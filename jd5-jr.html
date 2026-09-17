@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Lazy Donkey · Story Time (pp. 1–11)</title>
+<style>
+  :root{
+    --green:#4cc948; --green2:#2f9e2b; --yellow:#ffd447; --orange:#f5822b;
+    --red:#ff5d5d; --brown:#8d6e63; --ink:#3f3a25; --sky:#bfe7ff;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;
+    color:var(--ink); min-height:100vh; overflow-x:hidden;
+    background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);
+    background-size:300% 300%; animation:bgmove 18s ease-in-out infinite;
+  }
+  @keyframes bgmove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  .blob{position:fixed; border-radius:50%; filter:blur(48px); opacity:.5; pointer-events:none; z-index:0;}
+  .blob.b1{width:320px;height:320px; background:#c9f7b0; top:-90px; left:-90px; animation:drift 12s ease-in-out infinite alternate;}
+  .blob.b2{width:360px;height:360px; background:#ffd792; top:35%; right:-130px; animation:drift 15s ease-in-out infinite alternate-reverse;}
+  .blob.b3{width:300px;height:300px; background:#aee4ff; bottom:-110px; left:30%; animation:drift 13s ease-in-out infinite alternate;}
+  @keyframes drift{from{transform:translate(0,0) scale(1);}to{transform:translate(40px,-35px) scale(1.12);}}
+  .floaty{position:fixed; z-index:0; font-size:26px; pointer-events:none; opacity:.45; animation:floatUp linear infinite;}
+  @keyframes floatUp{from{transform:translateY(110vh) rotate(0deg);}to{transform:translateY(-15vh) rotate(360deg);}}
+  @keyframes sway{0%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-16px) rotate(5deg);}100%{transform:translateY(0) rotate(-5deg);}}
+
+  .wrap{position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 18px 60px;}
+  .topbar{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:16px 0 4px; flex-wrap:wrap;}
+  .brand,.homebtn{
+    display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.75);
+    border:2px solid #fff; border-radius:50px; padding:9px 18px; font-weight:800;
+    text-decoration:none; color:var(--green2); font-size:clamp(12px,2.2vw,15px);
+    box-shadow:0 4px 10px rgba(0,0,0,.12); transition:transform .2s, box-shadow .2s;
+  }
+  .brand:hover,.homebtn:hover{transform:translateY(-3px); box-shadow:0 8px 18px rgba(0,0,0,.18);}
+  .nowchip{background:var(--yellow); color:#6b4d00; border-radius:50px; padding:8px 18px; font-weight:900; font-size:clamp(12px,2.2vw,15px); box-shadow:0 3px 0 rgba(0,0,0,.12);}
+
+  .hero{
+    position:relative; border-radius:32px; overflow:hidden; margin-top:18px;
+    min-height:340px; display:flex; align-items:center; justify-content:center; text-align:center;
+    box-shadow:0 14px 30px rgba(0,0,0,.28);
+  }
+  .hero img.heroimg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
+  .hero .shade{position:absolute; inset:0; background:linear-gradient(180deg,rgba(107,66,40,.25),rgba(20,40,20,.55));}
+  .hero .herotext{position:relative; z-index:1; color:#fff; padding:30px 22px; text-shadow:0 3px 8px rgba(0,0,0,.4);}
+  .hero .hmot{font-size:clamp(46px,9vw,84px); line-height:1; animation:sway 3s ease-in-out infinite; display:inline-block;}
+  .hero h1{font-size:clamp(30px,6vw,58px); font-weight:900; margin:8px 0 6px;}
+  .hero p{font-size:clamp(14px,2.8vw,20px); font-weight:700; background:rgba(0,0,0,.35); display:inline-block; padding:8px 20px; border-radius:40px;}
+
+  nav.sticky{position:sticky; top:8px; z-index:30; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:20px 0 8px;}
+  nav.sticky a{
+    text-decoration:none; font-weight:900; color:var(--ink); background:#fff;
+    border:2px solid #fff; border-radius:50px; padding:10px 20px; font-size:clamp(12px,2.2vw,15px);
+    box-shadow:0 4px 10px rgba(0,0,0,.15); transition:transform .2s, box-shadow .2s;
+  }
+  nav.sticky a:hover{transform:translateY(-3px); box-shadow:0 8px 16px rgba(0,0,0,.2);}
+
+  section{background:rgba(255,255,255,.78); border-radius:26px; padding:24px 22px; margin:26px 0; box-shadow:0 8px 22px rgba(0,0,0,.12);}
+  .shead{display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap;}
+  .shead .ic{font-size:34px;}
+  .shead h2{font-size:clamp(20px,4vw,30px); font-weight:900; color:var(--green2);}
+  .shead .badge{background:var(--orange); color:#fff; font-size:clamp(11px,1.8vw,13px); font-weight:900; padding:4px 12px; border-radius:30px;}
+
+  .goals{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+  .goal{background:linear-gradient(150deg,#e9ffe9,#d3f7d0); border:3px solid var(--green); border-radius:20px; padding:16px; font-size:clamp(13px,2.4vw,16px); font-weight:700; line-height:1.5;}
+  .goal b{color:var(--green2);}
+
+  .tips{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;}
+  .tip{background:linear-gradient(150deg,#fff7de,#ffeeb8); border:3px dashed var(--yellow); border-radius:18px; padding:14px 16px; font-size:clamp(13px,2.3vw,15px); font-weight:700; line-height:1.5;}
+  .tip b{color:#a06b00;}
+
+  .btnrow{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px 0;}
+  .btn{
+    font-family:inherit; font-weight:900; font-size:clamp(14px,2.5vw,17px); border:none; cursor:pointer;
+    border-radius:50px; padding:12px 24px; color:#fff;
+    background:linear-gradient(180deg,var(--c1),var(--c2)); box-shadow:0 5px 0 rgba(0,0,0,.18), 0 8px 16px rgba(0,0,0,.12);
+    transition:transform .15s, box-shadow .15s, filter .15s;
+  }
+  .btn:hover{transform:translateY(-2px); filter:brightness(1.06);}
+  .btn:active{transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.18);}
+  .btn.green{--c1:#7ce577; --c2:#37a832;}
+  .btn.yellow{--c1:#ffd447; --c2:#edb200; color:#5c4300;}
+  .btn.orange{--c1:#ffab6e; --c2:#f5822b;}
+  .btn.blue{--c1:#6ec6ff; --c2:#3f95d8;}
+  .btn.pink{--c1:#ff7eb6; --c2:#ef4f98;}
+
+  .bingo-wrap{display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:flex-start;}
+  .board{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; width:min(100%,420px);}
+  .cell{
+    aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+    font-size:clamp(20px,5vw,34px); font-weight:900; border-radius:14px; color:#fff;
+    background:linear-gradient(150deg,#ffc571,#f5822b); box-shadow:0 4px 0 rgba(0,0,0,.2);
+    transition:transform .2s, filter .2s;
+  }
+  .cell.empty{background:linear-gradient(150deg,#f2efe6,#e5e0d0); color:#b9b2a0; box-shadow:0 4px 0 rgba(0,0,0,.1);}
+  .cell.called{background:linear-gradient(150deg,#8fe7ff,#3f95d8);}
+  .cell.win{animation:winPulse .8s infinite;}
+  @keyframes winPulse{0%,100%{transform:scale(1); box-shadow:0 4px 0 rgba(0,0,0,.2);}50%{transform:scale(1.12); box-shadow:0 6px 18px gold;}}
+  .side-tools{flex:1; min-width:260px;}
+  .called-list{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;}
+  .called-list span{background:#eaf4ff; border:2px solid var(--sky); color:#1c6ea8; font-weight:800; border-radius:20px; padding:4px 10px; font-size:clamp(12px,2vw,14px);}
+  .nsmall{font-size:clamp(12px,2.2vw,14px); color:#6d684f; font-weight:700; margin-top:8px; line-height:1.5;}
+
+  .qs{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px;}
+  .q{
+    background:#fff; border:2px solid #ffd9a3; border-radius:16px; padding:12px 14px; cursor:pointer;
+    font-weight:800; font-size:clamp(13px,2.3vw,15px); display:flex; gap:10px; align-items:flex-start;
+    box-shadow:0 3px 0 rgba(0,0,0,.07); transition:transform .18s, box-shadow .18s, border-color .18s;
+  }
+  .q:hover{transform:translateY(-3px); border-color:var(--orange); box-shadow:0 7px 14px rgba(0,0,0,.12);}
+  .q .qn{background:var(--orange); color:#fff; font-weight:900; border-radius:10px; min-width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0;}
+  .q.on{background:#fff4e0; border-color:var(--green); animation:winPulse .7s;}
+
+  .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;}
+  .pic{position:relative; background:#fff; border-radius:18px; padding:8px; box-shadow:0 6px 16px rgba(0,0,0,.14); cursor:zoom-in; transition:transform .2s, box-shadow .2s;}
+  .pic:hover{transform:translateY(-5px) scale(1.02); box-shadow:0 14px 26px rgba(0,0,0,.2);}
+  .pic img{width:100%; border-radius:12px; display:block;}
+  .pic .cap{font-weight:900; color:var(--brown); text-align:center; padding:8px 4px 4px; font-size:clamp(12px,2.2vw,14px);}
+  .pic .zoom{position:absolute; top:14px; right:14px; background:rgba(0,0,0,.55); color:#fff; border-radius:30px; padding:4px 12px; font-size:12px; font-weight:900;}
+
+  .teamrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px;}
+  .team{background:linear-gradient(150deg,#f5eefe,#e4d4fb); border:3px solid #b28dff; border-radius:18px; padding:14px; text-align:center;}
+  .team .tn{font-weight:900; font-size:clamp(16px,3vw,20px); color:var(--purple,#8b5cf0);}
+  .team .pp{font-weight:800; color:#5b4a8a; margin-top:4px;}
+
+  .songcard{background:linear-gradient(150deg,#fff1c9,#ffe68f); border:3px dashed var(--orange); border-radius:20px; padding:22px; text-align:center;}
+  .songcard .sm{font-size:44px;}
+  .songcard h3{font-size:clamp(20px,4vw,28px); font-weight:900; color:#a06b00; margin:6px 0;}
+  .songcard p{font-weight:700; font-size:clamp(13px,2.4vw,16px);}
+
+  footer{text-align:center; color:var(--brown); font-weight:700; font-size:clamp(12px,2.2vw,15px); margin-top:10px;}
+  a.design{display:inline-block; margin-top:10px; text-decoration:none; font-weight:900; background:linear-gradient(120deg,#8b5cf0,#f04f9b); color:#fff; border-radius:50px; padding:10px 24px; font-size:clamp(13px,2.4vw,16px); box-shadow:0 4px 0 rgba(40,20,90,.25); transition:transform .2s;}
+  a.design:hover{transform:translateY(-3px);}
+
+  .lightbox{position:fixed; inset:0; z-index:100; background:rgba(20,25,15,.92); display:none; align-items:center; justify-content:center; flex-direction:column; padding:20px;}
+  .lightbox.show{display:flex;}
+  .lightbox img{max-width:min(94vw,900px); max-height:80vh; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.5);}
+  .lbrow{display:flex; gap:14px; margin-top:14px; align-items:center;}
+  .lbb{font-family:inherit; cursor:pointer; border:none; border-radius:50px; padding:12px 22px; font-weight:900; font-size:clamp(14px,2.5vw,17px); color:#fff; background:linear-gradient(180deg,#6ec6ff,#3f95d8); box-shadow:0 4px 0 rgba(0,0,0,.25);}
+  .lbb.gray{background:linear-gradient(180deg,#b8b0cc,#9288ab);}
+  .lbcounter{color:#fff; font-weight:900; font-size:clamp(14px,2.5vw,17px);}
+
+  .fab{position:fixed; left:18px; z-index:90; width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; color:#fff;
+    border:none; text-decoration:none; background:linear-gradient(180deg,var(--c1),var(--c2));
+    box-shadow:0 5px 12px rgba(0,0,0,.3);
+    opacity:0; transform:translateY(96px) scale(.5); pointer-events:none;
+    transition:opacity .35s, transform .35s, box-shadow .2s, filter .2s;}
+  .fab.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+  .fab.dim{opacity:.32;}
+  .fab:hover{filter:brightness(1.08); box-shadow:0 7px 18px rgba(0,0,0,.38);}
+  .fab:active{transform:translateY(2px) scale(.96);}
+  #fabTop{bottom:86px; --c1:#6ec6ff; --c2:#3f95d8;}
+  #fabHome{bottom:18px; --c1:#7ce577; --c2:#37a832;}
+  @media (max-width:640px){.fab{width:48px; height:48px; font-size:20px; left:12px;} #fabTop{bottom:72px;}}
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="index.html">🏠 Joy English Classes</a>
+    <span class="nowchip">📖 Story Time · Second Time</span>
+  </div>
+
+  <div class="hero">
+    <img class="heroimg" src="lazy6.png" alt="The Lazy Donkey story scene">
+    <div class="shade"></div>
+    <div class="herotext">
+      <span class="hmot">🐴</span>
+      <h1>The Lazy Donkey</h1>
+      <p>pp. 1–11 · Picture Book Adventure 🚜</p>
+    </div>
+  </div>
+
+  <nav class="sticky">
+    <a href="#goals">🎯 Goals</a>
+    <a href="#bingo">🎲 Bingo Warm-Up</a>
+    <a href="#story">📖 Tell the Story</a>
+    <a href="#song">🎵 Song & Read-Along</a>
+  </nav>
+
+  <section id="goals">
+    <div class="shead"><span class="ic">🎯</span><h2>Learning Goals</h2></div>
+    <div class="goals">
+      <div class="goal"><b>1.</b> Students can <b>understand, read and tell</b> the story from <b>pp. 4–11</b>. 📖</div>
+      <div class="goal"><b>2.</b> Students learn the <b>song on p. 46</b> and sing along! 🎵</div>
+    </div>
+  </section>
+
+  <section id="bingo">
+    <div class="shead"><span class="ic">🎲</span><h2>Before Storytelling · Bingo Warm-Up</h2><span class="badge">1 card per team · 4×4</span></div>
+    <div class="bingo-wrap">
+      <div class="board" id="board"></div>
+      <div class="side-tools">
+        <div class="btnrow">
+          <button class="btn green" id="makeCard">🆕 Make a bingo card</button>
+          <button class="btn yellow" id="callNum">🔢 Call a number</button>
+        </div>
+        <div class="btnrow">
+          <button class="btn orange" id="clearCalls">🧹 New round</button>
+          <button class="btn blue" id="sayAllQ">🗣️ Say all questions</button>
+        </div>
+        <div class="nsmall">🎫 Give each team a card and let them write <b>numbers 1 to 16</b> inside (one minute!).</div>
+        <div class="nsmall">❓ Ask the questions below. Correct answer → call a number <b>between 1 and 16</b>. Keep going until a team completes a <b>line</b> — bingo! 🏆</div>
+        <div class="called-list" id="calledList"></div>
+      </div>
+    </div>
+
+    <div class="shead" style="margin-top:20px;"><span class="ic">❓</span><h2>Questions to Ask</h2><span class="badge">tap one to say it aloud</span></div>
+    <div class="qs" id="qs"></div>
+  </section>
+
+  <section id="story">
+    <div class="shead"><span class="ic">📖</span><h2>Tell the Story · pp. 4–11</h2></div>
+    <div class="tips">
+      <div class="tip"><b>Tr 1 · Finish it together</b><br>Don't finish your sentences — stop and let the class complete the line for you! 🗣️</div>
+      <div class="tip"><b>Tr 2 · Repeat with tone + gesture</b><br>After you, students repeat each line with <b>proper tone</b> and do a <b>gesture</b>. 👍</div>
+    </div>
+    <div class="shead"><span class="ic">🖼️</span><h2>Story Pictures</h2><span class="badge">click any picture to zoom 🔍</span></div>
+    <div class="gallery" id="gallery"></div>
+    <div class="nsmall" style="text-align:center;">🧑‍🏫 Flip through the pages as you tell the story. Stop mid-sentence, let the class finish, then repeat with a tone and a gesture!</div>
+
+    <div class="shead"><span class="ic">👥</span><h2>Teams Read Aloud</h2><span class="badge">after the recording</span></div>
+    <div class="nsmall">Step 1 — play the recording on <b>pp. 4–11</b>, students read along <b>silently</b>. 🤫<br>Step 2 — divide the class into teams, each team reads <b>two pages</b> out loud until you reach <b>p. 11</b>! 📢</div>
+    <div class="teamrow" id="teams"></div>
+  </section>
+
+  <section id="song">
+    <div class="shead"><span class="ic">🎵</span><h2>Song · p. 46</h2></div>
+    <div class="songcard">
+      <div class="sm">🎶</div>
+      <h3>Sing it together! (p. 46)</h3>
+      <p>After the story, learn the p. 46 song and sing along as a class. 🎤</p>
+      <div class="btnrow">
+        <button class="btn orange" id="playTune">🎹 Play a little tune</button>
+        <button class="btn pink" id="stopTune">⏹ Stop</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Made for playful English storytelling 🐴<br>
+    <a class="design" href="https://hanshanghao.github.io/English_Learning_Hub/my_profile.html" target="_blank" rel="noopener">✍️ Designed By: Han, Shang-Hao</a>
+  </footer>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lbImg" src="" alt="Story picture">
+  <div class="lbrow">
+    <button class="lbb" id="lbPrev">◀ Prev</button>
+    <span class="lbcounter" id="lbCount"></span>
+    <button class="lbb" id="lbNext">Next ▶</button>
+    <button class="lbb gray" id="lbClose">✕ Close</button>
+  </div>
+</div>
+
+<button class="fab" id="fabTop" title="Back to top" aria-label="Back to top">⬆</button>
+<a class="fab" id="fabHome" href="index.html" title="Back to Joy English Classes" aria-label="Back to Joy English Classes">🏠</a>
+
+<script>
+var QUESTIONS=[
+  "What animals can you see on Mr. Green's farm?",
+  "What can the hens do?",
+  "What can the cows do?",
+  "What can the horses do?",
+  "What can the sheep do?",
+  "What can the donkeys do?",
+  "How many donkeys are there?",
+  "What colours are the donkeys?",
+  "What is the baby donkey's name?",
+  "What does Mikey like to do?",
+  "What is not fun for Mikey?",
+  "Who asks Mikey to pull the plow?"
+];
+var GALLERY=["lazy1.png","lazy2.png","lazy3.png","lazy4.png","lazy5.png","lazy6.png"];
+var TEAMS=[
+  {n:"Team 1", pp:"pp. 4–5"},
+  {n:"Team 2", pp:"pp. 6–7"},
+  {n:"Team 3", pp:"pp. 8–9"},
+  {n:"Team 4", pp:"pp. 10–11"}
+];
+
+var actx=null;
+function audio(){
+  if(!actx){ try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+  if(actx && actx.state==="suspended") actx.resume();
+  return actx;
+}
+function tone(f,dur,type,vol,delay){
+  var c=audio(); if(!c) return;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||"sine"; o.frequency.value=f;
+  var t=c.currentTime+(delay||0);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.05);
+}
+function sPop(){ tone(500,0.1,"square",0.08); tone(760,0.09,"square",0.08,0.06); }
+function sDing(){ tone(660,0.12,"triangle",0.16); tone(880,0.16,"triangle",0.16,0.1); tone(1320,0.25,"triangle",0.14,0.2); }
+function sBuzz(){ tone(180,0.18,"sawtooth",0.11); tone(140,0.22,"sawtooth",0.11,0.16); }
+var speechOn=true;
+function speakTxt(txt){
+  if(!speechOn) return;
+  try{
+    if(!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(txt);
+    u.lang="en-US"; u.rate=0.82;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function speakSeq(list,idx){
+  idx=idx||0;
+  if(!speechOn || idx>=list.length) return;
+  speakTxt(list[idx]);
+  setTimeout(function(){ speakSeq(list,idx+1); }, 3400);
+}
+
+/* ---- bingo ---- */
+var board=document.getElementById("board");
+var calledList=document.getElementById("calledList");
+var cells=[];
+var called={};
+function freshBoard(){
+  var nums=[];
+  for(var n=1;n<=16;n++) nums.push(n);
+  for(var i=nums.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=nums[i]; nums[i]=nums[j]; nums[j]=t; }
+  board.innerHTML="";
+  cells=[];
+  nums.forEach(function(n){
+    var c=document.createElement("div");
+    c.className="cell";
+    c.textContent=n;
+    if(called[n]) c.classList.add("called");
+    board.appendChild(c);
+    cells.push(c);
+  });
+  recheckWin();
+}
+function callNumber(){
+  var left=[];
+  for(var n=1;n<=16;n++) if(!called[n]) left.push(n);
+  if(!left.length){ sBuzz(); return; }
+  var pick=left[Math.floor(Math.random()*left.length)];
+  called[pick]=true;
+  sDing();
+  speakTxt(String(pick));
+  var chip=document.createElement("span");
+  chip.textContent=pick;
+  calledList.appendChild(chip);
+  cells.forEach(function(c){ if(Number(c.textContent)===pick) c.classList.add("called"); });
+  recheckWin();
+}
+function recheckWin(){
+  var grid=[];
+  cells.forEach(function(c){ grid.push(Number(c.textContent)); });
+  var win=false;
+  var line=[[0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15],[0,4,8,12],[1,5,9,13],[2,6,10,14],[3,7,11,15],[0,5,10,15],[3,6,9,12]];
+  line.forEach(function(idx){
+    var all=true;
+    idx.forEach(function(k){ if(!called[grid[k]]) all=false; });
+    if(all){ win=true; idx.forEach(function(k){ cells[k].classList.add("win"); }); }
+  });
+  if(win){ sDing(); sDing(); speakTxt("Bingo!"); }
+}
+document.getElementById("makeCard").addEventListener("click",function(){ freshBoard(); sPop(); });
+document.getElementById("callNum").addEventListener("click",callNumber);
+document.getElementById("clearCalls").addEventListener("click",function(){
+  called={};
+  calledList.innerHTML="";
+  freshBoard(); sPop();
+});
+document.getElementById("sayAllQ").addEventListener("click",function(){ speakSeq(QUESTIONS,0); });
+
+/* ---- questions ---- */
+var qwrap=document.getElementById("qs");
+var qEls=[];
+QUESTIONS.forEach(function(q,i){
+  var el=document.createElement("div");
+  el.className="q";
+  var n=document.createElement("span");
+  n.className="qn";
+  n.textContent=String.fromCharCode(97+i);
+  var t=document.createElement("span");
+  t.textContent=q;
+  el.appendChild(n);
+  el.appendChild(t);
+  el.addEventListener("click",function(){
+    qEls.forEach(function(x){ x.classList.remove("on"); });
+    el.classList.add("on");
+    speakTxt(q);
+    sPop();
+    setTimeout(function(){ el.classList.remove("on"); },1600);
+  });
+  qwrap.appendChild(el);
+  qEls.push(el);
+});
+
+/* ---- gallery ---- */
+var gallery=document.getElementById("gallery");
+var lbIdx=0;
+GALLERY.forEach(function(src,i){
+  var pic=document.createElement("div");
+  pic.className="pic";
+  var img=document.createElement("img");
+  img.src=src;
+  img.alt="Story picture "+(i+1);
+  img.loading="lazy";
+  var zoom=document.createElement("span");
+  zoom.className="zoom";
+  zoom.textContent="🔍";
+  var cap=document.createElement("div");
+  cap.className="cap";
+  cap.textContent="Story Picture "+(i+1);
+  pic.appendChild(img);
+  pic.appendChild(zoom);
+  pic.appendChild(cap);
+  pic.addEventListener("click",function(){ openLb(i); });
+  gallery.appendChild(pic);
+});
+function openLb(i){
+  lbIdx=(i+GALLERY.length)%GALLERY.length;
+  document.getElementById("lbImg").src=GALLERY[lbIdx];
+  document.getElementById("lbCount").textContent=(lbIdx+1)+" / "+GALLERY.length;
+  document.getElementById("lightbox").classList.add("show");
+  sPop();
+}
+document.getElementById("lbClose").addEventListener("click",function(){ document.getElementById("lightbox").classList.remove("show"); });
+document.getElementById("lbPrev").addEventListener("click",function(){ openLb(lbIdx-1); });
+document.getElementById("lbNext").addEventListener("click",function(){ openLb(lbIdx+1); });
+document.getElementById("lightbox").addEventListener("click",function(e){ if(e.target===this) this.classList.remove("show"); });
+
+/* ---- teams ---- */
+var teamsEl=document.getElementById("teams");
+var TC=["#f0a7c4","#a7c6f0","#c7f0a7","#f5d88b"];
+TEAMS.forEach(function(team,i){
+  var d=document.createElement("div");
+  d.className="team";
+  d.style.borderColor=TC[i]||"#b28dff";
+  var n=document.createElement("div");
+  n.className="tn";
+  n.textContent="🎽 "+team.n;
+  var p=document.createElement("div");
+  p.className="pp";
+  p.textContent="Reads "+team.pp;
+  d.appendChild(n);
+  d.appendChild(p);
+  teamsEl.appendChild(d);
+});
+
+/* ---- song tune ---- */
+var tuneStop=0;
+document.getElementById("playTune").addEventListener("click",function(){
+  var seq=[[392,0],[440,.18],[523,.36],[587,.54],[659,.72],[587,.9],[523,1.08],[440,1.26]];
+  tuneStop=Date.now();
+  seq.forEach(function(s){ tone(s[0],0.16,"triangle",0.16,s[1]); });
+});
+document.getElementById("stopTune").addEventListener("click",function(){ sBuzz(); });
+
+/* ---- floaties ---- */
+["🐴","🐄","🐔","🐑","🐖","🚜","🌾","☀️"].forEach(function(e){
+  var f=document.createElement("span");
+  f.className="floaty";
+  f.textContent=e;
+  f.style.left=Math.random()*96+"%";
+  f.style.fontSize=(18+Math.random()*22)+"px";
+  f.style.animationDuration=(13+Math.random()*15)+"s";
+  f.style.animationDelay=(-(Math.random()*15))+"s";
+  document.body.appendChild(f);
+});
+
+/* ---- floating fab buttons ---- */
+var FAB_TOP=document.getElementById("fabTop");
+var FAB_HOME=document.getElementById("fabHome");
+var fabDimT=null;
+function fabResetDim(){
+  FAB_HOME.classList.remove("dim");
+  FAB_TOP.classList.remove("dim");
+  if(fabDimT) clearTimeout(fabDimT);
+  fabDimT=setTimeout(function(){
+    FAB_HOME.classList.add("dim");
+    FAB_TOP.classList.add("dim");
+  },3000);
+}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  FAB_HOME.classList.toggle("show",show);
+  FAB_TOP.classList.toggle("show",show);
+  if(fabDimT) clearTimeout(fabDimT);
+  if(show) fabResetDim();
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+fabUpdate();
+[FAB_HOME,FAB_TOP].forEach(function(el){
+  ["pointerdown","touchstart","mouseenter"].forEach(function(ev){
+    el.addEventListener(ev,function(){ fabResetDim(); });
+  });
+  el.addEventListener("mouseleave",function(){
+    if(fabDimT) clearTimeout(fabDimT);
+    fabDimT=setTimeout(function(){ FAB_HOME.classList.add("dim"); FAB_TOP.classList.add("dim"); },3000);
+  });
+});
+FAB_TOP.addEventListener("click",function(e){
+  e.preventDefault();
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+freshBoard();
+</script>
+</body>
+</html>

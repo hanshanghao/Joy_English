@@ -169,7 +169,8 @@ var LESSONS=[
   {id:"U3", emoji:"🛒", title:"How Much Is It?", desc:"Warmup + Dialogue + Vocabulary + Patterns", url:"u3.html", avail:true, c1:"#6ec6ff", c2:"#4a9ee0"},
   {id:"U4", emoji:"🍽️", title:"What Do You Want for Dinner?", desc:"Food, meals & likes", url:"", avail:false, c1:"#ff7eb6", c2:"#f04f9b"},
   {id:"U5", emoji:"🚑", title:"I Have a Headache", desc:"Body parts & health", url:"", avail:false, c1:"#b28dff", c2:"#8b5cf0"},
-  {id:"U6", emoji:"🎁", title:"What's in the Box?", desc:"Toys, space & surprises", url:"", avail:false, c1:"#ffd447", c2:"#f0b400"}
+  {id:"U6", emoji:"🎁", title:"What's in the Box?", desc:"Toys, space & surprises", url:"", avail:false, c1:"#ffd447", c2:"#f0b400"},
+  {id:"JD5", emoji:"🐴", title:"The Lazy Donkey", desc:"Story time · pp. 1–11 · bingo + read-aloud", url:"jd5-jr.html", avail:true, c1:"#8fb96a", c2:"#2f9e2b", tag:"Story · JD5"}
 ];
 
 var grid=document.getElementById("grid");
@@ -254,7 +255,7 @@ function buildCards(){
     }
     var badge=document.createElement("span");
     badge.className="badge";
-    badge.textContent="Unit "+L.id;
+    badge.textContent=L.tag?L.tag:("Unit "+L.id);
     var emo=document.createElement("span");
     emo.className="cemo";
     emo.textContent=L.emoji;
