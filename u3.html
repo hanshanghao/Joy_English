@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 3 · School Shop Fun! 🛍️</title>
+<style>
+  :root{
+    --pink:#ff7eb6; --purple:#b28dff; --blue:#6ec6ff; --green:#7ce577;
+    --yellow:#ffd447; --orange:#ffab6e; --red:#ff5d5d;
+    --ink:#3a2d4f; --paper:#fff7ea;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  body{
+    margin:0; padding:0 14px 80px; min-height:100vh;
+    font-family:"Comic Sans MS","Comic Sans",Chalkboard SE,Segoe UI,ui-rounded,Verdana,sans-serif;
+    color:var(--ink);
+    background-size:220% 220%; background-position:0% 40%; background-attachment:fixed;
+    animation:bgShift 26s ease-in-out infinite;
+    transition:background-image .6s;
+  }
+  @keyframes bgShift{0%,100%{background-position:0% 35%;} 50%{background-position:100% 65%;}}
+  body.tbg-dialogue{background-image:linear-gradient(150deg,#fff0cd,#ffd9e8 45%,#cee6ff 90%);}
+  body.tbg-vocab{background-image:linear-gradient(150deg,#eaffdc,#e0f4ff 45%,#ffe9f4 90%);}
+  body.tbg-patterns{background-image:linear-gradient(150deg,#e6fff2,#e4efff 45%,#fff2dd 90%);}
+
+  /* ===== animated background layers (one per main tab) ===== */
+  .bgfx{position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none; display:none;}
+  .bgfx.on{display:block;}
+  .bgfx .blob{position:absolute; border-radius:50%; filter:blur(48px); opacity:.35;}
+  .bgfx .fl{position:absolute; bottom:-50px; opacity:0; will-change:transform; font-style:normal;}
+  .bgfx .cloud{position:absolute; background:#fff; border-radius:999px; opacity:.55; filter:blur(3px);}
+  .bgfx .cloud::before,.bgfx .cloud::after{content:''; position:absolute; background:inherit; border-radius:inherit;}
+  .bgfx .cloud::before{width:60%; height:160%; left:20%; top:-80%;}
+  .bgfx .cloud::after{width:45%; height:120%; right:15%; top:-55%;}
+  @keyframes flRise{0%{transform:translateY(0) scale(.8); opacity:0;} 8%{opacity:.55;} 90%{opacity:.55;} 100%{transform:translateY(-118vh) rotate(40deg) scale(1.1); opacity:0;}}
+  @keyframes flFall{0%{transform:translateY(-20vh) rotate(0); opacity:0;} 8%{opacity:.5;} 90%{opacity:.5;} 100%{transform:translateY(120vh) rotate(340deg); opacity:0;}}
+  @keyframes flBob{0%,100%{transform:translateY(0) rotate(-5deg); opacity:.55;} 50%{transform:translateY(-30px) rotate(8deg); opacity:.8;}}
+  @keyframes cloudDrift{0%{transform:translateX(-26vw);} 100%{transform:translateX(126vw);}}
+
+  header{text-align:center; padding:18px 8px 4px;}
+  header h1{
+    margin:0; font-size:clamp(26px,5vw,44px); letter-spacing:1px;
+    text-shadow:2px 2px 0 #fff, 4px 4px 0 rgba(0,0,0,.08);
+  }
+  .tagline{color:#6b5a82; font-size:clamp(12px,2.4vw,15px); font-weight:700; margin-top:2px;}
+
+  .tabs{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px auto 4px; max-width:1000px;}
+  .tab{
+    border:none; cursor:pointer; font-family:inherit; font-weight:800;
+    font-size:clamp(13px,2.4vw,17px); color:var(--ink);
+    padding:10px 16px; border-radius:40px;
+    background:#fff; box-shadow:0 4px 0 rgba(0,0,0,.12), 0 6px 12px rgba(0,0,0,.08);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .tab:hover{transform:translateY(-2px);}
+  .tab.active{color:#fff; transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.12);}
+  .tab[data-tab="board"].active{background:var(--blue);}
+  .tab[data-tab="pencils"].active{background:var(--green);}
+  .tab[data-tab="flash"].active{background:var(--pink);}
+  .tab[data-tab="read"].active{background:var(--purple);}
+  .tab[data-tab="game"].active{background:var(--orange);}
+  .maintab{
+    border:none; cursor:pointer; font-family:inherit; font-weight:900;
+    font-size:clamp(15px,2.8vw,20px); color:var(--ink);
+    padding:12px 26px; border-radius:44px;
+    background:#fff; box-shadow:0 5px 0 rgba(0,0,0,.12), 0 8px 14px rgba(0,0,0,.08);
+    transition:transform .12s, box-shadow .12s, background .2s;
+  }
+  .maintab:hover{transform:translateY(-2px);}
+  .maintab.active{color:#fff; transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.12);}
+  .maintab[data-main="dialogue"].active{background:var(--orange);}
+  .maintab[data-main="vocab"].active{background:var(--blue);}
+  .maintab[data-main="patterns"].active{background:var(--purple);}
+
+  .speechtog{
+    border:none; cursor:pointer; width:54px; height:54px; border-radius:50%;
+    font-size:26px; background:#fff; box-shadow:0 4px 0 rgba(0,0,0,.12), 0 6px 12px rgba(0,0,0,.08);
+    display:inline-flex; align-items:center; justify-content:center; margin-top:8px;
+    transition:transform .12s, background .2s;
+  }
+  .speechtog:hover{transform:translateY(-2px);}
+  .speechtog.off{background:#e8e2f2; opacity:.55;}
+
+  .scene{display:none; max-width:1020px; margin:0 auto;}
+  .scene.active{display:block; animation:fadein .35s;}
+  @keyframes fadein{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  .scenecard{
+    background:rgba(255,255,255,.88); border-radius:30px; padding:22px;
+    box-shadow:0 10px 30px rgba(0,0,0,.10); margin-top:14px;
+  }
+  h2{text-align:center; margin:6px 0 4px; font-size:clamp(22px,4vw,34px);}
+  .sub{text-align:center; margin:4px auto 12px; color:#6b5a82; font-size:clamp(13px,2.4vw,16px); max-width:720px;}
+  .notebox{
+    background:#fff6d9; border:3px dashed var(--yellow); border-radius:18px;
+    padding:12px 16px; margin:12px 0; font-size:clamp(13px,2.4vw,16px); line-height:1.5;
+  }
+  .notebox.tip{background:#fff5f5; border:3px solid #ffb3b3; border-left:10px solid #ff5d5d; color:#7c1f1f;}
+  .btnrow{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:16px 0;}
+  .btn{
+    font-family:inherit; font-weight:800; font-size:clamp(14px,2.6vw,18px);
+    border:none; cursor:pointer; border-radius:50px; padding:12px 22px; color:#fff;
+    background:linear-gradient(180deg, var(--c1,#6ec6ff), var(--c2,#4a9ee0));
+    box-shadow:0 5px 0 rgba(0,0,0,.18), 0 8px 16px rgba(0,0,0,.12);
+    transition:transform .12s, box-shadow .12s, filter .12s;
+  }
+  .btn:hover{transform:translateY(-2px); filter:brightness(1.06);}
+  .btn:active{transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.18);}
+  .btn.active{outline:4px solid gold; outline-offset:3px;}
+  .btn.big{font-size:clamp(16px,3vw,22px); padding:16px 30px;}
+  .btn.green{--c1:#7ce577; --c2:#4cc948;}
+  .btn.pink{--c1:#ff7eb6; --c2:#f04f9b;}
+  .btn.purple{--c1:#b28dff; --c2:#8b5cf0;}
+  .btn.orange{--c1:#ffab6e; --c2:#f5822b;}
+  .btn.yellow{--c1:#ffd447; --c2:#f0b400;}
+  .btn.gray{--c1:#b8b0cc; --c2:#9288ab;}
+  .btn.blue{--c1:#6ec6ff; --c2:#4a9ee0;}
+  .btn:disabled{filter:grayscale(.8) brightness(.9); cursor:not-allowed; transform:none;}
+  .banner{
+    min-height:56px; display:none; text-align:center; font-size:clamp(18px,3vw,26px);
+    font-weight:800; padding:14px; border-radius:20px; margin:14px 0;
+  }
+  .banner.show{display:block; animation:pop .4s;}
+  .banner.win{background:linen; color:#8a2be2; border:3px solid var(--purple);}
+  .banner.warn{background:#ffe6e6; color:#c0392b; border:3px solid var(--red);}
+  @keyframes pop{0%{transform:scale(.4); opacity:0;} 70%{transform:scale(1.08);} 100%{transform:scale(1); opacity:1;}}
+  @keyframes bounce{0%,100%{transform:translateY(0);} 30%{transform:translateY(-14px);} 60%{transform:translateY(4px);}}
+  @keyframes shake{0%,100%{transform:translateX(0);} 20%{transform:translateX(-6px);} 40%{transform:translateX(6px);} 60%{transform:translateX(-4px);} 80%{transform:translateX(4px);}}
+  .shake{animation:shake .4s;}
+  .motor{animation:bounce 1s infinite;}
+
+  /* ===== image plates (cropped learning pictures) ===== */
+  .pic{
+    position:relative; border-radius:24px; background-size:cover; background-position:center;
+    box-shadow:inset 0 0 60px rgba(255,255,255,.35), 0 10px 24px rgba(0,0,0,.14);
+    overflow:hidden; border:3px solid rgba(255,255,255,.8);
+  }
+  .pic::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.28));}
+  .pic-hero{width:100%; height:clamp(140px,26vw,240px);}
+  .pic-side{width:100%; height:clamp(120px,22vw,210px);}
+  .pic-round{width:120px; height:120px; border-radius:50%; flex:0 0 120px;}
+  .pic-app{background-image:url("app.png");}
+  .pic-dialogue{background-image:url("dialogue.png");}
+  .pic-vocab{background-image:url("vocab.png");}
+  .pic-patterns{background-image:url("patterns.png");}
+  .pictag{
+    position:absolute; z-index:2; left:14px; bottom:12px; color:#fff; font-weight:900;
+    font-size:clamp(12px,2.4vw,15px); background:rgba(58,45,79,.55); border-radius:30px; padding:5px 14px;
+    backdrop-filter:blur(3px);
+  }
+  .picfloat{display:flex; gap:14px; align-items:center; margin:14px 0;}
+  .picfloat .pic-round{box-shadow:0 8px 20px rgba(0,0,0,.2);}
+  .picfloat .pfsay{
+    flex:1; background:#fff; border-radius:18px; border:3px solid var(--blue); padding:12px 16px;
+    font-weight:800; font-size:clamp(14px,2.6vw,17px); position:relative;
+  }
+  .picfloat .pfsay::before{content:''; position:absolute; left:-14px; top:22px; border-top:8px solid transparent; border-bottom:8px solid transparent; border-right:12px solid var(--blue);}
+
+  .sub-tabs{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px auto 4px; max-width:1000px;}
+  .sub-tab{
+    border:none; cursor:pointer; font-family:inherit; font-weight:800;
+    font-size:clamp(13px,2.4vw,17px); color:var(--ink);
+    padding:10px 16px; border-radius:40px;
+    background:#fff; box-shadow:0 4px 0 rgba(0,0,0,.12), 0 6px 12px rgba(0,0,0,.08);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .sub-tab:hover{transform:translateY(-2px);}
+  .sub-tab.active{color:#fff; transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.12);}
+  .sub-tab[data-stab="learn"].active{background:#6ec6ff;}
+  .sub-tab[data-stab="paygame"].active{background:#7ce577;}
+  .sub-tab[data-stab="unscramble"].active{background:#ff7eb6;}
+  .sub-tab[data-stab="order"].active{background:#ffd447; color:#7a5b00;}
+  .sub-tab[data-stab="fill"].active{background:#ff7eb6;}
+  .sub-tab[data-stab="act"].active{background:#7ce577;}
+  .sub-tab[data-stab="quiz"].active{background:#ffab6e;}
+  .sub-scene{display:none;}
+  .sub-scene.active{display:block; animation:fadein .3s;}
+
+  /* ===== dialogue ===== */
+  .dlrow{display:flex; align-items:flex-start; margin:11px 0; animation:fadein .3s both;}
+  .dlrow.A{justify-content:flex-start;}
+  .dlrow.B{justify-content:flex-end;}
+  .dava{
+    width:48px; height:48px; border-radius:50%; flex:0 0 48px; font-size:26px;
+    display:flex; align-items:center; justify-content:center; box-shadow:0 4px 0 rgba(0,0,0,.15);
+  }
+  .dlrow.A .dava{background:linear-gradient(180deg,#6ec6ff,#3b8fe0); margin-right:10px;}
+  .dlrow.B .dava{background:linear-gradient(180deg,#ffab6e,#f5822b); margin-left:10px; order:2;}
+  .bubbl{
+    max-width:76%; padding:12px 18px; border-radius:22px; font-weight:800;
+    font-size:clamp(15px,3vw,19px); cursor:pointer; position:relative; line-height:1.45;
+    box-shadow:0 4px 0 rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.08); transition:transform .15s;
+  }
+  .bubbl:hover{transform:translateY(-2px);}
+  .dlrow.A .bubbl{background:#e5f2ff; border:3px solid var(--blue); border-bottom-left-radius:6px;}
+  .dlrow.B .bubbl{background:#fff1e6; border:3px solid var(--orange); border-bottom-right-radius:6px;}
+  .bubbl.on{outline:5px solid gold; outline-offset:3px; transform:scale(1.04);}
+  .dlnum{
+    position:absolute; top:-11px; left:-11px; min-width:26px; height:26px; border-radius:50%;
+    background:var(--ink); color:#fff; font-size:12px; font-weight:900;
+    display:flex; align-items:center; justify-content:center; padding:0 5px;
+  }
+  .dl-label{
+    text-align:center; font-weight:900; color:#8b5cf0; font-size:clamp(13px,2.2vw,15px);
+    letter-spacing:1px; margin:14px 0 8px;
+  }
+  .voice-legend{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:8px 0 2px;}
+  .vle{display:inline-flex; align-items:center; gap:6px; background:#fff; border-radius:30px; padding:6px 14px; font-weight:800; font-size:clamp(12px,2.3vw,14px); box-shadow:0 3px 0 rgba(0,0,0,.1);}
+  .vle b{color:#8b5cf0;}
+  .vle .vavat{font-size:22px; line-height:1;}
+  .dl-bank,.dl-slots,.dl-fill{display:flex; flex-direction:column; gap:8px; max-width:820px; margin:0 auto;}
+  .dl-slots{min-height:60px; padding:10px; background:#f8f4ff; border-radius:16px;}
+  .dlcard{
+    background:#fff; border-radius:14px; padding:9px 14px; font-weight:800;
+    font-size:clamp(13px,2.4vw,16px); box-shadow:0 3px 8px rgba(0,0,0,.1);
+    cursor:pointer; display:flex; gap:9px; align-items:flex-start; transition:transform .12s;
+  }
+  .dlcard:hover{transform:translateY(-2px);}
+  .dlcard .n{
+    flex:0 0 26px; height:26px; border-radius:50%; background:#8b5cf0; color:#fff; font-size:12px;
+    display:flex; align-items:center; justify-content:center; font-weight:900; margin-top:1px;
+  }
+  .dlcard.can{background:#fff6d9; border:2px dashed var(--yellow);}
+  .dlcard.can .n{background:#f0b400;}
+  .dlcard.spot{background:#e5f2ff; border:2px solid var(--blue);}
+  .dlcard.spot .n{background:#3b8fe0;}
+  .dlcard.ok{background:#e8f5e9; border:2px solid #a5d6a7;}
+  .dlcard.ok .n{background:#2e7d32;}
+  .dlcard.bad{background:#ffebee; border:2px solid #ef9a9a;}
+  .dlcard.bad .n{background:#c62828;}
+  .gapword{
+    display:inline-block; min-width:88px; border-bottom:3px dashed var(--purple); text-align:center;
+    font-weight:900; color:#8b5cf0; cursor:pointer; padding:0 4px;
+  }
+  .gapword.filled{background:#fff0f6; border-bottom:3px solid var(--pink); color:#d63384; border-radius:8px;}
+  .stage{
+    min-height:150px; display:flex; align-items:center; justify-content:center; text-align:center;
+    font-size:clamp(22px,5vw,38px); font-weight:900; background:#fff; border-radius:26px;
+    box-shadow:0 8px 20px rgba(0,0,0,.12); padding:26px; margin:12px 0; position:relative;
+    border:4px solid var(--purple);
+  }
+  .stage .slabel{position:absolute; top:-16px; left:50%; transform:translateX(-50%); background:var(--purple); color:#fff; font-size:13px; font-weight:900; border-radius:30px; padding:4px 16px;}
+  .actchip{text-align:center; font-size:clamp(14px,2.6vw,17px); font-weight:800; color:#6b5a82; margin:6px 0 2px;}
+  .arrowrow{display:flex; gap:18px; justify-content:center; margin-top:8px;}
+
+  .msg-success{background:#e8f5e9; color:#2e7d32; border:2px solid #a5d6a7; border-radius:14px; padding:12px; text-align:center; font-weight:800; font-size:clamp(15px,2.8vw,18px); animation:pop .4s; margin-top:12px;}
+  .msg-error{background:#ffebee; color:#c62828; border:2px solid #ef9a9a; border-radius:14px; padding:12px; text-align:center; font-weight:800; font-size:clamp(15px,2.8vw,18px); animation:shake .4s; margin-top:12px;}
+
+  /* ===== vocab games (kept) ===== */
+  .board{display:grid; grid-template-columns:repeat(10,1fr); gap:9px; max-width:940px; margin:8px auto;}
+  .tile{
+    aspect-ratio:1/1; border-radius:14px; font-weight:900; color:#fff; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    font-size:clamp(14px,3.4vw,30px); user-select:none;
+    box-shadow:0 4px 0 rgba(0,0,0,.18), inset 0 -4px 0 rgba(0,0,0,.12);
+    transition:transform .15s, opacity .3s, box-shadow .15s; position:relative;
+  }
+  .tile:hover{transform:scale(1.08);}
+  .tile.dim{opacity:.32;}
+  .tile.active{box-shadow:0 0 0 5px #fff, 0 0 0 9px gold, 0 6px 18px rgba(0,0,0,.25); transform:scale(1.22); z-index:3; animation:pop .35s;}
+  .tile.ghost{outline:3px dashed #fff; outline-offset:-6px;}
+  .tile .wordtip{display:none; position:absolute; bottom:-34px; left:50%; transform:translateX(-50%); background:#3a2d4f; color:#fff; border-radius:10px; padding:4px 10px; font-size:12px; white-space:nowrap; z-index:5;}
+  .tile.flip .wordtip,.tile:hover .wordtip{display:block;}
+  .tile.marked{outline:5px solid var(--red); outline-offset:-3px; animation:shake .5s;}
+  .pal0{background:#ff6b6b;} .pal1{background:#ff9f43;} .pal2{background:#ffd447; color:#7a5b00;}
+  .pal3{background:#2ecc71;} .pal4{background:#1abc9c;} .pal5{background:#3498db;}
+  .pal6{background:#9b59b6;} .pal7{background:#e84393;} .pal8{background:#5f27cd;} .pal9{background:#00cec9; color:#075a56;}
+
+  .pencilGrid{display:grid; grid-template-columns:repeat(10,1fr); gap:8px; max-width:940px; margin:12px auto;}
+  .pencil{
+    aspect-ratio:1/1.4; font-size:clamp(20px,4.4vw,40px); display:flex; align-items:center; justify-content:center;
+    background:#fff; border-radius:10px; box-shadow:0 3px 0 rgba(0,0,0,.12); transition:transform .2s;
+  }
+  .pencil.active{transform:scale(1.3) rotate(-6deg); background:var(--yellow); box-shadow:0 0 0 4px gold; z-index:2;}
+  .counter8{text-align:center; font-size:clamp(26px,6vw,52px); font-weight:900; color:#2c7a2c; margin:10px 0 4px;}
+
+  .flashgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin:14px auto; max-width:940px;}
+  @media (max-width:640px){.flashgrid{grid-template-columns:repeat(2,1fr);}}
+  .fcard{background:linear-gradient(180deg,#fff,#f8f2ff); border-radius:18px; padding:14px 8px; text-align:center; box-shadow:0 6px 0 rgba(0,0,0,.14), 0 10px 18px rgba(0,0,0,.08); cursor:pointer; transition:transform .15s;}
+  .fcard:hover{transform:translateY(-4px) rotate(-1deg);}
+  .fcard .num{width:44px; height:44px; border-radius:50%; background:var(--gc,#6ec6ff); color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 6px; font-size:20px;}
+  .fcard .wordline{font-size:clamp(15px,3vw,24px); font-weight:900; letter-spacing:.5px; display:flex; justify-content:center; align-items:center; gap:2px;}
+  .fcard .tens{background:#fff3c4; border-radius:8px; padding:2px 5px;}
+  .mark{position:relative; display:inline-flex; align-items:center; justify-content:center; padding:0 3px;}
+  .mark::after{content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1.15em; height:1.15em; border:4px solid var(--red); border-radius:50%; animation:pulseRing 1.6s infinite;}
+  @keyframes pulseRing{0%{transform:translate(-50%,-50%) scale(.85);} 50%{transform:translate(-50%,-50%) scale(1.12);} 100%{transform:translate(-50%,-50%) scale(.85);}}
+  .tyhl{background:#ffe1e1; border-radius:8px; padding:2px 4px; color:#c0392b;}
+  .soundtiles{display:flex; flex-wrap:wrap; gap:4px; justify-content:center; margin-top:10px;}
+  .stile{width:40px; height:44px; border-radius:9px; background:#ede7ff; border:2px solid #b28dff; font-weight:900; font-size:20px; display:flex; align-items:center; justify-content:center; animation:pop .3s both;}
+  .boardarea{display:grid; grid-template-columns:repeat(10,1fr); gap:6px; margin:12px auto; max-width:760px;}
+  .bcell{background:#fff; border-radius:10px; text-align:center; padding:4px; box-shadow:0 3px 0 rgba(0,0,0,.1);}
+  .bcell .bn{font-weight:900; font-size:clamp(13px,2.6vw,22px); color:#3b6cff;}
+  .bcell .bw{font-size:clamp(8px,1.9vw,14px); font-weight:800; color:#c0392b; margin-top:2px;}
+  .bcell .bw .mark::after{width:1em; height:1em; border-width:2px;}
+
+  .readrows{display:flex; flex-direction:column; gap:18px; align-items:center; margin:10px 0;}
+  .readrow{display:flex; gap:8px; flex-wrap:nowrap; justify-content:center; max-width:100%; overflow:auto; padding-bottom:6px;}
+  .rch{min-width:74px; height:82px; border-radius:14px; font-weight:900; font-size:34px; color:#fff; display:flex; align-items:center; justify-content:center; background:#b28dff; box-shadow:0 4px 0 rgba(0,0,0,.16); transition:transform .15s; position:relative; cursor:pointer;}
+  .rch.w{font-size:clamp(13px,2.4vw,20px); background:#ff7eb6; padding:0 6px;}
+  .rch.on{outline:5px solid gold; outline-offset:3px; transform:scale(1.2); z-index:2;}
+  .passlbl{font-size:clamp(15px,3vw,20px); font-weight:800; color:#8b5cf0; text-align:center; margin:6px 0;}
+
+  .game-top{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; align-items:stretch; margin-bottom:12px;}
+  .scoreboard{display:flex; gap:14px; flex-wrap:wrap; justify-content:center; flex:1;}
+  .team-card{border-radius:20px; padding:10px 18px; min-width:170px; text-align:center; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.18);}
+  .team-card.A{background:linear-gradient(180deg,#6ec6ff,#3b8fe0);}
+  .team-card.B{background:linear-gradient(180deg,#ffab6e,#f5822b);}
+  .team-card .tname{font-weight:900; font-size:18px;}
+  .team-card .score{font-size:40px; font-weight:900; line-height:1;}
+  .team-card .scbtn{background:rgba(255,255,255,.9); color:var(--ink); border:none; width:30px; height:30px; border-radius:50%; font-weight:900; cursor:pointer; font-size:18px; margin:4px;}
+  .team-card.turnnow{outline:5px solid gold; outline-offset:3px;}
+  .game-mid{display:flex; flex-wrap:wrap; gap:24px; align-items:flex-start; justify-content:center;}
+  .jarzone{text-align:center; flex:0 0 320px;}
+  .jar{position:relative; width:300px; margin:6px auto;}
+  .jarlid{height:26px; margin:0 auto; width:170px; background:linear-gradient(180deg,#8b5cf0,#6a3fd0); border-radius:10px 10px 4px 4px; box-shadow:0 3px 0 rgba(0,0,0,.2);}
+  .jarneed{width:120px; height:24px; margin:0 auto; background:#b08cff; border-radius:0 0 12px 12px;}
+  .jarbody{border:5px solid #a57ff5; border-top:none; border-radius:0 0 42px 42px; min-height:150px; background:rgba(255,255,255,.55); padding:12px 10px; display:flex; flex-wrap:wrap; gap:1px; justify-content:center;}
+  .jaritem{font-size:30px; line-height:1.1; transition:transform .2s;}
+  .jaritem.hit{transform:scale(1.6); filter:drop-shadow(0 0 6px gold); z-index:2;}
+  .jarclot{position:absolute; inset:0 0 0 0; border:none; border-radius:0 0 42px 42px; background:repeating-linear-gradient(45deg,#b28dff 0 14px,#cbb2ff 14px 28px); display:flex; align-items:center; justify-content:center; gap:10px; z-index:6; font-size:42px; transition:opacity .3s; border-top:4px solid #6a3fd0;}
+  .jarclot.hidden{opacity:0; pointer-events:none;}
+  .jarcount{font-size:clamp(24px,5vw,40px); font-weight:900; margin-top:10px; min-height:46px; color:rebeccapurple;}
+  .container-hint{font-size:clamp(14px,2.5vw,17px); font-weight:700; margin-top:6px; background:#fff; border-radius:14px; padding:8px 12px; box-shadow:0 3px 0 rgba(0,0,0,.1);}
+  .guess-panel{flex:1; min-width:280px;}
+  .turnbadge{text-align:center; font-weight:900; font-size:clamp(16px,3vw,20px); color:#fff; border-radius:40px; padding:10px; margin-bottom:12px; background:linear-gradient(180deg,#6ec6ff,#3b8fe0);}
+  .turnbadge.B{background:linear-gradient(180deg,#ffab6e,#f5822b);}
+  .guessgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:8px;}
+  .gbtn{font-family:inherit; font-weight:900; font-size:clamp(17px,3vw,24px); border:none; cursor:pointer; border-radius:12px; padding:10px 4px; color:#fff; background:var(--gc,#6ec6ff); box-shadow:0 4px 0 rgba(0,0,0,.2); transition:transform .12s;}
+  .gbtn:hover{transform:translateY(-2px);}
+  .gbtn.sel{outline:5px solid gold; outline-offset:2px; transform:scale(1.06);}
+  .gbtn:disabled{opacity:.4; cursor:not-allowed;}
+  .spell-area{margin-top:12px; background:#fff; border-radius:16px; padding:14px; box-shadow:0 4px 0 rgba(0,0,0,.1);}
+  .spell-msg{font-weight:800; text-align:center; margin-bottom:8px;}
+  .spell-built{min-height:48px; display:flex; gap:3px; flex-wrap:wrap; justify-content:center; align-items:center; border:2px dashed #cbb2ff; border-radius:10px; padding:6px; margin-bottom:10px;}
+  .spell-built .stile{background:#b28dff; border-color:#8b5cf0; color:#fff;}
+  .spell-built .stile.dash{background:#ff5d5d; border-color:#c0392b;}
+  .spell-bank{display:flex; flex-wrap:wrap; gap:6px; justify-content:center;}
+  .sbtile{width:42px; height:46px; border-radius:9px; border:none; font-weight:900; font-size:21px; background:#ffd447; color:#7a5b00; cursor:pointer; box-shadow:0 3px 0 rgba(0,0,0,.2); transition:transform .1s;}
+  .sbtile:hover{transform:translateY(-2px);}
+  .sbtile:disabled{opacity:.35; cursor:default; transform:none;}
+  .hintline{font-size:13px; color:#8a6d3d; margin-top:8px; text-align:center;}
+
+  /* ===== patterns ===== */
+  .objectives-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:12px 0 16px;}
+  @media (max-width:640px){.objectives-grid{grid-template-columns:1fr;}}
+  .obj-card{background:linear-gradient(135deg,#f0e6ff,#fff7ea); border-radius:18px; padding:16px 18px; border-left:5px solid var(--purple); box-shadow:0 4px 12px rgba(0,0,0,.08);}
+  .obj-card .obj-title{font-weight:900; font-size:15px; color:#6a3fd0; margin-bottom:6px;}
+  .obj-card .obj-text{font-size:clamp(13px,2.2vw,15px); line-height:1.55; color:var(--ink);}
+  .obj-card .obj-text b{color:#c0392b;}
+  .pattern-box{background:linear-gradient(135deg,#ede7ff,#fff6d9); border:3px solid var(--purple); border-radius:22px; padding:20px; margin:14px 0; text-align:center;}
+  .pattern-box .patt-label{font-size:13px; font-weight:800; color:#8b5cf0; text-transform:uppercase; letter-spacing:2px; margin-bottom:8px;}
+  .pattern-box .patt-sentence{font-size:clamp(20px,4vw,32px); font-weight:900; line-height:1.4;}
+  .pattern-box .patt-sentence .hl-q{color:#2980b9; text-decoration:underline; text-decoration-color:#6ec6ff; text-underline-offset:4px;}
+  .pattern-box .patt-sentence .hl-a{color:#c0392b; text-decoration:underline; text-decoration-color:#ff5d5d; text-underline-offset:4px;}
+  .pattern-box .patt-sentence .hl-price{background:#ffd447; border-radius:8px; padding:2px 8px; display:inline-block; margin:2px;}
+  .pat-steps{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:12px 0; max-width:900px; margin-left:auto; margin-right:auto;}
+  @media (max-width:640px){.pat-steps{grid-template-columns:1fr;}}
+  .pstep{background:#fff; border-radius:18px; padding:14px; text-align:center; box-shadow:0 4px 0 rgba(0,0,0,.1),0 8px 16px rgba(0,0,0,.07);}
+  .pstep .pn{width:30px; height:30px; border-radius:50%; background:var(--purple); color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; margin:0 auto 8px;}
+  .pstep .pt{font-weight:900; font-size:clamp(12px,2.2vw,15px); color:#6a3fd0; margin-bottom:4px;}
+  .pstep .pe{font-size:clamp(14px,2.6vw,17px); font-weight:800;}
+
+  .store-layout{display:grid; grid-template-columns:1fr 320px; gap:20px; align-items:start; margin:14px 0;}
+  @media (max-width:740px){.store-layout{grid-template-columns:1fr;}}
+  .store-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:14px;}
+  .store-item{background:#fff; border-radius:20px; padding:16px 10px 12px; text-align:center; cursor:pointer; box-shadow:0 5px 0 rgba(0,0,0,.1), 0 8px 16px rgba(0,0,0,.06); transition:transform .18s, box-shadow .18s; position:relative;}
+  .store-item:hover{transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.15);}
+  .store-item.selected{outline:4px solid var(--purple); outline-offset:3px; transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,.18);}
+  .store-item .item-emoji{font-size:clamp(36px,6vw,52px); line-height:1; display:block; margin-bottom:6px; transition:transform .2s;}
+  .store-item:hover .item-emoji{transform:scale(1.15) rotate(-5deg);}
+  .store-item .item-name{font-weight:800; font-size:clamp(12px,2vw,15px); color:var(--ink); margin-bottom:4px;}
+  .price-tag-compact{display:inline-block; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; font-weight:900; font-size:clamp(11px,2vw,14px); padding:4px 12px; border-radius:30px; position:relative; box-shadow:0 2px 6px rgba(0,0,0,.2);}
+  .price-tag-compact::before{content:''; position:absolute; top:-6px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:6px solid transparent; border-right:6px solid transparent; border-bottom:6px solid #c0392b;}
+  .item-detail{background:#fff; border-radius:22px; padding:20px; text-align:center; box-shadow:0 8px 24px rgba(0,0,0,.1); position:sticky; top:20px;}
+  .item-detail .detail-emoji{font-size:80px; line-height:1; display:block; margin:8px 0; animation:pop .4s;}
+  .item-detail .detail-name{font-size:clamp(18px,3vw,24px); font-weight:900; margin:4px 0;}
+  .price-tag-large{display:inline-block; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; font-weight:900; font-size:clamp(22px,4vw,32px); padding:10px 28px; border-radius:36px; margin:10px 0; box-shadow:0 4px 12px rgba(0,0,0,.25); position:relative; animation:pop .35s;}
+  .price-tag-large::before{content:'🏷️'; position:absolute; top:-10px; left:-10px; font-size:22px;}
+  .price-tag-large::after{content:''; position:absolute; top:-12px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:8px solid #c0392b;}
+  .seller-bubble{background:#e8f5e9; border-radius:16px; padding:12px 16px; margin:12px 0; font-size:clamp(14px,2.5vw,17px); font-weight:700; color:#2e7d32; position:relative; border:2px solid #a5d6a7;}
+  .seller-bubble::after{content:''; position:absolute; top:-10px; left:30px; border-left:8px solid transparent; border-right:8px solid transparent; border-bottom:10px solid #a5d6a7;}
+  .seller-bubble.buyer{background:#e5f2ff; color:#1a5fb4; border-color:var(--blue);}
+  .seller-bubble.buyer::after{border-bottom-color:var(--blue);}
+  .speaker-icon{font-size:28px; vertical-align:middle; margin-right:4px;}
+  .for-sale-sign{display:inline-block; background:#ff5d5d; color:#fff; font-weight:900; font-size:clamp(18px,3.5vw,28px); padding:10px 30px; border-radius:12px; transform:rotate(-2deg); box-shadow:0 4px 12px rgba(0,0,0,.2); border:3px solid #c0392b; margin:6px 0;}
+
+  .wallet-zone{background:linear-gradient(135deg,#fff6d9,#ffe8cc); border:3px dashed var(--orange); border-radius:22px; padding:18px; margin:14px 0; text-align:center;}
+  .wallet-title{font-weight:900; font-size:clamp(16px,3vw,20px); color:#e67e22; margin-bottom:10px;}
+  .wallet-bills{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:10px 0;}
+  .bill-tile{width:100px; height:56px; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:grab; font-weight:900; color:#fff; user-select:none; box-shadow:0 4px 10px rgba(0,0,0,.2); transition:transform .15s, box-shadow .15s; position:relative;}
+  .bill-tile:hover{transform:translateY(-3px) rotate(-2deg); box-shadow:0 7px 16px rgba(0,0,0,.28);}
+  .bill-tile:active{cursor:grabbing; transform:scale(.95);}
+  .bill-tile .bill-val{font-size:20px; line-height:1;}
+  .bill-tile .bill-label{font-size:9px; opacity:.85; margin-top:1px;}
+  .bill-1{background:linear-gradient(180deg,#4caf50,#388e3c);}
+  .bill-5{background:linear-gradient(180deg,#9c27b0,#7b1fa2);}
+  .bill-10{background:linear-gradient(180deg,#2196f3,#1565c0);}
+  .bill-tile.used{opacity:.3; pointer-events:none; transform:scale(.85);}
+  .paydrop{min-height:90px; border:3px dashed #ccc; border-radius:18px; padding:14px; margin:12px 0; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; align-items:center; transition:border-color .2s, background .2s;}
+  .paydrop.dragover{border-color:var(--green); background:rgba(124,229,119,.15);}
+  .paydrop.correct{border-color:var(--green); background:rgba(124,229,119,.2); animation:pop .4s;}
+  .paydrop.wrong{border-color:var(--red); background:rgba(255,93,93,.1); animation:shake .4s;}
+  .paydrop-hint{color:#999; font-size:14px; font-weight:700;}
+  .paydrop .bill-tile{cursor:default;}
+  .pay-total{font-size:clamp(18px,3vw,24px); font-weight:900; margin:8px 0; min-height:34px;}
+  .pay-total .total-ok{color:#27ae60;}
+  .pay-total .total-not{color:#e74c3c;}
+
+  .uq-label{font-size:clamp(13px,2.2vw,15px); font-weight:800; color:#6a3fd0; margin:14px 0 6px; text-align:center;}
+  .uq-prompt{font-size:clamp(16px,3vw,22px); font-weight:900; text-align:center; margin:6px 0 10px; color:var(--ink);}
+  .uq-prompt .blank{display:inline-block; min-width:80px; border-bottom:3px dashed var(--purple); margin:0 2px;}
+  .uq-bank{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:10px 0; min-height:50px; padding:10px; background:#f8f4ff; border-radius:14px;}
+  .uq-bank .word-tile{cursor:pointer;}
+  .uq-answer{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:10px 0; min-height:54px; padding:12px; background:#fff; border:3px dashed var(--purple); border-radius:14px;}
+  .uq-answer .word-tile{cursor:pointer;}
+  .word-tile{display:inline-flex; align-items:center; justify-content:center; padding:8px 16px; border-radius:12px; font-weight:900; font-size:clamp(14px,2.8vw,19px); box-shadow:0 3px 8px rgba(0,0,0,.15); transition:transform .12s, opacity .2s; user-select:none;}
+  .word-tile.qtile{background:linear-gradient(180deg,#6ec6ff,#4a9ee0); color:#fff;}
+  .word-tile.atile{background:linear-gradient(180deg,#ff7eb6,#f04f9b); color:#fff;}
+  .word-tile:hover{transform:translateY(-2px);}
+  .word-tile.placed{opacity:.35; pointer-events:none; transform:scale(.9);}
+
+  /* ===== patterns quiz ===== */
+  .quiz-top{display:flex; flex-direction:column; gap:8px; align-items:center; margin:12px 0;}
+  .quiz-bar{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; align-items:center;}
+  .quiz-prog{font-weight:900; font-size:clamp(14px,2.6vw,17px); color:#6a3fd0; background:#fff; border-radius:30px; padding:8px 18px; box-shadow:0 3px 0 rgba(0,0,0,.1);}
+  .quiz-item{background:#fff; border-radius:26px; padding:24px; text-align:center; box-shadow:0 8px 24px rgba(0,0,0,.1); max-width:560px; margin:0 auto;}
+  .quiz-item .qi-emoji{font-size:clamp(46px,8vw,70px); line-height:1; display:block;}
+  .quiz-item .qi-name{font-size:clamp(17px,3vw,21px); font-weight:900; margin:6px 0;}
+  .quiz-item .qi-tag{font-size:clamp(26px,5vw,40px); font-weight:900; display:inline-block; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; padding:8px 30px; border-radius:40px; margin:10px 0; box-shadow:0 4px 0 #8f1f14;}
+  .quiz-item .qi-q{font-weight:900; font-size:clamp(16px,3vw,19px); color:#6a3fd0; margin:8px 0 14px;}
+  .quiz-opts{display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:420px; margin:0 auto;}
+  @media (max-width:480px){.quiz-opts{grid-template-columns:1fr;}}
+  .qopt{font-family:inherit; font-weight:900; font-size:clamp(15px,3vw,18px); border:3px solid transparent; cursor:pointer; border-radius:16px; padding:14px 10px; background:#f2edff; color:var(--ink); box-shadow:0 4px 0 rgba(0,0,0,.12); transition:transform .12s, background .2s;}
+  .qopt:hover{transform:translateY(-2px);}
+  .qopt.correct{background:#a5d6a7; outline:4px solid #2e8b57;} 
+  .qopt.wrong{background:#ff8a8a; animation:shake .4s;}
+
+  .teacher-toggle{position:fixed; right:16px; bottom:16px; z-index:60; border:none; cursor:pointer; font-family:inherit; background:var(--ink); color:#fff; border-radius:40px; padding:12px 18px; font-weight:800; font-size:15px; box-shadow:0 6px 14px rgba(0,0,0,.3);}
+  .teacher-panel{position:fixed; right:16px; bottom:72px; z-index:60; width:300px; background:#fff; border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,.3); padding:14px; display:none;}
+  .teacher-panel.open{display:block; animation:fadein .2s;}
+  .teacher-panel h4{margin:0 0 8px; font-size:15px; color:#6a3fd0;}
+  .teacher-panel label{font-size:13px; font-weight:700; display:block; margin:8px 0 4px;}
+  .teacher-panel select,.teacher-panel input{font-family:inherit; font-size:14px; padding:6px; border-radius:8px; border:2px solid #d8ccff; width:100%;}
+  .trow{display:flex; gap:6px; align-items:center; margin:8px 0; justify-content:center;}
+  .trow .btn{padding:6px 14px; font-size:14px;}
+  .secretpill{background:#3a2d4f; color:#fff; border-radius:20px; padding:4px 12px; font-weight:900; cursor:pointer; font-size:13px; display:inline-block;}
+  .tgrid{display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-top:6px;}
+  .tgrid button{font-family:inherit; font-weight:800; border:none; border-radius:6px; padding:6px 0; background:#ede7ff; cursor:pointer; color:var(--ink);}
+  .tgrid button:hover{background:#b28dff; color:#fff;}
+
+  .modal{position:fixed; inset:0; background:rgba(30,20,50,.92); display:none; align-items:center; justify-content:center; z-index:80;}
+  .modal.open{display:flex; animation:fadein .25s;}
+  .modalbox{background:var(--paper); border-radius:26px; padding:22px; max-width:460px; width:92%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.4);}
+  .modalbox .big{font-size:clamp(34px,8vw,64px); margin:6px 0;}
+  .molabel{font-weight:900; font-size:clamp(18px,4vw,24px);}
+  .monote{color:#6b5a82; font-size:14px; margin:8px 0;}
+  .secrettus{display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin:10px 0;}
+  .secrettus button{font-family:inherit; font-weight:800; border:none; border-radius:9px; padding:9px 8px; cursor:pointer; background:#ede7ff; color:var(--ink);}
+  .secrettus button:hover{background:#8b5cf0; color:#fff;}
+  .confetti{position:fixed; top:-20px; z-index:100; pointer-events:none; font-size:22px; animation:fall linear forwards;}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg);}}
+  @keyframes blinkEyes{0%,100%{transform:scale(1);} 50%{transform:scale(1.25);}}
+  .noPeek{animation:blinkEyes 1s infinite;}
+  footer{text-align:center; color:#8a7aa0; font-size:13px; margin-top:30px;}
+  .fab{position:fixed; right:18px; z-index:2040; width:56px; height:56px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer;
+    color:#fff; border:none; text-decoration:none;
+    background:linear-gradient(180deg,var(--c1,#6ec6ff),var(--c2,#4a9ee0));
+    box-shadow:0 5px 12px rgba(0,0,0,.3);
+    opacity:0; transform:translateY(96px) scale(.5); pointer-events:none;
+    transition:opacity .35s, transform .35s, box-shadow .2s, filter .2s;}
+  .fab.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+  .fab.dim{opacity:.32;}
+  .fab:hover{filter:brightness(1.08); box-shadow:0 7px 18px rgba(0,0,0,.38);}
+  .fab:active{transform:translateY(2px) scale(.96);}
+  #fabTop{bottom:86px; --c1:#6ec6ff; --c2:#4a9ee0;}
+  #fabHome{bottom:18px; --c1:#ff7eb6; --c2:#f04f9b;}
+  @media (max-width:640px){.fab{width:48px; height:48px; font-size:20px; right:12px;} #fabTop{bottom:72px;}}
+</style>
+</head>
+<body class="tbg-dialogue">
+
+<div class="bgfx" id="bgfx-dialogue"></div>
+<div class="bgfx" id="bgfx-vocab"></div>
+<div class="bgfx" id="bgfx-patterns"></div>
+
+<header>
+  <h1>🛍️ Unit 3 · School Shop Fun!</h1>
+  <div class="tagline">Dialogue + Vocabulary + Patterns — let's play and learn! 🌟</div>
+  <button class="speechtog" id="speechTog">🔊</button>
+  <div class="tabs">
+    <button class="maintab active" data-main="dialogue">🗣️ Dialogue</button>
+    <button class="maintab" data-main="vocab">📚 Vocabulary</button>
+    <button class="maintab" data-main="patterns">🧩 Patterns</button>
+  </div>
+</header>
+
+<!-- ============================================================ DIAlOGUE -->
+<section class="scene active" id="scene-dialogue">
+  <div class="scenecard">
+    <div class="pic pic-dialogue pic-hero" style="background-position:center 18%;">
+      <div class="pictag">🏪 At the School Shop</div>
+    </div>
+    <h2>🗣️ How Much Is It?</h2>
+    <p class="sub">A helper and a student meet at the school shop. Listen, read and act it out!</p>
+
+    <div class="voice-legend">
+      <span class="vle"><i class="vavat">👨‍💼</i> Shop Helper · male voice 🔊</span>
+      <span class="vle"><i class="vavat">👩‍🎓</i> Student · female voice 🔊</span>
+    </div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-stab="learn">🎭 Learn the Dialogue</button>
+      <button class="sub-tab" data-stab="order">🧩 Order the Lines</button>
+      <button class="sub-tab" data-stab="fill">✍️ Fill the Gaps</button>
+      <button class="sub-tab" data-stab="act">🎬 Act It Out!</button>
+    </div>
+
+    <div class="sub-scene active" id="dstab-learn">
+      <div class="btnrow">
+        <button class="btn big blue" id="dlPlay">🔊 Play the whole dialogue</button>
+        <button class="btn gray" id="dlStop">⏹ Stop</button>
+      </div>
+      <div id="dlLearn"></div>
+      <div class="notebox">
+        🧑‍🏫 <b>Teacher:</b> Tap any speech bubble to hear it read aloud. First read every line as a
+        class, then let students take turns being the helper 👨‍💼 and the student 👩‍🎓!
+      </div>
+    </div>
+
+    <div class="sub-scene" id="dstab-order">
+      <p class="sub">The lines are all mixed up! Tap a card to move it — put the dialogue back in order.</p>
+      <div class="dl-label">🗃️ Step 1 · tap the cards below to build the dialogue</div>
+      <div class="dl-slots" id="dlOrdSlots"></div>
+      <div class="dl-label">🥡 Step 2 · cards left over (tap to pick them up)</div>
+      <div class="dl-bank" id="dlOrdBank"></div>
+      <div class="btnrow">
+        <button class="btn gray" id="dlOrdReset">🔄 Reset</button>
+        <button class="btn big green" id="dlOrdCheck">✔️ Check my order</button>
+      </div>
+      <div id="dlOrdMsg"></div>
+    </div>
+
+    <div class="sub-scene" id="dstab-fill">
+      <p class="sub">Some words are hiding! Tap the word chips to fill every blank. Then read it aloud!</p>
+      <div class="dl-fill" id="dlFill"></div>
+      <div class="dl-label">🧩 Word chips — tap one, then tap a blank to fill it</div>
+      <div class="dl-bank" id="dlFillBank"></div>
+      <div class="btnrow">
+        <button class="btn gray" id="dlFillReset">🔄 Reset</button>
+        <button class="btn big pink" id="dlFillCheck">✔️ Check my answers</button>
+      </div>
+      <div id="dlFillMsg"></div>
+    </div>
+
+    <div class="sub-scene" id="dstab-act">
+      <p class="sub">Pick your role, then watch the stage and say your line when it lights up!</p>
+      <div class="btnrow">
+        <button class="btn blue active" id="actBoth">🔀 Both roles</button>
+        <button class="btn blue" id="actA">👨‍💼 Shop Helper</button>
+        <button class="btn orange" id="actB">👩‍🎓 Student</button>
+      </div>
+      <div class="stage" id="actStage">
+        <span class="slabel" id="actChip">Ready?</span>
+        <span id="actLine">Press ▶ to begin!</span>
+      </div>
+      <div class="arrowrow">
+        <button class="btn gray" id="actPrev">◀ Back</button>
+        <button class="btn big green" id="actNext">Next ▶</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ VOCABULARY -->
+<section class="scene" id="scene-vocab">
+  <div class="scenecard">
+    <div class="pic pic-vocab pic-hero" style="background-position:center 40%;">
+      <div class="pictag">🔢 Numbers 21–30</div>
+    </div>
+    <h2>📚 Number Words 21–30</h2>
+    <p class="sub">twenty-one… twenty-two… all the way to thirty! Play the games to know them by heart.</p>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-stab="board">🎯 Number Board</button>
+      <button class="sub-tab" data-stab="pencils">✏️ 30 Pencils</button>
+      <button class="sub-tab" data-stab="flash">🃏 Flashcards</button>
+      <button class="sub-tab" data-stab="read">📣 Read Together</button>
+      <button class="sub-tab" data-stab="game">🍬 Guess &amp; Spell</button>
+    </div>
+
+    <div class="sub-scene active" id="vstab-board">
+      <h3 style="text-align:center; margin:6px 0 2px;">🎯 The Number Board Game</h3>
+      <p class="sub">1 ・ 2 ・ 3 … our numbers from 1 to 30 are waiting! Pick a game.</p>
+      <div class="btnrow">
+        <button class="btn big blue" id="modeA">🔤 Count 1 to 20</button>
+        <button class="btn big purple" id="modeB">✨ Meet 21–30</button>
+        <button class="btn big green" id="countAll">🎵 Count 1–30 together</button>
+      </div>
+      <div class="board" id="board"></div>
+      <div class="banner" id="boardBanner"></div>
+      <div class="notebox" id="boardNote">
+        🧑‍🏫 <b>Teacher:</b> First let the class count 1 to 20, then <b>“Meet 21–30”</b> lights up the new
+        numbers so students can read them one at a time.
+      </div>
+    </div>
+
+    <div class="sub-scene" id="vstab-pencils">
+      <h3 style="text-align:center; margin:6px 0 2px;">✏️ 30 Pencils on the Desk</h3>
+      <p class="sub">Look at all these pencils! Can you help count them? One… two… three…</p>
+      <div class="counter8" id="pencilCounter">0</div>
+      <div class="btnrow">
+        <button class="btn big green" id="countPencils">🔢 Count the pencils together</button>
+        <button class="btn gray" id="resetPencils">🔄 Reset</button>
+      </div>
+      <div class="pencilGrid" id="pencilGrid"></div>
+      <div class="banner" id="pencilBanner"></div>
+      <div class="notebox">
+        🧑‍🏫 <b>Teacher:</b> Point at each pencil as the class counts aloud. There are exactly
+        <b>30 pencils</b> — great counting all the way to thirty!
+      </div>
+    </div>
+
+    <div class="sub-scene" id="vstab-flash">
+      <h3 style="text-align:center; margin:6px 0 2px;">🃏 Word Flashcards</h3>
+      <p class="sub">This is the <b>word side</b>. Watch for the red circles ⭕ — they show something special!</p>
+      <div class="flashgrid" id="flashgrid"></div>
+      <div class="notebox">
+        🔎 <b>The mystery of the red circles!</b><br>
+        1️⃣ For <b>21 to 29</b>, the red circle hugs the little <b>dash ( – )</b>. When we write these numbers
+        there is always a <b>hyphen</b> between <b>“twenty”</b> and the ones word.<br>
+        2️⃣ Look at <b>thirty</b> — the red circle hugs <b>“ty”</b>! <b>Tw-en-ty</b> … <b>thir-ty</b> — both end in “ty”! 🎉
+      </div>
+      <div class="btnrow">
+        <button class="btn big pink" id="listenAll">🔊 Listen to all the words</button>
+        <button class="btn big blue" id="placeOnBoard">🧲 Place flashcards under the numbers</button>
+      </div>
+      <div class="boardarea" id="boardarea"></div>
+      <div class="banner" id="flashBanner"></div>
+      <div class="notebox tip" id="flashHyphen" style="display:none;"></div>
+      <div class="notebox" id="flashNote">
+        🧑‍🏫 <b>Teacher:</b> Click a flashcard to <b>sound out and spell</b> its word. After all ten words,
+        press <b>“Place flashcards under the numbers”</b>.
+      </div>
+    </div>
+
+    <div class="sub-scene" id="vstab-read">
+      <h3 style="text-align:center; margin:6px 0 2px;">📣 Read Together 3 Times</h3>
+      <p class="sub">Watch the pointer 👉 — the class reads each one <b>three times</b>!</p>
+      <div class="btnrow">
+        <button class="btn big blue" id="readNums">🔢 Point at numbers (3x)</button>
+        <button class="btn big pink" id="readWords">🃏 Point at words (3x)</button>
+        <button class="btn gray" id="readStop">⏹ Stop</button>
+      </div>
+      <div class="passlbl" id="passLabel">Ready when you are!</div>
+      <div class="readrows">
+        <div class="readrow" id="numRow"></div>
+        <div class="readrow" id="wordRow"></div>
+      </div>
+      <div class="arrowrow">
+        <button class="btn gray" id="stepPrev">◀ Back</button>
+        <button class="btn gray" id="stepNext">Next ▶</button>
+      </div>
+      <div class="banner" id="readBanner"></div>
+    </div>
+
+    <div class="sub-scene" id="vstab-game">
+      <h3 style="text-align:center; margin:6px 0 2px;">🍬 The Guessing Game</h3>
+      <p class="sub">Two teams, one secret container. Guess, spell, and count!</p>
+      <div class="game-top">
+        <div class="scoreboard">
+          <div class="team-card A" id="teamA">
+            <div class="tname">⚡ TEAM A</div>
+            <div class="score" id="scoreA">0</div>
+            <div>
+              <button class="scbtn" data-team="A" data-d="1">+</button>
+              <button class="scbtn" data-team="A" data-d="-1">−</button>
+            </div>
+          </div>
+          <div class="team-card B" id="teamB">
+            <div class="tname">🔥 TEAM B</div>
+            <div class="score" id="scoreB">0</div>
+            <div>
+              <button class="scbtn" data-team="B" data-d="1">+</button>
+              <button class="scbtn" data-team="B" data-d="-1">−</button>
+            </div>
+          </div>
+        </div>
+        <button class="btn purple" id="warmup30">🔢 Count 1–30 first!</button>
+      </div>
+      <div class="game-mid">
+        <div class="jarzone">
+          <div class="jar">
+            <div class="jarneed"></div>
+            <div class="jarlid" id="jarLid">🔮</div>
+            <div class="jarbody" id="jarItems"></div>
+            <div class="jarclot" id="jarCloth">🙈❓</div>
+          </div>
+          <div class="jarcount" id="jarCount">?</div>
+          <div class="container-hint" id="containerHint">There are between 21 and 30 goodies hiding inside! 🤫</div>
+        </div>
+        <div class="guess-panel">
+          <div class="turnbadge A" id="turnBadge">⚡ Team A’s turn – pick a number!</div>
+          <div class="guessgrid" id="guessGrid"></div>
+          <div class="spell-area" id="spellArea">
+            <div class="spell-msg">Pick a number first, then spell its word to earn points! 🎯</div>
+          </div>
+        </div>
+      </div>
+      <div class="btnrow">
+        <button class="btn big gray" id="nextTurn">⏭ Next team</button>
+        <button class="btn big pink" id="revealBtn">🎉 Reveal &amp; count!</button>
+        <button class="btn big green" id="newRoundBtn">🙈 New round – close your eyes</button>
+      </div>
+      <div class="banner" id="gameBanner"></div>
+      <div class="notebox">
+        🧑‍🏫 <b>How to play</b>: Split into two teams 🎽. Secretly place 25 goodies in the jar (21–30!).
+        Teams guess the number <b>and</b> spell the word (e.g. 28 = <b>T-W-E-N-T-Y – E-I-G-H-T</b>) → +1 point.
+        Count aloud — the team that guessed the exact number earns +1 more! Close your eyes 🙈 and play again!
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PATTERNS -->
+<section class="scene" id="scene-patterns">
+  <div class="scenecard">
+    <div class="pic pic-patterns pic-hero" style="background-position:center 75%;">
+      <div class="pictag">🛍️ How much is it?</div>
+    </div>
+    <h2>🛍️ How Much Is It?</h2>
+    <p class="sub">Ask and answer the price of things at the school shop — it's easy!</p>
+
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <div class="obj-title">🎯 Teaching Objective 1</div>
+        <div class="obj-text">Ask and answer prices: <b>“How much is it?”</b> → <b>“It is twenty-three dollars.”</b></div>
+      </div>
+      <div class="obj-card">
+        <div class="obj-title">🎯 Teaching Objective 2</div>
+        <div class="obj-text">Listen, say, read and <b>write</b> the patterns with our games — question AND answer!</div>
+      </div>
+    </div>
+
+    <div class="pattern-box">
+      <div class="patt-label">✏️ The sentence patterns we learn today</div>
+      <div class="patt-sentence">
+        👩‍🎓 <span class="hl-q">How much is it?</span><br>
+        👨‍💼 <span class="hl-a">It is <span class="hl-price">twenty-three dollars</span>.</span>
+      </div>
+      <div class="patt-label" style="color:#e67e22;">(= It's twenty-three dollars. Both are okay!)</div>
+    </div>
+
+    <div class="pat-steps">
+      <div class="pstep"><div class="pn">1</div><div class="pt">Ask!</div><div class="pe">How much is it?</div></div>
+      <div class="pstep"><div class="pn">2</div><div class="pt">Say the number</div><div class="pe">twenty-three</div></div>
+      <div class="pstep"><div class="pn">3</div><div class="pt">Answer!</div><div class="pe">It is twenty-three dollars.</div></div>
+    </div>
+
+    <div class="sub-tabs">
+      <button class="sub-tab active" data-stab="learn">🏪 Learn with the Shop</button>
+      <button class="sub-tab" data-stab="paygame">🪙 Pay the Exact Amount</button>
+      <button class="sub-tab" data-stab="unscramble">🔠 Unscramble It</button>
+      <button class="sub-tab" data-stab="quiz">🎲 Pattern Quiz</button>
+    </div>
+
+    <div class="sub-scene active" id="pstab-learn">
+      <div style="text-align:center; margin-top:6px;">
+        <button class="btn big green" id="patShopOpen">🏪 Open the School Shop!</button>
+      </div>
+      <div id="patShopWrap">
+        <div class="pic pic-app pic-side" style="margin:14px 0;">
+          <div class="pictag">🖥️ The Shop App</div>
+        </div>
+        <div class="store-layout">
+          <div>
+            <div class="for-sale-sign" style="text-align:center;">FOR SALE</div>
+            <div class="store-grid" id="patStore"></div>
+          </div>
+          <div class="item-detail" id="patDetail">
+            <div style="font-weight:800; color:#8b5cf0; font-size:13px; letter-spacing:1px;">🛒 PICK AN ITEM</div>
+            <span class="detail-emoji" id="patDetailEmoji">🛍️</span>
+            <div class="detail-name" id="patDetailName">Tap an item to see its price!</div>
+            <div id="patPriceZone"></div>
+            <div class="seller-bubble buyer" style="display:none;" id="patBuyer">
+              <span class="speaker-icon" id="patBuyerIcon">👩‍🎓</span> <span id="patBuyerText">How much is it?</span>
+            </div>
+            <div class="seller-bubble" style="display:none;" id="patSeller">
+              <span class="speaker-icon" id="patSellerIcon">👨‍💼</span> <span id="patSellerText"></span>
+            </div>
+          </div>
+        </div>
+        <div class="notebox">
+          🧑‍🏫 <b>Teaching aids (Step 1):</b> Hold up a real pencil with a <b>$15</b> tag and ask
+          <b>“How much is it?”</b> Students call out <b>“It is fifteen dollars.”</b> Try <b>$5, $10, $23, $30</b>…
+          Then write the two patterns on the board with the parts in different colours.
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-scene" id="pstab-paygame">
+      <h3 style="text-align:center; margin:6px 0 2px;">🪙 Magic Joy – Pay the Exact Amount!</h3>
+      <p class="sub">One group per table. Pick an item, <b>drag the dollar bills</b> and pay the exact price!</p>
+      <div class="store-grid" id="payStore" style="max-width:640px; margin:10px auto;"></div>
+      <div class="wallet-zone">
+        <div class="wallet-title">👛 Your Money Wallet</div>
+        <div id="payTarget" style="font-weight:900; font-size:clamp(16px,3vw,20px); margin:6px 0; min-height:28px;"></div>
+        <div class="wallet-bills" id="walletBills"></div>
+        <div class="paydrop" id="payDrop">
+          <span class="paydrop-hint">💰 Drag bills here to pay…</span>
+        </div>
+        <div class="pay-total" id="payTotal"></div>
+        <div class="btnrow">
+          <button class="btn gray" id="payClear">🗑 Clear</button>
+          <button class="btn orange" id="payAgain">🎲 New item</button>
+          <button class="btn green" id="payCheck">✔️ Check payment</button>
+        </div>
+        <div id="payMsg"></div>
+      </div>
+    </div>
+
+    <div class="sub-scene" id="pstab-unscramble">
+      <h3 style="text-align:center; margin:6px 0 2px;">🔠 Unscramble the Sentence!</h3>
+      <p class="sub">Fix the words in the right order — question first, then your answer!</p>
+      <div class="uq-label">👇 THE QUESTION – fix the order</div>
+      <div class="uq-prompt" id="uqQP">👩‍🎓 How much ✏️ “<span class="blank">is</span>” it?</div>
+      <div class="uq-answer" id="uqQAns"></div>
+      <div class="uq-bank" id="uqQBank"></div>
+      <div class="uq-label">👇 THE ANSWER – fix the order</div>
+      <div class="uq-prompt" id="uqAP">👨‍💼 It is <span class="blank">twenty-three</span> dollars.</div>
+      <div class="uq-answer" id="uqAAns"></div>
+      <div class="uq-bank" id="uqABank"></div>
+      <div class="btnrow">
+        <button class="btn gray" id="uqReset">🔄 Reset</button>
+        <button class="btn big pink" id="uqCheck">✔️ Check my sentences</button>
+      </div>
+      <div id="uqMsg"></div>
+      <div class="notebox">
+        🧑‍🏫 <b>Teaching objective 2:</b> Students <b>listen, say, read and write</b> the patterns here!
+        Question: <b>How much is it?</b> Answer: <b>It is twenty-three dollars.</b> Read each part aloud after you finish. ✍️
+      </div>
+    </div>
+
+    <div class="sub-scene" id="pstab-quiz">
+      <h3 style="text-align:center; margin:6px 0 2px;">🎲 Pattern Quiz — Say the Price!</h3>
+      <p class="sub">See the price tag and pick the words! Switch directions too — can you do both?</p>
+      <div class="quiz-bar">
+        <button class="btn blue active" id="quizModeWord">🏷️ Tag → Words</button>
+        <button class="btn orange" id="quizModeTag">🗣️ Words → Tag</button>
+        <span class="quiz-prog" id="quizScore">Score: 0/0</span>
+        <button class="btn gray" id="quizAgain">🔄 Play again</button>
+      </div>
+      <div class="quiz-item" id="quizItem">
+        <span class="qi-emoji" id="quizEmoji">🛍️</span>
+        <div class="qi-name" id="quizName">Pencil</div>
+        <div class="qi-tag" id="quizTag">$15</div>
+        <div class="qi-q" id="quizQ">How much is it? — say the words!</div>
+        <div class="quiz-opts" id="quizOpts"></div>
+      </div>
+      <div class="banner" id="quizBanner"></div>
+    </div>
+
+    <div class="banner" id="patBanner"></div>
+  </div>
+</section>
+
+<footer>Made for a playful classroom 🎈 – Unit 3 School Shop adventure!</footer>
+
+<!-- ================= MODALS ================= -->
+<div class="modal" id="eyesModal">
+  <div class="modalbox">
+    <div class="big noPeek" id="eyesIcon">🙈</div>
+    <div class="molabel" id="eyesTitle">Close your eyes… NO peeking!</div>
+    <div class="big" id="eyesCount">5</div>
+    <div class="monote" id="eyesNote">🧑‍🏫 Teacher: while eyes are closed, pick the NEW secret number below.
+      Keep it between 21 and 30 – and cover it well! 🙅</div>
+    <div class="secrettus" id="secretGrid"></div>
+    <div class="trow">
+      <button class="btn orange" id="secretMinus">➖ −1</button>
+      <span class="secretpill" id="secretPill">?</span>
+      <button class="btn green" id="secretPlus">➕ +1</button>
+      <button class="btn purple" id="secretRandom">🎲 Random</button>
+    </div>
+    <br>
+    <button class="btn big green" id="eyesDone">👀 Open your eyes!</button>
+  </div>
+</div>
+
+<button class="teacher-toggle" id="teacherToggle">🛠 Teacher tools</button>
+<div class="teacher-panel" id="teacherPanel">
+  <h4>🛠 Teacher tools</h4>
+  <label>1) Choose what to hide in the jar:</label>
+  <select id="itemSelect">
+    <option value='{"e":"🍬","n":"candies"}'>🍬 Candies</option>
+    <option value='{"e":"🔵","n":"marbles"}'>🔵 Marbles</option>
+    <option value='{"e":"🫘","n":"beans"}'>🫘 Beans</option>
+    <option value='{"e":"🟣","n":"beads"}'>🟣 Beads</option>
+    <option value='{"e":"🌰","n":"nuts"}'>🌰 Nuts</option>
+    <option value='{"e":"🪙","n":"coins"}'>🪙 Coins</option>
+  </select>
+  <label>2) Secret count (hidden from class):</label>
+  <div class="trow">
+    <button class="btn orange" id="tMinus">➖</button>
+    <span class="secretpill" id="tPill">25</span>
+    <button class="btn green" id="tPlus">➕</button>
+    <button class="btn purple" id="tRandom">🎲</button>
+  </div>
+  <label>3) Quick set:</label>
+  <div class="tgrid" id="tGrid"></div>
+</div>
+
+<script>
+"use strict";
+var $ = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+/* ---------- data ---------- */
+var NUMS = [];
+for(var n=21;n<=30;n++) NUMS.push(n);
+var ALL = [];
+for(var a=1;a<=30;a++) ALL.push(a);
+var ONES = {1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine"};
+var WORDS = {};
+NUMS.forEach(function(n){ WORDS[n] = n===30 ? "thirty" : "twenty-"+ONES[n-20]; });
+
+/* ---------- sound ---------- */
+var actx=null;
+function audio(){
+  if(!actx){ try{ actx=new (window.AudioContext||window.webkitAudioContext)(); }catch(e){} }
+  if(actx && actx.state==="suspended") actx.resume();
+  return actx;
+}
+function tone(f,dur,type,vol,delay){
+  var c=audio(); if(!c) return;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||"sine"; o.frequency.value=f;
+  var t=c.currentTime+(delay||0);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.18,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.05);
+}
+function sPop(){ tone(500,0.1,"square",0.1); tone(760,0.09,"square",0.1,0.06); }
+function sDing(){ tone(660,0.12,"triangle",0.2); tone(880,0.16,"triangle",0.2,0.1); tone(1320,0.25,"triangle",0.18,0.2); }
+function sBuzz(){ tone(180,0.18,"sawtooth",0.12); tone(140,0.22,"sawtooth",0.12,0.16); }
+function sFanfare(){
+  tone(523,0.12,"triangle",0.2,0); tone(659,0.12,"triangle",0.2,0.11);
+  tone(784,0.12,"triangle",0.2,0.22); tone(1047,0.4,"triangle",0.22,0.33);
+}
+function sThud(){ tone(200,0.12,"sine",0.25); tone(120,0.12,"sine",0.2,0.08); }
+
+/* ---------- speech ---------- */
+var speechOn=true;
+function speakTxt(txt){
+  if(!speechOn) return;
+  try{
+    if(!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(txt);
+    u.lang="en-US"; u.rate=0.72;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function speakNum(n){ var w=WORDS[n]||String(n); speakTxt(w); }
+function speakLetter(ch){ speakTxt(ch==="-"?"hyphen":ch); }
+
+/* steady non-skipping word speller: reads EVERY character in order,
+   says "hyphen" for "-" and takes a 1-second break right after it */
+var spellToken=0;
+function spellWord(w,onLetter,onDone){
+  var token=++spellToken;
+  var letters=w.split("");
+  var i=0;
+  function next(){
+    if(token!==spellToken) return;
+    if(i>=letters.length){ if(onDone) onDone(); return; }
+    var ch=letters[i];
+    var dash=(ch==="-");
+    if(onLetter) onLetter(ch,i);
+    if(!speechOn || !("speechSynthesis" in window)){
+      i++;
+      setTimeout(next, dash?1200:200);
+      return;
+    }
+    var fired=false;
+    function advance(){
+      if(fired) return; fired=true;
+      if(token!==spellToken) return;
+      i++;
+      /* 1-second break after the hyphen, tiny nudge between letters */
+      setTimeout(next, dash?1000:120);
+    }
+    var u=new SpeechSynthesisUtterance(dash?"hyphen":ch);
+    u.lang="en-US"; u.rate=0.72;
+    u.onend=advance; u.onerror=advance;
+    try{
+      speechSynthesis.speak(u);
+      setTimeout(advance, 5000);
+    }catch(e){ advance(); }
+  }
+  next();
+}
+function showHyphenTip(n,w){
+  var b=$("#flashHyphen");
+  var isTy=(n===30);
+  b.innerHTML=isTy
+    ? '🎓 <b>Hyphen help — the "<b>ty</b>" rule! (English)</b><br>'
+      + '➖ <b>30</b> has NO hyphen — it is <b>one word: thirty</b>.<br>'
+      + '🎶 <b>ty</b> says "tee". <b>tw-en-<span class="hl-price">ty</span></b> and <b>thir-<span class="hl-price">ty</span></b> both end in <b>ty</b>!'
+    : '🎓 <b>Hyphen help! (English rules)</b><br>'
+      + '➖ The <b>hyphen</b> (–) is a little dash that <b>joins two words</b>: <b>twenty + one = twenty-one</b>.<br>'
+      + '✅ Rule: numbers <b>21 → 29</b> need a <b>hyphen</b> between <b>twenty</b> and the ones word.<br>'
+      + '⌨️ <b>How to type it:</b> press the tiny <b>dash key “-”</b>, the small line next to the <b>0</b> key on the keyboard: <b>t-w-e-n-t-y</b> <b style="color:#ff5d5d;">–</b> <b>o-n-e</b>.';
+  b.style.display="block";
+  var sp=isTy
+    ? "Thirty has no hyphen, it is one word. Twenty and thirty both end with t-y, which says tee."
+    : "What is the hyphen? It is a little dash that joins twenty and one, so twenty-one. Numbers twenty-one to twenty-nine all have a hyphen. To type it, press the small dash key next to the zero key.";
+  setTimeout(function(){ speakTxt(sp); }, 2600);
+}
+
+/* ---------- two voices: seller (male) & buyer (female) ---------- */
+function getVoices(){
+  try{ if(!window.speechSynthesis) return []; return window.speechSynthesis.getVoices()||[]; }catch(e){ return []; }
+}
+var VSELLER=null, VBUYER=null;
+var MALE_RE=/male|david|daniel|alexander|alex|guy|mark|ryan|george|john|james|brian|eric|christopher|jonathan|michael|paul|peter|thomas|zachary|steffan|guy|ben|boomer|brandon|charles|clay|corey|dennis|dylan|jesse|jack|kevin|kirk|lee|matthew|miguel|mike|mitch|neil|nathan|rick|roger|samuel|shawn|seth|tony|trevor|tobias|william|willem|yuri|amit|arbor|gravel|vittorio/i;
+var FEMALE_RE=/female|zira|aria|jenny|libby|michelle|sonia|hazel|susan|amy|natasha|emma|karen|naomi|serena|joana|maria|monica|ava|christy|fiona|gloria|jada|jessica|kate|linda|lucy|luna|melissa|nancy|olivia|penny|phoebe|rosa|sally|samantha|stella|tessa|tina|vanessa|victoria|wendy|sara|zoe|emily|isabella|ana|giulia|heather|hayley|iveta|katya|marta|reagan|savannah|tracy|valerie|xara|yasmin/i;
+function pickVoices(){
+  var vs=getVoices().filter(function(v){ return /^en/i.test(v.lang||""); });
+  vs.sort(function(a,b){ var au=a.lang==="en-US"?0:1, bu=b.lang==="en-US"?0:1; return au-bu; });
+  VSELLER=vs.find(function(v){ return MALE_RE.test(v.name); })||null;
+  VBUYER =vs.find(function(v){ return FEMALE_RE.test(v.name); })||null;
+  if(!VSELLER && !VBUYER && vs.length){ VSELLER=vs[0]; VBUYER=(vs.length>1)?vs[1]:vs[0]; }
+  else if(!VSELLER && vs.length){ VSELLER=VBUYER&&VBUYER!==vs[0]?VBUYER:vs[0]; }
+  else if(!VBUYER && vs.length){ VBUYER=VSELLER&&VSELLER!==vs[0]?VSELLER:vs[0]; }
+  /* make them different if at all possible */
+  if(VSELLER && VBUYER && VSELLER===VBUYER && vs.length>1){
+    VBUYER=vs.find(function(v){ return v!==VSELLER; });
+  }
+}
+if(window.speechSynthesis){
+  pickVoices();
+  if("onvoiceschanged" in window.speechSynthesis){
+    window.speechSynthesis.onvoiceschanged=function(){ pickVoices(); };
+  }
+}
+function speakTxt(txt, voice, pitch){
+  if(!speechOn) return;
+  try{
+    if(!("speechSynthesis" in window)) return;
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(txt);
+    u.lang="en-US"; u.rate=0.8;
+    if(voice) u.voice=voice;
+    if(pitch) u.pitch=pitch;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function speakLine(txt, side){
+  // side "A" = shop helper (seller, warm friendly male voice)
+  // side "B" = student (buyer, bright cheerful female voice)
+  if(side==="A") speakTxt(txt, VSELLER, 1.05);
+  else speakTxt(txt, VBUYER, 1.32);
+}
+function voiceFor(side){
+  return side==="A"?VSELLER:VBUYER;
+}
+function pitchFor(side){
+  return side==="A"?1.05:1.32;
+}
+
+var speechQ=null;
+function speakQueue(items, onEach, onDone){
+  if(speechQ){ try{ speechSynthesis.cancel(); }catch(e){} }
+  speechQ=items.slice();
+  var speakNext=function(){
+    if(!speechOn || !speechQ.length){ if(onDone) onDone(); speechQ=null; return; }
+    var item=speechQ.shift();
+    var txt=(typeof item==="string")?item:item.t;
+    var voice=item.v;
+    var pitch=item.p;
+    if(onEach) onEach(txt);
+    try{
+      if(!("speechSynthesis" in window)){ speakNext(); return; }
+      var u=new SpeechSynthesisUtterance(txt);
+      u.lang="en-US"; u.rate=0.8;
+      if(voice) u.voice=voice;
+      if(pitch) u.pitch=pitch;
+      u.onend=function(){ speakNext(); };
+      u.onerror=function(){ speakNext(); };
+      speechSynthesis.speak(u);
+    }catch(e){ speakNext(); }
+  };
+  speakNext();
+}
+function stopSpeechQueue(){
+  if(speechQ){ speechQ=null; try{ speechSynthesis.cancel(); }catch(e){} }
+}
+$("#speechTog").addEventListener("click",function(){
+  speechOn=!speechOn;
+  var b=$("#speechTog");
+  b.textContent=speechOn?"🔊":"🔇";
+  b.classList.toggle("off",!speechOn);
+  if(!speechOn) stopSpeechQueue();
+  try{ speechSynthesis.cancel(); }catch(e){}
+});
+
+/* ---------- helpers ---------- */
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=a[i]; a[i]=a[j]; a[j]=t;
+  }
+  return a;
+}
+function confetti(burst){
+  var n=burst||40;
+  var colors=["#ff5d5d","#ffd447","#2ecc71","#6ec6ff","#b28dff","#ff7eb6"];
+  for(var i=0;i<n;i++){
+    var c=document.createElement("div");
+    c.className="confetti";
+    c.textContent=["🎉","⭐","🎈","🦋","🌈","✨"][i%6];
+    c.style.left=Math.random()*100+"vw";
+    c.style.fontSize=(14+Math.random()*22)+"px";
+    c.style.animationDuration=(1.8+Math.random()*1.8)+"s";
+    c.style.color=colors[i%colors.length];
+    document.body.appendChild(c);
+    (function(el){ setTimeout(function(){ el.remove(); },4000); })(c);
+  }
+}
+function clearTimers(){ /* no-op safety */ }
+
+function showMsg(id,html,cls){
+  var el=$(id); if(!el) return;
+  el.innerHTML=html;
+  el.className=cls||"msg-success";
+  el.style.animation="none"; void el.offsetHeight; el.style.animation="";
+}
+function fixMsg(id){ var el=$(id); if(el){ el.innerHTML=""; el.className=""; } }
+
+/* ---------- animated backgrounds (one per main tab) ---------- */
+function buildBg(el, cfg){
+  var html="";
+  var blobColors=cfg.blobs||["rgba(255,190,120,.5)"];
+  for(var i=0;i<cfg.blobN;i++){
+    var cw=120+Math.random()*150, ch=120+Math.random()*150;
+    html+='<span class="blob" style="width:'+cw+'px;height:'+ch+'px;left:'+(Math.random()*92)+'%;top:'+(Math.random()*85)+'%;background:'+blobColors[i%blobColors.length]+'"></span>';
+  }
+  if(cfg.clouds) for(var k=0;k<cfg.clouds;k++){
+    html+='<span class="cloud" style="top:'+(6+Math.random()*20)+'%;width:'+(90+Math.random()*90)+'px;height:'+(26+Math.random()*16)+'px;animation:cloudDrift '+(26+Math.random()*16)+'s linear infinite;animation-delay:-'+(Math.random()*30)+'s;"></span>';
+  }
+  var E=cfg.ems;
+  for(var j=0;j<cfg.n;j++){
+    var em=E[j%E.length];
+    var size=20+Math.random()*26;
+    html+='<span class="fl" style="left:'+(Math.random()*94)+'%;font-size:'+size+'px;animation:'+cfg.anim+' '+(8+Math.random()*10)+'s linear infinite;animation-delay:-'+(Math.random()*18)+'s;animation-duration:'+(8+Math.random()*10)+'s;">'+em+'</span>';
+  }
+  el.innerHTML=html;
+}
+var BGCONF={
+  dialogue:{blobN:5,blobs:["rgba(255,190,120,.5)","rgba(255,140,190,.45)","rgba(120,180,255,.5)"],clouds:3,n:12,ems:["💬","💭","👋","🛍️","🙂","✨"],anim:"flRise"},
+  vocab:{blobN:4,blobs:["rgba(120,230,140,.45)","rgba(140,190,255,.5)","rgba(255,180,220,.45)"],clouds:0,n:16,ems:["🔢","✏️","21","30","🌈","📏","🎨"],anim:"flFall"},
+  patterns:{blobN:5,blobs:["rgba(150,230,190,.5)","rgba(255,210,140,.5)","rgba(140,190,255,.45)"],clouds:0,n:15,ems:["💰","🪙","🛒","🏷️","✨","$"],anim:"flFall"}
+};
+buildBg($("#bgfx-dialogue"), BGCONF.dialogue);
+buildBg($("#bgfx-vocab"), BGCONF.vocab);
+buildBg($("#bgfx-patterns"), BGCONF.patterns);
+
+/* ---------- main tab navigation ---------- */
+function goMain(name){
+  $$(".maintab").forEach(function(m){ m.classList.toggle("active", m.dataset.main===name); });
+  $$(".scene").forEach(function(s){ s.classList.remove("active"); });
+  var sc=$("#scene-"+name); if(sc) sc.classList.add("active");
+  document.body.className="tbg-"+name;
+  [["#bgfx-dialogue","dialogue"],["#bgfx-vocab","vocab"],["#bgfx-patterns","patterns"]].forEach(function(p){
+    $(p[0]).classList.toggle("on", p[1]===name);
+  });
+  stopSpeechQueue();
+  try{ speechSynthesis.cancel(); }catch(e){}
+}
+$$(".maintab").forEach(function(mb){
+  mb.addEventListener("click",function(){ goMain(mb.dataset.main); });
+});
+
+/* ---------- sub tabs wiring ---------- */
+function wireSub(scope, prefix){
+  var btns=$$(scope+" .sub-tab");
+  btns.forEach(function(b){
+    b.addEventListener("click",function(){
+      btns.forEach(function(x){ x.classList.toggle("active", x===b); });
+      $$(scope+" .sub-scene").forEach(function(s){ s.classList.remove("active"); });
+      var el=$("#"+prefix+b.dataset.stab);
+      if(el) el.classList.add("active");
+    });
+  });
+}
+wireSub("#scene-dialogue","dstab-");
+wireSub("#scene-vocab","vstab-");
+wireSub("#scene-patterns","pstab-");
+
+/* ============================================================
+   DIALOGUE
+============================================================ */
+var DL=[
+  {s:"A", t:"Good morning! Welcome to the school shop!"},
+  {s:"B", t:"Good morning! How much is the pencil?"},
+  {s:"A", t:"It's twenty-five dollars."},
+  {s:"B", t:"OK. How much is the eraser?"},
+  {s:"A", t:"It's twenty-one dollars."},
+  {s:"B", t:"Hmm... How much is the ruler?"},
+  {s:"A", t:"It's twenty-eight dollars."},
+  {s:"B", t:"I'll take the pencil, please."},
+  {s:"A", t:"Here you are. That's twenty-five dollars."},
+  {s:"B", t:"Thank you! Have a nice day!"},
+  {s:"A", t:"Have a nice day too! Bye bye!"}
+];
+var dlBubbles=[];
+var AV_MALE="👨💼", AV_FEMALE="👩🎓";
+function avatarFor(side){ return side==="A"?AV_MALE:AV_FEMALE; }
+function roleName(side){ return side==="A"?"Shop Helper":"Student"; }
+function buildDlLearn(){
+  var wrap=$("#dlLearn");
+  wrap.innerHTML="";
+  DL.forEach(function(line,i){
+    var row=document.createElement("div");
+    row.className="dlrow "+line.s;
+    var ava=document.createElement("div");
+    ava.className="dava";
+    ava.textContent=avatarFor(line.s);
+    var bub=document.createElement("div");
+    bub.className="bubbl";
+    var num=document.createElement("div");
+    num.className="dlnum";
+    num.textContent=(i+1);
+    bub.appendChild(num);
+    var txt=document.createElement("div");
+    txt.textContent=line.t;
+    bub.appendChild(txt);
+    bub.addEventListener("click",function(){
+      dlBubbles.forEach(function(b){ b.classList.remove("on"); });
+      bub.classList.add("on");
+      speakLine(line.t, line.s);
+      sPop();
+    });
+    row.appendChild(ava);
+    row.appendChild(bub);
+    dlBubbles.push(bub);
+    wrap.appendChild(row);
+  });
+}
+$("#dlPlay").addEventListener("click",function(){
+  stopSpeechQueue();
+  var items=DL.map(function(l){
+    return {t:l.t, v:voiceFor(l.s), p:pitchFor(l.s)};
+  });
+  var idx=0;
+  speakQueue(items,
+    function(txt){
+      if(idx>0 && dlBubbles[idx-1]) dlBubbles[idx-1].classList.remove("on");
+      if(dlBubbles[idx]) dlBubbles[idx].classList.add("on");
+      idx++;
+    },
+    function(){
+      if(dlBubbles[idx-1]) dlBubbles[idx-1].classList.remove("on");
+      sDing();
+    }
+  );
+});
+$("#dlStop").addEventListener("click",function(){
+  stopSpeechQueue();
+  dlBubbles.forEach(function(b){ b.classList.remove("on"); });
+  try{ speechSynthesis.cancel(); }catch(e){}
+});
+
+/* order the lines */
+var ORD={slot:[], bank:null};
+function dlOrderCard(line, i, kind){
+  var card=document.createElement("div");
+  card.className="dlcard "+kind;
+  var n=document.createElement("div");
+  n.className="n";
+  n.textContent=kind==="can"?"❓":(i+1);
+  card.appendChild(n);
+  var t=document.createElement("div");
+  t.textContent=line.s+" · "+line.t;
+  card.appendChild(t);
+  return card;
+}
+function renderOrder(){
+  var bank=$("#dlOrdBank"), slots=$("#dlOrdSlots");
+  bank.innerHTML=""; slots.innerHTML="";
+  ORD.bank.forEach(function(i){
+    var c=dlOrderCard(DL[i], i, "can");
+    c.addEventListener("click",function(){
+      if(ORD.slot.length<DL.length){ ORD.slot.push(i); sPop(); renderOrder(); }
+    });
+    bank.appendChild(c);
+  });
+  ORD.slot.forEach(function(i){
+    var c=dlOrderCard(DL[i], i, "spot");
+    c.addEventListener("click",function(){
+      var p=ORD.slot.indexOf(i);
+      if(p>=0){ ORD.slot.splice(p,1); ORD.bank.push(i); sPop(); renderOrder(); }
+    });
+    slots.appendChild(c);
+  });
+}
+function resetOrder(){
+  ORD.slot=[]; ORD.bank=DL.map(function(_,i){ return i; });
+  shuffleArrInPlace(ORD.bank);
+  fixMsg("#dlOrdMsg");
+  renderOrder();
+}
+function shuffleArrInPlace(a){
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=a[i]; a[i]=a[j]; a[j]=t;
+  }
+}
+$("#dlOrdReset").addEventListener("click",resetOrder);
+$("#dlOrdCheck").addEventListener("click",function(){
+  var ok=ORD.slot.length===DL.length && ORD.slot.every(function(v,i){ return v===i; });
+  if(ok){
+    showMsg("#dlOrdMsg","🎉 Fantastic! The dialogue is in the perfect order! Now act it out!", "msg-success");
+    sFanfare(); confetti(40);
+    speakLine("Good morning! Welcome to the school shop!", "A");
+  }else{
+    sBuzz();
+    showMsg("#dlOrdMsg","🙈 Almost! Use every card and check that 1,2,3… come before 4,5,6…", "msg-error");
+  }
+});
+
+/* fill the gaps */
+var DLFILL=[
+  {i:1, w:"pencil"},
+  {i:2, w:"twenty-five"},
+  {i:3, w:"eraser"},
+  {i:4, w:"twenty-one"},
+  {i:5, w:"ruler"},
+  {i:6, w:"twenty-eight"}
+];
+var FILL={ans:{}, picked:null};
+function taskHtml(task){
+  var line=DL[task.i];
+  var w=task.w;
+  var idx=line.t.indexOf(w);
+  var before=line.t.slice(0,idx), after=line.t.slice(idx+w.length);
+  var gap='<span class="gapword" data-w="'+w+'">'+((FILL.ans[w])||"?")+'</span>';
+  return {s:line.s, h:before+gap+after};
+}
+function renderFill(){
+  var wrap=$("#dlFill");
+  wrap.innerHTML="";
+  DLFILL.forEach(function(task,ti){
+    var row=document.createElement("div");
+    row.className="dlrow "+DL[task.i].s;
+    var ava=document.createElement("div");
+    ava.className="dava";
+    ava.textContent=avatarFor(DL[task.i].s);
+    var bub=document.createElement("div");
+    bub.className="bubbl";
+    bub.id="fillline-"+ti;
+    var t=taskHtml(task);
+    bub.innerHTML=t.h;
+    bub.addEventListener("click",function(){ speakTxt(DL[task.i].t); });
+    row.appendChild(ava); row.appendChild(bub);
+    wrap.appendChild(row);
+  });
+  // wire gaps after insertion
+  $$("#dlFill .gapword").forEach(function(g){
+    g.addEventListener("click",function(){
+      var w=g.dataset.w;
+      if(FILL.ans[w] && FILL.picked===null){
+        delete FILL.ans[w];
+        sPop();
+        renderFill();
+      }else if(FILL.picked!==null && FILL.ans[w]===undefined){
+        FILL.ans[w]=FILL.picked;
+        FILL.picked=null;
+        sDing();
+        renderFill();
+      }
+    });
+  });
+  var bank=$("#dlFillBank");
+  bank.innerHTML="";
+  var chips=DLFILL.map(function(t){return t.w;}).concat(["notebook","thirty","twelve"]);
+  shuffleArrInPlace(chips);
+  chips.forEach(function(w){
+    var c=document.createElement("div");
+    c.className="word-tile qatile";
+    c.style.cssText="background:linear-gradient(180deg,#b28dff,#8b5cf0);color:#fff;cursor:pointer;";
+    c.dataset.w=w;
+    c.textContent=w;
+    if(FILL.picked===w) c.style.outline="4px solid gold";
+    c.addEventListener("click",function(){
+      FILL.picked=w;
+      sPop();
+      renderFill();
+    });
+    if(FILL.ans[w]!==undefined) c.classList.add("placed");
+    bank.appendChild(c);
+  });
+}
+$("#dlFillReset").addEventListener("click",function(){
+  FILL.ans={}; FILL.picked=null;
+  fixMsg("#dlFillMsg");
+  renderFill();
+});
+$("#dlFillCheck").addEventListener("click",function(){
+  var filled=DLFILL.filter(function(t){ return FILL.ans[t.w]!==undefined; }).length;
+  if(filled!==DLFILL.length){
+    sBuzz();
+    showMsg("#dlFillMsg","Keep going! Tap a chip then a blank — fill all "+DLFILL.length+" gaps.", "msg-error");
+    return;
+  }
+  var ok=true;
+  DLFILL.forEach(function(t){ if(FILL.ans[t.w]!==t.w) ok=false; });
+  if(ok){
+    showMsg("#dlFillMsg","🎉 Perfect! Every word is in the right place — great reading!", "msg-success");
+    sFanfare(); confetti(40);
+    speakQueue([
+      {t:"How much is the pencil?", v:voiceFor("B"), p:pitchFor("B")},
+      {t:"It's twenty-five dollars!", v:voiceFor("A"), p:pitchFor("A")}
+    ]);
+  }else{
+    sBuzz();
+    showMsg("#dlFillMsg","🙈 Check the red blanks — the words don't match the sentence. Try again!", "msg-error");
+    $$("#dlFill .gapword").forEach(function(g){
+      var w=g.dataset.w;
+      if(FILL.ans[w]!==undefined && FILL.ans[w]!==w){ g.style.color="#c62828"; }
+    });
+  }
+});
+
+/* act it out */
+var ACT={mode:"both", idx:0};
+var actLines=function(){ return ACT.mode==="A"
+  ? DL.map(function(l,i){ if(l.s==="A") return i; return -1; }).filter(function(i){return i>=0;})
+  : ACT.mode==="B"
+    ? DL.map(function(l,i){ if(l.s==="B") return i; return -1; }).filter(function(i){return i>=0;})
+    : DL.map(function(_,i){ return i; }); };
+function setActMode(m){
+  ACT.mode=m; ACT.idx=0;
+  $("#actBoth").classList.toggle("active",m==="both");
+  $("#actA").classList.toggle("active",m==="A");
+  $("#actB").classList.toggle("active",m==="B");
+  renderAct();
+}
+function renderAct(){
+  var lines=actLines();
+  if(!lines.length) return;
+  var i=lines[ACT.idx];
+  $("#actChip").textContent=avatarFor(DL[i].s)+" "+roleName(DL[i].s);
+  $("#actLine").textContent=DL[i].t;
+  speakLine(DL[i].t, DL[i].s);
+  sPop();
+}
+$("#actBoth").addEventListener("click",function(){ setActMode("both"); });
+$("#actA").addEventListener("click",function(){ setActMode("A"); });
+$("#actB").addEventListener("click",function(){ setActMode("B"); });
+$("#actNext").addEventListener("click",function(){
+  var lines=actLines();
+  ACT.idx=(ACT.idx+1)%lines.length;
+  renderAct();
+});
+$("#actPrev").addEventListener("click",function(){
+  var lines=actLines();
+  ACT.idx=(ACT.idx-1+lines.length)%lines.length;
+  renderAct();
+});
+
+/* ============================================================
+   VOCABULARY — Number Board
+============================================================ */
+var boardEl=$("#board");
+function boardColor(n){ var c=["#ff6b6b","#ff9f43","#ffd447","#2ecc71","#1abc9c","#3498db","#9b59b6","#e84393","#5f27cd","#00cec9"]; return c[(n-1)%10]; }
+function buildBoard(){
+  ALL.forEach(function(n){
+    var d=document.createElement("div");
+    d.className="tile";
+    d.style.background=boardColor(n);
+    d.id="tile-"+n;
+    d.textContent=n;
+    d.dataset.n=n;
+    d.addEventListener("click",function(){
+      if(n<=20){ highlightOnly(n); speakNum(n); sPop(); }
+      else clickNewNumber(n);
+    });
+    boardEl.appendChild(d);
+  });
+  buildModeButtons();
+}
+function highlightOnly(n){
+  $$(".tile").forEach(function(t){ t.classList.remove("active","marked"); });
+  var el=$("#tile-"+n);
+  if(el) el.classList.add("active");
+}
+function addTipTo(n){
+  var el=$("#tile-"+n);
+  if(el && !el.querySelector(".wordtip")){
+    var s=document.createElement("div");
+    s.className="wordtip";
+    s.textContent=WORDS[n]||n;
+    el.appendChild(s);
+  }
+}
+var countTimer=null;
+function animateRun(nums,ms,labelpass,onDone){
+  if(countTimer) clearInterval(countTimer);
+  $$(".tile").forEach(function(t){ t.classList.remove("active","marked"); });
+  var i=0;
+  countTimer=setInterval(function(){
+    if(i>0){ var p=$("#tile-"+nums[i-1]); if(p) p.classList.remove("active"); }
+    var el=$("#tile-"+nums[i]);
+    if(el){ el.classList.add("active"); if(labelpass && el.scrollIntoView) el.scrollIntoView({block:"nearest",inline:"nearest",behavior:"smooth"}); }
+    i++;
+    if(i>=nums.length){
+      clearInterval(countTimer); countTimer=null;
+      if(onDone) onDone(nums);
+    }
+  },ms);
+}
+function setBanner(id,txt,cls){
+  var b=$(id); if(!b) return;
+  b.innerHTML=txt; b.className="banner show "+(cls||"win");
+}
+function clearBanner(id){ var b=$(id); if(b){ b.className="banner"; b.innerHTML=""; } }
+function buildModeButtons(){
+  $("#modeA").addEventListener("click",function(){
+    clearBanner("#boardBanner");
+    $("#boardNote").innerHTML="🧑‍🏫 <b>Teacher:</b> Count <b>1 to 20</b> together while the numbers light up. Ready? One… two… three…!";
+    animateRun(ALL.slice(0,20),550,true,function(){
+      $$(".tile").forEach(function(t){ if(+t.dataset.n>20) t.classList.add("dim"); });
+      setBanner("#boardBanner","🎉 You counted 1 to 20! Now meet 21–30!");
+      sFanfare(); confetti(40);
+      setTimeout(function(){ $$(".tile").forEach(function(t){ t.classList.remove("dim"); }); },2600);
+    });
+  });
+  $("#modeB").addEventListener("click",function(){
+    clearBanner("#boardBanner");
+    $$(".tile").forEach(function(t){ if(+t.dataset.n<=20) t.classList.add("dim"); });
+    NUMS.forEach(function(n){ var el=$("#tile-"+n); if(el){ el.classList.add("ghost"); el.classList.remove("dim"); addTipTo(n); } });
+    $("#modeB").textContent="✨ Reading 21–30 together…";
+    animateRun(NUMS,700,true,function(nums){
+      nums.forEach(function(n){ var el=$("#tile-"+n); if(el) el.classList.add("marked"); });
+      setBanner("#boardBanner","✨ The new numbers 21 to 30! Read them with me, three times!");
+      sFanfare(); confetti(20);
+      setTimeout(function(){
+        NUMS.forEach(function(n){ var el=$("#tile-"+n); if(el) el.classList.remove("marked","ghost"); });
+        $("#modeB").textContent="✨ Meet 21–30";
+      },3500);
+    });
+  });
+  $("#countAll").addEventListener("click",function(){
+    clearBanner("#boardBanner");
+    $$(".tile").forEach(function(t){ t.classList.remove("dim"); });
+    animateRun(ALL,260,true,function(){
+      setBanner("#boardBanner","🎉 1 to 30! You are number champions!");
+      sFanfare(); confetti(50);
+    });
+  });
+}
+function clickNewNumber(n){
+  if(n>20){
+    $$(".tile").forEach(function(t){ t.classList.remove("active","marked"); });
+    var el=$("#tile-"+n);
+    if(el){ el.classList.add("active","marked"); addTipTo(n); }
+    speakNum(n); sPop();
+    setBanner("#boardBanner","🔢 "+n+"  →  \u201C"+WORDS[n]+"\u201D  –  say it with me!");
+  }
+}
+
+/* ============================================================
+   VOCABULARY — pencils
+============================================================ */
+var pencilEl=$("#pencilGrid");
+function buildPencils(){
+  for(var i=1;i<=30;i++){
+    var p=document.createElement("div");
+    p.className="pencil";
+    p.id="pencil-"+i;
+    p.textContent="✏️";
+    pencilEl.appendChild(p);
+  }
+}
+var pTimer=null;
+function countPencils(){
+  if(pTimer) clearInterval(pTimer);
+  $$(".pencil").forEach(function(p){ p.classList.remove("active"); });
+  $("#pencilCounter").textContent="0";
+  clearBanner("#pencilBanner");
+  var i=1;
+  $("#countPencils").disabled=true;
+  pTimer=setInterval(function(){
+    if(i>1){ var pr=document.getElementById("pencil-"+(i-1)); if(pr) pr.classList.remove("active"); }
+    var pe=document.getElementById("pencil-"+i);
+    if(pe) pe.classList.add("active");
+    $("#pencilCounter").textContent=i;
+    i++;
+    if(i>30){
+      clearInterval(pTimer); pTimer=null;
+      $("#countPencils").disabled=false;
+      setBanner("#pencilBanner","🖍 30 pencils — you counted them all! Super counting!");
+      sFanfare(); confetti(40);
+    }
+  },520);
+}
+$("#countPencils").addEventListener("click",countPencils);
+$("#resetPencils").addEventListener("click",function(){
+  if(pTimer){ clearInterval(pTimer); pTimer=null; }
+  $("#countPencils").disabled=false;
+  $$(".pencil").forEach(function(p){ p.classList.remove("active"); });
+  $("#pencilCounter").textContent="0";
+  clearBanner("#pencilBanner");
+});
+
+/* ============================================================
+   VOCABULARY — flashcards
+============================================================ */
+var flashEl=$("#flashgrid");
+function buildFlashcards(){
+  NUMS.forEach(function(n,idx){
+    var card=document.createElement("div");
+    card.className="fcard";
+    card.dataset.n=n;
+    card.style.setProperty("--gc",boardColor(n));
+    var box=document.createElement("div");
+    box.className="num";
+    box.textContent=n;
+    var wl=document.createElement("div");
+    wl.className="wordline";
+    if(n===30){
+      var frame=document.createElement("div");
+      frame.innerHTML='<span class="tens">thir</span><span class="mark">ty</span>';
+      wl.appendChild(frame);
+    }else{
+      var fr=document.createElement("div");
+      fr.innerHTML='<span class="tens">twenty</span><span class="mark">–</span><span>'+ONES[n-20]+'</span>';
+      wl.appendChild(fr);
+    }
+    card.appendChild(box);
+    card.appendChild(wl);
+    card.addEventListener("click",function(){ soundOutWord(n,card); });
+    flashEl.appendChild(card);
+  });
+}
+function soundOutWord(n,card){
+  try{ if("speechSynthesis" in window) speechSynthesis.cancel(); }catch(e){}
+  spellToken++;
+  var old=card.querySelector(".soundtiles");
+  if(old && old.parentNode) old.parentNode.removeChild(old);
+  var w=WORDS[n];
+  var letters=w.split("");
+  var tiles=document.createElement("div");
+  tiles.className="soundtiles";
+  card.appendChild(tiles);
+  spellWord(w, function(ch){
+    var t=document.createElement("div");
+    t.className="stile"+(ch==="-"?" dash":"");
+    t.textContent=ch==="-"?"–":ch;
+    tiles.appendChild(t);
+    sPop();
+  }, function(){
+    sDing();
+    speakTxt(w);
+    setBanner("#flashBanner","✍️ \u201C"+w+"\u201D — spelled letter by letter!");
+    showHyphenTip(n,w);
+    setTimeout(function(){
+      if(tiles && tiles.parentNode) tiles.parentNode.removeChild(tiles);
+    }, 1800);
+  });
+}
+$("#listenAll").addEventListener("click",function(){
+  stopSpeechQueue();
+  $("#flashBanner").className="banner";
+  var order=NUMS.slice();
+  var idx=0;
+  speakQueue(
+    order.map(function(n){ return WORDS[n]; }),
+    function(word){
+      var n=30;
+      order.forEach(function(m){ if(WORDS[m]===word) n=m; });
+      var card=$(".fcard[data-n='"+n+"']");
+      if(card){ card.parentNode.appendChild(card); card.style.transform="translateY(-4px)"; setTimeout(function(){ card.style.transform=""; },600); }
+      setBanner("#flashBanner","🔊 \u201C"+word+"\u201D");
+    },
+    function(){
+      setBanner("#flashBanner","🎊 All ten words! twenty-one… twenty-two… twenty-nine… THIRTY!");
+      sFanfare(); confetti(30);
+    }
+  );
+});
+$("#placeOnBoard").addEventListener("click",function(){
+  $("#flashBanner").className="banner";
+  var area=$("#boardarea");
+  area.innerHTML="";
+  var idx=0;
+  NUMS.forEach(function(n){
+    setTimeout(function(){
+      var cell=document.createElement("div");
+      cell.className="bcell";
+      var bn=document.createElement("div");
+      bn.className="bn";
+      bn.textContent=n;
+      var bw=document.createElement("div");
+      bw.className="bw";
+      if(n===30){
+        bw.innerHTML='<span class="tyhl">thir</span><span class="mark">ty</span>';
+      }else{
+        bw.innerHTML='<span>twenty</span><span class="mark">–</span><span>'+ONES[n-20]+'</span>';
+      }
+      cell.appendChild(bn);
+      cell.appendChild(bw);
+      area.appendChild(cell);
+      sThud();
+      if(++idx===NUMS.length){
+        setBanner("#flashBanner","🧲 All the words are now on the board, under their numbers!");
+        sFanfare(); confetti(30);
+      }
+    },450*idx);
+  });
+});
+
+/* ============================================================
+   VOCABULARY — read together
+============================================================ */
+var numRow=$("#numRow"), wordRow=$("#wordRow");
+var readEls=[];
+var CURRENT={timer:null,ptr:0,pass:0,mode:null};
+function buildRead(){
+  NUMS.forEach(function(n){
+    var a=document.createElement("div");
+    a.className="rch";
+    a.style.background=boardColor(n);
+    a.textContent=n;
+    numRow.appendChild(a);
+    var b=document.createElement("div");
+    b.className="rch w";
+    b.textContent=WORDS[n];
+    wordRow.appendChild(b);
+    readEls.push({n:n,num:a,word:b});
+  });
+  $("#readNums").addEventListener("click",function(){ startReadMode("num"); });
+  $("#readWords").addEventListener("click",function(){ startReadMode("word"); });
+  $("#readStop").addEventListener("click",stopRead);
+  $("#stepPrev").addEventListener("click",function(){ stepRead(-1); });
+  $("#stepNext").addEventListener("click",function(){ stepRead(1); });
+}
+function startReadMode(mode){
+  if(CURRENT.timer){ clearInterval(CURRENT.timer); CURRENT.timer=null; }
+  CURRENT.mode=mode; CURRENT.ptr=-1; CURRENT.pass=0;
+  clearAllRead();
+  $("#readBanner").className="banner";
+  runReadPass();
+}
+function runReadPass(){
+  if(CURRENT.timer) clearInterval(CURRENT.timer);
+  CURRENT.pass++;
+  $("#passLabel").textContent="Pass "+CURRENT.pass+" of 3 — class, read with me! 👉";
+  CURRENT.ptr=-1;
+  CURRENT.timer=setInterval(tickRead,900);
+}
+function tickRead(){
+  CURRENT.ptr++;
+  if(CURRENT.ptr>=readEls.length){
+    clearInterval(CURRENT.timer); CURRENT.timer=null;
+    if(CURRENT.pass<3){ runReadPass(); }
+    else{ finishRead(); }
+    return;
+  }
+  var nums=CURRENT.mode==="num";
+  var cell=nums?readEls[CURRENT.ptr].num:readEls[CURRENT.ptr].word;
+  clearAllRead();
+  cell.classList.add("on");
+  speakTxt(nums?String(readEls[CURRENT.ptr].n):WORDS[readEls[CURRENT.ptr].n]);
+  sPop();
+}
+function finishRead(){
+  $("#passLabel").textContent="🎉 Done! Three times!";
+  setBanner("#readBanner","Fabulous reading — three times! 🌟");
+  sFanfare(); confetti(30);
+}
+function stepRead(dir){
+  if(CURRENT.timer){ clearInterval(CURRENT.timer); CURRENT.timer=null; }
+  CURRENT.ptr=(CURRENT.ptr+dir+readEls.length)%readEls.length;
+  var nums=CURRENT.mode!=="word";
+  var cell=nums?readEls[CURRENT.ptr].num:readEls[CURRENT.ptr].word;
+  clearAllRead();
+  cell.classList.add("on");
+  speakTxt(nums?String(readEls[CURRENT.ptr].n):WORDS[readEls[CURRENT.ptr].n]);
+  sPop();
+  $("#passLabel").textContent="Teacher’s pointer — class reads 3 times! 👉";
+}
+function clearAllRead(){ readEls.forEach(function(r){ r.num.classList.remove("on"); r.word.classList.remove("on"); }); }
+function stopRead(){
+  if(CURRENT.timer){ clearInterval(CURRENT.timer); CURRENT.timer=null; }
+  clearAllRead();
+  $("#passLabel").textContent="Ready when you are!";
+  $("#readBanner").className="banner";
+}
+
+/* ============================================================
+   VOCABULARY — guess & spell team game
+============================================================ */
+var G={target:25, item:{e:"🍬",n:"candies"}, score:{A:0,B:0}, state:{A:{guess:null,spelled:false,bonus:false},B:{guess:null,spelled:false,bonus:false}}, turn:"A", hidden:true};
+var jarItems=$("#jarItems"), jarCloth=$("#jarCloth");
+function setItems(){
+  jarItems.innerHTML="";
+  for(var i=1;i<=G.target;i++){
+    var s=document.createElement("span");
+    s.className="jaritem";
+    s.textContent=G.item.e;
+    s.style.fontSize=G.target>26?"26px":"30px";
+    jarItems.appendChild(s);
+  }
+}
+function buildGame(){
+  setItems();
+  $("#containerHint").textContent="There are between 21 and 30 "+G.item.n+" hiding inside! 🤫";
+  var g=$("#guessGrid");
+  g.innerHTML="";
+  for(var n=21;n<=30;n++){
+    var b=document.createElement("button");
+    b.className="gbtn";
+    b.textContent=n;
+    b.style.setProperty("--gc",boardColor(n));
+    b.dataset.n=n;
+    b.addEventListener("click",function(){ pickGuess(parseInt(this.dataset.n,10)); });
+    g.appendChild(b);
+  }
+  var tG=$("#tGrid");
+  for(var m=21;m<=30;m++){
+    (function(v){
+      var b=document.createElement("button");
+      b.textContent=v;
+      b.addEventListener("click",function(){ setTarget(v); renderPills(); });
+      tG.appendChild(b);
+    })(m);
+  }
+  $("#secretGrid").innerHTML="";
+  for(var k=21;k<=30;k++){
+    (function(v){
+      var b=document.createElement("button");
+      b.textContent=v;
+      b.addEventListener("click",function(){ setTarget(v); renderPills(); });
+      $("#secretGrid").appendChild(b);
+    })(k);
+  }
+  setTurn("A");
+}
+function renderPills(){ $("#tPill").textContent=G.target; $("#secretPill").textContent=G.target; }
+function setTarget(v){
+  v=Math.max(21,Math.min(30,v));
+  G.target=v;
+  setItems();
+  sPop();
+  renderPills();
+  $("#jarCount").textContent=G.hidden?"?":G.target;
+}
+function setTurn(t){
+  G.turn=t;
+  var badge=$("#turnBadge");
+  badge.textContent=(t==="A"?"⚡ Team A’s turn – pick a number!":"🔥 Team B’s turn – pick a number!");
+  badge.className="turnbadge "+t;
+  $("#teamA").classList.toggle("turnnow",t==="A");
+  $("#teamB").classList.toggle("turnnow",t==="B");
+  $$("#guessGrid .gbtn").forEach(function(b){ b.disabled=false; b.classList.remove("sel"); });
+  G.state[t].guess=null; G.state[t].spelled=false; G.state[t].bonus=false;
+  $("#spellArea").innerHTML='<div class="spell-msg">Pick a number, then spell it! 🎯</div>';
+}
+function pickGuess(n){
+  var st=G.state[G.turn];
+  if(st.spelled) return;
+  st.guess=n;
+  $$("#guessGrid .gbtn").forEach(function(b){ b.classList.toggle("sel",+b.dataset.n===n); });
+  sPop();
+  openSpell();
+}
+function openSpell(){
+  var st=G.state[G.turn];
+  var word=WORDS[st.guess];
+  var area=$("#spellArea");
+  area.innerHTML="";
+  var msg=document.createElement("div");
+  msg.className="spell-msg";
+  msg.textContent="Team "+(G.turn==="A"?"A ⚡":"B 🔥")+" guessed "+st.guess+" → Spell \u201C"+word+"\u201D +1 point!";
+  area.appendChild(msg);
+  var built=document.createElement("div");
+  built.className="spell-built";
+  area.appendChild(built);
+  var hint=document.createElement("div");
+  hint.className="hintline";
+  hint.textContent="Tap the letters in order! Put the dash – between twenty and the ones word. ✍️";
+  area.appendChild(hint);
+  var bank=document.createElement("div");
+  bank.className="spell-bank";
+  area.appendChild(bank);
+  var letters=word.split("");
+  var idx=0;
+  letters.forEach(function(c){
+    (function(want){
+      var b=document.createElement("button");
+      b.className="sbtile";
+      b.textContent=want==="-"?"–":want;
+      b.dataset.c=want;
+      b.addEventListener("click",function(){
+        if(b.disabled || idx>=letters.length) return;
+        if(want===letters[idx]){
+          b.disabled=true; b.style.opacity=.3;
+          var placed=document.createElement("div");
+          placed.className="stile"+(want==="-"?" dash":"");
+          placed.textContent=want==="-"?"–":want;
+          built.appendChild(placed);
+          sPop(); speakLetter(want);
+          idx++;
+          if(idx===letters.length){
+            st.spelled=true;
+            addScore(G.turn,1);
+            sFanfare(); confetti(25);
+            msg.textContent="✔️ Correct! \u201C"+word+"\u201D spelled! +1 point!";
+            msg.style.color="#1d9b3f";
+            if(st.guess===G.target){
+              var bonusLine=document.createElement("div");
+              bonusLine.style.cssText="margin-top:8px;font-weight:900;color:#8a2be2;";
+              bonusLine.textContent="🎊 ...and their guess is RIGHT! +1 more point at the count!";
+              area.appendChild(bonusLine);
+              sFanfare();
+            }
+          }
+        }else{
+          sBuzz();
+          b.classList.add("shake");
+          setTimeout(function(){ b.classList.remove("shake"); },500);
+        }
+      });
+      bank.appendChild(b);
+    })(c);
+  });
+}
+function addScore(team,d){
+  G.score[team]=Math.max(0,G.score[team]+d);
+  $("#score"+team).textContent=G.score[team];
+  var card=$("#team"+team);
+  card.style.transform="scale(1.08)";
+  setTimeout(function(){ card.style.transform=""; },200);
+  sDing();
+}
+$("#nextTurn").addEventListener("click",function(){
+  setTurn(G.turn==="A"?"B":"A");
+});
+$("#revealBtn").addEventListener("click",reveal);
+function reveal(){
+  if(G.hidden){
+    jarCloth.classList.add("hidden");
+    G.hidden=false;
+    $("#jarCount").textContent="...";
+    setItems();
+    var items=$$(".jaritem");
+    var total=items.length;
+    var i=0;
+    var rt=setInterval(function(){
+      items[i].classList.add("hit");
+      $("#jarCount").textContent=(i+1);
+      i++;
+      if(i>=total){
+        clearInterval(rt);
+        $("#jarCount").textContent=total+" "+G.item.e;
+        var bonusMsgs=[];
+        ["A","B"].forEach(function(tm){
+          if(G.state[tm].guess===total && !G.state[tm].bonus){
+            G.state[tm].bonus=true;
+            addScore(tm,1);
+            bonusMsgs.push("Team "+(tm==="A"?"A ⚡":"B 🔥"));
+          }
+        });
+        var banner=$("#gameBanner");
+        banner.className="banner show "+(bonusMsgs.length?"win":"warn");
+        banner.textContent=bonusMsgs.length
+          ? "🎊 Total = "+total+"! "+bonusMsgs.join(" and ")+" guessed it – +1 bonus point!"
+          : "Total = "+total+"! Nobody guessed it this time… new round!";
+        sFanfare(); confetti(bonusMsgs.length?50:20);
+      }
+    },180);
+  }else{
+    $("#jarCount").textContent=$$(".jaritem").length;
+    $("#gameBanner").className="banner show warn";
+    $("#gameBanner").textContent="The jar is already open";
+  }
+}
+$("#newRoundBtn").addEventListener("click",function(){
+  jarCloth.classList.remove("hidden");
+  G.hidden=true;
+  $("#jarCount").textContent="?";
+  $("#jarCloth").textContent="🙈?";
+  $("#gameBanner").className="banner";
+  var count=5;
+  $("#eyesCount").textContent=count;
+  $("#eyesTitle").textContent="Close your eyes… NO peeking! 🙈";
+  $("#eyesIcon").textContent="🙈";
+  $("#eyesDone").disabled=true;
+  $("#eyesModal").classList.add("open");
+  $("#eyesNote").textContent="🧑‍🏫 Teacher: while eyes are closed, pick the NEW secret number below. Keep it between 21 and 30 – and cover it well! 🙅";
+  var it=setInterval(function(){
+    count--;
+    if(count<=0){ clearInterval(it); $("#eyesCount").textContent="👀"; }
+    else $("#eyesCount").textContent=count;
+  },1000);
+  setTimeout(function(){ var b=$("#eyesDone"); if(b) b.disabled=false; },5000);
+  renderPills();
+});
+$("#eyesDone").addEventListener("click",function(){
+  $("#eyesModal").classList.remove("open");
+  setTurn("A");
+  sDing();
+});
+$("#secretMinus").addEventListener("click",function(){ setTarget(G.target-1); });
+$("#secretPlus").addEventListener("click",function(){ setTarget(G.target+1); });
+$("#secretRandom").addEventListener("click",function(){ setTarget(21+Math.floor(Math.random()*10)); });
+$("#warmup30").addEventListener("click",function(){
+  goMain("vocab");
+  $$("#scene-vocab .sub-tab").forEach(function(t){ t.classList.toggle("active", t.dataset.stab==="board"); });
+  $$("#scene-vocab .sub-scene").forEach(function(s){ s.classList.remove("active"); });
+  $("#vstab-board").classList.add("active");
+  animateRun(ALL,220,true,function(){
+    setBanner("#boardBanner","🎉 1 to 30! Ready to play the guessing game?");
+    sFanfare(); confetti(30);
+  });
+});
+$("#teacherToggle").addEventListener("click",function(){ $("#teacherPanel").classList.toggle("open"); });
+$("#tMinus").addEventListener("click",function(){ setTarget(G.target-1); });
+$("#tPlus").addEventListener("click",function(){ setTarget(G.target+1); });
+$("#tRandom").addEventListener("click",function(){ setTarget(21+Math.floor(Math.random()*10)); });
+$("#itemSelect").addEventListener("change",function(){
+  G.item=JSON.parse(this.value);
+  $("#containerHint").textContent="There are between 21 and 30 "+G.item.n+" hiding inside! 🤫";
+  $("#jarCount").textContent=G.hidden?"?":G.target;
+  setItems();
+  sFanfare();
+});
+$$(".scbtn").forEach(function(b){
+  b.addEventListener("click",function(){
+    var t=b.dataset.team, d=parseInt(b.dataset.d,10);
+    var v=G.score[t]+d; if(v<0)v=0;
+    G.score[t]=v;
+    $("#score"+t).textContent=v;
+  });
+});
+
+/* ============================================================
+   PATTERNS — data
+============================================================ */
+var MONEY_WORDS={
+  1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine",
+  10:"ten",11:"eleven",12:"twelve",13:"thirteen",14:"fourteen",15:"fifteen",16:"sixteen",
+  17:"seventeen",18:"eighteen",19:"nineteen",20:"twenty",21:"twenty-one",22:"twenty-two",
+  23:"twenty-three",24:"twenty-four",25:"twenty-five",26:"twenty-six",27:"twenty-seven",
+  28:"twenty-eight",29:"twenty-nine",30:"thirty"
+};
+function dollarsWord(v){ return MONEY_WORDS[v]||String(v); }
+var PATTERNS_ITEMS=[
+  {e:"✏️", n:"Pencil", v:15},
+  {e:"🖊️", n:"Pen", v:12},
+  {e:"📏", n:"Ruler", v:5},
+  {e:"📘", n:"Textbook", v:25},
+  {e:"🧽", n:"Eraser", v:8},
+  {e:"📓", n:"Notebook", v:23},
+  {e:"🎒", n:"Book Bag", v:30},
+  {e:"🖍️", n:"Crayons", v:10}
+];
+var PAT_BILLS=[1,1,1,1,5,5,5,10,10,10];
+var UQ_qCorrect=["How","much","is","it","?"];
+var UQ_aCorrect=["It","is","twenty-three","dollars","."];
+
+/* ---- patterns shop (learn) ---- */
+var patSel=0;
+function buildPatStore(){
+  var store=$("#patStore");
+  store.innerHTML="";
+  PATTERNS_ITEMS.forEach(function(it,i){
+    var d=document.createElement("div");
+    d.className="store-item"+(i===0?" selected":"");
+    d.dataset.idx=i;
+    d.innerHTML='<span class="item-emoji">'+it.e+'</span><div class="item-name">'+it.n+'</div><div class="price-tag-compact">$'+it.v+'</div>';
+    d.addEventListener("click",function(){ selectPatItem(i); });
+    store.appendChild(d);
+  });
+  selectPatItem(0);
+}
+function selectPatItem(i){
+  patSel=i;
+  var it=PATTERNS_ITEMS[i];
+  $$("#patStore .store-item").forEach(function(s){ s.classList.toggle("selected", +s.dataset.idx===i); });
+  var em=$("#patDetailEmoji");
+  em.textContent=it.e;
+  em.style.animation="none"; void em.offsetHeight; em.style.animation="pop .4s";
+  $("#patDetailName").textContent=it.n;
+  $("#patPriceZone").innerHTML='<div class="price-tag-large">$'+it.v+'</div>';
+  var buyer=$("#patBuyer"), seller=$("#patSeller");
+  buyer.style.display="block";
+  $("#patBuyerText").textContent="How much is it?";
+  seller.style.display="block";
+  $("#patSellerText").textContent="It is "+dollarsWord(it.v)+" dollars.";
+  clearBanner("#patBanner");
+}
+$("#patDetail").addEventListener("click",function(e){
+  if(e.target.closest(".store-item")) return;
+  var it=PATTERNS_ITEMS[patSel];
+  speakQueue([
+    {t:"How much is it?", v:voiceFor("B"), p:pitchFor("B")},
+    {t:"It is "+dollarsWord(it.v)+" dollars.", v:voiceFor("A"), p:pitchFor("A")}
+  ]);
+  sDing();
+  setBanner("#patBanner","🗣️ Ask: <b>How much is it?</b> Answer: <b>It is "+dollarsWord(it.v)+" dollars.</b>");
+});
+$("#patShopOpen").addEventListener("click",function(){
+  clearBanner("#patBanner");
+  speakLine("Look! There are so many things for sale!", "A");
+  sFanfare();
+  setBanner("#patBanner","🏪 \u201CLook! There are so many things for sale!\u201D — pick an item and ask <b>How much is it?</b>");
+  var wrap=$("#patShopWrap");
+  wrap.style.display="";
+  wrap.scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+/* ---- pay with money ---- */
+var PAY={item:null, bills:[], used:[]};
+function buildPayStore(){
+  var sEl=$("#payStore");
+  sEl.innerHTML="";
+  PATTERNS_ITEMS.forEach(function(it,i){
+    var d=document.createElement("div");
+    d.className="store-item"+(i===0?" selected":"");
+    d.dataset.idx=i;
+    d.innerHTML='<span class="item-emoji">'+it.e+'</span><div class="item-name">'+it.n+'</div><div class="price-tag-compact">$'+it.v+'</div>';
+    d.addEventListener("click",function(){ selectPayItem(i); });
+    sEl.appendChild(d);
+  });
+  resetPayWallet();
+  selectPayItem(0);
+}
+function selectPayItem(i){
+  var it=PATTERNS_ITEMS[i];
+  PAY.item=it;
+  $$("#payStore .store-item").forEach(function(s){ s.classList.toggle("selected", +s.dataset.idx===i); });
+  $("#payTarget").innerHTML='🧺 Buy the <b>'+it.e+' '+it.n+'</b> – it costs <span style="background:#ffd447; border-radius:6px; padding:1px 8px;">$'+it.v+'</span>! Drag the exact dollars 💵';
+  resetPayWallet();
+}
+function resetPayWallet(){
+  PAY.bills=[]; PAY.used=[];
+  $("#payTotal").innerHTML="";
+  $("#payMsg").innerHTML="";
+  var drop=$("#payDrop");
+  drop.className="paydrop";
+  drop.innerHTML='<span class="paydrop-hint">💰 Drag bills here to pay…</span>';
+  renderWallet();
+}
+function renderWallet(){
+  var w=$("#walletBills");
+  w.innerHTML="";
+  PAT_BILLS.forEach(function(v,i){
+    var t=document.createElement("div");
+    t.className="bill-tile bill-"+v;
+    t.dataset.v=v; t.dataset.idx=i;
+    t.draggable=true;
+    t.innerHTML='<span class="bill-val">$'+v+'</span><span class="bill-label">DOLLARS</span>';
+    t.addEventListener("dragstart",function(ev){ ev.dataTransfer.setData("text/plain", String(i)); });
+    t.addEventListener("click",function(){ addBill(i); });
+    w.appendChild(t);
+  });
+}
+var payDrop=$("#payDrop");
+payDrop.addEventListener("dragover",function(ev){ ev.preventDefault(); payDrop.classList.add("dragover"); });
+payDrop.addEventListener("dragleave",function(){ payDrop.classList.remove("dragover"); });
+payDrop.addEventListener("drop",function(ev){
+  ev.preventDefault();
+  payDrop.classList.remove("dragover");
+  var idx=parseInt(ev.dataTransfer.getData("text/plain"),10);
+  if(!isNaN(idx)) addBill(idx);
+});
+function addBill(idx){
+  if(PAY.used.indexOf(idx)>=0) return;
+  PAY.used.push(idx);
+  var b=$(".bill-tile[data-idx='"+idx+"']");
+  if(b) b.classList.add("used");
+  PAY.bills.push(+b.dataset.v);
+  var tip=payDrop.querySelector(".paydrop-hint");
+  if(tip) tip.remove();
+  var clone=document.createElement("div");
+  clone.className="bill-tile bill-"+b.dataset.v;
+  clone.innerHTML='<span class="bill-val">$'+b.dataset.v+'</span><span class="bill-label">DOLLARS</span>';
+  payDrop.appendChild(clone);
+  var total=PAY.bills.reduce(function(s2,x){ return s2+x; },0);
+  $("#payTotal").innerHTML="Paid so far: <span class='"+(total===PAY.item.v?"total-ok":"total-not")+"'>$"+total+"</span>"+(total>PAY.item.v?"  (too much!)":"");
+  sPop();
+}
+$("#payClear").addEventListener("click",resetPayWallet);
+$("#payAgain").addEventListener("click",function(){
+  var r=PATTERNS_ITEMS[Math.floor(Math.random()*PATTERNS_ITEMS.length)];
+  selectPayItem(PATTERNS_ITEMS.indexOf(r));
+});
+$("#payCheck").addEventListener("click",function(){
+  if(!PAY.item) return;
+  var total=PAY.bills.reduce(function(s2,x){ return s2+x; },0);
+  var msg=$("#payMsg");
+  if(total===PAY.item.v){
+    speakLine("It is "+dollarsWord(PAY.item.v)+" dollars. Correct!", "A");
+    sFanfare(); confetti(40);
+    msg.className="msg-success";
+    msg.innerHTML="🎉 <b>It is "+dollarsWord(PAY.item.v)+" dollars!</b> Perfect payment – 5 stars for your group! ⭐⭐⭐⭐⭐";
+    payDrop.classList.add("correct");
+  }else{
+    sBuzz();
+    msg.className="msg-error";
+    msg.innerHTML=total>PAY.item.v
+      ? "🙈 That's $"+total+" – too much! Take back a bill and try again."
+      : "🙈 That's only $"+total+" – we need $"+(PAY.item.v-total)+" more. Keep dragging!";
+    payDrop.classList.add("wrong");
+    setTimeout(function(){ payDrop.classList.remove("wrong"); },550);
+  }
+});
+
+/* ---- unscramble ---- */
+var UQ={q:{bank:["it","How","?","is","much"]}, a:{bank:["twenty-three","dollars","It","is","."]}, qAns:[], aAns:[]};
+function buildUq(){ renderUqBanks(); }
+function renderUqBanks(){
+  var uqQBankEl=$("#uqQBank"), uqQAnsEl=$("#uqQAns"), uqABankEl=$("#uqABank"), uqAAnsEl=$("#uqAAns");
+  uqQBankEl.innerHTML=""; uqQAnsEl.innerHTML="";
+  uqABankEl.innerHTML=""; uqAAnsEl.innerHTML="";
+  UQ.q.bank.forEach(function(w){
+    if(UQ.qAns.indexOf(w)<0){
+      var t=document.createElement("div");
+      t.className="word-tile qtile";
+      t.draggable=true;
+      t.textContent=w;
+      t.dataset.word=w;
+      t.addEventListener("dragstart",function(ev){ ev.dataTransfer.setData("text/plain","q:"+w); });
+      t.addEventListener("click",function(){ uqAdd("q",w); });
+      uqQBankEl.appendChild(t);
+    }
+  });
+  UQ.a.bank.forEach(function(w){
+    if(UQ.aAns.indexOf(w)<0){
+      var t=document.createElement("div");
+      t.className="word-tile atile";
+      t.draggable=true;
+      t.textContent=w;
+      t.dataset.word=w;
+      t.addEventListener("dragstart",function(ev){ ev.dataTransfer.setData("text/plain","a:"+w); });
+      t.addEventListener("click",function(){ uqAdd("a",w); });
+      uqABankEl.appendChild(t);
+    }
+  });
+  UQ.qAns.forEach(function(w){
+    var t=document.createElement("div");
+    t.className="word-tile qtile";
+    t.textContent=w;
+    t.addEventListener("click",function(){ uqRemove("q",w); });
+    uqQAnsEl.appendChild(t);
+  });
+  UQ.aAns.forEach(function(w){
+    var t=document.createElement("div");
+    t.className="word-tile atile";
+    t.textContent=w;
+    t.addEventListener("click",function(){ uqRemove("a",w); });
+    uqAAnsEl.appendChild(t);
+  });
+}
+function uqAdd(type,word){
+  var bankArr=type==="q"?UQ.q.bank:UQ.a.bank;
+  var ansArr=type==="q"?UQ.qAns:UQ.aAns;
+  if(bankArr.indexOf(word)<0) return;
+  ansArr.push(word);
+  renderUqBanks();
+  sPop();
+}
+function uqRemove(type,word){
+  var ansArr=type==="q"?UQ.qAns:UQ.aAns;
+  var i=ansArr.indexOf(word);
+  if(i<0) return;
+  ansArr.splice(i,1);
+  renderUqBanks();
+  sPop();
+}
+$("#uqQAns").addEventListener("dragover",function(ev){ ev.preventDefault(); });
+$("#uqQAns").addEventListener("drop",function(ev){
+  ev.preventDefault();
+  var d=ev.dataTransfer.getData("text/plain")||"";
+  if(d.indexOf("q:")===0) uqAdd("q",d.slice(2));
+});
+$("#uqAAns").addEventListener("dragover",function(ev){ ev.preventDefault(); });
+$("#uqAAns").addEventListener("drop",function(ev){
+  ev.preventDefault();
+  var d=ev.dataTransfer.getData("text/plain")||"";
+  if(d.indexOf("a:")===0) uqAdd("a",d.slice(2));
+});
+$("#uqReset").addEventListener("click",function(){
+  UQ.qAns=[]; UQ.aAns=[];
+  fixMsg("#uqMsg");
+  renderUqBanks();
+});
+function uqSame(a,b){
+  if(a.length!==b.length) return false;
+  for(var i=0;i<a.length;i++) if(a[i]!==b[i]) return false;
+  return true;
+}
+$("#uqCheck").addEventListener("click",function(){
+  var okQ=uqSame(UQ.qAns,UQ_qCorrect);
+  var okA=uqSame(UQ.aAns,UQ_aCorrect);
+  var msg=$("#uqMsg");
+  var parts=[];
+if(okQ) parts.push("👩‍🎓 \u201CHow much is it?\u201D correct!");
+  else parts.push("👩‍🎓 Question: let's check the word order!");
+  if(okA) parts.push("👨‍💼 \u201CIt is twenty-three dollars!\u201D correct!");
+  else parts.push("👨‍💼 Answer: let's check the word order!");
+  if(okQ&&okA){
+    speakQueue([
+      {t:"How much is it?", v:voiceFor("B"), p:pitchFor("B")},
+      {t:"It is twenty-three dollars.", v:voiceFor("A"), p:pitchFor("A")}
+    ]);
+    sFanfare(); confetti(50);
+    msg.className="msg-success";
+    $("#patBanner").className="banner show win";
+    $("#patBanner").textContent="🎊 Question + answer both correct! You can ask and answer prices now! 🛍️";
+  }else{
+    sBuzz();
+    msg.className="msg-error";
+    $("#patBanner").className="banner";
+  }
+  msg.innerHTML=parts.join("<br>");
+  msg.style.marginTop="12px";
+});
+
+/* ---- patterns quiz ---- */
+var QUIZ={mode:"word", order:[], pos:-1, score:0, total:0};
+function quizStart(){
+  QUIZ.order=shuffle(PATTERNS_ITEMS.map(function(_,i){ return i; }));
+  QUIZ.pos=-1; QUIZ.score=0; QUIZ.total=PATTERNS_ITEMS.length;
+  $("#quizBanner").className="banner";
+  $("#quizScore").textContent="Score: 0/"+QUIZ.total;
+  quizNext();
+}
+function quizNext(){
+  QUIZ.pos++;
+  var banner=$("#quizBanner");
+  banner.className="banner";
+  if(QUIZ.pos>=QUIZ.total){
+    banner.className="banner show win";
+    banner.textContent="🎉 "+(QUIZ.score===QUIZ.total?"Perfect! ":"")+"You scored "+QUIZ.score+" out of "+QUIZ.total+"!";
+    sFanfare(); confetti(50);
+    $("#quizEmoji").textContent="🏆";
+    $("#quizName").textContent="Game over — great job!";
+    $("#quizTag").textContent="";
+    $("#quizQ").textContent="Tap \u201CPlay again\u201D to try again!";
+    $("#quizOpts").innerHTML="";
+    return;
+  }
+  var it=PATTERNS_ITEMS[QUIZ.order[QUIZ.pos]];
+  $("#quizEmoji").textContent=it.e;
+  $("#quizName").textContent=it.n;
+  var opts=quizOptions(it.v);
+  if(QUIZ.mode==="word"){
+    $("#quizTag").textContent="$"+it.v;
+    $("#quizQ").textContent="How much is it? — say the words!";
+  }else{
+    $("#quizTag").textContent=dollarsWord(it.v)+" dollars";
+    $("#quizQ").textContent="It is ______ dollars. — pick the price tag!";
+  }
+  var box=$("#quizOpts");
+  box.innerHTML="";
+  opts.forEach(function(v){
+    var b=document.createElement("button");
+    b.className="qopt";
+    b.dataset.v=v;
+    b.textContent=QUIZ.mode==="word" ? dollarsWord(v)+" dollars" : "$"+v;
+    b.addEventListener("click",function(){ answerQuiz(v,it,b); });
+    box.appendChild(b);
+  });
+}
+function quizOptions(correct){
+  var vals=PATTERNS_ITEMS.map(function(x){ return x.v; });
+  var others=vals.filter(function(v){ return v!==correct; });
+  var pick=shuffle(others).slice(0,3);
+  pick.push(correct);
+  return shuffle(pick);
+}
+function answerQuiz(v, it, btn){
+  if(btn.disabled) return;
+  var correct=v===it.v;
+  if(correct){
+    QUIZ.score++;
+    btn.classList.add("correct");
+    sDing();
+    speakLine((QUIZ.mode==="word"
+      ? "It is "+dollarsWord(it.v)+" dollars!"
+      : dollarsWord(it.v)+" dollars!"), "A");
+  }else{
+    btn.classList.add("wrong");
+    sBuzz();
+  }
+  $("#quizScore").textContent="Score: "+QUIZ.score+"/"+QUIZ.total;
+  $$("#quizOpts .qopt").forEach(function(b){
+    b.disabled=true;
+    if(+b.dataset.v===it.v) b.classList.add("correct");
+    else if(+b.dataset.v===v && !correct) b.classList.add("wrong");
+  });
+  setTimeout(quizNext, correct?1400:1800);
+}
+$("#quizModeWord").addEventListener("click",function(){
+  QUIZ.mode="word";
+  $("#quizModeWord").classList.add("active");
+  $("#quizModeTag").classList.remove("active");
+  quizStart();
+});
+$("#quizModeTag").addEventListener("click",function(){
+  QUIZ.mode="tag";
+  $("#quizModeTag").classList.add("active");
+  $("#quizModeWord").classList.remove("active");
+  quizStart();
+});
+$("#quizAgain").addEventListener("click",quizStart);
+
+/* ============================================================
+   FLOATING HOME / TOP BUTTONS
+============================================================ */
+var FAB_TOP=document.getElementById("fabTop");
+var FAB_HOME=document.getElementById("fabHome");
+var fabTimer=null, fabDimT=null;
+function fabResetDim(){
+  FAB_HOME.classList.remove("dim");
+  FAB_TOP.classList.remove("dim");
+  if(fabDimT) clearTimeout(fabDimT);
+  fabDimT=setTimeout(function(){
+    FAB_HOME.classList.add("dim");
+    FAB_TOP.classList.add("dim");
+  },3000);
+}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  FAB_HOME.classList.toggle("show",show);
+  FAB_TOP.classList.toggle("show",show);
+  if(fabDimT) clearTimeout(fabDimT);
+  if(show){ fabResetDim(); }
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+window.addEventListener("touchmove",fabUpdate,{passive:true});
+fabUpdate();
+[FAB_HOME,FAB_TOP].forEach(function(el){
+  ["pointerdown","touchstart","mouseenter"].forEach(function(ev){
+    el.addEventListener(ev,function(){ fabResetDim(); });
+  });
+  el.addEventListener("mouseleave",function(){
+    if(fabDimT) clearTimeout(fabDimT);
+    fabDimT=setTimeout(function(){ FAB_HOME.classList.add("dim"); FAB_TOP.classList.add("dim"); },3000);
+  });
+});
+FAB_TOP.addEventListener("click",function(e){
+  e.preventDefault();
+  window.scrollTo({top:0, behavior:"smooth"});
+});
+
+/* ============================================================
+   INIT
+============================================================ */
+goMain("dialogue");
+buildDlLearn();
+resetOrder();
+renderFill();
+setActMode("both");
+buildBoard();
+buildPencils();
+buildFlashcards();
+buildRead();
+buildGame();
+buildPatStore();
+buildPayStore();
+buildUq();
+quizStart();
+
+document.addEventListener("click",function(){ audio(); });
+window.addEventListener("beforeunload",function(){ if(speechSynthesis) speechSynthesis.cancel(); });
+</script>
+<button class="fab" id="fabTop" title="Scroll to top" aria-label="Scroll to top">⬆</button>
+<a class="fab" id="fabHome" href="https://hanshanghao.github.io/English_Learning_Hub/" target="_blank" rel="noopener" title="Go to the English Learning Hub" aria-label="Go to the English Learning Hub">🏠</a>
+</body>
+</html>
