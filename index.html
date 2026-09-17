@@ -50,6 +50,24 @@
     box-shadow:0 3px 0 rgba(0,0,0,.08); transition:transform .25s;
   }
   .sub:hover{transform:scale(1.04);}
+  .midrow{text-align:center; margin:10px 0 30px;}
+  .midlesson{
+    display:inline-flex; align-items:center; gap:14px; text-decoration:none; color:#fff;
+    background:linear-gradient(120deg,#8b5cf0,#4a9ee0 55%,#f04f9b);
+    border-radius:60px; padding:18px 34px; font-weight:900; position:relative;
+    box-shadow:0 8px 0 rgba(40,20,90,.25), 0 16px 30px rgba(0,0,0,.2);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .midlesson:hover{transform:translateY(-5px) scale(1.04); box-shadow:0 13px 0 rgba(40,20,90,.28), 0 24px 40px rgba(0,0,0,.24);}
+  .midlesson:active{transform:translateY(2px) scale(.98); box-shadow:0 5px 0 rgba(40,20,90,.25);}
+  .midlesson::after{content:''; position:absolute; inset:-3px; border-radius:60px; border:3px solid rgba(255,255,255,.35); animation:midPulse 2s ease-in-out infinite;}
+  @keyframes midPulse{0%,100%{opacity:.5;}50%{opacity:1;}}
+  .mid-icon{font-size:38px;}
+  .mid-text{display:flex; flex-direction:column; align-items:flex-start; text-align:left; line-height:1.15;}
+  .mid1{font-size:clamp(13px,2.6vw,17px); letter-spacing:1px; opacity:.92;}
+  .mid2{font-size:clamp(18px,4vw,28px);}
+  .mid3{font-size:clamp(13px,2.6vw,16px); opacity:.95;}
+  @media (max-width:640px){.midlesson{flex-direction:column; gap:8px; padding:16px 24px; text-align:center;} .mid-text{align-items:center; text-align:center;}}
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:22px;}
   .card{
     position:relative; display:flex; flex-direction:column; align-items:center; text-align:center;
@@ -115,6 +133,16 @@
     <h1 id="title"></h1>
     <div class="sub">Every lesson is a little adventure — read, listen, spell and play! 🎈</div>
   </header>
+  <div class="midrow">
+    <a class="midlesson" href="u3.html">
+      <span class="mid-icon">🛍️</span>
+      <span class="mid-text">
+        <span class="mid1">TJ5-U3 · Now Playing</span>
+        <span class="mid2">Dialogue + Vocabulary + Patterns</span>
+        <span class="mid3">▶ Click to start the lesson!</span>
+      </span>
+    </a>
+  </div>
   <main class="grid" id="grid"></main>
   <footer>
     Made with ❤️ for joyful English learning 🧡 · <a href="https://github.com/hanshanghao/Joy_English" target="_blank" rel="noopener">Joy English Classes</a>
