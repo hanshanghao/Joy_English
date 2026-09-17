@@ -462,7 +462,7 @@
   @keyframes blinkEyes{0%,100%{transform:scale(1);} 50%{transform:scale(1.25);}}
   .noPeek{animation:blinkEyes 1s infinite;}
   footer{text-align:center; color:#8a7aa0; font-size:13px; margin-top:30px;}
-  .fab{position:fixed; right:18px; z-index:2040; width:56px; height:56px; border-radius:50%;
+  .fab{position:fixed; left:18px; z-index:2040; width:56px; height:56px; border-radius:50%;
     display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer;
     color:#fff; border:none; text-decoration:none;
     background:linear-gradient(180deg,var(--c1,#6ec6ff),var(--c2,#4a9ee0));
@@ -475,7 +475,7 @@
   .fab:active{transform:translateY(2px) scale(.96);}
   #fabTop{bottom:86px; --c1:#6ec6ff; --c2:#4a9ee0;}
   #fabHome{bottom:18px; --c1:#ff7eb6; --c2:#f04f9b;}
-  @media (max-width:640px){.fab{width:48px; height:48px; font-size:20px; right:12px;} #fabTop{bottom:72px;}}
+  @media (max-width:640px){.fab{width:48px; height:48px; font-size:20px; left:12px;} #fabTop{bottom:72px;}}
 </style>
 </head>
 <body class="tbg-dialogue">
@@ -2483,6 +2483,6 @@ document.addEventListener("click",function(){ audio(); });
 window.addEventListener("beforeunload",function(){ if(speechSynthesis) speechSynthesis.cancel(); });
 </script>
 <button class="fab" id="fabTop" title="Scroll to top" aria-label="Scroll to top">⬆</button>
-<a class="fab" id="fabHome" href="https://hanshanghao.github.io/English_Learning_Hub/" target="_blank" rel="noopener" title="Go to the English Learning Hub" aria-label="Go to the English Learning Hub">🏠</a>
+<a class="fab" id="fabHome" href="index.html" title="Back to Joy English Classes" aria-label="Back to Joy English Classes">🏠</a>
 </body>
 </html>
