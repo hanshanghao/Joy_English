@@ -50,7 +50,7 @@
     box-shadow:0 3px 0 rgba(0,0,0,.08); transition:transform .25s;
   }
   .sub:hover{transform:scale(1.04);}
-  .midrow{text-align:center; margin:10px 0 30px;}
+  .midrow{display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:stretch; margin:10px 0 30px;}
   .midlesson{
     display:inline-flex; align-items:center; gap:14px; text-decoration:none; color:#fff;
     background:linear-gradient(120deg,#8b5cf0,#4a9ee0 55%,#f04f9b);
@@ -143,12 +143,28 @@
     <div class="sub">Every lesson is a little adventure — read, listen, spell and play! 🎈</div>
   </header>
   <div class="midrow">
+    <a class="midlesson" href="u2.html">
+      <span class="mid-icon">🍓</span>
+      <span class="mid-text">
+        <span class="mid1">TJ5-U2 · Now Playing</span>
+        <span class="mid2">Dialogue + Vocabulary + Patterns</span>
+        <span class="mid3">▶ Click to start the lesson!</span>
+      </span>
+    </a>
     <a class="midlesson" href="u3.html">
       <span class="mid-icon">🛍️</span>
       <span class="mid-text">
         <span class="mid1">TJ5-U3 · Now Playing</span>
         <span class="mid2">Dialogue + Vocabulary + Patterns</span>
         <span class="mid3">▶ Click to start the lesson!</span>
+      </span>
+    </a>
+    <a class="midlesson" href="jd5-jr.html">
+      <span class="mid-icon">🐴</span>
+      <span class="mid-text">
+        <span class="mid1">JD5 · Story Time · Now Playing</span>
+        <span class="mid2">pp. 1–11 · bingo + read-aloud</span>
+        <span class="mid3">▶ Click to start the story!</span>
       </span>
     </a>
   </div>
