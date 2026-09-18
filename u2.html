@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TJ5 Unit 2 · Fruit Market Adventure</title>
+<style>
+  :root{
+    --purple:#8b5cf0; --blue:#4a9ee0; --pink:#f04f9b; --orange:#f5822b;
+    --yellow:#ffd447; --green:#4cc948; --red:#ff5d5d; --ink:#3f3a25;
+  }
+  *{margin:0; padding:0; box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;
+    color:var(--ink); min-height:100vh; overflow-x:hidden;
+    background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);
+    background-size:300% 300%; animation:bgmv 18s ease-in-out infinite;
+    transition:background .6s;
+  }
+  @keyframes bgmv{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  body[data-tbg="dialogue"]{background:linear-gradient(120deg,#dff3ff,#ffe3ee,#fff6d9); background-size:300% 300%; animation:bgmv 16s ease-in-out infinite;}
+  body[data-tbg="vocab"]{background:linear-gradient(120deg,#fff1c9,#ffe3ee,#e9ffe9); background-size:300% 300%; animation:bgmv 16s ease-in-out infinite;}
+  body[data-tbg="patterns"]{background:linear-gradient(120deg,#f3e9ff,#dff3ff,#fff6d9); background-size:300% 300%; animation:bgmv 16s ease-in-out infinite;}
+  .blob{position:fixed; border-radius:50%; filter:blur(48px); opacity:.5; pointer-events:none; z-index:0;}
+  .blob.b1{width:320px;height:320px; background:#ffcee2; top:-90px; left:-90px; animation:drift 12s ease-in-out infinite alternate;}
+  .blob.b2{width:360px;height:360px; background:#ffe89a; top:35%; right:-130px; animation:drift 15s ease-in-out infinite alternate-reverse;}
+  .blob.b3{width:300px;height:300px; background:#b6e5ff; bottom:-110px; left:30%; animation:drift 13s ease-in-out infinite alternate;}
+  @keyframes drift{from{transform:translate(0,0) scale(1);}to{transform:translate(40px,-35px) scale(1.12);}}
+  .floaty{position:fixed; z-index:0; font-size:26px; pointer-events:none; opacity:.45; animation:floatUp linear infinite;}
+  @keyframes floatUp{from{transform:translateY(110vh) rotate(0deg);}to{transform:translateY(-15vh) rotate(360deg);}}
+  @keyframes sway{0%{transform:translateY(0) rotate(-5deg);}50%{transform:translateY(-16px) rotate(5deg);}100%{transform:translateY(0) rotate(-5deg);}}
+
+  .wrap{position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 18px 60px;}
+  .topbar{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:16px 0 4px; flex-wrap:wrap;}
+  .brand{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.75); border:2px solid #fff; border-radius:50px; padding:9px 18px; font-weight:800; text-decoration:none; color:var(--green); font-size:clamp(12px,2.2vw,15px); box-shadow:0 4px 10px rgba(0,0,0,.12); transition:transform .2s, box-shadow .2s;}
+  .brand:hover{transform:translateY(-3px); box-shadow:0 8px 18px rgba(0,0,0,.18);}
+  .nowchip{background:var(--yellow); color:#6b4d00; border-radius:50px; padding:8px 18px; font-weight:900; font-size:clamp(12px,2.2vw,15px); box-shadow:0 3px 0 rgba(0,0,0,.12);}
+  .soundbtn{width:46px; height:46px; border:none; cursor:pointer; border-radius:50%; font-size:21px; font-family:inherit; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#6ec6ff,#3f95d8); color:#fff; box-shadow:0 4px 0 rgba(0,0,0,.2), 0 6px 12px rgba(0,0,0,.15); transition:transform .15s, filter .2s;}
+  .soundbtn:hover{transform:translateY(-2px); filter:brightness(1.08);}
+  .soundbtn:active{transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.2);}
+  .soundbtn.off{background:linear-gradient(180deg,#bdb4d1,#9a90b3);}
+
+  .hero{text-align:center; margin:18px 0 6px;}
+  .hero .hmot{display:inline-block; font-size:clamp(50px,9vw,80px); animation:sway 3s ease-in-out infinite;}
+  .hero h1{font-size:clamp(30px,6vw,56px); font-weight:900; color:var(--ink); text-shadow:0 3px 0 #fff, 0 8px 16px rgba(0,0,0,.12);}
+  .hero p{font-weight:800; color:#7a6a52; font-size:clamp(14px,2.6vw,18px); margin-top:4px;}
+
+  nav.main-tabs{position:sticky; top:6px; z-index:40; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:16px 0 10px;}
+  nav.main-tabs button{font-family:inherit; font-weight:900; font-size:clamp(12px,2.2vw,15px); cursor:pointer; border:none; border-radius:50px; padding:11px 18px; color:#fff; box-shadow:0 5px 0 rgba(0,0,0,.2), 0 8px 14px rgba(0,0,0,.14); background:linear-gradient(180deg,var(--c1),var(--c2)); transition:transform .15s, box-shadow .15s, filter .15s;}
+  nav.main-tabs button:hover{transform:translateY(-2px) scale(1.03); filter:brightness(1.06);}
+  nav.main-tabs button:active{transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.2);}
+  nav.main-tabs button.active{outline:4px solid gold; outline-offset:2px;}
+  nav.main-tabs button.tb1{--c1:#ffb36e; --c2:#f5822b;}
+  nav.main-tabs button.tb2{--c1:#6ec6ff; --c2:#3f95d8;}
+  nav.main-tabs button.tb3{--c1:#ff7eb6; --c2:#ef4f98;}
+  nav.main-tabs button.tb4{--c1:#b28dff; --c2:#8b5cf0;}
+
+  .scene{display:none;}
+  .scene.active{display:block; animation:fadeUp .4s cubic-bezier(.34,1.2,.64,1);}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(24px);}to{opacity:1; transform:translateY(0);}}
+
+  section{background:rgba(255,255,255,.8); border-radius:26px; padding:22px 20px; margin:22px 0; box-shadow:0 8px 22px rgba(0,0,0,.12);}
+  .shead{display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap;}
+  .shead .ic{font-size:32px;}
+  .shead h2{font-size:clamp(19px,3.6vw,28px); font-weight:900; color:var(--purple);}
+  .shead .badge{background:var(--orange); color:#fff; font-size:clamp(11px,1.8vw,13px); font-weight:900; padding:5px 14px; border-radius:30px;}
+  .shead .badge.green{background:var(--green);}
+  .shead .badge.blue{background:var(--blue);}
+  .shead .badge.pink{background:var(--pink);}
+  .tip{background:linear-gradient(150deg,#fff7de,#ffeeb8); border:3px dashed var(--yellow); border-radius:18px; padding:14px 16px; font-size:clamp(13px,2.3vw,15px); font-weight:700; line-height:1.5; margin:10px 0;}
+  .tip b{color:#a06b00;}
+  .praise{background:linear-gradient(150deg,#d9ffd1,#b9f8b2); border:4px solid #37a832; border-radius:20px; padding:18px; text-align:center; font-size:clamp(16px,3.2vw,23px); font-weight:900; color:#1d6b12; box-shadow:0 0 0 6px rgba(55,168,50,.18); margin:10px 0; animation:pls 1s ease-in-out infinite;}
+  @keyframes pls{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+  .turnrow{display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center; margin:10px 0;}
+  .turnq{font-weight:900; font-size:clamp(14px,2.6vw,17px);}
+  .turnpick.active{outline:4px solid gold; outline-offset:2px; transform:translateY(-2px);}
+  .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px;}
+  .card{background:#fff; border-radius:18px; padding:14px; box-shadow:0 5px 14px rgba(0,0,0,.1); text-align:center; font-weight:800; font-size:clamp(13px,2.3vw,15px);}
+  .flow{display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:center; margin:6px 0 14px;}
+  .fc{display:inline-flex; align-items:center; gap:7px; background:#fff; border-radius:40px; padding:8px 14px; font-weight:900; font-size:clamp(12px,2.2vw,14px); box-shadow:0 4px 10px rgba(0,0,0,.1);}
+  .fc .fn{background:var(--purple); color:#fff; border-radius:50%; width:24px; height:24px; display:inline-flex; align-items:center; justify-content:center; font-size:13px;}
+  .flow .ar{color:#b39ddb; font-weight:900;}
+
+  .btnrow{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:14px 0;}
+  .btn{font-family:inherit; font-weight:900; font-size:clamp(14px,2.5vw,17px); border:none; cursor:pointer; border-radius:50px; padding:12px 24px; color:#fff; background:linear-gradient(180deg,var(--c1),var(--c2)); box-shadow:0 5px 0 rgba(0,0,0,.18), 0 8px 16px rgba(0,0,0,.12); transition:transform .15s, box-shadow .15s, filter .15s;}
+  .btn:hover{transform:translateY(-2px); filter:brightness(1.06);}
+  .btn:active{transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.18);}
+  .btn:disabled{opacity:.55; cursor:not-allowed; transform:none;}
+  .btn.green{--c1:#7ce577; --c2:#37a832;} .btn.yellow{--c1:#ffd447; --c2:#edb200; color:#5c4300;}
+  .btn.orange{--c1:#ffab6e; --c2:#f5822b;} .btn.blue{--c1:#6ec6ff; --c2:#3f95d8;}
+  .btn.pink{--c1:#ff7eb6; --c2:#ef4f98;} .btn.purple{--c1:#b28dff; --c2:#8b5cf0;}
+  .btn.gray{--c1:#bdb4d1; --c2:#9a90b3;}
+
+  .flashgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin:12px 0;}
+  @media (max-width:640px){.flashgrid{grid-template-columns:repeat(4,1fr);}}
+  .flip{perspective:700px; cursor:pointer; height:152px;}
+  .flip .inner{position:relative; width:100%; height:100%; transform-style:preserve-3d; transition:transform .5s;}
+  .flip.flipped .inner{transform:rotateY(180deg);}
+  .flip .face{position:absolute; inset:0; backface-visibility:hidden; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-weight:900; box-shadow:0 5px 0 rgba(0,0,0,.16);}
+  .flip .front{background:linear-gradient(150deg,#ffd9a3,#ffb36e); font-size:clamp(28px,7vw,44px);}
+  .flip .back{background:linear-gradient(150deg,#ff8fb0,#f04f9b); color:#fff; font-size:clamp(13px,3vw,16px); transform:rotateY(180deg);}
+
+  .bboard{background:#3c6e47; color:#fff; border-radius:16px; padding:18px; font-size:clamp(16px,3.2vw,22px); font-weight:800; text-align:center; box-shadow:0 6px 0 #274b2e; margin:12px 0;}
+  .bboard .blank{color:var(--yellow);}
+
+  .tlcard{background:#fff; border:2px solid #ffd9a3; border-radius:14px; padding:12px; font-weight:800; cursor:pointer; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,.08); transition:transform .18s, box-shadow .18s;}
+  .tlcard:hover{transform:translateY(-3px); box-shadow:0 8px 16px rgba(0,0,0,.14);}
+
+  .timer{font-size:clamp(28px,6vw,46px); font-weight:900; color:var(--red); text-align:center;}
+  .teams{display:flex; flex-wrap:wrap; gap:14px; align-items:stretch; justify-content:center; margin:14px 0;}
+  .tcard{flex:1 1 190px; max-width:250px; background:#fff; border-radius:18px; padding:16px; text-align:center; box-shadow:0 5px 14px rgba(0,0,0,.1); border-top:8px solid var(--blue); display:flex; flex-direction:column; align-items:center; gap:6px;}
+  .tcard.tb{border-top-color:var(--green);}
+  .tname{font-weight:900; font-size:clamp(16px,3vw,20px);}
+  .tcount{font-size:clamp(26px,5vw,38px); font-weight:900; color:var(--blue); margin:2px 0;}
+  .tcard.tb .tcount{color:var(--green);}
+  .treset{align-self:center;}
+
+  .charcards{display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin:12px 0;}
+  .charcard{background:#fff; border-radius:18px; padding:16px 12px; text-align:center; cursor:pointer; box-shadow:0 5px 14px rgba(0,0,0,.1); border-bottom:6px solid var(--blue); transition:transform .18s, box-shadow .18s;}
+  .charcard:hover{transform:translateY(-4px); box-shadow:0 10px 20px rgba(0,0,0,.15);}
+  .charcard .ce{font-size:44px;}
+  .charcard .cn{font-weight:900; font-size:clamp(15px,2.6vw,19px); color:var(--blue);}
+  .charcard .ct{font-size:clamp(11px,2vw,13px); color:#7a6a52; font-weight:800;}
+  .charcard .cl{font-size:clamp(12px,2.1vw,14px); font-weight:800; margin-top:6px; min-height:38px;}
+
+  .dlpanel{display:flex; flex-direction:column; gap:12px; margin:14px 0 0;}
+  .dlrow{display:flex; gap:10px; align-items:flex-start;}
+  .dlrow .dava{font-size:34px; line-height:1;}
+  .bubbl{background:#fff; border-radius:16px 16px 16px 4px; padding:12px 16px; font-weight:800; font-size:clamp(14px,2.5vw,17px); box-shadow:0 4px 0 rgba(0,0,0,.1); cursor:pointer; transition:transform .15s, background .15s;}
+  .bubbl:hover{transform:translateX(4px);}
+  .bubbl.on{background:#fff4c9;}
+
+  .gallery{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .pic{position:relative; background:#fff; border-radius:16px; padding:6px; box-shadow:0 5px 14px rgba(0,0,0,.14); cursor:zoom-in; transition:transform .2s, box-shadow .2s;}
+  .pic:hover{transform:translateY(-5px) scale(1.02); box-shadow:0 12px 22px rgba(0,0,0,.2);}
+  .pic img{width:100%; max-height:220px; object-fit:contain; border-radius:11px; display:block; background:#fff;}
+  .pic .cap{font-weight:900; color:#8d6e63; text-align:center; padding:6px 4px 2px; font-size:clamp(11px,2vw,13px);}
+  #vocabGal .pic img{max-height:340px;}
+
+  .vocab-card{display:flex; gap:16px; align-items:center; background:#fff; border-radius:18px; padding:14px 18px; box-shadow:0 5px 14px rgba(0,0,0,.1); margin:10px 0; flex-wrap:wrap; cursor:pointer; transition:transform .18s, box-shadow .18s; border-left:10px solid var(--pink);}
+  .vocab-card:hover{transform:translateY(-3px); box-shadow:0 10px 20px rgba(0,0,0,.14);}
+  .vocab-card .ve{font-size:clamp(52px,8vw,72px);}
+  .vocab-card .vw{font-size:clamp(26px,5vw,40px); font-weight:900; color:var(--pink);}
+  .vocab-card .rule{font-size:clamp(14px,2.6vw,18px); font-weight:800; color:#7a6a52;}
+
+  .rulecard{background:#fff; border-radius:18px; padding:16px; box-shadow:0 5px 14px rgba(0,0,0,.1); text-align:center;}
+  .rulecard .rt{font-weight:900; color:var(--purple); font-size:clamp(15px,2.8vw,19px);}
+  .rx{font-size:clamp(24px,5vw,38px); font-weight:900; letter-spacing:1px;}
+  .rx .base{color:#666;}
+  .rx .add{color:var(--red);}
+  .rx .cut{color:var(--red); text-decoration:line-through;}
+  .rx .addg{color:var(--green);}
+  .ruledemo{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px;}
+
+  .syl-wrap{display:flex; flex-direction:column; gap:10px; margin:12px 0;}
+  .syl-row{display:flex; align-items:center; gap:10px; flex-wrap:wrap; background:#fff; border-radius:16px; padding:12px 16px; box-shadow:0 4px 10px rgba(0,0,0,.08);}
+  .syl-row .se{font-size:30px;}
+  .syl-row .sw{font-weight:900; font-size:clamp(16px,3vw,22px); min-width:120px;}
+  .syl-row .chips{display:flex; gap:8px; flex-wrap:wrap;}
+  .syl-row .chips .chip{background:linear-gradient(150deg,#b28dff,#8b5cf0); border-radius:12px; padding:8px 12px; font-weight:900; font-size:clamp(13px,2.4vw,16px); color:#fff; box-shadow:0 3px 0 rgba(0,0,0,.16); cursor:pointer; transition:transform .15s;}
+  .syl-row .chips .chip:hover{transform:translateY(-3px);}
+  .syl-row .chips .chip.on{background:linear-gradient(150deg,#7ce577,#37a832);}
+
+  .qwrap{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin-top:12px;}
+  .q{background:#fff; border:2px solid #ffd9a3; border-radius:16px; padding:12px 14px; font-weight:800; font-size:clamp(13px,2.3vw,15px); display:flex; gap:12px; align-items:center; flex-wrap:wrap; box-shadow:0 3px 0 rgba(0,0,0,.07);}
+  .q .optbtn{border:none; cursor:pointer; font-family:inherit; font-weight:900; font-size:clamp(14px,2.5vw,17px); color:#fff; border-radius:50px; padding:9px 16px; background:linear-gradient(180deg,#ff7eb6,#ef4f98); box-shadow:0 4px 0 rgba(0,0,0,.18); transition:transform .15s;}
+  .q .optbtn:hover{transform:translateY(-2px);}
+  .q .optbtn:disabled{opacity:.6; cursor:default; transform:none;}
+
+  .buildgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px;}
+  .buildarea{display:flex; flex-wrap:wrap; gap:8px; min-height:56px; align-items:center; justify-content:center; border:3px dashed #cbb2ff; border-radius:14px; padding:10px; margin:8px 0; background:#fff;}
+  .chip{background:linear-gradient(150deg,#b28dff,#8b5cf0); color:#fff; font-weight:900; font-size:clamp(14px,2.5vw,17px); border-radius:12px; padding:8px 14px; cursor:pointer; box-shadow:0 3px 0 rgba(0,0,0,.16); transition:transform .15s;}
+  .chip:hover{transform:translateY(-3px);}
+  .chip.used{opacity:.3; pointer-events:none;}
+  .chip.bank{background:linear-gradient(150deg,#ffb36e,#f5822b);}
+  .msg{text-align:center; font-weight:900; font-size:clamp(15px,2.8vw,19px); min-height:26px; margin-top:8px;}
+  .msg.ok{color:var(--green);} .msg.bad{color:var(--red);}
+  .builder-pad{background:#fff; border-radius:18px; padding:16px; box-shadow:0 5px 14px rgba(0,0,0,.1);}
+  .builder-pad .bt{font-weight:900; color:var(--purple); text-align:center; font-size:clamp(15px,2.8vw,19px);}
+
+  .maker{display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:center;}
+  .maker select{font-family:inherit; font-weight:900; font-size:clamp(14px,2.6vw,18px); border:3px solid #cbb2ff; border-radius:14px; padding:10px 12px; background:#fff;}
+  .meal-line{text-align:center; font-size:clamp(18px,3.6vw,26px); font-weight:900; color:var(--purple); min-height:40px; margin:8px 0;}
+  .fruitline{display:flex; flex-wrap:wrap; gap:2px; justify-content:center; font-size:clamp(20px,4vw,30px);}
+  .answer-box{display:flex; gap:10px; justify-content:center; align-items:center; margin:10px 0; flex-wrap:wrap;}
+  .answer-box input{font-family:inherit; font-weight:900; font-size:clamp(18px,3.5vw,26px); width:110px; text-align:center; border:3px solid var(--blue); border-radius:12px; padding:8px;}
+  .patrow{display:flex; gap:12px; align-items:center; background:#fff; border-radius:16px; padding:12px 16px; margin:8px 0; box-shadow:0 4px 10px rgba(0,0,0,.08); flex-wrap:wrap; cursor:pointer; transition:transform .18s;}
+  .patrow:hover{transform:translateY(-3px);}
+  .patrow .pe{font-size:30px;}
+  .patrow .pt{font-weight:900; font-size:clamp(15px,2.8vw,20px);}
+
+  .lightbox{position:fixed; inset:0; z-index:100; background:rgba(20,25,15,.92); display:none; align-items:center; justify-content:center; flex-direction:column; padding:20px;}
+  .lightbox.show{display:flex;}
+  .lightbox img{max-width:min(94vw,900px); max-height:80vh; border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.5);}
+  .lbrow{display:flex; gap:14px; margin-top:14px; align-items:center; flex-wrap:wrap; justify-content:center;}
+  .lbb{font-family:inherit; cursor:pointer; border:none; border-radius:50px; padding:11px 20px; font-weight:900; font-size:clamp(13px,2.4vw,16px); color:#fff; background:linear-gradient(180deg,#6ec6ff,#3f95d8); box-shadow:0 4px 0 rgba(0,0,0,.25);}
+  .lbb.gray{background:linear-gradient(180deg,#bdb4d1,#9a90b3);}
+  .lbcounter{color:#fff; font-weight:900;}
+
+  footer{text-align:center; color:#8d6e63; font-weight:700; font-size:clamp(12px,2.2vw,15px); margin-top:14px;}
+  a.design{display:inline-block; margin-top:10px; text-decoration:none; font-weight:900; background:linear-gradient(120deg,#8b5cf0,#f04f9b); color:#fff; border-radius:50px; padding:10px 24px; font-size:clamp(13px,2.4vw,16px); box-shadow:0 4px 0 rgba(40,20,90,.25); transition:transform .2s;}
+  a.design:hover{transform:translateY(-3px);}
+  .fab{position:fixed; left:18px; z-index:90; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; cursor:pointer; color:#fff; border:none; text-decoration:none; background:linear-gradient(180deg,var(--c1),var(--c2)); box-shadow:0 5px 12px rgba(0,0,0,.3); opacity:0; transform:translateY(96px) scale(.5); pointer-events:none; transition:opacity .35s, transform .35s, box-shadow .2s, filter .2s;}
+  .fab.show{opacity:1; transform:translateY(0) scale(1); pointer-events:auto;}
+  .fab.dim{opacity:.32;}
+  .fab:hover{filter:brightness(1.08);}
+  #fabTop{bottom:86px; --c1:#6ec6ff; --c2:#3f95d8;} #fabHome{bottom:18px; --c1:#7ce577; --c2:#37a832;}
+  @media (max-width:640px){.fab{width:48px; height:48px; font-size:20px; left:12px;} #fabTop{bottom:72px;}}
+</style>
+</head>
+<body data-tbg="warm">
+
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+
+<div class="wrap">
+  <div class="topbar">
+    <span class="nowchip">🍓 TJ5 · Unit 2 · Fruit Market</span>
+    <button class="soundbtn" id="soundBtn" title="Sound on / off" aria-label="Sound on or off" aria-pressed="true" type="button">🔊</button>
+  </div>
+
+  <div class="hero">
+    <span class="hmot">🍓</span>
+    <h1>Unit 2 · Fruit Market Adventure!</h1>
+    <p>Wow! There are so many strawberries! Let's make strawberry milk!</p>
+  </div>
+
+  <nav class="main-tabs">
+    <button class="tb1" data-main="warm">🎉 Warm-Up · 5 min</button>
+    <button class="tb2" data-main="dialogue">🗣️ Dialogue · 15 min</button>
+    <button class="tb3" data-main="vocab">📚 Vocabulary · 10 min</button>
+    <button class="tb4" data-main="patterns">🧩 Patterns · 15 min</button>
+  </nav>
+
+  <div class="scene" id="scene-warm">
+    <section>
+      <div class="shead"><span class="ic">🎯</span><h2>Warm-Up · Lucky Guess (5 min)</h2><span class="badge green">Review Unit 1 fruits</span></div>
+      <div class="flow">
+        <span class="fc"><span class="fn">1</span>Review flashcards</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">2</span>Pick a secret fruit</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">3</span>15-sec guesses</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">4</span>Reveal + reward teams</span>
+      </div>
+      <div class="cards">
+        <div class="card">🎴 <b>Teaching Aids:</b> blank paper (one per student) + Unit 1 flashcards</div>
+        <div class="card">👀 <b>Secret pick:</b> tapping a card only clicks (no red mark) — the class can't peek!</div>
+      </div>
+      <div class="bboard">I am going to the <span class="blank">____</span> .</div>
+
+      <div class="shead"><span class="ic">🃏</span><h2>Unit 1 Review Flashcards</h2><span class="badge blue">tap to flip &amp; listen</span></div>
+      <div class="flashgrid" id="warmFlash"></div>
+
+      <div class="shead"><span class="ic">🔮</span><h2>Lucky Guess Board</h2><span class="badge">tap a fruit to choose your secret</span></div>
+      <div class="flashgrid" id="luckGrid"></div>
+      <div class="timer" id="luckTimer">15</div>
+      <div class="btnrow">
+        <button class="btn orange" id="luckStart">⏱️ Start 15-second timer</button>
+        <button class="btn pink" id="luckReveal">🎭 Reveal the secret!</button>
+      </div>
+
+      <div class="shead"><span class="ic">🏆</span><h2>Reward Scoreboard</h2><span class="badge pink">Team A vs Team B</span></div>
+      <div class="teams">
+        <div class="tcard ta"><div class="tname">🟦 Team A</div><div class="tcount" id="scoreA">🎁 0</div><button class="btn green teamAdd" data-team="a">+1 Reward Card</button></div>
+        <div class="tcard tb"><div class="tname">🟩 Team B</div><div class="tcount" id="scoreB">🎁 0</div><button class="btn blue teamAdd" data-team="b">+1 Reward Card</button></div>
+        <button class="btn gray treset" id="teamReset">🔄 Reset score</button>
+      </div>
+      <div class="msg" id="luckMsg"></div>
+    </section>
+  </div>
+
+  <div class="scene" id="scene-dialogue">
+    <section>
+      <div class="shead"><span class="ic">🗣️</span><h2>Dialogue · At the Fruit Market (15 min)</h2></div>
+      <div class="flow">
+        <span class="fc"><span class="fn">1</span>Meet the characters</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">2</span>Listen &amp; say the lines</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">3</span>Hear the story</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">4</span>Look at the pictures</span>
+      </div>
+      <div class="cards">
+        <div class="card">1️⃣ Understand the story 📖</div>
+        <div class="card">2️⃣ Learn vocabulary &amp; the sentence pattern</div>
+        <div class="card">3️⃣ Understand, read &amp; say the dialogue 🗣️</div>
+      </div>
+      <div class="tip">🧑‍🏫 <b>Say the lines in different voices</b> as you put the characters on the dialogue poster. Nick 👦 loves strawberries, Abby 👧 loves pears, and poor Jack 🧒 has no money!</div>
+
+      <div class="shead"><span class="ic">👥</span><h2>Meet Our Friends</h2><span class="badge blue">tap a card to hear a catchphrase</span></div>
+      <div class="charcards" id="charCards"></div>
+
+      <div class="shead"><span class="ic">💬</span><h2>The Dialogue</h2><span class="badge blue">tap a bubble to say it</span></div>
+      <div class="dlpanel" id="dlPanel"></div>
+      <div class="btnrow">
+        <button class="btn blue" id="dlPlay">🔊 Play the whole dialogue</button>
+        <button class="btn gray" id="dlStop">⏹ Stop</button>
+      </div>
+
+      <div class="shead"><span class="ic">📖</span><h2>The Background Story</h2><span class="badge green">listen together</span></div>
+      <div class="tip" id="storyText"></div>
+      <div class="btnrow"><button class="btn green" id="storyRead">🔊 Read the story aloud</button></div>
+
+      <div class="shead"><span class="ic">🖼️</span><h2>Story Pictures</h2><span class="badge">tap to zoom</span></div>
+      <div class="gallery" id="diaGal"></div>
+      <div class="tip">🧑‍🏫 Point at the strawberries and say excitedly: <b>“Wow! There are so many strawberries. I love strawberries!”</b> Then count the pears out loud — one, two, three… eight! Exaggerate your expressions to teach <b>“Wow!”</b> 🎭</div>
+    </section>
+  </div>
+
+  <div class="scene" id="scene-vocab">
+    <section>
+      <div class="shead"><span class="ic">📚</span><h2>Vocabulary · Fruits (10 min)</h2><span class="badge green">singular &amp; plural</span></div>
+      <div class="flow">
+        <span class="fc"><span class="fn">1</span>Fruity flashcards</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">2</span>Spelling rules</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">3</span>Syllables</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">4</span>Plural quiz</span>
+      </div>
+
+      <div class="shead"><span class="ic">🃏</span><h2>Fruity Flashcards</h2><span class="badge blue">tap a card = hear it · tap again = plural</span></div>
+      <div id="vocabList"></div>
+
+      <div class="shead"><span class="ic">✏️</span><h2>Spelling Rules</h2><span class="badge pink">the three secret tricks</span></div>
+      <div class="ruledemo" id="ruleDemo"></div>
+
+      <div class="shead"><span class="ic">🔤</span><h2>Say It in Syllables</h2><span class="badge">slow beats 🥁</span></div>
+      <div class="syl-wrap" id="sylWrap"></div>
+
+      <div class="shead"><span class="ic">🎯</span><h2>Min i-Quiz · Say the Plural!</h2><span class="badge pink">one tap = answer</span></div>
+      <div class="qwrap" id="plurQuiz"></div>
+
+      <div class="shead"><span class="ic">🖼️</span><h2>Places Pictures</h2><span class="badge">tap to zoom</span></div>
+      <div class="gallery" id="vocabGal"></div>
+    </section>
+  </div>
+
+  <div class="scene" id="scene-patterns">
+    <section>
+      <div class="shead"><span class="ic">🧩</span><h2>Sentence Patterns (15 min)</h2></div>
+      <div class="flow">
+        <span class="fc"><span class="fn">1</span>Pattern of the day</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">2</span>Build the sentences</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">3</span>Make a drink</span><span class="ar">➜</span>
+        <span class="fc"><span class="fn">4</span>Count &amp; say it right</span>
+      </div>
+      <div class="tip">🎯 Pattern of the day<br><b>“There are many strawberries.”</b> 🍓<br><b>“Let's make strawberry milk!”</b> 🥛</div>
+
+      <div class="shead"><span class="ic">🔁</span><h2>Review Patterns</h2><span class="badge blue">tap to hear</span></div>
+      <div id="patList"></div>
+
+      <div class="shead"><span class="ic">🔠</span><h2>Build the Sentences!</h2><span class="badge blue" id="roundLabel">Round 1 of 3</span></div>
+      <div class="tip" id="roundTip">New questions every round — <b>no repeats</b>! Left card = <b>🟦 Team A</b>, right card = <b>🟩 Team B</b>. Correct answers earn reward points automatically! 🎯</div>
+      <div class="buildgrid" id="buildGrid"></div>
+      <div class="btnrow">
+        <button class="btn purple" id="patNext" type="button">➡️ Next round</button>
+      </div>
+
+      <div class="shead"><span class="ic">🏆</span><h2>Reward Scoreboard</h2><span class="badge pink">earn a card with every correct sentence</span></div>
+      <div class="teams">
+        <div class="tcard ta"><div class="tname">🟦 Team A</div><div class="tcount" id="patScoreA">🎁 0</div><button class="btn green patAdd" data-team="a">+1 Reward Card</button></div>
+        <div class="tcard tb"><div class="tname">🟩 Team B</div><div class="tcount" id="patScoreB">🎁 0</div><button class="btn blue patAdd" data-team="b">+1 Reward Card</button></div>
+        <button class="btn gray treset" id="patReset">🔄 Reset score</button>
+      </div>
+      <div class="msg" id="patMsg"></div>
+
+      <div class="shead"><span class="ic">🖐️</span><h2>Let's Make a Drink!</h2><span class="badge">paper-bag game</span></div>
+      <div class="maker">
+        <select id="mkFruit">
+          <option value="apple">🍎 apple</option><option value="banana">🍌 banana</option><option value="orange">🍊 orange</option>
+          <option value="papaya">🧡 papaya</option><option value="lemon">🍋 lemon</option><option value="grape">🍇 grape</option>
+          <option value="watermelon">🍉 watermelon</option><option value="strawberry" selected>🍓 strawberry</option>
+          <option value="pear">🍐 pear</option><option value="peach">🍑 peach</option><option value="tomato">🍅 tomato</option>
+        </select>
+        <select id="mkDrink">
+          <option value="milk" selected>🥛 milk</option><option value="juice">🧃 juice</option><option value="ice cream">🍦 ice cream</option>
+        </select>
+      </div>
+      <div class="btnrow"><button class="btn green" id="mkGo">✨ Let's make it!</button></div>
+      <div class="meal-line" id="mkLine"></div>
+
+      <div class="shead"><span class="ic">🔢</span><h2>How Many Strawberries?</h2><span class="badge green">count &amp; type</span></div>
+      <div class="fruitline" id="countFruits"></div>
+      <div class="answer-box">
+        <span>There are</span>
+        <input id="countAns" type="number" min="1" max="15">
+        <span>strawberries.</span>
+      </div>
+      <div class="btnrow"><button class="btn blue" id="countNew">🎲 New bunch</button><button class="btn orange" id="countCheck">✔️ Check</button></div>
+      <div class="msg" id="countMsg"></div>
+
+      <div class="shead"><span class="ic">👅</span><h2>“There are” — say it right!</h2><span class="badge green">tongue drill</span></div>
+      <div class="tip">Students often say <b>“they are”</b> instead of <b>“there are”</b>. Remind them to <b>curl their tongue</b> for the “th” sound: <b>th–ere are</b>! 🔴</div>
+      <div class="btnrow">
+        <button class="btn pink" id="trainThere">🔊 Practise: “There are… there are…”</button>
+        <button class="btn blue" id="trainContrast">🔊 Contrast: “they are” vs “there are”</button>
+      </div>
+      <div class="tip" id="trainMsg"></div>
+
+      <div class="shead"><span class="ic">🖼️</span><h2>Pattern Pictures</h2><span class="badge">tap to zoom</span></div>
+      <div class="gallery" id="patGal"></div>
+    </section>
+  </div>
+
+  <footer>
+    Made for playful English learning 🍓<br>
+    <a class="design" href="https://hanshanghao.github.io/English_Learning_Hub/" target="_blank" rel="noopener">🌐 Visit: English_Learning_Hub</a>
+  </footer>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <img id="lbImg" src="" alt="Lesson picture">
+  <div class="lbrow">
+    <button class="lbb" id="lbPrev">◀ Prev</button>
+    <span class="lbcounter" id="lbCount"></span>
+    <button class="lbb" id="lbNext">Next ▶</button>
+    <button class="lbb gray" id="lbClose">✕ Close</button>
+  </div>
+</div>
+
+<button class="fab" id="fabTop" title="Back to top" aria-label="Back to top">⬆</button>
+<a class="fab" id="fabHome" href="https://hanshanghao.github.io/Joy_English/" title="Back to Joy English Classes" aria-label="Back to Joy English Classes">🏠</a>
+
+<script>
+"use strict";
+var speechOn=true;
+var sndBtn=document.getElementById("soundBtn");
+function stopSpeech(){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+function setSpeech(on){
+  speechOn=!!on;
+  if(!speechOn) stopSpeech();
+  sndBtn.textContent=speechOn?"🔊":"🔇";
+  sndBtn.classList.toggle("off",!speechOn);
+  sndBtn.setAttribute("aria-pressed",String(speechOn));
+  if(speechOn){ try{ tone(900,0.14,"triangle",0.15); tone(1200,0.16,"triangle",0.15,0.09); }catch(e){} }
+}
+sndBtn.addEventListener("click",function(){ setSpeech(!speechOn); });
+function audio(){
+  var c=window._actx||null;
+  if(!c){ try{ c=new (window.AudioContext||window.webkitAudioContext)(); window._actx=c; }catch(e){} }
+  if(c && c.state==="suspended") c.resume();
+  return c;
+}
+function tone(f,dur,type,vol,delay){
+  var c=audio(); if(!c) return;
+  var o=c.createOscillator(), g=c.createGain();
+  o.type=type||"sine"; o.frequency.value=f;
+  var t=c.currentTime+(delay||0);
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+  o.connect(g); g.connect(c.destination);
+  o.start(t); o.stop(t+dur+0.05);
+}
+function sPop(){ tone(500,0.1,"square",0.08); tone(760,0.09,"square",0.08,0.06); }
+function sDing(){ tone(660,0.12,"triangle",0.16); tone(880,0.16,"triangle",0.16,0.1); tone(1320,0.25,"triangle",0.14,0.2); }
+function sBuzz(){ tone(180,0.18,"sawtooth",0.11); tone(140,0.22,"sawtooth",0.11,0.16); }
+function sFanfare(){ [523,659,784,1047].forEach(function(f,i){ tone(f,0.12,"triangle",0.18,i*0.11); }); tone(1047,0.4,"triangle",0.2,0.33); }
+function getVoice(male){
+  try{
+    var vs=window.speechSynthesis.getVoices().filter(function(v){ return /^en/i.test(v.lang||""); });
+    if(!vs.length) return null;
+    var natural=vs.filter(function(v){ return /(neural|natural|online)/i.test(v.name); });
+    var pool=natural.length?natural:vs;
+    var pref=male?[
+      /(david|george|guy|mark|ryan|andrew|eric|brian|christopher|leo)/i,
+      /male/i, /alex/i, /daniel/i
+    ]:[
+      /(aria|jenny|anna|emma|carol|michelle|natasha|sara|libby|sonia)/i,
+      /female/i, /zira/i, /hazel/i, /samantha/i, /susan/i
+    ];
+    for(var i=0;i<pref.length;i++){
+      for(var j=0;j<pool.length;j++){
+        if(pref[i].test(pool[j].name)) return pool[j];
+      }
+    }
+    return pool[0];
+  }catch(e){ return null; }
+}
+var V_MALE=null,V_FEMALE=null;
+function pickVoices(){
+  V_MALE=getVoice(true);
+  V_FEMALE=getVoice(false);
+  if(!V_MALE) V_MALE=V_FEMALE;
+  if(!V_FEMALE) V_FEMALE=V_MALE;
+}
+if(window.speechSynthesis){
+  pickVoices();
+  window.speechSynthesis.onvoiceschanged=function(){ pickVoices(); };
+}
+function voiceFor(pitch){
+  return (pitch&&pitch>=1.2)?(V_FEMALE||V_MALE):(V_MALE||V_FEMALE);
+}
+function speakTxt(txt,pitch,rate){
+  if(!speechOn) return;
+  try{
+    if(!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(txt);
+    u.lang="en-US"; u.rate=rate||0.72;
+    if(pitch) u.pitch=pitch; else u.pitch=1.0;
+    u.voice=voiceFor(pitch)||u.voice;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function splitChunks(txt){
+  var out=[];
+  var sent=txt.match(/[^.!?\u2026]+[.!?\u2026]*/g);
+  if(!sent) return [txt.trim()];
+  sent.forEach(function(s){
+    s=s.trim();
+    if(!s) return;
+    if(s.split(/\s+/).length>10){
+      s.split(",").forEach(function(part){
+        part=part.trim().replace(/^[,.\s]+|[,.\s]+$/g,"");
+        if(part) out.push(part);
+      });
+    }else{
+      out.push(s);
+    }
+  });
+  return out;
+}
+function speakHuman(txt,pitch,rate){
+  if(!speechOn) return;
+  try{
+    if(!("speechSynthesis" in window)) return;
+    var items=Object.prototype.toString.call(txt)==="[object Array]"?txt:[txt];
+    var chunks=[];
+    items.forEach(function(t){ if(t) chunks=chunks.concat(splitChunks(t)); });
+    if(!chunks.length) return;
+    var rt=rate||0.88;
+    var i=0;
+    var chain=function(){
+      if(!speechOn||i>=chunks.length) return;
+      var ch=chunks[i];
+      var n=i+1;
+      i++;
+      var u=new SpeechSynthesisUtterance(ch);
+      u.lang="en-US";
+      u.rate=Math.max(0.5,Math.min(1.5,rt+(n%3===1?0.02:(n%3===0?-0.02:0))));
+      var p=pitch||1.0;
+      u.pitch=Math.max(0.6,Math.min(1.8,p+((n%7)-3)*0.015));
+      u.voice=voiceFor(pitch)||u.voice;
+      var pause=(n<chunks.length)?460:80;
+      u.onend=function(){ setTimeout(chain,pause); };
+      u.onerror=function(){ setTimeout(chain,pause); };
+      try{
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(u);
+      }catch(e){
+        setTimeout(chain,pause);
+      }
+    };
+    chain();
+  }catch(e){}
+}
+function speakChain(list){
+  speakHuman(list,1.0,0.9);
+}
+
+var REVIEW=[{e:"🍎",w:"apple"},{e:"🍊",w:"orange"},{e:"🍌",w:"banana"},{e:"🧡",w:"papaya"},{e:"🍋",w:"lemon"},{e:"🍇",w:"grape"},{e:"🍉",w:"watermelon"}];
+var VFRUITS=[
+  {s:"pear",pl:"pears",e:"🍐",syll:["pear"]},
+  {s:"strawberry",pl:"strawberries",e:"🍓",syll:["straw","ber","ry"]},
+  {s:"tomato",pl:"tomatoes",e:"🍅",syll:["to","ma","to"]},
+  {s:"peach",pl:"peaches",e:"🍑",syll:["peach"]}
+];
+var PRAISE_C=[
+  "Good going, keep it up!",
+  "Excellent! You are a star!",
+  "Fantastic work! Well done!",
+  "You nailed it! High five!",
+  "Awesome! Super smart!",
+  "Great job! You make it look easy!",
+  "Brilliant! Keep shining!",
+  "Wonderful! Practice makes perfect!",
+  "You did it! I'm so proud of you!",
+  "Super! Give yourselves a round of applause!"
+];
+var PRAISE_W=[
+  "Keep going! Practice makes perfect!",
+  "Almost there! You can do it!",
+  "Good try! Let's build it again!",
+  "No worries! Trying is how we learn!",
+  "You're learning! Let's try once more!",
+  "So close! Take your time and try again!",
+  "That's how we learn! One more time!",
+  "Keep trying! You are getting better every time!",
+  "Good effort! Now spot the difference!",
+  "Don't give up! You'll get it next time!"
+];
+var LAST_PC=-1, LAST_PW=-1;
+function pickPraise(arr,last){
+  if(arr.length<=1) return arr[0];
+  var i=Math.floor(Math.random()*arr.length);
+  while(i===last){ i=Math.floor(Math.random()*arr.length); }
+  return arr[i];
+}
+
+function buildWarm(){
+  var warmEl=document.getElementById("warmFlash");
+  REVIEW.forEach(function(f){
+    var flip=document.createElement("div");
+    flip.className="flip";
+    flip.innerHTML='<div class="inner"><div class="face front">'+f.e+'</div><div class="face back">'+f.w+'</div></div>';
+    flip.addEventListener("click",function(){ flip.classList.toggle("flipped"); speakTxt(f.w,1.0,0.72); sPop(); });
+    warmEl.appendChild(flip);
+  });
+  var luck=document.getElementById("luckGrid");
+  var luckSel=null;
+  var score={a:0,b:0};
+  var luckTimer=null, luckLeft=15;
+  function luckTick(){
+    document.getElementById("luckTimer").textContent=luckLeft;
+    if(luckLeft<=0){ clearInterval(luckTimer); sDing(); document.getElementById("luckMsg").innerHTML="⏰ Time's up! Now… reveal! 🎭"; }
+    else luckLeft--;
+  }
+  REVIEW.forEach(function(f){
+    var c=document.createElement("div");
+    c.className="tlcard";
+    c.innerHTML=f.e+"<br>"+f.w;
+    c.addEventListener("click",function(){ luckSel=f; document.getElementById("luckMsg").innerHTML="🤫 Secret chosen…"; sPop(); });
+    luck.appendChild(c);
+  });
+  document.getElementById("luckStart").addEventListener("click",function(){
+    clearInterval(luckTimer); luckLeft=15; luckTick(); luckTimer=setInterval(luckTick,1000); sPop();
+  });
+  document.getElementById("luckReveal").addEventListener("click",function(){
+    clearInterval(luckTimer);
+    document.getElementById("luckTimer").textContent="0";
+    if(luckSel){
+      speakTxt(luckSel.w,1.0,0.72); sDing();
+      document.getElementById("luckMsg").innerHTML="🎭 It's <b>"+luckSel.e+" "+luckSel.w+"</b>! Correct guesses get a reward card! 🎁";
+    }else{
+      document.getElementById("luckMsg").innerHTML="👆 First tap a fruit card on the board to choose your secret!"; sBuzz();
+    }
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".teamAdd"),function(btn){
+    btn.addEventListener("click",function(){
+      var t=btn.getAttribute("data-team");
+      score[t]++;
+      document.getElementById(t==="a"?"scoreA":"scoreB").textContent="🎁 "+score[t];
+      document.getElementById("luckMsg").innerHTML=(t==="a"?"🟦 Team A":"🟩 Team B")+" gets a reward card! 🎉";
+      sDing();
+    });
+  });
+  document.getElementById("teamReset").addEventListener("click",function(){
+    score={a:0,b:0};
+    document.getElementById("scoreA").textContent="🎁 0";
+    document.getElementById("scoreB").textContent="🎁 0";
+    document.getElementById("luckMsg").innerHTML="";
+    sPop();
+  });
+}
+
+function buildDialogue(){
+  var CHARS=[
+    {e:"👦",n:"Nick",p:0.82,t:"deep & happy",line:"Wow! There are so many strawberries!"},
+    {e:"👧",n:"Abby",p:1.32,t:"bright & clear",line:"Wow! There are so many pears!"},
+    {e:"🧒",n:"Jack",p:1.0,t:"funny & shy",line:"But… I don't have any money."}
+  ];
+  var cc=document.getElementById("charCards");
+  CHARS.forEach(function(c){
+    var card=document.createElement("div");
+    card.className="charcard";
+    card.innerHTML='<div class="ce">'+c.e+'</div><div class="cn">'+c.n+'</div><div class="ct">'+c.t+'</div><div class="cl">“'+c.line+'”</div>';
+    card.addEventListener("click",function(){ speakHuman(c.line,c.p,0.88); sPop(); });
+    cc.appendChild(card);
+  });
+  var DIAL=[
+    {e:"👦",w:"Nick",t:"Wow! There are so many strawberries!",p:0.82},
+    {e:"👦",w:"Nick",t:"I love strawberries!",p:0.82},
+    {e:"🧒",w:"Jack",t:"I love strawberries, too!",p:1.0},
+    {e:"👧",w:"Abby",t:"Wow! There are so many pears!",p:1.32},
+    {e:"👧",w:"Abby",t:"I love pears, too!",p:1.32},
+    {e:"🧒",w:"Jack",t:"I love pears, too!",p:1.0},
+    {e:"🧒",w:"Jack",t:"But… I don't have any money.",p:1.0}
+  ];
+  var dlBub=[];
+  var dlEl=document.getElementById("dlPanel");
+  DIAL.forEach(function(l,i){
+    var row=document.createElement("div");
+    row.className="dlrow";
+    var ava=document.createElement("div"); ava.className="dava"; ava.textContent=l.e;
+    var bub=document.createElement("div"); bub.className="bubbl"; bub.innerHTML="<b>"+l.w+":</b> "+l.t;
+    row.appendChild(ava); row.appendChild(bub);
+    bub.addEventListener("click",function(){
+      Array.prototype.forEach.call(dlBub,function(b){ b.classList.remove("on"); });
+      bub.classList.add("on");
+      speakHuman(l.t,l.p,0.88); sPop();
+    });
+    dlEl.appendChild(row); dlBub.push(bub);
+  });
+  document.getElementById("dlPlay").addEventListener("click",function(){
+    stopSpeech();
+    var i=0;
+    var chain=function(){
+      Array.prototype.forEach.call(dlBub,function(b){ b.classList.remove("on"); });
+      if(i>=DIAL.length){ sDing(); return; }
+      if(dlBub[i]) dlBub[i].classList.add("on");
+      var u=new SpeechSynthesisUtterance(DIAL[i].t);
+      u.lang="en-US"; u.rate=0.85; u.pitch=DIAL[i].p; u.voice=voiceFor(DIAL[i].p)||u.voice;
+      u.onend=function(){ i++; setTimeout(chain,460); };
+      u.onerror=function(){ i++; setTimeout(chain,460); };
+      try{ window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
+      catch(e){ i++; setTimeout(chain,460); }
+    };
+    chain();
+  });
+  document.getElementById("dlStop").addEventListener("click",function(){
+    stopSpeech();
+    Array.prototype.forEach.call(dlBub,function(b){ b.classList.remove("on"); });
+  });
+  var storyEl=document.getElementById("storyText");
+  storyEl.innerHTML="At the fruit market, Abby 👧, Nick 👦 and Jack 🧒 meet together. It is bustling and lively! 🍐 Nick loves strawberries and cries, <b>“Wow! There are so many strawberries!”</b> Jack loves them too. Abby spots lots of pears and shouts, <b>“Wow! There are so many pears!”</b> After all that delicious fruit, Jack really wants to buy some… but he checks his pockets and says sadly, <b>“I don't have any money.”</b> Poor Jack! Who can help him? Let's keep reading to find out! 🎡";
+  document.getElementById("storyRead").addEventListener("click",function(){
+    speakChain([
+      "At the fruit market, Abby, Nick and Jack meet together. It is bustling and lively!",
+      "Wow! There are so many strawberries! I love strawberries!",
+      "Wow! There are so many pears! I love pears, too!",
+      "But Jack says, I don't have any money. Poor Jack! Who can help him? Let's keep reading to find out!"
+    ],0);
+    sDing();
+  });
+  makeGallery("diaGal",["1.png","2.png","3.png","4.png"],"Scene ");
+}
+
+function buildVocab(){
+  var vlist=document.getElementById("vocabList");
+  VFRUITS.forEach(function(f){
+    var card=document.createElement("div");
+    card.className="vocab-card";
+    card.innerHTML='<span class="ve">'+f.e+'</span><div>'+
+      '<div class="vw">a '+f.s+'</div>'+
+      '<div class="rule"><span class="red">'+f.s+'</span> &rarr; <span class="red">'+f.pl+'</span></div></div>';
+    var vw=card.querySelector(".vw");
+    var plural=false;
+    card.addEventListener("click",function(){
+      plural=!plural;
+      vw.textContent=(plural?f.pl:"a "+f.s);
+      speakTxt(plural?f.pl:f.s,1.0,0.72);
+      sPop();
+    });
+    vlist.appendChild(card);
+  });
+  var rules=[
+    {t:"Trick 1 · just add “s”",rx:'<span class="base">pear</span><span class="add">s</span>',from:"pear",to:"pears"},
+    {t:"Trick 2 · add “es”",rx:'<span class="base">tomato</span><span class="add">es</span>',from:"tomatoes",to:"tomatoes"},
+    {t:"Trick 3 · minus y, plus ies",rx:'<span class="base">strawberr</span><span class="cut">y</span><span class="addg">ies</span>',from:"strawberry",to:"strawberries"}
+  ];
+  var rd=document.getElementById("ruleDemo");
+  rules.forEach(function(r){
+    var card=document.createElement("div");
+    card.className="rulecard";
+    card.innerHTML='<div class="rt">'+r.t+'</div><div class="rx">'+r.rx+'</div>';
+    card.addEventListener("click",function(){ speakTxt(r.to,1.0,0.7); sPop(); });
+    rd.appendChild(card);
+  });
+  var sw=document.getElementById("sylWrap");
+  VFRUITS.forEach(function(f,i){
+    var row=document.createElement("div");
+    row.className="syl-row";
+    row.innerHTML='<span class="se">'+f.e+'</span><span class="sw">'+(i===0?"a "+f.s:f.s)+'</span><div class="chips"></div>';
+    var chipsEl=row.querySelector(".chips");
+    var chips=f.syll.map(function(sy){
+      var c=document.createElement("span");
+      c.className="chip";
+      c.textContent=sy;
+      c.addEventListener("click",function(){ speakTxt(sy,1.0,0.6); sPop(); });
+      chipsEl.appendChild(c);
+      return c;
+    });
+    row.addEventListener("click",function(){ speakTxt(f.s,1.0,0.72); sPop(); });
+    var sayBtn=document.createElement("span");
+    sayBtn.className="chip";
+    sayBtn.style.background="linear-gradient(150deg,#7ce577,#37a832)";
+    sayBtn.textContent="🔊 slowly → fast";
+    sayBtn.addEventListener("click",function(ev){
+      ev.stopPropagation();
+      if(!speechOn) return;
+      var idx=0, phase="syllables";
+      var step=function(done){
+        var u=new SpeechSynthesisUtterance(done);
+        u.lang="en-US"; u.rate=0.5; u.pitch=1.0; u.voice=voiceFor(1.0)||u.voice;
+        u.onend=function(){ setTimeout(next,430); };
+        u.onerror=function(){ setTimeout(next,430); };
+        try{ window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
+        catch(e){ setTimeout(next,430); }
+      };
+      var next=function(){
+        if(!speechOn) return;
+        if(phase==="syllables"){
+          if(idx<f.syll.length){
+            Array.prototype.forEach.call(chips,function(c){ c.classList.remove("on"); });
+            chips[idx].classList.add("on");
+            step(f.syll[idx]);
+            idx++;
+          }else{
+            phase="word1";
+            idx=0;
+            Array.prototype.forEach.call(chips,function(c){ c.classList.add("on"); });
+            step(f.s);
+          }
+        }else if(phase==="word1"){
+          phase="word2";
+          step(f.s);
+        }else{
+          Array.prototype.forEach.call(chips,function(c){ c.classList.remove("on"); });
+          sDing();
+        }
+      };
+      next();
+    });
+    chipsEl.appendChild(sayBtn);
+    sw.appendChild(row);
+  });
+  var pq=document.getElementById("plurQuiz");
+  var PLUR_OPTS={
+    pears:["pears","pearys","pear"],
+    strawberries:["strawberries","strawberrys","strawberies"],
+    tomatoes:["tomatoes","tomaties","tomatos"],
+    peaches:["peaches","peachys","peachs"]
+  };
+  VFRUITS.forEach(function(f){
+    var q=document.createElement("div");
+    q.className="q";
+    var forms=PLUR_OPTS[f.pl].slice();
+    for(var i=forms.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=forms[i]; forms[i]=forms[j]; forms[j]=t; }
+    var opts=forms.map(function(opt){ return '<button class="optbtn" data-pl="'+opt+'">'+opt+'</button>'; }).join("");
+    q.innerHTML="<b>"+f.s+"</b> → <span class='red'>plural?</span>"+opts;
+    Array.prototype.forEach.call(q.querySelectorAll("button"),function(b){
+      b.addEventListener("click",function(){
+        if(b.getAttribute("data-pl")===f.pl){ b.style.background="#37a832"; sDing(); speakTxt(f.pl,1.0,0.72); }
+        else{ b.style.background="#ff5d5d"; sBuzz(); }
+        Array.prototype.forEach.call(q.querySelectorAll("button"),function(x){ x.disabled=true; });
+      });
+    });
+    pq.appendChild(q);
+  });
+  makeGallery("vocabGal",["5.png","6.png","7.png","8.png","9.png","10.png","11.png","12.png"],"Place ");
+}
+
+function makeBuilder(container,title,words,team,onCorrect){
+  var pad=document.createElement("div");
+  pad.className="builder-pad";
+  var teamTag=(team==="b")?'<span style="color:var(--green)">🟩 Team B</span>':'<span style="color:var(--blue)">🟦 Team A</span>';
+    pad.innerHTML='<div class="bt">'+title+'</div>'+
+      '<div class="bt" style="font-size:clamp(15px,2.8vw,19px);color:var(--purple);">'+teamTag+'</div>'+
+      '<div class="buildarea slot"></div>'+
+      '<div class="buildarea bank"></div>'+
+      '<div class="btnrow"><button class="btn purple check" type="button">✔️ Check</button><button class="btn gray reset" type="button">🔄 Reset</button></div>'+
+      '<div class="msg"></div>';
+  container.appendChild(pad);
+  var slotEl=pad.querySelector(".slot");
+  var bankEl=pad.querySelector(".bank");
+  var msgEl=pad.querySelector(".msg");
+  var bank=words.slice();
+  function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  shuffle(bank);
+  function addChip(where,word,kind){
+    var c=document.createElement("span");
+    c.className="chip "+(kind==="bank"?"bank":"");
+    c.textContent=word;
+    c.addEventListener("click",function(){
+      if(kind==="bank"){
+        c.classList.add("used");
+        addChip(slotEl,word,"slot");
+      }else{
+        Array.prototype.forEach.call(bankEl.children,function(x){ if(x.textContent===word&&x.classList.contains("used")){ x.classList.remove("used"); } });
+        slotEl.removeChild(c);
+      }
+      sPop();
+    });
+    where.appendChild(c);
+  }
+  bank.forEach(function(w){ addChip(bankEl,w,"bank"); });
+  pad.querySelector(".check").addEventListener("click",function(){
+    var got=[];
+    Array.prototype.forEach.call(slotEl.childNodes,function(n){ if(n.nodeType===1) got.push(n.textContent); });
+    var userLine=got.join(" ");
+    if(userLine===words.join(" ")){
+      var pc=pickPraise(PRAISE_C,LAST_PC);
+      LAST_PC=PRAISE_C.indexOf(pc);
+      msgEl.innerHTML="🎉 <b>Correct!</b><br><span style='color:#37a832;font-weight:900'>"+words.join(" ")+"</span><br>"+pc+" 🌟";
+      msgEl.className="msg ok";
+      sFanfare();
+      speakHuman([words.join(" "),pc],1.0,0.88);
+      pad.querySelector(".check").disabled=true;
+      if(onCorrect) onCorrect(team);
+    }else{
+      var pw=pickPraise(PRAISE_W,LAST_PW);
+      LAST_PW=PRAISE_W.indexOf(pw);
+      msgEl.innerHTML=userLine?
+        "🙈 <b>Not quite!</b><br><span style='color:#ff4d4d;font-weight:900'>❌ You made: "+userLine+"</span><br><span style='color:#37a832;font-weight:900'>✅ Correct: "+words.join(" ")+"</span><br>"+pw+" 💪"
+        :
+        "🙈 Build the sentence first!<br><span style='color:#37a832;font-weight:900'>✅ Correct: "+words.join(" ")+"</span><br>"+pw+" 💪";
+      msgEl.className="msg bad";
+      sBuzz();
+      speakHuman(pw,1.15,0.88);
+    }
+  });
+  pad.querySelector(".reset").addEventListener("click",function(){
+    slotEl.innerHTML=""; bankEl.innerHTML=""; shuffle(bank);
+    bank.forEach(function(w){ addChip(bankEl,w,"bank"); });
+    msgEl.innerHTML="";
+    sPop();
+  });
+}
+
+function buildPatterns(){
+  var PATS=[
+    {e:"🍐",t:"There is a pear."},
+    {e:"🍑",t:"There are five peaches."},
+    {e:"🍓",t:"How many strawberries are there?"},
+    {e:"🍅",t:"There are eight tomatoes."}
+  ];
+  var pl=document.getElementById("patList");
+  PATS.forEach(function(p){
+    var row=document.createElement("div");
+    row.className="patrow";
+    row.innerHTML='<span class="pe">'+p.e+'</span><span class="pt">'+p.t+'</span>';
+    row.addEventListener("click",function(){ speakHuman(p.t,1.0,0.88); sPop(); });
+    pl.appendChild(row);
+  });
+  var SENTENCES=[
+    {title:"Sentence 1 🍓",words:["There","are","many","strawberries","."]},
+    {title:"Sentence 2 🥛",words:["Let's","make","strawberry","milk","."]},
+    {title:"Sentence 3 🍐",words:["There","are","many","pears","."]},
+    {title:"Sentence 4 ❤️",words:["I","love","strawberries","too","."]},
+    {title:"Sentence 5 🧡",words:["Let's","make","papaya","milk","!"]},
+    {title:"Sentence 6 🍑",words:["How","many","peaches","are","there","?"]},
+    {title:"Sentence 7 😲",words:["Wow!","There","are","so","many","strawberries","!"]},
+    {title:"Sentence 8 🍅",words:["There","are","sixteen","tomatoes","."]},
+    {title:"Sentence 9 ❤️",words:["I","love","pears","too","."]},
+    {title:"Sentence 10 🍇",words:["Let's","make","grape","juice","!"]},
+    {title:"Sentence 11 🍑",words:["There","is","a","peach","."]},
+    {title:"Sentence 12 🤔",words:["How","many","strawberries","are","there","?"]}
+  ];
+  var bg=document.getElementById("buildGrid");
+  var roundLabel=document.getElementById("roundLabel");
+  var roundTip=document.getElementById("roundTip");
+  var roundMsg=document.getElementById("patMsg");
+  var roundIdx=0;
+  var pool=SENTENCES.slice();
+  var currentDone=0,currentTotal=0;
+  function pickSentences(){
+    var picked=[];
+    while(pool.length&&picked.length<2){
+      picked.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+    }
+    return picked;
+  }
+  function praise(){
+    var a=patScore.a, b=patScore.b;
+    var winner=(a===b)?("It's a tie! Both teams rock! 🙌"):(a>b?"🏆 <b>Team A</b> is today's champion!":"🏆 <b>Team B</b> is today's champion!");
+    sFanfare(); sFanfare();
+    roundTip.className="praise";
+    roundTip.innerHTML="🌟🎉 <b>AMAZING JOB, EVERYONE!</b> 🎉🌟<br>You built <b>every</b> sentence with your fruit words!<br><b>Final scores:</b> 🟦 Team A "+a+" &nbsp;·&nbsp; 🟩 Team B "+b+"<br>"+winner+" 🍓";
+    document.getElementById("patNext").textContent="🔄 Play again";
+    speakHuman("Amazing job, everyone! You completed all the sentences. Final score: Team A, "+a+", Team B, "+b+". "+(a===b?"What a great tie! Both teams rock!":(a>b?"Congratulations, Team A, you are today's champions!":"Congratulations, Team B, you are today's champions!")),1.1,0.9);
+  }
+  function checkOne(){
+    currentDone++;
+    if(currentDone===currentTotal){
+      if(!pool.length){
+        praise();
+      }else{
+        sDing();
+        roundTip.className="tip";
+        roundTip.innerHTML="🎉 <b>Round done!</b> Reward points are on the scoreboard below, then press <b>Next round</b>!";
+      }
+    }
+  }
+  function showRound(){
+    bg.innerHTML="";
+    currentDone=0;
+    var picked=pickSentences();
+    currentTotal=picked.length;
+    picked.forEach(function(s,i){
+      var team=(i===0)?"a":"b";
+      makeBuilder(bg,s.title,s.words,team,function(){
+        checkOne();
+        addScore(team);
+        roundMsg.innerHTML="🌟 "+(team==="a"?"🟦 Team A":"🟩 Team B")+" answered correctly! +1 reward point 🎉";
+      });
+    });
+    roundLabel.textContent="Round "+(roundIdx+1)+" · "+(pool.length?"("+pool.length+" more to go)":"last round!");
+    document.getElementById("patNext").textContent="➡️ Next round";
+    roundTip.className="tip";
+    roundTip.innerHTML="New questions every round — <b>no repeats</b>! Left card = <b>🟦 Team A</b>, right card = <b>🟩 Team B</b>. Correct answers earn reward points automatically! 🎯";
+    roundMsg.innerHTML="";
+  }
+  document.getElementById("patNext").addEventListener("click",function(){
+    if(!pool.length){ pool=SENTENCES.slice(); roundIdx=0; }
+    else{ roundIdx++; }
+    showRound();
+  });
+  showRound();
+  var patScore={a:0,b:0};
+  function addScore(t){
+    patScore[t]++;
+    document.getElementById(t==="a"?"patScoreA":"patScoreB").textContent="🎁 "+patScore[t];
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".patAdd"),function(btn){
+    btn.addEventListener("click",function(){
+      addScore(btn.getAttribute("data-team"));
+      roundMsg.innerHTML=(btn.getAttribute("data-team")==="a"?"🟦 Team A":"🟩 Team B")+" gets a reward card (manual) 🎉";
+      sDing();
+    });
+  });
+  document.getElementById("patReset").addEventListener("click",function(){
+    patScore={a:0,b:0};
+    document.getElementById("patScoreA").textContent="🎁 0";
+    document.getElementById("patScoreB").textContent="🎁 0";
+    roundMsg.innerHTML="";
+    sPop();
+  });
+  document.getElementById("mkGo").addEventListener("click",function(){
+    var f=document.getElementById("mkFruit").value;
+    var d=document.getElementById("mkDrink").value;
+    document.getElementById("mkLine").innerHTML="Let's make <b>"+f+" "+d+"</b>!";
+    speakHuman("Let's make "+f+" "+d+"!",0.9,0.88);
+    sDing();
+  });
+  var countN=0;
+  var cf=document.getElementById("countFruits");
+  function newBunch(){
+    countN=6+Math.floor(Math.random()*7);
+    var s="";
+    for(var i=0;i<countN;i++) s+="🍓";
+    cf.innerHTML=s;
+    document.getElementById("countAns").value="";
+    document.getElementById("countMsg").innerHTML="";
+  }
+  newBunch();
+  document.getElementById("countNew").addEventListener("click",function(){ newBunch(); sPop(); });
+  document.getElementById("countCheck").addEventListener("click",function(){
+    var a=document.getElementById("countAns").value.trim();
+    var m=document.getElementById("countMsg");
+    if(Number(a)===countN){
+      m.innerHTML="🎉 Yes! There are "+countN+" strawberries!";
+      m.className="msg ok";
+      sDing();
+      speakHuman("There are "+countN+" strawberries!",1.0,0.88);
+    }else{
+      m.innerHTML="🙈 Count again! How many strawberries are there?";
+      m.className="msg bad";
+      sBuzz();
+    }
+  });
+  document.getElementById("trainThere").addEventListener("click",function(){
+    speakChain(["there are","there are","there are"],0);
+    document.getElementById("trainMsg").innerHTML="👅 Curl your tongue for the <b>th</b>: th–ere… are!";
+    sDing();
+  });
+  document.getElementById("trainContrast").addEventListener("click",function(){
+    speakChain(["they are","there are","they are","there are"],0);
+    document.getElementById("trainMsg").innerHTML="🔀 <b>They</b> = people (a friend). <b>There</b> = about things (the strawberries). Hear the difference!";
+    sDing();
+  });
+  makeGallery("patGal",["13.png","14.png","15.png","16.png","17.png","18.png"],"Picture ");
+}
+
+var LB=[]; var lbIdx=0;
+function makeGallery(id,srcs,label){
+  var gal=document.getElementById(id);
+  if(!gal || gal.childNodes.length) return;
+  srcs.forEach(function(src,i){
+    var pic=document.createElement("div");
+    pic.className="pic";
+    var img=document.createElement("img");
+    img.src=src; img.loading="lazy"; img.alt=label+(i+1);
+    if(i===0){ img.onerror=function(){ img.onerror=null; img.style.background="#ffe9c9"; } }
+    var cap=document.createElement("div");
+    cap.className="cap";
+    cap.textContent=label+(i+1);
+    pic.appendChild(img); pic.appendChild(cap);
+    pic.addEventListener("click",function(){ openLb(srcs,i); });
+    gal.appendChild(pic);
+  });
+  LB=LB.concat(srcs);
+}
+function openLb(srcs,i){
+  LB=srcs.slice();
+  lbIdx=(i+LB.length)%LB.length;
+  document.getElementById("lbImg").src=LB[lbIdx];
+  document.getElementById("lbCount").textContent=(lbIdx+1)+" / "+LB.length;
+  document.getElementById("lightbox").classList.add("show");
+  sPop();
+}
+document.getElementById("lbClose").addEventListener("click",function(){ document.getElementById("lightbox").classList.remove("show"); });
+document.getElementById("lbPrev").addEventListener("click",function(){ openLb(LB,lbIdx-1); });
+document.getElementById("lbNext").addEventListener("click",function(){ openLb(LB,lbIdx+1); });
+document.getElementById("lightbox").addEventListener("click",function(e){ if(e.target===this) this.classList.remove("show"); });
+
+var BUILT={};
+function showFail(tab){
+  var el=document.getElementById("scene-"+tab);
+  var box=document.createElement("div");
+  box.className="tip";
+  box.innerHTML="😵 Oops! This tab hit a snag. Please refresh the page.<br>If it keeps happening, tell your teacher the tab name: <b>"+tab+"</b>.";
+  el.insertBefore(box,el.firstChild);
+}
+function buildTab(tab){
+  if(BUILT[tab]) return;
+  try{
+    if(tab==="warm") buildWarm();
+    else if(tab==="dialogue") buildDialogue();
+    else if(tab==="vocab") buildVocab();
+    else if(tab==="patterns") buildPatterns();
+    BUILT[tab]=true;
+  }catch(e){
+    if(window.console) console.error("build error ["+tab+"]",e);
+    BUILT[tab]=true;
+    showFail(tab);
+  }
+}
+function goMain(tab){
+  buildTab(tab);
+  Array.prototype.forEach.call(document.querySelectorAll(".scene"),function(s){ s.classList.remove("active"); });
+  Array.prototype.forEach.call(document.querySelectorAll(".main-tabs button"),function(b){ b.classList.remove("active"); });
+  document.getElementById("scene-"+tab).classList.add("active");
+  document.querySelector('[data-main="'+tab+'"]').classList.add("active");
+  document.body.setAttribute("data-tbg",tab);
+  stopSpeech();
+}
+Array.prototype.forEach.call(document.querySelectorAll(".main-tabs button"),function(b){
+  b.addEventListener("click",function(){ goMain(b.getAttribute("data-main")); });
+});
+buildTab("warm");
+
+["🍓","🍐","🍅","🍑","🍎","🍇","🥛","🏪"].forEach(function(e){
+  var f=document.createElement("span");
+  f.className="floaty";
+  f.textContent=e;
+  f.style.left=Math.random()*96+"%";
+  f.style.fontSize=(18+Math.random()*22)+"px";
+  f.style.animationDuration=(13+Math.random()*15)+"s";
+  f.style.animationDelay=(-(Math.random()*15))+"s";
+  document.body.appendChild(f);
+});
+
+var FAB_TOP=document.getElementById("fabTop");
+var FAB_HOME=document.getElementById("fabHome");
+var fabDimT=null;
+function fabResetDim(){
+  FAB_HOME.classList.remove("dim");
+  FAB_TOP.classList.remove("dim");
+  if(fabDimT) clearTimeout(fabDimT);
+  fabDimT=setTimeout(function(){ FAB_HOME.classList.add("dim"); FAB_TOP.classList.add("dim"); },3000);
+}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  FAB_HOME.classList.toggle("show",show);
+  FAB_TOP.classList.toggle("show",show);
+  if(fabDimT) clearTimeout(fabDimT);
+  if(show) fabResetDim();
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+fabUpdate();
+[FAB_HOME,FAB_TOP].forEach(function(el){
+  ["pointerdown","touchstart","mouseenter"].forEach(function(ev){ el.addEventListener(ev,fabResetDim); });
+  el.addEventListener("mouseleave",function(){
+    if(fabDimT) clearTimeout(fabDimT);
+    fabDimT=setTimeout(function(){ FAB_HOME.classList.add("dim"); FAB_TOP.classList.add("dim"); },3000);
+  });
+});
+FAB_TOP.addEventListener("click",function(e){ e.preventDefault(); window.scrollTo({top:0,behavior:"smooth"}); });
+</script>
+</body>
+</html>
