@@ -41,11 +41,10 @@
   .hero{
     position:relative; border-radius:32px; overflow:hidden; margin-top:18px;
     min-height:340px; display:flex; align-items:center; justify-content:center; text-align:center;
+    background:linear-gradient(150deg,#ffd9a3,#f5822b 55%,#e06a15);
     box-shadow:0 14px 30px rgba(0,0,0,.28);
   }
-  .hero img.heroimg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
-  .hero .shade{position:absolute; inset:0; background:linear-gradient(180deg,rgba(107,66,40,.25),rgba(20,40,20,.55));}
-  .hero .herotext{position:relative; z-index:1; color:#fff; padding:30px 22px; text-shadow:0 3px 8px rgba(0,0,0,.4);}
+  .hero .herotext{position:relative; z-index:1; color:#fff; padding:30px 22px; text-shadow:0 3px 8px rgba(0,0,0,.35);}
   .hero .hmot{font-size:clamp(46px,9vw,84px); line-height:1; animation:sway 3s ease-in-out infinite; display:inline-block;}
   .hero h1{font-size:clamp(30px,6vw,58px); font-weight:900; margin:8px 0 6px;}
   .hero p{font-size:clamp(14px,2.8vw,20px); font-weight:700; background:rgba(0,0,0,.35); display:inline-block; padding:8px 20px; border-radius:40px;}
@@ -166,13 +165,10 @@
 
 <div class="wrap">
   <div class="topbar">
-    <a class="brand" href="index.html">🏠 Joy English Classes</a>
     <span class="nowchip">📖 Story Time · Second Time</span>
   </div>
 
   <div class="hero">
-    <img class="heroimg" src="lazy6.png" alt="The Lazy Donkey story scene">
-    <div class="shade"></div>
     <div class="herotext">
       <span class="hmot">🐴</span>
       <h1>The Lazy Donkey</h1>
@@ -263,7 +259,7 @@
 </div>
 
 <button class="fab" id="fabTop" title="Back to top" aria-label="Back to top">⬆</button>
-<a class="fab" id="fabHome" href="index.html" title="Back to Joy English Classes" aria-label="Back to Joy English Classes">🏠</a>
+<a class="fab" id="fabHome" href="https://hanshanghao.github.io/Joy_English/" title="Back to Joy English Classes" aria-label="Back to Joy English Classes">🏠</a>
 
 <script>
 var QUESTIONS=[
