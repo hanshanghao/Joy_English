@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD5 Unit 3 - Making Friends</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f;--paper:#fff7ea}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:var(--pink);top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:var(--yellow);bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:var(--blue);top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-30%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.18),0 12px 20px rgba(0,0,0,.15)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.18),0 4px 8px rgba(0,0,0,.1)}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.topbar .sound-toggle{margin-left:auto;background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
+.topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.navbar .ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s}
+.navbar .ntab:hover{border-color:var(--purple);background:#f5f0ff}
+.navbar .ntab.on{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(139,92,240,.35)}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(139,92,240,.15),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15));animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(26px,5.5vw,44px);font-weight:900;color:var(--ink);text-shadow:2px 2px 0 rgba(139,92,240,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.hero .desc{margin-top:10px;font-size:clamp(13px,2vw,16px);color:#666;font-weight:600}
+.flow{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:16px 0}
+.flow .step{background:linear-gradient(135deg,var(--purple),#6c3de0);color:#fff;padding:10px 18px;border-radius:30px;font-size:clamp(12px,1.8vw,15px);font-weight:700;white-space:nowrap}
+.flow .arr{font-size:20px;color:var(--purple);font-weight:900}
+.t-image{width:100%;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;transition:transform .3s;display:block}
+.t-image:hover{transform:scale(1.02)}
+.checkbox-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:16px 0}
+.chk-item{display:flex;align-items:center;gap:10px;background:#fff;padding:12px 14px;border-radius:14px;cursor:pointer;border:2px solid #e8e0f5;transition:all .2s;font-weight:700;font-size:clamp(13px,2vw,16px)}
+.chk-item:hover{border-color:var(--purple);background:#f8f5ff}
+.chk-item.checked{border-color:var(--green);background:#e8ffe8}
+.chk-item .chk-box{width:28px;height:28px;border-radius:8px;border:3px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s;flex-shrink:0}
+.chk-item.checked .chk-box{background:var(--green);border-color:var(--green);color:#fff}
+.scenario-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.scenario-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);transition:transform .25s}
+.scenario-card:hover{transform:translateY(-4px)}
+.scenario-card .sc-head{padding:14px 16px;color:#fff;font-weight:800;font-size:clamp(16px,2.6vw,22px);display:flex;align-items:center;gap:10px}
+.scenario-card .sc-head .sc-emoji{font-size:28px}
+.scenario-card .sc-body{padding:14px 16px}
+.sc-dialogue{display:flex;align-items:flex-start;gap:10px;margin:8px 0;cursor:pointer;transition:background .2s;border-radius:14px;padding:10px 12px}
+.sc-dialogue:hover{background:rgba(139,92,240,.06)}
+.sc-dialogue .avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;color:#fff;font-weight:800}
+.sc-dialogue.girl .avatar{background:linear-gradient(135deg,var(--pink),#e03080)}
+.sc-dialogue.boy .avatar{background:linear-gradient(135deg,var(--blue),#2a7ab8)}
+.sc-dialogue .sc-bubble{border-radius:14px;padding:10px 14px;font-size:clamp(13px,2vw,16px);font-weight:600;line-height:1.5;flex:1;position:relative}
+.sc-dialogue.girl .sc-bubble{background:#f5f0ff;border-left:4px solid var(--pink)}
+.sc-dialogue.boy .sc-bubble{background:#e8f4ff;border-right:4px solid var(--blue);text-align:right}
+.scenario-card .extra-phrases{margin-top:12px;padding-top:12px;border-top:2px dashed #e8e0f5}
+.scenario-card .extra-phrases .ep-title{font-size:clamp(11px,1.5vw,13px);font-weight:800;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.scenario-card .extra-phrases .ep-pills{display:flex;flex-wrap:wrap;gap:6px}
+.scenario-card .extra-phrases .ep-pill{background:#f5f0ff;border:2px solid var(--purple);color:var(--purple);padding:4px 12px;border-radius:20px;font-size:clamp(11px,1.5vw,13px);font-weight:700;cursor:pointer;transition:all .2s}
+.scenario-card .extra-phrases .ep-pill:hover{background:var(--purple);color:#fff}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-icon{font-size:32px;margin-bottom:4px}
+.team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
+.team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
+.team-box.tc{border-top:6px solid var(--green)}.team-box.tc .team-score{color:var(--green)}
+.team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s}
+.team-btns button:hover{transform:scale(1.1)}
+.team-btns .tadd{background:linear-gradient(135deg,#7ce577,#37a832)}
+.team-btns .tsub{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.sp-cat-card{background:#fff;border-radius:18px;padding:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--purple);margin-bottom:14px;cursor:pointer;transition:all .2s}
+.sp-cat-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.sp-cat-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:4px}
+.sp-cat-card .sp-prompt{font-size:clamp(13px,2vw,16px);color:#888;font-weight:600;margin-bottom:10px;font-style:italic}
+.sp-pills{display:flex;flex-wrap:wrap;gap:8px}
+.sp-pill{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid var(--purple);color:var(--purple);padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.sp-pill:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.drop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:18px}
+.drop-zone{background:linear-gradient(135deg,#f5f0ff,#e8e0ff);border:3px dashed #b8a8e0;border-radius:18px;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;text-align:center;cursor:pointer;transition:all .3s}
+.drop-zone:hover{border-color:var(--purple);background:linear-gradient(135deg,#f0ecff,#e0d8ff)}
+.drop-zone.filled{border-style:solid;border-color:var(--green);background:linear-gradient(135deg,#e8ffe8,#d4f5d4)}
+.drop-zone.wrong{border-color:var(--red);background:linear-gradient(135deg,#ffe8e8,#ffd4d4)}
+.drop-zone .dz-emoji{font-size:36px;margin-bottom:6px}
+.drop-zone .dz-label{font-size:clamp(13px,2vw,16px);font-weight:700;color:var(--purple);margin-bottom:4px}
+.drop-zone .dz-hint{font-size:clamp(11px,1.6vw,13px);color:#999}
+.drop-zone .dz-placed{font-size:clamp(13px,1.8vw,15px);font-weight:700;color:var(--green);margin-top:6px}
+.sticker-pool{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:18px}
+.sticker-btn{background:linear-gradient(140deg,var(--c1),var(--c2));color:#fff;padding:10px 18px;border-radius:30px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;border:none;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:all .2s}
+.sticker-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.sticker-btn.sel{box-shadow:0 0 0 3px var(--green),0 6px 16px rgba(76,201,72,.3);transform:scale(1.05)}
+.sticker-btn.done{opacity:.35;pointer-events:none;transform:none}
+.quiz-area{max-width:700px;margin:0 auto}
+.qprog{display:flex;gap:6px;margin-bottom:20px;justify-content:center}
+.qprog .qdot{width:14px;height:14px;border-radius:50%;background:#ddd;transition:all .3s}
+.qprog .qdot.cur{background:var(--purple);transform:scale(1.3)}
+.qprog .qdot.ok{background:var(--green)}
+.qprog .qdot.no{background:var(--red)}
+.qcard{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px}
+.qcard h3{font-size:clamp(15px,2.4vw,20px);margin-bottom:14px;line-height:1.5}
+.qcard h3 .qn{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;width:32px;height:32px;border-radius:50%;font-size:14px;margin-right:8px}
+.qopts{display:grid;gap:10px}
+.qopt{padding:14px 18px;border:3px solid #e0d8f0;border-radius:14px;cursor:pointer;font-size:clamp(13px,2vw,16px);transition:all .2s;background:#faf8ff;font-weight:600}
+.qopt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateX(4px)}
+.qopt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;font-weight:800;pointer-events:none}
+.qopt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.qopt.dis{pointer-events:none;opacity:.5}
+.qresult{text-align:center;margin-top:20px;display:none}
+.qresult.show{display:block;animation:fadeup .5s}
+.qresult h2{font-size:clamp(20px,4vw,28px);margin-bottom:8px;color:var(--purple)}
+.qresult p{font-size:clamp(14px,2.2vw,18px);font-weight:600}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;pointer-events:none;transition:transform .4s,opacity .4s;opacity:0;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.mascot{position:fixed;bottom:20px;right:20px;z-index:997;font-size:48px;cursor:pointer;transition:transform .3s;line-height:1}
+.mascot:hover{transform:scale(1.15) rotate(-10deg)}
+.fab-wrap{position:fixed;bottom:80px;right:20px;z-index:998;display:flex;flex-direction:column;gap:10px}
+.fab{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .5s,transform .4s,background .2s;opacity:0;pointer-events:none;transform:translateY(96px)}
+.fab.fab-top{background:linear-gradient(135deg,var(--purple),#6c3de0);color:#fff}
+.fab.fab-home{background:linear-gradient(135deg,var(--green),#2f9e2b);color:#fff}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10001;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 0 40px rgba(255,255,255,.2)}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;font-weight:900;transition:transform .2s}
+.lightbox .lb-close:hover{transform:scale(1.2)}
+.confetti-piece{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:10000;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(1080deg);opacity:0}}
+@media(max-width:768px){.scenario-grid,.drop-grid{grid-template-columns:1fr}.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.checkbox-list{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div id="floaties"></div>
+<div class="topbar">
+<div class="now-chip">🤝 JD5 · Unit 3 · Making Friends</div>
+<button class="sound-toggle" id="soundBtn" title="Toggle Sound">🔊</button>
+</div>
+<div class="navbar" id="navBar">
+<button class="ntab on" onclick="showTab(0)">📖 Look &amp; Check</button>
+<button class="ntab" onclick="showTab(1)">💬 Let's Talk</button>
+<button class="ntab" onclick="showTab(2)">🎯 Spotlight Game</button>
+<button class="ntab" onclick="showTab(3)">🧩 What Should They Say?</button>
+<button class="ntab" onclick="showTab(4)">📝 Quiz</button>
+</div>
+<div class="tabpan on" id="tp0">
+<div class="hero">
+<span class="big-emoji">🤝</span>
+<h1>How Do You Make Friends?</h1>
+<span class="sub">JD5 · Unit 3 · pp. 18–19</span>
+</div>
+<section>
+<div class="shead"><span class="ic">📖</span><h2>Look &amp; Check</h2><span class="badge">Page 18</span></div>
+<img class="t-image" src="1.png" alt="How Do You Make Friends? - Page 18" onclick="openLb(this.src)">
+<div class="tip" style="margin-top:14px">
+💡 <strong>Look at the picture.</strong> Do you do these things to be a good friend? Check the boxes!
+</div>
+<div class="checkbox-list" id="chkList"></div>
+</section>
+</div>
+<div class="tabpan" id="tp1">
+<section>
+<div class="shead"><span class="ic">💬</span><h2>Let's Talk</h2><span class="badge">7 SCENARIOS</span></div>
+<div class="flow">
+<span class="step">🎧 Listen</span><span class="arr">➡</span>
+<span class="step">🗣️ Repeat</span><span class="arr">➡</span>
+<span class="step">🎭 Practice</span>
+</div>
+<div class="tip" style="margin-bottom:14px">💡 Click any dialogue bubble to hear it spoken in British English!</div>
+<div class="scenario-grid" id="scenarioGrid"></div>
+</section>
+</div>
+<div class="tabpan" id="tp2">
+<section>
+<div class="shead"><span class="ic">🎯</span><h2>Spotlight Team Game</h2><span class="badge">GENERATE</span></div>
+<div class="tip" style="margin-bottom:16px">💡 Click a category. Teams take turns saying different phrases. First team to run out of ideas loses a point!</div>
+<div class="team-grid" id="spotTeams"></div>
+<div id="spotCat"></div>
+</section>
+</div>
+<div class="tabpan" id="tp3">
+<section>
+<div class="shead"><span class="ic">🧩</span><h2>What Should They Say?</h2><span class="badge">Page 19</span></div>
+<img class="t-image" src="2.png" alt="What Should They Say? - Page 19" onclick="openLb(this.src)" style="margin-bottom:16px">
+<div class="tip" style="margin-bottom:14px">💡 Click a sticker, then click the matching picture!</div>
+<div class="sticker-pool" id="stickerPool"></div>
+<div class="drop-grid" id="dropGrid"></div>
+<div style="text-align:center;margin-top:10px">
+<button class="btn purple" onclick="checkStickers()">✅ Check Answers</button>
+<button class="btn orange" onclick="resetStickers()">🔄 Reset</button>
+</div>
+<div id="stickerResult" style="text-align:center;margin-top:14px;font-size:1.2rem;font-weight:800"></div>
+</section>
+</div>
+<div class="tabpan" id="tp4">
+<section>
+<div class="shead"><span class="ic">📝</span><h2>Quiz</h2><span class="badge">+5 PTS</span></div>
+<div class="quiz-area">
+<div class="qprog" id="qprog"></div>
+<div id="qCard"></div>
+<div class="qresult" id="qResult"><h2>🎉 Quiz Complete!</h2><p id="qResultText"></p>
+<button class="btn pink" onclick="resetQuiz()" style="margin-top:12px">🔄 Try Again</button>
+</div>
+</div>
+</section>
+</div>
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" title="Hello from Owlbert!">🦉</div>
+<div class="fab-wrap">
+<button class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆</button>
+<a class="fab fab-home" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+</div>
+<div class="lightbox" id="lightbox">
+<button class="lb-close" id="lbClose">&times;</button>
+<img id="lbImg" src="" alt="Textbook page">
+</div>
+<script>
+var soundOn=true;
+var actx=null;
+function audio(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx;}
+function tone(f,dur,type,vol,delay){var c=audio();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.value=f;var t=c.currentTime+(delay||0);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+0.05);}
+function sPop(){tone(500,0.1,"square",0.08);tone(760,0.09,"square",0.08,0.06);}
+function sDing(){tone(660,0.12,"triangle",0.16);tone(880,0.16,"triangle",0.16,0.1);tone(1320,0.25,"triangle",0.14,0.2);}
+function sBuzz(){tone(180,0.18,"sawtooth",0.11);tone(140,0.22,"sawtooth",0.11,0.16);}
+var cachedVoices=[];
+if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();};}
+function speakGB(text,pitch,onEnd){var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();var gb=v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.lang.startsWith("en-GB");})||v.find(function(x){return x.lang.startsWith("en");});var u=new SpeechSynthesisUtterance(text);u.voice=gb||null;u.lang="en-GB";u.rate=0.95;u.pitch=pitch;u.onend=onEnd;speechSynthesis.speak(u);}
+function speakLine(text){speechSynthesis.cancel();speakGB(text,1.15,null);}
+function speakPair(girlText,boyText){speechSynthesis.cancel();speakGB(girlText,1.3,function(){if(boyText)speakGB(boyText,0.8,null);});}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2000);}
+function launchConfetti(){var emojis=["🎉","⭐","✨","🎊","💖","🌈","🎈","💪"];for(var i=0;i<50;i++){var el=document.createElement("div");el.className="confetti-piece";el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];el.style.cssText="left:"+Math.random()*100+"vw;font-size:"+(Math.random()*16+10)+"px;animation-duration:"+(Math.random()*2+2)+"s;animation-delay:"+(Math.random()*1.5)+"s;";document.body.appendChild(el);setTimeout(function(e){e.remove();}.bind(null,el),5000);}}
+var totalScore=0;
+function addPts(pts){totalScore+=pts;showToast("+"+pts+" points! Total: "+totalScore);if(soundOn)sDing();}
+var curTab=0;
+function showTab(idx){curTab=idx;var pans=document.querySelectorAll(".tabpan");var tabs=document.querySelectorAll(".navbar .ntab");pans.forEach(function(p,i){p.classList.toggle("on",i===idx);});tabs.forEach(function(t,i){t.classList.toggle("on",i===idx);});}
+document.getElementById("soundBtn").onclick=function(){soundOn=!soundOn;this.textContent=soundOn?"🔊":"🔇";showToast(soundOn?"Sound ON":"Sound OFF");};
+function openLb(src){var lb=document.getElementById("lightbox");document.getElementById("lbImg").src=src;lb.classList.add("show");sPop();}
+document.getElementById("lbClose").onclick=function(){document.getElementById("lightbox").classList.remove("show");};
+document.getElementById("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show");};
+var fabDimT=null;
+var fabHasBeenDim=false;
+function fabDim(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity=".3";});fabHasBeenDim=true;}
+function fabBright(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity="1";});}
+function fabResetDim(){fabBright();clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  document.querySelectorAll(".fab").forEach(function(f){
+    if(show){f.style.pointerEvents="auto";f.style.transform="translateY(0)";if(!fabHasBeenDim)f.style.opacity="1";}
+    else{f.style.opacity="0";f.style.pointerEvents="none";f.style.transform="translateY(96px)";fabHasBeenDim=false;clearTimeout(fabDimT);}
+  });
+  if(show&&!fabHasBeenDim)fabResetDim();
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+document.querySelectorAll(".fab").forEach(function(f){
+  f.addEventListener("mouseenter",function(){clearTimeout(fabDimT);fabBright();});
+  f.addEventListener("mouseleave",function(){clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);});
+  f.addEventListener("touchstart",function(){fabResetDim();});
+  f.addEventListener("click",function(){fabResetDim();});
+});
+var chkItems=[
+{emoji:"👋",text:"Say hello to friends."},
+{emoji:"🤝",text:"Help each other."},
+{emoji:"💕",text:"Show you care."},
+{emoji:"🐕",text:"Listen and talk."},
+{emoji:"💪",text:"Work together."},
+{emoji:"🍪",text:"Share with friends."},
+{emoji:"⚽",text:"Play together."}
+];
+function buildCheckboxes(){var g=document.getElementById("chkList");g.innerHTML="";chkItems.forEach(function(item,i){var d=document.createElement("div");d.className="chk-item";d.innerHTML="<div class=\"chk-box\"></div><span>"+item.emoji+" "+item.text+"</span>";d.onclick=function(){this.classList.toggle("checked");var box=this.querySelector(".chk-box");if(this.classList.contains("checked")){box.textContent="✓";if(soundOn)sPop();}else{box.textContent="";}};g.appendChild(d);});}
+var scenarios=[
+{cat:"Say Hello",emoji:"👋",bg:"linear-gradient(135deg,#a78bfa,#7c3aed)",lines:[{sp:"Girl",text:"Hi, Johnny.",gender:"girl"},{sp:"Boy",text:"Hi, Peggy.",gender:"boy"}],extra:["Good morning!","Hello! How are you?"]},
+{cat:"Help Each Other",emoji:"🤝",bg:"linear-gradient(135deg,#f472b6,#ec4899)",lines:[{sp:"Girl",text:"Let me help!",gender:"girl"},{sp:"Boy",text:"Thanks!",gender:"boy"}],extra:["Can I help you?","Do you need help?"]},
+{cat:"Show You Care",emoji:"💕",bg:"linear-gradient(135deg,#60a5fa,#3b82f6)",lines:[{sp:"Girl",text:"What's wrong?",gender:"girl"},{sp:"Boy",text:"It hurts!",gender:"boy"}],extra:["Are you OK?","I'm worried about you."]},
+{cat:"Listen and Talk",emoji:"🐕",bg:"linear-gradient(135deg,#6ee76e,#34a832)",lines:[{sp:"Girl",text:"I like dogs. How about you?",gender:"girl"},{sp:"Boy",text:"Well, I like cats.",gender:"boy"}],extra:["What's your favourite animal?","I like cats too!"]},
+{cat:"Work Together",emoji:"💪",bg:"linear-gradient(135deg,#fb923c,#f97316)",lines:[{sp:"Girl",text:"We're done! We're a good team!",gender:"girl"},{sp:"Boy",text:"Yay!",gender:"boy"}],extra:["Let's do it together!","Great job!"]},
+{cat:"Share",emoji:"🍪",bg:"linear-gradient(135deg,#a78bfa,#7c3aed)",lines:[{sp:"Girl",text:"May I use your crayons?",gender:"girl"},{sp:"Boy",text:"Sure.",gender:"boy"}],extra:["Can I share?","This is for you."]},
+{cat:"Play Together",emoji:"⚽",bg:"linear-gradient(135deg,#f472b6,#ec4899)",lines:[{sp:"Girl",text:"Let's play ball!",gender:"girl"},{sp:"Boy",text:"Yeah, let's!",gender:"boy"}],extra:["May I play with you?","Let's play a game!"]}
+];
+function buildScenarios(){var g=document.getElementById("scenarioGrid");g.innerHTML="";scenarios.forEach(function(s,i){var c=document.createElement("div");c.className="scenario-card";var html="<div class=\"sc-head\" style=\"background:"+s.bg+"\"><span class=\"sc-emoji\">"+s.emoji+"</span>"+s.cat+"</div><div class=\"sc-body\">";s.lines.forEach(function(l){var isGirl=l.gender==="girl";var escapedText=l.text.replace(/'/g,"\\'");html+="<div class=\"sc-dialogue "+l.gender+"\" onclick=\"speakGB('"+escapedText+"',"+(isGirl?"1.3":"0.8")+",null)\" title=\"Click to listen\"><div class=\"avatar\">"+(isGirl?"👩":"👦")+"</div><div class=\"sc-bubble\"><strong>"+l.sp+":</strong> "+l.text+"</div></div>";});if(s.extra&&s.extra.length){html+="<div class=\"extra-phrases\"><div class=\"ep-title\">Extra Phrases</div><div class=\"ep-pills\">";s.extra.forEach(function(p){var ep=p.replace(/'/g,"\\'");html+="<span class=\"ep-pill\" onclick=\"speakGB('"+ep+"',1.2,null);sPop()\" title=\"Click to hear\">"+p+"</span>";});html+="</div></div>";}html+="</div>";c.innerHTML=html;g.appendChild(c);});}
+var spotCategories=[
+{name:"Say Hello",emoji:"👋",phrases:["Good afternoon.","How are you?","Nice to meet you.","What's up?"]},
+{name:"Listen & Talk",emoji:"👂",phrases:["What's your name?","How old are you?","Are you sad?"]},
+{name:"Share",emoji:"🍪",phrases:["This is for you.","Let's eat!","Have some cake!"]},
+{name:"Help Each Other",emoji:"🤝",phrases:["I can help.","Can you help?"]},
+{name:"Show You Care",emoji:"💖",phrases:["Are you OK?","Are you tired?","Take care."]},
+{name:"Work Together",emoji:"💪",phrases:["Let's line up.","May I study with you?","I have an idea."]},
+{name:"Play Together",emoji:"⚽",phrases:["May I play with you?","Let's play a game!"]}
+];
+var spotScores={a:0,b:0,c:0};
+function adjSpot(t,pts){spotScores[t]=Math.max(0,spotScores[t]+pts);var el=document.getElementById("spot"+t.toUpperCase()+"Score");el.textContent=spotScores[t];el.style.transform="scale(1.3)";setTimeout(function(){el.style.transform="scale(1)";},300);if(pts>0&&soundOn)sPop();}
+function buildSpotTeams(){var g=document.getElementById("spotTeams");g.innerHTML="";var ts=[{id:"a",name:"Team A",emoji:"🔵",cls:"ta"},{id:"b",name:"Team B",emoji:"🟠",cls:"tb"},{id:"c",name:"Team C",emoji:"🟢",cls:"tc"}];ts.forEach(function(t){var d=document.createElement("div");d.className="team-box "+t.cls;d.innerHTML="<div class=\"team-icon\">"+t.emoji+"</div><div class=\"team-name\">"+t.name+"</div><div class=\"team-score\" id=\"spot"+t.id.toUpperCase()+"Score\">0</div><div class=\"team-btns\"><button class=\"tadd\" onclick=\"adjSpot('"+t.id+"',1)\">+1</button><button class=\"tadd\" onclick=\"adjSpot('"+t.id+"',5)\">+5</button><button class=\"tsub\" onclick=\"adjSpot('"+t.id+"',-1)\">-1</button></div>";g.appendChild(d);});}
+function buildSpotCat(){var g=document.getElementById("spotCat");g.innerHTML="";spotCategories.forEach(function(c){var d=document.createElement("div");d.className="sp-cat-card";d.onclick=function(){var pills=this.querySelectorAll(".sp-pill");pills.forEach(function(p){p.style.background="";p.style.color="";});if(soundOn)sPop();};var html="<h3>"+c.emoji+" "+c.name+"</h3><div class=\"sp-prompt\">How else can we say "+c.name.toLowerCase()+"?</div><div class=\"sp-pills\">";c.phrases.forEach(function(p){var ep=p.replace(/'/g,"\\'");html+="<span class=\"sp-pill\" onclick=\"speakGB('"+ep+"',1.2,null);this.style.background='var(--purple)';this.style.color='#fff';setTimeout(function(el){el.style.background='';el.style.color='';},1500,this)\" title=\"Click to hear\">"+p+"</span>";});html+="</div>";d.innerHTML=html;g.appendChild(d);});}
+var stickerData=[
+{id:"st1",text:"Let me help.",color:"--c1:#7ce577;--c2:#37a832",zone:"z1"},
+{id:"st2",text:"May I use your markers?",color:"--c1:#6ec6ff;--c2:#3f95d8",zone:"z2"},
+{id:"st3",text:"Let's take turns.",color:"--c1:#ffab6e;--c2:#f5822b",zone:"z3"},
+{id:"st4",text:"I'm sorry.",color:"--c1:#b28dff;--c2:#8b5cf0",zone:"z4"}
+];
+var zoneData=[
+{id:"z1",emoji:"🤝",label:"Kid helping another kid up",hint:"A friend falls down",correct:"st1"},
+{id:"z2",emoji:"🎨",label:"Kids drawing at art class",hint:"Using markers together",correct:"st2"},
+{id:"z3",emoji:"🎪",label:"Kids at playground",hint:"Waiting on the swing",correct:"st3"},
+{id:"z4",emoji:"📦",label:"Kid carrying heavy crate",hint:"Something went wrong",correct:"st4"}
+];
+var selSticker=null;
+var placements={};
+function buildStickers(){var g=document.getElementById("stickerPool");g.innerHTML="";stickerData.forEach(function(s){var b=document.createElement("button");b.className="sticker-btn";b.id=s.id;b.textContent=s.text;b.style.cssText=s.color;b.onclick=function(){if(this.classList.contains("done"))return;document.querySelectorAll(".sticker-btn").forEach(function(x){x.classList.remove("sel");});this.classList.add("sel");selSticker=s.id;if(soundOn)sPop();};g.appendChild(b);});}
+function buildZones(){var g=document.getElementById("dropGrid");g.innerHTML="";zoneData.forEach(function(z){var d=document.createElement("div");d.className="drop-zone";d.id=z.id;d.innerHTML="<div class=\"dz-emoji\">"+z.emoji+"</div><div class=\"dz-label\">"+z.label+"</div><div class=\"dz-hint\">"+z.hint+"</div><div class=\"dz-placed\"></div>";d.onclick=function(){if(!selSticker)return;Object.keys(placements).forEach(function(k){if(placements[k]===selSticker){delete placements[k];var oz=document.getElementById(k);oz.classList.remove("filled","wrong");oz.querySelector(".dz-placed").textContent="";var os=document.getElementById(selSticker);if(os){os.classList.remove("done");}}});placements[z.id]=selSticker;this.classList.add("filled");this.classList.remove("wrong");var st=stickerData.find(function(x){return x.id===selSticker;});this.querySelector(".dz-placed").textContent=st?st.text:"";var se=document.getElementById(selSticker);if(se){se.classList.remove("sel");se.classList.add("done");}selSticker=null;if(soundOn)sPop();};g.appendChild(d);});}
+function checkStickers(){var correct=0;var total=zoneData.length;zoneData.forEach(function(z){var zone=document.getElementById(z.id);if(placements[z.id]===z.correct){zone.classList.add("filled");zone.classList.remove("wrong");correct++;}else if(placements[z.id]){zone.classList.add("wrong");zone.classList.remove("filled");}});var res=document.getElementById("stickerResult");if(correct===total){res.innerHTML="🎉 Perfect! All "+total+" correct! +20 points!";res.style.color="var(--green)";addPts(20);launchConfetti();}else{res.innerHTML="You got "+correct+"/"+total+" correct. Try again!";res.style.color="var(--red)";if(correct>0)addPts(correct*5);}}
+function resetStickers(){Object.keys(placements).forEach(function(k){var z=document.getElementById(k);if(z){z.classList.remove("filled","wrong");z.querySelector(".dz-placed").textContent="";}});placements={};selSticker=null;document.querySelectorAll(".sticker-btn").forEach(function(b){b.classList.remove("sel","done");});document.getElementById("stickerResult").textContent="";}
+var quizData=[
+{q:"What do you say when a friend is hurt?",a:["What's wrong?","Let's play ball!","Hi!"],c:0},
+{q:"How do you ask to use something?",a:["Let me help!","May I use your markers?","Thanks!"],c:1},
+{q:"What do you say before playing ball?",a:["We're done!","It hurts!","Let's play ball!"],c:2},
+{q:"How do you respond when someone helps you?",a:["What's wrong?","Thanks!","Let's take turns."],c:1},
+{q:"What do you say when you finish together?",a:["We're done! We're a good team!","Hi, Johnny.","I like dogs."],c:0},
+{q:"How do you start talking about pets?",a:["May I use your crayons?","I like dogs. How about you?","Let's play ball!"],c:1},
+{q:"Which shows you care?",a:["Let's play ball!","Are you OK?","Thanks!"],c:1},
+{q:"What do you say to a friend at school?",a:["Hi!","It hurts!","We're done!"],c:0}
+];
+var qIdx=0;
+var qAns=[];
+function buildQuiz(){var p=document.getElementById("qprog");p.innerHTML="";quizData.forEach(function(q,i){var d=document.createElement("div");d.className="qdot";if(i===0)d.classList.add("cur");p.appendChild(d);});renderQ();}
+function renderQ(){var c=document.getElementById("qCard");document.getElementById("qResult").classList.remove("show");if(qIdx>=quizData.length){var ok=qAns.filter(function(x){return x;}).length;document.getElementById("qResultText").textContent="You got "+ok+"/"+quizData.length+" correct! Total points: "+totalScore;c.innerHTML="";document.getElementById("qResult").classList.add("show");if(ok===quizData.length)launchConfetti();return;}var q=quizData[qIdx];var h="<div class=\"qcard\"><h3><span class=\"qn\">"+(qIdx+1)+"</span>"+q.q+"</h3><div class=\"qopts\">";q.a.forEach(function(o,i){h+="<div class=\"qopt\" onclick=\"ansQ("+i+")\">"+o+"</div>";});h+="</div></div>";c.innerHTML=h;}
+function ansQ(choice){var q=quizData[qIdx];var opts=document.querySelectorAll(".qopt");opts.forEach(function(o,i){if(i===q.c)o.classList.add("ok");else if(i===choice&&choice!==q.c)o.classList.add("no");else o.classList.add("dis");});var dots=document.querySelectorAll(".qprog .qdot");if(choice===q.c){dots[qIdx].classList.add("ok");qAns.push(true);addPts(5);if(soundOn)sDing();}else{dots[qIdx].classList.add("no");qAns.push(false);if(soundOn)sBuzz();}setTimeout(function(){qIdx++;renderQ();},1200);}
+function resetQuiz(){qIdx=0;qAns=[];buildQuiz();}
+var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈"];
+function createFloaties(){var c=document.getElementById("floaties");for(var i=0;i<12;i++){var s=document.createElement("div");s.className="floaty";s.innerHTML=floatEmojis[i%floatEmojis.length];s.style.left=Math.random()*100+"vw";s.style.fontSize=(Math.random()*14+18)+"px";s.style.animationDuration=(Math.random()*12+14)+"s";s.style.animationDelay=(Math.random()*10)+"s";c.appendChild(s);}}
+document.getElementById("mascot").onclick=function(){speakGB("Hi! I am Owlbert! Let's make friends!",1.4,null);showToast("🦉 Hello from Owlbert!");};
+buildCheckboxes();buildScenarios();buildSpotTeams();buildSpotCat();buildStickers();buildZones();buildQuiz();createFloaties();
+</script>
+</body>
+</html>
