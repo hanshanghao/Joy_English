@@ -570,7 +570,7 @@ var fruits=[
 {word:"banana",plural:"bananas",emoji:"🍌",singular:"a banana"},
 {word:"grape",plural:"grapes",emoji:"🍇",singular:"a grape"}
 ];
-function buildFruitGrid(){var g=document.getElementById("fruitGrid");g.innerHTML="";fruits.forEach(function(f){var d=document.createElement("div");d.className="vocab-card";d.innerHTML="<div class='vc-emoji'>"+f.emoji+"</div><div class='vc-body'><div class='vc-word'>"+f.singular+"</div><div class='vc-plural'>"+f.plural+"</div></div>";d.onclick=function(){speakGB(f.singular+", "+f.plural,1.35,"girl",null);sPop();};g.appendChild(d);});}
+function buildFruitGrid(){var g=document.getElementById("fruitGrid");g.innerHTML="";fruits.forEach(function(f){var d=document.createElement("div");d.className="vocab-card";d.innerHTML="<div class='vc-emoji'>"+f.emoji+"</div><div class='vc-body'><div class='vc-word'>"+f.singular+"</div><div class='vc-plural'>"+f.plural+"</div></div>";d.onclick=function(){speakGB("Singular. "+f.singular,1.35,"girl",function(){setTimeout(function(){speakGB("Plural. "+f.plural,1.35,"girl",null);},400);});sPop();};g.appendChild(d);});}
 
 /* PLACES */
 var places=[
