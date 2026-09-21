@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TJ5 Unit 5 - Review Units 1-4</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f;--paper:#fff7ea}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:var(--pink);top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:var(--yellow);bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:var(--blue);top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-30%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.18),0 12px 20px rgba(0,0,0,.15)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.18),0 4px 8px rgba(0,0,0,.1)}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.btn.red{--c1:#ff8a8a;--c2:#e04040}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.topbar .sound-toggle{margin-left:auto;background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
+.topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.navbar .ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s}
+.navbar .ntab:hover{border-color:var(--purple);background:#f5f0ff}
+.navbar .ntab.on{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(139,92,240,.35)}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(139,92,240,.15),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15));animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(26px,5.5vw,44px);font-weight:900;color:var(--ink);text-shadow:2px 2px 0 rgba(139,92,240,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.hero .desc{margin-top:10px;font-size:clamp(13px,2vw,16px);color:#666;font-weight:600}
+.t-image{width:100%;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;transition:transform .3s;display:block}
+.t-image:hover{transform:scale(1.02)}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-icon{font-size:32px;margin-bottom:4px}
+.team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
+.team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
+.team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s}
+.team-btns button:hover{transform:scale(1.1)}
+.team-btns .tadd{background:linear-gradient(135deg,#7ce577,#37a832)}
+.team-btns .tsub{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+
+.num-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin:16px 0}
+.num-card{background:#fff;border-radius:14px;padding:12px 8px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:all .2s;border:3px solid transparent}
+.num-card:hover{border-color:var(--purple);transform:translateY(-2px)}
+.num-card .num-big{font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--purple)}
+.num-card .num-word{font-size:clamp(11px,1.6vw,14px);font-weight:700;color:#888;margin-top:4px}
+.num-card.done{border-color:var(--green);background:#e8ffe8}
+
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
+.vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s}
+.vocab-card:hover{transform:translateY(-4px)}
+.vocab-card .vc-img{width:100%;height:140px;object-fit:cover}
+.vocab-card .vc-body{padding:14px;text-align:center}
+.vocab-card .vc-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.vocab-card .vc-plural{font-size:clamp(13px,2vw,16px);font-weight:700;color:var(--green);margin-top:4px}
+.vocab-card .vc-emoji{font-size:48px;padding:20px;text-align:center}
+
+.pattern-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--purple)}
+.pattern-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:10px}
+.pattern-card .pattern-text{font-size:clamp(15px,2.4vw,20px);font-weight:700;line-height:1.6;margin-bottom:8px}
+.pattern-card .pattern-text .blank{display:inline-block;min-width:100px;border-bottom:3px dashed var(--purple);margin:0 4px;text-align:center;color:var(--green);font-weight:800}
+.pattern-card .pattern-text .highlight{color:var(--pink);font-weight:900}
+.pattern-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pattern-examples .pe{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid var(--purple);color:var(--purple);padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.pattern-examples .pe:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+
+.quiz-area{max-width:700px;margin:0 auto}
+.qprog{display:flex;gap:6px;margin-bottom:20px;justify-content:center}
+.qprog .qdot{width:14px;height:14px;border-radius:50%;background:#ddd;transition:all .3s}
+.qprog .qdot.cur{background:var(--purple);transform:scale(1.3)}
+.qprog .qdot.ok{background:var(--green)}
+.qprog .qdot.no{background:var(--red)}
+.qcard{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px}
+.qcard h3{font-size:clamp(15px,2.4vw,20px);margin-bottom:14px;line-height:1.5}
+.qcard h3 .qn{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;width:32px;height:32px;border-radius:50%;font-size:14px;margin-right:8px}
+.qopts{display:grid;gap:10px}
+.qopt{padding:14px 18px;border:3px solid #e0d8f0;border-radius:14px;cursor:pointer;font-size:clamp(13px,2vw,16px);transition:all .2s;background:#faf8ff;font-weight:600}
+.qopt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateX(4px)}
+.qopt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;font-weight:800;pointer-events:none}
+.qopt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.qopt.dis{pointer-events:none;opacity:.5}
+.qresult{text-align:center;margin-top:20px;display:none}
+.qresult.show{display:block;animation:fadeup .5s}
+.qresult h2{font-size:clamp(20px,4vw,28px);margin-bottom:8px;color:var(--purple)}
+.qresult p{font-size:clamp(14px,2.2vw,18px);font-weight:600}
+
+.relay-board{background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin:16px 0}
+.relay-board h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:12px;text-align:center}
+.relay-input{display:flex;gap:10px;justify-content:center;margin:12px 0;flex-wrap:wrap}
+.relay-input input{padding:10px 16px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(14px,2.2vw,18px);font-weight:700;width:200px;text-align:center;outline:none;transition:border-color .2s}
+.relay-input input:focus{border-color:var(--purple)}
+.relay-result{text-align:center;font-size:clamp(14px,2.2vw,18px);font-weight:700;margin:10px 0;min-height:28px}
+.relay-timer{text-align:center;font-size:clamp(28px,5vw,40px);font-weight:900;color:var(--purple);margin:10px 0}
+
+.story-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.story-card .story-step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:background .2s}
+.story-card .story-step:hover{background:rgba(139,92,240,.06)}
+.story-card .step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.story-card .step-text{font-size:clamp(13px,2vw,16px);font-weight:600;line-height:1.5}
+.story-card .step-emoji{font-size:28px;flex-shrink:0}
+
+.money-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:16px 0}
+.money-card{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .2s;border:3px solid transparent}
+.money-card:hover{border-color:var(--green);transform:translateY(-2px)}
+.money-card .money-val{font-size:clamp(24px,4vw,32px);font-weight:900;color:var(--green)}
+.money-card .money-label{font-size:clamp(12px,1.8vw,15px);font-weight:700;color:#888}
+
+.spot-cat-card{background:#fff;border-radius:18px;padding:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--purple);margin-bottom:14px;cursor:pointer;transition:all .2s}
+.spot-cat-card:hover{box-shadow:0 8px 20px rgba(0,0,0,.15)}
+.spot-cat-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:4px}
+.spot-cat-card .sp-prompt{font-size:clamp(13px,2vw,16px);color:#888;font-weight:600;margin-bottom:10px;font-style:italic}
+.sp-pills{display:flex;flex-wrap:wrap;gap:8px}
+.sp-pill{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid var(--purple);color:var(--purple);padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.sp-pill:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;pointer-events:none;transition:transform .4s,opacity .4s;opacity:0;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.mascot{position:fixed;bottom:20px;right:20px;z-index:997;font-size:48px;cursor:pointer;transition:transform .3s;line-height:1}
+.mascot:hover{transform:scale(1.15) rotate(-10deg)}
+.fab-wrap{position:fixed;bottom:80px;right:20px;z-index:998;display:flex;flex-direction:column;gap:10px}
+.fab{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .5s,transform .4s,background .2s;opacity:0;pointer-events:none;transform:translateY(96px)}
+.fab.fab-top{background:linear-gradient(135deg,var(--purple),#6c3de0);color:#fff}
+.fab.fab-home{background:linear-gradient(135deg,var(--green),#2f9e2b);color:#fff}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10001;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 0 40px rgba(255,255,255,.2)}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;font-weight:900;transition:transform .2s}
+.lightbox .lb-close:hover{transform:scale(1.2)}
+.confetti-piece{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:10000;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(1080deg);opacity:0}}
+
+.place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin:16px 0}
+.place-card{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .25s;border:3px solid transparent}
+.place-card:hover{transform:translateY(-4px);border-color:var(--purple)}
+.place-card .pc-emoji{font-size:42px;margin-bottom:6px}
+.place-card .pc-name{font-weight:900;font-size:clamp(13px,2vw,16px);color:var(--purple)}
+
+.bathroom-step{display:flex;align-items:center;gap:16px;background:#fff;border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .2s;border-left:6px solid var(--green)}
+.bathroom-step:hover{transform:translateX(4px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.bathroom-step .bs-emoji{font-size:42px;flex-shrink:0}
+.bathroom-step .bs-text h4{font-size:clamp(15px,2.4vw,20px);font-weight:900;color:var(--green);margin-bottom:4px}
+.bathroom-step .bs-text p{font-size:clamp(13px,2vw,16px);font-weight:600;color:#666}
+
+.match-game{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:16px 0}
+.match-card{background:#fff;border-radius:14px;padding:14px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:all .2s;border:3px solid #e0d8f0;min-height:80px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.match-card:hover{border-color:var(--purple);background:#f8f5ff}
+.match-card.selected{border-color:var(--blue);background:#e8f4ff;box-shadow:0 0 0 3px rgba(74,158,224,.3)}
+.match-card.matched{border-color:var(--green);background:#e8ffe8;pointer-events:none}
+.match-card .mc-emoji{font-size:32px}
+.match-card .mc-text{font-size:clamp(12px,1.8vw,15px);font-weight:700;margin-top:4px}
+
+.dollar-input{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.dollar-coin{width:60px;height:60px;border-radius:50%;border:4px solid;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:clamp(14px,2vw,18px);cursor:pointer;transition:all .2s}
+.dollar-coin.c1{border-color:#4cc948;color:#4cc948;background:#e8ffe8}
+.dollar-coin.c5{border-color:#4a9ee0;color:#4a9ee0;background:#e8f4ff}
+.dollar-coin.c10{border-color:#f5822b;color:#f5822b;background:#fff3e8}
+.dollar-coin:hover{transform:scale(1.1)}
+.dollar-coin.selected{transform:scale(1.15);box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.dollar-total{text-align:center;font-size:clamp(18px,3vw,24px);font-weight:900;color:var(--green);margin:10px 0}
+
+@media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.num-grid{grid-template-columns:repeat(5,1fr)}.vocab-grid{grid-template-columns:repeat(2,1fr)}.place-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div id="floaties"></div>
+<div class="topbar">
+<div class="now-chip">📚 TJ5 · Unit 5 · Review Units 1–4</div>
+<button class="sound-toggle" id="soundBtn" title="Toggle Sound">🔊</button>
+</div>
+<div class="navbar" id="navBar">
+<button class="ntab on" onclick="showTab(0)">📖 Lesson Plan</button>
+<button class="ntab" onclick="showTab(1)">🔢 Warm-up</button>
+<button class="ntab" onclick="showTab(2)">📚 Vocabulary</button>
+<button class="ntab" onclick="showTab(3)">💬 Patterns</button>
+<button class="ntab" onclick="showTab(4)">🃏 Lucky Cards</button>
+<button class="ntab" onclick="showTab(5)">⚡ Who's Faster?</button>
+<button class="ntab" onclick="showTab(6)">🪙 Daily English</button>
+<button class="ntab" onclick="showTab(7)">🚻 Tales of Values</button>
+<button class="ntab" onclick="showTab(8)">🎯 Spotlight</button>
+<button class="ntab" onclick="showTab(9)">📝 Quiz</button>
+</div>
+
+<!-- TAB 0: Lesson Plan -->
+<div class="tabpan on" id="tp0">
+<div class="hero">
+<span class="big-emoji">📚</span>
+<h1>TJ5 Unit 5 - Review Units 1-4</h1>
+<span class="sub">Warm-up + Vocabulary + Patterns + Tales of Values</span>
+</div>
+<section>
+<div class="shead"><span class="ic">📋</span><h2>Today's Lesson Plan</h2><span class="badge">OVERVIEW</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 This unit reviews Units 1-4. The objective is to review the parts students have difficulties with. Make sure students have completed Unit 1-4 memorise & say before class.
+</div>
+<div class="story-card">
+<div class="story-step" onclick="speakGB('Warm-up. Writing Relay. Review spelling and writing one through thirty.',1.05,'boy',null)">
+<div class="step-num">1</div>
+<div class="step-text"><strong>Warm-up (5 min)</strong><br>Writing Relay - Numbers 1-30 spelling & writing game</div>
+<div class="step-emoji">🔢</div>
+</div>
+<div class="story-step" onclick="speakGB('Review Vocabulary and Patterns. Lucky Cards and Who is Faster activity.',1.4,'girl',null)">
+<div class="step-num">2</div>
+<div class="step-text"><strong>Review Vocabulary + Patterns (15 min)</strong><br>Lucky Cards, Who's Faster? - Units 1-4 vocabulary & sentence patterns</div>
+<div class="step-emoji">📚</div>
+</div>
+<div class="story-step" onclick="speakGB('Daily English. Learn plus and minus. Students only need to listen, say, and use them.',1.05,'boy',null)">
+<div class="step-num">3</div>
+<div class="step-text"><strong>Daily English (5 min)</strong><br>Plus & Minus - using $1, $5, $10 coins</div>
+<div class="step-emoji">🪙</div>
+</div>
+<div class="story-step" onclick="speakGB('Tales of Values. Be a good kid. Learn bathroom etiquette.',1.4,'girl',null)">
+<div class="step-num">4</div>
+<div class="step-text"><strong>Tales of Values (10 min)</strong><br>Be a Good Kid - Bathroom etiquette rules</div>
+<div class="step-emoji">🚻</div>
+</div>
+<div class="story-step" onclick="speakGB('Spotlight Game and Quiz. Review everything we learned today.',1.05,'boy',null)">
+<div class="step-num">5</div>
+<div class="step-text"><strong>Spotlight + Quiz (10 min)</strong><br>Team game and review quiz</div>
+<div class="step-emoji">🎯</div>
+</div>
+</div>
+</section>
+<section>
+<div class="shead"><span class="ic">🎯</span><h2>Today's Objectives</h2></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+<div class="tip">✅ Review spelling & writing numbers 1-30</div>
+<div class="tip">✅ Review vocabulary: fruits, places, colours</div>
+<div class="tip">✅ Review sentence patterns from Units 1-4</div>
+<div class="tip">✅ Learn Daily English: plus & minus</div>
+<div class="tip">✅ Tales of Values: Bathroom etiquette</div>
+<div class="tip">✅ Dragon Boat Festival - zongzi & sachets</div>
+</div>
+</section>
+</div>
+
+<!-- TAB 1: Warm-up Number Relay -->
+<div class="tabpan" id="tp1">
+<section>
+<div class="shead"><span class="ic">🔢</span><h2>Writing Relay</h2><span class="badge">1-30</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click each number to hear it spoken. Practice spelling! Then try the Writing Relay game below.
+</div>
+<div class="num-grid" id="numGrid"></div>
+</section>
+<section>
+<div class="shead"><span class="ic">🏁</span><h2>Writing Relay Game</h2><span class="badge">TEAM GAME</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Team A writes first, then Team B. Type the word for the number shown. First team to finish all 30 wins!
+</div>
+<div class="team-grid" id="relayTeams"></div>
+<div class="relay-board">
+<h3 id="relayPrompt">Press Start to begin!</h3>
+<div class="relay-timer" id="relayTimer">--</div>
+<div class="relay-input" id="relayInput" style="display:none">
+<input type="text" id="relayAnswer" placeholder="Type the word..." autocomplete="off">
+<button class="btn green" onclick="checkRelay()">✅ Check</button>
+</div>
+<div class="relay-result" id="relayResult"></div>
+<div style="text-align:center;margin-top:12px">
+<button class="btn purple" onclick="startRelay()">▶ Start Relay</button>
+<button class="btn orange" onclick="resetRelay()">🔄 Reset</button>
+</div>
+</div>
+</section>
+</div>
+
+<!-- TAB 2: Vocabulary -->
+<div class="tabpan" id="tp2">
+<section>
+<div class="shead"><span class="ic">🍎</span><h2>Fruits - Singular & Plural</h2><span class="badge">VOCAB</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click any card to hear the word! Notice how the spelling changes for plural.
+</div>
+<img class="t-image" src="u23.png" alt="Fruits Vocabulary" onclick="openLb(this.src)" style="margin-bottom:16px">
+<div class="vocab-grid" id="fruitGrid"></div>
+</section>
+<section>
+<div class="shead"><span class="ic">🏙️</span><h2>Places</h2><span class="badge">VOCAB</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click any place card to hear its name and what you can do there!
+</div>
+<div class="place-grid" id="placeGrid"></div>
+</section>
+<section>
+<div class="shead"><span class="ic">🧩</span><h2>Match the Place!</h2><span class="badge">GAME</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click a place name, then click the matching picture. Match all 8 to win!
+</div>
+<div id="matchResult" style="text-align:center;margin-bottom:10px;font-size:1.1rem;font-weight:800"></div>
+<div class="match-game" id="matchGrid"></div>
+<div style="text-align:center;margin-top:14px">
+<button class="btn green" onclick="checkMatch()">✅ Check</button>
+<button class="btn orange" onclick="resetMatch()">🔄 Reset</button>
+</div>
+</section>
+</div>
+
+<!-- TAB 3: Patterns -->
+<div class="tabpan" id="tp3">
+<section>
+<div class="shead"><span class="ic">💬</span><h2>Sentence Patterns</h2><span class="badge">UNITS 1-4</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click any pattern to hear it spoken. Practice making your own sentences!
+</div>
+<div id="patternCards"></div>
+</section>
+</div>
+
+<!-- TAB 4: Lucky Cards -->
+<div class="tabpan" id="tp4">
+<section>
+<div class="shead"><span class="ic">🃏</span><h2>Lucky Cards</h2><span class="badge">VOCAB REVIEW</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click a card to flip it and reveal the vocabulary. Say the word aloud! Cards with 🍀 are Lucky Cards - get bonus points!
+</div>
+<div class="team-grid" id="luckyTeams"></div>
+<div style="text-align:center;margin:16px 0">
+<button class="btn purple" onclick="flipLuckyCard()">🃏 Draw Card</button>
+<button class="btn orange" onclick="resetLucky()">🔄 New Round</button>
+</div>
+<div id="luckyCard" style="text-align:center;margin:16px 0;min-height:120px"></div>
+<div id="luckyResult" style="text-align:center;font-size:1.1rem;font-weight:800"></div>
+</section>
+</div>
+
+<!-- TAB 5: Who's Faster -->
+<div class="tabpan" id="tp5">
+<section>
+<div class="shead"><span class="ic">⚡</span><h2>Who's Faster?</h2><span class="badge">pp. 13-14</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Team A vs Team B! Click Start to show a sentence. Teams race to find the correct word card. First to click gets the point!
+</div>
+<div class="team-grid" id="fasterTeams"></div>
+<div style="text-align:center;margin:16px 0">
+<button class="btn purple" onclick="startFaster()">▶ Start Round</button>
+<button class="btn orange" onclick="resetFaster()">🔄 Reset</button>
+</div>
+<div id="fasterSentence" style="text-align:center;font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin:16px 0;min-height:40px"></div>
+<div class="match-game" id="fasterCards" style="display:none"></div>
+<div id="fasterResult" style="text-align:center;font-size:1.1rem;font-weight:800;min-height:30px"></div>
+</section>
+</div>
+
+<!-- TAB 6: Daily English -->
+<div class="tabpan" id="tp6">
+<section>
+<div class="shead"><span class="ic">🪙</span><h2>Daily English - Plus & Minus</h2><span class="badge">MONEY</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Learn to count money! Click coins to add them up. Use $1, $5, and $10 coins.
+</div>
+<img class="t-image" src="9.png" alt="How Much Is It?" onclick="openLb(this.src)" style="margin-bottom:16px">
+<div class="story-card">
+<div class="story-step" onclick="speakGB('Plus means to add. Five plus five equals ten.',1.05,'boy',null)">
+<div class="step-num" style="background:linear-gradient(135deg,var(--green),#2f9e2b)">+</div>
+<div class="step-text"><strong>Plus (+)</strong><br>To add numbers together. $5 + $5 = $10</div>
+<div class="step-emoji">➕</div>
+</div>
+<div class="story-step" onclick="speakGB('Minus means to take away. Ten minus five equals five.',1.4,'girl',null)">
+<div class="step-num" style="background:linear-gradient(135deg,var(--red),#c0392b)">-</div>
+<div class="step-text"><strong>Minus (-)</strong><br>To take away numbers. $10 - $5 = $5</div>
+<div class="step-emoji">➖</div>
+</div>
+</div>
+<h3 style="text-align:center;font-weight:900;color:var(--purple);margin:16px 0">🎮 Money Calculator</h3>
+<div class="money-grid" id="moneyGrid"></div>
+<div class="dollar-input" id="dollarInput"></div>
+<div class="dollar-total" id="dollarTotal">Total: $0</div>
+<div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+<button class="btn green" onclick="calcMoney('+')">➕ Plus</button>
+<button class="btn red" onclick="calcMoney('-')">➖ Minus</button>
+<button class="btn orange" onclick="resetMoney()">🔄 Reset</button>
+</div>
+<div class="relay-result" id="moneyResult" style="margin-top:10px"></div>
+</section>
+</div>
+
+<!-- TAB 7: Tales of Values -->
+<div class="tabpan" id="tp7">
+<section>
+<div class="shead"><span class="ic">🚻</span><h2>Be a Good Kid!</h2><span class="badge">TALES OF VALUES</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click each step to hear the instruction. Learn the proper bathroom etiquette!
+</div>
+<div class="story-card" style="margin-bottom:16px">
+<div class="story-step" onclick="speakGB('When you need to go to the bathroom, raise your hand and ask the teacher. May I go to the bathroom?',1.4,'girl',null)">
+<div class="step-num">1</div>
+<div class="step-text"><strong>Raise your hand</strong><br>Say: "May I go to the bathroom?"</div>
+<div class="step-emoji">🙋</div>
+</div>
+<div class="story-step" onclick="speakGB('Before you open the door, you have to knock on the door. Be a good kid. Knock on the door.',1.05,'boy',null)">
+<div class="step-num">2</div>
+<div class="step-text"><strong>Knock on the door</strong><br>Before you open the door, always knock first!</div>
+<div class="step-emoji"> knocking</div>
+</div>
+<div class="story-step" onclick="speakGB('After using the toilet, you have to flush the toilet. Be a good kid. Flush the toilet.',1.4,'girl',null)">
+<div class="step-num">3</div>
+<div class="step-text"><strong>Flush the toilet</strong><br>After using the toilet, always flush!</div>
+<div class="step-emoji">🚽</div>
+</div>
+<div class="story-step" onclick="speakGB('After flushing the toilet, you have to wash your hands with soap. Be a good kid. Use the soap.',1.05,'boy',null)">
+<div class="step-num">4</div>
+<div class="step-text"><strong>Wash your hands with soap</strong><br>Use soap and wash your hands properly!</div>
+<div class="step-emoji">🧼</div>
+</div>
+<div class="story-step" onclick="speakGB('Be a good kid! Knock, flush, and wash your hands every time!',1.4,'girl',null)">
+<div class="step-num">5</div>
+<div class="step-text"><strong>Be a Good Kid!</strong><br>Remember all three steps every time!</div>
+<div class="step-emoji">⭐</div>
+</div>
+</div>
+</section>
+<section>
+<div class="shead"><span class="ic">🎭</span><h2>Practice Role Play</h2><span class="badge">ACT IT OUT</h2></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click each dialogue to practice. Students line up and practice each step!
+</div>
+<div class="scenario-grid" style="grid-template-columns:1fr">
+<div style="background:#fff;border-radius:18px;padding:16px;box-shadow:0 5px 14px rgba(0,0,0,.08)">
+<div class="sc-dialogue girl" onclick="speakGB('May I go to the bathroom?',1.4,'girl',null)" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;cursor:pointer;margin-bottom:8px">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#e03080);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0">👩</div>
+<div style="background:#f5f0ff;border-left:4px solid var(--pink);border-radius:14px;padding:10px 14px;flex:1;font-weight:600"><strong>Student:</strong> May I go to the bathroom?</div>
+</div>
+<div class="sc-dialogue boy" onclick="speakGB('Yes, you may.',1.05,'boy',null)" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;cursor:pointer;margin-bottom:8px">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#2a7ab8);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0">👦</div>
+<div style="background:#e8f4ff;border-right:4px solid var(--blue);border-radius:14px;padding:10px 14px;flex:1;font-weight:600;text-align:right"><strong>Teacher:</strong> Yes, you may.</div>
+</div>
+<div class="sc-dialogue girl" onclick="speakGB('Be a good kid. Knock on the door.',1.4,'girl',null)" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;cursor:pointer;margin-bottom:8px">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--green),#34a832);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0">🚶</div>
+<div style="background:#e8ffe8;border-left:4px solid var(--green);border-radius:14px;padding:10px 14px;flex:1;font-weight:600"><strong>Narrator:</strong> Be a good kid. Knock on the door.</div>
+</div>
+<div class="sc-dialogue boy" onclick="speakGB('Be a good kid. Flush the toilet.',1.05,'boy',null)" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;cursor:pointer;margin-bottom:8px">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#2a7ab8);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0">🚽</div>
+<div style="background:#e8f4ff;border-right:4px solid var(--blue);border-radius:14px;padding:10px 14px;flex:1;font-weight:600;text-align:right"><strong>Narrator:</strong> Be a good kid. Flush the toilet.</div>
+</div>
+<div class="sc-dialogue girl" onclick="speakGB('Be a good kid. Wash your hands with soap.',1.4,'girl',null)" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:14px;cursor:pointer">
+<div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#e03080);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;flex-shrink:0">🧼</div>
+<div style="background:#f5f0ff;border-left:4px solid var(--pink);border-radius:14px;padding:10px 14px;flex:1;font-weight:600"><strong>Narrator:</strong> Be a good kid. Wash your hands with soap.</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+
+<!-- TAB 8: Spotlight -->
+<div class="tabpan" id="tp8">
+<section>
+<div class="shead"><span class="ic">🎯</span><h2>Spotlight Team Game</h2><span class="badge">REVIEW</span></div>
+<div class="tip" style="margin-bottom:16px">
+💡 Click a category. Teams take turns saying different phrases. First team to run out of ideas loses a point!
+</div>
+<div class="team-grid" id="spotTeams"></div>
+<div id="spotCat"></div>
+</section>
+</div>
+
+<!-- TAB 9: Quiz -->
+<div class="tabpan" id="tp9">
+<section>
+<div class="shead"><span class="ic">📝</span><h2>Review Quiz</h2><span class="badge">+5 PTS</span></div>
+<div class="quiz-area">
+<div class="qprog" id="qprog"></div>
+<div id="qCard"></div>
+<div class="qresult" id="qResult"><h2>🎉 Quiz Complete!</h2><p id="qResultText"></p>
+<button class="btn pink" onclick="resetQuiz()" style="margin-top:12px">🔄 Try Again</button>
+</div>
+</div>
+</section>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" title="Hello from Owlbert!">🦉</div>
+<div class="fab-wrap">
+<button class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆</button>
+<a class="fab fab-home" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+</div>
+<div class="lightbox" id="lightbox">
+<button class="lb-close" id="lbClose">&times;</button>
+<img id="lbImg" src="" alt="Textbook page">
+</div>
+
+<script>
+var soundOn=true;
+var actx=null;
+function audio(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx;}
+function tone(f,dur,type,vol,delay){var c=audio();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.value=f;var t=c.currentTime+(delay||0);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+0.05);}
+function sPop(){tone(500,0.1,"square",0.08);tone(760,0.09,"square",0.08,0.06);}
+function sDing(){tone(660,0.12,"triangle",0.16);tone(880,0.16,"triangle",0.16,0.1);tone(1320,0.25,"triangle",0.14,0.2);}
+function sBuzz(){tone(180,0.18,"sawtooth",0.11);tone(140,0.22,"sawtooth",0.11,0.16);}
+function sWin(){tone(523,0.12,"sine",0.14);tone(659,0.12,"sine",0.14,0.1);tone(784,0.12,"sine",0.14,0.2);tone(1047,0.2,"sine",0.16,0.3);}
+var cachedVoices=[];
+if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();};}
+function speakGB(text,pitch,gender,onEnd){var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();var voice;if(gender==="boy"){voice=v.find(function(x){return x.lang==="en-GB"&&(x.name.includes("Google UK English Male")||x.name.includes("Male")||x.name.includes("Daniel"));})||v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.name.includes("Male")&&x.lang.startsWith("en");})||v.find(function(x){return x.lang.startsWith("en");});}else{voice=v.find(function(x){return x.lang==="en-GB"&&(x.name.includes("Google UK English Female")||x.name.includes("Female")||x.name.includes("Karen")||x.name.includes("Samantha"));})||v.find(function(x){return x.lang==="en-GB"&&!x.name.includes("Male");})||v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.name.includes("Female")&&x.lang.startsWith("en");})||v.find(function(x){return x.lang.startsWith("en");});}var u=new SpeechSynthesisUtterance(text);u.voice=voice||null;u.lang="en-GB";u.rate=0.72;u.pitch=pitch;u.volume=1;u.onend=onEnd;speechSynthesis.speak(u);}
+function speakLine(text){speechSynthesis.cancel();speakGB(text,1.35,"girl",null);}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2000);}
+function launchConfetti(){var emojis=["🎉","⭐","✨","🎊","💖","🌈","🎈","💪"];for(var i=0;i<50;i++){var el=document.createElement("div");el.className="confetti-piece";el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];el.style.cssText="left:"+Math.random()*100+"vw;font-size:"+(Math.random()*16+10)+"px;animation-duration:"+(Math.random()*2+2)+"s;animation-delay:"+(Math.random()*1.5)+"s;";document.body.appendChild(el);setTimeout(function(e){e.remove();}.bind(null,el),5000);}}
+var totalScore=0;
+function addPts(pts){totalScore+=pts;showToast("+"+pts+" points! Total: "+totalScore);if(soundOn)sDing();}
+var curTab=0;
+function showTab(idx){curTab=idx;var pans=document.querySelectorAll(".tabpan");var tabs=document.querySelectorAll(".navbar .ntab");pans.forEach(function(p,i){p.classList.toggle("on",i===idx);});tabs.forEach(function(t,i){t.classList.toggle("on",i===idx);});}
+document.getElementById("soundBtn").onclick=function(){soundOn=!soundOn;this.textContent=soundOn?"🔊":"🔇";showToast(soundOn?"Sound ON":"Sound OFF");};
+function openLb(src){var lb=document.getElementById("lightbox");document.getElementById("lbImg").src=src;lb.classList.add("show");sPop();}
+document.getElementById("lbClose").onclick=function(){document.getElementById("lightbox").classList.remove("show");};
+document.getElementById("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show");};
+var fabDimT=null;var fabHasBeenDim=false;
+function fabDim(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity=".3";});fabHasBeenDim=true;}
+function fabBright(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity="1";});}
+function fabResetDim(){fabBright();clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);}
+function fabUpdate(){var show=window.scrollY>160;document.querySelectorAll(".fab").forEach(function(f){if(show){f.style.pointerEvents="auto";f.style.transform="translateY(0)";if(!fabHasBeenDim)f.style.opacity="1";}else{f.style.opacity="0";f.style.pointerEvents="none";f.style.transform="translateY(96px)";fabHasBeenDim=false;clearTimeout(fabDimT);}});if(show&&!fabHasBeenDim)fabResetDim();}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+document.querySelectorAll(".fab").forEach(function(f){f.addEventListener("mouseenter",function(){clearTimeout(fabDimT);fabBright();});f.addEventListener("mouseleave",function(){clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);});f.addEventListener("touchstart",function(){fabResetDim();});f.addEventListener("click",function(){fabResetDim();});});
+
+/* NUMBERS 1-30 */
+var numbers=[
+{n:1,w:"one"},{n:2,w:"two"},{n:3,w:"three"},{n:4,w:"four"},{n:5,w:"five"},
+{n:6,w:"six"},{n:7,w:"seven"},{n:8,w:"eight"},{n:9,w:"nine"},{n:10,w:"ten"},
+{n:11,w:"eleven"},{n:12,w:"twelve"},{n:13,w:"thirteen"},{n:14,w:"fourteen"},{n:15,w:"fifteen"},
+{n:16,w:"sixteen"},{n:17,w:"seventeen"},{n:18,w:"eighteen"},{n:19,w:"nineteen"},{n:20,w:"twenty"},
+{n:21,w:"twenty-one"},{n:22,w:"twenty-two"},{n:23,w:"twenty-three"},{n:24,w:"twenty-four"},{n:25,w:"twenty-five"},
+{n:26,w:"twenty-six"},{n:27,w:"twenty-seven"},{n:28,w:"twenty-eight"},{n:29,w:"twenty-nine"},{n:30,w:"thirty"}
+];
+function buildNumGrid(){var g=document.getElementById("numGrid");g.innerHTML="";numbers.forEach(function(n){var d=document.createElement("div");d.className="num-card";d.innerHTML="<div class='num-big'>"+n.n+"</div><div class='num-word'>"+n.w+"</div>";d.onclick=function(){speakGB(n.n.toString()+". "+n.w,1.35,"girl",null);this.classList.add("done");sPop();};g.appendChild(d);});}
+
+/* RELAY */
+var relayIdx=0;var relayTeam="a";var relayActive=false;
+function buildRelayTeams(){var g=document.getElementById("relayTeams");g.innerHTML="";var ts=[{id:"a",name:"Team A",emoji:"🔵",cls:"ta",score:0},{id:"b",name:"Team B",emoji:"🟠",cls:"tb",score:0}];ts.forEach(function(t){var d=document.createElement("div");d.className="team-box "+t.cls;d.innerHTML="<div class='team-icon'>"+t.emoji+"</div><div class='team-name'>"+t.name+"</div><div class='team-score' id='relay"+t.id.toUpperCase()+"Score'>"+t.score+"</div>";g.appendChild(d);});}
+var relayScores={a:0,b:0};
+function startRelay(){relayIdx=0;relayTeam="a";relayActive=true;relayScores={a:0,b:0};document.getElementById("relayA Score").textContent="0";document.getElementById("relayB Score").textContent="0";showRelayNum();}
+function showRelayNum(){if(relayIdx>=30){relayActive=false;var winner=relayScores.a>relayScores.b?"Team A wins!":relayScores.b>relayScores.a?"Team B wins!":"It's a tie!";document.getElementById("relayPrompt").textContent="🏁 Relay Complete! "+winner;document.getElementById("relayInput").style.display="none";document.getElementById("relayResult").textContent="Team A: "+relayScores.a+" | Team B: "+relayScores.b;sWin();launchConfetti();return;}var n=numbers[relayIdx];document.getElementById("relayPrompt").innerHTML="Team "+relayTeam.toUpperCase()+": Write <strong>"+n.n+"</strong> in words";document.getElementById("relayTimer").textContent=n.n;document.getElementById("relayInput").style.display="flex";document.getElementById("relayAnswer").value="";document.getElementById("relayAnswer").focus();document.getElementById("relayResult").textContent="";}
+function checkRelay(){if(!relayActive)return;var n=numbers[relayIdx];var ans=document.getElementById("relayAnswer").value.trim().toLowerCase();var correct=n.w.toLowerCase();if(ans===correct){relayScores[relayTeam]++;document.getElementById("relay"+relayTeam.toUpperCase()+"Score").textContent=relayScores[relayTeam];document.getElementById("relayResult").innerHTML="<span style='color:var(--green)'>✅ Correct! "+n.w+"</span>";sDing();}else{document.getElementById("relayResult").innerHTML="<span style='color:var(--red)'>❌ It's '"+n.w+"'</span>";sBuzz();}relayTeam=relayTeam==="a"?"b":"a";relayIdx++;setTimeout(showRelayNum,1200);}
+function resetRelay(){relayIdx=0;relayTeam="a";relayActive=false;relayScores={a:0,b:0};document.getElementById("relayPrompt").textContent="Press Start to begin!";document.getElementById("relayTimer").textContent="--";document.getElementById("relayInput").style.display="none";document.getElementById("relayResult").textContent="";document.getElementById("relayAScore").textContent="0";document.getElementById("relayBScore").textContent="0";}
+
+/* FRUITS */
+var fruits=[
+{word:"pear",plural:"pears",emoji:"🍐",singular:"a pear"},
+{word:"strawberry",plural:"strawberries",emoji:"🍓",singular:"a strawberry"},
+{word:"tomato",plural:"tomatoes",emoji:"🍅",singular:"a tomato"},
+{word:"peach",plural:"peaches",emoji:"🍑",singular:"a peach"},
+{word:"watermelon",plural:"watermelons",emoji:"🍉",singular:"a watermelon"},
+{word:"apple",plural:"apples",emoji:"🍎",singular:"an apple"},
+{word:"banana",plural:"bananas",emoji:"🍌",singular:"a banana"},
+{word:"grape",plural:"grapes",emoji:"🍇",singular:"a grape"}
+];
+function buildFruitGrid(){var g=document.getElementById("fruitGrid");g.innerHTML="";fruits.forEach(function(f){var d=document.createElement("div");d.className="vocab-card";d.innerHTML="<div class='vc-emoji'>"+f.emoji+"</div><div class='vc-body'><div class='vc-word'>"+f.singular+"</div><div class='vc-plural'>"+f.plural+"</div></div>";d.onclick=function(){speakGB(f.singular+", "+f.plural,1.35,"girl",null);sPop();};g.appendChild(d);});}
+
+/* PLACES */
+var places=[
+{name:"supermarket",emoji:"🛒",things:"food, fruits, vegetables",canDo:"buy food, shop for groceries"},
+{name:"library",emoji:"📚",things:"books, magazines, computers",canDo:"read books, borrow books"},
+{name:"market",emoji:"🥕",things:"fresh food, vegetables, fruits",canDo:"buy fresh food, shop for deals"},
+{name:"office",emoji:"💼",things:"desks, computers, chairs",canDo:"work, type on computer"},
+{name:"museum",emoji:"🦕",things:"dinosaurs, statues, paintings",canDo:"listen to guides, look at exhibits"},
+{name:"zoo",emoji:"🐼",things:"lions, monkeys, pandas",canDo:"watch animals, take a train"},
+{name:"movie theater",emoji:"🎬",things:"big screen, popcorn, seats",canDo:"watch movies, eat popcorn"},
+{name:"concert hall",emoji:"🎵",things:"musicians, stage, lights",canDo:"listen to music, clap hands"},
+{name:"gym",emoji:"🏃",things:"exercise machines, trainers",canDo:"exercise, join classes"},
+{name:"amusement park",emoji:"🎡",things:"rides, shows, food stands",canDo:"go on rides, watch shows"},
+{name:"bookstore",emoji:"📖",things:"books, storybooks, comics",canDo:"read, buy books"},
+{name:"department store",emoji:"👔",things:"clothes, toys, shoes",canDo:"shop, buy, try on clothes"}
+];
+function buildPlaceGrid(){var g=document.getElementById("placeGrid");g.innerHTML="";places.forEach(function(p){var d=document.createElement("div");d.className="place-card";d.innerHTML="<div class='pc-emoji'>"+p.emoji+"</div><div class='pc-name'>"+p.name+"</div><div style='font-size:12px;color:#888;margin-top:4px'>"+p.things+"</div>";d.onclick=function(){speakGB(p.name+". There are many "+p.things+" in the "+p.name+". I can "+p.canDo+" at the "+p.name+".",1.35,"girl",null);sPop();};g.appendChild(d);});}
+
+/* MATCH GAME */
+var matchPairs=[
+{id:"m1",place:"supermarket",emoji:"🛒"},
+{id:"m2",place:"library",emoji:"📚"},
+{id:"m3",place:"market",emoji:"🥕"},
+{id:"m4",place:"office",emoji:"💼"},
+{id:"m5",place:"museum",emoji:"🦕"},
+{id:"m6",place:"zoo",emoji:"🐼"}
+];
+var matchSel=null;var matchCorrect=0;
+function buildMatch(){var g=document.getElementById("matchGrid");g.innerHTML="";var cards=[];matchPairs.forEach(function(p){cards.push({type:"text",text:p.place,id:p.id});cards.push({type:"emoji",text:p.emoji,id:p.id});});cards.sort(function(){return Math.random()-0.5;});cards.forEach(function(c){var d=document.createElement("div");d.className="match-card";d.dataset.pairId=c.id;d.dataset.type=c.type;if(c.type==="text"){d.innerHTML="<div class='mc-text'>"+c.text+"</div>";}else{d.innerHTML="<div class='mc-emoji'>"+c.text+"</div>";}d.onclick=function(){if(this.classList.contains("matched"))return;document.querySelectorAll(".match-card.selected").forEach(function(x){if(x!==d)x.classList.remove("selected");});if(matchSel&&matchSel!==this){if(matchSel.dataset.pairId===this.dataset.pairId&&matchSel.dataset.type!==this.dataset.type){matchSel.classList.add("matched");this.classList.add("matched");matchCorrect++;sPop();if(matchCorrect===matchPairs.length){sWin();launchConfetti();addPts(10);document.getElementById("matchResult").innerHTML="🎉 All matched! +10 points!";}}else{sBuzz();}matchSel.classList.remove("selected");matchSel=null;}else{this.classList.add("selected");matchSel=this;}};g.appendChild(d);});}
+function checkMatch(){}
+function resetMatch(){matchSel=null;matchCorrect=0;document.getElementById("matchResult").textContent="";buildMatch();}
+
+/* PATTERNS */
+var patterns=[
+{title:"There are many ___",highlight:["many"],examples:["There are many strawberries.","There are many pears.","There are many books in the library.","There are many students."]},
+{title:"I love ___",highlight:["love"],examples:["I love strawberries!","I love pears, too!","I love dogs!","I love ice cream!"]},
+{title:"How much is it?",highlight:["How much"],examples:["How much is it? It's twenty-nine dollars.","How much is the birthday card? It's twenty-four dollars.","How much are the strawberries? They're twelve dollars."]},
+{title:"Where are you going?",highlight:["Where"],examples:["Where are you going? I'm going to the market.","Where are you going? I'm going to the bookstore.","Where are you going? I'm going to the library."]},
+{title:"What colour are ___?",highlight:["What colour"],examples:["What colour are they? They're red.","What colour is it? It's blue.","What colour are the pears? They're yellow."]},
+{title:"Is he/she a ___?",highlight:["Is"],examples:["Is he a teacher? Yes, he is.","Is she a student? Yes, she is.","Is he a doctor? No, he isn't."]},
+{title:"Let's make ___!",highlight:["Let's"],examples:["Let's make strawberry milk!","Let's make watermelon juice!","Let's make a cake!"]}
+];
+function buildPatterns(){var g=document.getElementById("patternCards");g.innerHTML="";patterns.forEach(function(p){var d=document.createElement("div");d.className="pattern-card";var h="<h3>"+p.title+"</h3><div class='pattern-examples'>";p.examples.forEach(function(e){var escaped=e.replace(/'/g,"\\'");h+="<span class='pe' onclick=\"speakGB('"+escaped+"',1.35,'girl',null);sPop()\" title='Click to hear'>"+e+"</span>";});h+="</div>";d.innerHTML=h;g.appendChild(d);});}
+
+/* LUCKY CARDS */
+var luckyVocab=[
+{word:"strawberries",emoji:"🍓"},{word:"pears",emoji:"🍐"},{word:"tomatoes",emoji:"🍅"},{word:"peaches",emoji:"🍑"},
+{word:"supermarket",emoji:"🛒"},{word:"library",emoji:"📚"},{word:"market",emoji:"🥕"},{word:"office",emoji:"💼"},
+{word:"How much",emoji:"💲"},{word:"Where are you going",emoji:"🚶"},{word:"What colour",emoji:"🎨"},{word:"Is he a teacher",emoji:"👨‍🏫"},
+{word:"twenty-nine dollars",emoji:"💰"},{word:"twenty-four dollars",emoji:"💳"},{word:"strawberry milk",emoji:"🥛"},{word:"watermelon juice",emoji:"🧃"}
+];
+var luckyIdx=0;var luckyScores={a:0,b:0};var luckyCurrent="a";
+function buildLuckyTeams(){var g=document.getElementById("luckyTeams");g.innerHTML="";var ts=[{id:"a",name:"Team A",emoji:"🔵",cls:"ta"},{id:"b",name:"Team B",emoji:"🟠",cls:"tb"}];ts.forEach(function(t){var d=document.createElement("div");d.className="team-box "+t.cls;d.innerHTML="<div class='team-icon'>"+t.emoji+"</div><div class='team-name'>"+t.name+"</div><div class='team-score' id='lucky"+t.id.toUpperCase()+"Score'>"+luckyScores[t.id]+"</div>";g.appendChild(d);});}
+function flipLuckyCard(){if(luckyIdx>=luckyVocab.length){document.getElementById("luckyCard").innerHTML="<h3 style='color:var(--green)'>🎉 All cards drawn!</h3>";document.getElementById("luckyResult").textContent="Team A: "+luckyScores.a+" | Team B: "+luckyScores.b;sWin();launchConfetti();return;}var v=luckyVocab[luckyIdx];var isLucky=Math.random()<0.25;var pts=isLucky?3:1;var card=document.createElement("div");card.style.cssText="background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:4px solid var(--purple);border-radius:20px;padding:24px;display:inline-block;animation:fadeup .4s";card.innerHTML="<div style='font-size:64px;margin-bottom:8px'>"+v.emoji+"</div><div style='font-size:clamp(18px,3vw,24px);font-weight:900;color:var(--purple)'>"+v.word+"</div>"+(isLucky?"<div style='font-size:20px;margin-top:8px'>🍀 Lucky! +3 points!</div>":"<div style='font-size:14px;color:#888;margin-top:4px'>+1 point</div>");document.getElementById("luckyCard").innerHTML="";document.getElementById("luckyCard").appendChild(card);luckyScores[luckyCurrent]+=pts;document.getElementById("lucky"+luckyCurrent.toUpperCase()+"Score").textContent=luckyScores[luckyCurrent];document.getElementById("luckyResult").textContent="Team "+luckyCurrent.toUpperCase()+" gets "+pts+" point"+(pts>1?"s":"")+"! (Click Draw Card for next)";speakGB(v.word,1.35,"girl",null);luckyCurrent=luckyCurrent==="a"?"b":"a";luckyIdx++;sPop();}
+function resetLucky(){luckyIdx=0;luckyScores={a:0,b:0};luckyCurrent="a";document.getElementById("luckyCard").innerHTML="";document.getElementById("luckyResult").textContent="";document.getElementById("luckyAScore").textContent="0";document.getElementById("luckyBScore").textContent="0";}
+
+/* WHO'S FASTER */
+var fasterSentences=[
+{sentence:"There are many strawberries.",words:["strawberries","pears","tomatoes","apples"]},
+{sentence:"How much is it? It's twenty-nine dollars.",words:["twenty-nine","twenty-four","fifteen","thirty"]},
+{sentence:"Where are you going? I'm going to the market.",words:["market","library","office","zoo"]},
+{sentence:"I love pears, too!",words:["pears","peaches","strawberries","bananas"]},
+{sentence:"What colour are they? They're red.",words:["red","blue","green","yellow"]},
+{sentence:"Is he a teacher? Yes, he is.",words:["teacher","student","doctor","nurse"]}
+];
+var fasterIdx=0;var fasterScores={a:0,b:0};var fasterLocked=false;
+function buildFasterTeams(){var g=document.getElementById("fasterTeams");g.innerHTML="";var ts=[{id:"a",name:"Team A",emoji:"🔵",cls:"ta"},{id:"b",name:"Team B",emoji:"🟠",cls:"tb"}];ts.forEach(function(t){var d=document.createElement("div");d.className="team-box "+t.cls;d.innerHTML="<div class='team-icon'>"+t.emoji+"</div><div class='team-name'>"+t.name+"</div><div class='team-score' id='faster"+t.id.toUpperCase()+"Score'>"+fasterScores[t.id]+"</div>";g.appendChild(d);});}
+function startFaster(){if(fasterIdx>=fasterSentences.length){document.getElementById("fasterSentence").innerHTML="🎉 Round Over! Team A: "+fasterScores.a+" | Team B: "+fasterScores.b;sWin();launchConfetti();return;}fasterLocked=false;var s=fasterSentences[fasterIdx];document.getElementById("fasterSentence").textContent=s.sentence;document.getElementById("fasterResult").textContent="";document.getElementById("fasterCards").style.display="grid";var g=document.getElementById("fasterCards");g.innerHTML="";var shuffled=s.words.slice().sort(function(){return Math.random()-0.5;});shuffled.forEach(function(w){var d=document.createElement("div");d.className="match-card";d.innerHTML="<div class='mc-text'>"+w+"</div>";d.onclick=function(){if(fasterLocked)return;fasterLocked=true;document.querySelectorAll("#fasterCards .match-card").forEach(function(x){if(x.textContent===s.words[0])x.classList.add("matched");else if(x!==d)x.classList.add("dis");});if(w===s.words[0]){fasterScores.a++;document.getElementById("fasterAScore").textContent=fasterScores.a;document.getElementById("fasterResult").innerHTML="<span style='color:var(--green)'>✅ Correct! +1 point for Team A</span>";sDing();}else{fasterScores.b++;document.getElementById("fasterBScore").textContent=fasterScores.b;document.getElementById("fasterResult").innerHTML="<span style='color:var(--blue)'>🔵 Team B gets the point! Answer: "+s.words[0]+"</span>";sBuzz();}fasterIdx++;setTimeout(startFaster,1500);};g.appendChild(d);});}
+function resetFaster(){fasterIdx=0;fasterScores={a:0,b:0};fasterLocked=false;document.getElementById("fasterSentence").textContent="";document.getElementById("fasterResult").textContent="";document.getElementById("fasterCards").style.display="none";document.getElementById("fasterAScore").textContent="0";document.getElementById("fasterBScore").textContent="0";}
+
+/* DAILY ENGLISH - MONEY */
+var moneyCoins=[{val:1,label:"$1",cls:"c1"},{val:5,label:"$5",cls:"c5"},{val:10,label:"$10",cls:"c10"}];
+var moneyTotal=0;var moneyOp=null;var moneyPrev=0;
+function buildMoneyGrid(){var g=document.getElementById("moneyGrid");g.innerHTML="";var items=[{emoji:"💵",name:"$1 Coin",val:1},{emoji:"💴",name:"$5 Coin",val:5},{emoji:"💶",name:"$10 Coin",val:10}];items.forEach(function(it){var d=document.createElement("div");d.className="money-card";d.innerHTML="<div style='font-size:36px'>"+it.emoji+"</div><div class='money-val'>$"+it.val+"</div><div class='money-label'>"+it.name+"</div>";d.onclick=function(){addCoin(it.val);sPop();};g.appendChild(d);});var inp=document.getElementById("dollarInput");inp.innerHTML="";moneyCoins.forEach(function(c){var d=document.createElement("div");d.className="dollar-coin "+c.cls;d.textContent=c.label;d.onclick=function(){addCoin(c.val);sPop();};inp.appendChild(d);});}
+function addCoin(val){moneyTotal+=val;document.getElementById("dollarTotal").textContent="Total: $"+moneyTotal;speakGB(moneyTotal+" dollars",1.35,"girl",null);}
+function calcMoney(op){if(moneyOp&&moneyPrev!==null){var result=op==="+"?moneyPrev+moneyTotal:moneyPrev-moneyTotal;if(result<0)result=0;var msg=(op==="+"?"$"+moneyPrev+" plus $"+moneyTotal+" equals $"+result:"$"+moneyPrev+" minus $"+moneyTotal+" equals $"+result);document.getElementById("moneyResult").innerHTML="<strong>"+msg+"</strong>";speakGB(msg,1.05,"boy",null);moneyPrev=result;moneyTotal=result;document.getElementById("dollarTotal").textContent="Total: $"+moneyTotal;}else{moneyPrev=moneyTotal;moneyOp=op;document.getElementById("moneyResult").innerHTML="Got $"+moneyTotal+". Now add or subtract more!";speakGB("You have "+moneyTotal+" dollars.",1.35,"girl",null);}}
+function resetMoney(){moneyTotal=0;moneyOp=null;moneyPrev=0;document.getElementById("dollarTotal").textContent="Total: $0";document.getElementById("moneyResult").textContent="";}
+
+/* SPOTLIGHT */
+var spotCategories=[
+{name:"Fruits",emoji:"🍓",phrases:[{text:"There are many strawberries.",gender:"girl"},{text:"I love pears!",gender:"boy"},{text:"Let's make watermelon juice!",gender:"girl"},{text:"I like tomatoes too!",gender:"boy"}]},
+{name:"Places",emoji:"🏙️",phrases:[{text:"I'm going to the supermarket.",gender:"girl"},{text:"Let's go to the library!",gender:"boy"},{text:"The market is very big!",gender:"girl"},{text:"I can read at the library.",gender:"boy"}]},
+{name:"How Much?",emoji:"💰",phrases:[{text:"How much is it?",gender:"girl"},{text:"It's twenty-nine dollars.",gender:"boy"},{text:"It's twenty-four dollars.",gender:"girl"},{text:"I don't have money!",gender:"boy"}]},
+{name:"Where Are You Going?",emoji:"🚶",phrases:[{text:"Where are you going?",gender:"girl"},{text:"I'm going to the zoo!",gender:"boy"},{text:"I'm going to the movie theater.",gender:"girl"},{text:"Let's go to the amusement park!",gender:"boy"}]},
+{name:"Colours",emoji:"🎨",phrases:[{text:"What colour are they?",gender:"girl"},{text:"They're red!",gender:"boy"},{text:"They're yellow!",gender:"girl"},{text:"They're blue!",gender:"boy"}]}
+];
+var spotScores={a:0,b:0};
+function adjSpot(t,pts){spotScores[t]=Math.max(0,spotScores[t]+pts);var el=document.getElementById("spot"+t.toUpperCase()+"Score");el.textContent=spotScores[t];el.style.transform="scale(1.3)";setTimeout(function(){el.style.transform="scale(1)";},300);if(pts>0&&soundOn)sPop();}
+function buildSpotTeams(){var g=document.getElementById("spotTeams");g.innerHTML="";var ts=[{id:"a",name:"Team A",emoji:"🔵",cls:"ta"},{id:"b",name:"Team B",emoji:"🟠",cls:"tb"}];ts.forEach(function(t){var d=document.createElement("div");d.className="team-box "+t.cls;d.innerHTML="<div class='team-icon'>"+t.emoji+"</div><div class='team-name'>"+t.name+"</div><div class='team-score' id='spot"+t.id.toUpperCase()+"Score'>0</div><div class='team-btns'><button class='tadd' onclick=\"adjSpot('"+t.id+"',1)\">+1</button><button class='tadd' onclick=\"adjSpot('"+t.id+"',5)\">+5</button><button class='tsub' onclick=\"adjSpot('"+t.id+"',-1)\">-1</button></div>";g.appendChild(d);});}
+function buildSpotCat(){var g=document.getElementById("spotCat");g.innerHTML="";spotCategories.forEach(function(c){var d=document.createElement("div");d.className="sp-cat-card";d.onclick=function(){if(soundOn)sPop();};var html="<h3>"+c.emoji+" "+c.name+"</h3><div class='sp-pills'>";c.phrases.forEach(function(p){var ep=p.text.replace(/'/g,"\\'");var pPitch=p.gender==="girl"?"1.4":"1.05";var pAvatar=p.gender==="girl"?"👩":"👦";html+="<span class='sp-pill' onclick=\"speakGB('"+ep+"',"+pPitch+",'"+p.gender+"',null);this.style.background='var(--purple)';this.style.color='#fff';setTimeout(function(el){el.style.background='';el.style.color='';},1500,this)\" title=\""+pAvatar+" says\">"+p.text+"</span>";});html+="</div>";d.innerHTML=html;g.appendChild(d);});}
+
+/* QUIZ */
+var quizData=[
+{q:"What do you say to ask about the price?",a:[{text:"How much is it?",gender:"girl"},{text:"Where are you going?",gender:"boy"},{text:"What colour is it?",gender:"girl"}],c:0},
+{q:"Which is the plural of 'strawberry'?",a:[{text:"strawberrys",gender:"girl"},{text:"strawberries",gender:"boy"},{text:"strawberryies",gender:"girl"}],c:1},
+{q:"Where are you going? I'm going to the ___.",a:[{text:"library",gender:"girl"},{text:"twenty-nine",gender:"boy"},{text:"red",gender:"girl"}],c:0},
+{q:"How much is the birthday card? It's ___ dollars.",a:[{text:"twenty-four",gender:"girl"},{text:"strawberries",gender:"boy"},{text:"market",gender:"girl"}],c:0},
+{q:"There are many ___ in the supermarket.",a:[{text:"fruits",gender:"girl"},{text:"dollars",gender:"boy"},{text:"colours",gender:"girl"}],c:0},
+{q:"What colour are the pears? They're ___.",a:[{text:"yellow",gender:"girl"},{text:"twenty-nine",gender:"boy"},{text:"library",gender:"girl"}],c:0},
+{q:"Is he a teacher? Yes, ___ is.",a:[{text:"he",gender:"girl"},{text:"she",gender:"boy"},{text:"it",gender:"girl"}],c:0},
+{q:"Let's make ___ milk!",a:[{text:"strawberry",gender:"girl"},{text:"twenty-four",gender:"boy"},{text:"market",gender:"girl"}],c:0}
+];
+var qIdx=0;var qAns=[];
+function buildQuiz(){var p=document.getElementById("qprog");p.innerHTML="";quizData.forEach(function(q,i){var d=document.createElement("div");d.className="qdot";if(i===0)d.classList.add("cur");p.appendChild(d);});renderQ();}
+function renderQ(){var c=document.getElementById("qCard");document.getElementById("qResult").classList.remove("show");var nextBtn=document.getElementById("qNextBtn");if(nextBtn)nextBtn.style.display="none";if(qIdx>=quizData.length){var ok=qAns.filter(function(x){return x;}).length;document.getElementById("qResultText").textContent="You got "+ok+"/"+quizData.length+" correct! Total points: "+totalScore;c.innerHTML="";document.getElementById("qResult").classList.add("show");if(ok===quizData.length)launchConfetti();return;}var q=quizData[qIdx];var h="<div class='qcard'><h3><span class='qn'>"+(qIdx+1)+"</span>"+q.q+"</h3><div class='qopts'>";q.a.forEach(function(o,i){var qAvatar=o.gender==="girl"?"👩":"👦";h+="<div class='qopt' onclick='ansQ("+i+")' title='"+qAvatar+" says'>"+o.text+"</div>";});h+="</div></div>";c.innerHTML=h;}
+function ansQ(choice){var q=quizData[qIdx];var opts=document.querySelectorAll(".qopt");var chosen=q.a[choice];var chosenPitch=chosen.gender==="girl"?"1.4":"1.05";opts.forEach(function(o,i){if(i===q.c)o.classList.add("ok");else if(i===choice&&choice!==q.c)o.classList.add("no");else o.classList.add("dis");});var dots=document.querySelectorAll(".qprog .qdot");if(choice===q.c){dots[qIdx].classList.add("ok");qAns.push(true);addPts(5);if(soundOn)sDing();speakGB(chosen.text,parseFloat(chosenPitch),chosen.gender,null);}else{dots[qIdx].classList.add("no");qAns.push(false);if(soundOn)sBuzz();var correctAns=q.a[q.c];var correctPitch=correctAns.gender==="girl"?"1.4":"1.05";speakGB("The correct answer is... "+correctAns.text,parseFloat(correctPitch),correctAns.gender,null);}var nextBtn=document.getElementById("qNextBtn");if(!nextBtn){var b=document.createElement("button");b.id="qNextBtn";b.className="btn purple";b.style.cssText="margin-top:16px;display:inline-flex;align-items:center;gap:8px;";b.innerHTML="➡ Next Question";b.onclick=function(){qIdx++;renderQ();};document.querySelector(".qcard").appendChild(b);}else{nextBtn.style.display="inline-flex";}}
+function resetQuiz(){qIdx=0;qAns=[];buildQuiz();}
+
+var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈"];
+function createFloaties(){var c=document.getElementById("floaties");for(var i=0;i<12;i++){var s=document.createElement("div");s.className="floaty";s.innerHTML=floatEmojis[i%floatEmojis.length];s.style.left=Math.random()*100+"vw";s.style.fontSize=(Math.random()*14+18)+"px";s.style.animationDuration=(Math.random()*12+14)+"s";s.style.animationDelay=(Math.random()*10)+"s";c.appendChild(s);}}
+document.getElementById("mascot").onclick=function(){speakGB("Hi! I am Owlbert! Let's review Units 1 to 4!",1.05,"boy",null);showToast("🦉 Hello from Owlbert!");};
+
+buildNumGrid();buildRelayTeams();buildFruitGrid();buildPlaceGrid();buildMatch();buildPatterns();
+buildLuckyTeams();buildFasterTeams();buildMoneyGrid();buildSpotTeams();buildSpotCat();buildQuiz();createFloaties();
+</script>
+</body>
+</html>
