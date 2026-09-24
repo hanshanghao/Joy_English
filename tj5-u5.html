@@ -269,8 +269,8 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .cf-vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
 .cf-vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;text-align:center}
 .cf-vocab-card:hover{transform:translateY(-4px)}
-.cf-vocab-card img,.cf-vocab-card svg{width:100%;height:150px;object-fit:contain;display:block;transition:transform .3s}
-.cf-vocab-card:hover img,.cf-vocab-card:hover svg{transform:scale(1.05)}
+.cf-vocab-card img{width:100%;height:150px;object-fit:cover;display:block;transition:transform .3s;border-radius:12px 12px 0 0}
+.cf-vocab-card:hover img{transform:scale(1.05)}
 .cf-vocab-card .cv-body{padding:12px}
 .cf-vocab-card .cv-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
 .cf-vocab-card .cv-desc{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#888;margin-top:4px}
@@ -1253,23 +1253,17 @@ sPop();
 }
 
 /* Culture & Festival */
-var cfSvg={
-zongzi:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="16" fill="#e8f5e9"/><path d="M60 20 C45 20 30 35 30 55 C30 80 60 100 60 100 C60 100 90 80 90 55 C90 35 75 20 60 20Z" fill="#4caf50" stroke="#2e7d32" stroke-width="2"/><path d="M60 25 C50 25 38 37 38 52 C38 73 60 92 60 92" fill="none" stroke="#81c784" stroke-width="1.5"/><path d="M60 25 C70 25 82 37 82 52 C82 73 60 92 60 92" fill="none" stroke="#81c784" stroke-width="1.5"/><ellipse cx="60" cy="55" rx="14" ry="18" fill="#fff8e1" stroke="#f9a825" stroke-width="1.5"/><circle cx="56" cy="50" r="3" fill="#d32f2f"/><circle cx="64" cy="54" r="2.5" fill="#ff8f00"/><circle cx="58" cy="58" r="2" fill="#8d6e63"/><text x="60" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">zongzi</text></svg>',
-sachet:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="16" fill="#fce4ec"/><rect x="35" y="40" width="50" height="55" rx="10" fill="#e91e63" stroke="#c2185b" stroke-width="2"/><rect x="40" y="44" width="40" height="47" rx="7" fill="#f48fb1"/><path d="M45 30 Q60 15 75 30" fill="none" stroke="#c2185b" stroke-width="2.5" stroke-linecap="round"/><circle cx="60" cy="30" r="4" fill="#c2185b"/><path d="M50 60 Q55 55 60 60 Q65 55 70 60" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><path d="M50 70 Q55 65 60 70 Q65 65 70 70" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="60" cy="80" r="3" fill="#fff" opacity=".6"/><text x="60" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#c2185b">sachet</text></svg>',
-herb:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="16" fill="#e0f2f1"/><path d="M60 95 L60 50" stroke="#5d4037" stroke-width="3" stroke-linecap="round"/><path d="M60 50 Q40 30 30 45 Q25 55 45 55 Q50 55 60 50" fill="#43a047" stroke="#2e7d32" stroke-width="1.5"/><path d="M60 50 Q80 30 90 45 Q95 55 75 55 Q70 55 60 50" fill="#66bb6a" stroke="#2e7d32" stroke-width="1.5"/><path d="M60 65 Q45 50 35 60 Q30 68 48 68 Q52 68 60 65" fill="#4caf50" stroke="#2e7d32" stroke-width="1.2"/><path d="M60 65 Q75 50 85 60 Q90 68 72 68 Q68 68 60 65" fill="#81c784" stroke="#2e7d32" stroke-width="1.2"/><circle cx="50" cy="40" r="2" fill="#ffeb3b"/><circle cx="70" cy="38" r="1.5" fill="#fff9c4"/><circle cx="42" cy="52" r="1.5" fill="#ffeb3b"/><text x="60" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#2e7d32">Chinese herb</text></svg>',
-boat:'<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" rx="16" fill="#e3f2fd"/><path d="M10 70 Q30 55 60 55 Q90 55 110 70 Q105 80 60 82 Q15 80 10 70Z" fill="#d32f2f" stroke="#b71c1c" stroke-width="2"/><path d="M20 70 Q40 60 60 60 Q80 60 100 70" fill="none" stroke="#ff8a80" stroke-width="1.5"/><ellipse cx="60" cy="52" rx="6" ry="8" fill="#ff8f00" stroke="#e65100" stroke-width="1.5"/><circle cx="58" cy="50" r="1.5" fill="#fff"/><circle cx="62" cy="50" r="1.5" fill="#fff"/><path d="M55 54 Q60 58 65 54" fill="none" stroke="#fff" stroke-width="1" stroke-linecap="round"/><path d="M30 78 Q50 85 70 78" fill="none" stroke="#64b5f6" stroke-width="2"/><path d="M20 82 Q45 90 70 82" fill="none" stroke="#90caf9" stroke-width="1.5"/><path d="M15 86 Q40 94 65 86" fill="none" stroke="#bbdefb" stroke-width="1"/><text x="60" y="115" text-anchor="middle" font-size="10" font-weight="bold" fill="#1565c0">dragon boat</text></svg>'
-};
 var cfVocab=[
-{svg:"zongzi",word:"zongzi",meaning:"Sticky rice dumplings wrapped in bamboo leaves",voice:"Zongzi. Sticky rice dumplings wrapped in bamboo leaves. Yummy! Yummy!"},
-{svg:"sachet",word:"sachet",meaning:"A small perfume bag worn around the neck",voice:"Sachet. A small perfume bag. You can wear it around your neck. It smells so good!"},
-{svg:"herb",word:"Chinese herb",meaning:"Special plants used for health and good luck",voice:"Chinese herb. Special plants used for health and good luck."},
-{svg:"boat",word:"dragon boat",meaning:"A long colorful boat rowed in the river",voice:"Dragon boat. A long, colorful boat. People row it in the river. Hey-yo! Hey-yo!"}
+{img:"cf-zongzi.jpg",word:"zongzi",meaning:"Sticky rice dumplings wrapped in bamboo leaves",voice:"Zongzi. Sticky rice dumplings wrapped in bamboo leaves. Yummy! Yummy!"},
+{img:"cf-sachet.jpg",word:"sachet",meaning:"A small perfume bag worn around the neck",voice:"Sachet. A small perfume bag. You can wear it around your neck. It smells so good!"},
+{img:"cf-herb.jpg",word:"Chinese herb",meaning:"Special plants used for health and good luck",voice:"Chinese herb. Special plants used for health and good luck."},
+{img:"cf-boat.jpg",word:"dragon boat",meaning:"A long colorful boat rowed in the river",voice:"Dragon boat. A long, colorful boat. People row it in the river. Hey-yo! Hey-yo!"}
 ];
 var cfVocabBox=document.getElementById("cfVocabGrid");
 if(cfVocabBox){
 cfVocab.forEach(function(v,i){
 var c=document.createElement("div");c.className="cf-vocab-card";
-c.innerHTML='<div style="padding:10px">'+cfSvg[v.svg]+'</div><div class="cv-body"><div class="cv-word">'+v.word+'</div><div class="cv-desc">'+v.meaning+'</div></div>';
+c.innerHTML='<img src="'+v.img+'" alt="'+v.word+'"><div class="cv-body"><div class="cv-word">'+v.word+'</div><div class="cv-desc">'+v.meaning+'</div></div>';
 c.onclick=function(){speakGB(v.voice,1.15,"girl",null)};
 cfVocabBox.appendChild(c);
 });
