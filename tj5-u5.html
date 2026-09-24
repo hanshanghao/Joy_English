@@ -252,6 +252,20 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .score-item .si-type{font-size:clamp(11px,1.6vw,13px);font-weight:700;opacity:.85}
 .score-item .si-score{font-size:clamp(20px,4vw,28px);font-weight:900}
 
+.fill-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.fill-q{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.6;margin-bottom:4px}
+.fill-a{font-size:clamp(14px,2.2vw,18px);font-weight:700;color:#666;margin-bottom:12px}
+.fill-blank{display:inline-block;min-width:120px;border-bottom:3px dashed var(--purple);padding:2px 8px;color:var(--green);font-weight:900;text-align:center;transition:all .3s}
+.fill-blank.revealed{border-bottom-style:solid;background:#e8ffe8;border-radius:8px}
+.fill-blank.wrong-reveal{border-bottom-color:var(--red);background:#ffe8e8;color:var(--red);border-radius:8px}
+.fill-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fill-opt{padding:10px 18px;border:3px solid #e0d8f0;border-radius:50px;font-size:clamp(13px,2vw,16px);font-weight:700;cursor:pointer;background:#faf8ff;transition:all .2s}
+.fill-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.fill-opt.selected{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.fill-opt.wrong{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.fill-opt.dis{pointer-events:none;opacity:.5}
+.fill-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;margin-top:10px;min-height:24px}
+
 @media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.num-grid{grid-template-columns:repeat(5,1fr)}.vocab-grid{grid-template-columns:repeat(2,1fr)}.place-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -769,19 +783,31 @@ var mcData=[
 {q:"Where can people work?",opts:["office","library","market","supermarket"],optImg:["q-office.png","q-library.png","q-market.png","q-supermarket.png"],correct:0,explain:"People work at the office!",gender:"boy"},
 {q:"Where do you buy fresh food?",opts:["market","supermarket","library","office"],optImg:["q-market.png","q-supermarket.png","q-library.png","q-office.png"],correct:0,explain:"You buy fresh food at the market!",gender:"girl"}
 ];
+var fillData=[
+{q:"What colour are <span class='fill-blank' id='fb0'>______</span>?",a:"They're red.",answer:"the pears",opts:["the pears","the books","the library","the fruits"],explain:"What colour are the pears? They're red."},
+{q:"There are many <span class='fill-blank' id='fb1'>______</span> in the library.",a:"",answer:"books",opts:["books","fruits","pears","tomatoes"],explain:"There are many books in the library."},
+{q:"<span class='fill-blank' id='fb2'>______</span> is the pencil?",a:"It's twenty-nine dollars.",answer:"How much",opts:["How much","How many","Where","What colour"],explain:"How much is the pencil? It's twenty-nine dollars."},
+{q:"<span class='fill-blank' id='fb3'>______</span>?",a:"I'm going to the market.",answer:"Where are you going",opts:["Where are you going","How much is it","What colour","Is he a teacher"],explain:"Where are you going? I'm going to the market."},
+{q:"<span class='fill-blank' id='fb4'>______</span>?",a:"Yes, he's a teacher.",answer:"Is he a teacher",opts:["Is he a teacher","Where are you going","How much is it","What colour"],explain:"Is he a teacher? Yes, he's a teacher."},
+{q:"Are you <span class='fill-blank' id='fb5'>______</span>?",a:"Yes, I'm a student.",answer:"a student",opts:["a student","a teacher","a doctor","a nurse"],explain:"Are you a student? Yes, I'm a student."},
+{q:"<span class='fill-blank' id='fb6'>______</span>?",a:"I'm going to the bookstore.",answer:"Where are you going",opts:["Where are you going","How much is it","What colour","Is he a teacher"],explain:"Where are you going? I'm going to the bookstore."},
+{q:"<span class='fill-blank' id='fb7'>______</span> the birthday card?",a:"It's twenty-four dollars.",answer:"How much is",opts:["How much is","Where is","What colour is","Is he"],explain:"How much is the birthday card? It's twenty-four dollars."}
+];
 var quizSections=[
 {type:"tf",title:"True or False",icon:"✅",badge:"6 QUESTIONS"},
 {type:"listen",title:"Listen & Choose",icon:"🎧",badge:"5 QUESTIONS"},
 {type:"write",title:"Spelling Challenge",icon:"✏️",badge:"6 QUESTIONS"},
-{type:"mc",title:"Picture Quiz",icon:"🖼️",badge:"6 QUESTIONS"}
+{type:"mc",title:"Picture Quiz",icon:"🖼️",badge:"6 QUESTIONS"},
+{type:"fill",title:"Fill in the Blanks",icon:"📝",badge:"8 QUESTIONS"}
 ];
-var tfAnswered=[];var listenAnswered=[];var writeAnswered=[];var mcAnswered=[];
+var tfAnswered=[];var listenAnswered=[];var writeAnswered=[];var mcAnswered=[];var fillAnswered=[];
 
 function buildQuizAll(){
 tfAnswered=tfData.map(function(){return null;});
 listenAnswered=listenData.map(function(){return null;});
 writeAnswered=writeData.map(function(){return null;});
 mcAnswered=mcData.map(function(){return null;});
+fillAnswered=fillData.map(function(){return null;});
 quizScore=0;
 var c=document.getElementById("quizContent");
 var h="";
@@ -791,6 +817,7 @@ if(s.type==="tf") h+=buildTFHtml();
 else if(s.type==="listen") h+=buildListenHtml();
 else if(s.type==="write") h+=buildWriteHtml();
 else if(s.type==="mc") h+=buildMcHtml();
+else if(s.type==="fill") h+=buildFillHtml();
 });
 h+="<div style='text-align:center;margin:20px 0'><button class='btn purple' onclick='finishQuiz()' style='padding:16px 40px;font-size:clamp(16px,2.6vw,20px)'>🏁 Finish Quiz</button></div>";
 c.innerHTML=h;
@@ -955,12 +982,53 @@ res.innerHTML=html;
 if(soundOn)speakGB(m.opts[m.correct],1.35,m.gender,null);
 }
 
+function buildFillHtml(){
+var h="";fillData.forEach(function(f,i){
+h+="<div class='fill-card' id='fc"+i+"'><div class='fill-q'>"+f.q+"</div>";
+if(f.a)h+="<div class='fill-a'>"+f.a+"</div>";
+h+="<div class='fill-opts' id='fo"+i+"'>";
+var shuffled=f.opts.slice().sort(function(){return Math.random()-0.5;});
+shuffled.forEach(function(o,j){
+h+="<div class='fill-opt' onclick=\"answerFill("+i+",this,'"+o.replace(/'/g,"\\'")+"')\">"+o+"</div>";
+});
+h+="</div><div class='fill-result' id='fRes"+i+"'></div></div>";
+});return h;}
+
+function answerFill(i,el,chosen){
+if(fillAnswered[i]!==null)return;
+fillAnswered[i]=true;
+var f=fillData[i];
+var blank=document.getElementById("fb"+i);
+var res=document.getElementById("fRes"+i);
+var opts=document.querySelectorAll("#fo"+i+" .fill-opt");
+if(chosen===f.answer){
+blank.textContent=f.answer;
+blank.classList.add("revealed");
+el.classList.add("selected");
+opts.forEach(function(o){if(o!==el)o.classList.add("dis");});
+res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+f.explain+"</span>";
+quizScore+=5;addPts(5);
+if(soundOn){sDing();speakGB(f.explain,1.35,"girl",null);}
+}else{
+blank.textContent=f.answer;
+blank.classList.add("wrong-reveal");
+el.classList.add("wrong");
+opts.forEach(function(o){
+if(o.textContent===f.answer)o.classList.add("selected");
+else if(o!==el)o.classList.add("dis");
+});
+res.innerHTML="<span style='color:var(--red)'>❌ It's '"+f.answer+"'. "+f.explain+"</span>";
+if(soundOn){sBuzz();speakGB(f.explain,1.35,"girl",null);}
+}
+}
+
 function finishQuiz(){
 var answered=tfAnswered.filter(function(x){return x!==null;}).length+
 listenAnswered.filter(function(x){return x!==null;}).length+
 writeAnswered.filter(function(x){return x!==null;}).length+
-mcAnswered.filter(function(x){return x!==null;}).length;
-var total=tfData.length+listenData.length+writeData.length+mcData.length;
+mcAnswered.filter(function(x){return x!==null;}).length+
+fillAnswered.filter(function(x){return x!==null;}).length;
+var total=tfData.length+listenData.length+writeData.length+mcData.length+fillData.length;
 if(answered<total){showToast("Answer all questions first! ("+answered+"/"+total+")");return;}
 document.getElementById("quizContent").style.display="none";
 var sb=document.getElementById("scoreBoard");
@@ -980,10 +1048,12 @@ var tfCorrect=tfAnswered.filter(function(x,i){return x===tfData[i].answer;}).len
 var liCorrect=listenAnswered.filter(function(x,i){return x===listenData[i].correct;}).length;
 var wrCorrect=writeAnswered.length;
 var mcCorrect=mcAnswered.filter(function(x,i){return x===mcData[i].correct;}).length;
+var flCorrect=fillAnswered.filter(function(x,i){return x===true;}).length;
 bd.innerHTML="<div class='score-item'><div class='si-type'>✅ True/False</div><div class='si-score'>"+tfCorrect+"/"+tfData.length+"</div></div>"+
 "<div class='score-item'><div class='si-type'>🎧 Listen</div><div class='si-score'>"+liCorrect+"/"+listenData.length+"</div></div>"+
 "<div class='score-item'><div class='si-type'>✏️ Spelling</div><div class='si-score'>"+wrCorrect+"/"+writeData.length+"</div></div>"+
-"<div class='score-item'><div class='si-type'>🖼️ Picture</div><div class='si-score'>"+mcCorrect+"/"+mcData.length+"</div></div>";
+"<div class='score-item'><div class='si-type'>🖼️ Picture</div><div class='si-score'>"+mcCorrect+"/"+mcData.length+"</div></div>"+
+"<div class='score-item'><div class='si-type'>📝 Fill Blanks</div><div class='si-score'>"+flCorrect+"/"+fillData.length+"</div></div>";
 if(pct===1){launchConfetti();if(soundOn)sWin();}
 window.scrollTo({top:0,behavior:'smooth'});
 }
