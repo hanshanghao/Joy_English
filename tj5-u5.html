@@ -186,6 +186,56 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .dollar-coin.selected{transform:scale(1.15);box-shadow:0 4px 12px rgba(0,0,0,.2)}
 .dollar-total{text-align:center;font-size:clamp(18px,3vw,24px);font-weight:900;color:var(--green);margin:10px 0}
 
+.quiz-section-title{display:flex;align-items:center;gap:10px;margin:20px 0 14px;padding:10px 16px;background:linear-gradient(135deg,rgba(139,92,240,.12),rgba(240,79,155,.08));border-radius:16px;border-left:5px solid var(--purple)}
+.quiz-section-title h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.quiz-section-title .qs-badge{background:var(--purple);color:#fff;font-size:clamp(11px,1.6vw,13px);font-weight:800;padding:4px 12px;border-radius:20px;margin-left:auto}
+
+.tf-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0;transition:all .3s}
+.tf-card .tf-emoji{font-size:clamp(48px,10vw,72px);text-align:center;margin-bottom:10px;animation:bounce 2.5s ease-in-out infinite}
+.tf-card .tf-stmt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:14px;line-height:1.4}
+.tf-btns{display:flex;gap:12px;justify-content:center}
+.tf-btn{padding:14px 32px;border:none;border-radius:50px;font-size:clamp(16px,2.6vw,22px);font-weight:900;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.15)}
+.tf-btn:hover{transform:translateY(-3px);box-shadow:0 8px 0 rgba(0,0,0,.15)}
+.tf-btn.true-btn{background:linear-gradient(135deg,#7ce577,#37a832)}
+.tf-btn.false-btn{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.tf-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.tf-result{font-size:clamp(14px,2.2vw,18px);font-weight:800;text-align:center;margin-top:12px;min-height:28px}
+
+.listen-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.listen-play{display:flex;justify-content:center;margin-bottom:14px}
+.listen-play button{width:64px;height:64px;border-radius:50%;border:none;font-size:28px;cursor:pointer;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.15);transition:all .2s}
+.listen-play button:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.15)}
+.listen-play button:active{transform:translateY(2px);box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.listen-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:12px;font-weight:600}
+.listen-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.listen-opt{padding:14px 18px;border:3px solid #e0d8f0;border-radius:14px;cursor:pointer;font-size:clamp(14px,2.2vw,18px);font-weight:700;background:#faf8ff;text-align:center;transition:all .2s}
+.listen-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.listen-opt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.listen-opt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.listen-opt.dis{pointer-events:none;opacity:.5}
+.listen-opt .lo-emoji{font-size:32px;display:block;margin-bottom:4px}
+
+.write-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.write-prompt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:6px}
+.write-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:14px;font-weight:600}
+.write-input{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.write-input input{padding:12px 18px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(16px,2.6vw,22px);font-weight:700;width:260px;text-align:center;outline:none;transition:border-color .2s;font-family:inherit}
+.write-input input:focus{border-color:var(--purple)}
+.write-input input.correct{border-color:var(--green);background:#e8ffe8}
+.write-input input.wrong{border-color:var(--red);background:#ffe8e8}
+.write-result{font-size:clamp(14px,2.2vw,18px);font-weight:800;text-align:center;margin-top:12px;min-height:28px}
+.write-spell{font-size:clamp(13px,2vw,16px);color:var(--purple);text-align:center;margin-top:8px;font-weight:700;letter-spacing:2px;min-height:24px}
+
+.score-board{background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:22px;padding:28px 22px;text-align:center;color:#fff;margin:16px 0;box-shadow:0 8px 22px rgba(139,92,240,.3)}
+.score-board h2{font-size:clamp(22px,4vw,32px);font-weight:900;margin-bottom:12px}
+.score-board .score-big{font-size:clamp(40px,10vw,72px);font-weight:900;text-shadow:0 4px 8px rgba(0,0,0,.2);line-height:1}
+.score-board .score-label{font-size:clamp(14px,2.2vw,18px);font-weight:700;opacity:.9;margin-top:4px}
+.score-board .score-stars{font-size:clamp(24px,5vw,40px);margin:10px 0}
+.score-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
+.score-item{background:rgba(255,255,255,.2);border-radius:14px;padding:12px;text-align:center}
+.score-item .si-type{font-size:clamp(11px,1.6vw,13px);font-weight:700;opacity:.85}
+.score-item .si-score{font-size:clamp(20px,4vw,28px);font-weight:900}
+
 @media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.num-grid{grid-template-columns:repeat(5,1fr)}.vocab-grid{grid-template-columns:repeat(2,1fr)}.place-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -486,16 +536,21 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 
 <!-- TAB 9: Quiz -->
 <div class="tabpan" id="tp9">
-<section>
-<div class="shead"><span class="ic">📝</span><h2>Review Quiz</h2><span class="badge">+5 PTS</span></div>
-<div class="quiz-area">
-<div class="qprog" id="qprog"></div>
-<div id="qCard"></div>
-<div class="qresult" id="qResult"><h2>🎉 Quiz Complete!</h2><p id="qResultText"></p>
-<button class="btn pink" onclick="resetQuiz()" style="margin-top:12px">🔄 Try Again</button>
+<div class="hero">
+<span class="big-emoji">📝</span>
+<h1>Review Quiz</h1>
+<span class="sub">Test your knowledge from Units 1–4</span>
+<div class="desc">Listen, speak, write & spell! Complete all sections to earn max points.</div>
 </div>
+<div id="quizContent"></div>
+<div class="score-board" id="scoreBoard" style="display:none">
+<h2>🎉 Quiz Complete!</h2>
+<div class="score-big" id="finalScore">0</div>
+<div class="score-label" id="finalLabel">points earned</div>
+<div class="score-stars" id="finalStars"></div>
+<div class="score-breakdown" id="scoreBreakdown"></div>
+<button class="btn" onclick="resetAllQuiz()" style="margin-top:16px;background:#fff;color:var(--purple);font-weight:900">🔄 Try Again</button>
 </div>
-</section>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -665,29 +720,258 @@ function adjSpot(t,pts){spotScores[t]=Math.max(0,spotScores[t]+pts);var el=docum
 function buildSpotTeams(){var g=document.getElementById("spotTeams");g.innerHTML="";var ts=[{id:"a",name:"Team A",emoji:"🔵",cls:"ta"},{id:"b",name:"Team B",emoji:"🟠",cls:"tb"}];ts.forEach(function(t){var d=document.createElement("div");d.className="team-box "+t.cls;d.innerHTML="<div class='team-icon'>"+t.emoji+"</div><div class='team-name'>"+t.name+"</div><div class='team-score' id='spot"+t.id.toUpperCase()+"Score'>0</div><div class='team-btns'><button class='tadd' onclick=\"adjSpot('"+t.id+"',1)\">+1</button><button class='tadd' onclick=\"adjSpot('"+t.id+"',5)\">+5</button><button class='tsub' onclick=\"adjSpot('"+t.id+"',-1)\">-1</button></div>";g.appendChild(d);});}
 function buildSpotCat(){var g=document.getElementById("spotCat");g.innerHTML="";spotCategories.forEach(function(c){var d=document.createElement("div");d.className="sp-cat-card";d.onclick=function(){if(soundOn)sPop();};var html="<h3>"+c.emoji+" "+c.name+"</h3><div class='sp-pills'>";c.phrases.forEach(function(p){var ep=p.text.replace(/'/g,"\\'");var pPitch=p.gender==="girl"?"1.4":"1.05";var pAvatar=p.gender==="girl"?"👩":"👦";html+="<span class='sp-pill' onclick=\"speakGB('"+ep+"',"+pPitch+",'"+p.gender+"',null);this.style.background='var(--purple)';this.style.color='#fff';setTimeout(function(el){el.style.background='';el.style.color='';},1500,this)\" title=\""+pAvatar+" says\">"+p.text+"</span>";});html+="</div>";d.innerHTML=html;g.appendChild(d);});}
 
-/* QUIZ */
-var quizData=[
-{q:"What do you say to ask about the price?",a:[{text:"How much is it?",gender:"girl"},{text:"Where are you going?",gender:"boy"},{text:"What colour is it?",gender:"girl"}],c:0},
-{q:"Which is the plural of 'strawberry'?",a:[{text:"strawberrys",gender:"girl"},{text:"strawberries",gender:"boy"},{text:"strawberryies",gender:"girl"}],c:1},
-{q:"Where are you going? I'm going to the ___.",a:[{text:"library",gender:"girl"},{text:"twenty-nine",gender:"boy"},{text:"red",gender:"girl"}],c:0},
-{q:"How much is the birthday card? It's ___ dollars.",a:[{text:"twenty-four",gender:"girl"},{text:"strawberries",gender:"boy"},{text:"market",gender:"girl"}],c:0},
-{q:"There are many ___ in the supermarket.",a:[{text:"fruits",gender:"girl"},{text:"dollars",gender:"boy"},{text:"colours",gender:"girl"}],c:0},
-{q:"What colour are the pears? They're ___.",a:[{text:"yellow",gender:"girl"},{text:"twenty-nine",gender:"boy"},{text:"library",gender:"girl"}],c:0},
-{q:"Is he a teacher? Yes, ___ is.",a:[{text:"he",gender:"girl"},{text:"she",gender:"boy"},{text:"it",gender:"girl"}],c:0},
-{q:"Let's make ___ milk!",a:[{text:"strawberry",gender:"girl"},{text:"twenty-four",gender:"boy"},{text:"market",gender:"girl"}],c:0}
+/* QUIZ ENGINE */
+var quizScore=0;
+var tfData=[
+{emoji:"🍓",stmt:"Strawberry becomes 'strawberrys' in plural.",answer:false,explain:"No! It becomes 'strawberries'.",gender:"girl"},
+{emoji:"📚",stmt:"A library is a place where you can read books.",answer:true,explain:"Yes! You read and borrow books at the library.",gender:"boy"},
+{emoji:"🛒",stmt:"You go to the supermarket to watch movies.",answer:false,explain:"No! You go to the movie theater to watch movies.",gender:"girl"},
+{emoji:"🍅",stmt:"Tomato becomes 'tomatoes' in plural.",answer:true,explain:"Yes! Tomato → tomatoes.",gender:"boy"},
+{emoji:"💰",stmt:"'How much is it?' is used to ask about colour.",answer:false,explain:"No! 'How much is it?' asks about price.",gender:"girl"},
+{emoji:"🐼",stmt:"There are many animals at the zoo.",answer:true,explain:"Yes! Lions, monkeys, pandas and more!",gender:"boy"}
 ];
-var qIdx=0;var qAns=[];
-function buildQuiz(){var p=document.getElementById("qprog");p.innerHTML="";quizData.forEach(function(q,i){var d=document.createElement("div");d.className="qdot";if(i===0)d.classList.add("cur");p.appendChild(d);});renderQ();}
-function renderQ(){var c=document.getElementById("qCard");document.getElementById("qResult").classList.remove("show");var nextBtn=document.getElementById("qNextBtn");if(nextBtn)nextBtn.style.display="none";if(qIdx>=quizData.length){var ok=qAns.filter(function(x){return x;}).length;document.getElementById("qResultText").textContent="You got "+ok+"/"+quizData.length+" correct! Total points: "+totalScore;c.innerHTML="";document.getElementById("qResult").classList.add("show");if(ok===quizData.length)launchConfetti();return;}var q=quizData[qIdx];var h="<div class='qcard'><h3><span class='qn'>"+(qIdx+1)+"</span>"+q.q+"</h3><div class='qopts'>";q.a.forEach(function(o,i){var qAvatar=o.gender==="girl"?"👩":"👦";h+="<div class='qopt' onclick='ansQ("+i+")' title='"+qAvatar+" says'>"+o.text+"</div>";});h+="</div></div>";c.innerHTML=h;}
-function ansQ(choice){var q=quizData[qIdx];var opts=document.querySelectorAll(".qopt");var chosen=q.a[choice];var chosenPitch=chosen.gender==="girl"?"1.4":"1.05";opts.forEach(function(o,i){if(i===q.c)o.classList.add("ok");else if(i===choice&&choice!==q.c)o.classList.add("no");else o.classList.add("dis");});var dots=document.querySelectorAll(".qprog .qdot");if(choice===q.c){dots[qIdx].classList.add("ok");qAns.push(true);addPts(5);if(soundOn)sDing();speakGB(chosen.text,parseFloat(chosenPitch),chosen.gender,null);}else{dots[qIdx].classList.add("no");qAns.push(false);if(soundOn)sBuzz();var correctAns=q.a[q.c];var correctPitch=correctAns.gender==="girl"?"1.4":"1.05";speakGB("The correct answer is... "+correctAns.text,parseFloat(correctPitch),correctAns.gender,null);}var nextBtn=document.getElementById("qNextBtn");if(!nextBtn){var b=document.createElement("button");b.id="qNextBtn";b.className="btn purple";b.style.cssText="margin-top:16px;display:inline-flex;align-items:center;gap:8px;";b.innerHTML="➡ Next Question";b.onclick=function(){qIdx++;renderQ();};document.querySelector(".qcard").appendChild(b);}else{nextBtn.style.display="inline-flex";}}
-function resetQuiz(){qIdx=0;qAns=[];buildQuiz();}
+var listenData=[
+{word:"twenty-nine",emoji:"💰",hint:"How much is the birthday card?",opts:["twenty-nine","twenty-four","fifteen","thirty"],correct:0},
+{word:"strawberries",emoji:"🍓",hint:"There are many ___",opts:["strawberries","strawberrys","strawberryies","strawberry"],correct:0},
+{word:"supermarket",emoji:"🛒",hint:"Where are you going? I'm going to the ___",opts:["supermarket","supermarketes","markets","office"],correct:0},
+{word:"yellow",emoji:"🍐",hint:"What colour are the pears?",opts:["yellow","red","blue","green"],correct:0},
+{word:"watermelon",emoji:"🍉",hint:"Let's make ___ juice!",opts:["watermelon","watermelons","water melon","watermelones"],correct:0}
+];
+var writeData=[
+{prompt:"Write the spelling for number 12:",answer:"twelve",hint:"Listen first, then type the word",emoji:"1️⃣2️⃣"},
+{prompt:"Write the spelling for number 25:",answer:"twenty-five",hint:"Think carefully about the hyphen!",emoji:"🔢"},
+{prompt:"What is the plural of 'peach'?",answer:"peaches",hint:"Peach → ___",emoji:"🍑"},
+{prompt:"Write the plural of 'strawberry':",answer:"strawberries",hint:"Change y to ies!",emoji:"🍓"},
+{prompt:"Write the spelling for number 18:",answer:"eighteen",hint:"Eight + een = ___",emoji:"🔢"},
+{prompt:"What is the plural of 'tomato'?",answer:"tomatoes",hint:"Add -es",emoji:"🍅"}
+];
+var mcData=[
+{emoji:"🛒",q:"Where do you buy fresh vegetables?",opts:["supermarket","library","zoo","gym"],correct:0,gender:"girl"},
+{emoji:"💵",q:"$5 + $10 = ?",opts:["$15","$25","$50","$10"],correct:0,gender:"boy"},
+{emoji:"🍐",q:"What colour are most pears?",opts:["yellow","red","blue","purple"],correct:0,gender:"girl"},
+{emoji:"🦕",q:"Where can you see dinosaurs?",opts:["museum","supermarket","office","gym"],correct:0,gender:"boy"},
+{emoji:"🎬",q:"Where do you watch films?",opts:["movie theater","library","market","bookstore"],correct:0,gender:"girl"},
+{emoji:"🔑",q:"Which pattern asks about price?",opts:["How much is it?","Where are you going?","What colour is it?","Is he a teacher?"],correct:0,gender:"boy"}
+];
+var quizSections=[
+{type:"tf",title:"True or False",icon:"✅",badge:"6 QUESTIONS"},
+{type:"listen",title:"Listen & Choose",icon:"🎧",badge:"5 QUESTIONS"},
+{type:"write",title:"Spelling Challenge",icon:"✏️",badge:"6 QUESTIONS"},
+{type:"mc",title:"Picture Quiz",icon:"🖼️",badge:"6 QUESTIONS"}
+];
+var tfAnswered=[];var listenAnswered=[];var writeAnswered=[];var mcAnswered=[];
+
+function buildQuizAll(){
+tfAnswered=tfData.map(function(){return null;});
+listenAnswered=listenData.map(function(){return null;});
+writeAnswered=writeData.map(function(){return null;});
+mcAnswered=mcData.map(function(){return null;});
+quizScore=0;
+var c=document.getElementById("quizContent");
+var h="";
+quizSections.forEach(function(s){
+h+="<div class='quiz-section-title'><span style='font-size:28px'>"+s.icon+"</span><h3>"+s.title+"</h3><span class='qs-badge'>"+s.badge+"</span></div>";
+if(s.type==="tf") h+=buildTFHtml();
+else if(s.type==="listen") h+=buildListenHtml();
+else if(s.type==="write") h+=buildWriteHtml();
+else if(s.type==="mc") h+=buildMcHtml();
+});
+h+="<div style='text-align:center;margin:20px 0'><button class='btn purple' onclick='finishQuiz()' style='padding:16px 40px;font-size:clamp(16px,2.6vw,20px)'>🏁 Finish Quiz</button></div>";
+c.innerHTML=h;
+document.getElementById("scoreBoard").style.display="none";
+attachEvents();
+}
+
+function buildTFHtml(){
+var h="";tfData.forEach(function(t,i){
+h+="<div class='tf-card' id='tf"+i+"'><div class='tf-emoji'>"+t.emoji+"</div><div class='tf-stmt'>"+t.stmt+"</div><div class='tf-btns'><button class='tf-btn true-btn' onclick=\"answerTF("+i+",true)\">✔️ True</button><button class='tf-btn false-btn' onclick=\"answerTF("+i+",false)\">❌ False</button></div><div class='tf-result' id='tfRes"+i+"'></div></div>";
+});return h;}
+
+function buildListenHtml(){
+var h="";listenData.forEach(function(l,i){
+h+="<div class='listen-card' id='lc"+i+"'><div class='listen-play'><button onclick=\"playListenWord("+i+")\" title='Click to listen'>🔊</button></div><div class='listen-hint'>"+l.hint+"</div><div class='listen-opts' id='lo"+i+"'>";
+l.opts.forEach(function(o,j){
+h+="<div class='listen-opt' onclick=\"answerListen("+i+","+j+")\"><span class='lo-emoji'>"+l.emoji+"</span>"+o+"</div>";
+});
+h+="</div><div class='tf-result' id='lRes"+i+"'></div></div>";
+});return h;}
+
+function buildWriteHtml(){
+var h="";writeData.forEach(function(w,i){
+h+="<div class='write-card' id='wc"+i+"'><div style='font-size:36px;text-align:center'>"+w.emoji+"</div><div class='write-prompt'>"+w.prompt+"</div><div class='write-hint'>"+w.hint+"</div><div class='write-input'><input type='text' id='wi"+i+"' placeholder='Type the word...' autocomplete='off'></div><div style='text-align:center;margin-top:10px'><button class='btn green' onclick=\"checkWrite("+i+")\" style='padding:10px 24px'>✅ Check</button> <button class='btn blue' onclick=\"hearWrite("+i+")\" style='padding:10px 24px'>🔊 Hear</button></div><div class='write-result' id='wRes"+i+"'></div><div class='write-spell' id='wSpell"+i+"'></div></div>";
+});return h;}
+
+function buildMcHtml(){
+var h="";mcData.forEach(function(m,i){
+h+="<div class='listen-card' id='mc"+i+"'><div class='tf-emoji'>"+m.emoji+"</div><div class='write-prompt'>"+m.q+"</div><div class='listen-opts' id='mco"+i+"'>";
+m.opts.forEach(function(o,j){
+h+="<div class='listen-opt' onclick=\"answerMc("+i+","+j+")\"><span class='lo-emoji'>"+m.emoji+"</span>"+o+"</div>";
+});
+h+="</div><div class='tf-result' id='mcRes"+i+"'></div></div>";
+});return h;}
+
+function answerTF(i,ans){
+if(tfAnswered[i]!==null)return;
+tfAnswered[i]=ans;
+var t=tfData[i];
+var card=document.getElementById("tf"+i);
+var btns=card.querySelectorAll(".tf-btn");
+btns.forEach(function(b){b.disabled=true;});
+var res=document.getElementById("tfRes"+i);
+if(ans===t.answer){
+res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+t.explain+"</span>";
+card.style.borderColor="var(--green)";
+quizScore+=5;addPts(5);
+if(soundOn){sDing();speakGB(t.explain,1.35,t.gender,null);}
+}else{
+res.innerHTML="<span style='color:var(--red)'>❌ Wrong! "+t.explain+"</span>";
+card.style.borderColor="var(--red)";
+if(soundOn){sBuzz();speakGB("The answer is "+(t.answer?"True":"False")+". "+t.explain,1.35,t.gender,null);}
+}
+}
+
+function playListenWord(i){
+if(soundOn){speakGB(listenData[i].word,1.35,"girl",null,0.9);}
+sPop();
+}
+
+function answerListen(i,ans){
+if(listenAnswered[i]!==null)return;
+listenAnswered[i]=ans;
+var l=listenData[i];
+var opts=document.querySelectorAll("#lo"+i+" .listen-opt");
+var res=document.getElementById("lRes"+i);
+opts.forEach(function(o,j){
+if(j===l.correct)o.classList.add("ok");
+else if(j===ans&&ans!==l.correct)o.classList.add("no");
+else o.classList.add("dis");
+});
+if(ans===l.correct){
+res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+l.word+"</span>";
+quizScore+=5;addPts(5);
+if(soundOn){sDing();speakGB(l.word,1.35,"girl",null,0.9);}
+}else{
+res.innerHTML="<span style='color:var(--red)'>❌ It's '"+l.word+"'</span>";
+if(soundOn){sBuzz();speakGB(l.word,1.35,"girl",null,0.9);}
+}
+}
+
+function hearWrite(i){
+if(soundOn)speakGB(writeData[i].answer,1.35,"girl",null,0.85);
+sPop();
+}
+
+function checkWrite(i){
+if(writeAnswered[i]!==null)return;
+var input=document.getElementById("wi"+i);
+var val=input.value.trim().toLowerCase();
+var w=writeData[i];
+var res=document.getElementById("wRes"+i);
+var spell=document.getElementById("wSpell"+i);
+writeAnswered[i]=true;
+if(val===w.answer.toLowerCase()){
+input.classList.add("correct");
+res.innerHTML="<span style='color:var(--green)'>✅ Correct! '"+w.answer+"'</span>";
+quizScore+=5;addPts(5);
+if(soundOn)sDing();
+spell.innerHTML=w.answer.split("").join("-");
+if(soundOn)speakGB(w.answer,1.35,"girl",null,0.9);
+}else{
+input.classList.add("wrong");
+res.innerHTML="<span style='color:var(--red)'>❌ It's '"+w.answer+"'</span>";
+if(soundOn)sBuzz();
+var letters=w.answer.split("");
+var idx=0;
+function spellLetter(){
+if(idx<letters.length){
+spell.textContent=letters.slice(0,idx+1).join(" - ");
+idx++;setTimeout(spellLetter,350);
+}else{
+spell.textContent=w.answer.split("").join("-");
+if(soundOn)speakGB(w.answer,1.35,"girl",null,0.9);
+}}
+spellLetter();
+}
+}
+
+function answerMc(i,ans){
+if(mcAnswered[i]!==null)return;
+mcAnswered[i]=ans;
+var m=mcData[i];
+var opts=document.querySelectorAll("#mco"+i+" .listen-opt");
+var res=document.getElementById("mcRes"+i);
+opts.forEach(function(o,j){
+if(j===m.correct)o.classList.add("ok");
+else if(j===ans&&ans!==m.correct)o.classList.add("no");
+else o.classList.add("dis");
+});
+if(ans===m.correct){
+res.innerHTML="<span style='color:var(--green)'>✅ Correct!</span>";
+quizScore+=5;addPts(5);
+if(soundOn)sDing();
+}else{
+res.innerHTML="<span style='color:var(--red)'>❌ It's '"+m.opts[m.correct]+"'</span>";
+if(soundOn)sBuzz();
+}
+if(soundOn)speakGB(m.opts[m.correct],1.35,m.gender,null);
+}
+
+function finishQuiz(){
+var answered=tfAnswered.filter(function(x){return x!==null;}).length+
+listenAnswered.filter(function(x){return x!==null;}).length+
+writeAnswered.filter(function(x){return x!==null;}).length+
+mcAnswered.filter(function(x){return x!==null;}).length;
+var total=tfData.length+listenData.length+writeData.length+mcData.length;
+if(answered<total){showToast("Answer all questions first! ("+answered+"/"+total+")");return;}
+document.getElementById("quizContent").style.display="none";
+var sb=document.getElementById("scoreBoard");
+sb.style.display="block";
+var maxPts=total*5;
+document.getElementById("finalScore").textContent=quizScore+"/"+maxPts;
+document.getElementById("finalLabel").textContent="points earned";
+var pct=quizScore/maxPts;
+var stars="";
+if(pct===1)stars="⭐⭐⭐";
+else if(pct>=0.75)stars="⭐⭐";
+else if(pct>=0.5)stars="⭐";
+else stars="Keep trying!";
+document.getElementById("finalStars").textContent=stars;
+var bd=document.getElementById("scoreBreakdown");
+var tfCorrect=tfAnswered.filter(function(x,i){return x===tfData[i].answer;}).length;
+var liCorrect=listenAnswered.filter(function(x,i){return x===listenData[i].correct;}).length;
+var wrCorrect=writeAnswered.length;
+var mcCorrect=mcAnswered.filter(function(x,i){return x===mcData[i].correct;}).length;
+bd.innerHTML="<div class='score-item'><div class='si-type'>✅ True/False</div><div class='si-score'>"+tfCorrect+"/"+tfData.length+"</div></div>"+
+"<div class='score-item'><div class='si-type'>🎧 Listen</div><div class='si-score'>"+liCorrect+"/"+listenData.length+"</div></div>"+
+"<div class='score-item'><div class='si-type'>✏️ Spelling</div><div class='si-score'>"+wrCorrect+"/"+writeData.length+"</div></div>"+
+"<div class='score-item'><div class='si-type'>🖼️ Picture</div><div class='si-score'>"+mcCorrect+"/"+mcData.length+"</div></div>";
+if(pct===1){launchConfetti();if(soundOn)sWin();}
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function resetAllQuiz(){
+document.getElementById("quizContent").style.display="block";
+buildQuizAll();
+window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function attachEvents(){
+writeData.forEach(function(w,i){
+var inp=document.getElementById("wi"+i);
+if(inp){
+inp.addEventListener("keydown",function(e){
+if(e.key==="Enter")checkWrite(i);
+});
+}}
+);
+}
 
 var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈"];
 function createFloaties(){var c=document.getElementById("floaties");for(var i=0;i<12;i++){var s=document.createElement("div");s.className="floaty";s.innerHTML=floatEmojis[i%floatEmojis.length];s.style.left=Math.random()*100+"vw";s.style.fontSize=(Math.random()*14+18)+"px";s.style.animationDuration=(Math.random()*12+14)+"s";s.style.animationDelay=(Math.random()*10)+"s";c.appendChild(s);}}
 document.getElementById("mascot").onclick=function(){speakGB("Hi! I am Owlbert! Let's review Units 1 to 4!",1.05,"boy",null);showToast("🦉 Hello from Owlbert!");};
 
 buildNumGrid();buildRelayTeams();buildFruitGrid();buildPlaceGrid();buildMatch();buildPatterns();
-buildLuckyTeams();shuffleLucky();buildFasterTeams();buildMoneyGrid();buildSpotTeams();buildSpotCat();buildQuiz();createFloaties();
+buildLuckyTeams();shuffleLucky();buildFasterTeams();buildMoneyGrid();buildSpotTeams();buildSpotCat();buildQuizAll();createFloaties();
 </script>
 </body>
 </html>
