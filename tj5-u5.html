@@ -549,7 +549,7 @@ var numbers=[
 {n:21,w:"twenty-one"},{n:22,w:"twenty-two"},{n:23,w:"twenty-three"},{n:24,w:"twenty-four"},{n:25,w:"twenty-five"},
 {n:26,w:"twenty-six"},{n:27,w:"twenty-seven"},{n:28,w:"twenty-eight"},{n:29,w:"twenty-nine"},{n:30,w:"thirty"}
 ];
-function buildNumGrid(){var g=document.getElementById("numGrid");g.innerHTML="";numbers.forEach(function(n){var d=document.createElement("div");d.className="num-card";d.innerHTML="<div class='num-big'>"+n.n+"</div><div class='num-word'>"+n.w+"</div>";var clicked=false;d.onclick=function(){if(!clicked){clicked=true;if(soundOn)speakGB(n.n.toString(),1.35,"girl",null);sPop();}else{this.classList.add("done");if(soundOn)speakGB(n.w,1.35,"girl",function(){setTimeout(function(){if(soundOn)speakGB(n.n.toString(),1.35,"girl",null);},400);});sPop();}};g.appendChild(d);});}
+function buildNumGrid(){var g=document.getElementById("numGrid");g.innerHTML="";numbers.forEach(function(n){var d=document.createElement("div");d.className="num-card";d.innerHTML="<div class='num-big'>"+n.n+"</div><div class='num-word'>"+n.w+"</div>";var clicked=false;d.onclick=function(){if(!clicked){clicked=true;if(soundOn)speakGB(n.n.toString(),1.35,"girl",null);sPop();}else{this.classList.add("done");if(soundOn){var letters=n.w.split("");var i=0;function spellNext(){if(i<letters.length){speakGB(letters[i],1.35,"girl",function(){i++;setTimeout(spellNext,300);});}else{setTimeout(function(){speakGB(n.w,1.35,"girl",null);},300);}}spellNext();}sPop();}};g.appendChild(d);});}
 
 /* RELAY */
 var relayIdx=0;var relayTeam="a";var relayActive=false;
