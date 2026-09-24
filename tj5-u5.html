@@ -723,12 +723,12 @@ function buildSpotCat(){var g=document.getElementById("spotCat");g.innerHTML="";
 /* QUIZ ENGINE */
 var quizScore=0;
 var tfData=[
-{emoji:"🍓",stmt:"Strawberry becomes 'strawberrys' in plural.",answer:false,explain:"No! Remember! Strawberry becomes <span style='color:var(--green);font-weight:900'>strawberries</span> with <span style='color:var(--green);font-weight:900'>ies</span>. If you use <span style='color:#fff;background:var(--red);font-weight:900;padding:2px 8px;border-radius:50px'>ys</span> or <span style='color:#fff;background:var(--red);font-weight:900;padding:2px 8px;border-radius:50px'>yies</span>, it will be wrong.",gender:"girl"},
-{emoji:"📚",stmt:"A library is a place where you can read books.",answer:true,explain:"Yes! That's right! A library is a place where you can <span style='color:var(--green);font-weight:900'>read and borrow books</span>. Well done!",gender:"boy"},
-{emoji:"🛒",stmt:"You go to the supermarket to watch movies.",answer:false,explain:"No! Remember! You go to the <span style='color:var(--green);font-weight:900'>supermarket</span> to buy food and fruits. You go to the <span style='color:var(--green);font-weight:900'>movie theater</span> to watch movies!",gender:"girl"},
-{emoji:"🍅",stmt:"Tomato becomes 'tomatoes' in plural.",answer:true,explain:"Yes! Remember! Tomato becomes <span style='color:var(--green);font-weight:900'>tomatoes</span>. We add <span style='color:var(--green);font-weight:900'>es</span>, not just <span style='color:#fff;background:var(--red);font-weight:900;padding:2px 8px;border-radius:50px'>s</span>. Great job!",gender:"boy"},
-{emoji:"💰",stmt:"'How much is it?' is used to ask about colour.",answer:false,explain:"No! Remember! <span style='color:var(--green);font-weight:900'>How much is it?</span> is used to ask about <span style='color:var(--green);font-weight:900'>price</span>. <span style='color:var(--green);font-weight:900'>What colour is it?</span> is used to ask about <span style='color:var(--green);font-weight:900'>colour</span>.",gender:"girl"},
-{emoji:"🐼",stmt:"There are many animals at the zoo.",answer:true,explain:"Yes! That's right! There are <span style='color:var(--green);font-weight:900'>many animals</span> at the zoo, like <span style='color:var(--green);font-weight:900'>lions, monkeys, and pandas</span>!",gender:"boy"}
+{emoji:"🍓",stmt:"Strawberry becomes 'strawberrys' in plural.",answer:false,explain:"No! Remember! Strawberry becomes <span style='color:var(--green);font-weight:900'>strawberries</span> with <span style='color:var(--green);font-weight:900'>ies</span>. If you use <span style='color:#fff;background:var(--red);font-weight:900;padding:2px 8px;border-radius:50px'>ys</span> or <span style='color:#fff;background:var(--red);font-weight:900;padding:2px 8px;border-radius:50px'>yies</span>, it will be wrong.",speak:"No! Remember! Strawberry becomes strawberries with ies. If you use ys or yies, it will be wrong.",gender:"girl"},
+{emoji:"📚",stmt:"A library is a place where you can read books.",answer:true,explain:"Yes! That's right! A library is a place where you can <span style='color:var(--green);font-weight:900'>read and borrow books</span>. Well done!",speak:"Yes! That's right! A library is a place where you can read and borrow books. Well done!",gender:"boy"},
+{emoji:"🛒",stmt:"You go to the supermarket to watch movies.",answer:false,explain:"No! Remember! You go to the <span style='color:var(--green);font-weight:900'>supermarket</span> to buy food and fruits. You go to the <span style='color:var(--green);font-weight:900'>movie theater</span> to watch movies!",speak:"No! Remember! You go to the supermarket to buy food and fruits. You go to the movie theater to watch movies!",gender:"girl"},
+{emoji:"🍅",stmt:"Tomato becomes 'tomatoes' in plural.",answer:true,explain:"Yes! Remember! Tomato becomes <span style='color:var(--green);font-weight:900'>tomatoes</span>. We add <span style='color:var(--green);font-weight:900'>es</span>, not just <span style='color:#fff;background:var(--red);font-weight:900;padding:2px 8px;border-radius:50px'>s</span>. Great job!",speak:"Yes! Remember! Tomato becomes tomatoes. We add es, not just s. Great job!",gender:"boy"},
+{emoji:"💰",stmt:"'How much is it?' is used to ask about colour.",answer:false,explain:"No! Remember! <span style='color:var(--green);font-weight:900'>How much is it?</span> is used to ask about <span style='color:var(--green);font-weight:900'>price</span>. <span style='color:var(--green);font-weight:900'>What colour is it?</span> is used to ask about <span style='color:var(--green);font-weight:900'>colour</span>.",speak:"No! Remember! How much is it? is used to ask about price. What colour is it? is used to ask about colour.",gender:"girl"},
+{emoji:"🐼",stmt:"There are many animals at the zoo.",answer:true,explain:"Yes! That's right! There are <span style='color:var(--green);font-weight:900'>many animals</span> at the zoo, like <span style='color:var(--green);font-weight:900'>lions, monkeys, and pandas</span>!",speak:"Yes! That's right! There are many animals at the zoo, like lions, monkeys, and pandas!",gender:"boy"}
 ];
 var listenData=[
 {word:"twenty-nine",emoji:"💰",hint:"How much is the birthday card?",opts:["twenty-nine","twenty-four","fifteen","thirty"],correct:0},
@@ -822,11 +822,12 @@ if(ans===t.answer){
 res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+t.explain+"</span>";
 card.style.borderColor="var(--green)";
 quizScore+=5;addPts(5);
-if(soundOn){sDing();speakGB(t.explain,1.35,t.gender,null);}
+if(soundOn){sDing();speakGB(t.speak,1.35,t.gender,null);}
 }else{
 res.innerHTML="<span style='color:var(--red)'>❌ Wrong! "+t.explain+"</span>";
 card.style.borderColor="var(--red)";
-if(soundOn){sBuzz();speakGB("The answer is "+(t.answer?"True":"False")+". "+t.explain,1.35,t.gender,null);}
+if(soundOn){sBuzz();speakGB(t.speak,1.35,t.gender,null);}
+}
 }
 }
 
