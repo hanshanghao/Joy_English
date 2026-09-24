@@ -266,6 +266,27 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .fill-opt.dis{pointer-events:none;opacity:.5}
 .fill-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;margin-top:10px;min-height:24px}
 
+.cf-vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
+.cf-vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;text-align:center}
+.cf-vocab-card:hover{transform:translateY(-4px)}
+.cf-vocab-card img{width:100%;height:130px;object-fit:cover;display:block}
+.cf-vocab-card .cv-body{padding:12px}
+.cf-vocab-card .cv-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.cf-vocab-card .cv-desc{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#888;margin-top:4px}
+
+.flash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin:16px 0}
+.flash-card{perspective:600px;height:180px;cursor:pointer}
+.flash-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flash-card.flipped .flash-card-inner{transform:rotateY(180deg)}
+.flash-card-front,.flash-card-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.1)}
+.flash-card-front{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff}
+.flash-card-front img{width:80px;height:80px;object-fit:cover;border-radius:14px;margin-bottom:8px;border:3px solid #fff}
+.flash-card-front .fc-text{font-size:clamp(14px,2.2vw,18px);font-weight:800}
+.flash-card-back{background:#fff;color:var(--ink);transform:rotateY(180deg);border:3px solid var(--purple)}
+.flash-card-back .fc-word{font-size:clamp(18px,3vw,26px);font-weight:900;color:var(--purple);margin-bottom:6px}
+.flash-card-back .fc-meaning{font-size:clamp(13px,2vw,16px);font-weight:600;color:#666;text-align:center}
+.flash-card-back .fc-sentence{font-size:clamp(12px,1.8vw,14px);font-weight:700;color:var(--green);margin-top:8px;text-align:center;font-style:italic}
+
 @media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.num-grid{grid-template-columns:repeat(5,1fr)}.vocab-grid{grid-template-columns:repeat(2,1fr)}.place-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -289,6 +310,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <button class="ntab" onclick="showTab(7)">🚻 Tales of Values</button>
 <button class="ntab" onclick="showTab(8)">🎯 Spotlight</button>
 <button class="ntab" onclick="showTab(9)">📝 Quiz</button>
+<button class="ntab" onclick="showTab(10)">🐉 Culture & Festival</button>
 </div>
 
 <!-- TAB 0: Lesson Plan -->
@@ -687,6 +709,41 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div class="score-breakdown" id="scoreBreakdown"></div>
 <button class="btn" onclick="resetAllQuiz()" style="margin-top:16px;background:#fff;color:var(--purple);font-weight:900">🔄 Try Again</button>
 </div>
+</div>
+
+<!-- TAB 10: Culture & Festival -->
+<div class="tabpan" id="tp10">
+<div class="hero">
+<span class="big-emoji">🐉</span>
+<h1>Dragon-boat Festival</h1>
+<span class="sub">Culture & Festival · Fun Unit 1</span>
+<div class="desc">Learn about the Dragon-boat Festival! Eat zongzi, row the boat, and have fun!</div>
+</div>
+<section>
+<div class="shead"><span class="ic">🎋</span><h2>Vocabulary</h2><span class="badge">NEW WORDS</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click each card to hear the word and learn about it!
+</div>
+<img class="t-image" src="cf-dragonboat.png" alt="Dragon-boat Festival" onclick="openLb(this.src)" style="margin-bottom:16px">
+<div class="cf-vocab-grid" id="cfVocabGrid"></div>
+</section>
+<section>
+<div class="shead"><span class="ic">💬</span><h2>Sentence Patterns</h2><span class="badge">PRACTICE</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click each pattern to hear it spoken. Practice making your own sentences!
+</div>
+<div id="cfPatterns"></div>
+</section>
+<section>
+<div class="shead"><span class="ic">🃏</span><h2>Flashcards Game</h2><span class="badge">FLIP & LEARN</span></div>
+<div class="tip" style="margin-bottom:14px">
+💡 Click a card to flip it and reveal the answer. Say the word aloud!
+</div>
+<div class="flash-grid" id="cfFlashGrid"></div>
+<div style="text-align:center;margin-top:16px">
+<button class="btn purple" onclick="resetCfFlash()">🔄 Shuffle Cards</button>
+</div>
+</section>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1193,6 +1250,63 @@ sPop();
 });
 });
 }
+
+/* Culture & Festival */
+var cfVocab=[
+{img:"cf-dragonboat.png",word:"zongzi",phonetic:"ZONG-zi",meaning:"Sticky rice dumplings wrapped in bamboo leaves",sentence:"I love eating zongzi on Dragon-boat Festival!",voice:"Zongzi. Sticky rice dumplings wrapped in bamboo leaves. Yummy! Yummy!"},
+{img:"cf-dragonboat.png",word:"sachet",phonetic:"SACH-et",meaning:"A small perfume bag worn around the neck",sentence:"My grandma made a sachet for me!",voice:"Sachet. A small perfume bag. You can wear it around your neck. It smells so good!"},
+{img:"cf-dragonboat.png",word:"Chinese herb",phonetic:"CHINE-ze herb",meaning:"Special plants used for health and good luck",sentence:"We put Chinese herbs in the sachet.",voice:"Chinese herb. Special plants used for health and good luck."},
+{img:"cf-dragonboat.png",word:"dragon boat",phonetic:"DRAG-on boat",meaning:"A long colorful boat rowed in the river",sentence:"We row the dragon boat in the river!",voice:"Dragon boat. A long, colorful boat. People row it in the river. Hey-yo! Hey-yo!"}
+];
+var cfVocabBox=document.getElementById("cfVocabGrid");
+if(cfVocabBox){
+cfVocab.forEach(function(v,i){
+var c=document.createElement("div");c.className="cf-vocab-card";
+c.innerHTML='<img src="'+v.img+'" alt="'+v.word+'"><div class="cv-body"><div class="cv-word">'+v.word+'</div><div class="cv-desc">'+v.meaning+'</div></div>';
+c.onclick=function(){speakGB(v.voice,1.15,"girl",null)};
+cfVocabBox.appendChild(c);
+});
+}
+
+var cfPatterns=[
+{pattern:"Happy Dragon-boat Festival!",chinese:"端午节快乐！",voice:"Happy Dragon-boat Festival!"},
+{pattern:"Let's eat zongzi!",chinese:"我们吃粽子吧！",voice:"Let us eat zongzi!"},
+{pattern:"How many zongzi can you eat?",chinese:"你能吃多少个粽子？",voice:"How many zongzi can you eat?"},
+{pattern:"I can eat five zongzi!",chinese:"我能吃五个粽子！",voice:"I can eat five zongzi!"},
+{pattern:"Row the boat!",chinese:"划船！",voice:"Row the boat!"},
+{pattern:"We will win!",chinese:"我们会赢！",voice:"We will win!"}
+];
+var cfPatBox=document.getElementById("cfPatterns");
+if(cfPatBox){
+cfPatterns.forEach(function(p,i){
+var card=document.createElement("div");card.className="story-card";
+card.innerHTML='<div class="story-step" onclick="speakGB(\''+p.voice+'\','+(1.1+i*0.05)+',\''+(i%2===0?"girl":"boy")+'\',null)"><div class="step-num">'+(i+1)+'</div><div class="step-text"><strong>'+p.pattern+'</strong><br><span style="color:#888;font-size:clamp(12px,1.8vw,14px)">'+p.chinese+'</span></div><div class="step-emoji">💬</div></div>';
+cfPatBox.appendChild(card);
+});
+}
+
+var cfFlashData=[
+{word:"zongzi",meaning:"Sticky rice dumplings wrapped in bamboo leaves 🍙",sentence:"I love eating zongzi on Dragon-boat Festival!",voice:"Zongzi"},
+{word:"sachet",meaning:"A small perfume bag worn around the neck 👒",sentence:"My grandma made a sachet for me!",voice:"Sachet"},
+{word:"Chinese herb",meaning:"Special plants used for health and good luck 🌿",sentence:"We put Chinese herbs in the sachet.",voice:"Chinese herb"},
+{word:"dragon boat",meaning:"A long colorful boat rowed in the river 🐲",sentence:"We row the dragon boat in the river!",voice:"Dragon boat"},
+{word:"Happy Festival!",meaning:"A greeting for festival celebrations 🎉",sentence:"Happy Dragon-boat Festival!",voice:"Happy Dragon-boat Festival"},
+{word:"zongzi",meaning:"Yummy sticky rice dumplings! 🍡",sentence:"How many zongzi can you eat?",voice:"How many zongzi can you eat?"}
+];
+function buildCfFlash(){
+var box=document.getElementById("cfFlashGrid");
+if(!box)return;
+box.innerHTML="";
+var shuffled=cfFlashData.slice().sort(function(){return Math.random()-0.5});
+shuffled.forEach(function(f,i){
+var c=document.createElement("div");c.className="flash-card";
+c.innerHTML='<div class="flash-card-inner"><div class="flash-card-front"><div class="fc-text">🐉</div><div class="fc-text" style="font-size:13px;margin-top:6px">Click to flip!</div></div><div class="flash-card-back"><div class="fc-word">'+f.word+'</div><div class="fc-meaning">'+f.meaning+'</div><div class="fc-sentence">'+f.sentence+'</div></div></div>';
+c.onclick=function(){c.classList.toggle("flipped");if(c.classList.contains("flipped")){speakGB(f.voice,1.2,"girl",null)}};
+box.appendChild(c);
+});
+}
+buildCfFlash();
+function resetCfFlash(){buildCfFlash()}
 
 var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈"];
 function createFloaties(){var c=document.getElementById("floaties");for(var i=0;i<12;i++){var s=document.createElement("div");s.className="floaty";s.innerHTML=floatEmojis[i%floatEmojis.length];s.style.left=Math.random()*100+"vw";s.style.fontSize=(Math.random()*14+18)+"px";s.style.animationDuration=(Math.random()*12+14)+"s";s.style.animationDelay=(Math.random()*10)+"s";c.appendChild(s);}}
