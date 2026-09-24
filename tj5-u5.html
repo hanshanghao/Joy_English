@@ -269,7 +269,8 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .cf-vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
 .cf-vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;text-align:center}
 .cf-vocab-card:hover{transform:translateY(-4px)}
-.cf-vocab-card img{width:100%;height:130px;object-fit:cover;display:block}
+.cf-vocab-card img{width:100%;height:150px;object-fit:cover;display:block;transition:transform .3s}
+.cf-vocab-card:hover img{transform:scale(1.05)}
 .cf-vocab-card .cv-body{padding:12px}
 .cf-vocab-card .cv-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
 .cf-vocab-card .cv-desc{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#888;margin-top:4px}
@@ -1253,16 +1254,16 @@ sPop();
 
 /* Culture & Festival */
 var cfVocab=[
-{img:"cf-dragonboat.png",word:"zongzi",phonetic:"ZONG-zi",meaning:"Sticky rice dumplings wrapped in bamboo leaves",sentence:"I love eating zongzi on Dragon-boat Festival!",voice:"Zongzi. Sticky rice dumplings wrapped in bamboo leaves. Yummy! Yummy!"},
-{img:"cf-dragonboat.png",word:"sachet",phonetic:"SACH-et",meaning:"A small perfume bag worn around the neck",sentence:"My grandma made a sachet for me!",voice:"Sachet. A small perfume bag. You can wear it around your neck. It smells so good!"},
-{img:"cf-dragonboat.png",word:"Chinese herb",phonetic:"CHINE-ze herb",meaning:"Special plants used for health and good luck",sentence:"We put Chinese herbs in the sachet.",voice:"Chinese herb. Special plants used for health and good luck."},
-{img:"cf-dragonboat.png",word:"dragon boat",phonetic:"DRAG-on boat",meaning:"A long colorful boat rowed in the river",sentence:"We row the dragon boat in the river!",voice:"Dragon boat. A long, colorful boat. People row it in the river. Hey-yo! Hey-yo!"}
+{img:"cf-dragonboat.png",word:"zongzi",phonetic:"ZONG-zi",meaning:"Sticky rice dumplings wrapped in bamboo leaves",sentence:"I love eating zongzi on Dragon-boat Festival!",voice:"Zongzi. Sticky rice dumplings wrapped in bamboo leaves. Yummy! Yummy!",crop:"center 15%"},
+{img:"cf-dragonboat.png",word:"sachet",phonetic:"SACH-et",meaning:"A small perfume bag worn around the neck",sentence:"My grandma made a sachet for me!",voice:"Sachet. A small perfume bag. You can wear it around your neck. It smells so good!",crop:"right 20%"},
+{img:"cf-dragonboat.png",word:"Chinese herb",phonetic:"CHINE-ze herb",meaning:"Special plants used for health and good luck",sentence:"We put Chinese herbs in the sachet.",voice:"Chinese herb. Special plants used for health and good luck.",crop:"left 65%"},
+{img:"cf-dragonboat.png",word:"dragon boat",phonetic:"DRAG-on boat",meaning:"A long colorful boat rowed in the river",sentence:"We row the dragon boat in the river!",voice:"Dragon boat. A long, colorful boat. People row it in the river. Hey-yo! Hey-yo!",crop:"right 70%"}
 ];
 var cfVocabBox=document.getElementById("cfVocabGrid");
 if(cfVocabBox){
 cfVocab.forEach(function(v,i){
 var c=document.createElement("div");c.className="cf-vocab-card";
-c.innerHTML='<img src="'+v.img+'" alt="'+v.word+'"><div class="cv-body"><div class="cv-word">'+v.word+'</div><div class="cv-desc">'+v.meaning+'</div></div>';
+c.innerHTML='<img src="'+v.img+'" alt="'+v.word+'" style="object-position:'+v.crop+'"><div class="cv-body"><div class="cv-word">'+v.word+'</div><div class="cv-desc">'+v.meaning+'</div></div>';
 c.onclick=function(){speakGB(v.voice,1.15,"girl",null)};
 cfVocabBox.appendChild(c);
 });
