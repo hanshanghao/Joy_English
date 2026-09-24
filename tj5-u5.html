@@ -1270,18 +1270,18 @@ cfVocabBox.appendChild(c);
 }
 
 var cfPatterns=[
-{pattern:"Happy Dragon-boat Festival!",chinese:"端午节快乐！",voice:"Happy Dragon-boat Festival!"},
-{pattern:"Let's eat zongzi!",chinese:"我们吃粽子吧！",voice:"Let us eat zongzi!"},
-{pattern:"How many zongzi can you eat?",chinese:"你能吃多少个粽子？",voice:"How many zongzi can you eat?"},
-{pattern:"I can eat five zongzi!",chinese:"我能吃五个粽子！",voice:"I can eat five zongzi!"},
-{pattern:"Row the boat!",chinese:"划船！",voice:"Row the boat!"},
-{pattern:"We will win!",chinese:"我们会赢！",voice:"We will win!"}
+{pattern:"Happy Dragon-boat Festival!",voice:"Happy Dragon-boat Festival!"},
+{pattern:"Let's eat zongzi!",voice:"Let us eat zongzi!"},
+{pattern:"How many zongzi can you eat?",voice:"How many zongzi can you eat?"},
+{pattern:"I can eat five zongzi!",voice:"I can eat five zongzi!"},
+{pattern:"Row the boat!",voice:"Row the boat!"},
+{pattern:"We will win!",voice:"We will win!"}
 ];
 var cfPatBox=document.getElementById("cfPatterns");
 if(cfPatBox){
 cfPatterns.forEach(function(p,i){
 var card=document.createElement("div");card.className="story-card";
-card.innerHTML='<div class="story-step" onclick="speakGB(\''+p.voice+'\','+(1.1+i*0.05)+',\''+(i%2===0?"girl":"boy")+'\',null)"><div class="step-num">'+(i+1)+'</div><div class="step-text"><strong>'+p.pattern+'</strong><br><span style="color:#888;font-size:clamp(12px,1.8vw,14px)">'+p.chinese+'</span></div><div class="step-emoji">💬</div></div>';
+card.innerHTML='<div class="story-step" onclick="speakGB(\''+p.voice+'\','+(1.1+i*0.05)+',\''+(i%2===0?"girl":"boy")+'\',null)"><div class="step-num">'+(i+1)+'</div><div class="step-text"><strong>'+p.pattern+'</strong></div><div class="step-emoji">💬</div></div>';
 cfPatBox.appendChild(card);
 });
 }
