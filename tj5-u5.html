@@ -848,6 +848,7 @@ h+="<div class='write-keyboard' id='wk"+i+"'>";
 for(var k=0;k<keys.length;k++){
 h+="<button class='write-key' data-q='"+i+"' data-l='"+keys[k]+"'>"+keys[k]+"</button>";
 }
+h+="<button class='write-key' data-q='"+i+"' data-l='-' style='font-size:clamp(18px,3vw,24px)'>-</button>";
 h+="<button class='write-key del' data-q='"+i+"' data-action='del'>⌫</button>";
 h+="<button class='write-key clr' data-q='"+i+"' data-action='clr'>CLEAR</button>";
 h+="</div>";
