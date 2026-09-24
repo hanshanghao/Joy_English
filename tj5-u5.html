@@ -70,7 +70,8 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .num-card{background:#fff;border-radius:14px;padding:12px 8px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.08);cursor:pointer;transition:all .2s;border:3px solid transparent}
 .num-card:hover{border-color:var(--purple);transform:translateY(-2px)}
 .num-card .num-big{font-size:clamp(24px,4vw,36px);font-weight:900;color:var(--purple)}
-.num-card .num-word{font-size:clamp(11px,1.6vw,14px);font-weight:700;color:#888;margin-top:4px}
+.num-card .num-word{font-size:clamp(11px,1.6vw,14px);font-weight:700;color:var(--green);margin-top:4px;max-height:0;overflow:hidden;opacity:0;transition:all .3s ease}
+.num-card.done .num-word{max-height:40px;opacity:1}
 .num-card.done{border-color:var(--green);background:#e8ffe8}
 
 .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
@@ -548,7 +549,7 @@ var numbers=[
 {n:21,w:"twenty-one"},{n:22,w:"twenty-two"},{n:23,w:"twenty-three"},{n:24,w:"twenty-four"},{n:25,w:"twenty-five"},
 {n:26,w:"twenty-six"},{n:27,w:"twenty-seven"},{n:28,w:"twenty-eight"},{n:29,w:"twenty-nine"},{n:30,w:"thirty"}
 ];
-function buildNumGrid(){var g=document.getElementById("numGrid");g.innerHTML="";numbers.forEach(function(n){var d=document.createElement("div");d.className="num-card";d.innerHTML="<div class='num-big'>"+n.n+"</div><div class='num-word'>"+n.w+"</div>";d.onclick=function(){speakGB(n.n.toString()+". "+n.w,1.35,"girl",null);this.classList.add("done");sPop();};g.appendChild(d);});}
+function buildNumGrid(){var g=document.getElementById("numGrid");g.innerHTML="";numbers.forEach(function(n){var d=document.createElement("div");d.className="num-card";d.innerHTML="<div class='num-big'>"+n.n+"</div><div class='num-word'>"+n.w+"</div>";var clicked=false;d.onclick=function(){if(!clicked){clicked=true;speakGB(n.n.toString(),1.35,"girl",null);sPop();}else{this.classList.add("done");speakGB(n.w,1.35,"girl",function(){setTimeout(function(){speakGB(n.n.toString(),1.35,"girl",null);},400);});sPop();}};g.appendChild(d);});}
 
 /* RELAY */
 var relayIdx=0;var relayTeam="a";var relayActive=false;
