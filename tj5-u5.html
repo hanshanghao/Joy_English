@@ -218,11 +218,18 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .write-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
 .write-prompt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:6px}
 .write-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:14px;font-weight:600}
-.write-input{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.write-input input{padding:12px 18px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(16px,2.6vw,22px);font-weight:700;width:260px;text-align:center;outline:none;transition:border-color .2s;font-family:inherit}
-.write-input input:focus{border-color:var(--purple)}
-.write-input input.correct{border-color:var(--green);background:#e8ffe8}
-.write-input input.wrong{border-color:var(--red);background:#ffe8e8}
+.write-display{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;min-height:48px;padding:10px;background:#f8f5ff;border-radius:14px;border:2px dashed #d0c4f0}
+.write-letter{width:36px;height:42px;display:flex;align-items:center;justify-content:center;font-size:clamp(18px,3vw,24px);font-weight:900;color:var(--purple);border-bottom:3px solid var(--purple);transition:all .2s}
+.write-letter.filled{animation:popIn .2s ease}
+@keyframes popIn{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.write-keyboard{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.write-key{width:clamp(32px,7vw,40px);height:clamp(36px,8vw,44px);border:none;border-radius:10px;font-size:clamp(14px,2.2vw,18px);font-weight:800;cursor:pointer;background:linear-gradient(135deg,#f5f0ff,#ede4ff);color:var(--purple);border:2px solid #d0c4f0;transition:all .15s;box-shadow:0 3px 0 rgba(0,0,0,.08)}
+.write-key:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.08);background:var(--purple);color:#fff;border-color:var(--purple)}
+.write-key:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.write-key.del{background:linear-gradient(135deg,#ffab6e,#f5822b);color:#fff;border-color:#f5822b;font-size:clamp(16px,2.6vw,20px)}
+.write-key.del:hover{background:#f5822b}
+.write-key.clr{background:linear-gradient(135deg,#ff8a8a,#e04040);color:#fff;border-color:#e04040;font-size:clamp(12px,1.8vw,14px)}
+.write-key.clr:hover{background:#e04040}
 .write-result{font-size:clamp(14px,2.2vw,18px);font-weight:800;text-align:center;margin-top:12px;min-height:28px}
 .write-spell{font-size:clamp(13px,2vw,16px);color:var(--purple);text-align:center;margin-top:8px;font-weight:700;letter-spacing:2px;min-height:24px}
 
@@ -797,8 +804,19 @@ h+="</div><div class='tf-result' id='lRes"+i+"'></div></div>";
 });return h;}
 
 function buildWriteHtml(){
-var h="";writeData.forEach(function(w,i){
-h+="<div class='write-card' id='wc"+i+"'><div style='font-size:36px;text-align:center'>"+w.emoji+"</div><div class='write-prompt'>"+w.prompt+"</div><div class='write-hint'>"+w.hint+"</div><div class='write-input'><input type='text' id='wi"+i+"' placeholder='Type the word...' autocomplete='off'></div><div style='text-align:center;margin-top:10px'><button class='btn green' onclick=\"checkWrite("+i+")\" style='padding:10px 24px'>✅ Check</button> <button class='btn blue' onclick=\"hearWrite("+i+")\" style='padding:10px 24px'>🔊 Hear</button></div><div class='write-result' id='wRes"+i+"'></div><div class='write-spell' id='wSpell"+i+"'></div></div>";
+var h="";var keys="abcdefghijklmnopqrstuvwxyz";
+writeData.forEach(function(w,i){
+h+="<div class='write-card' id='wc"+i+"'><div style='font-size:36px;text-align:center'>"+w.emoji+"</div><div class='write-prompt'>"+w.prompt+"</div><div class='write-hint'>"+w.hint+"</div>";
+h+="<div class='write-display' id='wd"+i+"'></div>";
+h+="<div class='write-keyboard' id='wk"+i+"'>";
+for(var k=0;k<keys.length;k++){
+h+="<button class='write-key' data-q='"+i+"' data-l='"+keys[k]+"'>"+keys[k]+"</button>";
+}
+h+="<button class='write-key del' data-q='"+i+"' data-action='del'>⌫</button>";
+h+="<button class='write-key clr' data-q='"+i+"' data-action='clr'>CLEAR</button>";
+h+="</div>";
+h+="<div style='text-align:center;margin-top:10px'><button class='btn green' onclick=\"checkWrite("+i+")\" style='padding:10px 24px'>✅ Check</button> <button class='btn blue' onclick=\"hearWrite("+i+")\" style='padding:10px 24px'>🔊 Hear</button></div>";
+h+="<div class='write-result' id='wRes"+i+"'></div><div class='write-spell' id='wSpell"+i+"'></div></div>";
 });return h;}
 
 function buildMcHtml(){
@@ -863,21 +881,23 @@ sPop();
 
 function checkWrite(i){
 if(writeAnswered[i]!==null)return;
-var input=document.getElementById("wi"+i);
-var val=input.value.trim().toLowerCase();
+var display=document.getElementById("wd"+i);
+var val=display.textContent.trim().toLowerCase();
 var w=writeData[i];
 var res=document.getElementById("wRes"+i);
 var spell=document.getElementById("wSpell"+i);
 writeAnswered[i]=true;
 if(val===w.answer.toLowerCase()){
-input.classList.add("correct");
+display.style.borderColor="var(--green)";
+display.style.background="#e8ffe8";
 res.innerHTML="<span style='color:var(--green)'>✅ Correct! '"+w.answer+"'</span>";
 quizScore+=5;addPts(5);
 if(soundOn)sDing();
 spell.innerHTML=w.answer.split("").join("-");
 if(soundOn)speakGB(w.answer,1.35,"girl",null,0.9);
 }else{
-input.classList.add("wrong");
+display.style.borderColor="var(--red)";
+display.style.background="#ffe8e8";
 res.innerHTML="<span style='color:var(--red)'>❌ It's '"+w.answer+"'</span>";
 if(soundOn)sBuzz();
 var letters=w.answer.split("");
@@ -956,14 +976,26 @@ window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function attachEvents(){
-writeData.forEach(function(w,i){
-var inp=document.getElementById("wi"+i);
-if(inp){
-inp.addEventListener("keydown",function(e){
-if(e.key==="Enter")checkWrite(i);
-});
+document.querySelectorAll(".write-key").forEach(function(btn){
+btn.addEventListener("click",function(){
+var q=parseInt(this.dataset.q);
+var action=this.dataset.action;
+var display=document.getElementById("wd"+q);
+if(writeAnswered[q]!==null)return;
+if(action==="del"){
+var letters=display.textContent.split("");
+letters.pop();
+display.textContent=letters.join("");
+}else if(action==="clr"){
+display.textContent="";
+}else{
+var letter=this.dataset.l;
+if(display.textContent.length<20){
+display.textContent+=letter;
+sPop();
 }}
-);
+});
+});
 }
 
 var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈"];
