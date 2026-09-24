@@ -782,7 +782,8 @@ function launchConfetti(){var emojis=["🎉","⭐","✨","🎊","💖","🌈","�
 var totalScore=0;
 function addPts(pts){totalScore+=pts;showToast("+"+pts+" points! Total: "+totalScore);if(soundOn)sDing();}
 var curTab=0;
-function showTab(idx){curTab=idx;var pans=document.querySelectorAll(".tabpan");var tabs=document.querySelectorAll(".navbar .ntab");pans.forEach(function(p,i){p.classList.toggle("on",i===idx);});tabs.forEach(function(t,i){t.classList.toggle("on",i===idx);});}
+var tabSecMap={0:"warmup",1:"relay",2:"vocab",3:"patterns",4:"lucky",5:"faster",6:"daily",7:"values",8:"spotlight",9:"culture",10:"culture"};
+function showTab(idx){curTab=idx;curSec=tabSecMap[idx]||"warmup";var pans=document.querySelectorAll(".tabpan");var tabs=document.querySelectorAll(".navbar .ntab");pans.forEach(function(p,i){p.classList.toggle("on",i===idx);});tabs.forEach(function(t,i){t.classList.toggle("on",i===idx);});}
 function openLb(src){var lb=document.getElementById("lightbox");document.getElementById("lbImg").src=src;lb.classList.add("show");sPop();}
 document.getElementById("lbClose").onclick=function(){document.getElementById("lightbox").classList.remove("show");};
 document.getElementById("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show");};
