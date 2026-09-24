@@ -37,6 +37,10 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .now-chip{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
 .topbar .sound-toggle{margin-left:auto;background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
 .topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.sec-sound{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.85);border:2px solid #e0d8f0;border-radius:50px;padding:4px 12px;font-size:clamp(11px,1.6vw,13px);font-weight:700;cursor:pointer;transition:all .2s;color:#555;margin-left:auto}
+.sec-sound:hover{border-color:var(--purple);background:#f5f0ff}
+.sec-sound.off{border-color:#ddd;color:#bbb;background:#f9f9f9}
+.sec-sound .sec-si{font-size:15px}
 .navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
 .navbar::-webkit-scrollbar{display:none}
 .navbar .ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s}
@@ -298,7 +302,6 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div id="floaties"></div>
 <div class="topbar">
 <div class="now-chip">📚 TJ5 · Unit 5 · Review Units 1–4</div>
-<button class="sound-toggle" id="soundBtn" title="Toggle Sound">🔊</button>
 </div>
 <div class="navbar" id="navBar">
 <button class="ntab on" onclick="showTab(0)">📖 Lesson Plan</button>
@@ -315,14 +318,14 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 0: Lesson Plan -->
-<div class="tabpan on" id="tp0">
+<div class="tabpan on" id="tp0" data-sec="warmup">
 <div class="hero">
 <span class="big-emoji">📚</span>
 <h1>TJ5 Unit 5 - Review Units 1-4</h1>
 <span class="sub">Warm-up + Vocabulary + Patterns + Tales of Values</span>
 </div>
 <section>
-<div class="shead"><span class="ic">📋</span><h2>Today's Lesson Plan</h2><span class="badge">OVERVIEW</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">📋</span><h2>Today's Lesson Plan</h2><span class="badge">OVERVIEW</span><button class="sec-sound" data-sec="warmup" onclick="toggleSecSound('warmup',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 This unit reviews Units 1-4. The objective is to review the parts students have difficulties with. Make sure students have completed Unit 1-4 memorise & say before class.
 </div>
@@ -368,9 +371,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 1: Warm-up Number Relay -->
-<div class="tabpan" id="tp1">
+<div class="tabpan" id="tp1" data-sec="relay">
 <section>
-<div class="shead"><span class="ic">🔢</span><h2>Writing Relay</h2><span class="badge">1-30</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🔢</span><h2>Writing Relay</h2><span class="badge">1-30</span><button class="sec-sound" data-sec="relay" onclick="toggleSecSound('relay',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click each number to hear it spoken. Practice spelling! Then try the Writing Relay game below.
 </div>
@@ -399,9 +402,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 2: Vocabulary -->
-<div class="tabpan" id="tp2">
+<div class="tabpan" id="tp2" data-sec="vocab">
 <section>
-<div class="shead"><span class="ic">🍎</span><h2>Fruits - Singular & Plural</h2><span class="badge">VOCAB</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🍎</span><h2>Fruits - Singular & Plural</h2><span class="badge">VOCAB</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click any card to hear the word! Notice how the spelling changes for plural.
 </div>
@@ -409,7 +412,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div class="vocab-grid" id="fruitGrid"></div>
 </section>
 <section>
-<div class="shead"><span class="ic">🏙️</span><h2>Places</h2><span class="badge">VOCAB</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🏙️</span><h2>Places</h2><span class="badge">VOCAB</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click any place card to hear its name and what you can do there!
 </div>
@@ -430,9 +433,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 3: Patterns -->
-<div class="tabpan" id="tp3">
+<div class="tabpan" id="tp3" data-sec="patterns">
 <section>
-<div class="shead"><span class="ic">💬</span><h2>Sentence Patterns</h2><span class="badge">UNITS 1-4</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">💬</span><h2>Sentence Patterns</h2><span class="badge">UNITS 1-4</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click any pattern to hear it spoken. Practice making your own sentences!
 </div>
@@ -441,9 +444,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 4: Lucky Cards -->
-<div class="tabpan" id="tp4">
+<div class="tabpan" id="tp4" data-sec="lucky">
 <section>
-<div class="shead"><span class="ic">🃏</span><h2>Lucky Cards</h2><span class="badge">VOCAB REVIEW</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🃏</span><h2>Lucky Cards</h2><span class="badge">VOCAB REVIEW</span><button class="sec-sound" data-sec="lucky" onclick="toggleSecSound('lucky',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click a card to flip it and reveal the vocabulary. Say the word aloud! Cards with 🍀 are Lucky Cards - get bonus points!
 </div>
@@ -458,9 +461,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 5: Who's Faster -->
-<div class="tabpan" id="tp5">
+<div class="tabpan" id="tp5" data-sec="faster">
 <section>
-<div class="shead"><span class="ic">⚡</span><h2>Who's Faster?</h2><span class="badge">pp. 13-14</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">⚡</span><h2>Who's Faster?</h2><span class="badge">pp. 13-14</span><button class="sec-sound" data-sec="faster" onclick="toggleSecSound('faster',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Team A vs Team B! Click Start to show a sentence. Teams race to find the correct word card. First to click gets the point!
 </div>
@@ -476,9 +479,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 6: Daily English -->
-<div class="tabpan" id="tp6">
+<div class="tabpan" id="tp6" data-sec="daily">
 <section>
-<div class="shead"><span class="ic">🪙</span><h2>Daily English - Plus & Minus</h2><span class="badge">MONEY</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🪙</span><h2>Daily English - Plus & Minus</h2><span class="badge">MONEY</span><button class="sec-sound" data-sec="daily" onclick="toggleSecSound('daily',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Learn to count money! Click coins to add them up. Use $1, $5, and $10 coins.
 </div>
@@ -507,7 +510,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div class="relay-result" id="moneyResult" style="margin-top:10px"></div>
 </section>
 <section>
-<div class="shead"><span class="ic">📖</span><h2>Practice Sentences</h2><span class="badge">PLUS & MINUS</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">📖</span><h2>Practice Sentences</h2><span class="badge">PLUS & MINUS</span><button class="sec-sound" data-sec="daily" onclick="toggleSecSound('daily',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click each card to hear the sentence. Practice saying them aloud!
 </div>
@@ -545,7 +548,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 </section>
 <section>
-<div class="shead"><span class="ic">📚</span><h2>There Are Many</h2><span class="badge">PRACTICE</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">📚</span><h2>There Are Many</h2><span class="badge">PRACTICE</span><button class="sec-sound" data-sec="daily" onclick="toggleSecSound('daily',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Look at the pictures and practice saying the sentences!
 </div>
@@ -579,7 +582,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 </section>
 <section>
-<div class="shead"><span class="ic">🚻</span><h2>Be a Good Kid - Practice</h2><span class="badge">VALUES</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🚻</span><h2>Be a Good Kid - Practice</h2><span class="badge">VALUES</span><button class="sec-sound" data-sec="values" onclick="toggleSecSound('values',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click each step to hear and practice the bathroom rules!
 </div>
@@ -615,9 +618,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 7: Tales of Values -->
-<div class="tabpan" id="tp7">
+<div class="tabpan" id="tp7" data-sec="values">
 <section>
-<div class="shead"><span class="ic">🚻</span><h2>Be a Good Kid!</h2><span class="badge">TALES OF VALUES</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🚻</span><h2>Be a Good Kid!</h2><span class="badge">TALES OF VALUES</span><button class="sec-sound" data-sec="values" onclick="toggleSecSound('values',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click each step to hear the instruction. Learn the proper bathroom etiquette!
 </div>
@@ -682,9 +685,9 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 8: Spotlight -->
-<div class="tabpan" id="tp8">
+<div class="tabpan" id="tp8" data-sec="spotlight">
 <section>
-<div class="shead"><span class="ic">🎯</span><h2>Spotlight Team Game</h2><span class="badge">REVIEW</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🎯</span><h2>Spotlight Team Game</h2><span class="badge">REVIEW</span><button class="sec-sound" data-sec="spotlight" onclick="toggleSecSound('spotlight',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:16px">
 💡 Click a category. Teams take turns saying different phrases. First team to run out of ideas loses a point!
 </div>
@@ -694,7 +697,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 </div>
 
 <!-- TAB 9: Quiz -->
-<div class="tabpan" id="tp9">
+<div class="tabpan" id="tp9" data-sec="culture">
 <div class="hero">
 <span class="big-emoji">📝</span>
 <h1>Review Quiz</h1>
@@ -721,7 +724,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div class="desc">Learn about the Dragon-boat Festival! Eat zongzi, row the boat, and have fun!</div>
 </div>
 <section>
-<div class="shead"><span class="ic">🎋</span><h2>Vocabulary</h2><span class="badge">NEW WORDS</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🎋</span><h2>Vocabulary</h2><span class="badge">NEW WORDS</span><button class="sec-sound" data-sec="culture" onclick="toggleSecSound('culture',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click each card to hear the word and learn about it!
 </div>
@@ -729,14 +732,14 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div class="cf-vocab-grid" id="cfVocabGrid"></div>
 </section>
 <section>
-<div class="shead"><span class="ic">💬</span><h2>Sentence Patterns</h2><span class="badge">PRACTICE</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">💬</span><h2>Sentence Patterns</h2><span class="badge">PRACTICE</span><button class="sec-sound" data-sec="culture" onclick="toggleSecSound('culture',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click each pattern to hear it spoken. Practice making your own sentences!
 </div>
 <div id="cfPatterns"></div>
 </section>
 <section>
-<div class="shead"><span class="ic">🃏</span><h2>Flashcards Game</h2><span class="badge">FLIP & LEARN</span></div>
+<div class="shead" style="display:flex;align-items:center"><span class="ic">🃏</span><h2>Flashcards Game</h2><span class="badge">FLIP & LEARN</span><button class="sec-sound" data-sec="culture" onclick="toggleSecSound('culture',this)"><span class="sec-si">🔊</span></button></div>
 <div class="tip" style="margin-bottom:14px">
 💡 Click a card to flip it and reveal the answer. Say the word aloud!
 </div>
@@ -769,7 +772,10 @@ function sBuzz(){if(!soundOn)return;tone(180,0.18,"sawtooth",0.11);tone(140,0.22
 function sWin(){if(!soundOn)return;tone(523,0.12,"sine",0.14);tone(659,0.12,"sine",0.14,0.1);tone(784,0.12,"sine",0.14,0.2);tone(1047,0.2,"sine",0.16,0.3);}
 var cachedVoices=[];
 if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();};}
-function speakGB(text,pitch,gender,onEnd,rate){if(!soundOn){if(onEnd)onEnd();return;}var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();var voice;if(gender==="boy"){voice=v.find(function(x){return x.lang==="en-GB"&&(x.name.includes("Google UK English Male")||x.name.includes("Male")||x.name.includes("Daniel"));})||v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.name.includes("Male")&&x.lang.startsWith("en");})||v.find(function(x){return x.lang.startsWith("en");});}else{voice=v.find(function(x){return x.lang==="en-GB"&&(x.name.includes("Google UK English Female")||x.name.includes("Female")||x.name.includes("Karen")||x.name.includes("Samantha"));})||v.find(function(x){return x.lang==="en-GB"&&!x.name.includes("Male");})||v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.name.includes("Female")&&x.lang.startsWith("en");})||v.find(function(x){return x.lang.startsWith("en");});}var u=new SpeechSynthesisUtterance(text);u.voice=voice||null;u.lang="en-GB";u.rate=rate||0.72;u.pitch=pitch;u.volume=1;u.onend=onEnd;speechSynthesis.speak(u);}
+var secSounds={warmup:true,relay:true,vocab:true,patterns:true,lucky:true,faster:true,daily:true,values:true,spotlight:true,culture:true};
+function toggleSecSound(sec,btn){secSounds[sec]=!secSounds[sec];var si=btn.querySelector(".sec-si");si.textContent=secSounds[sec]?"🔊":"🔇";btn.classList.toggle("off",!secSounds[sec]);showToast(sec.charAt(0).toUpperCase()+sec.slice(1)+" sound "+(secSounds[sec]?"ON":"OFF"));}
+var curSec="warmup";
+function speakGB(text,pitch,gender,onEnd,rate){if(!soundOn||!secSounds[curSec]){if(onEnd)onEnd();return;}var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();var voice;if(gender==="boy"){voice=v.find(function(x){return x.lang==="en-GB"&&(x.name.includes("Google UK English Male")||x.name.includes("Male")||x.name.includes("Daniel"));})||v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.name.includes("Male")&&x.lang.startsWith("en");})||v.find(function(x){return x.lang.startsWith("en");});}else{voice=v.find(function(x){return x.lang==="en-GB"&&(x.name.includes("Google UK English Female")||x.name.includes("Female")||x.name.includes("Karen")||x.name.includes("Samantha"));})||v.find(function(x){return x.lang==="en-GB"&&!x.name.includes("Male");})||v.find(function(x){return x.lang==="en-GB";})||v.find(function(x){return x.name.includes("Female")&&x.lang.startsWith("en");})||v.find(function(x){return x.lang.startsWith("en");});}var u=new SpeechSynthesisUtterance(text);u.voice=voice||null;u.lang="en-GB";u.rate=rate||0.72;u.pitch=pitch;u.volume=1;u.onend=onEnd;speechSynthesis.speak(u);}
 function speakLine(text){speechSynthesis.cancel();speakGB(text,1.35,"girl",null);}
 function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2000);}
 function launchConfetti(){var emojis=["🎉","⭐","✨","🎊","💖","🌈","🎈","💪"];for(var i=0;i<50;i++){var el=document.createElement("div");el.className="confetti-piece";el.innerHTML=emojis[Math.floor(Math.random()*emojis.length)];el.style.cssText="left:"+Math.random()*100+"vw;font-size:"+(Math.random()*16+10)+"px;animation-duration:"+(Math.random()*2+2)+"s;animation-delay:"+(Math.random()*1.5)+"s;";document.body.appendChild(el);setTimeout(function(e){e.remove();}.bind(null,el),5000);}}
@@ -777,7 +783,6 @@ var totalScore=0;
 function addPts(pts){totalScore+=pts;showToast("+"+pts+" points! Total: "+totalScore);if(soundOn)sDing();}
 var curTab=0;
 function showTab(idx){curTab=idx;var pans=document.querySelectorAll(".tabpan");var tabs=document.querySelectorAll(".navbar .ntab");pans.forEach(function(p,i){p.classList.toggle("on",i===idx);});tabs.forEach(function(t,i){t.classList.toggle("on",i===idx);});}
-document.getElementById("soundBtn").onclick=function(){soundOn=!soundOn;this.textContent=soundOn?"🔊":"🔇";showToast(soundOn?"Sound ON":"Sound OFF");};
 function openLb(src){var lb=document.getElementById("lightbox");document.getElementById("lbImg").src=src;lb.classList.add("show");sPop();}
 document.getElementById("lbClose").onclick=function(){document.getElementById("lightbox").classList.remove("show");};
 document.getElementById("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show");};
@@ -1311,6 +1316,14 @@ function resetCfFlash(){buildCfFlash()}
 var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈"];
 function createFloaties(){var c=document.getElementById("floaties");for(var i=0;i<12;i++){var s=document.createElement("div");s.className="floaty";s.innerHTML=floatEmojis[i%floatEmojis.length];s.style.left=Math.random()*100+"vw";s.style.fontSize=(Math.random()*14+18)+"px";s.style.animationDuration=(Math.random()*12+14)+"s";s.style.animationDelay=(Math.random()*10)+"s";c.appendChild(s);}}
 document.getElementById("mascot").onclick=function(){speakGB("Hi! I am Owlbert! Let's review Units 1 to 4!",1.05,"boy",null);showToast("🦉 Hello from Owlbert!");};
+
+var secMap={"warmup":1,"relay":1,"vocab":2,"patterns":3,"lucky":4,"faster":5,"daily":6,"values":7,"spotlight":8,"culture":9};
+document.addEventListener("click",function(e){
+var secBtn=e.target.closest(".sec-sound");
+if(secBtn){var sec=secBtn.dataset.sec;curSec=sec;return;}
+var secEl=e.target.closest("[data-sec]");
+if(secEl){curSec=secEl.dataset.sec;}
+});
 
 buildNumGrid();buildRelayTeams();buildFruitGrid();buildPlaceGrid();buildMatch();buildPatterns();
 buildLuckyTeams();shuffleLucky();buildFasterTeams();buildMoneyGrid();buildSpotTeams();buildSpotCat();buildQuizAll();createFloaties();
