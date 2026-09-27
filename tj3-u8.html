@@ -557,6 +557,18 @@ function speakerGender(name){
   var k=String(name||"").toLowerCase().replace(/\s+/g," ").trim();
   return SPEAKER_VOICE[k]||null;
 }
+var EMOJI_VOICE=[["👧","f"],["👦","m"],["🧒","m"],["🧑","m"],["👶",null],["👩","f"],["👨","m"]];
+function genderFromEmoji(e){
+  var s=String(e||"");
+  for(var i=0;i<EMOJI_VOICE.length;i++){
+    if(s.indexOf(EMOJI_VOICE[i][0])>=0) return EMOJI_VOICE[i][1];
+  }
+  return null;
+}
+function speakerVoice(emoji,name){
+  var g=genderFromEmoji(emoji);
+  return g||speakerGender(name);
+}
 function voiceFor(pitch,gender){
   if(gender==="f") return V_FEMALE||V_MALE;
   if(gender==="m") return V_MALE||V_FEMALE;
@@ -1126,16 +1138,16 @@ function buildDialogue(){
     var card=document.createElement("div");
     card.className="charcard";
     card.innerHTML='<div class="ce">'+c.e+'</div><div class="cn">'+c.n+'</div><div class="ct">'+c.t+'</div><div class="cl">"'+c.line+'"</div>';
-    card.addEventListener("click",function(){ speakHuman(c.line,c.p,0,speakerGender(c.n)); sPop(); });
+    card.addEventListener("click",function(){ speakHuman(c.line,c.p,0,speakerVoice(c.e,c.n)); sPop(); });
     cc.appendChild(card);
   });
   var DIAL=[
     {e:"👦",w:"Alex",t:"Wow! There are so many interactive games!",p:0.82},
-    {e:"👦",w:"Alex",t:"I love learning through play!",p:0.82},
+    {e:"👧",w:"Emma",t:"I love learning through play!",p:1.32},
     {e:"🧒",w:"Jack",t:"I love learning through play, too!",p:1.0},
     {e:"👧",w:"Emma",t:"Wow! I can learn so much!",p:1.32},
-    {e:"👧",w:"Emma",t:"I love the interactive activities!",p:1.32},
-    {e:"🧒",w:"Jack",t:"I love learning through play, too!",p:1.0},
+    {e:"👦",w:"Alex",t:"I love the interactive activities!",p:0.86},
+    {e:"👧",w:"Emma",t:"I love learning through play, too!",p:1.28},
     {e:"🧒",w:"Jack",t:"But… I don't understand everything yet.",p:1.0}
   ];
   var dlBub=[];
@@ -1149,7 +1161,7 @@ function buildDialogue(){
     bub.addEventListener("click",function(){
       Array.prototype.forEach.call(dlBub,function(b){ b.classList.remove("on"); });
       bub.classList.add("on");
-      speakHuman(l.t,l.p,0,speakerGender(l.w)); sPop();
+      speakHuman(l.t,l.p,0,speakerVoice(l.e,l.w)); sPop();
     });
     dlEl.appendChild(row); dlBub.push(bub);
   });
@@ -1169,7 +1181,7 @@ function buildDialogue(){
       u.volume=1;
       u.rate=NATURAL_RATE;
       u.pitch=clampPitch(line.p,1.0);
-      u.voice=voiceFor(line.p,speakerGender(line.w))||u.voice;
+      u.voice=voiceFor(line.p,speakerVoice(line.e,line.w))||u.voice;
       u.onend=function(){ setTimeout(chain,340); };
       u.onerror=function(){ setTimeout(chain,340); };
       try{ window.speechSynthesis.speak(u); }
