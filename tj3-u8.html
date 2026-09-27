@@ -36,10 +36,19 @@
   .brand{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.75); border:2px solid #fff; border-radius:50px; padding:9px 18px; font-weight:800; text-decoration:none; color:var(--green); font-size:clamp(12px,2.2vw,15px); box-shadow:0 4px 10px rgba(0,0,0,.12); transition:transform .2s, box-shadow .2s;}
   .brand:hover{transform:translateY(-3px); box-shadow:0 8px 18px rgba(0,0,0,.18);}
   .nowchip{background:var(--yellow); color:#6b4d00; border-radius:50px; padding:8px 18px; font-weight:900; font-size:clamp(12px,2.2vw,15px); box-shadow:0 3px 0 rgba(0,0,0,.12);}
-  .soundbtn{width:46px; height:46px; border:none; cursor:pointer; border-radius:50%; font-size:21px; font-family:inherit; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#6ec6ff,#3f95d8); color:#fff; box-shadow:0 4px 0 rgba(0,0,0,.2), 0 6px 12px rgba(0,0,0,.15); transition:transform .15s, filter .2s;}
-  .soundbtn:hover{transform:translateY(-2px); filter:brightness(1.08);}
-  .soundbtn:active{transform:translateY(2px); box-shadow:0 2px 0 rgba(0,0,0,.2);}
-  .soundbtn.off{background:linear-gradient(180deg,#bdb4d1,#9a90b3);}
+
+  .shead .sec-sound{
+    margin-left:auto; flex:0 0 auto; display:inline-flex; align-items:center; gap:5px;
+    font-family:inherit; font-weight:900; font-size:clamp(11px,1.8vw,13px); color:#fff;
+    background:linear-gradient(180deg,#6ec6ff,#3f95d8); border:none; border-radius:30px;
+    padding:5px 13px; cursor:pointer; box-shadow:0 3px 0 rgba(0,0,0,.2);
+    transition:transform .15s, filter .2s, background .2s;
+  }
+  .shead .sec-sound:hover{transform:translateY(-2px); filter:brightness(1.08);}
+  .shead .sec-sound:active{transform:translateY(2px); box-shadow:0 1px 0 rgba(0,0,0,.2);}
+  .shead .sec-sound:focus-visible{outline:3px solid var(--yellow); outline-offset:2px;}
+  .shead .sec-sound .sec-si{font-size:14px; line-height:1;}
+  .shead .sec-sound.off{background:linear-gradient(180deg,#bdb4d1,#9a90b3);}
 
   .hero{text-align:center; margin:18px 0 6px;}
   .hero .hmot{display:inline-block; font-size:clamp(50px,9vw,80px); animation:sway 3s ease-in-out infinite;}
@@ -218,7 +227,6 @@
 <div class="wrap">
   <div class="topbar">
     <span class="nowchip">🎯 TJ3-U8 · Unit 8 · Interactive Learning Adventure</span>
-    <button class="soundbtn" id="soundBtn" title="Sound on / off" aria-label="Sound on or off" aria-pressed="true" type="button">🔊</button>
   </div>
 
   <div class="hero">
@@ -236,7 +244,7 @@
 
   <div class="scene" id="scene-warm">
     <section>
-      <div class="shead"><span class="ic">🎯</span><h2>Warm-Up · Lucky Guess (5 min)</h2><span class="badge green">Review Unit 7 topics</span></div>
+      <div class="shead" data-sec="warm-intro"><span class="ic">🎯</span><h2>Warm-Up · Lucky Guess (5 min)</h2><span class="badge green">Review Unit 7 topics</span></div>
       <div class="flow">
         <span class="fc"><span class="fn">1</span>Review flashcards</span><span class="ar">➜</span>
         <span class="fc"><span class="fn">2</span>Pick a secret word</span><span class="ar">➜</span>
@@ -249,10 +257,10 @@
       </div>
       <div class="bboard">I am going to the <span class="blank">____</span> .</div>
 
-      <div class="shead"><span class="ic">🃏</span><h2>Unit 7 Review Flashcards</h2><span class="badge blue">tap to flip &amp; listen</span></div>
+      <div class="shead" data-sec="warm-flash"><span class="ic">🃏</span><h2>Unit 7 Review Flashcards</h2><span class="badge blue">tap to flip &amp; listen</span></div>
       <div class="flashgrid" id="warmFlash"></div>
 
-      <div class="shead"><span class="ic">🔮</span><h2>Lucky Guess Board</h2><span class="badge">tap a word to choose your secret</span></div>
+      <div class="shead" data-sec="warm-lucky"><span class="ic">🔮</span><h2>Lucky Guess Board</h2><span class="badge">tap a word to choose your secret</span></div>
       <div class="flashgrid" id="luckGrid"></div>
       <div class="timer" id="luckTimer">15</div>
       <div class="btnrow">
@@ -260,10 +268,10 @@
         <button class="btn pink" id="luckReveal">🎭 Reveal the secret!</button>
       </div>
 
-      <div class="shead"><span class="ic">📚</span><h2>Unit 7 Vocabulary List</h2><span class="badge green">drag &amp; drop to practice</span></div>
+      <div class="shead" data-sec="warm-vocab"><span class="ic">📚</span><h2>Unit 7 Vocabulary List</h2><span class="badge green">drag &amp; drop to practice</span></div>
       <div class="cards" id="vocabListCards"></div>
 
-      <div class="shead"><span class="ic">🏆</span><h2>Reward Scoreboard</h2><span class="badge pink">Team A vs Team B</span></div>
+      <div class="shead" data-sec="warm-score"><span class="ic">🏆</span><h2>Reward Scoreboard</h2><span class="badge pink">Team A vs Team B</span></div>
       <div class="teams">
         <div class="tcard ta"><div class="tname">🟦 Team A</div><div class="tcount" id="scoreA">🎁 0</div><button class="btn green teamAdd" data-team="a">+1 Reward Card</button></div>
         <div class="tcard tb"><div class="tname">🟩 Team B</div><div class="tcount" id="scoreB">🎁 0</div><button class="btn blue teamAdd" data-team="b">+1 Reward Card</button></div>
@@ -275,7 +283,7 @@
 
   <div class="scene" id="scene-dialogue">
     <section>
-      <div class="shead"><span class="ic">🗣️</span><h2>Dialogue · At the Interactive Station (15 min)</h2></div>
+      <div class="shead" data-sec="dia-intro"><span class="ic">🗣️</span><h2>Dialogue · At the Interactive Station (15 min)</h2></div>
       <div class="flow">
         <span class="fc"><span class="fn">1</span>Meet the characters</span><span class="ar">➜</span>
         <span class="fc"><span class="fn">2</span>Listen &amp; say the lines</span><span class="ar">➜</span>
@@ -284,28 +292,28 @@
         <span class="fc"><span class="fn">4</span>Look at the pictures</span>
       </div>
 
-      <div class="shead"><span class="ic">👥</span><h2>Meet Our Friends</h2><span class="badge blue">tap a card to hear a catchphrase</span></div>
+      <div class="shead" data-sec="dia-chars"><span class="ic">👥</span><h2>Meet Our Friends</h2><span class="badge blue">tap a card to hear a catchphrase</span></div>
       <div class="charcards" id="charCards"></div>
 
-      <div class="shead"><span class="ic">💬</span><h2>The Dialogue</h2><span class="badge blue">tap a bubble to say it</span></div>
+      <div class="shead" data-sec="dia-script"><span class="ic">💬</span><h2>The Dialogue</h2><span class="badge blue">tap a bubble to say it</span></div>
       <div class="dlpanel" id="dlPanel"></div>
       <div class="btnrow">
         <button class="btn blue" id="dlPlay">🔊 Play the whole dialogue</button>
         <button class="btn gray" id="dlStop">⏹ Stop</button>
       </div>
 
-      <div class="shead"><span class="ic">📖</span><h2>The Background Story</h2><span class="badge green">listen together</span></div>
+      <div class="shead" data-sec="dia-story"><span class="ic">📖</span><h2>The Background Story</h2><span class="badge green">listen together</span></div>
       <div class="tip" id="storyText"></div>
       <div class="btnrow"><button class="btn green" id="storyRead">🔊 Read the story aloud</button></div>
 
-      <div class="shead"><span class="ic">🖼️</span><h2>Story Pictures</h2><span class="badge">tap to zoom</span></div>
+      <div class="shead" data-sec="dia-pics"><span class="ic">🖼️</span><h2>Story Pictures</h2><span class="badge">tap to zoom</span></div>
       <div class="gallery" id="diaGal"></div>
     </section>
   </div>
 
   <div class="scene" id="scene-vocab">
     <section>
-      <div class="shead"><span class="ic">📚</span><h2>Vocabulary · Interactive Words (10 min)</h2><span class="badge green">singular &amp; plural</span></div>
+      <div class="shead" data-sec="voc-intro"><span class="ic">📚</span><h2>Vocabulary · Interactive Words (10 min)</h2><span class="badge green">singular &amp; plural</span></div>
       <div class="flow">
         <span class="fc"><span class="fn">1</span>Interactive flashcards</span><span class="ar">➜</span>
         <span class="fc"><span class="fn">2</span>Spelling rules</span><span class="ar">➜</span>
@@ -313,26 +321,26 @@
         <span class="fc"><span class="fn">4</span>Plural quiz</span>
       </div>
 
-      <div class="shead"><span class="ic">🃏</span><h2>Interactive Flashcards</h2><span class="badge blue">tap a card = hear it · tap again = plural</span></div>
+      <div class="shead" data-sec="voc-flash"><span class="ic">🃏</span><h2>Interactive Flashcards</h2><span class="badge blue">tap a card = hear it · tap again = plural</span></div>
       <div id="vocabList"></div>
 
-      <div class="shead"><span class="ic">✏️</span><h2>Spelling Rules</h2><span class="badge pink">the three secret tricks</span></div>
+      <div class="shead" data-sec="voc-rules"><span class="ic">✏️</span><h2>Spelling Rules</h2><span class="badge pink">the three secret tricks</span></div>
       <div class="ruledemo" id="ruleDemo"></div>
 
-      <div class="shead"><span class="ic">🔤</span><h2>Say It in Syllables</h2><span class="badge">slow beats 🥁</span></div>
+      <div class="shead" data-sec="voc-syll"><span class="ic">🔤</span><h2>Say It in Syllables</h2><span class="badge">slow beats 🥁</span></div>
       <div class="syl-wrap" id="sylWrap"></div>
 
-      <div class="shead"><span class="ic">🎯</span><h2>Min i-Quiz · Say the Plural!</h2><span class="badge pink">one tap = answer</span></div>
+      <div class="shead" data-sec="voc-quiz"><span class="ic">🎯</span><h2>Min i-Quiz · Say the Plural!</h2><span class="badge pink">one tap = answer</span></div>
       <div class="qwrap" id="plurQuiz"></div>
 
-      <div class="shead"><span class="ic">🖼️</span><h2>Places Pictures</h2><span class="badge">tap to zoom</span></div>
+      <div class="shead" data-sec="voc-pics"><span class="ic">🖼️</span><h2>Places Pictures</h2><span class="badge">tap to zoom</span></div>
       <div class="gallery" id="vocabGal"></div>
     </section>
   </div>
 
   <div class="scene" id="scene-patterns">
     <section>
-      <div class="shead"><span class="ic">🧩</span><h2>Sentence Patterns (15 min)</h2></div>
+      <div class="shead" data-sec="pat-intro"><span class="ic">🧩</span><h2>Sentence Patterns (15 min)</h2></div>
       <div class="flow">
         <span class="fc"><span class="fn">1</span>Pattern of the day</span><span class="ar">➜</span>
         <span class="fc"><span class="fn">2</span>Build the sentences</span><span class="ar">➜</span>
@@ -341,17 +349,17 @@
       </div>
       <div class="tip">🎯 Pattern of the day<br><b>“There are many interactive games.”</b> 🎮<br><b>“Let's play together!”</b> 🤝</div>
 
-      <div class="shead"><span class="ic">🔁</span><h2>Review Patterns</h2><span class="badge blue">tap to hear</span></div>
+      <div class="shead" data-sec="pat-review"><span class="ic">🔁</span><h2>Review Patterns</h2><span class="badge blue">tap to hear</span></div>
       <div id="patList"></div>
 
-      <div class="shead"><span class="ic">🔠</span><h2>Build the Sentences!</h2><span class="badge blue" id="roundLabel">Round 1 of 3</span></div>
+      <div class="shead" data-sec="pat-build"><span class="ic">🔠</span><h2>Build the Sentences!</h2><span class="badge blue" id="roundLabel">Round 1 of 3</span></div>
       <div class="tip" id="roundTip">New questions every round — <b>no repeats</b>! Left card = <b>🟦 Team A</b>, right card = <b>🟩 Team B</b>. Correct answers earn reward points automatically! 🎯</div>
       <div class="buildgrid" id="buildGrid"></div>
       <div class="btnrow">
         <button class="btn purple" id="patNext" type="button">➡️ Next round</button>
       </div>
 
-      <div class="shead"><span class="ic">🥤</span><h2>Make a Drink</h2><span class="badge green">Let's make…</span></div>
+      <div class="shead" data-sec="pat-drink"><span class="ic">🥤</span><h2>Make a Drink</h2><span class="badge green">Let's make…</span></div>
       <div class="tip">🎯 Pick a fruit and a drink, then say the sentence together!<br><b>"Let's make magic milk!"</b> 🧃</div>
       <div class="maker">
         <select id="mkFruit" aria-label="Choose a fruit">
@@ -372,7 +380,7 @@
       </div>
       <div class="meal-line" id="mkLine">👇 Pick a fruit and a drink first!</div>
 
-      <div class="shead"><span class="ic">🔢</span><h2>Count &amp; Say It Right</h2><span class="badge pink">how many games?</span></div>
+      <div class="shead" data-sec="pat-count"><span class="ic">🔢</span><h2>Count &amp; Say It Right</h2><span class="badge pink">how many games?</span></div>
       <div class="tip">🎯 Count the games, type the number, then say <b>"There are ___ games!"</b> 👅</div>
       <div class="fruitline" id="countFruits"></div>
       <div class="answer-box">
@@ -382,7 +390,7 @@
       </div>
       <div class="msg" id="countMsg"></div>
 
-      <div class="shead"><span class="ic">🏆</span><h2>Reward Scoreboard</h2><span class="badge pink">earn a card with every correct sentence</span></div>
+      <div class="shead" data-sec="pat-score"><span class="ic">🏆</span><h2>Reward Scoreboard</h2><span class="badge pink">earn a card with every correct sentence</span></div>
       <div class="teams">
         <div class="tcard ta"><div class="tname">🟦 Team A</div><div class="tcount" id="patScoreA">🎁 0</div><button class="btn green patAdd" data-team="a">+1 Reward Card</button></div>
         <div class="tcard tb"><div class="tname">🟩 Team B</div><div class="tcount" id="patScoreB">🎁 0</div><button class="btn blue patAdd" data-team="b">+1 Reward Card</button></div>
@@ -390,7 +398,7 @@
       </div>
       <div class="msg" id="patMsg"></div>
 
-      <div class="shead"><span class="ic">👅</span><h2>“There are” — say it right!</h2><span class="badge green">tongue drill</span></div>
+      <div class="shead" data-sec="pat-there"><span class="ic">👅</span><h2>“There are” — say it right!</h2><span class="badge green">tongue drill</span></div>
       <div class="tip">Students often say <b>“they are”</b> instead of <b>“there are”</b>. Remind them to <b>curl their tongue</b> for the “th” sound: <b>th–ere are</b>! 🔴</div>
       <div class="btnrow">
         <button class="btn pink" id="trainThere">🔊 Practise: “There are… there are…”</button>
@@ -398,7 +406,7 @@
       </div>
       <div class="tip" id="trainMsg"></div>
 
-      <div class="shead"><span class="ic">🖼️</span><h2>Pattern Pictures</h2><span class="badge">tap to zoom</span></div>
+      <div class="shead" data-sec="pat-pics"><span class="ic">🖼️</span><h2>Pattern Pictures</h2><span class="badge">tap to zoom</span></div>
       <div class="gallery" id="patGal"></div>
     </section>
   </div>
@@ -424,19 +432,56 @@
 
 <script>
 "use strict";
-var speechOn=true;
-var sndBtn=document.getElementById("soundBtn");
+var SEC_SOUNDS={};
+var curSec="";
+function secOn(){ return !!SEC_SOUNDS[curSec]; }
 function stopSpeech(){ try{ window.speechSynthesis.cancel(); }catch(e){} }
-function setSpeech(on){
-  speechOn=!!on;
-  if(!speechOn) stopSpeech();
-  sndBtn.textContent=speechOn?"🔊":"🔇";
-  sndBtn.classList.toggle("off",!speechOn);
-  sndBtn.setAttribute("aria-pressed",String(speechOn));
-  if(speechOn){ try{ tone(900,0.14,"triangle",0.15); tone(1200,0.16,"triangle",0.15,0.09); }catch(e){} }
+function toggleSecSound(sec,btn){
+  SEC_SOUNDS[sec]=!SEC_SOUNDS[sec];
+  curSec=sec;
+  var si=btn.querySelector(".sec-si");
+  if(si) si.textContent=SEC_SOUNDS[sec]?"🔊":"🔇";
+  btn.classList.toggle("off",!SEC_SOUNDS[sec]);
+  btn.setAttribute("aria-pressed",String(SEC_SOUNDS[sec]));
+  if(!SEC_SOUNDS[sec]) stopSpeech();
+  else{ try{ tone(900,0.14,"triangle",0.15); tone(1200,0.16,"triangle",0.15,0.09); }catch(e){} }
 }
-
-sndBtn.addEventListener("click",function(){ setSpeech(!speechOn); });
+function initSecSounds(){
+  var heads=document.querySelectorAll(".shead[data-sec]");
+  Array.prototype.forEach.call(heads,function(h){
+    var sec=h.getAttribute("data-sec");
+    if(!(sec in SEC_SOUNDS)) SEC_SOUNDS[sec]=true;
+    var b=document.createElement("button");
+    b.className="sec-sound";
+    b.type="button";
+    b.setAttribute("data-sec-btn",sec);
+    b.setAttribute("aria-pressed","true");
+    b.title="Sound on / off for this section";
+    b.setAttribute("aria-label","Sound on or off for this section");
+    b.innerHTML='<span class="sec-si">🔊</span>';
+    b.addEventListener("click",function(){ toggleSecSound(sec,b); });
+    h.appendChild(b);
+  });
+  if(!curSec) curSec=heads.length?heads[0].getAttribute("data-sec"):"";
+}
+function secForNode(node){
+  if(!node||!node.closest) return null;
+  var inHead=node.closest(".shead[data-sec]");
+  if(inHead) return inHead.getAttribute("data-sec");
+  var scene=node.closest(".scene");
+  if(!scene) return null;
+  var heads=scene.querySelectorAll(".shead[data-sec]");
+  var best=null;
+  for(var i=0;i<heads.length;i++){
+    if(heads[i].compareDocumentPosition(node)&4) best=heads[i];
+  }
+  if(!best&&heads.length) best=heads[0];
+  return best?best.getAttribute("data-sec"):null;
+}
+document.addEventListener("click",function(e){
+  var sec=secForNode(e.target);
+  if(sec) curSec=sec;
+},true);
 function audio(){
   var c=window._actx||null;
   if(!c){ try{ c=new (window.AudioContext||window.webkitAudioContext)(); window._actx=c; }catch(e){} }
@@ -444,6 +489,7 @@ function audio(){
   return c;
 }
 function tone(f,dur,type,vol,delay){
+  if(!secOn()) return;
   var c=audio(); if(!c) return;
   var o=c.createOscillator(), g=c.createGain();
   o.type=type||"sine"; o.frequency.value=f;
@@ -494,7 +540,7 @@ function voiceFor(pitch){
   return (pitch&&pitch>=1.2)?(V_FEMALE||V_MALE):(V_MALE||V_FEMALE);
 }
 function speakTxt(txt,pitch,rate){
-  if(!speechOn) return;
+  if(!secOn()) return;
   try{
     if(!("speechSynthesis" in window)) return;
     window.speechSynthesis.cancel();
@@ -524,7 +570,7 @@ function splitChunks(txt){
   return out;
 }
 function speakHuman(txt,pitch,rate){
-  if(!speechOn) return;
+  if(!secOn()) return;
   try{
     if(!("speechSynthesis" in window)) return;
     var items=Object.prototype.toString.call(txt)==="[object Array]"?txt:[txt];
@@ -534,7 +580,7 @@ function speakHuman(txt,pitch,rate){
     var rt=rate||0.88;
     var i=0;
     var chain=function(){
-      if(!speechOn||i>=chunks.length) return;
+      if(!secOn()||i>=chunks.length) return;
       var ch=chunks[i];
       var n=i+1;
       i++;
@@ -838,7 +884,7 @@ function buildSyllablePractice(){
     sayBtn.textContent="🔊 slowly → fast";
     sayBtn.addEventListener("click",function(ev){
       ev.stopPropagation();
-      if(!speechOn) return;
+      if(!secOn()) return;
       var idx=0, phase="syllables";
       var step=function(done){
         var u=new SpeechSynthesisUtterance(done);
@@ -849,7 +895,7 @@ function buildSyllablePractice(){
         catch(e){ setTimeout(next,430); }
       };
       var next=function(){
-        if(!speechOn) return;
+        if(!secOn()) return;
         if(phase==="syllables"){
           if(idx<item.syllables.length){
             Array.prototype.forEach.call(chips,function(c){ c.classList.remove("on"); });
@@ -1155,7 +1201,7 @@ function buildVocab(){
     sayBtn.textContent="🔊 slowly → fast";
     sayBtn.addEventListener("click",function(ev){
       ev.stopPropagation();
-      if(!speechOn) return;
+      if(!secOn()) return;
       var idx=0, phase="syllables";
       var step=function(done){
         var u=new SpeechSynthesisUtterance(done);
@@ -1166,7 +1212,7 @@ function buildVocab(){
         catch(e){ setTimeout(next,430); }
       };
       var next=function(){
-        if(!speechOn) return;
+        if(!secOn()) return;
         if(phase==="syllables"){
           if(idx<f.syll.length){
             Array.prototype.forEach.call(chips,function(c){ c.classList.remove("on"); });
@@ -1503,11 +1549,14 @@ function goMain(tab){
   document.querySelector('[data-main="'+tab+'"]').classList.add("active");
   document.body.setAttribute("data-tbg",tab);
   stopSpeech();
+  var first=document.querySelector("#scene-"+tab+" .shead[data-sec]");
+  if(first) curSec=first.getAttribute("data-sec");
 }
 Array.prototype.forEach.call(document.querySelectorAll(".main-tabs button"),function(b){
   b.addEventListener("click",function(){ goMain(b.getAttribute("data-main")); });
 });
-buildTab("warm");
+initSecSounds();
+goMain("warm");
 
 ["🎮","🎈","⭐","✨","🧸","📚","🎯"].forEach(function(e){
   var f=document.createElement("span");
