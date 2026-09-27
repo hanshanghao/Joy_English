@@ -434,8 +434,9 @@
 "use strict";
 var SEC_SOUNDS={};
 var curSec="";
+var speakGen=0;
 function secOn(){ return !!SEC_SOUNDS[curSec]; }
-function stopSpeech(){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+function stopSpeech(){ speakGen++; try{ window.speechSynthesis.cancel(); }catch(e){} }
 function toggleSecSound(sec,btn){
   SEC_SOUNDS[sec]=!SEC_SOUNDS[sec];
   curSec=sec;
@@ -504,31 +505,46 @@ function sPop(){ tone(500,0.1,"square",0.08); tone(760,0.09,"square",0.08,0.06);
 function sDing(){ tone(660,0.12,"triangle",0.16); tone(880,0.16,"triangle",0.16,0.1); tone(1320,0.25,"triangle",0.14,0.2); }
 function sBuzz(){ tone(180,0.18,"sawtooth",0.11); tone(140,0.22,"sawtooth",0.11,0.16); }
 function sFanfare(){ [523,659,784,1047].forEach(function(f,i){ tone(f,0.12,"triangle",0.18,i*0.11); }); tone(1047,0.4,"triangle",0.2,0.33); }
-function getVoice(male){
-  try{
-    var vs=window.speechSynthesis.getVoices().filter(function(v){ return /^en/i.test(v.lang||""); });
-    if(!vs.length) return null;
-    var natural=vs.filter(function(v){ return /(neural|natural|online)/i.test(v.name); });
-    var pool=natural.length?natural:vs;
-    var pref=male?[
-      /(david|george|guy|mark|ryan|andrew|eric|brian|christopher|leo)/i,
-      /male/i, /alex/i, /daniel/i
-    ]:[
-      /(aria|jenny|anna|emma|carol|michelle|natasha|sara|libby|sonia)/i,
-      /female/i, /zira/i, /hazel/i, /samantha/i, /susan/i
-    ];
-    for(var i=0;i<pref.length;i++){
-      for(var j=0;j<pool.length;j++){
-        if(pref[i].test(pool[j].name)) return pool[j];
+var VOICE_LANG="en-GB";
+var NATURAL_RATE=0.97;
+var GB_MALE_NAMES=[
+  /ryan\b/i,/thomas\b/i,/daniel\b/i,/oliver\b/i,/arthur|alfie|liam|jamie/i,
+  /(david|george|guy|mark|andrew|eric|brian|christopher|alex)/i,/male|man\b/i
+];
+var GB_FEMALE_NAMES=[
+  /sonia\b/i,/libby/i,/serena/i,/charlotte/i,/kate\b/i,/maisie|eleanor|cathy|tessa|mimi|flo\b/i,
+  /(hazel|aria|jenny|emma|anna|sara|michelle|natasha|zira|samantha|susan|carol)/i,/female|woman/i
+];
+var V_MALE=null,V_FEMALE=null;
+function voiceScore(v){
+  var s=0,lang=v.lang||"";
+  if(/^en[-_]GB/i.test(lang)) s+=100;
+  else if(/^en[-_](AU|IE|NZ)/i.test(lang)) s+=55;
+  else if(/^en/i.test(lang)) s+=25;
+  if(/(neural|natural|online|google)/i.test(v.name||"")) s+=30;
+  if(v.localService) s+=5;
+  return s;
+}
+function findVoice(prefs){
+  var all=[];
+  try{ all=window.speechSynthesis.getVoices()||[]; }catch(e){ return null; }
+  var best=null,bestScore=-1;
+  for(var j=0;j<all.length;j++){
+    var v=all[j];
+    if(!/^en/i.test(v.lang||"")) continue;
+    for(var i=0;i<prefs.length;i++){
+      if(prefs[i].test(v.name||"")){
+        var sc=voiceScore(v)+(prefs.length-i)*2;
+        if(sc>bestScore){ bestScore=sc; best=v; }
+        break;
       }
     }
-    return pool[0];
-  }catch(e){ return null; }
+  }
+  return best;
 }
-var V_MALE=null,V_FEMALE=null;
 function pickVoices(){
-  V_MALE=getVoice(true);
-  V_FEMALE=getVoice(false);
+  V_FEMALE=findVoice(GB_FEMALE_NAMES);
+  V_MALE=findVoice(GB_MALE_NAMES);
   if(!V_MALE) V_MALE=V_FEMALE;
   if(!V_FEMALE) V_FEMALE=V_MALE;
 }
@@ -536,18 +552,36 @@ if(window.speechSynthesis){
   pickVoices();
   window.speechSynthesis.onvoiceschanged=function(){ pickVoices(); };
 }
-function voiceFor(pitch){
+var SPEAKER_VOICE={alex:"m",emma:"f",jack:"m","mrs. smith":"f",tom:"m",lucy:"f"};
+function speakerGender(name){
+  var k=String(name||"").toLowerCase().replace(/\s+/g," ").trim();
+  return SPEAKER_VOICE[k]||null;
+}
+function voiceFor(pitch,gender){
+  if(gender==="f") return V_FEMALE||V_MALE;
+  if(gender==="m") return V_MALE||V_FEMALE;
   return (pitch&&pitch>=1.2)?(V_FEMALE||V_MALE):(V_MALE||V_FEMALE);
 }
-function speakTxt(txt,pitch,rate){
-  if(!secOn()) return;
+function clampRate(r){
+  var v=(typeof r==="number"&&r>0)?r:NATURAL_RATE;
+  return Math.max(0.5,Math.min(1.4,v));
+}
+function clampPitch(p,dflt){
+  var v=(typeof p==="number"&&p>0)?p:dflt;
+  return Math.max(0.6,Math.min(1.6,v));
+}
+function speakTxt(txt,pitch,rate,gender){
+  if(!secOn()||!txt) return;
   try{
     if(!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    var u=new SpeechSynthesisUtterance(txt);
-    u.lang="en-US"; u.rate=rate||0.72;
-    if(pitch) u.pitch=pitch; else u.pitch=1.0;
-    u.voice=voiceFor(pitch)||u.voice;
+    var gen=++speakGen;
+    try{ window.speechSynthesis.cancel(); }catch(e){}
+    var u=new SpeechSynthesisUtterance(String(txt));
+    u.lang=VOICE_LANG;
+    u.rate=clampRate(rate);
+    u.pitch=clampPitch(pitch,1.0);
+    u.volume=1;
+    u.voice=voiceFor(pitch,gender)||u.voice;
     window.speechSynthesis.speak(u);
   }catch(e){}
 }
@@ -569,42 +603,46 @@ function splitChunks(txt){
   });
   return out;
 }
-function speakHuman(txt,pitch,rate){
+function chunkPause(ch){
+  if(/[.!?\u2026]["')\]]?\s*$/.test(ch)) return 360;
+  if(/[,;:]\s*$/.test(ch)) return 200;
+  return 110;
+}
+function speakHuman(txt,pitch,rate,gender){
   if(!secOn()) return;
   try{
     if(!("speechSynthesis" in window)) return;
     var items=Object.prototype.toString.call(txt)==="[object Array]"?txt:[txt];
     var chunks=[];
-    items.forEach(function(t){ if(t) chunks=chunks.concat(splitChunks(t)); });
+    items.forEach(function(t){ if(t) chunks=chunks.concat(splitChunks(String(t))); });
     if(!chunks.length) return;
-    var rt=rate||0.88;
+    var gen=++speakGen;
+    try{ window.speechSynthesis.cancel(); }catch(e){}
+    var base=clampRate(rate);
+    var p0=clampPitch(pitch,1.0);
     var i=0;
     var chain=function(){
-      if(!secOn()||i>=chunks.length) return;
+      if(gen!==speakGen||!secOn()||i>=chunks.length) return;
       var ch=chunks[i];
       var n=i+1;
       i++;
       var u=new SpeechSynthesisUtterance(ch);
-      u.lang="en-US";
-      u.rate=Math.max(0.5,Math.min(1.5,rt+(n%3===1?0.02:(n%3===0?-0.02:0))));
-      var p=pitch||1.0;
-      u.pitch=Math.max(0.6,Math.min(1.8,p+((n%7)-3)*0.015));
-      u.voice=voiceFor(pitch)||u.voice;
-      var pause=(n<chunks.length)?460:80;
+      u.lang=VOICE_LANG;
+      u.volume=1;
+      u.rate=Math.max(0.6,Math.min(1.3,base+((n%3)-1)*0.015));
+      u.pitch=Math.max(0.7,Math.min(1.5,p0+((n%5)-2)*0.02));
+      u.voice=voiceFor(pitch,gender)||u.voice;
+      var pause=chunkPause(ch);
       u.onend=function(){ setTimeout(chain,pause); };
       u.onerror=function(){ setTimeout(chain,pause); };
-      try{
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
-      }catch(e){
-        setTimeout(chain,pause);
-      }
+      try{ window.speechSynthesis.speak(u); }
+      catch(e){ setTimeout(chain,pause); }
     };
     chain();
   }catch(e){}
 }
 function speakChain(list){
-  speakHuman(list,1.0,0.9);
+  speakHuman(list);
 }
 
 
@@ -656,7 +694,7 @@ function buildWarm(){
     var flip=document.createElement("div");
     flip.className="flip";
     flip.innerHTML='<div class="inner"><div class="face front">'+f.e+'</div><div class="face back">'+f.w+'</div></div>';
-    flip.addEventListener("click",function(){ flip.classList.toggle("flipped"); speakTxt(f.w,1.0,0.72); sPop(); });
+    flip.addEventListener("click",function(){ flip.classList.toggle("flipped"); speakTxt(f.w); sPop(); });
     warmEl.appendChild(flip);
   });
   var luck=document.getElementById("luckGrid");
@@ -682,7 +720,7 @@ function buildWarm(){
     clearInterval(luckTimer);
     document.getElementById("luckTimer").textContent="0";
     if(luckSel){
-      speakTxt(luckSel.w,1.0,0.72); sDing();
+      speakTxt(luckSel.w); sDing();
       document.getElementById("luckMsg").innerHTML="🎭 It's <b>"+luckSel.e+" "+luckSel.w+"</b>! Correct guesses get a reward card! 🎁";
     }else{
       document.getElementById("luckMsg").innerHTML="👆 First tap a word card on the board to choose your secret!"; sBuzz();
@@ -725,10 +763,10 @@ function buildVocabCards(){
   vocabWords.forEach(function(item,i){
     var card=document.createElement("div");
     card.className="card";
-    card.innerHTML='<div style="font-size:32px;margin-bottom:8px;">🎯</div><div style="font-weight:900;font-size:18px;margin-bottom:6px;">'+item.word+'</div><div style="font-size:14px;color:#7a6a52;margin-bottom:8px;">'+item.example+'</div><button class="btn green" style="font-size:12px;padding:6px 14px;" onclick="speakTxt(\''+item.audio+'\',1.0,0.72)">🔊 Listen</button>';
+    card.innerHTML='<div style="font-size:32px;margin-bottom:8px;">🎯</div><div style="font-weight:900;font-size:18px;margin-bottom:6px;">'+item.word+'</div><div style="font-size:14px;color:#7a6a52;margin-bottom:8px;">'+item.example+'</div><button class="btn green" style="font-size:12px;padding:6px 14px;" onclick="speakTxt(\''+item.audio+'\')">🔊 Listen</button>';
     card.addEventListener("click",function(e){
       if(e.target.tagName!="BUTTON"){
-        speakTxt(item.word,1.0,0.72);
+        speakTxt(item.word);
         sPop();
       }
     });
@@ -750,7 +788,7 @@ function buildDialogueData(){
     var card=document.createElement("div");
     card.className="charcard";
     card.innerHTML='<div class="ce">'+c.name.charAt(0)+'</div><div class="cn">'+c.name+'</div><div class="ct">'+c.role+" - "+c.voice+'</div><div class="cl">"'+c.phrase+'"</div>';
-    card.addEventListener("click",function(){ speakHuman(c.audio,1.0,0.88); sPop(); });
+    card.addEventListener("click",function(){ speakHuman(c.audio,1.0); sPop(); });
     charCards.appendChild(card);
   });
 }
@@ -776,7 +814,7 @@ function buildDialogueBubbles(){
     bub.addEventListener("click",function(){
       Array.prototype.forEach.call(dlBubbles,function(b){ b.classList.remove("on"); });
       bub.classList.add("on");
-      speakHuman(line.text,line.voice,0.88); sPop();
+      speakHuman(line.text,line.voice,0,speakerGender(line.speaker)); sPop();
     });
     dlPanel.appendChild(row);
   });
@@ -823,7 +861,7 @@ function buildVocabData(){
     card.addEventListener("click",function(){
       plural=!plural;
       vw.textContent=(plural?item.plural:"a "+item.word);
-      speakTxt(plural?item.plural:item.word,1.0,0.72);
+      speakTxt(plural?item.plural:item.word);
       sPop();
     });
     vlist.appendChild(card);
@@ -843,7 +881,7 @@ function buildSpellingRules(){
     var card=document.createElement("div");
     card.className="rulecard";
     card.innerHTML='<div class="rt">'+rule.title+'</div><div class="rx"><span class="base">'+rule.base+'</span><span class="add">s</span></div><div style="font-size:12px;color:#7a6a52;margin-top:6px;">'+rule.example+'</div>';
-    card.addEventListener("click",function(){ speakTxt(rule.to,1.0,0.7); sPop(); });
+    card.addEventListener("click",function(){ speakTxt(rule.to); sPop(); });
     rd.appendChild(card);
   });
 }
@@ -873,11 +911,11 @@ function buildSyllablePractice(){
       var c=document.createElement("span");
       c.className="chip";
       c.textContent=sy;
-      c.addEventListener("click",function(){ speakTxt(sy,1.0,0.6); sPop(); });
+      c.addEventListener("click",function(){ speakTxt(sy,1.0,0.8); sPop(); });
       chipsEl.appendChild(c);
       return c;
     });
-    row.addEventListener("click",function(){ speakTxt(item.word,1.0,0.72); sPop(); });
+    row.addEventListener("click",function(){ speakTxt(item.word); sPop(); });
     var sayBtn=document.createElement("span");
     sayBtn.className="chip";
     sayBtn.style.background="linear-gradient(150deg,#7ce577,#37a832)";
@@ -888,7 +926,7 @@ function buildSyllablePractice(){
       var idx=0, phase="syllables";
       var step=function(done){
         var u=new SpeechSynthesisUtterance(done);
-        u.lang="en-US"; u.rate=0.5; u.pitch=1.0; u.voice=voiceFor(1.0)||u.voice;
+        u.lang=VOICE_LANG; u.rate=0.5; u.pitch=1.0; u.voice=voiceFor(1.0)||u.voice;
         u.onend=function(){ setTimeout(next,430); };
         u.onerror=function(){ setTimeout(next,430); };
         try{ window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
@@ -962,7 +1000,7 @@ function buildPluralQuiz(){
     q.innerHTML="<b>"+item.word+"</b> → <span class='red'>plural?</span>"+opts;
     Array.prototype.forEach.call(q.querySelectorAll("button"),function(b){
       b.addEventListener("click",function(){
-        if(b.getAttribute("data-pl")===item.plural){ b.style.background="#37a832"; sDing(); speakTxt(item.plural,1.0,0.72); }
+        if(b.getAttribute("data-pl")===item.plural){ b.style.background="#37a832"; sDing(); speakTxt(item.plural); }
         else{ b.style.background="#ff5d5d"; sBuzz(); }
         Array.prototype.forEach.call(q.querySelectorAll("button"),function(x){ x.disabled=true; });
       });
@@ -991,7 +1029,7 @@ function buildPatternData(){
     var row=document.createElement("div");
     row.className="patrow";
     row.innerHTML='<span class="pe">'+p.emoji+'</span><span class="pt">'+p.text+'</span>';
-    row.addEventListener("click",function(){ speakHuman(p.text,1.0,0.88); sPop(); });
+    row.addEventListener("click",function(){ speakHuman(p.text,1.0); sPop(); });
     pl.appendChild(row);
   });
 }
@@ -1037,7 +1075,7 @@ function buildSentenceData(){
             document.getElementById("roundTip").className="praise";
             document.getElementById("roundTip").innerHTML=praiseMsg;
             document.getElementById("patNext").textContent="🔄 Play again";
-            speakHuman("Amazing job, everyone! You completed all the sentences!",1.1,0.9);
+            speakHuman("Amazing job, everyone! You completed all the sentences!",1.1);
           }else{
             sDing();
             document.getElementById("roundTip").className="tip";
@@ -1088,7 +1126,7 @@ function buildDialogue(){
     var card=document.createElement("div");
     card.className="charcard";
     card.innerHTML='<div class="ce">'+c.e+'</div><div class="cn">'+c.n+'</div><div class="ct">'+c.t+'</div><div class="cl">"'+c.line+'"</div>';
-    card.addEventListener("click",function(){ speakHuman(c.line,c.p,0.88); sPop(); });
+    card.addEventListener("click",function(){ speakHuman(c.line,c.p,0,speakerGender(c.n)); sPop(); });
     cc.appendChild(card);
   });
   var DIAL=[
@@ -1111,23 +1149,31 @@ function buildDialogue(){
     bub.addEventListener("click",function(){
       Array.prototype.forEach.call(dlBub,function(b){ b.classList.remove("on"); });
       bub.classList.add("on");
-      speakHuman(l.t,l.p,0.88); sPop();
+      speakHuman(l.t,l.p,0,speakerGender(l.w)); sPop();
     });
     dlEl.appendChild(row); dlBub.push(bub);
   });
   document.getElementById("dlPlay").addEventListener("click",function(){
     stopSpeech();
+    var gen=speakGen;
     var i=0;
     var chain=function(){
+      if(gen!==speakGen||!secOn()) return;
       Array.prototype.forEach.call(dlBub,function(b){ b.classList.remove("on"); });
       if(i>=DIAL.length){ sDing(); return; }
+      var line=DIAL[i];
       if(dlBub[i]) dlBub[i].classList.add("on");
-      var u=new SpeechSynthesisUtterance(DIAL[i].t);
-      u.lang="en-US"; u.rate=0.85; u.pitch=DIAL[i].p; u.voice=voiceFor(DIAL[i].p)||u.voice;
-      u.onend=function(){ i++; setTimeout(chain,460); };
-      u.onerror=function(){ i++; setTimeout(chain,460); };
-      try{ window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
-      catch(e){ i++; setTimeout(chain,460); }
+      i++;
+      var u=new SpeechSynthesisUtterance(line.t);
+      u.lang=VOICE_LANG;
+      u.volume=1;
+      u.rate=NATURAL_RATE;
+      u.pitch=clampPitch(line.p,1.0);
+      u.voice=voiceFor(line.p,speakerGender(line.w))||u.voice;
+      u.onend=function(){ setTimeout(chain,340); };
+      u.onerror=function(){ setTimeout(chain,340); };
+      try{ window.speechSynthesis.speak(u); }
+      catch(e){ setTimeout(chain,340); }
     };
     chain();
   });
@@ -1162,7 +1208,7 @@ function buildVocab(){
     card.addEventListener("click",function(){
       plural=!plural;
       vw.textContent=(plural?f.pl:"a "+f.s);
-      speakTxt(plural?f.pl:f.s,1.0,0.72);
+      speakTxt(plural?f.pl:f.s);
       sPop();
     });
     vlist.appendChild(card);
@@ -1177,7 +1223,7 @@ function buildVocab(){
     var card=document.createElement("div");
     card.className="rulecard";
     card.innerHTML='<div class="rt">'+r.t+'</div><div class="rx">'+r.rx+'</div>';
-    card.addEventListener("click",function(){ speakTxt(r.to,1.0,0.7); sPop(); });
+    card.addEventListener("click",function(){ speakTxt(r.to); sPop(); });
     rd.appendChild(card);
   });
   var sw=document.getElementById("sylWrap");
@@ -1190,11 +1236,11 @@ function buildVocab(){
       var c=document.createElement("span");
       c.className="chip";
       c.textContent=sy;
-      c.addEventListener("click",function(){ speakTxt(sy,1.0,0.6); sPop(); });
+      c.addEventListener("click",function(){ speakTxt(sy,1.0,0.8); sPop(); });
       chipsEl.appendChild(c);
       return c;
     });
-    row.addEventListener("click",function(){ speakTxt(f.s,1.0,0.72); sPop(); });
+    row.addEventListener("click",function(){ speakTxt(f.s); sPop(); });
     var sayBtn=document.createElement("span");
     sayBtn.className="chip";
     sayBtn.style.background="linear-gradient(150deg,#7ce577,#37a832)";
@@ -1205,7 +1251,7 @@ function buildVocab(){
       var idx=0, phase="syllables";
       var step=function(done){
         var u=new SpeechSynthesisUtterance(done);
-        u.lang="en-US"; u.rate=0.5; u.pitch=1.0; u.voice=voiceFor(1.0)||u.voice;
+        u.lang=VOICE_LANG; u.rate=0.5; u.pitch=1.0; u.voice=voiceFor(1.0)||u.voice;
         u.onend=function(){ setTimeout(next,430); };
         u.onerror=function(){ setTimeout(next,430); };
         try{ window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); }
@@ -1256,7 +1302,7 @@ function buildVocab(){
     q.innerHTML="<b>"+f.s+"</b> → <span class='red'>plural?</span>"+opts;
     Array.prototype.forEach.call(q.querySelectorAll("button"),function(b){
       b.addEventListener("click",function(){
-        if(b.getAttribute("data-pl")===f.pl){ b.style.background="#37a832"; sDing(); speakTxt(f.pl,1.0,0.72); }
+        if(b.getAttribute("data-pl")===f.pl){ b.style.background="#37a832"; sDing(); speakTxt(f.pl); }
         else{ b.style.background="#ff5d5d"; sBuzz(); }
         Array.prototype.forEach.call(q.querySelectorAll("button"),function(x){ x.disabled=true; });
       });
@@ -1310,7 +1356,7 @@ function makeBuilder(container,title,words,team,onCorrect){
       msgEl.innerHTML="🎉 <b>Correct!</b><br><span style='color:#37a832;font-weight:900'>"+words.join(" ")+"</span><br>"+pc+" 🌟";
       msgEl.className="msg ok";
       sFanfare();
-      speakHuman([words.join(" "),pc],1.0,0.88);
+      speakHuman([words.join(" "),pc],1.0);
       pad.querySelector(".check").disabled=true;
       if(onCorrect) onCorrect(team);
     }else{
@@ -1322,7 +1368,7 @@ function makeBuilder(container,title,words,team,onCorrect){
         "🙈 Build the sentence first!<br><span style='color:#37a832;font-weight:900'>✅ Correct: "+words.join(" ")+"</span><br>"+pw+" 💪";
       msgEl.className="msg bad";
       sBuzz();
-      speakHuman(pw,1.15,0.88);
+      speakHuman(pw,1.15);
     }
   });
   pad.querySelector(".reset").addEventListener("click",function(){
@@ -1345,7 +1391,7 @@ function buildPatterns(){
     var row=document.createElement("div");
     row.className="patrow";
     row.innerHTML='<span class="pe">'+p.e+'</span><span class="pt">'+p.t+'</span>';
-    row.addEventListener("click",function(){ speakHuman(p.t,1.0,0.88); sPop(); });
+    row.addEventListener("click",function(){ speakHuman(p.t,1.0); sPop(); });
     pl.appendChild(row);
   });
   var SENTENCES=[
@@ -1383,7 +1429,7 @@ function buildPatterns(){
     roundTip.className="praise";
     roundTip.innerHTML="🌟🎉 <b>AMAZING JOB, EVERYONE!</b> 🎉🌟<br>You built <b>every</b> sentence with your words!<br><b>Final scores:</b> 🟦 Team A "+a+" &nbsp;·&nbsp; 🟩 Team B "+b+"<br>"+winner+" 🎯";
     document.getElementById("patNext").textContent="🔄 Play again";
-    speakHuman("Amazing job, everyone! You completed all the sentences. Final score: Team A, "+a+", Team B, "+b+". "+(a===b?"What a great tie! Both teams rock!":(a>b?"Congratulations, Team A, you are today's champions!":"Congratulations, Team B, you are today's champions!")),1.1,0.9);
+    speakHuman("Amazing job, everyone! You completed all the sentences. Final score: Team A, "+a+", Team B, "+b+". "+(a===b?"What a great tie! Both teams rock!":(a>b?"Congratulations, Team A, you are today's champions!":"Congratulations, Team B, you are today's champions!")),1.1);
   }
   function checkOne(){
     currentDone++;
@@ -1445,7 +1491,7 @@ function buildPatterns(){
     var f=document.getElementById("mkFruit").value;
     var d=document.getElementById("mkDrink").value;
     document.getElementById("mkLine").innerHTML="Let's make <b>"+f+" "+d+"</b>!";
-    speakHuman("Let's make "+f+" "+d+"!",0.9,0.88);
+    speakHuman("Let's make "+f+" "+d+"!",0.9);
     sDing();
   });
   var countN=0;
@@ -1467,7 +1513,7 @@ function buildPatterns(){
       m.innerHTML="🎉 Yes! There are "+countN+" games!";
       m.className="msg ok";
       sDing();
-      speakHuman("There are "+countN+" games!",1.0,0.88);
+      speakHuman("There are "+countN+" games!",1.0);
     }else{
       m.innerHTML="🙈 Count again! How many games are there?";
       m.className="msg bad";
