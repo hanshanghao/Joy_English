@@ -1,0 +1,2331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TJ5 Unit 6 - Rooms in the House</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f;--paper:#fff7ea}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:var(--pink);top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:var(--yellow);bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:var(--blue);top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-30%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0;font-family:inherit}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.18),0 12px 20px rgba(0,0,0,.15)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.18),0 4px 8px rgba(0,0,0,.1)}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.btn.red{--c1:#ff8a8a;--c2:#e04040}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.topbar .sound-toggle{margin-left:auto;background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
+.topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.topbar .sound-toggle.off{border-color:#ddd;color:#bbb;background:#f2f2f2}
+.sec-sound{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.85);border:2px solid #e0d8f0;border-radius:50px;padding:4px 12px;font-size:clamp(11px,1.6vw,13px);font-weight:700;cursor:pointer;transition:all .2s;color:#555;margin-left:auto}
+.sec-sound:hover{border-color:var(--purple);background:#f5f0ff}
+.sec-sound.off{border-color:#ddd;color:#bbb;background:#f9f9f9}
+.sec-sound .sec-si{font-size:15px}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.navbar .ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s;font-family:inherit}
+.navbar .ntab:hover{border-color:var(--purple);background:#f5f0ff}
+.navbar .ntab.on{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(139,92,240,.35)}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(139,92,240,.15),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15));animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(26px,5.5vw,44px);font-weight:900;color:var(--ink);text-shadow:2px 2px 0 rgba(139,92,240,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.hero .desc{margin-top:10px;font-size:clamp(13px,2vw,16px);color:#666;font-weight:600}
+/* ===== R PHONICS NOTE ===== */
+.rnote{background:linear-gradient(150deg,#fff4fb,#ffe4f3,#f0e6ff);border:4px solid var(--pink);border-radius:24px;padding:20px;margin:0 0 20px;box-shadow:0 10px 26px rgba(240,79,155,.25)}
+.rnote h2{font-size:clamp(19px,3.6vw,28px);font-weight:900;color:var(--pink);margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rnote h2 .rbadge{background:var(--pink);color:#fff;font-size:clamp(11px,1.7vw,13px);padding:4px 12px;border-radius:30px;font-weight:900}
+.rnote .rlead{font-size:clamp(13px,2.1vw,16px);font-weight:700;line-height:1.55;margin-bottom:12px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.ritem{background:rgba(255,255,255,.85);border:3px solid #ffd6ec;border-radius:16px;padding:12px 14px}
+.ritem h4{font-size:clamp(14px,2.2vw,17px);font-weight:900;color:var(--purple);margin-bottom:5px;display:flex;gap:6px;align-items:center}
+.ritem p{font-size:clamp(12px,1.9vw,15px);font-weight:600;line-height:1.5;color:#555}
+.ritem .rbig{font-size:clamp(30px,6vw,46px);font-weight:900;color:var(--pink);line-height:1;margin-right:6px}
+.ritem.ok{border-color:#b6f0b0}.ritem.ok h4{color:#2f9e2b}
+.ritem.no{border-color:#ffc2c2}.ritem.no h4{color:#c0392b}
+.rmouth{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rmouth span{background:#fff;border:2px solid var(--purple);border-radius:12px;padding:4px 10px;font-size:clamp(12px,1.8vw,15px);font-weight:800;color:var(--purple);cursor:pointer;transition:all .2s}
+.rmouth span:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.rnote .rfoot{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* ===== TIMELINE ===== */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.tl-item{background:#fff;border-radius:18px;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-top:6px solid var(--purple);cursor:pointer;transition:all .25s}
+.tl-item:hover{transform:translateY(-4px);box-shadow:0 9px 20px rgba(0,0,0,.14)}
+.tl-item .tl-min{font-size:clamp(11px,1.7vw,13px);font-weight:900;color:#fff;background:var(--purple);display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:6px}
+.tl-item h4{font-size:clamp(15px,2.4vw,19px);font-weight:900;color:var(--ink);margin-bottom:4px}
+.tl-item p{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#777;line-height:1.45}
+.tl-item.t1{border-top-color:var(--orange)}.tl-item.t1 .tl-min{background:var(--orange)}
+.tl-item.t2{border-top-color:var(--pink)}.tl-item.t2 .tl-min{background:var(--pink)}
+.tl-item.t3{border-top-color:var(--green)}.tl-item.t3 .tl-min{background:var(--green)}
+/* ===== CROPS ===== */
+.crop{position:relative;overflow:hidden;border-radius:16px;width:100%;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1);display:block}
+.crop img{position:absolute;max-width:none;height:auto;display:block}
+.cropfit{display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.cropfit .crop{border-radius:0;box-shadow:none;flex-shrink:0}
+.t-image{width:100%;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;transition:transform .3s;display:block}
+.t-image:hover{transform:scale(1.02)}
+.twobox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+/* ===== TEAMS ===== */
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-icon{font-size:32px;margin-bottom:4px}
+.team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
+.team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
+.team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s;font-family:inherit}
+.team-btns button:hover{transform:scale(1.1)}
+.team-btns .tadd{background:linear-gradient(135deg,#7ce577,#37a832)}
+.team-btns .tsub{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.turn-chip{display:inline-block;background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff;font-weight:900;padding:5px 16px;border-radius:30px;font-size:clamp(12px,1.9vw,15px)}
+/* ===== CARD GRIDS ===== */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
+.vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;border:4px solid transparent}
+.vocab-card:hover{transform:translateY(-5px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.vocab-card.said{border-color:var(--green)}
+.vocab-card.isnew{border-color:var(--orange)}
+.vocab-card .vc-body{padding:12px;text-align:center}
+.vocab-card .vc-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.vocab-card .vc-tag{display:inline-block;font-size:clamp(10px,1.5vw,12px);font-weight:900;padding:2px 10px;border-radius:20px;margin-top:5px;background:#e8f4ff;color:#2a7ab8}
+.vocab-card.isnew .vc-tag{background:#fff3e8;color:#d1600d}
+.vocab-card .vc-say{font-size:clamp(12px,1.9vw,15px);font-weight:700;color:var(--green);margin-top:6px;min-height:20px}
+/* ===== STORY STEPS ===== */
+.story-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.story-step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:background .2s}
+.story-step:hover{background:rgba(139,92,240,.06)}
+.story-step .step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.story-step .step-text{font-size:clamp(13px,2vw,16px);font-weight:600;line-height:1.5}
+.story-step .spk{margin-left:auto;font-size:20px;opacity:.5;flex-shrink:0}
+.story-step:hover .spk{opacity:1}
+/* ===== DIALOGUE BUBBLES ===== */
+.dlg{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;cursor:pointer;margin-bottom:8px;transition:all .2s}
+.dlg:hover{transform:translateX(4px)}
+.dlg .av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.dlg.g .av{background:linear-gradient(135deg,var(--pink),#e03080)}
+.dlg.b .av{background:linear-gradient(135deg,var(--blue),#2a7ab8)}
+.dlg.p .av{background:linear-gradient(135deg,var(--green),#34a832)}
+.dlg.o .av{background:linear-gradient(135deg,var(--orange),#e06a10)}
+.dlg .bub{padding:10px 16px;border-radius:16px;font-weight:700;font-size:clamp(13px,2.1vw,17px);line-height:1.45;flex:1}
+.dlg.g .bub{background:#f5f0ff;border-left:5px solid var(--pink)}
+.dlg.b .bub{background:#e8f4ff;border-left:5px solid var(--blue)}
+.dlg.p .bub{background:#e8ffe8;border-left:5px solid var(--green)}
+.dlg.o .bub{background:#fff3e8;border-left:5px solid var(--orange)}
+.dlg .vtag{font-size:clamp(10px,1.6vw,12px);font-weight:900;padding:3px 9px;border-radius:20px;background:#fff;border:2px solid #e0d8f0;color:#888;flex-shrink:0}
+.dlg.g .vtag{border-color:var(--pink);color:var(--pink)}
+.dlg.b .vtag{border-color:var(--blue);color:var(--blue)}
+.dlg.p .vtag{border-color:var(--green);color:var(--green)}
+.dlg.o .vtag{border-color:var(--orange);color:var(--orange)}
+/* ===== TEACHER SILLY ===== */
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:16px 0}
+.obj{background:#fff;border-radius:18px;padding:16px 10px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .25s;border:4px solid transparent}
+.obj:hover{transform:translateY(-5px) rotate(-3deg);border-color:var(--purple)}
+.obj.used{border-color:var(--green);background:#f2fff2}
+.obj .obj-emoji{font-size:52px;display:block;margin-bottom:6px;transition:transform .3s}
+.obj.brushing .obj-emoji{animation:brushAnim .6s ease-in-out infinite alternate}
+@keyframes brushAnim{from{transform:rotate(-18deg)}to{transform:rotate(18deg) translateY(-6px)}}
+.obj .obj-name{font-weight:900;font-size:clamp(12px,1.9vw,15px)}
+.obj .obj-say{font-size:clamp(11px,1.7vw,13px);font-weight:700;color:#888;margin-top:4px;min-height:18px}
+.obj-say.bad{color:var(--red)}
+.obj-say.good{color:var(--green)}
+.big-reply{text-align:center;font-size:clamp(22px,5vw,42px);font-weight:900;margin:14px 0;min-height:56px;letter-spacing:1px}
+.big-reply.bad{color:var(--red);animation:shake .4s}
+.big-reply.good{color:var(--green);animation:popIn .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes popIn{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
+/* ===== YES/NO ===== */
+.yn{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.yn button{padding:16px 40px;border:none;border-radius:50px;font-size:clamp(17px,3vw,26px);font-weight:900;cursor:pointer;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:all .2s;font-family:inherit}
+.yn button.y{background:linear-gradient(135deg,#7ce577,#37a832)}
+.yn button.n{background:linear-gradient(135deg,#ff8a8a,#e04040)}
+.yn button:hover{transform:translateY(-4px)}
+.big-ans{text-align:center;font-size:clamp(19px,3.4vw,28px);font-weight:900;min-height:36px;margin:10px 0}
+/* ===== ZONES ===== */
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.zone{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:4px solid transparent;position:relative}
+.zone:hover{transform:translateY(-4px);border-color:var(--purple)}
+.zone .zlabel{padding:8px;text-align:center;font-weight:900;font-size:clamp(12px,2vw,16px);color:var(--purple);background:#f8f5ff}
+.zone .zhide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:clamp(34px,8vw,56px);background:linear-gradient(135deg,rgba(139,92,240,.94),rgba(240,79,155,.94));color:#fff;opacity:0;pointer-events:none;transition:all .3s;font-weight:900;text-shadow:0 3px 6px rgba(0,0,0,.35);text-align:center;line-height:1.2}
+.zone.revealed .zhide{opacity:1;pointer-events:auto}
+.zone.revealed{border-color:var(--green)}
+.zone.dim{opacity:.45;filter:grayscale(.7)}
+/* ===== PASSING ===== */
+.pass-track{position:relative;height:130px;background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:4px dashed var(--purple);border-radius:20px;margin:14px 0;overflow:hidden}
+.pass-card{position:absolute;top:50%;transform:translate(-50%,-50%);background:#fff;border:4px solid var(--purple);border-radius:16px;padding:8px 14px;width:120px;box-shadow:0 6px 16px rgba(0,0,0,.18);transition:left .26s linear}
+.pass-card .pc-emoji{font-size:34px;text-align:center}
+.pass-card .pc-word{font-size:clamp(11px,1.7vw,14px);font-weight:900;color:var(--purple);text-align:center;margin-top:2px}
+.spell-out{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;min-height:48px;margin:12px 0}
+.spell-out span{background:#fff;border:3px solid var(--purple);border-radius:12px;width:38px;height:44px;display:flex;align-items:center;justify-content:center;font-size:clamp(17px,3vw,24px);font-weight:900;color:var(--purple);animation:popIn .25s ease}
+.spell-out span.sp{background:var(--green);border-color:var(--green);color:#fff;width:24px}
+.spell-out span.wg{background:transparent;border:none;width:14px}
+/* ===== PATTERNS ===== */
+.pattern-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--purple)}
+.pattern-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:10px}
+.pattern-line{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.7;cursor:pointer;padding:8px 10px;border-radius:12px;transition:background .2s}
+.pattern-line:hover{background:#f8f5ff}
+.pattern-line .q{color:var(--pink)}
+.pattern-line .a{color:var(--green)}
+.pattern-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pattern-examples .pe{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid var(--purple);color:var(--purple);padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.pattern-examples .pe:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.sub-machine{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.sub-machine select{width:100%;padding:12px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(14px,2.2vw,17px);font-weight:800;background:#faf8ff;outline:none;font-family:inherit;color:var(--ink);cursor:pointer}
+.sub-machine select:focus{border-color:var(--purple)}
+.sub-out{text-align:center;background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 14px rgba(0,0,0,.08);border:4px solid var(--green)}
+.sub-out .so-q{font-size:clamp(16px,2.8vw,22px);font-weight:900;color:var(--pink)}
+.sub-out .so-a{font-size:clamp(18px,3.2vw,28px);font-weight:900;color:var(--green);margin-top:6px;line-height:1.4}
+.prep-chip{display:inline-block;font-size:clamp(16px,2.8vw,26px);font-weight:900;padding:0 12px;margin:0 3px}
+.prep-chip.ok{background:#d8f8d8;border-radius:12px;color:#2f9e2b}
+.prep-chip.no{background:#ffdcdc;border-radius:12px;color:#c0392b;text-decoration:line-through}
+/* ===== BEAT THE TEACHER ===== */
+.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:10px solid var(--purple);background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.ring .rt{font-size:clamp(34px,8vw,52px);font-weight:900;color:var(--purple);line-height:1}
+.ring .rl{font-size:clamp(10px,1.7vw,12px);font-weight:900;color:#999;letter-spacing:1px}
+.ring.hot{border-color:var(--red);animation:pulseR .6s ease-in-out infinite alternate}
+@keyframes pulseR{from{transform:scale(1)}to{transform:scale(1.05)}}
+.bt-q{text-align:center;font-size:clamp(19px,4vw,34px);font-weight:900;color:var(--ink);min-height:80px;display:flex;align-items:center;justify-content:center;padding:10px;line-height:1.35}
+.bt-opt-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.bt-opt{padding:12px 22px;border:3px solid #e0d8f0;border-radius:16px;font-size:clamp(14px,2.3vw,18px);font-weight:800;background:#faf8ff;cursor:pointer;transition:all .2s;font-family:inherit}
+.bt-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-3px)}
+.bt-opt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.bt-opt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.bt-opt.dis{pointer-events:none;opacity:.45}
+/* ===== QUIZ ===== */
+.quiz-section-title{display:flex;align-items:center;gap:10px;margin:20px 0 14px;padding:10px 16px;background:linear-gradient(135deg,rgba(139,92,240,.12),rgba(240,79,155,.08));border-radius:16px;border-left:5px solid var(--purple)}
+.quiz-section-title h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.quiz-section-title .qs-badge{background:var(--purple);color:#fff;font-size:clamp(11px,1.6vw,13px);font-weight:800;padding:4px 12px;border-radius:20px;margin-left:auto}
+.tf-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0;transition:all .3s}
+.tf-card .tf-emoji{font-size:clamp(44px,9vw,66px);text-align:center;margin-bottom:10px}
+.tf-card .tf-stmt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:14px;line-height:1.4}
+.tf-btns{display:flex;gap:12px;justify-content:center}
+.tf-btn{padding:14px 32px;border:none;border-radius:50px;font-size:clamp(16px,2.6vw,22px);font-weight:900;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.15);font-family:inherit}
+.tf-btn:hover{transform:translateY(-3px)}
+.tf-btn.true-btn{background:linear-gradient(135deg,#7ce577,#37a832)}
+.tf-btn.false-btn{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.tf-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.tf-result{font-size:clamp(13px,2.1vw,17px);font-weight:700;text-align:center;margin-top:12px;min-height:26px;line-height:1.5}
+.listen-card,.write-card,.fill-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.listen-play{display:flex;justify-content:center;margin-bottom:14px}
+.listen-play button{width:64px;height:64px;border-radius:50%;border:none;font-size:28px;cursor:pointer;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.15);transition:all .2s}
+.listen-play button:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.15)}
+.listen-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:12px;font-weight:600}
+.listen-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.listen-opt{padding:14px 18px;border:3px solid #e0d8f0;border-radius:14px;cursor:pointer;font-size:clamp(14px,2.2vw,18px);font-weight:700;background:#faf8ff;text-align:center;transition:all .2s;font-family:inherit}
+.listen-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.listen-opt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.listen-opt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.listen-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt{padding:8px;cursor:pointer;border:3px solid #e0d8f0;border-radius:14px;background:#faf8ff;transition:all .2s}
+.pic-opt:hover{border-color:var(--purple);transform:translateY(-3px)}
+.pic-opt.ok{border-color:var(--green);background:#e8ffe8;pointer-events:none}
+.pic-opt.no{border-color:var(--red);background:#ffe8e8;pointer-events:none}
+.pic-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt .po-w{font-size:clamp(11px,1.8vw,14px);font-weight:800;margin-top:6px}
+.write-prompt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:6px}
+.write-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:14px;font-weight:600}
+.write-display{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;min-height:48px;padding:10px;background:#f8f5ff;border-radius:14px;border:2px dashed #d0c4f0}
+.write-display.ok{border-color:var(--green);background:#e8ffe8;border-style:solid}
+.write-display.bad{border-color:var(--red);background:#ffe8e8;border-style:solid}
+.write-keyboard{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.write-key{width:clamp(30px,6.5vw,38px);height:clamp(34px,7.5vw,42px);border:none;border-radius:10px;font-size:clamp(13px,2.1vw,17px);font-weight:800;cursor:pointer;background:linear-gradient(135deg,#f5f0ff,#ede4ff);color:var(--purple);border:2px solid #d0c4f0;transition:all .15s;box-shadow:0 3px 0 rgba(0,0,0,.08);font-family:inherit}
+.write-key:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.08);background:var(--purple);color:#fff;border-color:var(--purple)}
+.write-key:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.write-key.del{background:linear-gradient(135deg,#ffab6e,#f5822b);color:#fff;border-color:#f5822b;font-size:clamp(15px,2.4vw,19px)}
+.write-key.clr{background:linear-gradient(135deg,#ff8a8a,#e04040);color:#fff;border-color:#e04040;font-size:clamp(11px,1.7vw,13px)}
+.fill-q{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.6;margin-bottom:4px}
+.fill-a{font-size:clamp(14px,2.2vw,18px);font-weight:700;color:#666;margin-bottom:12px}
+.fill-blank{display:inline-block;min-width:120px;border-bottom:3px dashed var(--purple);padding:2px 8px;color:var(--green);font-weight:900;text-align:center;transition:all .3s}
+.fill-blank.revealed{border-bottom-style:solid;background:#e8ffe8;border-radius:8px}
+.fill-blank.wrong-reveal{border-bottom-color:var(--red);background:#ffe8e8;color:var(--red);border-radius:8px}
+.fill-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fill-opt{padding:10px 18px;border:3px solid #e0d8f0;border-radius:50px;font-size:clamp(13px,2vw,16px);font-weight:700;cursor:pointer;background:#faf8ff;transition:all .2s;font-family:inherit}
+.fill-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.fill-opt.selected{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.fill-opt.wrong{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.fill-opt.dis{pointer-events:none;opacity:.5}
+.fill-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;margin-top:10px;min-height:24px}
+.score-board{background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:22px;padding:28px 22px;text-align:center;color:#fff;margin:16px 0;box-shadow:0 8px 22px rgba(139,92,240,.3)}
+.score-board h2{font-size:clamp(22px,4vw,32px);font-weight:900;margin-bottom:12px}
+.score-board .score-big{font-size:clamp(40px,10vw,72px);font-weight:900;text-shadow:0 4px 8px rgba(0,0,0,.2);line-height:1}
+.score-board .score-label{font-size:clamp(14px,2.2vw,18px);font-weight:700;opacity:.9;margin-top:4px}
+.score-board .score-stars{font-size:clamp(24px,5vw,40px);margin:10px 0}
+.score-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
+.score-item{background:rgba(255,255,255,.2);border-radius:14px;padding:12px;text-align:center}
+.score-item .si-type{font-size:clamp(11px,1.6vw,13px);font-weight:700;opacity:.85}
+.score-item .si-score{font-size:clamp(20px,4vw,28px);font-weight:900}
+/* ===== PHONICS ===== */
+.phon-hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:linear-gradient(135deg,#fff0f8,#f3e9ff);border:4px solid var(--pink);border-radius:22px;padding:20px;margin-bottom:16px}
+.phon-big{font-size:clamp(70px,16vw,130px);font-weight:900;color:var(--pink);line-height:.85;text-shadow:0 6px 0 rgba(240,79,155,.25);animation:bounce 2.2s ease-in-out infinite;cursor:pointer;user-select:none}
+.r-word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:16px 0}
+.r-word{background:#fff;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .22s;border:3px solid #f0e0ff}
+.r-word:hover{transform:translateY(-4px) scale(1.03);border-color:var(--pink)}
+.r-word .rw-w{font-size:clamp(15px,2.4vw,20px);font-weight:900;color:var(--purple)}
+.r-word .rw-s{font-size:clamp(11px,1.8vw,14px);font-weight:800;color:var(--pink);letter-spacing:1px;margin-top:3px}
+.sort-boxes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.sort-box{border-radius:18px;padding:14px;min-height:150px;border:4px dashed}
+.sort-box.r{border-color:var(--pink);background:#fff5fb}
+.sort-box.n{border-color:var(--blue);background:#f4faff}
+.sort-box h4{font-size:clamp(14px,2.3vw,18px);font-weight:900;margin-bottom:10px;text-align:center}
+.sort-box.r h4{color:var(--pink)}
+.sort-box.n h4{color:var(--blue)}
+.sort-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+.sort-pool span{background:#fff;border:3px solid #e0d8f0;border-radius:14px;padding:8px 16px;font-size:clamp(13px,2.1vw,17px);font-weight:800;cursor:pointer;transition:all .2s;font-family:inherit}
+.sort-pool span:hover{border-color:var(--purple);transform:translateY(-3px)}
+.sort-pool span.gone{opacity:.2;pointer-events:none}
+.sort-pool span.sel{border-color:var(--pink)!important;background:#ffe4f3;transform:scale(1.08)}
+.sort-box .placed{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:40px}
+.sort-box .placed span{background:#fff;border:3px solid currentColor;border-radius:14px;padding:6px 14px;font-size:clamp(12px,1.9vw,15px);font-weight:800;cursor:pointer}
+.sort-box.r .placed span{color:var(--pink)}
+.sort-box.n .placed span{color:var(--blue)}
+.blend-row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center;margin:10px 0;min-height:40px}
+.blend-row span{background:#fff;border:3px solid var(--purple);border-radius:12px;width:34px;height:40px;display:flex;align-items:center;justify-content:center;font-size:clamp(16px,2.8vw,22px);font-weight:900;color:var(--purple);animation:popIn .2s ease}
+.blend-row .bs{background:transparent;border:none;width:16px}
+.blend-row .done{border-color:var(--green);color:var(--green);background:#e8ffe8}
+/* ===== MISC ===== */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;pointer-events:none;transition:transform .4s,opacity .4s;opacity:0;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.mascot{position:fixed;bottom:20px;right:20px;z-index:997;font-size:48px;cursor:pointer;transition:transform .3s;line-height:1}
+.mascot:hover{transform:scale(1.15) rotate(-10deg)}
+.fab-wrap{position:fixed;bottom:80px;right:20px;z-index:998;display:flex;flex-direction:column;gap:10px}
+.fab{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .5s,transform .4s,background .2s;opacity:0;pointer-events:none;transform:translateY(96px)}
+.fab.fab-top{background:linear-gradient(135deg,var(--purple),#6c3de0);color:#fff}
+.fab.fab-home{background:linear-gradient(135deg,var(--green),#2f9e2b);color:#fff}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10001;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 0 40px rgba(255,255,255,.2)}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;font-weight:900;transition:transform .2s}
+.lightbox .lb-close:hover{transform:scale(1.2)}
+.confetti-piece{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:10000;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(1080deg);opacity:0}}
+.board-plan{background:#fff;border-radius:18px;padding:18px;box-shadow:0 5px 14px rgba(0,0,0,.08);font-size:clamp(13px,2.1vw,17px);line-height:1.9;font-weight:700}
+.board-plan .bp-t{font-weight:900;color:var(--purple);font-size:1.1em;margin-bottom:4px}
+.bp-star{color:var(--orange);font-weight:900}
+.bp-ok{color:var(--green);font-weight:900}
+.bp-no{color:var(--red);font-weight:900;text-decoration:line-through}
+.cine{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:10000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:20px}
+.cine.show{display:flex}
+.cine .cine-who{font-size:clamp(14px,2.4vw,20px);font-weight:900;color:#ffd447;letter-spacing:2px;margin-bottom:8px}
+.cine .cine-line{font-size:clamp(24px,6vw,52px);font-weight:900;color:#fff;line-height:1.25;text-shadow:0 4px 20px rgba(0,0,0,.6);text-align:center}
+.cine-close{margin-top:20px;padding:12px 30px;border-radius:50px;border:none;background:#fff;font-size:clamp(14px,2.2vw,18px);font-weight:900;cursor:pointer;font-family:inherit}
+.det-q{background:#f8f5ff;border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;border:3px solid #e0d8f0;transition:all .2s}
+.det-q:hover{border-color:var(--purple)}
+.det-q .det-a{font-size:clamp(13px,2.1vw,17px);font-weight:800;color:var(--green);margin-top:8px;min-height:24px}
+.det-q.revealed{border-color:var(--green);background:#f2fff2}
+@media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.vocab-grid{grid-template-columns:repeat(2,1fr)}.mascot{font-size:38px;bottom:10px;right:10px}.twobox{grid-template-columns:1fr}.sub-machine{grid-template-columns:1fr}.phon-hero{grid-template-columns:1fr;text-align:center}.sort-boxes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div id="floaties"></div>
+
+<div class="topbar">
+  <div class="now-chip">🏠 TJ5 · Unit 6 · Rooms in the House</div>
+  <button class="sound-toggle" id="globalSound" title="Global sound on / off">🔊</button>
+</div>
+
+<div class="navbar" id="navBar">
+  <button class="ntab on" onclick="showTab(0)">📖 Lesson Plan</button>
+  <button class="ntab" onclick="showTab(1)">🔤 Phonics R</button>
+  <button class="ntab" onclick="showTab(2)">👄 Read My Lips</button>
+  <button class="ntab" onclick="showTab(3)">🎭 Dialogue Story</button>
+  <button class="ntab" onclick="showTab(4)">🏠 Vocabulary</button>
+  <button class="ntab" onclick="showTab(5)">🔄 Passing Game</button>
+  <button class="ntab" onclick="showTab(6)">💬 Patterns</button>
+  <button class="ntab" onclick="showTab(7)">🕵️ Hide &amp; Guess</button>
+  <button class="ntab" onclick="showTab(8)">🏘️ Human House</button>
+  <button class="ntab" onclick="showTab(9)">⚡ Beat the Teacher</button>
+  <button class="ntab" onclick="showTab(10)">📝 Quiz</button>
+</div>
+
+<!-- ============ TAB 0 : R PHONICS NOTE + LESSON PLAN ============ -->
+<div class="tabpan on" id="tp0" data-sec="plan">
+  <div class="rnote">
+    <h2>🔤 Teacher's Note — The R Phonics in Unit 6 <span class="rbadge">R</span><span class="rbadge">READ ME FIRST</span></h2>
+    <p class="rlead">Almost every target word in this lesson carries the letter <strong>R</strong>. Children in Taiwan usually need two things: the <strong>British</strong> way to make /r/, and a reminder to keep the tongue <strong>back</strong> for /r/ but <strong>down</strong> for /l/. Read this note before the lesson.</p>
+    <div class="rgrid">
+      <div class="ritem">
+        <h4><span class="rbig">R</span> How to make it (British)</h4>
+        <p>Bend your tongue <strong>up and back</strong> so the tip sits just behind your top teeth — but it does <strong>NOT touch</strong>. Lips pull forward a little. Hold it and say <strong>“rrr…”</strong>. Never roll it like a motorbike.</p>
+        <div class="rmouth">
+          <span data-say="R. Rrrr." data-rate="0.6" data-voice="girl">rrr…</span>
+          <span data-say="R. Rrrr. Room." data-voice="girl">room</span>
+          <span data-say="Where is Mom? She is in the dining room." data-voice="boy">full sentence</span>
+        </div>
+      </div>
+      <div class="ritem">
+        <h4>🇬🇧 British = NON-rhotic</h4>
+        <p>In British English the R is only sounded <strong>before a vowel</strong>. In this unit the R is <strong>always</strong> before a vowel, so you <strong>always</strong> say it: bed<strong>r</strong>oom, bath<strong>r</strong>oom, living <strong>r</strong>oom, dining <strong>r</strong>oom, whe<strong>r</strong>e, a<strong>r</strong>e, the<strong>r</strong>e.</p>
+        <div class="rmouth">
+          <span data-say="In a car, British people say cah, not car." data-voice="girl">car = “cah”</span>
+        </div>
+      </div>
+      <div class="ritem no">
+        <h4>⚠️ Mistake 1 — L for R</h4>
+        <p>“wiving room”, “bedloom”, “the coww”. <strong>Fix:</strong> /l/ = tongue tip <strong>DOWN</strong> on the teeth ridge. /r/ = tongue tip <strong>UP</strong>, touching nothing.</p>
+      </div>
+      <div class="ritem no">
+        <h4>⚠️ Mistake 2 — Extra vowel</h4>
+        <p>“bedrooom”, “rooom”, “breeeathroom”. <strong>Fix:</strong> the R is a small quiet sound, not a long vowel. Say the vowel <strong>once</strong>, then close your lips fast.</p>
+      </div>
+      <div class="ritem no">
+        <h4>⚠️ Mistake 3 — Rolling the R</h4>
+        <p>Rerolling the tongue (American style). <strong>Fix:</strong> the British /r/ never touches the roof of the mouth. If you can <em>feel</em> a bump, it is too far back.</p>
+      </div>
+      <div class="ritem ok">
+        <h4>✅ Say these R words</h4>
+        <p>room · bedroom · bathroom · dining room · living room · where · are · there · They're · Where's the cow?</p>
+        <div class="rmouth">
+          <span data-say="bedroom" data-voice="girl">bedroom</span>
+          <span data-say="bathroom" data-voice="boy">bathroom</span>
+          <span data-say="dining room" data-voice="girl">dining room</span>
+          <span data-say="living room" data-voice="boy">living room</span>
+        </div>
+      </div>
+    </div>
+    <div class="rfoot">
+      <button class="btn pink" data-say="Listen carefully. In British English, the r in room is a small sound. The tongue goes up and back, but it does not touch. Good. Now say it with me. Room. Bedroom. Bathroom. Dining room. Living room." data-voice="girl">🔊 Read this note to me (British)</button>
+      <button class="btn purple" onclick="showTab(1)">🔤 Go to Phonics Practice →</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="big-emoji">🏠</span>
+    <h1>Tales of Joy 5 · Unit 6</h1>
+    <span class="sub">Rooms in the House · Where is…?</span>
+    <div class="desc">Warm-up (10) → Dialogue (15) → Vocabulary (10) → Patterns (15) = 50 minutes</div>
+  </div>
+
+  <section>
+    <div class="shead"><span class="ic">📋</span><h2>Today's 50-Minute Lesson Plan</h2><span class="badge">HOUR 1</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Core language: <strong>rooms in a house</strong> + <strong>asking where someone is</strong>. Only <strong>dining room</strong> is new — the other four rooms are review. Click any block to jump to it!</div>
+    <div class="tl">
+      <div class="tl-item" onclick="showTab(2)"><span class="tl-min">0–10 min</span><h4>👄 Warm-up: Read My Lips</h4><p>Review Units 1–4 vocabulary. Teacher mouths a word silently — teams identify it, then spell it. 1 point for the word, 1 for the spelling.</p></div>
+      <div class="tl-item t1" onclick="showTab(3)"><span class="tl-min">10–25 min</span><h4>🎭 Dialogue: Storytelling</h4><p>Teacher Silly → Picture Detective → Magic Beans Drama → Character Role Play. Build the story with acting and faces, never by reading it flat.</p></div>
+      <div class="tl-item t2" onclick="showTab(4)"><span class="tl-min">25–35 min</span><h4>🏠 Vocabulary: Rooms</h4><p>bedroom · bathroom · kitchen · <strong>dining room</strong> ⭐ · living room. Look → Say → Spell, then Room Actions and the Passing Game.</p></div>
+      <div class="tl-item t3" onclick="showTab(6)"><span class="tl-min">35–50 min</span><h4>💬 Patterns: Where is…?</h4><p>Where is Mom? → She is in the dining room. Teacher modelling → Hide &amp; Guess → Human House → Beat the Teacher.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎯</span><h2>Objectives &amp; Target Language</h2><span class="badge">GOALS</span></div>
+    <div class="board-plan" style="margin-bottom:14px">
+      <div class="bp-t">Where is Mom? → <span style="color:var(--green)">She is in the dining room.</span></div>
+      <div class="bp-t">Where is Dad? → <span style="color:var(--green)">He is in the kitchen.</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+      <div class="tip">✅ Name 5 rooms: bedroom, bathroom, kitchen, dining room ⭐, living room</div>
+      <div class="tip">✅ Ask &amp; answer: <strong>Where is…?</strong> He / She is in the …</div>
+      <div class="tip">✅ Use <strong>she</strong> for Mom / Amy / Jill, <strong>he</strong> for Dad / Ben / Jack</div>
+      <div class="tip">✅ Say the R sound correctly: <em>bedroom, bathroom, dining room</em></div>
+      <div class="tip">✅ Write <span class="bp-ok">dining room</span> (TWO words) not <span class="bp-no">diningroom</span></div>
+      <div class="tip">✅ <strong>in the</strong> + room ⭐ but <strong>at home</strong></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🗂️</span><h2>Board Plan</h2><span class="badge">WRITE THIS UP</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="board-plan">
+      <div class="bp-t">TJ5 — Unit 6</div>
+      <div>Vocabulary</div>
+      <div>bedroom &nbsp;|&nbsp; bathroom &nbsp;|&nbsp; kitchen</div>
+      <div>dining room <span class="bp-star">⭐</span> &nbsp;|&nbsp; living room</div>
+      <div style="height:10px"></div>
+      <div class="bp-t">Pattern</div>
+      <div>Where is Mom? → She is in the dining room.</div>
+      <div>Where is Dad? → He is in the kitchen.</div>
+      <div style="height:10px"></div>
+      <div class="bp-t">Remember</div>
+      <div><span class="bp-ok">in the dining room ✅</span> &nbsp; <span class="bp-ok">at home ✅</span></div>
+      <div><span class="bp-ok">dining room = TWO words ✅</span></div>
+    </div>
+  </section>
+</div>
+<!-- ============ TAB 1 : PHONICS R ============ -->
+<div class="tabpan" id="tp1" data-sec="phonics">
+  <section>
+    <div class="shead"><span class="ic">🔤</span><h2>The R Sound — British /r/</h2><span class="badge">PHONICS</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="phon-hero">
+      <div class="phon-big" data-say="R. Rrrr. Rrr." data-rate="0.55" data-voice="girl" title="Click to hear the R sound">R</div>
+      <div>
+        <div style="font-size:clamp(16px,2.6vw,21px);font-weight:900;color:var(--purple);margin-bottom:8px">Click the big R to hear the pure British sound.</div>
+        <div style="font-size:clamp(13px,2.1vw,16px);font-weight:700;line-height:1.6;color:#555">
+          1️⃣ Tongue <strong>UP and BACK</strong>, tip just behind the top teeth.<br>
+          2️⃣ It does <strong>NOT touch</strong> anything.<br>
+          3️⃣ Lips pull forward slightly, like a small smile.<br>
+          4️⃣ <strong>No rolling.</strong> The British /r/ is quiet and quick.
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn pink" data-say="R. Rrrr. Now with vowels. Ra. Re. Ro. Ru. Ar. Er. Or. Ur." data-rate="0.7" data-voice="girl">🔊 Sound + vowels</button>
+          <button class="btn blue" data-say="L is different. For l, the tongue tip goes down and touches the teeth. Lllll. Now back to r. Rrrr." data-rate="0.75" data-voice="boy">🔊 /r/ vs /l/</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🏠</span><h2>R Words in This Unit</h2><span class="badge">LISTEN &amp; REPEAT</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Click a card to hear it slowly, then at normal speed. Notice: the R is always <strong>before a vowel</strong>, so you always say it.</div>
+    <div class="r-word-grid" id="rWordGrid"></div>
+    <div style="text-align:center"><button class="btn purple" onclick="speakRWords()">🔊 Hear them all</button></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🕵️</span><h2>R Detective — Does it have the R?</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Click a word to hear it, then click its box: <strong>🔊 Has R</strong> or <strong>🔇 No R</strong>. Sort all 10!</div>
+    <div class="sort-pool" id="sortPool"></div>
+    <div class="sort-boxes">
+      <div class="sort-box r"><h4>🔊 HAS R — make the /r/!</h4><div class="placed" id="boxR"></div></div>
+      <div class="sort-box n"><h4>🔇 NO R — tongue tip down</h4><div class="placed" id="boxN"></div></div>
+    </div>
+    <div id="sortResult" style="text-align:center;font-weight:900;font-size:1.1rem;min-height:26px"></div>
+    <div style="text-align:center;margin-top:12px"><button class="btn orange" onclick="resetSort()">🔄 Reset</button></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">✏️</span><h2>Spell the R Words</h2><span class="badge">WRITING</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Listen, then build the word letter by letter. Remember: <strong>dining room</strong> has a space in the middle!</div>
+    <div id="spellOutBox"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">💬</span><h2>Say It With the R Sound</h2><span class="badge">PATTERN</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Tap a line to hear it. R words are highlighted. Repeat three times, getting faster each round.</div>
+    <div class="story-card">
+      <div class="story-step" data-say="Where is Mom? She is in the dining room." data-voice="girl"><div class="step-num">1</div><div class="step-text"><strong>Where is Mom?</strong><br>She is in the <u style="color:var(--pink)">dining room</u>.</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="Where is Dad? He is in the kitchen." data-voice="boy"><div class="step-num">2</div><div class="step-text"><strong>Where is Dad?</strong><br>He is in the kitchen.</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="Where is Abby? She is in the bedroom." data-voice="girl"><div class="step-num">3</div><div class="step-text"><strong>Where is Abby?</strong><br>She is in the <u style="color:var(--pink)">bedroom</u>.</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="Where's the cow? I don't have it. But I have these! They're magic beans." data-voice="boy"><div class="step-num">4</div><div class="step-text"><strong>Where's the cow?</strong><br>They're magic beans.</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="Magic beans? You silly boy!" data-voice="girl"><div class="step-num">5</div><div class="step-text"><strong>Magic beans?!</strong><br>You <u style="color:var(--pink)">silly</u> boy!</div><div class="spk">🔊</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 2 : WARM-UP READ MY LIPS ============ -->
+<div class="tabpan" id="tp2" data-sec="lips">
+  <section>
+    <div class="shead"><span class="ic">👄</span><h2>Read My Lips</h2><span class="badge">0–10 MIN · WARM-UP</span><button class="sec-sound" data-sec="lips" onclick="toggleSecSound('lips',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">
+      💡 The teacher mouths the word <strong>silently</strong> — no sound!<br>
+      👉 A correct student must: <strong>SAY</strong> the word → <strong>SPELL</strong> it → <strong>FIND</strong> the flashcard.<br>
+      🏆 Team A vs Team B: <strong>1 point</strong> for the word + <strong>1 point</strong> for correct spelling.
+    </div>
+    <div class="story-card">
+      <div class="story-step" data-say="Good afternoon, everyone! Are you ready? Yes! Great! Eyes on me. Today we have a challenge. Can you read my lips?" data-voice="girl"><div class="step-num">T</div><div class="step-text"><strong>Good afternoon, everyone!</strong><br>Class: Good afternoon, Teacher! · Are you ready? — Yes!</div><div class="step-emoji">👋</div></div>
+      <div class="story-step" data-say="No sound! Watch my mouth. What am I saying?" data-voice="girl"><div class="step-num">T</div><div class="step-text"><strong>No sound! Watch my mouth.</strong><br>What am I saying?</div><div class="step-emoji">👀</div></div>
+      <div class="story-step" data-say="Five seconds! Ready? Five, four, three, two, one!" data-voice="boy"><div class="step-num">5</div><div class="step-text"><strong>Rapid-fire round!</strong><br>5–4–3–2–1!</div><div class="step-emoji">🤫</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🏆</span><h2>Read My Lips — Team Game</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="lips" onclick="toggleSecSound('lips',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="team-grid" id="lipsTeams"></div>
+    <div style="text-align:center;margin:6px 0"><span class="turn-chip" id="lipsTurn">🔵 Team A's turn</span></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn purple" onclick="newLipWord()">👄 Teacher mouths a word</button>
+      <button class="btn blue" onclick="replayLipWord()">🔁 Say it again</button>
+      <button class="btn orange" onclick="countdownLip()">⏱️ Rapid-fire 5-4-3-2-1</button>
+      <button class="btn red" onclick="resetLips()">🔄 Reset</button>
+    </div>
+    <div id="lipStage" style="text-align:center;min-height:130px;background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:4px dashed var(--purple);border-radius:20px;padding:18px;margin:12px 0">
+      <div style="font-size:clamp(11px,1.8vw,13px);font-weight:900;color:#999;letter-spacing:2px">WATCH THE TEACHER'S MOUTH</div>
+      <div style="font-size:clamp(40px,10vw,64px);line-height:1.1" id="lipFace">👄</div>
+      <div id="lipPrompt" style="font-size:clamp(15px,2.6vw,20px);font-weight:900;color:var(--purple)">Press the button to start!</div>
+    </div>
+    <div class="listen-opts" id="lipOptions" style="margin-top:14px"></div>
+    <div style="text-align:center;margin-top:18px">
+      <h3 style="font-weight:900;color:var(--purple);font-size:clamp(15px,2.4vw,20px)">Now spell it! Tap the letters in order.</h3>
+      <div class="spell-out" id="lipSlots"></div>
+      <div class="write-keyboard" id="lipKeys"></div>
+      <div class="write-keyboard">
+        <button class="write-key del" onclick="lipDel()">⌫</button>
+        <button class="write-key clr" onclick="lipClear()">CLEAR</button>
+        <button class="btn green" onclick="lipCheck()">✅ Check spelling</button>
+        <button class="btn blue" onclick="speakLipSpell()">🔊 Hear spelling</button>
+      </div>
+      <div class="write-result" id="lipResult" style="min-height:30px"></div>
+    </div>
+  </section>
+</div>
+<!-- ============ TAB 3 : DIALOGUE ============ -->
+<div class="tabpan" id="tp3" data-sec="dialogue">
+  <section>
+    <div class="shead"><span class="ic">🤪</span><h2>Activity 1 — Teacher Silly</h2><span class="badge">10–13 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Take an object that has <strong>no business</strong> brushing your hair. Children will laugh — that is the point. Teach <strong>“Don't be silly!”</strong> Finish with a real brush.</div>
+    <div class="obj-grid" id="sillyGrid"></div>
+    <div class="big-reply" id="sillyReply">…</div>
+    <div style="text-align:center"><button class="btn orange" onclick="resetSilly()">🔄 Start again</button></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🔍</span><h2>Activity 2 — Picture Detective</h2><span class="badge">13–17 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Do <strong>not</strong> read the dialogue. Look, ask questions, and let the children find the answers. Click a question to reveal the answer.</div>
+    <div class="twobox">
+      <div><img class="t-image" src="u6-01.png" alt="Tales of Joy 5 Unit 6 dialogue, pages A8 to A9" onclick="openLb(this.src)"><div style="text-align:center;font-weight:800;color:#888;margin-top:6px">Dialogue 1 — pp. A8–A9 (tap to enlarge)</div></div>
+      <div><img class="t-image" src="u6-02.png" alt="Tales of Joy 5 Unit 6 dialogue, pages A9 to A10" onclick="openLb(this.src)"><div style="text-align:center;font-weight:800;color:#888;margin-top:6px">Dialogue 2 — pp. A9–A10 (tap to enlarge)</div></div>
+    </div>
+    <div class="twobox" id="detectiveCrops"></div>
+    <div class="story-card" id="detectiveQs"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🫘</span><h2>Activity 3 — Magic Beans Drama</h2><span class="badge">17–21 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Use real beans or pretend ones. Act out Mom throwing them out of the window with a <strong>big angry face</strong>. Children predict, then you perform. Use actions, facial expressions and character voices.</div>
+    <div style="text-align:center;margin:14px 0">
+      <div id="beansStage" style="max-width:440px;margin:0 auto"></div>
+      <div style="margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn blue" onclick="beansFace('happy')">😀 Happy face</button>
+        <button class="btn red" onclick="beansFace('angry')">😠 Angry face</button>
+        <button class="btn green" onclick="beansFace('sad')">😢 Sad face</button>
+      </div>
+    </div>
+    <div class="story-card">
+      <div class="dlg g" data-say="Where's the cow?" data-voice="girl"><div class="av">👩</div><div class="bub"><strong>Mom:</strong> Where's the cow?</div><div class="vtag">👩 FEMALE</div></div>
+      <div class="dlg b" data-say="I don't have it. But I have these!" data-voice="boy"><div class="av">👦</div><div class="bub"><strong>Jack:</strong> I don't have it. But I have these!</div><div class="vtag">👦 MALE</div></div>
+      <div class="dlg g" data-say="What are they?" data-voice="girl"><div class="av">👩</div><div class="bub"><strong>Mom:</strong> What are they?</div><div class="vtag">👩 FEMALE</div></div>
+      <div class="dlg b" data-say="They're magic beans." data-voice="boy"><div class="av">👦</div><div class="bub"><strong>Jack:</strong> They're magic beans.</div><div class="vtag">👦 MALE</div></div>
+    </div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(16px,2.6vw,22px)">Predict! Are the beans magic?</h3>
+    <div class="yn"><button class="y" onclick="predict('y')">✅ Yes!</button><button class="n" onclick="predict('n')">❌ No!</button></div>
+    <div class="big-ans" id="predictAns">…</div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(16px,2.6vw,22px)">How does Jack feel now?</h3>
+    <div class="yn"><button class="y" onclick="beansFeel('happy')">😀 Happy</button><button class="n" onclick="beansFeel('sad')">😢 Sad</button></div>
+    <div class="big-ans" id="feelAns">…</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎭</span><h2>Activity 4 — Character Role Play</h2><span class="badge">21–25 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Group A = Jack · Group B = Jack's Mom. Read together, then <strong>SWITCH</strong>. Strong classes: add Abby and Nick. Finish with the <strong>What's Next?</strong> challenge.</div>
+    <div class="story-card">
+      <div class="dlg b" data-say="Mom, I'm back. Where are you?" data-voice="boy"><div class="av">👦</div><div class="bub"><strong>Jack:</strong> Mom, I'm back. Where are you?</div><div class="vtag">👦 MALE</div></div>
+      <div class="dlg g" data-say="I'm in the dining room." data-voice="girl"><div class="av">👩</div><div class="bub"><strong>Mom:</strong> I'm in the dining room.</div><div class="vtag">👩 FEMALE</div></div>
+      <div class="dlg p" data-say="Mom, I'm back! Where are you? I'm in the dining room." data-voice="girl"><div class="av">🗣️</div><div class="bub"><strong>Class repeats with feeling:</strong> Mom, I'm back! Where are you? — I'm in the dining room.</div><div class="vtag">👩 FEMALE</div></div>
+    </div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(16px,2.6vw,22px)">What's Next? — supply the missing line</h3>
+    <div class="tip" style="margin-bottom:14px">💡 The teacher says the first line and <strong>pauses</strong>. The class must supply the next line out loud.</div>
+    <div class="story-card" id="whatsNext"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn purple" onclick="nextWhatsNext()">▶ Next challenge</button>
+      <button class="btn orange" onclick="resetWhatsNext()">🔄 Reset</button>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 4 : VOCABULARY ============ -->
+<div class="tabpan" id="tp4" data-sec="vocab">
+  <section>
+    <div class="shead"><span class="ic">🏠</span><h2>Rooms in the House</h2><span class="badge">25–35 MIN · VOCAB</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 <strong>Look → Say → Spell.</strong> Click a card to hear it. ⭐ marks the one NEW word. The manual warns that children often write <em>diningroom</em> as one word — drill <strong>two words</strong>!</div>
+    <img class="t-image" src="u6-03.png" alt="Rooms in the house: bedroom, bathroom, kitchen, dining room, living room" onclick="openLb(this.src)" style="margin-bottom:16px">
+    <div class="vocab-grid" id="roomGrid"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">✏️</span><h2>Two Words! dining room</h2><span class="badge">COMMON ERROR</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Ask: <strong>“How many words?”</strong> Class: <strong>“Two!”</strong> Then emphasise: <strong>Dining… ROOM.</strong></div>
+    <div class="story-card">
+      <div class="dlg g" data-say="Dining room. How many words?" data-voice="girl"><div class="av">👩</div><div class="bub"><strong>Teacher:</strong> Dining room. How many words?</div><div class="vtag">👩 FEMALE</div></div>
+      <div class="dlg p" data-say="Two! Exactly. Dining, room." data-voice="girl"><div class="av">🗣️</div><div class="bub"><strong>Class:</strong> Two! Exactly. Dining… ROOM.</div><div class="vtag">👩 FEMALE</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#e8ffe8;border:5px solid var(--green);border-radius:18px;padding:18px;text-align:center"><div style="font-size:clamp(18px,3.4vw,28px);font-weight:900;color:#1a7a2c">dining room ✅</div><div style="font-size:clamp(12px,1.9vw,15px);font-weight:700;color:#555;margin-top:6px">2 words · a space in the middle</div></div>
+      <div style="background:#ffe8e8;border:5px solid var(--red);border-radius:18px;padding:18px;text-align:center"><div style="font-size:clamp(18px,3.4vw,28px);font-weight:900;color:#c0392b;text-decoration:line-through">diningroom ❌</div><div style="font-size:clamp(12px,1.9vw,15px);font-weight:700;color:#555;margin-top:6px">1 word · <strong>wrong!</strong></div></div>
+    </div>
+    <div class="story-card" style="margin-top:16px">
+      <div class="story-step" data-say="D-I-N-I-N-G, R-O-O-M." data-rate="0.8" data-voice="girl"><div class="step-num">A</div><div class="step-text"><strong>dining room</strong> — spell it out with me</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="bedroom: B-E-D-R-O-O-M. bathroom: B-A-T-H-R-O-O-M. living room: L-I-V-I-N-G, R-O-O-M." data-rate="0.8" data-voice="boy"><div class="step-num">B</div><div class="step-text"><strong>All the room words</strong> — notice the <span style="color:var(--pink)">R</span> in every one!</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="kitchen: K-I-T-C-H-E-N. Kitchen has no R. Say it." data-rate="0.8" data-voice="girl"><div class="step-num">C</div><div class="step-text"><strong>kitchen</strong> — the only room with <strong>no R</strong></div><div class="spk">🔊</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🤸</span><h2>Room Actions — Act It Out!</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Give each room one gesture. Teacher calls the room → children <strong>act + say</strong>. Then <strong>reverse it</strong>: the teacher acts silently and the children guess the room.</div>
+    <div class="zone-grid" id="actionGrid"></div>
+    <div class="big-ans" id="actionAns">Teacher: call a room, or act and let them guess →</div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn purple" onclick="randomAction()">🎲 Call a random room</button>
+      <button class="btn blue" onclick="teacherActs()">🙈 Teacher acts — class guesses</button>
+      <button class="btn orange" onclick="stopActing()">✋ Stop</button>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 5 : PASSING GAME ============ -->
+<div class="tabpan" id="tp5" data-sec="passing">
+  <section>
+    <div class="shead"><span class="ic">🔄</span><h2>The Passing Game</h2><span class="badge">MANUAL GAME</span><button class="sec-sound" data-sec="passing" onclick="toggleSecSound('passing',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Pass the room flashcard around while everyone says the word again and again. Suddenly the teacher shouts <strong>STOP!</strong> Whoever holds the card says the word, then spells it. Restart quickly so several children get a turn.</div>
+    <div class="team-grid" id="passTeams"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn green" onclick="startPassing()">▶️ START passing</button>
+      <button class="btn red" onclick="stopPassing()">🛑 STOP!</button>
+      <button class="btn orange" onclick="resetPassing()">🔄 Reset</button>
+    </div>
+    <div class="pass-track" id="passTrack"><div class="pass-card" id="passCard" style="left:12%"><div class="pc-emoji">🏠</div><div class="pc-word">start</div></div></div>
+    <div style="text-align:center;font-size:clamp(15px,2.4vw,20px);font-weight:900;color:var(--purple);min-height:28px" id="passMsg">Press START and let the card fly!</div>
+    <div class="spell-out" id="passSlots"></div>
+    <div style="text-align:center"><button class="btn blue" onclick="speakPassWord()" id="passHearBtn" style="display:none">🔊 Hear the word + spelling</button></div>
+  </section>
+</div>
+<!-- ============ TAB 6 : PATTERNS ============ -->
+<div class="tabpan" id="tp6" data-sec="patterns">
+  <section>
+    <div class="shead"><span class="ic">💬</span><h2>Where Is…?</h2><span class="badge">35–50 MIN · PATTERNS</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 <strong>Mom</strong> and <strong>dining room</strong> are the substitution parts — underline them. Keep correcting pronouns: Mom / Amy / Jill → <strong>she</strong>; Dad / Ben / Jack → <strong>he</strong>.</div>
+    <img class="t-image" src="u6-04.png" alt="Where is Mom? She is in the dining room. Where is Dad? He is in the kitchen." onclick="openLb(this.src)" style="margin-bottom:16px">
+    <div id="patternCards"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧑‍🤝‍🧑</span><h2>Teacher Modelling</h2><span class="badge">35–39 MIN</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Pick a person and a room — the class must produce the <strong>whole sentence</strong>. Click to hear it in a British voice.</div>
+    <div class="sub-machine">
+      <div><label style="font-weight:900;color:#888;font-size:13px">1. WHO?</label><select id="whoSel" onchange="buildSentence()"></select></div>
+      <div><label style="font-weight:900;color:#888;font-size:13px">2. WHICH ROOM?</label><select id="roomSel" onchange="buildSentence()"></select></div>
+    </div>
+    <div class="sub-out">
+      <div class="so-q" id="subQ">Where is Mom?</div>
+      <div class="so-a" id="subA">She is in the dining room.</div>
+      <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn purple" onclick="speakSentence()">🔊 Say it (British)</button>
+        <button class="btn green" onclick="randomSub()">🎲 Random person</button>
+        <button class="btn blue" onclick="showCine()">🎬 Big screen</button>
+      </div>
+    </div>
+    <div class="twobox" id="portraitCrops"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧭</span><h2>in the + room, but at home</h2><span class="badge">KEY CONTRAST</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 <strong>in</strong> goes with a room · <strong>at</strong> goes with <em>home</em>. Click a sentence: ✅ = correct, ❌ = wrong. The wrong one is fixed and spoken for you.</div>
+    <div class="pattern-card">
+      <div class="pattern-line" data-prep="in the kitchen" data-good="1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>She is <strong style="color:var(--green)">in</strong> the kitchen.</span><span class="prep-chip ok" data-mark>in the kitchen ✅</span></div>
+      <div class="pattern-line" data-prep="at home" data-good="1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>She is <strong style="color:var(--green)">at</strong> home.</span><span class="prep-chip ok" data-mark>at home ✅</span></div>
+      <div class="pattern-line" data-prep="in the bedroom" data-good="1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>He is <strong style="color:var(--green)">in</strong> the bedroom.</span><span class="prep-chip ok" data-mark>in the bedroom ✅</span></div>
+      <div class="pattern-line" data-prep="in the home" data-good="0" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>She is <strong>in</strong> the home.</span><span class="prep-chip no" data-mark>in the home ❌</span></div>
+      <div class="pattern-line" data-prep="at the kitchen" data-good="0" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>He is <strong>at</strong> the kitchen.</span><span class="prep-chip no" data-mark>at the kitchen ❌</span></div>
+      <div class="pattern-line" data-prep="in home" data-good="0" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>He is <strong>in</strong> home.</span><span class="prep-chip no" data-mark>in home ❌</span></div>
+    </div>
+    <div class="tip" style="margin-top:12px">🧠 <strong>Memory hook for children:</strong> “<em>In</em>” = inside a room (like inside a box). “<em>At</em> home” = at the whole house. We do not say “at the kitchen”.</div>
+  </section>
+</div>
+
+<!-- ============ TAB 7 : HIDE AND GUESS ============ -->
+<div class="tabpan" id="tp7" data-sec="hide">
+  <section>
+    <div class="shead"><span class="ic">🕵️</span><h2>“Where Is Mom?” Hide &amp; Guess</h2><span class="badge">39–43 MIN · GAME</span><button class="sec-sound" data-sec="hide" onclick="toggleSecSound('hide',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Five room cards on the board. Secretly hide 👩 behind one. The class must answer with the <strong>full sentence</strong>: “She is in the bedroom.” Wrong? Reveal and try again. Then let a student hide 👨 Dad.</div>
+    <div class="team-grid" id="hideTeams"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn pink" onclick="hidePerson('mom')">👩 Hide Mom</button>
+      <button class="btn blue" onclick="hidePerson('dad')">👨 Hide Dad</button>
+      <button class="btn orange" onclick="resetHide()">🔄 Reset</button>
+    </div>
+    <div class="big-ans" id="hideQ">Press “Hide Mom” to begin!…</div>
+    <div class="zone-grid" id="hideGrid"></div>
+    <div class="big-ans" id="hideA" style="font-size:clamp(16px,2.8vw,24px)">…</div>
+    <div style="text-align:center"><button class="btn green" onclick="awardHide()">🏆 Our answer is correct! (+1)</button></div>
+    <div id="hideScoreMsg" style="text-align:center;font-weight:900;font-size:1.05rem;min-height:26px"></div>
+  </section>
+</div>
+
+<!-- ============ TAB 8 : HUMAN HOUSE ============ -->
+<div class="tabpan" id="tp8" data-sec="house">
+  <section>
+    <div class="shead"><span class="ic">🏘️</span><h2>The Human House Game</h2><span class="badge">43–47 MIN · GAME</span><button class="sec-sound" data-sec="house" onclick="toggleSecSound('house',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Five areas of the classroom become the five rooms. Secretly tell Mom and Dad where to go. Class closes its eyes, then opens them and must produce the <strong>full sentence</strong>. Then let the children be the teacher!</div>
+    <div class="team-grid" id="houseTeams"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn pink" onclick="placePerson('mom')">👩 Send Mom (secret)</button>
+      <button class="btn blue" onclick="placePerson('dad')">👨 Send Dad (secret)</button>
+      <button class="btn green" onclick="askHouse('mom')">🙋 Where is Mom?</button>
+      <button class="btn green" onclick="askHouse('dad')">🙋 Where is Dad?</button>
+      <button class="btn orange" onclick="resetHouse()">🔄 Reset</button>
+    </div>
+    <div class="big-ans" id="houseQ">Click “Send Mom” to hide her somewhere in the house!…</div>
+    <div class="zone-grid" id="houseGrid"></div>
+    <div class="big-ans" id="houseA" style="font-size:clamp(16px,2.8vw,24px)">…</div>
+    <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="rewardHouse()">🏆 Our answer is correct! (+1)</button></div>
+    <div id="houseScoreMsg" style="text-align:center;font-weight:900;font-size:1.05rem;min-height:26px"></div>
+  </section>
+</div>
+
+<!-- ============ TAB 9 : BEAT THE TEACHER ============ -->
+<div class="tabpan" id="tp9" data-sec="beat">
+  <section>
+    <div class="shead"><span class="ic">⚡</span><h2>Beat the Teacher!</h2><span class="badge">47–50 MIN · FINAL</span><button class="sec-sound" data-sec="beat" onclick="toggleSecSound('beat',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 <strong>The class needs 5 points in 3 minutes</strong> — and the Teacher is answering too! Race the Teacher. One point for every correct answer.</div>
+    <div class="team-grid" id="beatTeams"></div>
+    <div class="ring" id="beatRing"><div class="rt" id="beatTime">60</div><div class="rl">SECONDS</div></div>
+    <div class="bt-q" id="beatQ">Press START — let's go!</div>
+    <div class="bt-opt-row" id="beatOpts"></div>
+    <div class="write-result" id="beatRes" style="min-height:30px"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:10px">
+      <button class="btn green" onclick="startBeat()">▶️ START (60 seconds)</button>
+      <button class="btn red" onclick="stopBeat()">🛑 Stop</button>
+      <button class="btn orange" onclick="resetBeat()">🔄 Reset</button>
+    </div>
+  </section>
+  <section>
+    <div class="shead"><span class="ic">👏</span><h2>Wrap-up</h2><span class="badge">SAY IT TOGETHER</span><button class="sec-sound" data-sec="beat" onclick="toggleSecSound('beat',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="story-card">
+      <div class="dlg g" data-say="Excellent! What did we learn today? Rooms! Where is Mom? She is in the dining room! Where is Dad? He is in the kitchen! Fantastic. Give yourselves three claps. One, two, three!" data-voice="girl"><div class="av">🎉</div><div class="bub"><strong>Teacher &amp; Class:</strong> Excellent! What did we learn today? — <strong>Rooms!</strong></div><div class="vtag">👩 FEMALE</div></div>
+    </div>
+    <div style="text-align:center"><button class="btn pink" onclick="finishLesson()">🎉 Finish the lesson!</button></div>
+  </section>
+</div>
+
+<!-- ============ TAB 10 : QUIZ ============ -->
+<div class="tabpan" id="tp10" data-sec="quiz">
+  <div class="hero">
+    <span class="big-emoji">📝</span>
+    <h1>Unit 6 Quiz</h1>
+    <span class="sub">Rooms in the House · Where is…?</span>
+    <div class="desc">Listen, speak, spell and act! 5 sections · earn max points.</div>
+  </div>
+  <section>
+    <div class="shead"><span class="ic">🎧</span><h2>Quiz Instructions</h2><span class="badge">LISTEN &amp; CHOOSE</span><button class="sec-sound" data-sec="quiz" onclick="toggleSecSound('quiz',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Every question can be <strong>heard</strong>. Click the 🔊 to listen again before you answer. The British voices speak at a normal, clear pace.</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn purple" onclick="sayF('Welcome to the Unit 6 quiz. Listen, speak, spell and act!')">🔊 Quiz intro (British ♀)</button>
+      <button class="btn blue" onclick="sayM('Are you ready? Let us begin!')">🔊 Teacher's start (British ♂)</button>
+      <button class="btn green" onclick="sayF('Great job, everyone! Well done!')">🔊 Well done (British ♀)</button>
+    </div>
+  </section>
+  <div id="quizContent"></div>
+  <div class="score-board" id="scoreBoard" style="display:none">
+    <h2>🎉 Quiz Complete!</h2>
+    <div class="score-big" id="finalScore">0</div>
+    <div class="score-label" id="finalLabel">points earned</div>
+    <div class="score-stars" id="finalStars"></div>
+    <div class="score-breakdown" id="scoreBreakdown"></div>
+    <button class="btn" onclick="resetAllQuiz()" style="margin-top:16px;background:#fff;color:var(--purple);font-weight:900">🔄 Try Again</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" title="Hello from Owlbert!">🦉</div>
+<div class="fab-wrap">
+  <button class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆</button>
+  <a class="fab fab-home" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+</div>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <img id="lbImg" src="" alt="Textbook page">
+</div>
+<div class="cine" id="cine">
+  <div class="cine-who" id="cineWho">QUESTION</div>
+  <div class="cine-line" id="cineLine">Where is Mom?</div>
+  <button class="cine-close" onclick="closeCine()">Close ✕</button>
+</div>
+<script>
+/* ===== IMAGE CROPS (natural sizes) ===== */
+var IMG={"u6-01.png":[1433,887],"u6-02.png":[948,580],"u6-03.png":[943,537],"u6-04.png":[922,547]};
+function cropHTML(src,x,y,w,h,extra){
+  var d=IMG[src];
+  return '<div class="crop '+(extra||'')+'" style="aspect-ratio:'+w+' / '+h+'">'
+    +'<img src="'+src+'" alt="" style="width:'+(d[0]/w*100).toFixed(3)+'%;left:-'+((x/w)*100).toFixed(3)+'%;top:-'+((y/h)*100).toFixed(3)+'%\">'
+    +'</div>';
+}
+var C={
+  house:    {src:"u6-03.png",x:256,y:112,w:440,h:350},
+  bedroom:  {src:"u6-03.png",x:266,y:166,w:250,h:88},
+  bathroom: {src:"u6-03.png",x:528,y:166,w:164,h:88},
+  kitchen:  {src:"u6-03.png",x:264,y:284,w:88, h:158},
+  dining:   {src:"u6-03.png",x:356,y:284,w:146,h:158},
+  living:   {src:"u6-03.png",x:508,y:284,w:178,h:158},
+  momEat:   {src:"u6-04.png",x:306,y:112,w:194,h:130},
+  dadCook:  {src:"u6-04.png",x:518,y:96, w:100,h:146},
+  amy:      {src:"u6-04.png",x:350,y:298,w:150,h:247},
+  ben:      {src:"u6-04.png",x:466,y:290,w:182,h:255},
+  sMom:     {src:"u6-02.png",x:358,y:142,w:142,h:260},
+  sMom2:    {src:"u6-02.png",x:650,y:88, w:100,h:218},
+  sKids:    {src:"u6-02.png",x:115,y:243,w:210,h:182},
+  sDad:     {src:"u6-02.png",x:762,y:368,w:118,h:198},
+  jackHouse:{src:"u6-01.png",x:252,y:0,w:474,h:424},
+  sRun:     {src:"u6-01.png",x:52,y:526,w:250,h:162}
+};
+/* cropHTML: optional maxH fits the crop inside a fixed-height, centred box
+   so every card in a row lines up nicely */
+function cropHTML(src,x,y,w,h,extra,maxH){
+  var d=IMG[src];
+  var img='<img src="'+src+'" alt="" style="width:'+(d[0]/w*100).toFixed(3)+'%;left:-'+((x/w)*100).toFixed(3)+'%;top:-'+((y/h)*100).toFixed(3)+'%">';
+  var inner='<div class="crop '+(extra||'')+'" style="aspect-ratio:'+w+' / '+h+';'+(maxH?'width:'+Math.round(maxH*w/h)+'px;max-width:100%;':'')+'">'+img+'</div>';
+  if(!maxH)return inner;
+  return '<div class="cropfit" style="height:'+maxH+'px">'+inner+'</div>';
+}
+function cropOf(k,extra,maxH){var c=C[k];return cropHTML(c.src,c.x,c.y,c.w,c.h,extra,maxH);}
+
+/* ===== AUDIO + TWO BRITISH VOICES ===== */
+var soundOn=true;
+var RATE=0.9, RATE_SLOW=0.8;
+var secSounds={plan:true,phonics:true,lips:true,dialogue:true,vocab:true,passing:true,patterns:true,hide:true,house:true,beat:true,quiz:true};
+var curSec="plan";
+var actx=null;
+function audio(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx;}
+function tone(f,dur,type,vol,delay){var c=audio();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.value=f;var t=c.currentTime+(delay||0);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+0.05);}
+function sPop(){if(!soundOn)return;tone(500,0.1,"square",0.08);tone(760,0.09,"square",0.08,0.06);}
+function sDing(){if(!soundOn)return;tone(660,0.12,"triangle",0.16);tone(880,0.16,"triangle",0.16,0.1);tone(1320,0.25,"triangle",0.14,0.2);}
+function sBuzz(){if(!soundOn)return;tone(180,0.18,"sawtooth",0.11);tone(140,0.22,"sawtooth",0.11,0.16);}
+function sWin(){if(!soundOn)return;tone(523,0.12,"sine",0.14);tone(659,0.12,"sine",0.14,0.1);tone(784,0.12,"sine",0.14,0.2);tone(1047,0.2,"sine",0.16,0.3);}
+var cachedVoices=[];
+if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();};}
+function pickVoice(gender){
+  var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();
+  if(!v||!v.length)return null;
+  if(gender==="boy"){
+    return v.find(function(x){return x.lang==="en-GB"&&(x.name.indexOf("Google UK English Male")>-1||x.name.indexOf("Male")>-1||x.name.indexOf("Daniel")>-1||x.name.indexOf("Oliver")>-1||x.name.indexOf("Arthur")>-1);})
+      ||v.find(function(x){return x.lang==="en-GB"&&/male|daniel|oliver|arthur|george|fred/i.test(x.name);})
+      ||v.find(function(x){return x.lang==="en-GB";})
+      ||v.find(function(x){return x.name.indexOf("Male")>-1&&x.lang.indexOf("en")===0;})
+      ||v.find(function(x){return x.lang.indexOf("en")===0;});
+  }
+  return v.find(function(x){return x.lang==="en-GB"&&(x.name.indexOf("Google UK English Female")>-1||x.name.indexOf("Female")>-1||x.name.indexOf("Karen")>-1||x.name.indexOf("Samantha")>-1||x.name.indexOf("Serena")>-1);})
+    ||v.find(function(x){return x.lang==="en-GB"&&!/male/i.test(x.name);})
+    ||v.find(function(x){return x.lang==="en-GB";})
+    ||v.find(function(x){return /female|karen|samantha|serena/i.test(x.name)&&x.lang.indexOf("en")===0;})
+    ||v.find(function(x){return x.lang.indexOf("en")===0;});
+}
+function speakGB(text,pitch,gender,onEnd,rate){
+  if(!soundOn||!secSounds[curSec]){if(onEnd)setTimeout(onEnd,120);return;}
+  var u=new SpeechSynthesisUtterance(text);
+  u.voice=pickVoice(gender);
+  u.lang="en-GB";
+  u.rate=rate||RATE;
+  u.pitch=pitch;
+  u.volume=1;
+  u.onend=onEnd;
+  try{speechSynthesis.speak(u);}catch(e){if(onEnd)setTimeout(onEnd,120);}
+}
+var VF="girl",VM="boy";
+function sayF(t,rate){speakGB(t,1.35,VF,null,rate);}
+function sayM(t,rate){speakGB(t,1.05,VM,null,rate);}
+function stopSpeak(){try{speechSynthesis.cancel();}catch(e){}}
+function spellOut(word,gap,rate,gender,cb){
+  stopSpeak();
+  var parts=word.split(" "),i=0;
+  function nextWord(){
+    if(i>=parts.length){if(cb)cb();return;}
+    var w=parts[i],j=0;
+    function nextLetter(){
+      if(j<w.length){
+        speakGB(w[j].toUpperCase(),1.15,gender,function(){j++;setTimeout(nextLetter,gap||230);},rate||RATE_SLOW);
+      }else{
+        setTimeout(function(){
+          speakGB(w,1.15,gender,function(){i++;setTimeout(nextWord,320);},RATE);
+        },gap||230);
+      }
+    }
+    nextLetter();
+  }
+  nextWord();
+}
+function toggleSecSound(sec,btn){
+  secSounds[sec]=!secSounds[sec];
+  btn.querySelector(".sec-si").textContent=secSounds[sec]?"🔊":"🔇";
+  btn.classList.toggle("off",!secSounds[sec]);
+  showToast(sec.charAt(0).toUpperCase()+sec.slice(1)+" sound "+(secSounds[sec]?"ON":"OFF"));
+}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(showToast._t);showToast._t=setTimeout(function(){t.classList.remove("show");},2000);}
+function launchConfetti(){
+  var em=["🎉","⭐","✨","🎊","💖","🌈","🎈","💪","🏠","👏"];
+  for(var i=0;i<50;i++){
+    var el=document.createElement("div");el.className="confetti-piece";
+    el.innerHTML=em[Math.floor(Math.random()*em.length)];
+    el.style.cssText="left:"+Math.random()*100+"vw;font-size:"+(Math.random()*16+10)+"px;animation-duration:"+(Math.random()*2+2)+"s;animation-delay:"+(Math.random()*1.5)+"s;";
+    document.body.appendChild(el);
+    (function(e){setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e);},5000);})(el);
+  }
+}
+
+/* ===== TABS ===== */
+var tabSecMap={0:"plan",1:"phonics",2:"lips",3:"dialogue",4:"vocab",5:"passing",6:"patterns",7:"hide",8:"house",9:"beat",10:"quiz"};
+function showTab(idx){
+  curSec=tabSecMap[idx]||"plan";
+  var pans=document.querySelectorAll(".tabpan"),tabs=document.querySelectorAll(".navbar .ntab");
+  for(var i=0;i<pans.length;i++)pans[i].classList.toggle("on",i===idx);
+  for(var j=0;j<tabs.length;j++)tabs[j].classList.toggle("on",j===idx);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openLb(src){document.getElementById("lbImg").src=src;document.getElementById("lightbox").classList.add("show");sPop();}
+document.getElementById("lbClose").onclick=function(){document.getElementById("lightbox").classList.remove("show");};
+document.getElementById("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show");};
+document.getElementById("globalSound").onclick=function(){
+  soundOn=!soundOn;
+  this.textContent=soundOn?"🔊":"🔇";
+  this.classList.toggle("off",!soundOn);
+  if(!soundOn)stopSpeak();
+  showToast("Global sound "+(soundOn?"ON":"OFF"));
+};
+function showCine(){
+  document.getElementById("cineWho").textContent=document.getElementById("subQ").textContent;
+  document.getElementById("cineLine").textContent=document.getElementById("subA").textContent;
+  document.getElementById("cine").classList.add("show");
+  speakSentence();
+}
+function closeCine(){document.getElementById("cine").classList.remove("show");}
+
+/* ===== DATA ===== */
+var ROOMS=[
+ {key:"bedroom",  word:"bedroom",    crop:"bedroom",  emoji:"🛏️", isNew:false, spell:["B","E","D","R","O","O","M"],                 act:"Pretend to sleep.",            say:"I sleep in the bedroom."},
+ {key:"bathroom", word:"bathroom",   crop:"bathroom", emoji:"🛁", isNew:false, spell:["B","A","T","H","R","O","O","M"],            act:"Pretend to brush your teeth.", say:"I wash in the bathroom."},
+ {key:"kitchen",  word:"kitchen",    crop:"kitchen",  emoji:"🍳", isNew:false, spell:["K","I","T","C","H","E","N"],               act:"Pretend to cook.",             say:"Dad cooks in the kitchen."},
+ {key:"dining",   word:"dining room",crop:"dining",   emoji:"🍽️", isNew:true,  spell:["D","I","N","I","N","G"," ","R","O","O","M"],act:"Pretend to eat.",              say:"We eat in the dining room."},
+ {key:"living",   word:"living room",crop:"living",   emoji:"🛋️", isNew:false, spell:["L","I","V","I","N","G"," ","R","O","O","M"],act:"Pretend to watch TV.",         say:"We watch TV in the living room."}
+];
+var PEOPLE=[
+ {name:"Mom",  pron:"She", gender:"girl", voice:"girl"},
+ {name:"Dad",  pron:"He",  gender:"boy",  voice:"boy"},
+ {name:"Amy",  pron:"She", gender:"girl", voice:"girl"},
+ {name:"Abby", pron:"She", gender:"girl", voice:"girl"},
+ {name:"Jill", pron:"She", gender:"girl", voice:"girl"},
+ {name:"Ben",  pron:"He",  gender:"boy",  voice:"boy"},
+ {name:"Jack", pron:"He",  gender:"boy",  voice:"boy"},
+ {name:"Nick", pron:"He",  gender:"boy",  voice:"boy"}
+];
+function roomByKey(k){for(var i=0;i<ROOMS.length;i++)if(ROOMS[i].key===k)return ROOMS[i];return ROOMS[0];}
+
+/* ===== TEAMS ===== */
+function buildTeams(id){
+  var g=document.getElementById(id);if(!g)return;
+  var sc=0;
+  g.innerHTML="";
+  [{k:"a",n:"Team A",e:"🔵",c:"ta"},{k:"b",n:"Team B",e:"🟠",c:"tb"}].forEach(function(t){
+    var d=document.createElement("div");
+    d.className="team-box "+t.c;
+    d.innerHTML="<div class='team-icon'>"+t.e+"</div><div class='team-name'>"+t.n+"</div><div class='team-score' id='"+id+t.k.toUpperCase()+"'>"+sc+"</div>"
+      +"<div class='team-btns'><button class='tadd' onclick=\"bumpTeam('"+id+"','"+t.k+"',1)\">+1</button>"
+      +"<button class='tadd' onclick=\"bumpTeam('"+id+"','"+t.k+"',2)\">+2</button>"
+      +"<button class='tsub' onclick=\"bumpTeam('"+id+"','"+t.k+"',-1)\">-1</button></div>";
+    g.appendChild(d);
+  });
+}
+function bumpTeam(id,t,pts){
+  var el=document.getElementById(id+t.toUpperCase());if(!el)return;
+  var v=parseInt(el.textContent||"0")+pts;if(v<0)v=0;el.textContent=v;
+  el.style.transform="scale(1.35)";
+  setTimeout(function(){el.style.transform="scale(1)";},300);
+  if(pts>0){sDing();showToast("Team "+t.toUpperCase()+" +"+pts+" point"+(pts>1?"s":""));}
+}
+function teamVal(id,t){
+  var el=document.getElementById(id+t.toUpperCase());
+  return el?parseInt(el.textContent||"0",10)||0:0;
+}
+/* ============================================================
+   TAB 1 : PHONICS
+   ============================================================ */
+var RWORDS=[
+ {w:"room",s:"R-oo-m"},{w:"bedroom",s:"B-E-D-R-oo-m"},{w:"bathroom",s:"B-A-TH-R-oo-m"},
+ {w:"dining room",s:"D-I-N-I-N-G R-oo-m"},{w:"living room",s:"L-I-V-I-N-G R-oo-m"},
+ {w:"where",s:"WH-E-R-ee"},{w:"are",s:"A-R"},{w:"there",s:"TH-E-R-ee"},
+ {w:"They're",s:"TH-E-R-ee"},{w:"Where is Mom?",s:"WH-E-R-ee"}
+];
+function buildRWords(){
+  var g=document.getElementById("rWordGrid");if(!g)return;g.innerHTML="";
+  RWORDS.forEach(function(r,i){
+    var d=document.createElement("div");
+    d.className="r-word";
+    d.innerHTML="<div class='rw-w'>"+r.w+"</div><div class='rw-s'>"+r.s+"</div>";
+    d.onclick=function(){
+      var v=(i%2===0)?VF:VM;
+      speakGB(r.w,1.2,v,function(){setTimeout(function(){speakGB(r.w,1.2,v,null,RATE);},300);},RATE_SLOW);
+    };
+    g.appendChild(d);
+  });
+}
+function speakRWords(){
+  var i=0;
+  (function next(){
+    if(i>=RWORDS.length)return;
+    speakGB(RWORDS[i].w,1.2,(i%2===0)?VF:VM,function(){i++;setTimeout(next,420);},RATE);
+  })();
+}
+var SORTWORDS=[
+ {w:"bedroom",r:true},{w:"kitchen",r:false},{w:"bathroom",r:true},{w:"cow",r:false},
+ {w:"living room",r:true},{w:"silly",r:false},{w:"dining room",r:true},{w:"beans",r:false},
+ {w:"where",r:true},{w:"I'm",r:false}
+];
+var sortRight=0,sortPending=null;
+function resetSort(){sortRight=0;sortPending=null;document.getElementById("sortResult").textContent="";buildSort();}
+function buildSort(){
+  var pool=document.getElementById("sortPool");
+  if(!pool)return;
+  pool.innerHTML="";
+  document.getElementById("boxR").innerHTML="";
+  document.getElementById("boxN").innerHTML="";
+  var br=document.getElementById("boxR"),bn=document.getElementById("boxN");
+  br.onclick=function(){sortTo("r");};
+  bn.onclick=function(){sortTo("n");};
+  SORTWORDS.forEach(function(s,i){
+    var sp=document.createElement("span");
+    sp.id="sw"+i;
+    sp.textContent=s.w;
+    pool.appendChild(sp);
+  });
+}
+function sortPick(i){
+  var el=document.getElementById("sw"+i);
+  if(!el||el.classList.contains("gone"))return;
+  if(sortPending)sortPending.classList.remove("sel");
+  sortPending=el;
+  el.classList.add("sel");
+  sayF(SORTWORDS[i].w);
+  showToast("Now click the correct box for “"+SORTWORDS[i].w+"”");
+}
+function sortTo(box){
+  var el=sortPending;
+  if(!el){showToast("First click a word in the pool!");return;}
+  var i=parseInt(el.id.replace("sw",""),10);
+  var s=SORTWORDS[i];
+  sortPending=null;
+  el.classList.remove("sel");
+  el.classList.add("gone");
+  var moved=document.createElement("span");
+  moved.textContent=s.w;
+  moved.onclick=function(e){e.stopPropagation();sayF(s.w);};
+  document.getElementById(box==="r"?"boxR":"boxN").appendChild(moved);
+  var correct=(s.r&&box==="r")||(!s.r&&box==="n");
+  var res=document.getElementById("sortResult");
+  if(correct){
+    sortRight++;sDing();
+    sayF("Yes! "+s.w);
+    res.innerHTML="✅ <span style='color:var(--green)'>Correct!</span> Sorted: "+sortRight+" / "+SORTWORDS.length;
+  }else{
+    sBuzz();
+    sayF("No! "+s.w+(s.r?" has an R sound. Put it in the R box.":" has no R sound. Put it in the no R box."));
+    res.innerHTML="❌ <span style='color:var(--red)'>Not quite!</span> Sorted: "+sortRight+" / "+SORTWORDS.length;
+  }
+  if(sortRight>=SORTWORDS.length){
+    res.innerHTML="🎉 All sorted! Brilliant phonics! +10 points!";
+    sWin();launchConfetti();
+  }
+}
+var SPELLWORDS=[
+ {w:"bedroom",hint:"B-E-D-R-O-O-M"},
+ {w:"bathroom",hint:"B-A-T-H-R-O-O-M"},
+ {w:"kitchen",hint:"K-I-T-C-H-E-N — the only one with no R!"},
+ {w:"dining room",hint:"TWO words! D-I-N-I-N-G then R-O-O-M"},
+ {w:"living room",hint:"L-I-V-I-N-G then R-O-O-M"},
+ {w:"where",hint:"WH-E-R-ee — the R is before a vowel"}
+];
+function buildSpellOut(){
+  var box=document.getElementById("spellOutBox");
+  if(!box)return;
+  box.innerHTML="";
+  var keys="abcdefghijklmnopqrstuvwxyz";
+  SPELLWORDS.forEach(function(s,i){
+    var card=document.createElement("div");
+    card.className="write-card";
+    var h="<div style='text-align:center;font-size:34px'>✏️</div>";
+    h+="<div class='write-prompt'>Spell it: <strong>"+s.w+"</strong></div>";
+    h+="<div class='write-hint'>"+s.hint+"</div>";
+    h+="<div class='write-display' id='pwd"+i+"'></div>";
+    h+="<div class='blend-row' id='pblend"+i+"'></div>";
+    h+="<div class='write-keyboard'>";
+    for(var k=0;k<keys.length;k++)h+="<button class='write-key' data-q='"+i+"' data-l='"+keys[k]+"'>"+keys[k]+"</button>";
+    h+="<button class='write-key' data-q='"+i+"' data-l=' ' style='font-size:clamp(13px,2.2vw,17px)'>␣</button>";
+    h+="<button class='write-key del' data-q='"+i+"' data-action='del'>⌫</button>";
+    h+="<button class='write-key clr' data-q='"+i+"' data-action='clr'>CLEAR</button></div>";
+    h+="<div style='text-align:center;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap'>";
+    h+="<button class='btn blue' onclick=\"speakPhonSpell("+i+")\">🔊 Hear it slowly</button>";
+    h+="<button class='btn green' onclick=\"checkPhonSpell("+i+")\">✅ Check</button></div>";
+    h+="<div class='write-result' id='pRes"+i+"'></div>";
+    card.innerHTML=h;
+    box.appendChild(card);
+  });
+  box.querySelectorAll(".write-key").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var q=parseInt(this.dataset.q,10);
+      var d=document.getElementById("pwd"+q);
+      if(d.classList.contains("ok"))return;
+      if(this.dataset.action==="del")d.textContent=d.textContent.slice(0,-1);
+      else if(this.dataset.action==="clr")d.textContent="";
+      else if(d.textContent.length<16)d.textContent+=this.dataset.l;
+      sPop();
+    });
+  });
+}
+function speakPhonSpell(i){
+  stopSpeak();
+  sayF(SPELLWORDS[i].w);
+  setTimeout(function(){spellOut(SPELLWORDS[i].w,240,RATE_SLOW,VF,null);},1700);
+}
+function checkPhonSpell(i){
+  var d=document.getElementById("pwd"+i);
+  var res=document.getElementById("pRes"+i);
+  var val=d.textContent.trim().toLowerCase().replace(/\s+/g," ");
+  if(val===SPELLWORDS[i].w){
+    d.className="write-display ok";
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+SPELLWORDS[i].w+"</span>";
+    sDing();sWin();
+    var b=document.getElementById("pblend"+i);
+    var h="";
+    SPELLWORDS[i].w.split("").forEach(function(c){h+=(c===" ")?'<span class="bs"></span>':'<span class="done">'+c.toUpperCase()+"</span>";});
+    b.innerHTML=h;
+  }else{
+    d.className="write-display bad";
+    res.innerHTML="<span style='color:var(--red)'>❌ Look again — it is ' "+SPELLWORDS[i].w+" '</span>";
+    sBuzz();
+    spellOut(SPELLWORDS[i].w,250,RATE_SLOW,VF,null);
+  }
+}
+
+/* ============================================================
+   TAB 2 : READ MY LIPS
+   ============================================================ */
+var LIPWORDS=["apple","banana","pear","strawberry","watermelon","grape","tomato","peach","candle","bucket","rabbit","bedroom","bathroom","kitchen","dining room","living room"];
+var lipWord="",lipTurn="a",lipLocked=true,lipTyped="",lipSpelled=false;
+function buildLipKeys(){
+  var g=document.getElementById("lipKeys");
+  if(!g||g.childNodes.length)return;
+  var keys="abcdefghijklmnopqrstuvwxyz",h="";
+  for(var k=0;k<keys.length;k++)h+="<button class='write-key' onclick=\"lipType('"+keys[k]+"')\">"+keys[k]+"</button>";
+  h+="<button class='write-key' onclick=\"lipType(' ')\" style='font-size:clamp(13px,2.2vw,17px)'>␣</button>";
+  g.innerHTML=h;
+}
+function setLipsTurn(t){
+  lipTurn=t;
+  document.getElementById("lipsTurn").textContent=(t==="a")?"🔵 Team A's turn":"🟠 Team B's turn";
+}
+function resetLips(){
+  stopSpeak();
+  lipWord="";lipLocked=true;lipTyped="";lipSpelled=false;
+  buildTeams("lipsTeams");
+  setLipsTurn("a");
+  document.getElementById("lipPrompt").innerHTML="Press the button to start!";
+  document.getElementById("lipFace").textContent="👄";
+  document.getElementById("lipOptions").innerHTML="";
+  document.getElementById("lipSlots").innerHTML="";
+  document.getElementById("lipResult").innerHTML="";
+}
+function newLipWord(){
+  stopSpeak();
+  var pool=LIPWORDS.slice();
+  lipWord=pool.splice(Math.floor(Math.random()*pool.length),1)[0];
+  var opts=[];
+  for(var i=0;i<3;i++)opts.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+  opts.push(lipWord);
+  opts.sort(function(){return Math.random()-0.5;});
+  lipLocked=false;lipTyped="";lipSpelled=false;
+  document.getElementById("lipPrompt").innerHTML="😶 <strong>No sound!</strong> Watch the teacher's mouth…";
+  document.getElementById("lipFace").textContent="👄";
+  document.getElementById("lipSlots").innerHTML="";
+  document.getElementById("lipResult").innerHTML="";
+  var g=document.getElementById("lipOptions");
+  g.innerHTML="";
+  opts.forEach(function(w){
+    var d=document.createElement("div");
+    d.className="listen-opt";
+    d.textContent=w;
+    d.style.cssText="font-size:clamp(15px,2.6vw,21px);font-weight:900;opacity:.22;filter:blur(8px);cursor:default";
+    g.appendChild(d);
+  });
+  setTimeout(function(){speakGB(lipWord,1.2,VF,null,RATE);},300);
+}
+function revealLips(){
+  var nodes=document.querySelectorAll("#lipOptions .listen-opt");
+  for(var i=0;i<nodes.length;i++){nodes[i].style.opacity="1";nodes[i].style.filter="none";}
+  if(lipWord)document.getElementById("lipPrompt").innerHTML="🔤 <strong>"+lipWord+"</strong> — now spell it!";
+}
+function replayLipWord(){
+  if(!lipWord){showToast("Pick a word first!");return;}
+  sayF(lipWord);
+  document.getElementById("lipResult").innerHTML="<span style='color:#888'>👂 Listen again…</span>";
+}
+function countdownLip(){
+  if(!lipWord){showToast("Pick a word first!");return;}
+  var n=5;
+  (function tick(){
+    if(n>0){
+      document.getElementById("lipPrompt").innerHTML="⏱️ <strong>"+n+"</strong>";
+      tone(700,0.12,"square",0.1);
+      n--;
+      setTimeout(tick,800);
+    }else{
+      document.getElementById("lipPrompt").innerHTML="👄 <strong>GO!</strong>";
+      sayF(lipWord);
+    }
+  })();
+}
+function lipPick(w){
+  if(lipLocked||!lipWord)return;
+  lipLocked=true;
+  var nodes=document.querySelectorAll("#lipOptions .listen-opt");
+  var chosen=null;
+  for(var i=0;i<nodes.length;i++){
+    nodes[i].style.opacity="1";nodes[i].style.filter="none";nodes[i].classList.add("dis");
+    if(nodes[i].textContent===w)chosen=nodes[i];
+  }
+  if(w===lipWord){
+    if(chosen)chosen.classList.remove("dis"),chosen.classList.add("ok");
+    bumpTeam("lipsTeams",lipTurn,1);
+    sDing();
+    document.getElementById("lipResult").innerHTML="<span style='color:var(--green)'>✅ Correct! +1 point. Now spell it for another +1!</span>";
+    document.getElementById("lipPrompt").innerHTML="✍️ <strong>Spell it!</strong> "+lipWord.length+" letters";
+  }else{
+    sBuzz();
+    document.getElementById("lipResult").innerHTML="<span style='color:var(--red)'>❌ It was '"+lipWord+"'. Say it, then spell it.</span>";
+    document.getElementById("lipPrompt").innerHTML="😶 <strong>It was: "+lipWord+"</strong>";
+    for(var j=0;j<nodes.length;j++)if(nodes[j].textContent===lipWord)nodes[j].classList.add("ok");
+  }
+  revealLips();
+}
+function lipType(ch){
+  if(!lipWord||lipSpelled)return;
+  if(lipTyped.length<16){lipTyped+=ch;renderLipSlots();sPop();}
+}
+function lipDel(){if(lipSpelled)return;lipTyped=lipTyped.slice(0,-1);renderLipSlots();}
+function lipClear(){if(lipSpelled)return;lipTyped="";renderLipSlots();}
+function renderLipSlots(){
+  var out="",i;
+  for(i=0;i<lipTyped.length;i++){
+    var c=lipTyped[i];
+    out+= c===" " ? '<span class="wg"></span>' : '<span>'+c.toUpperCase()+"</span>";
+  }
+  document.getElementById("lipSlots").innerHTML=out||'<span style="border:none;background:transparent;color:#aaa;font-size:14px">…</span>';
+}
+function lipCheck(){
+  if(!lipWord){showToast("Pick a word first!");return;}
+  if(lipSpelled)return;
+  if(lipTyped.toLowerCase().replace(/\s+/g," ")===lipWord){
+    lipSpelled=true;
+    bumpTeam("lipsTeams",lipTurn,1);
+    sDing();sWin();
+    document.getElementById("lipResult").innerHTML="<span style='color:var(--green)'>🎉 Perfect spelling! +1 point. Turn over!</span>";
+    document.getElementById("lipPrompt").innerHTML="🏆 <strong>Excellent!</strong> Next word?";
+    setLipsTurn(lipTurn==="a"?"b":"a");
+    document.getElementById("lipsTeams"+lipTurn.toUpperCase());
+  }else{
+    sBuzz();
+    document.getElementById("lipResult").innerHTML="<span style='color:var(--red)'>❌ Try again — count the letters.</span>";
+    spellOut(lipWord,230,RATE_SLOW,VF,null);
+  }
+}
+function speakLipSpell(){if(lipWord)spellOut(lipWord,240,RATE_SLOW,VF,null);}
+/* ============================================================
+   TAB 3 : DIALOGUE
+   ============================================================ */
+var SILLY=[
+ {obj:"eraser",emoji:"🧽",line:"Oh! My hair is messy. Can I brush my hair with an eraser?",good:false},
+ {obj:"marker", emoji:"🖍️",line:"How about this? Can I brush my hair with a marker?",good:false},
+ {obj:"pen",    emoji:"🖊️",line:"And this one? Can I brush my hair with a pen?",good:false},
+ {obj:"brush",  emoji:"🪥",line:"Can I use this?",good:true}
+];
+function buildSilly(){
+  var g=document.getElementById("sillyGrid");if(!g)return;g.innerHTML="";
+  SILLY.forEach(function(s,i){
+    var d=document.createElement("div");
+    d.className="obj";
+    d.id="obj"+i;
+    d.innerHTML="<span class='obj-emoji'>"+s.emoji+"</span><div class='obj-name'>"+s.obj+"</div><div class='obj-say' id='osay"+i+"'></div>";
+    d.onclick=function(){sillyPick(i);};
+    g.appendChild(d);
+  });
+}
+function sillyPick(i){
+  var s=SILLY[i];
+  var el=document.getElementById("obj"+i);
+  var say=document.getElementById("osay"+i);
+  var rep=document.getElementById("sillyReply");
+  el.classList.add("brushing");
+  setTimeout(function(){el.classList.remove("brushing");},1600);
+  stopSpeak();
+  sayF(s.line,0.85);
+  if(s.good){
+    el.classList.add("used");
+    setTimeout(function(){
+      rep.className="big-reply good";
+      rep.textContent="Yes!";
+      sayF("Yes!");
+    },1500);
+  }else{
+    el.classList.add("used");
+    setTimeout(function(){
+      rep.className="big-reply bad";
+      rep.textContent="No! Don't be silly!";
+      say.textContent="Class: Don't be silly!";
+      say.className="obj-say bad";
+      sayF("No! Don't be silly!");
+    },1500);
+  }
+}
+function resetSilly(){
+  stopSpeak();
+  buildSilly();
+  var r=document.getElementById("sillyReply");
+  r.className="big-reply";r.textContent="…";
+}
+var DETQ=[
+ {q:"Look carefully. Who can you see?",a:"Jack, Abby and Nick — and Mom!",voice:VF},
+ {q:"Where are they?",a:"They are at Jack's house!",voice:VM},
+ {q:"Are they at the park?",a:"No! They are not at the park.",voice:VF},
+ {q:"They are at…?",a:"Jack's house!",voice:VM},
+ {q:"Who came home with magic beans?",a:"Jack! He traded his cow for them.",voice:VM},
+ {q:"What is Mom doing in the dining room?",a:"She is in the dining room. Where is Mom? She is in the dining room.",voice:VF},
+ {q:"Where is the cow? (R sound!)",a:"Where's the cow? I don't have it. But I have these!",voice:VM},
+ {q:"What are the beans?",a:"They're magic beans!",voice:VF}
+];
+function buildDetective(){
+  var b=document.getElementById("detectiveCrops");
+  if(b){
+    b.innerHTML="";
+    var items=[["jackHouse","🏠 Jack's house"],["sRun","🧒 The children arrive"],["sMom","👩 Mom"],["sMom2","😠 Mom is angry"],["sKids","🧒 Abby, Nick & Jack"],["sDad","👨 Dad"]];
+    items.forEach(function(it){
+      var w=document.createElement("div");
+      w.innerHTML=cropOf(it[0],null,170)+'<div style="text-align:center;font-weight:800;color:var(--purple);margin-top:6px;font-size:clamp(12px,2vw,15px)">'+it[1]+'</div>';
+      var cr=w.querySelector(".crop");
+      cr.style.cursor="zoom-in";
+      cr.onclick=function(){openLb(C[it[0]].src);};
+      b.appendChild(w);
+    });
+  }
+  var g=document.getElementById("detectiveQs");if(!g)return;g.innerHTML="";
+  DETQ.forEach(function(d,i){
+    var el=document.createElement("div");
+    el.className="det-q";
+    el.innerHTML="<strong style='font-size:clamp(14px,2.3vw,18px)'>❓ "+d.q+"</strong><div class='det-a' id='deta"+i+"'>tap to reveal 👆</div>";
+    el.onclick=function(){
+      var a=document.getElementById("deta"+i);
+      if(a.textContent.indexOf("tap")>-1){
+        a.textContent="✅ "+d.a;
+        el.classList.add("revealed");
+        speakGB(d.a,1.2,d.voice,null,RATE);
+      }else{
+        speakGB(d.a,1.2,d.voice,null,RATE);
+      }
+    };
+    g.appendChild(el);
+  });
+}
+var BEANFACES={
+  happy:{crop:"sKids",line:"Is Jack happy now?",say:"Are you happy now, Jack?",who:"TEACHER"},
+  angry:{crop:"sMom2",line:"Magic beans?! You silly boy!",say:"Magic beans?! You silly boy!",who:"MOM (angry!)"},
+  sad:{crop:"sDad",line:"Oh no! Mom threw them away…",say:"Oh no! She threw the beans out of the window!",who:"NARRATOR"}
+};
+function beansFace(which){
+  var f=BEANFACES[which];
+  var stage=document.getElementById("beansStage");
+  if(!stage||!f)return;
+  stage.innerHTML=cropOf(f.crop,null,250);
+  stopSpeak();
+  speakGB(f.say,1.3,which==="angry"?VF:VM,null,RATE);
+  showToast(f.line);
+  if(which==="angry"){sBuzz();}
+}
+function predict(ans){
+  var el=document.getElementById("predictAns");
+  stopSpeak();
+  if(ans==="y"){
+    el.innerHTML="<span style='color:var(--red)'>❌ Not yet! Not now.</span>";
+    sayF("Really? Are they magic? No! Not now.");
+  }else{
+    el.innerHTML="<span style='color:var(--green)'>✅ That's right! No, they are not magic… yet!</span>";
+    sDing();
+    sayF("That's right! No, they are not magic. Not now.");
+  }
+}
+function beansFeel(ans){
+  var el=document.getElementById("feelAns");
+  stopSpeak();
+  if(ans==="happy"){
+    el.innerHTML="<span style='color:var(--red)'>❌ No! He is <strong>sad</strong>. 😢</span>";
+    sBuzz();sayF("Is Jack happy now? No! He is sad.");
+  }else{
+    el.innerHTML="<span style='color:var(--green)'>✅ Yes! Jack is <strong>sad</strong>. 😢</span>";
+    sDing();sayF("Is he sad? Yes! Jack is very sad.");
+  }
+}
+var WN=[
+ {cue:"Mom, I'm back. …",ans:"Where are you?",v:VM},
+ {cue:"Where are you? …",ans:"I'm in the dining room.",v:VF},
+ {cue:"Where's the cow? …",ans:"I don't have it. But I have these!",v:VM},
+ {cue:"I don't have it. But I have these! …",ans:"What are they?",v:VF},
+ {cue:"What are they? …",ans:"They're magic beans.",v:VM},
+ {cue:"They're magic beans. …",ans:"Magic beans?! You silly boy!",v:VF},
+ {cue:"Where is Mom? …",ans:"She is in the dining room.",v:VF},
+ {cue:"Where is Dad? …",ans:"He is in the kitchen.",v:VM}
+];
+var whatsNextIdx=0;
+function resetWhatsNext(){whatsNextIdx=0;buildWhatsNext();}
+function buildWhatsNext(){
+  var g=document.getElementById("whatsNext");if(!g)return;
+  g.innerHTML="";
+  nextWhatsNext();
+}
+function nextWhatsNext(){
+  var g=document.getElementById("whatsNext");if(!g)return;
+  var it=WN[whatsNextIdx%WN.length];
+  var el=document.createElement("div");
+  el.className="story-step";
+  el.innerHTML="<div class='step-num'>"+(whatsNextIdx%WN.length+1)+"</div><div class='step-text'>"
+    +"<strong>Teacher says:</strong> “"+it.cue+"”<br><span style='color:var(--pink)'>Class must say: “"+it.ans+"”</span></div>"
+    +"<div class='step-emoji'>🗣️</div>";
+  el.onclick=function(){
+    stopSpeak();
+    speakGB(it.cue,1.2,it.v,function(){setTimeout(function(){speakGB(it.ans,1.2,it.v,null,RATE);},600);},RATE);
+  };
+  g.innerHTML="";
+  g.appendChild(el);
+  whatsNextIdx++;
+}
+
+/* ============================================================
+   TAB 4 : VOCABULARY
+   ============================================================ */
+function buildRooms(){
+  var g=document.getElementById("roomGrid");if(!g)return;g.innerHTML="";
+  ROOMS.forEach(function(r,i){
+    var d=document.createElement("div");
+    d.className="vocab-card"+(r.isNew?" isnew":"");
+    d.id="vc"+i;
+    d.innerHTML=cropOf(r.crop,null,150)
+      +"<div class='vc-body'><div class='vc-word'>"+r.emoji+" "+r.word+"</div>"
+      +"<div class='vc-tag'>"+(r.isNew?"⭐ NEW WORD":"review")+"</div>"
+      +"<div class='vc-say' id='vcsay"+i+"'>Look 👀 → Say 🗣️ → Spell ✏️</div></div>";
+    d.onclick=function(){
+      var say=document.getElementById("vcsay"+i);
+      say.textContent="🗣️ "+r.word;
+      d.classList.add("said");
+      stopSpeak();
+      sayF("What room is this? "+r.word+". "+r.word+". "+r.say);
+      setTimeout(function(){spellOut(r.word,230,RATE_SLOW,VF,null);},2600);
+    };
+    g.appendChild(d);
+  });
+}
+function buildActions(){
+  var g=document.getElementById("actionGrid");if(!g)return;g.innerHTML="";
+  ROOMS.forEach(function(r,i){
+    var d=document.createElement("div");
+    d.className="zone";
+    d.innerHTML=cropOf(r.crop,null,130)+"<div class='zlabel'>"+r.emoji+" "+r.word+"</div>";
+    d.onclick=function(){actionPick(i);};
+    g.appendChild(d);
+  });
+}
+function actionPick(i){
+  var r=ROOMS[i];
+  var a=document.getElementById("actionAns");
+  stopSpeak();
+  a.innerHTML="<span style='color:var(--purple)'>"+r.emoji+" "+r.word.toUpperCase()+"!</span><br><span style='font-size:clamp(13px,2vw,16px);color:#666'>"+r.act+"</span>";
+  sPop();
+  sayF(r.word+"! "+r.act.replace("Pretend to ","Pretend you are "));
+}
+function randomAction(){
+  var i=Math.floor(Math.random()*ROOMS.length);
+  actionPick(i);
+  showToast("Teacher says: “"+ROOMS[i].word.toUpperCase()+"!” — everyone ACT!");
+}
+var actTimer=null,actRoom=-1;
+function teacherActs(){
+  actRoom=Math.floor(Math.random()*ROOMS.length);
+  var a=document.getElementById("actionAns");
+  a.innerHTML="🙈 <span style='color:var(--purple)'>Teacher is acting…</span><br><span style='font-size:clamp(13px,2vw,16px);color:#666'>Class: “You are in the …?”</span>";
+  showToast(ROOMS[actRoom].act+" — which room?");
+  actTimer=setTimeout(function(){
+    var ans=document.getElementById("actionAns");
+    ans.innerHTML="<span style='color:var(--green)'>✅ It was the "+ROOMS[actRoom].word+"!</span>";
+    sayF("It was the "+ROOMS[actRoom].word+"!");
+  },6000);
+}
+function stopActing(){
+  if(actTimer){clearTimeout(actTimer);actTimer=null;}
+  document.getElementById("actionAns").textContent="Stopped. Press “Teacher acts” to try again.";
+}
+
+/* ============================================================
+   TAB 5 : PASSING GAME
+   ============================================================ */
+var passTimer=null,passRunning=false,passWord="",passPos=12,passDir=1;
+function startPassing(){
+  passRunning=true;passPos=12;passDir=1;
+  var btn=document.getElementById("passHearBtn");if(btn)btn.style.display="none";
+  document.getElementById("passSlots").innerHTML="";
+  document.getElementById("passMsg").textContent="🔊 Pass the card — keep saying the word!";
+  var r=roomByKey("dining");
+  sayF("Pass the card. Pass the card. "+r.word+"! "+r.word+"! "+r.word+"!");
+  clearInterval(passTimer);
+  passTimer=setInterval(function(){
+    if(!passRunning)return;
+    passPos+=passDir*7;
+    if(passPos>92){passPos=92;passDir=-1;sPop();}
+    if(passPos<8){passPos=8;passDir=1;sPop();}
+    var card=document.getElementById("passCard");
+    if(card)card.style.left=passPos+"%";
+  },260);
+}
+function stopPassing(){
+  if(!passRunning){showToast("Press START first!");return;}
+  passRunning=false;
+  clearInterval(passTimer);
+  var r=roomByKey(["bedroom","bathroom","kitchen","dining","living"][Math.floor(Math.random()*5)]);
+  passWord=r.word;
+  var card=document.getElementById("passCard");
+  if(card){card.style.left=passPos+"%";card.querySelector(".pc-emoji").textContent=r.emoji;card.querySelector(".pc-word").textContent=r.word;}
+  document.getElementById("passMsg").innerHTML="🛑 <span style='color:var(--red)'>STOP!</span> Whoever holds this card — say it, then spell it!";
+  sayM("Stop!");
+  sBuzz();
+  var btn=document.getElementById("passHearBtn");if(btn)btn.style.display="inline-flex";
+  renderPassSlots("");
+  setTimeout(function(){spellOut(passWord,260,RATE_SLOW,VF,null);},900);
+}
+function renderPassSlots(txt){
+  var out="",i;
+  for(i=0;i<txt.length;i++){
+    var c=txt[i];
+    out+=(c===" ")?'<span class="sp"></span>':'<span>'+c.toUpperCase()+"</span>";
+  }
+  document.getElementById("passSlots").innerHTML=out;
+}
+function speakPassWord(){
+  if(!passWord){showToast("Press START then STOP first!");return;}
+  stopSpeak();
+  sayF(passWord);
+  var i=0;
+  (function next(){
+    if(i>=passWord.length)return;
+    renderPassSlots(passWord.slice(0,i+1));
+    speakGB(passWord[i].toUpperCase(),1.15,VF,function(){i++;setTimeout(next,260);},RATE_SLOW);
+  })();
+}
+function resetPassing(){
+  passRunning=false;clearInterval(passTimer);passWord="";
+  var card=document.getElementById("passCard");
+  if(card){card.style.left="12%";card.querySelector(".pc-emoji").textContent="🏠";card.querySelector(".pc-word").textContent="start";}
+  document.getElementById("passMsg").textContent="Press START and let the card fly!";
+  document.getElementById("passSlots").innerHTML="";
+  var btn=document.getElementById("passHearBtn");if(btn)btn.style.display="none";
+}
+/* ============================================================
+   TAB 6 : PATTERNS
+   ============================================================ */
+var PATTERNS=[
+ {t:"Where is Mom? → She is in the dining room.",q:"Where is Mom?",a:"She is in the dining room.",
+  ex:["Where is Mom? She is in the dining room.","Where's Mom? In the living room.","Where's Mom? She's in the living room."]},
+ {t:"Where is Dad? → He is in the kitchen.",q:"Where is Dad?",a:"He is in the kitchen.",
+  ex:["Where is Dad? He is in the kitchen.","Where's Dad? In the bedroom.","Where's Dad? He's in the bedroom."]},
+ {t:"in the + room ⭐",q:"",a:"in the bedroom · in the bathroom · in the kitchen · in the dining room · in the living room",
+  ex:["She is in the bedroom.","He is in the bathroom.","She is in the dining room."]},
+ {t:"…but at home ⭐",q:"",a:"at home",
+  ex:["She is at home.","He is at home.","Are you at home? Yes, I am."]},
+ {t:"Where are the beans? → They're magic beans.",q:"Where are the beans?",a:"They're magic beans.",
+  ex:["Where are the beans? They're on the table.","What are they? They're magic beans.","Where's the cow? I don't have it."]}
+];
+function buildPatterns(){
+  var g=document.getElementById("patternCards");if(!g)return;g.innerHTML="";
+  PATTERNS.forEach(function(p,i){
+    var c=document.createElement("div");
+    c.className="pattern-card";
+    var h="<h3>"+p.t+"</h3>";
+    h+="<div class='pattern-line' data-say='"+p.t.replace(/'/g,"&#39;")+"' data-voice='"+((i%2===0)?VF:VM)+"'>🔊 Tap to hear: <span class='q'>"+p.q+"</span> <span class='a'>"+p.a+"</span></div>";
+    h+="<div class='pattern-examples'>";
+    p.ex.forEach(function(e){
+      h+="<span class='pe' data-say='"+e.replace(/'/g,"&#39;")+"' data-voice='"+((i%2===0)?VF:VM)+"'>"+e+"</span>";
+    });
+    h+="</div>";
+    c.innerHTML=h;
+    g.appendChild(c);
+  });
+}
+var curWho=PEOPLE[0],curRoom=ROOMS[3];
+function buildSubMachine(){
+  var w=document.getElementById("whoSel"),r=document.getElementById("roomSel");
+  if(!w||!r)return;
+  w.innerHTML="";r.innerHTML="";
+  PEOPLE.forEach(function(p,i){var o=document.createElement("option");o.value=i;o.textContent=p.name;w.appendChild(o);});
+  ROOMS.forEach(function(p,i){var o=document.createElement("option");o.value=i;o.textContent=p.word;r.appendChild(o);});
+  w.value=0;r.value=3;
+  var pc=document.getElementById("portraitCrops");
+  if(pc){
+    pc.innerHTML="";
+    var people=[
+      {crop:"momEat",label:"👩 Mom in the dining room",say:"Mom is in the dining room. Where is Mom? She is in the dining room.",voice:VF},
+      {crop:"dadCook",label:"👨 Dad in the kitchen",say:"Dad is in the kitchen. Where is Dad? He is in the kitchen.",voice:VM}
+    ];
+    people.forEach(function(p){
+      var d=document.createElement("div");
+      d.className="vocab-card";
+      d.setAttribute("data-say",p.say);
+      d.setAttribute("data-voice",p.voice);
+      d.innerHTML=cropOf(p.crop,null,175)+"<div class='vc-body'><div class='vc-word'>"+p.label+"</div><div class='vc-say'>🔊 tap to hear</div></div>";
+      pc.appendChild(d);
+    });
+  }
+  buildSentence();
+}
+function buildSentence(){
+  var w=document.getElementById("whoSel"),r=document.getElementById("roomSel");
+  if(!w||!r)return;
+  curWho=PEOPLE[parseInt(w.value,10)||0];
+  curRoom=ROOMS[parseInt(r.value,10)||0];
+  document.getElementById("subQ").textContent="Where is "+curWho.name+"?";
+  document.getElementById("subA").textContent=curWho.pron+" is in the "+curRoom.word+".";
+}
+function speakSentence(){
+  var q="Where is "+curWho.name+"?";
+  var a=curWho.pron+" is in the "+curRoom.word+".";
+  stopSpeak();
+  speakGB(q,1.2,curWho.voice,function(){setTimeout(function(){speakGB(a,1.2,curWho.voice,null,RATE);},420);},RATE);
+}
+function randomSub(){
+  var w=document.getElementById("whoSel");
+  w.value=Math.floor(Math.random()*PEOPLE.length);
+  document.getElementById("roomSel").value=Math.floor(Math.random()*ROOMS.length);
+  buildSentence();
+  showToast("Class must answer with the WHOLE sentence!");
+}
+function buildPrep(){
+  var lines=document.querySelectorAll(".pattern-line[data-prep]");
+  for(var i=0;i<lines.length;i++){
+    (function(el){
+      el.onclick=function(){
+        var txt=el.getAttribute("data-prep");
+        var good=el.getAttribute("data-good")==="1";
+        var mark=el.querySelector("[data-mark]");
+        stopSpeak();
+        if(good){
+          sDing();
+          speakGB("Yes! "+txt,1.2,el.dataset.voice||VF,null,RATE);
+        }else{
+          sBuzz();
+          var fix=txt.replace(/^at the /,"in the ").replace(/^in home$/,"at home");
+          speakGB("No! "+txt.replace(/^(at|in) /,"")+" is wrong. We say in the room. Or at home.",1.2,VM,null,RATE);
+          mark.className="prep-chip ok";
+          mark.textContent="→ "+fix+" ✅";
+        }
+      };
+    })(lines[i]);
+  }
+}
+
+/* ============================================================
+   TAB 7 : HIDE AND GUESS
+   ============================================================ */
+var hideWho="mom",hideRoom=null,hideOpen=false,hideTurn="a";
+function buildHideGrid(){
+  var g=document.getElementById("hideGrid");if(!g)return;g.innerHTML="";
+  ROOMS.forEach(function(r,i){
+    var d=document.createElement("div");
+    d.className="zone";
+    d.id="hz"+i;
+    d.innerHTML=cropOf(r.crop,null,130)+"<div class='zlabel'>"+r.emoji+" "+r.word+"</div><div class='zhide'></div>";
+    d.onclick=function(){hideGuess(i);};
+    g.appendChild(d);
+  });
+}
+function hidePerson(who){
+  hideWho=who;hideOpen=true;
+  hideRoom=Math.floor(Math.random()*ROOMS.length);
+  var pr=(who==="mom")?"She":"He";
+  var word=(who==="mom")?"Mom":"Dad";
+  document.getElementById("hideQ").innerHTML="😱 Oh no! <span style='color:var(--pink)'>Where is "+word+"?</span>";
+  document.getElementById("hideA").innerHTML="Answer with the FULL sentence: “"+pr+" is in the …”";
+  var i;
+  for(i=0;i<ROOMS.length;i++)document.getElementById("hz"+i).classList.remove("revealed","dim");
+  var h=document.getElementById("hz"+hideRoom).querySelector(".zhide");
+  h.textContent=(who==="mom")?"👩":"👨";
+  document.getElementById("hideScoreMsg").innerHTML="<span style='color:#888'>👀 Secretly hidden! Students guess the room.</span>";
+  stopSpeak();
+  sayF("Oh no! Where is "+word+"?");
+}
+function hideGuess(i){
+  if(!hideOpen){showToast("Press “Hide Mom” or “Hide Dad” first!");return;}
+  hideOpen=false;
+  var r=ROOMS[i];
+  var pr=(hideWho==="mom")?"She":"He";
+  var ok=(i===hideRoom);
+  var a=document.getElementById("hideA");
+  for(var k=0;k<ROOMS.length;k++)document.getElementById("hz"+k).classList.remove("revealed");
+  var h=document.getElementById("hz"+i).querySelector(".zhide");
+  h.textContent=(hideWho==="mom")?"👩":"👨";
+  document.getElementById("hz"+i).classList.add("revealed");
+  if(ok){
+    a.innerHTML="🎉 <span style='color:var(--green)'>YES! "+pr+" is in the "+r.word+"!</span>";
+    bumpTeam("hideTeams",hideTurn,1);
+    sDing();sWin();
+    sayF("Yes! "+pr+" is in the "+r.word+"!");
+    hideTurn=(hideTurn==="a")?"b":"a";
+    document.getElementById("hideScoreMsg").innerHTML="<span style='color:var(--green)'>Turn over to Team "+hideTurn.toUpperCase()+"</span>";
+  }else{
+    a.innerHTML="❌ <span style='color:var(--red)'>No! Try again!</span> ("+pr+" is in the "+ROOMS[hideRoom].word+")";
+    sBuzz();
+    sayF("No! Try again!");
+  }
+}
+function awardHide(){
+  bumpTeam("hideTeams",hideTurn,0);
+  showToast("Use the +1 / +2 buttons on the score boxes to award points.");
+}
+function resetHide(){
+  hideOpen=false;hideRoom=null;
+  for(var i=0;i<ROOMS.length;i++){
+    var z=document.getElementById("hz"+i);
+    z.classList.remove("revealed","dim");
+    z.querySelector(".zhide").textContent="";
+  }
+  document.getElementById("hideQ").textContent="Press “Hide Mom” to begin!…";
+  document.getElementById("hideA").textContent="…";
+  document.getElementById("hideScoreMsg").textContent="";
+}
+
+/* ============================================================
+   TAB 8 : HUMAN HOUSE
+   ============================================================ */
+var houseAt={mom:null,dad:null},houseTurn="a";
+function buildHouseGrid(){
+  var g=document.getElementById("houseGrid");if(!g)return;g.innerHTML="";
+  ROOMS.forEach(function(r,i){
+    var d=document.createElement("div");
+    d.className="zone";
+    d.id="hz2"+i;
+    d.innerHTML=cropOf(r.crop,null,130)+"<div class='zlabel'>🧒 "+r.word+" corner</div><div class='zhide'></div>";
+    d.onclick=function(){houseReveal(i);};
+    g.appendChild(d);
+  });
+}
+function placePerson(who){
+  var k=Math.floor(Math.random()*ROOMS.length);
+  houseAt[who]=k;
+  document.getElementById("houseQ").innerHTML="📣 <span style='color:var(--purple)'>"+who.toUpperCase()+" — go to the "+ROOMS[k].word+"!</span> <span style='font-size:clamp(12px,1.8vw,14px);color:#888'>(tell them secretly, then: “Close your eyes!”)</span>";
+  document.getElementById("houseA").innerHTML="Class closes its eyes… then: “Open your eyes. <span style='color:var(--pink)'>Where is "+who.toUpperCase()+"?</span>”";
+  var i;
+  for(i=0;i<ROOMS.length;i++)document.getElementById("hz2"+i).classList.remove("revealed");
+  stopSpeak();
+  sayF("Close your eyes! "+who+" , go to the "+ROOMS[k].word+".");
+  showToast("🤫 Secret: "+who+" is in the "+ROOMS[k].word);
+}
+function askHouse(who){
+  if(houseAt[who]===null||houseAt[who]===undefined){showToast("Send "+who+" into the house first!");return;}
+  var pr=(who==="mom")?"She":"He";
+  document.getElementById("houseQ").innerHTML="🙋 <span style='color:var(--pink)'>Where is "+who.toUpperCase()+"?</span>";
+  document.getElementById("houseA").innerHTML="Class must answer: “"+pr+" is in the …”";
+  stopSpeak();
+  sayF("Ready? Open your eyes. Where is "+who+"?");
+}
+function houseReveal(i){
+  var r=ROOMS[i];
+  var out=[];
+  if(houseAt.mom!==null&&houseAt.mom!==undefined)out.push({who:"mom",k:houseAt.mom});
+  if(houseAt.dad!==null&&houseAt.dad!==undefined)out.push({who:"dad",k:houseAt.dad});
+  if(!out.length){showToast("Send Mom and Dad into the house first!");return;}
+  for(var k=0;k<ROOMS.length;k++)document.getElementById("hz2"+k).classList.remove("revealed");
+  var html="";
+  out.forEach(function(o){
+    if(o.k!==i)return;
+    var z=document.getElementById("hz2"+i);
+    z.querySelector(".zhide").textContent=(o.who==="mom")?"👩 Mom":"👨 Dad";
+    z.classList.add("revealed");
+    var pr=(o.who==="mom")?"She":"He";
+    html+="<span style='color:var(--green)'>"+pr+" is in the "+r.word+"!</span><br>";
+  });
+  document.getElementById("houseA").innerHTML=html||"<span style='color:#888'>Nobody here. Try another room!</span>";
+  sDing();
+  out.forEach(function(o,ix){
+    var pr=(o.who==="mom")?"She":"He";
+    setTimeout(function(){speakGB(pr+" is in the "+ROOMS[o.k].word+".",1.2,o.who==="mom"?VF:VM,null,RATE);},ix*2200);
+  });
+}
+function rewardHouse(){
+  bumpTeam("houseTeams",houseTurn,1);
+  houseTurn=(houseTurn==="a")?"b":"a";
+  document.getElementById("houseScoreMsg").innerHTML="<span style='color:var(--green)'>Next question — turn over!</span>";
+}
+function resetHouse(){
+  houseAt={mom:null,dad:null};
+  for(var i=0;i<ROOMS.length;i++){
+    var z=document.getElementById("hz2"+i);
+    z.classList.remove("revealed","dim");
+    z.querySelector(".zhide").textContent="";
+  }
+  document.getElementById("houseQ").textContent="Click “Send Mom” to hide her somewhere in the house!…";
+  document.getElementById("houseA").textContent="…";
+  document.getElementById("houseScoreMsg").textContent="";
+}
+
+/* ============================================================
+   TAB 9 : BEAT THE TEACHER
+   ============================================================ */
+var BEATQ=[
+ {q:"Where is Mom?",opts:["She is in the dining room.","He is in the kitchen.","She is in the bedroom."],a:0,v:VF},
+ {q:"Where is Dad?",opts:["He is in the bathroom.","She is in the kitchen.","He is in the living room."],a:2,v:VM},
+ {q:"What room is this?",opts:["bathroom","bedroom","dining room"],a:1,v:VF},
+ {q:"Spell: dining room",opts:["dinin g room","dining room","diningroom"],a:1,v:VM},
+ {q:"In the home or at home?",opts:["in the home","at home","in home"],a:1,v:VF},
+ {q:"She is ___ the kitchen.",opts:["in","at","on"],a:0,v:VM},
+ {q:"He is ___ home.",opts:["at","in","to"],a:0,v:VF},
+ {q:"Where is Jill?",opts:["She is in the bedroom.","He is in the bedroom.","She is on the bed."],a:0,v:VM},
+ {q:"Where is Ben?",opts:["She is in the living room.","He is in the living room.","He is on the sofa."],a:1,v:VF},
+ {q:"What is this room? 🍳",opts:["kitchen","bedroom","bathroom"],a:0,v:VM},
+ {q:"Which word has NO R?",opts:["kitchen","bedroom","dining room"],a:0,v:VF},
+ {q:"Where is Dad?",opts:["He is in the kitchen.","He is in the dining room.","He is in the bathroom."],a:0,v:VM},
+ {q:"She's in the dining ___.",opts:["bed","room","bath"],a:1,v:VF},
+ {q:"Where is Nick?",opts:["He is in the kitchen.","She is in the kitchen.","He is in the garden."],a:0,v:VM},
+ {q:"At home or in the living room?",opts:["in the living room","at the living room","in living room"],a:0,v:VF}
+];
+var beatIdx=0,beatTimer=null,beatLeft=60,beatRunning=false,beatLocked=true;
+function startBeat(){
+  stopBeat();
+  beatIdx=0;beatLeft=60;beatRunning=true;beatLocked=true;
+  buildTeams("beatTeams");
+  document.getElementById("beatTime").textContent=beatLeft;
+  document.getElementById("beatRing").classList.remove("hot");
+  document.getElementById("beatRes").innerHTML="";
+  showToast("🔥 60 seconds! Get 5 points!");
+  nextBeatQ();
+  beatTimer=setInterval(function(){
+    beatLeft--;
+    document.getElementById("beatTime").textContent=Math.max(0,beatLeft);
+    if(beatLeft<=10)document.getElementById("beatRing").classList.add("hot");
+    if(beatLeft<=0)stopBeat();
+  },1000);
+}
+function nextBeatQ(){
+  if(!beatRunning)return;
+  beatLocked=false;
+  var it=BEATQ[beatIdx%BEATQ.length];
+  document.getElementById("beatQ").textContent=it.q;
+  var row=document.getElementById("beatOpts");
+  row.innerHTML="";
+  it.opts.forEach(function(o,j){
+    var b=document.createElement("button");
+    b.className="bt-opt";
+    b.textContent=o;
+    b.onclick=function(){answerBeat(j,it);};
+    row.appendChild(b);
+  });
+  speakGB(it.q,1.2,it.v,null,RATE);
+}
+function answerBeat(j,it){
+  if(beatLocked||!beatRunning)return;
+  beatLocked=true;
+  var row=document.getElementById("beatOpts").children;
+  var res=document.getElementById("beatRes");
+  for(var i=0;i<row.length;i++){
+    row[i].classList.add("dis");
+    if(i===it.a)row[i].classList.add("ok");
+    else if(i===j)row[i].classList.add("no");
+  }
+  if(j===it.a){
+    bumpTeam("beatTeams","a",1);
+    sDing();
+    res.innerHTML="<span style='color:var(--green)'>✅ +1 point! ("+teamVal("beatTeams","a")+" / 5 needed)</span>";
+    sayF(it.opts[it.a]);
+    if(teamVal("beatTeams","a")>=5){
+      sWin();launchConfetti();
+      res.innerHTML="<span style='color:var(--green);font-size:clamp(16px,2.6vw,22px)'>🎉 5 POINTS! The class beat the Teacher!</span>";
+      stopBeat();
+      return;
+    }
+  }else{
+    sBuzz();
+    res.innerHTML="<span style='color:var(--red)'>❌ It's “"+it.opts[it.a]+"”</span>";
+    speakGB(it.opts[it.a],1.2,it.v,null,RATE);
+  }
+  beatIdx++;
+  setTimeout(function(){if(beatRunning)nextBeatQ();},1400);
+}
+function stopBeat(){
+  beatRunning=false;
+  if(beatTimer){clearInterval(beatTimer);beatTimer=null;}
+  document.getElementById("beatRing").classList.remove("hot");
+  var sc=teamVal("beatTeams","a");
+  var res=document.getElementById("beatRes");
+  if(res&&beatIdx>0){
+    if(sc>=5){res.innerHTML="🏆 <span style='color:var(--green)'>Fantastic! The class got "+sc+" points. Three claps — one, two, three!</span>";}
+    else{res.innerHTML="⏰ <span style='color:var(--red)'>Time's up! The class got "+sc+" / 5.</span>";}
+  }
+  var score=sc;
+  if(score>=5){sWin();launchConfetti();}
+  stopSpeak();
+  sayF(score>=5?"Excellent! What did we learn today? Rooms!":"Good try! Let's try again.");
+}
+function resetBeat(){
+  stopBeat();
+  buildTeams("beatTeams");
+  beatIdx=0;beatLeft=60;beatLocked=true;
+  document.getElementById("beatTime").textContent="60";
+  document.getElementById("beatQ").textContent="Press START — let's go!";
+  document.getElementById("beatOpts").innerHTML="";
+  document.getElementById("beatRes").innerHTML="";
+}
+function finishLesson(){
+  stopSpeak();
+  buildTeams("beatTeams");
+  document.getElementById("beatQ").innerHTML="🎉 <span style='color:var(--green)'>Fantastic! Give yourselves three claps — one, two, three!</span>";
+  document.getElementById("beatRes").innerHTML="";
+  sWin();launchConfetti();
+  speakGB("Excellent! What did we learn today?",1.2,VF,function(){
+    speakGB("Rooms! Where is Mom? She is in the dining room! Where is Dad? He is in the kitchen!",1.2,VF,function(){
+      speakGB("Fantastic. Give yourselves three claps. One, two, three!",1.2,VM,null,RATE);
+    },RATE);
+  },RATE);
+}
+/* ============================================================
+   TAB 10 : QUIZ
+   ============================================================ */
+var TF=[
+ {e:"🛏️",s:"We sleep in the bedroom.",a:true,ex:"Yes! We sleep in the bedroom.",v:VF},
+ {e:"🍽️",s:"“diningroom” is one word.",a:false,ex:"No! It is dining ROOM — two words, with a space.",v:VM},
+ {e:"🍳",s:"Dad is in the kitchen. So we say: He is in the kitchen.",a:true,ex:"Yes! Dad → he. He is in the kitchen.",v:VM},
+ {e:"🏠",s:"We say “She is in the home.”",a:false,ex:"No! We say in the room, but we say AT HOME.",v:VF},
+ {e:"🔤",s:"The word kitchen has an R sound.",a:false,ex:"Correct — kitchen has NO r. Bedroom, bathroom, dining room and living room all do.",v:VM},
+ {e:"👩",s:"Where is Jill? → She is in the living room.",a:true,ex:"Yes! Jill → she.",v:VF}
+];
+var LISTEN=[
+ {w:"bedroom",e:"🛏️",h:"Mom is in the ___. (Pattern: Where is…?)",o:["bedroom","bathroom","dining room","kitchen"],a:0},
+ {w:"dining room",e:"🍽️",h:"She is in the ___. How many words?",o:["dining room","diningroom","dinin room","dining roon"],a:0},
+ {w:"bathroom",e:"🛁",h:"I wash my face in the ___.",o:["bathroom","bedroom","living room","kitchen"],a:0},
+ {w:"living room",e:"🛋️",h:"We watch TV in the ___.",o:["living room","livin room","dining room","bedroom"],a:0},
+ {w:"kitchen",e:"🍳",h:"Dad is in the ___. (no R!)",o:["kitchen","kitten","kitchen room","bathroom"],a:0}
+];
+var SPELL=[
+ {p:"Write the room where you sleep:",a:"bedroom",h:"B-E-D-R-O-O-M — listen for the R!",e:"🛏️"},
+ {p:"Write the room where you wash:",a:"bathroom",h:"B-A-T-H-R-O-O-M",e:"🛁"},
+ {p:"Write the NEW room word (2 words!):",a:"dining room",h:"D-I-N-I-N-G + R-O-O-M — put a space in the middle!",e:"🍽️"},
+ {p:"Write the room with the sofa:",a:"living room",h:"L-I-V-I-N-G + R-O-O-M",e:"🛋️"},
+ {p:"Write the room where we cook (no R):",a:"kitchen",h:"K-I-T-C-H-E-N",e:"🍳"},
+ {p:"Write the magic beans:",a:"beans",h:"B-E-A-N-S",e:"🫘"}
+];
+var PICQ=[
+ {q:"Where do we sleep?",a:0,v:VF},
+ {q:"Where do we cook?",a:2,v:VM},
+ {q:"Where do we eat at the table?",a:3,v:VF},
+ {q:"Where do we watch TV?",a:4,v:VM},
+ {q:"Where do we wash our hands?",a:1,v:VF}
+];
+var FILL=[
+ {q:"Where is Mom?",ok:"She is in the dining room.",
+  ans:["She is in the dining room.","He is in the dining room.","She is in the home.","He is in the home."],
+  ex:"Where is Mom? She is in the dining room. Mom is a woman, so we say SHE. And it is IN the dining room."},
+ {q:"Where is Dad?",ok:"He is in the kitchen.",
+  ans:["He is in the kitchen.","She is in the kitchen.","He is at the kitchen.","He is in the home."],
+  ex:"Where is Dad? He is in the kitchen. Dad is a man, so we say HE."},
+ {q:"Where is Abby?",ok:"She is in the bedroom.",
+  ans:["She is in the bedroom.","He is in the bedroom.","She is in the bathroom.","She is in the home."],
+  ex:"Where is Abby? She is in the bedroom. Abby is a girl, so we say SHE."},
+ {q:"Where is Ben?",ok:"He is in the living room.",
+  ans:["He is in the living room.","She is in the living room.","He is in the bedroom.","He is at the living room."],
+  ex:"Where is Ben? He is in the living room. Ben is a boy, so we say HE."},
+ {q:"Is Mom at home, or in a room?",ok:"She is in the dining room.",
+  ans:["She is in the dining room.","She is in the home.","She is at the dining room.","She is at home."],
+  ex:"We say IN the dining room, but we say AT home. Never 'in the home'."},
+ {q:"This room is the",ok:"bathroom.",
+  ans:["bathroom.","bedroom.","kitchen.","the home."],
+  ex:"This room is the bathroom. It is in the house, so we say IN the bathroom."}
+];
+var QS=[
+ {t:"tf",t1:"True or False",i:"✅",b:TF.length+" QUESTIONS"},
+ {t:"listen",t1:"Listen & Choose",i:"🎧",b:LISTEN.length+" QUESTIONS"},
+ {t:"spell",t1:"Spelling Challenge",i:"✏️",b:SPELL.length+" QUESTIONS"},
+ {t:"pic",t1:"Picture Quiz",i:"🖼️",b:PICQ.length+" QUESTIONS"},
+ {t:"fill",t1:"Fill in the Blanks",i:"📝",b:FILL.length+" QUESTIONS"}
+];
+var quizScore=0,ansTF=[],ansLs=[],ansSp=[],ansPic=[],ansFi=[];
+function buildQuizAll(){
+  quizScore=0;
+  ansTF=TF.map(function(){return null;});
+  ansLs=LISTEN.map(function(){return null;});
+  ansSp=SPELL.map(function(){return null;});
+  ansPic=PICQ.map(function(){return null;});
+  ansFi=FILL.map(function(){return null;});
+  var h="",keys="abcdefghijklmnopqrstuvwxyz",i,j;
+  for(var s=0;s<QS.length;s++){
+    var q=QS[s];
+    h+="<div class='quiz-section-title'><span style='font-size:28px'>"+q.i+"</span><h3>"+q.t1+"</h3><span class='qs-badge'>"+q.b+"</span></div>";
+    if(q.t==="tf"){
+      for(i=0;i<TF.length;i++){
+        h+="<div class='tf-card' id='tf"+i+"'><div class='tf-emoji'>"+TF[i].e+"</div><div class='tf-stmt'>"+TF[i].s+"</div>"
+          +"<div class='tf-btns'><button class='tf-btn true-btn' onclick=\"answerTF("+i+",true)\">✔️ True</button>"
+          +"<button class='tf-btn false-btn' onclick=\"answerTF("+i+",false)\">❌ False</button></div>"
+          +"<div class='tf-result' id='tfRes"+i+"'></div></div>";
+      }
+    }else if(q.t==="listen"){
+      for(i=0;i<LISTEN.length;i++){
+        h+="<div class='listen-card' id='lc"+i+"'><div class='listen-play'><button onclick=\"playLs("+i+")\">🔊</button></div>"
+          +"<div class='listen-hint'>"+LISTEN[i].h+"</div><div class='listen-opts' id='lo"+i+"'>";
+        for(j=0;j<LISTEN[i].o.length;j++)h+="<div class='listen-opt' onclick=\"answerLs("+i+","+j+")\"><span style='font-size:30px;display:block;margin-bottom:4px'>"+LISTEN[i].e+"</span>"+LISTEN[i].o[j]+"</div>";
+        h+="</div><div class='tf-result' id='lsRes"+i+"'></div></div>";
+      }
+    }else if(q.t==="spell"){
+      for(i=0;i<SPELL.length;i++){
+        h+="<div class='write-card'><div style='text-align:center;font-size:34px'>"+SPELL[i].e+"</div>"
+          +"<div class='write-prompt'>"+SPELL[i].p+"</div><div class='write-hint'>"+SPELL[i].h+"</div>"
+          +"<div class='write-display' id='spd"+i+"'></div><div class='write-keyboard'>";
+        for(j=0;j<keys.length;j++)h+="<button class='write-key' data-sq='"+i+"' data-l='"+keys[j]+"'>"+keys[j]+"</button>";
+        h+="<button class='write-key' data-sq='"+i+"' data-l=' ' style='font-size:clamp(13px,2.2vw,17px)'>␣</button>"
+          +"<button class='write-key del' data-sq='"+i+"' data-action='del'>⌫</button>"
+          +"<button class='write-key clr' data-sq='"+i+"' data-action='clr'>CLEAR</button></div>"
+          +"<div style='text-align:center;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap'>"
+          +"<button class='btn blue' onclick=\"hearSp("+i+")\">🔊 Hear</button>"
+          +"<button class='btn green' onclick=\"checkSp("+i+")\">✅ Check</button></div>"
+          +"<div class='write-result' id='spRes"+i+"'></div></div>";
+      }
+    }else if(q.t==="pic"){
+      for(i=0;i<PICQ.length;i++){
+        h+="<div class='listen-card'><div class='write-prompt'>"+PICQ[i].q+"</div><div class='listen-opts' id='pico"+i+"'>";
+        for(j=0;j<ROOMS.length;j++)h+="<div class='pic-opt' onclick=\"answerPic("+i+","+j+")\">"+cropOf(ROOMS[j].crop,null,110)+"<div class='po-w'>"+ROOMS[j].word+"</div></div>";
+        h+="</div><div class='tf-result' id='picRes"+i+"'></div></div>";
+      }
+    }else{
+      for(i=0;i<FILL.length;i++){
+        h+="<div class='fill-card'><div class='fill-q'>"+FILL[i].q+" <span class='fill-blank' id='fb"+i+"'>______</span>?</div>"
+          +"<div class='fill-a' style='color:#bbb'>choose the correct phrase</div><div class='fill-opts' id='fo"+i+"'>";
+        var sh=FILL[i].ans.slice().sort(function(){return Math.random()-0.5;});
+        for(j=0;j<sh.length;j++)h+="<div class='fill-opt' data-f='"+i+"' data-o='"+sh[j].replace(/'/g,"&#39;")+"'>"+sh[j]+"</div>";
+        h+="</div><div class='fill-result' id='fiRes"+i+"'></div></div>";
+      }
+    }
+  }
+  h+="<div style='text-align:center;margin:20px 0'><button class='btn purple' onclick=\"finishQuiz()\" style='padding:16px 40px;font-size:clamp(16px,2.6vw,20px)'>🏁 Finish Quiz</button></div>";
+  document.getElementById("quizContent").innerHTML=h;
+  document.getElementById("scoreBoard").style.display="none";
+  document.getElementById("quizContent").style.display="block";
+  attachQuizEvents();
+}
+function answerTF(i,ans){
+  if(ansTF[i]!==null)return;
+  ansTF[i]=ans;
+  var t=TF[i],card=document.getElementById("tf"+i),res=document.getElementById("tfRes"+i);
+  var btns=card.querySelectorAll(".tf-btn");
+  for(var k=0;k<btns.length;k++)btns[k].disabled=true;
+  if(ans===t.a){
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+t.ex+"</span>";
+    card.style.borderColor="var(--green)";
+    quizScore+=5;sDing();
+    speakGB(t.ex,1.2,t.v,null,RATE);
+  }else{
+    res.innerHTML="<span style='color:var(--red)'>❌ "+t.ex+"</span>";
+    card.style.borderColor="var(--red)";
+    sBuzz();
+    speakGB(t.ex,1.2,t.v,null,RATE);
+  }
+}
+function playLs(i){stopSpeak();sayF(LISTEN[i].w);}
+function answerLs(i,a){
+  if(ansLs[i]!==null)return;
+  ansLs[i]=a;
+  var l=LISTEN[i],opts=document.querySelectorAll("#lo"+i+" .listen-opt"),res=document.getElementById("lsRes"+i);
+  for(var j=0;j<opts.length;j++){
+    if(j===l.a)opts[j].classList.add("ok");
+    else if(j===a)opts[j].classList.add("no");
+    else opts[j].classList.add("dis");
+  }
+  if(a===l.a){
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+l.w+"</span>";
+    quizScore+=5;sDing();sayF(l.w);
+  }else{
+    res.innerHTML="<span style='color:var(--red)'>❌ It's '"+l.w+"'</span>";
+    sBuzz();sayF(l.w);
+  }
+}
+function hearSp(i){stopSpeak();sayF(SPELL[i].a);}
+function checkSp(i){
+  if(ansSp[i]!==null)return;
+  ansSp[i]=true;
+  var d=document.getElementById("spd"+i),res=document.getElementById("spRes"+i);
+  var val=d.textContent.trim().toLowerCase().replace(/\s+/g," ");
+  if(val===SPELL[i].a){
+    d.className="write-display ok";
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! '"+SPELL[i].a+"'</span>";
+    quizScore+=5;sDing();
+    sayF(SPELL[i].a);
+  }else{
+    d.className="write-display bad";
+    res.innerHTML="<span style='color:var(--red)'>❌ It's '"+SPELL[i].a+"'</span>";
+    sBuzz();
+    spellOut(SPELL[i].a,250,RATE_SLOW,VF,null);
+  }
+}
+function answerPic(i,a){
+  if(ansPic[i]!==null)return;
+  ansPic[i]=a;
+  var p=PICQ[i],opts=document.querySelectorAll("#pico"+i+" .pic-opt"),res=document.getElementById("picRes"+i);
+  for(var j=0;j<opts.length;j++){
+    if(j===p.a)opts[j].classList.add("ok");
+    else if(j===a)opts[j].classList.add("no");
+    else opts[j].classList.add("dis");
+  }
+  if(a===p.a){
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+ROOMS[p.a].word+"</span>";
+    quizScore+=5;sDing();
+    speakGB(ROOMS[p.a].word+". "+p.q+" "+ROOMS[p.a].word+".",1.2,p.v,null,RATE);
+  }else{
+    res.innerHTML="<span style='color:var(--red)'>❌ That's the "+ROOMS[a].word+". The answer is the "+ROOMS[p.a].word+"!</span>";
+    sBuzz();
+    speakGB("That's the "+ROOMS[a].word+". The answer is the "+ROOMS[p.a].word+"!",1.2,p.v,null,RATE);
+  }
+}
+function answerFill(i,el,chosen){
+  if(ansFi[i]!==null)return;
+  ansFi[i]=true;
+  var f=FILL[i],blank=document.getElementById("fb"+i),res=document.getElementById("fiRes"+i);
+  var opts=document.querySelectorAll("#fo"+i+" .fill-opt");
+  var correct=(chosen===f.ok);
+  blank.textContent=chosen;
+  var j;
+  if(correct){
+    blank.className="fill-blank revealed";
+    el.className="fill-opt selected";
+    for(j=0;j<opts.length;j++)if(opts[j]!==el)opts[j].classList.add("dis");
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+f.ex+"</span>";
+    quizScore+=5;sDing();
+    sayF(f.ex);
+  }else{
+    blank.textContent=f.ok;
+    blank.className="fill-blank wrong-reveal";
+    for(j=0;j<opts.length;j++){
+      if(opts[j].textContent===f.ok)opts[j].className="fill-opt selected";
+      else if(opts[j]!==el)opts[j].classList.add("dis");
+    }
+    res.innerHTML="<span style='color:var(--red)'>❌ It's '"+f.ok+"' "+f.ex+"</span>";
+    sBuzz();
+    sayF(f.ex);
+  }
+}
+function finishQuiz(){
+  var done=0,total=TF.length+LISTEN.length+SPELL.length+PICQ.length+FILL.length;
+  done+=ansTF.filter(function(x){return x!==null;}).length;
+  done+=ansLs.filter(function(x){return x!==null;}).length;
+  done+=ansSp.filter(function(x){return x!==null;}).length;
+  done+=ansPic.filter(function(x){return x!==null;}).length;
+  done+=ansFi.filter(function(x){return x!==null;}).length;
+  if(done<total){showToast("Answer all questions first! ("+done+"/"+total+")");return;}
+  document.getElementById("quizContent").style.display="none";
+  var sb=document.getElementById("scoreBoard");
+  sb.style.display="block";
+  var max=total*5;
+  document.getElementById("finalScore").textContent=quizScore+"/"+max;
+  document.getElementById("finalLabel").textContent="points earned";
+  var pct=quizScore/max,stars="";
+  if(pct===1)stars="⭐⭐⭐";else if(pct>=0.75)stars="⭐⭐";else if(pct>=0.5)stars="⭐";else stars="Keep trying! 💪";
+  document.getElementById("finalStars").textContent=stars;
+  var cTf=ansTF.filter(function(x,i){return x===TF[i].a;}).length;
+  var cLs=ansLs.filter(function(x,i){return x===LISTEN[i].a;}).length;
+  var cSp=ansSp.filter(function(x){return x===true;}).length;
+  var cPic=ansPic.filter(function(x,i){return x===PICQ[i].a;}).length;
+  var cFi=ansFi.filter(function(x){return x===true;}).length;
+  document.getElementById("scoreBreakdown").innerHTML=
+    "<div class='score-item'><div class='si-type'>✅ True/False</div><div class='si-score'>"+cTf+"/"+TF.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>🎧 Listen</div><div class='si-score'>"+cLs+"/"+LISTEN.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>✏️ Spelling</div><div class='si-score'>"+cSp+"/"+SPELL.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>🖼️ Picture</div><div class='si-score'>"+cPic+"/"+PICQ.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>📝 Fill Blanks</div><div class='si-score'>"+cFi+"/"+FILL.length+"</div></div>";
+  if(pct===1){launchConfetti();sWin();}
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function resetAllQuiz(){buildQuizAll();window.scrollTo({top:0,behavior:"smooth"});}
+function attachQuizEvents(){
+  document.querySelectorAll(".write-key[data-sq]").forEach(function(btn){
+    btn.onclick=function(){
+      var q=parseInt(this.dataset.sq,10);
+      var d=document.getElementById("spd"+q);
+      if(ansSp[q]!==null)return;
+      if(this.dataset.action==="del")d.textContent=d.textContent.slice(0,-1);
+      else if(this.dataset.action==="clr")d.textContent="";
+      else if(d.textContent.length<18)d.textContent+=this.dataset.l;
+      sPop();
+    };
+  });
+  document.querySelectorAll(".fill-opt[data-f]").forEach(function(el){
+    el.onclick=function(){answerFill(parseInt(this.dataset.f,10),this,this.dataset.o);};
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener("click",function(e){
+  var s=e.target.closest("[data-say]");
+  if(s){
+    var v=s.getAttribute("data-voice")||VF;
+    var p=(v==="boy")?1.05:1.35;
+    var r=s.getAttribute("data-rate");
+    stopSpeak();
+    speakGB(s.getAttribute("data-say"),p,v,null,r?parseFloat(r):RATE);
+    sPop();
+    return;
+  }
+  var sb=e.target.closest(".sec-sound");
+  if(sb){curSec=sb.getAttribute("data-sec");return;}
+  var se=e.target.closest("[data-sec]");
+  if(se){curSec=se.getAttribute("data-sec");}
+});
+document.getElementById("mascot").onclick=function(){
+  speakGB("Hello, friends! I'm Owlbert. Today we learn about rooms in the house, and the R sound. Room. Bedroom. Dining room!",1.05,VM,null,RATE);
+  showToast("🦉 Hello from Owlbert!");
+};
+var fabDimT=null,fabDimmed=false;
+function fabDim(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity=".3";});fabDimmed=true;}
+function fabBright(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity="1";});}
+function fabResetDim(){fabBright();clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  document.querySelectorAll(".fab").forEach(function(f){
+    if(show){f.style.pointerEvents="auto";f.style.transform="translateY(0)";if(!fabDimmed)f.style.opacity="1";}
+    else{f.style.opacity="0";f.style.pointerEvents="none";f.style.transform="translateY(96px)";fabDimmed=false;clearTimeout(fabDimT);}
+  });
+  if(show&&!fabDimmed)fabResetDim();
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+document.querySelectorAll(".fab").forEach(function(f){
+  f.addEventListener("mouseenter",function(){clearTimeout(fabDimT);fabBright();});
+  f.addEventListener("mouseleave",function(){clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);});
+  f.addEventListener("touchstart",fabResetDim);
+  f.addEventListener("click",fabResetDim);
+});
+var floatEmojis=["🎈","⭐","✨","📚","🍎","🦋","🌈","🏠","🪥"];
+function createFloaties(){
+  var c=document.getElementById("floaties");
+  for(var i=0;i<12;i++){
+    var s=document.createElement("div");
+    s.className="floaty";
+    s.innerHTML=floatEmojis[i%floatEmojis.length];
+    s.style.left=Math.random()*100+"vw";
+    s.style.fontSize=(Math.random()*14+18)+"px";
+    s.style.animationDuration=(Math.random()*12+14)+"s";
+    s.style.animationDelay=(Math.random()*10)+"s";
+    c.appendChild(s);
+  }
+}
+buildRWords();buildSort();buildSpellOut();buildLipKeys();
+buildTeams("lipsTeams");buildTeams("hideTeams");buildTeams("houseTeams");buildTeams("passTeams");
+buildSilly();buildDetective();buildRooms();buildActions();
+buildHideGrid();buildHouseGrid();
+buildPatterns();buildSubMachine();buildPrep();
+buildQuizAll();
+createFloaties();
+setLipsTurn("a");
+document.getElementById("sortPool").addEventListener("click",function(e){
+  var sp=e.target.closest("span");
+  if(sp&&sp.id.indexOf("sw")===0)sortPick(parseInt(sp.id.replace("sw",""),10));
+});
+</script>
+</body>
+</html>
