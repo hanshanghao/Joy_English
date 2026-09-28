@@ -317,9 +317,11 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .vtable td{padding:10px 8px;text-align:center;border-bottom:1px solid #f0e6dc;background:#fff}
 .vtable tr:nth-child(even) td{background:#fffaf4}
 .vtable td.hl{color:var(--orange);font-size:clamp(15px,2.4vw,20px)}
-.vtable.mini{font-size:clamp(10px,1.5vw,13px);table-layout:fixed}
-.vtable.mini th,.vtable.mini td{padding:7px 3px;word-break:break-word}
-.vtable.mini td:first-child{font-size:clamp(10px,1.5vw,13px);text-align:left;padding-left:6px}
+.vtable.mini{font-size:clamp(9px,1.4vw,12px);table-layout:fixed}
+.vtable.mini th,.vtable.mini td{padding:7px 2px;word-break:normal;white-space:nowrap}
+.vtable.mini td:first-child{font-size:clamp(9px,1.4vw,12px);text-align:left;padding-left:4px;white-space:normal;line-height:1.25}
+.vtable.mini td.hl{font-size:clamp(11px,1.7vw,14px)}
+.vtable.mini th:first-child{width:34%}
 .sort-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
 @media(max-width:760px){.sort-boxes{grid-template-columns:1fr}}
 .sort-box{border-radius:18px;padding:14px;min-height:140px;border:4px dashed}
