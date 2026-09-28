@@ -1,0 +1,2131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic Joy 5 Unit 13 - What Do You Want for Breakfast?</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f;--paper:#fff7ea}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#fff0d9,#ffe9ef,#e2f6ff,#f3ffe4);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:var(--orange);top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:var(--yellow);bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:var(--blue);top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-30%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0;font-family:inherit}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.18),0 12px 20px rgba(0,0,0,.15)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.18),0 4px 8px rgba(0,0,0,.1)}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.btn.red{--c1:#ff8a8a;--c2:#e04040}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.topbar .sound-toggle{margin-left:auto;background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
+.topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.topbar .sound-toggle.off{border-color:#ddd;color:#bbb;background:#f2f2f2}
+.sec-sound{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.85);border:2px solid #e0d8f0;border-radius:50px;padding:4px 12px;font-size:clamp(11px,1.6vw,13px);font-weight:700;cursor:pointer;transition:all .2s;color:#555;margin-left:auto}
+.sec-sound:hover{border-color:var(--purple);background:#f5f0ff}
+.sec-sound.off{border-color:#ddd;color:#bbb;background:#f9f9f9}
+.sec-sound .sec-si{font-size:15px}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.navbar .ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s;font-family:inherit}
+.navbar .ntab:hover{border-color:var(--purple);background:#f5f0ff}
+.navbar .ntab.on{background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(245,130,43,.35)}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(245,130,43,.16),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15));animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(24px,5.2vw,42px);font-weight:900;color:var(--ink);text-shadow:2px 2px 0 rgba(245,130,43,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.hero .desc{margin-top:10px;font-size:clamp(13px,2vw,16px);color:#666;font-weight:600}
+/* ===== -s/-es PHONICS NOTE (top of page) ===== */
+.snote{background:linear-gradient(150deg,#fff6e6,#ffeede,#eef0ff);border:4px solid var(--orange);border-radius:24px;padding:20px;margin:0 0 20px;box-shadow:0 10px 26px rgba(245,130,43,.25)}
+.snote h2{font-size:clamp(19px,3.6vw,28px);font-weight:900;color:var(--orange);margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.snote h2 .sbadge{background:var(--orange);color:#fff;font-size:clamp(11px,1.7vw,13px);padding:4px 12px;border-radius:30px;font-weight:900}
+.snote .slead{font-size:clamp(13px,2.1vw,16px);font-weight:700;line-height:1.55;margin-bottom:12px}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.sitem{background:rgba(255,255,255,.88);border:3px solid #ffd9b0;border-radius:16px;padding:12px 14px}
+.sitem h4{font-size:clamp(14px,2.2vw,17px);font-weight:900;color:var(--purple);margin-bottom:5px;display:flex;gap:6px;align-items:center}
+.sitem p{font-size:clamp(12px,1.9vw,15px);font-weight:600;line-height:1.5;color:#555}
+.sitem .sbig{font-size:clamp(26px,5vw,40px);font-weight:900;color:var(--orange);line-height:1;margin-right:6px}
+.sitem.ok{border-color:#b6f0b0}.sitem.ok h4{color:#2f9e2b}
+.sitem.no{border-color:#ffc2c2}.sitem.no h4{color:#c0392b}
+.schips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.schips span{background:#fff;border:2px solid var(--purple);border-radius:12px;padding:4px 10px;font-size:clamp(12px,1.8vw,15px);font-weight:800;color:var(--purple);cursor:pointer;transition:all .2s}
+.schips span:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.snote .sfoot{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* ===== TIMELINE ===== */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.tl-item{background:#fff;border-radius:18px;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-top:6px solid var(--orange);cursor:pointer;transition:all .25s}
+.tl-item:hover{transform:translateY(-4px);box-shadow:0 9px 20px rgba(0,0,0,.14)}
+.tl-item .tl-min{font-size:clamp(11px,1.7vw,13px);font-weight:900;color:#fff;background:var(--orange);display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:6px}
+.tl-item h4{font-size:clamp(15px,2.4vw,19px);font-weight:900;color:var(--ink);margin-bottom:4px}
+.tl-item p{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#777;line-height:1.45}
+.tl-item.t1{border-top-color:var(--pink)}.tl-item.t1 .tl-min{background:var(--pink)}
+.tl-item.t2{border-top-color:var(--green)}.tl-item.t2 .tl-min{background:var(--green)}
+.tl-item.t3{border-top-color:var(--blue)}.tl-item.t3 .tl-min{background:var(--blue)}
+/* ===== IMAGES ===== */
+.t-image{width:100%;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;transition:transform .3s;display:block;background:#fff}
+.t-image:hover{transform:scale(1.02)}
+.twobox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;align-items:start}
+.framed{background:#fff;border-radius:16px;padding:10px;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:zoom-in;transition:transform .2s}
+.framed:hover{transform:translateY(-3px)}
+.framed img{width:100%;border-radius:10px;display:block}
+.framed .fcap{text-align:center;font-weight:800;color:var(--purple);margin-top:6px;font-size:clamp(11px,1.9vw,14px)}
+/* ===== TEAMS ===== */
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-icon{font-size:32px;margin-bottom:4px}
+.team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
+.team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
+.team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s;font-family:inherit}
+.team-btns button:hover{transform:scale(1.1)}
+.team-btns .tadd{background:linear-gradient(135deg,#7ce577,#37a832)}
+.team-btns .tsub{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.turn-chip{display:inline-block;background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff;font-weight:900;padding:5px 16px;border-radius:30px;font-size:clamp(12px,1.9vw,15px)}
+/* ===== CARD GRIDS ===== */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;margin:16px 0}
+.vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;border:4px solid transparent}
+.vocab-card:hover{transform:translateY(-5px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.vocab-card.said{border-color:var(--green)}
+.vocab-card.hit{border-color:var(--green);background:#f2fff2}
+.vocab-card .picbox{height:150px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.vocab-card .picbox img{width:100%;height:100%;object-fit:contain;display:block}
+.vocab-card .vc-body{padding:10px;text-align:center}
+.vocab-card .vc-word{font-size:clamp(15px,2.4vw,20px);font-weight:900;color:var(--purple)}
+.vocab-card .vc-say{font-size:clamp(12px,1.9vw,15px);font-weight:700;color:var(--green);margin-top:4px;min-height:18px}
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:16px 0}
+.zone{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:4px solid transparent;position:relative}
+.zone:hover{transform:translateY(-4px);border-color:var(--purple)}
+.zone .picbox{height:110px;display:flex;align-items:center;justify-content:center;background:#fff;overflow:hidden}
+.zone .picbox img{width:100%;height:100%;object-fit:contain;display:block}
+.zone .zlabel{padding:6px;text-align:center;font-weight:900;font-size:clamp(12px,2vw,15px);color:var(--purple);background:#f8f5ff}
+.zone .zhide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:clamp(30px,7vw,48px);background:linear-gradient(135deg,rgba(245,130,43,.94),rgba(240,79,155,.94));color:#fff;opacity:0;pointer-events:none;transition:all .3s;font-weight:900;text-shadow:0 3px 6px rgba(0,0,0,.35)}
+.zone.revealed .zhide{opacity:1;pointer-events:auto}
+.zone.revealed{border-color:var(--green)}
+.zone.dim{opacity:.4;filter:grayscale(.8)}
+/* ===== STORY STEPS ===== */
+.story-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.story-step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:background .2s}
+.story-step:hover{background:rgba(139,92,240,.06)}
+.story-step .step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.story-step .step-text{font-size:clamp(13px,2vw,16px);font-weight:600;line-height:1.5}
+.story-step .spk{margin-left:auto;font-size:20px;opacity:.5;flex-shrink:0}
+.story-step:hover .spk{opacity:1}
+/* ===== DIALOGUE BUBBLES ===== */
+.dlg{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;cursor:pointer;margin-bottom:8px;transition:all .2s}
+.dlg:hover{transform:translateX(4px)}
+.dlg .av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.dlg.g .av{background:linear-gradient(135deg,var(--pink),#e03080)}
+.dlg.b .av{background:linear-gradient(135deg,var(--blue),#2a7ab8)}
+.dlg.p .av{background:linear-gradient(135deg,var(--green),#34a832)}
+.dlg.o .av{background:linear-gradient(135deg,var(--orange),#e06a10)}
+.dlg .bub{padding:10px 16px;border-radius:16px;font-weight:700;font-size:clamp(13px,2.1vw,17px);line-height:1.45;flex:1}
+.dlg.g .bub{background:#f5f0ff;border-left:5px solid var(--pink)}
+.dlg.b .bub{background:#e8f4ff;border-left:5px solid var(--blue)}
+.dlg.p .bub{background:#e8ffe8;border-left:5px solid var(--green)}
+.dlg.o .bub{background:#fff3e8;border-left:5px solid var(--orange)}
+.dlg .vtag{font-size:clamp(10px,1.6vw,12px);font-weight:900;padding:3px 9px;border-radius:20px;background:#fff;border:2px solid #e0d8f0;color:#888;flex-shrink:0}
+.dlg.g .vtag{border-color:var(--pink);color:var(--pink)}
+.dlg.b .vtag{border-color:var(--blue);color:var(--blue)}
+.dlg.p .vtag{border-color:var(--green);color:var(--green)}
+.dlg.o .vtag{border-color:var(--orange);color:var(--orange)}
+/* ===== OBJECTS / HAMMER ===== */
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:16px 0}
+.obj{background:#fff;border-radius:18px;padding:14px 8px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .25s;border:4px solid transparent;position:relative}
+.obj:hover{transform:translateY(-4px);border-color:var(--purple)}
+.obj .picbox{height:96px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff}
+.obj .picbox img{width:100%;height:100%;object-fit:contain;display:block}
+.obj .obj-name{font-weight:900;font-size:clamp(12px,1.9vw,15px);color:var(--purple);margin-top:4px}
+.obj.used{border-color:var(--green);background:#f2fff2}
+.obj .hammer{position:absolute;top:4px;right:6px;font-size:22px;opacity:0;transition:transform .2s}
+.obj.tapped{animation:tapHit .4s}
+.obj.tapped .hammer{opacity:1;animation:hammerBang .5s}
+.obj.tapped{border-color:var(--green);background:#e8ffe8}
+@keyframes tapHit{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes hammerBang{0%{transform:rotate(0) translate(0,0)}40%{transform:rotate(-35deg) translate(-8px,10px)}100%{transform:rotate(0)}}
+.big-reply{text-align:center;font-size:clamp(20px,4.4vw,36px);font-weight:900;margin:14px 0;min-height:52px}
+.big-reply.bad{color:var(--red);animation:shake .4s}
+.big-reply.good{color:var(--green);animation:popIn .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes popIn{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
+.big-ans{text-align:center;font-size:clamp(18px,3.2vw,26px);font-weight:900;min-height:34px;margin:10px 0}
+.yn{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.yn button{padding:16px 40px;border:none;border-radius:50px;font-size:clamp(16px,2.8vw,24px);font-weight:900;cursor:pointer;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:all .2s;font-family:inherit}
+.yn button.y{background:linear-gradient(135deg,#7ce577,#37a832)}
+.yn button.n{background:linear-gradient(135deg,#ff8a8a,#e04040)}
+.yn button:hover{transform:translateY(-4px)}
+.det-q{background:#f8f5ff;border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;border:3px solid #e0d8f0;transition:all .2s}
+.det-q:hover{border-color:var(--purple)}
+.det-q .det-a{font-size:clamp(13px,2.1vw,17px);font-weight:800;color:var(--green);margin-top:8px;min-height:24px}
+.det-q.revealed{border-color:var(--green);background:#f2fff2}
+/* ===== LUCKY KING ===== */
+.lk-words{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;min-height:70px;margin:12px 0;padding:14px;background:#fff8e8;border:3px dashed var(--orange);border-radius:18px}
+.lk-word{padding:10px 18px;border-radius:14px;font-size:clamp(14px,2.3vw,19px);font-weight:900;background:#fff;border:3px solid var(--orange);color:var(--orange);cursor:pointer;transition:all .2s;font-family:inherit}
+.lk-word:hover{transform:translateY(-3px) scale(1.05)}
+.lk-word.used{opacity:.25;pointer-events:none;border-color:#ccc;color:#bbb}
+.lk-out{text-align:center;background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 14px rgba(0,0,0,.08);border:4px solid var(--orange);margin:12px 0}
+.lk-out .lk-q{font-size:clamp(16px,2.8vw,24px);font-weight:900;color:var(--pink)}
+.lk-out .lk-a{font-size:clamp(15px,2.6vw,22px);font-weight:900;color:var(--green);margin-top:8px;line-height:1.5}
+.cards-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.pcard{width:92px;height:130px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:38px;cursor:pointer;box-shadow:0 5px 14px rgba(0,0,0,.2);transition:all .25s;border:4px solid #fff;position:relative}
+.pcard.red{background:linear-gradient(145deg,#ff6b6b,#c92a2a)}
+.pcard.blk{background:linear-gradient(145deg,#5a5a6e,#1f1f2e)}
+.pcard:hover{transform:translateY(-8px) rotate(-4deg) scale(1.06)}
+.pcard .pc-pts{font-size:15px;font-weight:900;color:#fff;margin-top:4px}
+.pcard .pc-lbl{font-size:10px;font-weight:900;color:rgba(255,255,255,.85);letter-spacing:1px}
+.pcard.flipped{animation:flipCard .5s}
+@keyframes flipCard{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+.num-chip{display:inline-flex;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;align-items:center;justify-content:center;font-weight:900;font-size:18px;margin:4px;cursor:pointer;transition:all .2s}
+.num-chip:hover{transform:scale(1.15) rotate(-6deg)}
+.num-chip.used{opacity:.3;pointer-events:none}
+/* ===== PATTERNS ===== */
+.pattern-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--orange)}
+.pattern-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:10px}
+.pattern-line{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.7;cursor:pointer;padding:8px 10px;border-radius:12px;transition:background .2s}
+.pattern-line:hover{background:#fff8ec}
+.pattern-line .q{color:var(--pink)}
+.pattern-line .a{color:var(--green)}
+.pattern-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pattern-examples .pe{background:linear-gradient(135deg,#fff3e0,#ffe8cc);border:2px solid var(--orange);color:#d1600d;padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.pattern-examples .pe:hover{background:var(--orange);color:#fff;transform:scale(1.05)}
+.sub-machine{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.sub-machine select{width:100%;padding:12px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(14px,2.2vw,17px);font-weight:800;background:#faf8ff;outline:none;font-family:inherit;color:var(--ink);cursor:pointer}
+.sub-machine select:focus{border-color:var(--orange)}
+.sub-out{text-align:center;background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 14px rgba(0,0,0,.08);border:4px solid var(--green)}
+.sub-out .so-q{font-size:clamp(16px,2.8vw,22px);font-weight:900;color:var(--pink)}
+.sub-out .so-a{font-size:clamp(17px,3vw,26px);font-weight:900;color:var(--green);margin-top:6px;line-height:1.4}
+.vchip{display:inline-block;font-size:clamp(15px,2.6vw,22px);font-weight:900;padding:2px 12px;margin:0 3px;border-radius:12px}
+.vchip.ok{background:#d8f8d8;color:#2f9e2b}
+.vchip.no{background:#ffdcdc;color:#c0392b;text-decoration:line-through}
+.vchip.base{background:#f0f0f0;color:#999}
+.sbtnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+/* ===== SPIN & SPEAK ===== */
+.spin-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;align-items:stretch;margin:16px 0}
+.spin-box{background:#fff;border-radius:18px;padding:14px 18px;box-shadow:0 5px 14px rgba(0,0,0,.08);border:4px solid var(--purple);text-align:center;min-width:130px}
+.spin-box .sb-lbl{font-size:clamp(10px,1.6vw,12px);font-weight:900;color:#999;letter-spacing:1px}
+.spin-box .sb-val{font-size:clamp(16px,2.8vw,24px);font-weight:900;color:var(--purple)}
+.spin-box.b2{border-color:var(--blue)}.spin-box.b2 .sb-val{color:var(--blue)}
+.spin-box.b3{border-color:var(--pink)}.spin-box.b3 .sb-val{color:var(--pink)}
+.spin-q{text-align:center;background:linear-gradient(135deg,#fff3e0,#ffe8cc);border-radius:18px;padding:20px;margin:14px 0;border:4px solid var(--orange)}
+.spin-q .sq-q{font-size:clamp(17px,3vw,28px);font-weight:900;color:var(--pink);line-height:1.4}
+.spin-q .sq-a{font-size:clamp(15px,2.6vw,22px);font-weight:900;color:var(--green);margin-top:10px;line-height:1.4}
+.food-pick{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.food-pick .fp{background:#fff;border:3px solid #e0d8f0;border-radius:14px;padding:8px 12px;cursor:pointer;transition:all .2s;font-weight:800;font-size:clamp(12px,1.9vw,15px);font-family:inherit;color:var(--ink)}
+.food-pick .fp:hover{border-color:var(--green);background:#e8ffe8;transform:translateY(-3px)}
+.food-pick .fp.sel{border-color:var(--green);background:#e8ffe8;color:#1a7a2c}
+/* ===== TIC-TAC-TOE ===== */
+.ttt{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0;max-width:640px;margin-left:auto;margin-right:auto}
+.ttt-cell{background:#fff;border:4px solid #e0d8f0;border-radius:16px;min-height:104px;cursor:pointer;transition:all .25s;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px}
+.ttt-cell:hover{border-color:var(--orange);transform:translateY(-3px)}
+.ttt-cell img{width:100%;height:70px;object-fit:contain;display:block}
+.ttt-cell .tc-q{font-size:clamp(11px,1.7vw,14px);font-weight:800;color:#888;text-align:center;line-height:1.3}
+.ttt-cell.star{border-color:var(--yellow);background:#fffae0}
+.ttt-cell.heart{border-color:var(--pink);background:#fff0f6}
+.ttt-cell .mark{position:absolute;top:2px;right:6px;font-size:26px}
+.ttt-cell.dim{opacity:.45}
+.ttt-log{text-align:center;font-size:clamp(13px,2.1vw,17px);font-weight:800;color:var(--purple);min-height:26px;margin:10px 0}
+/* ===== QUIZ ===== */
+.quiz-section-title{display:flex;align-items:center;gap:10px;margin:20px 0 14px;padding:10px 16px;background:linear-gradient(135deg,rgba(245,130,43,.13),rgba(240,79,155,.08));border-radius:16px;border-left:5px solid var(--orange)}
+.quiz-section-title h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.quiz-section-title .qs-badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.6vw,13px);font-weight:800;padding:4px 12px;border-radius:20px;margin-left:auto}
+.tf-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0;transition:all .3s}
+.tf-card .tf-emoji{font-size:clamp(40px,8vw,60px);text-align:center;margin-bottom:10px}
+.tf-card .tf-stmt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:14px;line-height:1.4}
+.tf-btns{display:flex;gap:12px;justify-content:center}
+.tf-btn{padding:14px 32px;border:none;border-radius:50px;font-size:clamp(16px,2.6vw,22px);font-weight:900;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.15);font-family:inherit}
+.tf-btn:hover{transform:translateY(-3px)}
+.tf-btn.true-btn{background:linear-gradient(135deg,#7ce577,#37a832)}
+.tf-btn.false-btn{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.tf-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.tf-result{font-size:clamp(13px,2.1vw,17px);font-weight:700;text-align:center;margin-top:12px;min-height:26px;line-height:1.5}
+.listen-card,.write-card,.fill-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.listen-play{display:flex;justify-content:center;margin-bottom:14px}
+.listen-play button{width:64px;height:64px;border-radius:50%;border:none;font-size:28px;cursor:pointer;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.15);transition:all .2s}
+.listen-play button:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.15)}
+.listen-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:12px;font-weight:600}
+.listen-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.listen-opt{padding:14px 18px;border:3px solid #e0d8f0;border-radius:14px;cursor:pointer;font-size:clamp(14px,2.2vw,18px);font-weight:700;background:#faf8ff;text-align:center;transition:all .2s;font-family:inherit}
+.listen-opt:hover{border-color:var(--orange);background:#fff5e8;transform:translateY(-2px)}
+.listen-opt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.listen-opt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.listen-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt{padding:8px;cursor:pointer;border:3px solid #e0d8f0;border-radius:14px;background:#faf8ff;transition:all .2s}
+.pic-opt:hover{border-color:var(--orange);transform:translateY(-3px)}
+.pic-opt.ok{border-color:var(--green);background:#e8ffe8;pointer-events:none}
+.pic-opt.no{border-color:var(--red);background:#ffe8e8;pointer-events:none}
+.pic-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt img{width:100%;height:78px;object-fit:contain;background:#fff;border-radius:8px;display:block}
+.pic-opt .po-w{font-size:clamp(11px,1.8vw,14px);font-weight:800;margin-top:6px}
+.write-prompt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:6px}
+.write-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:14px;font-weight:600}
+.write-display{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;min-height:48px;padding:10px;background:#fff8ec;border-radius:14px;border:2px dashed #e8c9a0}
+.write-display.ok{border-color:var(--green);background:#e8ffe8;border-style:solid}
+.write-display.bad{border-color:var(--red);background:#ffe8e8;border-style:solid}
+.write-keyboard{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.write-key{width:clamp(28px,6.2vw,36px);height:clamp(32px,7.2vw,40px);border:none;border-radius:10px;font-size:clamp(12px,2vw,16px);font-weight:800;cursor:pointer;background:linear-gradient(135deg,#fff3e0,#ffe8cc);color:#d1600d;border:2px solid #e8c9a0;transition:all .15s;box-shadow:0 3px 0 rgba(0,0,0,.08);font-family:inherit}
+.write-key:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.08);background:var(--orange);color:#fff;border-color:var(--orange)}
+.write-key:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.write-key.del{background:linear-gradient(135deg,#ffab6e,#f5822b);color:#fff;border-color:#f5822b;font-size:clamp(14px,2.3vw,18px)}
+.write-key.clr{background:linear-gradient(135deg,#ff8a8a,#e04040);color:#fff;border-color:#e04040;font-size:clamp(10px,1.6vw,12px)}
+.fill-q{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.6;margin-bottom:4px}
+.fill-a{font-size:clamp(14px,2.2vw,18px);font-weight:700;color:#666;margin-bottom:12px}
+.fill-blank{display:inline-block;min-width:110px;border-bottom:3px dashed var(--orange);padding:2px 8px;color:var(--green);font-weight:900;text-align:center;transition:all .3s}
+.fill-blank.revealed{border-bottom-style:solid;background:#e8ffe8;border-radius:8px}
+.fill-blank.wrong-reveal{border-bottom-color:var(--red);background:#ffe8e8;color:var(--red);border-radius:8px}
+.fill-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fill-opt{padding:10px 18px;border:3px solid #e0d8f0;border-radius:50px;font-size:clamp(13px,2vw,16px);font-weight:700;cursor:pointer;background:#faf8ff;transition:all .2s;font-family:inherit}
+.fill-opt:hover{border-color:var(--orange);background:#fff5e8;transform:translateY(-2px)}
+.fill-opt.selected{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.fill-opt.dis{pointer-events:none;opacity:.5}
+.fill-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;margin-top:10px;min-height:24px}
+.score-board{background:linear-gradient(135deg,var(--orange),var(--pink));border-radius:22px;padding:28px 22px;text-align:center;color:#fff;margin:16px 0;box-shadow:0 8px 22px rgba(245,130,43,.3)}
+.score-board h2{font-size:clamp(22px,4vw,32px);font-weight:900;margin-bottom:12px}
+.score-board .score-big{font-size:clamp(40px,10vw,72px);font-weight:900;text-shadow:0 4px 8px rgba(0,0,0,.2);line-height:1}
+.score-board .score-label{font-size:clamp(14px,2.2vw,18px);font-weight:700;opacity:.9;margin-top:4px}
+.score-board .score-stars{font-size:clamp(24px,5vw,40px);margin:10px 0}
+.score-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
+.score-item{background:rgba(255,255,255,.2);border-radius:14px;padding:12px;text-align:center}
+.score-item .si-type{font-size:clamp(11px,1.6vw,13px);font-weight:700;opacity:.85}
+.score-item .si-score{font-size:clamp(20px,4vw,28px);font-weight:900}
+/* ===== PHONICS / SORT ===== */
+.phon-hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:linear-gradient(135deg,#fff4e0,#f0ecff);border:4px solid var(--orange);border-radius:22px;padding:20px;margin-bottom:16px}
+.phon-big{font-size:clamp(52px,12vw,100px);font-weight:900;color:var(--orange);line-height:.9;text-shadow:0 5px 0 rgba(245,130,43,.22);animation:bounce 2.2s ease-in-out infinite;cursor:pointer;user-select:none}
+.vtable{width:100%;border-collapse:separate;border-spacing:0;margin:12px 0;font-size:clamp(12px,2vw,16px);font-weight:800;border-radius:14px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.vtable th{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:10px 8px;font-size:clamp(11px,1.9vw,15px)}
+.vtable td{padding:10px 8px;text-align:center;border-bottom:1px solid #f0e6dc;background:#fff}
+.vtable tr:nth-child(even) td{background:#fffaf4}
+.vtable td.hl{color:var(--orange);font-size:clamp(15px,2.4vw,20px)}
+.vtable.mini{font-size:clamp(10px,1.5vw,13px);table-layout:fixed}
+.vtable.mini th,.vtable.mini td{padding:7px 3px;word-break:break-word}
+.vtable.mini td:first-child{font-size:clamp(10px,1.5vw,13px);text-align:left;padding-left:6px}
+.sort-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+@media(max-width:760px){.sort-boxes{grid-template-columns:1fr}}
+.sort-box{border-radius:18px;padding:14px;min-height:140px;border:4px dashed}
+.sort-box.a{border-color:var(--green);background:#f2fff2}
+.sort-box.b{border-color:var(--blue);background:#f2f8ff}
+.sort-box.c{border-color:var(--red);background:#fff2f2}
+.sort-box h4{font-size:clamp(12px,2vw,16px);font-weight:900;margin-bottom:10px;text-align:center;line-height:1.3}
+.sort-box.a h4{color:#2f9e2b}.sort-box.b h4{color:#2a7ab8}.sort-box.c h4{color:#c0392b}
+.sort-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+.sort-pool span{background:#fff;border:3px solid #e0d8f0;border-radius:14px;padding:8px 14px;font-size:clamp(13px,2.1vw,17px);font-weight:800;cursor:pointer;transition:all .2s;font-family:inherit}
+.sort-pool span:hover{border-color:var(--orange);transform:translateY(-3px)}
+.sort-pool span.gone{opacity:.2;pointer-events:none}
+.sort-pool span.sel{border-color:var(--orange)!important;background:#fff3e0;transform:scale(1.08)}
+.sort-box .placed{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:34px}
+.sort-box .placed span{background:#fff;border:3px solid currentColor;border-radius:12px;padding:5px 12px;font-size:clamp(12px,1.9vw,15px);font-weight:800;cursor:pointer}
+.sort-box.a .placed span{color:#2f9e2b}.sort-box.b .placed span{color:#2a7ab8}.sort-box.c .placed span{color:#c0392b}
+/* ===== MISC ===== */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;pointer-events:none;transition:transform .4s,opacity .4s;opacity:0;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.mascot{position:fixed;bottom:20px;right:20px;z-index:997;font-size:48px;cursor:pointer;transition:transform .3s;line-height:1}
+.mascot:hover{transform:scale(1.15) rotate(-10deg)}
+.fab-wrap{position:fixed;bottom:80px;right:20px;z-index:998;display:flex;flex-direction:column;gap:10px}
+.fab{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .5s,transform .4s;opacity:0;pointer-events:none;transform:translateY(96px)}
+.fab.fab-top{background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff}
+.fab.fab-home{background:linear-gradient(135deg,var(--green),#2f9e2b);color:#fff}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:10001;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:94vw;max-height:92vh;border-radius:12px;box-shadow:0 0 40px rgba(255,255,255,.2)}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;font-weight:900;transition:transform .2s}
+.lightbox .lb-close:hover{transform:scale(1.2)}
+.confetti-piece{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:10000;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(1080deg);opacity:0}}
+.board-plan{background:#fff;border-radius:18px;padding:18px;box-shadow:0 5px 14px rgba(0,0,0,.08);font-size:clamp(13px,2.1vw,17px);line-height:1.9;font-weight:700}
+.board-plan .bp-t{font-weight:900;color:var(--purple);font-size:1.1em;margin-bottom:4px}
+.bp-star{color:var(--orange);font-weight:900}
+.bp-ok{color:var(--green);font-weight:900}
+.bp-no{color:var(--red);font-weight:900;text-decoration:line-through}
+.hidden{display:none!important}
+@media(max-width:900px){.sort-boxes{grid-template-columns:1fr}}
+@media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.4rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.vocab-grid{grid-template-columns:repeat(2,1fr)}.mascot{font-size:38px;bottom:10px;right:10px}.twobox{grid-template-columns:1fr}.sub-machine{grid-template-columns:1fr}.phon-hero{grid-template-columns:1fr;text-align:center}.ttt{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div id="floaties"></div>
+
+<div class="topbar">
+  <div class="now-chip">🍳 Magic Joy 5 · Unit 13 · Breakfast</div>
+  <button class="sound-toggle" id="globalSound" title="Global sound on / off">🔊</button>
+</div>
+
+<div class="navbar" id="navBar">
+  <button class="ntab on" onclick="showTab(0)">📖 Lesson Plan</button>
+  <button class="ntab" onclick="showTab(1)">🔤 Phonics -s/-es</button>
+  <button class="ntab" onclick="showTab(2)">👑 Lucky King</button>
+  <button class="ntab" onclick="showTab(3)">🎭 Dialogue</button>
+  <button class="ntab" onclick="showTab(4)">🎬 Role Play</button>
+  <button class="ntab" onclick="showTab(5)">🍽️ Vocabulary</button>
+  <button class="ntab" onclick="showTab(6)">🔨 Hammer Challenge</button>
+  <button class="ntab" onclick="showTab(7)">💬 Patterns</button>
+  <button class="ntab" onclick="showTab(8)">🧠 The S Rule</button>
+  <button class="ntab" onclick="showTab(9)">🏪 Food Market</button>
+  <button class="ntab" onclick="showTab(10)">🎲 Tic-Tac-Toe</button>
+  <button class="ntab" onclick="showTab(11)">📝 Quiz</button>
+</div>
+
+<!-- ============ TAB 0 : -s/-es NOTE + LESSON PLAN ============ -->
+<div class="tabpan on" id="tp0" data-sec="plan">
+  <div class="snote">
+    <h2>🔤 Teacher's Note — The <span class="sbadge">-s / -es</span> Rule <span class="sbadge">READ ME FIRST</span></h2>
+    <p class="slead">Unit 13 is the first time children must add an <strong>S</strong> to the verb. Almost every spoken sentence here depends on it: <em>want → wants</em>, <em>eat → eats</em>, <em>drink → drinks</em>. Children in Taiwan often drop the S or add it everywhere — this note explains the rule before the lesson starts.</p>
+    <div class="sgrid">
+      <div class="sitem">
+        <h4><span class="sbig">S</span> Who gets the S?</h4>
+        <p>Only <strong>he, she, it</strong> and one person by name get the extra <strong>s</strong>. Everybody else uses the plain verb.</p>
+        <div class="schips">
+          <span data-say="I want bread." data-voice="girl">I / You / We / They → want</span>
+          <span data-say="She wants bread." data-voice="girl">He / She / It → wants</span>
+        </div>
+      </div>
+      <div class="sitem">
+        <h4>🎯 The full table</h4>
+        <table class="vtable mini">
+          <tr><th>Subject</th><th>want</th><th>eat</th><th>drink</th></tr>
+          <tr><td>I / You / We / They</td><td class="hl">want</td><td class="hl">eat</td><td class="hl">drink</td></tr>
+          <tr><td>He / She / It</td><td class="hl">wants</td><td class="hl">eats</td><td class="hl">drinks</td></tr>
+        </table>
+      </div>
+      <div class="sitem ok">
+        <h4>❗ DOES already has the S</h4>
+        <p>In a question we say <strong>does + want</strong> — <strong>not</strong> “does wants”. The S has already moved from the verb to <em>does</em>!</p>
+        <div class="schips">
+          <span data-say="What does she want for breakfast?" data-voice="girl">What DOES she WANT? ✓</span>
+          <span data-say="What does she wants for breakfast?" data-voice="boy" style="border-color:var(--red);color:var(--red)">What DOES she WANTS? ✗</span>
+        </div>
+      </div>
+      <div class="sitem no">
+        <h4>⚠️ Mistake 1 — no S at all</h4>
+        <p>“She <em>want</em> bread.” <strong>Fix:</strong> point at a girl and hold up an imaginary <strong>S</strong>, then drop it on the end of <em>want</em>.</p>
+      </div>
+      <div class="sitem no">
+        <h4>⚠️ Mistake 2 — S on everybody</h4>
+        <p>“I <em>wants</em> bread.” <strong>Fix:</strong> only one person is being talked about. Say “I” and the S disappears.</p>
+      </div>
+      <div class="sitem no">
+        <h4>⚠️ Mistake 3 — wants in questions</h4>
+        <p>“What does she <em>wants</em>…?” <strong>Fix:</strong> the S lives on <strong>DOES</strong> now, so the verb goes back to plain <em>want</em>.</p>
+      </div>
+    </div>
+    <div class="sfoot">
+      <button class="btn orange" data-say="Listen carefully. In Unit 13 the verb changes. I, you, we, they want. He, she, it wants. And in a question, does already has the S, so we say what does she want. Not does wants. Good. Now say it with me." data-voice="girl">🔊 Read this note to me (British)</button>
+      <button class="btn purple" onclick="showTab(1)">🔤 Go to Phonics Practice →</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="big-emoji">🍳</span>
+    <h1>Magic Joy 5 · Unit 13</h1>
+    <span class="sub">What Do You Want for Breakfast?</span>
+    <div class="desc">Warm-up (10) → Dialogue (15) → Vocabulary (10) → Patterns (15) = 50 minutes</div>
+  </div>
+
+  <section>
+    <div class="shead"><span class="ic">📋</span><h2>Today's 50-Minute Lesson Plan</h2><span class="badge">HOUR 1</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Core language: <strong>breakfast food</strong> + asking <strong>what someone wants</strong>. The manual highlights the pronunciation of <strong>steak</strong> and <strong>bread</strong> — model these carefully. Click any block to jump to it!</div>
+    <div class="tl">
+      <div class="tl-item" onclick="showTab(2)"><span class="tl-min">0–10 min</span><h4>👑 Warm-up: I'm the Lucky King</h4><p>Review Unit 12 <em>Does ___ ___ on ___?</em> and the third-person -s/-es rule. Red card = 2 points, black card = 1 point.</p></div>
+      <div class="tl-item t1" onclick="showTab(3)"><span class="tl-min">10–25 min</span><h4>🎭 Dialogue</h4><p>Act it out at 6:00 → Breakfast picture talk → Dialogue Detective → Role Play → What's Next?</p></div>
+      <div class="tl-item t2" onclick="showTab(5)"><span class="tl-min">25–35 min</span><h4>🍽️ Vocabulary</h4><p>steak · bread · noodles · soup · fish · rice · soybean milk. Look, Say, Repeat → Action Vocabulary → Hammer Challenge.</p></div>
+      <div class="tl-item t3" onclick="showTab(7)"><span class="tl-min">35–50 min</span><h4>💬 Patterns</h4><p>What do you want for breakfast? → I want… Then the S rule, Food Market, Spin &amp; Speak, Tic-Tac-Toe.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎯</span><h2>Objectives &amp; Target Language</h2><span class="badge">GOALS</span></div>
+    <div class="board-plan" style="margin-bottom:14px">
+      <div class="bp-t">What do you want for breakfast? → <span style="color:var(--green)">I want bread and milk for breakfast.</span></div>
+      <div class="bp-t">What does she want for breakfast? → <span style="color:var(--green)">She wants two eggs, bread, and juice.</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+      <div class="tip">✅ Name 7 foods: steak, bread, noodles, soup, fish, rice, soybean milk</div>
+      <div class="tip">✅ Ask &amp; answer: <strong>What do you want for breakfast?</strong></div>
+      <div class="tip">✅ Add the S: he / she / it → <strong>wants, eats, drinks</strong></div>
+      <div class="tip">✅ <strong>does + want</strong> (not does + wants) in questions</div>
+      <div class="tip">✅ Change the meal: breakfast → <strong>lunch</strong> → <strong>dinner</strong></div>
+      <div class="tip">✅ Change the verb: want → <strong>eat</strong> / <strong>drink</strong></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🗂️</span><h2>Board Plan</h2><span class="badge">WRITE THIS UP</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="twobox">
+      <div class="board-plan">
+        <div class="bp-t">MAGIC JOY 5 — UNIT 13</div>
+        <div class="bp-t">FOOD</div>
+        <div>steak · bread · noodles · soup</div>
+        <div>fish · rice · soybean milk</div>
+      </div>
+      <div class="board-plan">
+        <div class="bp-t">PATTERN</div>
+        <div>What do you want for breakfast?</div>
+        <div>I want ______ for breakfast.</div>
+        <div style="height:8px"></div>
+        <div>What does she want for breakfast?</div>
+        <div>She wants ______ for breakfast.</div>
+      </div>
+    </div>
+    <div class="board-plan" style="margin-top:14px">
+      <div class="bp-t">Remember</div>
+      <div>I / You / We / They → <span class="bp-ok">WANT</span> &nbsp;&nbsp; He / She / It → <span class="bp-ok">WANTS</span></div>
+      <div><span class="bp-ok">What DOES she WANT? ✓</span> &nbsp; <span class="bp-no">What DOES she WANTS? ✗</span></div>
+      <div style="height:8px"></div>
+      <div><span class="bp-ok">breakfast | lunch | dinner</span></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 1 : PHONICS -s/-es ============ -->
+<div class="tabpan" id="tp1" data-sec="phonics">
+  <section>
+    <div class="shead"><span class="ic">🔤</span><h2>The S Rule — Third Person</h2><span class="badge">PHONICS</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="phon-hero">
+      <div class="phon-big" data-say="S. Ssss." data-rate="0.6" data-voice="girl" title="Click to hear the S sound">S</div>
+      <div>
+        <div style="font-size:clamp(16px,2.6vw,21px);font-weight:900;color:var(--purple);margin-bottom:8px">Click the big S to hear the sound.</div>
+        <div style="font-size:clamp(13px,2.1vw,16px);font-weight:700;line-height:1.6;color:#555">
+          1️⃣ Just add <strong>“sss”</strong> to the end of the verb.<br>
+          2️⃣ Only <strong>he / she / it</strong> and one name get it.<br>
+          3️⃣ Spelling: <strong>es</strong> after <em>s, sh, ch, x, o</em> → <em>watches, goes</em>.<br>
+          4️⃣ In questions the S jumps to <strong>does</strong>.
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button class="btn orange" data-say="Want. She wants. Eat. She eats. Drink. She drinks." data-rate="0.72" data-voice="girl">🔊 want / wants</button>
+          <button class="btn blue" data-say="Watch. She watches. Go. She goes. That is es after ch and o." data-rate="0.75" data-voice="boy">🔊 -es after s sh ch x o</button>
+        </div>
+      </div>
+    </div>
+    <table class="vtable">
+      <tr><th>Subject</th><th>want</th><th>eat</th><th>drink</th><th>question</th></tr>
+      <tr><td>I / You / We / They</td><td class="hl">want</td><td class="hl">eat</td><td class="hl">drink</td><td class="hl">What do you want…?</td></tr>
+      <tr><td>He / She / It</td><td class="hl">wants</td><td class="hl">eats</td><td class="hl">drinks</td><td class="hl">What does she want…?</td></tr>
+    </table>
+    <div class="tip">🖐️ <strong>Gesture:</strong> hold up an imaginary <strong>S</strong> and move it from <em>wants</em> to <em>does</em>. Say: <em>“Does already has the S power!”</em></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🕵️</span><h2>S Detective — Where does the S go?</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Click a sentence to hear it, then click the correct box: <strong>✅ needs S</strong> · <strong>🔵 no S</strong> · <strong>❌ the S is on DOES</strong>. Sort all 12!</div>
+    <div class="sort-pool" id="sPool"></div>
+    <div class="sort-boxes">
+      <div class="sort-box a"><h4>✅ He / She → add the S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">wants · eats · drinks</span></h4><div class="placed" id="boxA"></div></div>
+      <div class="sort-box b"><h4>🔵 I / You / We / They → no S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">want · eat · drink</span></h4><div class="placed" id="boxB"></div></div>
+      <div class="sort-box c"><h4>❌ DOES already has the S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">does + want (not wants)</span></h4><div class="placed" id="boxC"></div></div>
+    </div>
+    <div id="sResult" style="text-align:center;font-weight:900;font-size:1.1rem;min-height:26px"></div>
+    <div style="text-align:center;margin-top:12px"><button class="btn orange" onclick="resetSortS()">🔄 Reset</button></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">✏️</span><h2>Spell the Food Words</h2><span class="badge">WRITING</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Listen, then build the word letter by letter. Watch the <strong>ea</strong> in <em>steak</em> and <em>bread</em> — the manual calls this out!</div>
+    <div id="spellBox"></div>
+  </section>
+</div>
+<!-- ============ TAB 2 : WARM-UP LUCKY KING ============ -->
+<div class="tabpan" id="tp2" data-sec="lucky">
+  <section>
+    <div class="shead"><span class="ic">👑</span><h2>I'm the Lucky King</h2><span class="badge">0–10 MIN · WARM-UP</span><button class="sec-sound" data-sec="lucky" onclick="toggleSecSound('lucky',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">
+      💡 Review the Unit 12 pattern: <strong>Does ___ ___ on ___?</strong><br>
+      🃏 Divide the class into groups and <strong>number</strong> them. Show the scrambled words, call a number, and that student writes the full sentence on the board.<br>
+      ❤️ <strong>Red card = 2 points</strong> · ♠️ <strong>Black card = 1 point</strong> · Always ask: <strong>“Does it need an S?”</strong>
+    </div>
+    <div class="story-card">
+      <div class="story-step" data-say="Good afternoon, everyone! Are you ready for Magic Joy? Today we're going to talk about food! But first, a quick review." data-voice="girl"><div class="step-num">1</div><div class="step-text"><strong>Fast greeting &amp; recall</strong><br>Everybody — question!</div><div class="step-emoji">👋</div></div>
+      <div class="story-step" data-say="Does Peter go to the library on Tuesdays? Yes, he does. No, he doesn't. Remember: he and she, the verb takes an s." data-voice="boy"><div class="step-num">2</div><div class="step-text"><strong>Model the pattern</strong><br>Yes, he does. / No, he doesn't.</div><div class="step-emoji">📚</div></div>
+    </div>
+    <div class="framed" style="max-width:440px;margin:16px auto" onclick="openLb('v-luckyking.png')"><img src="v-luckyking.png" alt="Scrambled words card from Appendix 13-1: go, library, the, to, Tuesdays"><div class="fcap">🃏 Appendix 13-1 scrambled-words card (tap to enlarge)</div></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🃏</span><h2>Lucky King — Team Game</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="lucky" onclick="toggleSecSound('lucky',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="team-grid" id="lkTeams"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn purple" onclick="lkNewRound()">🔄 New scrambled question</button>
+      <button class="btn blue" onclick="lkSpeakQuestion()">🔊 Hear the question</button>
+      <button class="btn green" onclick="lkSpeakAnswer()">🔊 Hear the answer</button>
+      <button class="btn red" onclick="lkReset()">🔄 Reset scores</button>
+    </div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(15px,2.4vw,20px)">1️⃣ Build the question — click the words in order</h3>
+    <div class="lk-words" id="lkWords"></div>
+    <div class="lk-out">
+      <div class="lk-q" id="lkQ">Press “New scrambled question” to begin!</div>
+      <div class="lk-a" id="lkA">…</div>
+    </div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(15px,2.4vw,20px)">2️⃣ Call a number — does it need an S?</h3>
+    <div style="text-align:center" id="lkNums"></div>
+    <div class="sbtnrow" id="lkBtns">
+      <button class="btn green" onclick="lkAnswer(true)">✅ Yes — add the S</button>
+      <button class="btn blue" onclick="lkAnswer(false)">🔵 No — no S</button>
+    </div>
+    <div class="big-ans" id="lkResult">…</div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(15px,2.4vw,20px)">3️⃣ Draw a Magic Joy Poker card</h3>
+    <div class="cards-row">
+      <div class="pcard red" onclick="lkDraw('red')">♥<div class="pc-pts">2 pts</div><div class="pc-lbl">RED CARD</div></div>
+      <div class="pcard blk" onclick="lkDraw('blk')">♠<div class="pc-pts">1 pt</div><div class="pc-lbl">BLACK CARD</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 3 : DIALOGUE ============ -->
+<div class="tabpan" id="tp3" data-sec="dialogue">
+  <section>
+    <div class="shead"><span class="ic">🌅</span><h2>Wake Up! Breakfast Time!</h2><span class="badge">10–13 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Set a clock or draw <strong>🕕 6:00</strong>. Pretend to crow like a rooster! Children love the sleepy Jane part — use a big yawn.</div>
+    <div class="twobox">
+      <div class="framed" onclick="openLb('v-breakfast-scene.png')"><img src="v-breakfast-scene.png" alt="Mia wakes Peter and Jane up at 6 o'clock"><div class="fcap">🌅 Mia wakes Peter and Jane — 6:00 (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('v-dialogue-poster.png')"><img src="v-dialogue-poster.png" alt="Dialogue poster: what do you want for breakfast?"><div class="fcap">🍽️ Come to the kitchen! (tap to enlarge)</div></div>
+    </div>
+    <div class="story-card">
+      <div class="story-step" data-say="Cock-a-doodle-doo! Wake up! Wake up!" data-voice="girl"><div class="step-num">🐓</div><div class="step-text"><strong>Rooster!</strong><br>“Wake up! Wake up!”</div><div class="step-emoji">😴</div></div>
+      <div class="story-step" data-say="What time is it?" data-voice="boy"><div class="step-num">?</div><div class="step-text\"><strong>Point at the clock.</strong><br>Class: “It's six.”</div><div class="step-emoji">🕕</div></div>
+      <div class="story-step" data-say="Let's go! No way. I'm sleepy. Come on. It's time for breakfast!" data-voice="girl"><div class="step-num">🥱</div><div class="step-text"><strong>Sleepy Jane</strong><br>Yawn, rub your eyes, pretend to go back to sleep.</div><div class="step-emoji">😴</div></div>
+    </div>
+    <img class="t-image" src="v-dialogue-script.png" alt="Dialogue: Wake up. What time is it? It's six. Let's go. No way. I'm sleepy. Come on. It's time for breakfast." onclick="openLb(this.src)" style="margin:16px 0">
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🔍</span><h2>Breakfast Picture Talk &amp; Detective</h2><span class="badge">13–20 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Point at the food and smell it: <em>“Mmmm… it smells so good!”</em> Then ask the <strong>Dialogue Detective</strong> questions — click a question to reveal the answer.</div>
+    <div class="story-card" id="talkSteps"></div>
+    <div id="detQs"></div>
+  </section>
+</div>
+
+<!-- ============ TAB 4 : ROLE PLAY + WHAT'S NEXT ============ -->
+<div class="tabpan" id="tp4" data-sec="roleplay">
+  <section>
+    <div class="shead"><span class="ic">🎭</span><h2>Practice Role Play</h2><span class="badge">20–23 MIN</span><button class="sec-sound" data-sec="roleplay" onclick="toggleSecSound('roleplay',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Divide the class into <strong>four groups</strong> — Mia, Peter, Jane, Nick. Use different voices and expressions. Tell students: <strong>“Don't read like robots!”</strong> Then switch roles after one round.</div>
+    <div class="story-card" id="roleDlg"></div>
+    <div class="tip" style="margin-top:12px">🎭 Encourage <strong>facial expressions</strong>, <strong>character voices</strong>, <strong>sleepy actions</strong> and <strong>breakfast gestures</strong>.</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">⏭️</span><h2>What's Next?</h2><span class="badge">23–25 MIN · GAME</span><button class="sec-sound" data-sec="roleplay" onclick="toggleSecSound('roleplay',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Give students 30–60 seconds to look over the dialogue, then partly cover it. Teacher says one line and the class gives the <strong>next line</strong>. For competition: “Team A — Number 2!” Correct + fast = 1 point. Excellent character voice = bonus point!</div>
+    <div class="team-grid" id="wnTeams"></div>
+    <div class="lk-out">
+      <div class="lk-q" id="wnCue">Press “Next challenge” to begin!</div>
+      <div class="lk-a" id="wnAns">…</div>
+    </div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn purple" onclick="wnNext()">▶ Next challenge</button>
+      <button class="btn green" onclick="wnAward(1)">🏆 Correct + fast (+1)</button>
+      <button class="btn orange" onclick="wnAward(2)">🎭 Bonus: great character voice (+2)</button>
+      <button class="btn blue" onclick="wnSpeak()">🔊 Hear both lines</button>
+    </div>
+  </section>
+</div>
+<!-- ============ TAB 5 : VOCABULARY ============ -->
+<div class="tabpan" id="tp5" data-sec="vocab">
+  <section>
+    <div class="shead"><span class="ic">🍽️</span><h2>Breakfast Food — Look, Say, Repeat</h2><span class="badge">25–28 MIN · VOCAB</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Show a flashcard, say the word, class repeat <strong>×3</strong>. The manual specifically calls out that the <strong>ea</strong> in <em>steak</em> and <em>bread</em> is pronounced /ɛ/ — model it slowly and carefully. Click a card to hear it, then spell it!</div>
+    <div class="twobox">
+      <div class="framed" onclick="openLb('v-poster.png')"><img src="v-poster.png" alt="Magic Joy 5 Unit 13 flashcard poster: steak, bread, noodles, soup, fish, rice, soybean milk"><div class="fcap">📇 Unit 13 flashcard poster (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('v-wordbank.png')"><img src="v-wordbank.png" alt="Unit 13 word bank: what do you or they want, eat or drink for breakfast, lunch or dinner"><div class="fcap">🔤 Word bank (tap to enlarge)</div></div>
+    </div>
+    <div class="vocab-grid" id="foodGrid"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🔤</span><h2>Careful with the <span style="color:var(--orange)">ea</span></h2><span class="badge">PRONUNCIATION</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 In British English <strong>steak</strong> and <strong>bread</strong> both have the same <strong>/ɛ/</strong> (the vowel in <em>dress</em>). Many Taiwanese learners say /eɪ/ instead. Tap to compare.</div>
+    <div class="story-card">
+      <div class="story-step" data-say="Steak. Bread. Steak. Bread. The ea is the same short sound in both. Like dress." data-rate="0.72" data-voice="girl"><div class="step-num">1</div><div class="step-text"><strong>steak / bread</strong> — /ɛ/ like in <em>dress</em>, NOT /eɪ/</div><div class="spk">🔊</div></div>
+      <div class="story-step" data-say="Bread. Noodles. Soup. Fish. Rice. Soybean milk." data-rate="0.8" data-voice="boy"><div class="step-num">2</div><div class="step-text"><strong>All six</strong> — notice the <strong>/aɪ/</strong> in rice and the <strong>/ɔː/</strong> in soybean</div><div class="spk">🔊</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 6 : ACTION VOCAB + HAMMER CHALLENGE ============ -->
+<div class="tabpan" id="tp6" data-sec="hammer">
+  <section>
+    <div class="shead"><span class="ic">🤸</span><h2>Action Vocabulary</h2><span class="badge">28–31 MIN · GAME</span><button class="sec-sound" data-sec="hammer" onclick="toggleSecSound('hammer',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Give each word a quick action. Teacher calls the word → children <strong>act and say it</strong>. Then <strong>reverse it</strong>: the teacher only does the action and the class shouts the word!</div>
+    <div class="obj-grid" id="actGrid"></div>
+    <div class="big-reply" id="actReply">Teacher: call a food, or act and let them guess →</div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn purple" onclick="actRandom()">🎲 Call a random food</button>
+      <button class="btn blue" onclick="actTeacher()">🙈 Teacher acts — class guesses</button>
+      <button class="btn orange" onclick="actStop()">✋ Stop</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🔨</span><h2>Hammer Challenge</h2><span class="badge">31–35 MIN · TEAM GAME</span><button class="sec-sound" data-sec="hammer" onclick="toggleSecSound('hammer',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Put the <strong>seven flashcards</strong> on the board. Call a number — one student from each team comes forward and <strong>taps the correct picture</strong> with a toy hammer. The winner must say the word; for an extra point the teacher says <strong>“Spell it!”</strong></div>
+    <div class="team-grid" id="hamTeams"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0">
+      <button class="btn purple" onclick="hamNew()">🎲 Call a food word</button>
+      <button class="btn green" onclick="hamAward(1)">✅ Correct tap (+1)</button>
+      <button class="btn orange" onclick="hamAward(2)">✏️ Correct + spelled (+2)</button>
+      <button class="btn red" onclick="hamReset()">🔄 Reset</button>
+    </div>
+    <div class="big-reply" id="hamPrompt">Press “Call a food word” to begin!</div>
+    <div class="obj-grid" id="hamGrid"></div>
+    <div class="big-ans" id="hamResult">…</div>
+  </section>
+</div>
+
+<!-- ============ TAB 7 : PATTERNS ============ -->
+<div class="tabpan" id="tp7" data-sec="patterns">
+  <section>
+    <div class="shead"><span class="ic">💬</span><h2>What Do You Want for Breakfast?</h2><span class="badge">35–38 MIN · PATTERNS</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Write the pattern, hold up food flashcards and build sentences together. Then change the meal: <strong>breakfast → lunch → dinner</strong>, and the verb: <strong>want → eat / drink</strong>.</div>
+    <div class="twobox">
+      <div class="framed" onclick="openLb('v-dialogue-poster.png')"><img src="v-dialogue-poster.png" alt="What do you want for breakfast?"><div class="fcap">🍽️ The target pattern (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('v-tictactoe.png')"><img src="v-tictactoe.png" alt="Unit 13 patterns poster with food and people"><div class="fcap">🎲 Patterns poster (tap to enlarge)</div></div>
+    </div>
+    <div id="patternCards"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧱</span><h2>Build the Sentence</h2><span class="badge">DRILL</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Pick a person, a meal and a food. The app builds the sentence and checks the verb for you!</div>
+    <div class="sub-machine">
+      <div><label style="font-weight:900;color:#888;font-size:13px">1. WHO?</label><select id="whoSel" onchange="buildSentence()"></select></div>
+      <div><label style="font-weight:900;color:#888;font-size:13px">2. WHICH MEAL?</label><select id="mealSel" onchange="buildSentence()"></select></div>
+    </div>
+    <div class="food-pick" id="foodPick"></div>
+    <div class="sub-out">
+      <div class="so-q" id="subQ">What do you want for breakfast?</div>
+      <div class="so-a" id="subA">I want bread and soybean milk for breakfast.</div>
+      <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn purple" onclick="speakSentence()">🔊 Say it (British)</button>
+        <button class="btn green" onclick="subRandom()">🎲 Random everything</button>
+      </div>
+    </div>
+    <h3 style="text-align:center;font-weight:900;color:var(--purple);font-size:clamp(15px,2.4vw,20px)">Now try the <strong>question</strong> version (with DOES)</h3>
+    <div class="sbtnrow" id="qBtns"></div>
+    <div class="lk-out" style="margin-top:10px">
+      <div class="lk-q" id="doesQ">What does she want for breakfast?</div>
+      <div class="lk-a" id="doesA">She wants fish and rice for breakfast.</div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 8 : DISCOVER THE GRAMMAR ============ -->
+<div class="tabpan" id="tp8" data-sec="srule">
+  <section>
+    <div class="shead"><span class="ic">🧠</span><h2>Discover the Grammar</h2><span class="badge">38–41 MIN</span><button class="sec-sound" data-sec="srule" onclick="toggleSecSound('srule',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Write <strong>“I want bread.”</strong> Then point at a girl and write <strong>“She wants bread.”</strong> Ask: <strong>“Same or different?”</strong> Highlight the S. Then show that <strong>DOES</strong> takes the S away from the verb.</div>
+    <table class="vtable">
+      <tr><th>Subject</th><th>VERB</th><th>Example</th></tr>
+      <tr><td>I / You / We / They</td><td class="hl">WANT</td><td>I want bread and milk for breakfast.</td></tr>
+      <tr><td>He / She / It</td><td class="hl">WANTS</td><td>She wants two eggs, bread, and juice.</td></tr>
+    </table>
+    <div class="pattern-card" style="margin-top:14px">
+      <h3>❗ The most important rule in this unit</h3>
+      <div class="pattern-line" data-good="1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>What <strong style="color:var(--green)">DOES</strong> she <strong style="color:var(--green)">WANT</strong> for breakfast?</span><span class="vchip ok">✓ correct</span></div>
+      <div class="pattern-line" data-good="0" data-mark="1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>What <strong>DOES</strong> she <strong>WANTS</strong> for breakfast?</span><span class="vchip no" data-mark>✗ wrong</span></div>
+      <div class="tip" style="margin-top:10px">🖐️ <strong>Gesture:</strong> hold up an imaginary <strong>S</strong> and move it from <em>wants</em> to <em>does</em>. Say: <em>“Does already has the S power!”</em> Click a line to hear it.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎯</span><h2>Fix the Mistake!</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="srule" onclick="toggleSecSound('srule',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Each sentence has an S in the wrong place. Click the card, then click the <strong>correct</strong> or <strong>wrong</strong> button.</div>
+    <div class="zone-grid" id="fixGrid"></div>
+    <div class="big-ans" id="fixResult">…</div>
+  </section>
+</div>
+<!-- ============ TAB 9 : FOOD MARKET + SPIN & SPEAK ============ -->
+<div class="tabpan" id="tp9" data-sec="market">
+  <section>
+    <div class="shead"><span class="ic">🏪</span><h2>The Food Market</h2><span class="badge">41–44 MIN · GAME</span><button class="sec-sound" data-sec="market" onclick="toggleSecSound('market',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Put the food cards around the classroom. One student walks to a food card and says <strong>“I want steak for dinner.”</strong> Then point at them and the class asks: <strong>“What does he want for dinner?”</strong></div>
+    <div class="team-grid" id="mkTeams"></div>
+    <div class="lk-out">
+      <div class="lk-q" id="mkQ">Click a food card to send a student to the market!</div>
+      <div class="lk-a" id="mkA">…</div>
+    </div>
+    <div class="sub-machine" style="grid-template-columns:1fr 1fr">
+      <div><label style="font-weight:900;color:#888;font-size:13px">WHO WENT SHOPPING?</label><select id="mkWho" onchange="mkSet()"></select></div>
+      <div><label style="font-weight:900;color:#888;font-size:13px">WHICH MEAL?</label><select id="mkMeal" onchange="mkSet()"></select></div>
+    </div>
+    <div class="zone-grid" id="mkGrid"></div>
+    <div class="big-ans" id="mkResult">…</div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn green" onclick="mkAward(1)">🏆 Class answer correct (+1)</button>
+      <button class="btn orange" onclick="mkReset()">🔄 Reset</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎡</span><h2>Spin &amp; Speak</h2><span class="badge">44–47 MIN · SUBSTITUTION</span><button class="sec-sound" data-sec="market" onclick="toggleSecSound('market',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 The teacher's wheel shows <strong>WHO + VERB + MEAL</strong>. The class must build the <strong>question</strong>, then a chosen student picks food and builds the <strong>answer</strong>. Spin all three boxes!</div>
+    <div class="spin-row">
+      <div class="spin-box"><div class="sb-lbl">WHO</div><div class="sb-val" id="spWho">YOU</div><button class="btn orange" style="padding:5px 12px;font-size:12px;margin-top:6px" onclick="spSpin(0)">↻</button></div>
+      <div class="spin-box b2"><div class="sb-lbl">VERB</div><div class="sb-val" id="spVerb">WANT</div><button class="btn blue" style="padding:5px 12px;font-size:12px;margin-top:6px" onclick="spSpin(1)">↻</button></div>
+      <div class="spin-box b3"><div class="sb-lbl">MEAL</div><div class="sb-val" id="spMeal">BREAKFAST</div><button class="btn pink" style="padding:5px 12px;font-size:12px;margin-top:6px" onclick="spSpin(2)">↻</button></div>
+    </div>
+    <div class="spin-q">
+      <div class="sq-q" id="spQ">What do you want for breakfast?</div>
+      <div class="sq-a" id="spA">Pick a food to finish the answer…</div>
+    </div>
+    <div class="food-pick" id="spFoods"></div>
+    <div style="text-align:center"><button class="btn purple" onclick="spSpeak()">🔊 Hear the question</button> <button class="btn green" onclick="spReset()">🔄 Reset</button></div>
+  </section>
+</div>
+
+<!-- ============ TAB 10 : TIC-TAC-TOE ============ -->
+<div class="tabpan" id="tp10" data-sec="ttt">
+  <section>
+    <div class="shead"><span class="ic">🎲</span><h2>Breakfast Tic-Tac-Toe</h2><span class="badge">47–50 MIN · FINAL</span><button class="sec-sound" data-sec="ttt" onclick="toggleSecSound('ttt',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Draw a 3 × 4 grid with different food pictures (manual p. 93). A student picks a square, the teacher asks a question, and the student looks at the picture to answer. Correct → mark the square. <strong>Team ⭐ vs Team ❤️</strong> — first team to connect <strong>3</strong> squares wins!</div>
+    <div class="team-grid" id="tttTeams"></div>
+    <div class="framed" style="max-width:660px;margin:0 auto 14px" onclick="openLb('v-tictactoe.png')"><img src="v-tictactoe.png" alt="Unit 13 patterns poster used as the Tic-Tac-Toe board"><div class="fcap">🎲 The manual's board (p. 93) — tap to enlarge</div></div>
+    <div class="ttt" id="tttBoard"></div>
+    <div class="ttt-log" id="tttLog">Click any square to start!</div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn green" onclick="tttAward('star')">⭐ Team ⭐ correct</button>
+      <button class="btn pink" onclick="tttAward('heart')">❤️ Team ❤️ correct</button>
+      <button class="btn orange" onclick="tttReset()">🔄 New game</button>
+    </div>
+  </section>
+  <section>
+    <div class="shead"><span class="ic">👏</span><h2>Wrap-up</h2><span class="badge">SAY IT TOGETHER</span><button class="sec-sound" data-sec="ttt" onclick="toggleSecSound('ttt',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="story-card">
+      <div class="dlg g" data-say="What do you want for breakfast? I want bread and soybean milk for breakfast! What does Mia want for dinner? She wants noodles and soup for dinner! Fantastic. Give yourselves three big claps. One, two, three!" data-voice="girl"><div class="av">🎉</div><div class="bub"><strong>Teacher &amp; Class:</strong> <strong>Rooms!</strong> — sorry, <strong>Food!</strong> What did we learn today?</div><div class="vtag">👩 FEMALE</div></div>
+    </div>
+    <div style="text-align:center"><button class="btn orange" onclick="finishLesson()">🎉 Finish the lesson!</button></div>
+  </section>
+</div>
+
+<!-- ============ TAB 11 : QUIZ ============ -->
+<div class="tabpan" id="tp11" data-sec="quiz">
+  <div class="hero">
+    <span class="big-emoji">📝</span>
+    <h1>Unit 13 Quiz</h1>
+    <span class="sub">Breakfast Food · What do you want?</span>
+    <div class="desc">Listen, speak, spell and act! 5 sections · earn max points.</div>
+  </div>
+  <section>
+    <div class="shead"><span class="ic">🎧</span><h2>Quiz Instructions</h2><span class="badge">LISTEN &amp; CHOOSE</span><button class="sec-sound" data-sec="quiz" onclick="toggleSecSound('quiz',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Every question can be <strong>heard</strong>. Click the 🔊 to listen again before you answer. The British voices speak at a normal, clear pace.</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button class="btn orange" onclick="sayF('Welcome to the Unit 13 quiz. Listen, speak, spell and act!')">🔊 Quiz intro (British ♀)</button>
+      <button class="btn blue" onclick="sayM('Are you ready? Let us begin!')">🔊 Teacher's start (British ♂)</button>
+      <button class="btn green" onclick="sayF('Great job, everyone! Well done!')">🔊 Well done (British ♀)</button>
+    </div>
+  </section>
+  <div id="quizContent"></div>
+  <div class="score-board" id="scoreBoard" style="display:none">
+    <h2>🎉 Quiz Complete!</h2>
+    <div class="score-big" id="finalScore">0</div>
+    <div class="score-label" id="finalLabel">points earned</div>
+    <div class="score-stars" id="finalStars"></div>
+    <div class="score-breakdown" id="scoreBreakdown"></div>
+    <button class="btn" onclick="resetAllQuiz()" style="margin-top:16px;background:#fff;color:var(--orange);font-weight:900">🔄 Try Again</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" title="Hello from Ollie!">🦉</div>
+<div class="fab-wrap">
+  <button class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆</button>
+  <a class="fab fab-home" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+</div>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <img id="lbImg" src="" alt="Page">
+</div>
+<script>
+/* ===== AUDIO + TWO BRITISH VOICES ===== */
+var soundOn=true;
+var RATE=0.9, RATE_SLOW=0.8;
+var secSounds={plan:true,phonics:true,lucky:true,dialogue:true,roleplay:true,vocab:true,hammer:true,patterns:true,srule:true,market:true,ttt:true,quiz:true};
+var curSec="plan";
+var actx=null;
+function audio(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx;}
+function tone(f,dur,type,vol,delay){var c=audio();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.value=f;var t=c.currentTime+(delay||0);g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(vol||0.16,t+0.02);g.gain.exponentialRampToValueAtTime(0.0001,t+dur);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+0.05);}
+function sPop(){if(!soundOn)return;tone(500,0.1,"square",0.08);tone(760,0.09,"square",0.08,0.06);}
+function sDing(){if(!soundOn)return;tone(660,0.12,"triangle",0.16);tone(880,0.16,"triangle",0.16,0.1);tone(1320,0.25,"triangle",0.14,0.2);}
+function sBuzz(){if(!soundOn)return;tone(180,0.18,"sawtooth",0.11);tone(140,0.22,"sawtooth",0.11,0.16);}
+function sWin(){if(!soundOn)return;tone(523,0.12,"sine",0.14);tone(659,0.12,"sine",0.14,0.1);tone(784,0.12,"sine",0.14,0.2);tone(1047,0.2,"sine",0.16,0.3);}
+var cachedVoices=[];
+if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();};}
+function pickVoice(gender){
+  var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();
+  if(!v||!v.length)return null;
+  if(gender==="boy"){
+    return v.find(function(x){return x.lang==="en-GB"&&(x.name.indexOf("Google UK English Male")>-1||x.name.indexOf("Male")>-1||x.name.indexOf("Daniel")>-1||x.name.indexOf("Oliver")>-1||x.name.indexOf("Arthur")>-1);})
+      ||v.find(function(x){return x.lang==="en-GB"&&/male|daniel|oliver|arthur|george|fred/i.test(x.name);})
+      ||v.find(function(x){return x.lang==="en-GB";})
+      ||v.find(function(x){return x.name.indexOf("Male")>-1&&x.lang.indexOf("en")===0;})
+      ||v.find(function(x){return x.lang.indexOf("en")===0;});
+  }
+  return v.find(function(x){return x.lang==="en-GB"&&(x.name.indexOf("Google UK English Female")>-1||x.name.indexOf("Female")>-1||x.name.indexOf("Karen")>-1||x.name.indexOf("Samantha")>-1||x.name.indexOf("Serena")>-1);})
+    ||v.find(function(x){return x.lang==="en-GB"&&!/male/i.test(x.name);})
+    ||v.find(function(x){return x.lang==="en-GB";})
+    ||v.find(function(x){return /female|karen|samantha|serena/i.test(x.name)&&x.lang.indexOf("en")===0;})
+    ||v.find(function(x){return x.lang.indexOf("en")===0;});
+}
+function speakGB(text,pitch,gender,onEnd,rate){
+  if(!soundOn||!secSounds[curSec]){if(onEnd)setTimeout(onEnd,120);return;}
+  var u=new SpeechSynthesisUtterance(text);
+  u.voice=pickVoice(gender);
+  u.lang="en-GB";
+  u.rate=rate||RATE;
+  u.pitch=pitch;
+  u.volume=1;
+  u.onend=onEnd;
+  try{speechSynthesis.speak(u);}catch(e){if(onEnd)setTimeout(onEnd,120);}
+}
+var VF="girl",VM="boy";
+function sayF(t,rate){speakGB(t,1.35,VF,null,rate);}
+function sayM(t,rate){speakGB(t,1.05,VM,null,rate);}
+function stopSpeak(){try{speechSynthesis.cancel();}catch(e){}}
+function spellOut(word,gap,rate,gender,cb){
+  stopSpeak();
+  var parts=word.split(" "),i=0;
+  function nextWord(){
+    if(i>=parts.length){if(cb)cb();return;}
+    var w=parts[i],j=0;
+    function nextLetter(){
+      if(j<w.length){
+        speakGB(w[j].toUpperCase(),1.15,gender,function(){j++;setTimeout(nextLetter,gap||230);},rate||RATE_SLOW);
+      }else{
+        setTimeout(function(){
+          speakGB(w,1.15,gender,function(){i++;setTimeout(nextWord,320);},RATE);
+        },gap||230);
+      }
+    }
+    nextLetter();
+  }
+  nextWord();
+}
+function toggleSecSound(sec,btn){
+  secSounds[sec]=!secSounds[sec];
+  btn.querySelector(".sec-si").textContent=secSounds[sec]?"🔊":"🔇";
+  btn.classList.toggle("off",!secSounds[sec]);
+  showToast(sec.charAt(0).toUpperCase()+sec.slice(1)+" sound "+(secSounds[sec]?"ON":"OFF"));
+}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(showToast._t);showToast._t=setTimeout(function(){t.classList.remove("show");},2000);}
+function launchConfetti(){
+  var em=["🎉","⭐","✨","🎊","💖","🌈","🎈","🍞","🥛","👏"];
+  for(var i=0;i<50;i++){
+    var el=document.createElement("div");el.className="confetti-piece";
+    el.innerHTML=em[Math.floor(Math.random()*em.length)];
+    el.style.cssText="left:"+Math.random()*100+"vw;font-size:"+(Math.random()*16+10)+"px;animation-duration:"+(Math.random()*2+2)+"s;animation-delay:"+(Math.random()*1.5)+"s;";
+    document.body.appendChild(el);
+    (function(e){setTimeout(function(){if(e.parentNode)e.parentNode.removeChild(e);},5000);})(el);
+  }
+}
+
+/* ===== TABS / UI ===== */
+var tabSecMap={0:"plan",1:"phonics",2:"lucky",3:"dialogue",4:"roleplay",5:"vocab",6:"hammer",7:"patterns",8:"srule",9:"market",10:"ttt",11:"quiz"};
+function showTab(idx){
+  curSec=tabSecMap[idx]||"plan";
+  var pans=document.querySelectorAll(".tabpan"),tabs=document.querySelectorAll(".navbar .ntab");
+  for(var i=0;i<pans.length;i++)pans[i].classList.toggle("on",i===idx);
+  for(var j=0;j<tabs.length;j++)tabs[j].classList.toggle("on",j===idx);
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function openLb(src){document.getElementById("lbImg").src=src;document.getElementById("lightbox").classList.add("show");sPop();}
+document.getElementById("lbClose").onclick=function(){document.getElementById("lightbox").classList.remove("show");};
+document.getElementById("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show");};
+document.getElementById("globalSound").onclick=function(){
+  soundOn=!soundOn;
+  this.textContent=soundOn?"🔊":"🔇";
+  this.classList.toggle("off",!soundOn);
+  if(!soundOn)stopSpeak();
+  showToast("Global sound "+(soundOn?"ON":"OFF"));
+};
+
+/* ===== DATA ===== */
+var FOODS=[
+ {key:"steak",   word:"steak",          img:"v-steak.png",   emoji:"🥩", act:"Pretend to cut steak.",            say:"I want steak for breakfast.",   hint:"STEAK"},
+ {key:"bread",   word:"bread",          img:"v-bread.png",   emoji:"🍞", act:"Pretend to spread butter.",        say:"I want bread for breakfast.",   hint:"BREAD"},
+ {key:"noodles", word:"noodles",        img:"v-noodles.png", emoji:"🍜", act:"Pretend to slurp noodles.",         say:"I want noodles for breakfast.", hint:"NOODLES"},
+ {key:"soup",    word:"soup",           img:"v-soup.png",    emoji:"🥣", act:"Pretend to drink from a spoon.",   say:"I want soup for breakfast.",    hint:"SOUP"},
+ {key:"fish",    word:"fish",           img:"v-fish.png",    emoji:"🐟", act:"Swimming hands.",                   say:"I want fish for breakfast.",    hint:"FISH"},
+ {key:"rice",    word:"rice",           img:"v-rice.png",    emoji:"🍚", act:"Pretend to use chopsticks.",       say:"I want rice for breakfast.",    hint:"RICE"},
+ {key:"soymilk", word:"soybean milk",   img:"v-soymilk.png", emoji:"🥛", act:"Pretend to drink.",                say:"I want soybean milk for breakfast.", hint:"SOYBEAN MILK"}
+];
+function foodByKey(k){for(var i=0;i<FOODS.length;i++)if(FOODS[i].key===k)return FOODS[i];return FOODS[0];}
+var MEALS=["breakfast","lunch","dinner"];
+var VERBS=[{base:"want",s:"wants",eats:false},{base:"eat",s:"eats",eats:true},{base:"drink",s:"drinks",eats:false}];
+var PEOPLE=[
+ {name:"you",   pron:"I",      third:false, voice:"girl"},
+ {name:"Mia",   pron:"She",    third:true,  voice:"girl"},
+ {name:"Peter", pron:"He",     third:true,  voice:"boy"},
+ {name:"Jane",  pron:"She",    third:true,  voice:"girl"},
+ {name:"Nick",  pron:"He",     third:true,  voice:"boy"},
+ {name:"Mike",  pron:"He",     third:true,  voice:"boy"},
+ {name:"they",  pron:"They",   third:false, voice:"girl"},
+ {name:"we",    pron:"We",     third:false, voice:"girl"}
+];
+function thirdVerb(v,p){return p.third?v.s:v.base;}
+function subjectWord(p){return p.name==="you"?"you":p.name;}
+
+/* ===== TEAMS ===== */
+function buildTeams(id){
+  var g=document.getElementById(id);if(!g)return;
+  g.innerHTML="";
+  [{k:"a",n:"Team A",e:"🔵",c:"ta"},{k:"b",n:"Team B",e:"🟠",c:"tb"}].forEach(function(t){
+    var d=document.createElement("div");
+    d.className="team-box "+t.c;
+    d.innerHTML="<div class='team-icon'>"+t.e+"</div><div class='team-name'>"+t.n+"</div><div class='team-score' id='"+id+t.k.toUpperCase()+"'>0</div>"
+      +"<div class='team-btns'><button class='tadd' onclick=\"bumpTeam('"+id+"','"+t.k+"',1)\">+1</button>"
+      +"<button class='tadd' onclick=\"bumpTeam('"+id+"','"+t.k+"',2)\">+2</button>"
+      +"<button class='tsub' onclick=\"bumpTeam('"+id+"','"+t.k+"',-1)\">-1</button></div>";
+    g.appendChild(d);
+  });
+}
+function bumpTeam(id,t,pts){
+  var el=document.getElementById(id+t.toUpperCase());if(!el)return;
+  var v=parseInt(el.textContent||"0",10)+pts;if(v<0)v=0;el.textContent=v;
+  el.style.transform="scale(1.35)";
+  setTimeout(function(){el.style.transform="scale(1)";},300);
+  if(pts>0){sDing();showToast("Team "+t.toUpperCase()+" +"+pts+" point"+(pts>1?"s":""));}
+}
+function teamVal(id,t){var el=document.getElementById(id+t.toUpperCase());return el?parseInt(el.textContent||"0",10)||0:0;}
+/* ============================================================
+   TAB 1 : PHONICS -s/-es
+   ============================================================ */
+var SDET=[
+ {s:"She want bread.",a:"a",ex:"No! She is one person, so we say she WANTS bread."},
+ {s:"I wants bread.",a:"b",ex:"No! 'I' is not he or she, so there is no S: I want bread."},
+ {s:"What does he want for breakfast?",a:"c",ex:"Yes! DOES already has the S, so the verb goes back to WANT."},
+ {s:"They eat noodles for lunch.",a:"b",ex:"Yes! They are not he or she, so there is no S: they eat."},
+ {s:"Peter wants steak for dinner.",a:"a",ex:"Yes! One person by name, so we add the S: Peter WANTS."},
+ {s:"What does she wants for lunch?",a:"c",ex:"No! The S is on DOES, so we say does she WANT."},
+ {s:"We drink soybean milk.",a:"b",ex:"Yes! 'We' is not he or she, so there is no S."},
+ {s:"He drinks soup for breakfast.",a:"a",ex:"Yes! He is one person, so we add the S: he DRINKS."},
+ {s:"You eat fish.",a:"b",ex:"Yes! 'You' is not he or she, so there is no S."},
+ {s:"It eat bread.",a:"a",ex:"No! IT is a third person, so we say it EATS bread."},
+ {s:"What do they want for dinner?",a:"b",ex:"Yes! They are not he or she, so the verb stays WANT."},
+ {s:"Does she wants bread?",a:"c",ex:"No! DOES already has the S, so we say does she WANT."}
+];
+var sRight=0,sPending=null;
+function resetSortS(){sRight=0;sPending=null;document.getElementById("sResult").textContent="";buildSortS();}
+function buildSortS(){
+  var pool=document.getElementById("sPool");
+  if(!pool)return;
+  pool.innerHTML="";
+  var a=document.getElementById("boxA"),b=document.getElementById("boxB"),c=document.getElementById("boxC");
+  a.innerHTML="";b.innerHTML="";c.innerHTML="";
+  a.onclick=function(){sTo("a");};b.onclick=function(){sTo("b");};c.onclick=function(){sTo("c");};
+  SDET.forEach(function(d,i){
+    var sp=document.createElement("span");
+    sp.id="sx"+i;sp.textContent=d.s;
+    pool.appendChild(sp);
+  });
+}
+function sPick(i){
+  var el=document.getElementById("sx"+i);
+  if(!el||el.classList.contains("gone"))return;
+  if(sPending)sPending.classList.remove("sel");
+  sPending=el;el.classList.add("sel");
+  sayF(SDET[i].s);
+  showToast("Now click the correct box");
+}
+function sTo(box){
+  var el=sPending;
+  if(!el){showToast("First click a sentence in the pool!");return;}
+  var i=parseInt(el.id.replace("sx",""),10);
+  var d=SDET[i];
+  sPending=null;
+  el.classList.remove("sel");el.classList.add("gone");
+  var moved=document.createElement("span");
+  moved.textContent=d.s;
+  moved.onclick=function(e){e.stopPropagation();sayF(d.s);};
+  document.getElementById(box==="a"?"boxA":(box==="b"?"boxB":"boxC")).appendChild(moved);
+  var res=document.getElementById("sResult");
+  if(box===d.a){
+    sRight++;sDing();sayF("Yes! "+d.ex);
+    res.innerHTML="✅ <span style='color:var(--green)'>Correct!</span> "+sRight+" / "+SDET.length;
+  }else{
+    sBuzz();sayF("No! "+d.ex);
+    res.innerHTML="❌ <span style='color:var(--red)'>Not quite!</span> "+d.ex;
+  }
+  if(sRight>=SDET.length){
+    res.innerHTML="🎉 All sorted! Brilliant! You know the S rule!";
+    sWin();launchConfetti();
+  }
+}
+var SPELLW=[
+ {w:"steak",hint:"ST-E-A-K — the ea is /ɛ/"},
+ {w:"bread",hint:"BR-E-A-D — the ea is /ɛ/"},
+ {w:"noodles",hint:"NOO-DLES"},
+ {w:"soup",hint:"S-O-U-P"},
+ {w:"fish",hint:"F-I-S-H"},
+ {w:"rice",hint:"R-I-C-E — long /aɪ/"},
+ {w:"soybean milk",hint:"SOY-BEAN MILK — two words!"}
+];
+function buildSpell(){
+  var box=document.getElementById("spellBox");if(!box)return;
+  box.innerHTML="";
+  var keys="abcdefghijklmnopqrstuvwxyz";
+  SPELLW.forEach(function(s,i){
+    var card=document.createElement("div");
+    card.className="write-card";
+    var h="<div style='text-align:center;font-size:34px'>✏️</div>";
+    h+="<div class='write-prompt'>Spell it: <strong>"+s.w+"</strong></div>";
+    h+="<div class='write-hint'>"+s.hint+"</div>";
+    h+="<div class='write-display' id='pwd"+i+"'></div>";
+    h+="<div class='write-keyboard'>";
+    for(var k=0;k<keys.length;k++)h+="<button class='write-key' data-q='"+i+"' data-l='"+keys[k]+"'>"+keys[k]+"</button>";
+    h+="<button class='write-key' data-q='"+i+"' data-l=' ' style='font-size:clamp(12px,2vw,16px)'>␣</button>";
+    h+="<button class='write-key del' data-q='"+i+"' data-action='del'>⌫</button>";
+    h+="<button class='write-key clr' data-q='"+i+"' data-action='clr'>CLEAR</button></div>";
+    h+="<div style='text-align:center;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap'>";
+    h+="<button class='btn blue' onclick=\"speakSpell("+i+")\">🔊 Hear it slowly</button>";
+    h+="<button class='btn green' onclick=\"checkSpell("+i+")\">✅ Check</button></div>";
+    h+="<div class='write-result' id='pRes"+i+"'></div>";
+    card.innerHTML=h;box.appendChild(card);
+  });
+  box.querySelectorAll(".write-key").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var q=parseInt(this.dataset.q,10);
+      var d=document.getElementById("pwd"+q);
+      if(d.classList.contains("ok"))return;
+      if(this.dataset.action==="del")d.textContent=d.textContent.slice(0,-1);
+      else if(this.dataset.action==="clr")d.textContent="";
+      else if(d.textContent.length<16)d.textContent+=this.dataset.l;
+      sPop();
+    });
+  });
+}
+function speakSpell(i){stopSpeak();sayF(SPELLW[i].w+".",0.85);setTimeout(function(){spellOut(SPELLW[i].w,240,RATE_SLOW,VF,null);},1700);}
+function checkSpell(i){
+  var d=document.getElementById("pwd"+i),res=document.getElementById("pRes"+i);
+  var val=d.textContent.trim().toLowerCase().replace(/\s+/g," ");
+  if(val===SPELLW[i].w){
+    d.className="write-display ok";
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+SPELLW[i].w+"</span>";
+    sDing();sWin();sayF(SPELLW[i].w);
+  }else{
+    d.className="write-display bad";
+    res.innerHTML="<span style='color:var(--red)'>❌ Look again — it is '"+SPELLW[i].w+"'</span>";
+    sBuzz();spellOut(SPELLW[i].w,250,RATE_SLOW,VF,null);
+  }
+}
+
+/* ============================================================
+   TAB 2 : LUCKY KING
+   ============================================================ */
+var LKQ=[
+ {who:"Peter",verb:"go",where:"the library",when:"on Tuesdays"},
+ {who:"Mia",verb:"go",where:"to school",when:"on Mondays"},
+ {who:"Kate",verb:"read",where:"in the library",when:"on Fridays"},
+ {who:"Nick",verb:"play",where:"football",when:"on Saturdays"},
+ {who:"Jane",verb:"sing",where:"in the music room",when:"on Wednesdays"},
+ {who:"Mike",verb:"watch TV",where:"at home",when:"in the evening"},
+ {who:"May",verb:"draw",where:"pictures",when:"after school"},
+ {who:"Sam",verb:"ride a bike",where:"in the park",when:"on Sundays"}
+];
+var lkCur=null,lkBuilt="",lkAnswered=false,lkPicked="";
+function lkNewRound(){
+  lkCur=LKQ[Math.floor(Math.random()*LKQ.length)];
+  lkAnswered=false;lkPicked="";
+  document.getElementById("lkResult").textContent="…";
+  document.getElementById("lkA").textContent="…";
+  document.getElementById("lkBtns").style.display="none";
+  var words=lkCur.who.split(" ");
+  var all=words.concat([lkCur.verb,lkCur.where,lkCur.when]);
+  all=all.sort(function(){return Math.random()-0.5;});
+  lkBuilt="";
+  var g=document.getElementById("lkWords");
+  g.innerHTML="";
+  all.forEach(function(w){
+    var b=document.createElement("button");
+    b.className="lk-word";b.textContent=w;b.dataset.w=w;
+    b.onclick=function(){lkTap(b);};
+    g.appendChild(b);
+  });
+  document.getElementById("lkQ").textContent="Click the words to build: Does "+lkCur.who+" …";
+}
+function lkTap(b){
+  if(b.classList.contains("used"))return;
+  b.classList.add("used");
+  lkPicked=(lkPicked?lkPicked+" ":"")+b.dataset.w;
+  var wantWords=lkCur.who.split(" ").concat([lkCur.verb,lkCur.where,lkCur.when]);
+  lkBuilt=(lkBuilt?lkBuilt+" ":"")+b.dataset.w;
+  if(lkBuilt.length>=wantWords.join(" ").length){
+    var ok=lkBuilt===wantWords.join(" ");
+    var el=document.getElementById("lkQ");
+    if(ok){el.innerHTML="Does "+lkCur.who+" "+lkCur.verb+" "+lkCur.where+" "+lkCur.when+"?";sDing();}
+    else{el.innerHTML="Try again — press <strong>New scrambled question</strong>.";sBuzz();}
+    document.getElementById("lkBtns").style.display="flex";
+  }
+}
+function lkQuestion(){
+  if(!lkCur)return "";
+  return "Does "+lkCur.who+" "+lkCur.verb+" "+lkCur.where+" "+lkCur.when+"?";
+}
+function lkAnswerSing(){return lkCur?lkCur.verb+"s":"";}
+function lkSpeakQuestion(){stopSpeak();sayF(lkQuestion(),0.85);}
+function lkSpeakAnswer(){
+  if(!lkCur)return;
+  stopSpeak();
+  sayF("Yes, he does. He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".");
+}
+function lkAnswer(yes){
+  if(!lkCur||lkAnswered)return;
+  lkAnswered=true;
+  var res=document.getElementById("lkResult");
+  var a=document.getElementById("lkA");
+  var correct=yes?/s$/.test(lkCur.verb):!/s$/.test(lkCur.verb);
+  if(correct){
+    a.innerHTML="Yes, he does. <strong>He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".</strong>";
+    res.innerHTML="✅ <span style='color:var(--green)'>Correct! Does it need an S? YES.</span> Now draw a card!";
+    sDing();sayF("Yes, he does. He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".");
+  }else{
+    a.innerHTML="He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".";
+    res.innerHTML="❌ <span style='color:var(--red)'>Look again — the verb needs an S: "+lkAnswerSing()+"</span>";
+    sBuzz();sayF("Look again. He "+lkAnswerSing()+" "+lkCur.where+".");
+  }
+  document.getElementById("lkBtns").style.display="none";
+}
+function lkDraw(kind){
+  if(!lkCur){showToast("Make a question first!");return;}
+  var pts=kind==="red"?2:1;
+  bumpTeam("lkTeams","a",pts);
+  showToast((kind==="red"?"❤️ Red card":"♠️ Black card")+" = "+pts+" point"+(pts>1?"s":"")+"!");
+  sayF(kind==="red"?"Red card! Two points!":"Black card! One point!");
+}
+function lkReset(){buildTeams("lkTeams");lkNewRound();document.getElementById("lkNums").innerHTML=lkNumsHtml();}
+function lkNumsHtml(){
+  var h="";
+  for(var i=1;i<=6;i++)h+="<div class='num-chip' onclick=\"lkCall("+i+")\">"+i+"</div>";
+  return h;
+}
+function lkCall(n){
+  var el=document.querySelectorAll("#lkNums .num-chip")[n-1];
+  if(el)el.classList.add("used");
+  showToast("Number "+n+"! Go!");
+  sayM("Number "+n+"! Go!");
+}
+/* ============================================================
+   TAB 3 : DIALOGUE
+   ============================================================ */
+var TALK=[
+ {t:"Smell the food!",s:"Mmmm... it smells so good!",v:VF},
+ {t:"What can you see?",s:"What can you see?",v:VF},
+ {t:"Introduce the question",s:"What do you want for breakfast?",v:VF},
+ {t:"Model the answer",s:"I want eggs, bread, milk, and juice.",v:VF},
+ {t:"Ask a student",s:"Kevin, what do you want for breakfast?",v:VM},
+ {t:"Student answer",s:"I want bread and milk.",v:VM}
+];
+function buildTalk(){
+  var g=document.getElementById("talkSteps");if(!g)return;
+  g.innerHTML="";
+  TALK.forEach(function(t,i){
+    var d=document.createElement("div");
+    d.className="story-step";
+    d.innerHTML="<div class='step-num'>"+(i+1)+"</div><div class='step-text'><strong>"+t.t+"</strong><br>"+t.s+"</div><div class='spk'>🔊</div>";
+    d.onclick=function(){stopSpeak();speakGB(t.s,1.2,t.v,null,RATE);};
+    g.appendChild(d);
+  });
+}
+var DETQ=[
+ {q:"Where is Jane?",a:"She is in bed — she is sleepy!",v:VF},
+ {q:"What time is it?",a:"It is six o'clock.",v:VM},
+ {q:"What does Peter want for breakfast?",a:"Bread and milk, please.",v:VM},
+ {q:"What does Jane want?",a:"Two eggs, bread, and juice.",v:VF},
+ {q:"Does Peter want eggs?",a:"No, he doesn't.",v:VM},
+ {q:"Does Jane want eggs?",a:"Yes, she does.",v:VF},
+ {q:"Who is still sleepy?",a:"Jane! She says: No way. I'm sleepy.",v:VF},
+ {q:"Who wakes everybody up?",a:"Mia — the eldest sister.",v:VF}
+];
+function buildDet(){
+  var g=document.getElementById("detQs");if(!g)return;
+  g.innerHTML="";
+  DETQ.forEach(function(d,i){
+    var el=document.createElement("div");
+    el.className="det-q";
+    el.innerHTML="<strong style='font-size:clamp(14px,2.3vw,18px)'>❓ "+d.q+"</strong><div class='det-a' id='deta"+i+"'>tap to reveal 👆</div>";
+    el.onclick=function(){
+      var a=document.getElementById("deta"+i);
+      if(a.textContent.indexOf("tap")>-1){
+        a.textContent="✅ "+d.a;el.classList.add("revealed");
+        speakGB(d.a,1.2,d.v,null,RATE);
+      }else{speakGB(d.a,1.2,d.v,null,RATE);}
+    };
+    g.appendChild(el);
+  });
+}
+
+/* ============================================================
+   TAB 4 : ROLE PLAY + WHAT'S NEXT
+   ============================================================ */
+var ROLEDLG=[
+ {c:"Mia",   av:"👩", cls:"g", tag:"👩 FEMALE", v:VF,   s:"Wake up! Wake up!"},
+ {c:"Peter", av:"👦", cls:"b", tag:"👦 MALE",   v:VM,   s:"What time is it?"},
+ {c:"Mia",   av:"👩", cls:"g", tag:"👩 FEMALE", v:VF,   s:"It's six. Let's go."},
+ {c:"Jane",  av:"👧", cls:"p", tag:"👩 FEMALE", v:VF,   s:"No way. I'm sleepy."},
+ {c:"Mia",   av:"👩", cls:"o", tag:"👩 FEMALE", v:VF,   s:"Come on. It's time for breakfast."},
+ {c:"Mia",   av:"👩", cls:"g", tag:"👩 FEMALE", v:VF,   s:"Come to the kitchen. What do you want for breakfast?"},
+ {c:"Peter", av:"👦", cls:"b", tag:"👦 MALE",   v:VM,   s:"Bread and milk, please."},
+ {c:"Mia",   av:"👩", cls:"g", tag:"👩 FEMALE", v:VF,   s:"Mmm... I want bread and milk, please."},
+ {c:"Jane",  av:"👧", cls:"p", tag:"👩 FEMALE", v:VF,   s:"Me too! I'm sleepy."},
+ {c:"Nick",  av:"👦", cls:"b", tag:"👦 MALE",   v:VM,   s:"I want steak and rice, please."}
+];
+function buildRole(){
+  var g=document.getElementById("roleDlg");if(!g)return;
+  g.innerHTML="";
+  ROLEDLG.forEach(function(d){
+    var el=document.createElement("div");
+    el.className="dlg "+d.cls;
+    el.innerHTML="<div class='av'>"+d.av+"</div><div class='bub'><strong>"+d.c+":</strong> "+d.s+"</div><div class='vtag'>"+d.tag+"</div>";
+    el.setAttribute("data-say",d.s);
+    el.setAttribute("data-voice",d.v);
+    g.appendChild(el);
+  });
+}
+var WN=[
+ {cue:"Wake up! Wake up.",ans:"What time is it?",v:VF},
+ {cue:"What time is it?",ans:"It's six. Let's go.",v:VM},
+ {cue:"It's six. Let's go.",ans:"No way. I'm sleepy.",v:VF},
+ {cue:"No way. I'm sleepy.",ans:"Come on. It's time for breakfast.",v:VF},
+ {cue:"Come on. It's time for breakfast.",ans:"Come to the kitchen. What do you want for breakfast?",v:VF},
+ {cue:"Come to the kitchen. What do you want for breakfast?",ans:"Bread and milk, please.",v:VM},
+ {cue:"Bread and milk, please.",ans:"Mmm... I want bread and milk, please.",v:VF},
+ {cue:"Mmm... I want bread and milk, please.",ans:"Me too! I'm sleepy.",v:VF}
+];
+var wnIdx=0,wnTurn="a";
+function wnNext(){
+  var it=WN[wnIdx%WN.length];
+  document.getElementById("wnCue").innerHTML="Teacher says: <strong>“"+it.cue+"</strong>”";
+  document.getElementById("wnAns").innerHTML="Class must say: <strong>“"+it.ans+"”</strong>";
+  wnCur=it;
+  wnIdx++;
+}
+var wnCur=null;
+function wnAward(pts){
+  bumpTeam("wnTeams",wnTurn,pts);
+  wnTurn=(wnTurn==="a")?"b":"a";
+  if(pts===2)showToast("🎭 Bonus point — great character voice!");
+}
+function wnSpeak(){
+  if(!wnCur)return;
+  stopSpeak();
+  speakGB(wnCur.cue,1.2,wnCur.v,function(){setTimeout(function(){speakGB(wnCur.ans,1.2,wnCur.v,null,RATE);},600);},RATE);
+}
+
+/* ============================================================
+   TAB 5 : VOCABULARY
+   ============================================================ */
+function buildFoodGrid(){
+  var g=document.getElementById("foodGrid");if(!g)return;
+  g.innerHTML="";
+  FOODS.forEach(function(f,i){
+    var d=document.createElement("div");
+    d.className="vocab-card";d.id="fc"+i;
+    d.innerHTML="<div class='picbox'><img src='"+f.img+"' alt='"+f.word+"'></div>"
+      +"<div class='vc-body'><div class='vc-word'>"+f.emoji+" "+f.word+"</div>"
+      +"<div class='vc-say' id='fsay"+i+"'>Look 👀 → Say 🗣️ → Spell ✏️</div></div>";
+    d.onclick=function(){
+      var say=document.getElementById("fsay"+i);
+      say.textContent="🗣️ "+f.word;d.classList.add("said");
+      stopSpeak();
+      sayF(f.word+". "+f.say,0.9);
+      setTimeout(function(){spellOut(f.word,230,RATE_SLOW,VF,null);},2500);
+    };
+    g.appendChild(d);
+  });
+}
+
+/* ============================================================
+   TAB 6 : ACTION VOCAB + HAMMER
+   ============================================================ */
+function buildAct(){
+  var g=document.getElementById("actGrid");if(!g)return;
+  g.innerHTML="";
+  FOODS.forEach(function(f,i){
+    var d=document.createElement("div");
+    d.className="obj";
+    d.innerHTML="<div class='picbox'><img src='"+f.img+"' alt='"+f.word+"'></div><div class='obj-name'>"+f.emoji+" "+f.word+"</div>";
+    d.onclick=function(){actPick(i);};
+    g.appendChild(d);
+  });
+}
+function actPick(i){
+  var f=FOODS[i];
+  var a=document.getElementById("actReply");
+  stopSpeak();
+  a.innerHTML="<span style='color:var(--orange)'>"+f.emoji+" "+f.word.toUpperCase()+"!</span><br><span style='font-size:clamp(13px,2vw,16px);color:#666'>"+f.act+"</span>";
+  sPop();
+  sayF(f.word.toUpperCase()+"! "+f.act.replace("Pretend to ","Pretend you are "));
+}
+function actRandom(){var i=Math.floor(Math.random()*FOODS.length);actPick(i);showToast("Teacher says: “"+FOODS[i].word.toUpperCase()+"!” — everyone ACT!");}
+var actTimer=null;
+function actTeacher(){
+  var i=Math.floor(Math.random()*FOODS.length);
+  document.getElementById("actReply").innerHTML="🙈 <span style='color:var(--orange)'>Teacher is acting…</span><br><span style='font-size:clamp(13px,2vw,16px);color:#666'>Class: “You are eating the …?”</span>";
+  showToast(FOODS[i].act+" — which food?");
+  actTimer=setTimeout(function(){
+    document.getElementById("actReply").innerHTML="✅ <span style='color:var(--green)'>It was the "+FOODS[i].word+"!</span>";
+    sayF("It was the "+FOODS[i].word+"!");
+  },6000);
+}
+function actStop(){if(actTimer){clearTimeout(actTimer);actTimer=null;}document.getElementById("actReply").textContent="Stopped. Press “Teacher acts” to try again.";}
+var hamTarget=-1;
+function buildHam(){
+  var g=document.getElementById("hamGrid");if(!g)return;
+  g.innerHTML="";
+  var order=FOODS.slice().sort(function(){return Math.random()-0.5;});
+  order.forEach(function(f){
+    var i=FOODS.indexOf(f);
+    var d=document.createElement("div");
+    d.className="obj";d.id="ham"+i;
+    d.innerHTML="<div class='hammer'>🔨</div><div class='picbox'><img src='"+f.img+"' alt='"+f.word+"'></div><div class='obj-name'>"+f.word+"</div>";
+    d.onclick=function(){hamTap(i);};
+    g.appendChild(d);
+  });
+}
+function hamNew(){
+  hamTarget=Math.floor(Math.random()*FOODS.length);
+  document.getElementById("hamResult").textContent="…";
+  document.getElementById("hamBtns")&&0;
+  document.getElementById("hamPrompt").innerHTML="🔨 Teacher calls: <span style='color:var(--pink)'>“"+FOODS[hamTarget].hint+"!”</span><br><span style='font-size:clamp(13px,2vw,16px);color:#666'>“Number 4!” — tap the right picture!</span>";
+  sayF(FOODS[hamTarget].word.toUpperCase()+"!");
+  sPop();
+}
+function hamTap(i){
+  if(hamTarget<0){showToast("Press “Call a food word” first!");return;}
+  var el=document.getElementById("ham"+i);
+  var res=document.getElementById("hamResult");
+  if(i===hamTarget){
+    el.classList.add("tapped");
+    res.innerHTML="✅ <span style='color:var(--green)'>Correct! Say it — and spell it for +2!</span>";
+    sDing();sayF(FOODS[i].word+". "+FOODS[i].spell||FOODS[i].word);
+    hamTarget=-1;
+  }else{
+    res.innerHTML="❌ <span style='color:var(--red)'>No! Try again.</span>";
+    sBuzz();sayF("No! Try again.");
+  }
+}
+function hamAward(pts){bumpTeam("hamTeams","a",pts);buildHam();hamNew();}
+function hamReset(){buildTeams("hamTeams");buildHam();hamTarget=-1;document.getElementById("hamPrompt").textContent="Press “Call a food word” to begin!";document.getElementById("hamResult").textContent="…";}
+/* ============================================================
+   TAB 7 : PATTERNS
+   ============================================================ */
+var PATTERNS=[
+ {t:"What do you want for breakfast? → I want … for breakfast.",
+  ex:["What do you want for breakfast? I want bread and milk for breakfast.","What do you want for lunch? I want noodles and soup for lunch.","What do you want for dinner? I want steak for dinner."]},
+ {t:"Change the MEAL ⭐",ex:["breakfast → lunch","lunch → dinner","dinner → supper"]},
+ {t:"Change the VERB ⭐",ex:["I want bread. / I eat bread.","I want milk. / I drink milk.","What do you eat for lunch?"]},
+ {t:"What does she want? → She wants …",ex:["What does she want for breakfast? She wants two eggs, bread, and juice.","What does he want for dinner? He wants steak.","What does Nick want for lunch? He wants fish and rice."]},
+ {t:"eat / drink questions",ex:["What do you eat for breakfast?","What do they drink for lunch?","What does Peter drink for dinner?"]}
+];
+function buildPatterns(){
+  var g=document.getElementById("patternCards");if(!g)return;
+  g.innerHTML="";
+  PATTERNS.forEach(function(p,i){
+    var c=document.createElement("div");
+    c.className="pattern-card";
+    var v=(i%2===0)?VF:VM;
+    var h="<h3>"+p.t+"</h3>";
+    h+="<div class='pattern-examples'>";
+    p.ex.forEach(function(e){
+      h+="<span class='pe' data-say='"+e.replace(/'/g,"&#39;")+"' data-voice='"+v+"'>"+e+"</span>";
+    });
+    h+="</div>";
+    c.innerHTML=h;g.appendChild(c);
+  });
+}
+var curWho=PEOPLE[0],curMeal="breakfast",curFoods=["bread","soymilk"];
+function buildSubMachine(){
+  var w=document.getElementById("whoSel"),m=document.getElementById("mealSel");
+  if(!w||!m)return;
+  w.innerHTML="";m.innerHTML="";
+  PEOPLE.forEach(function(p,i){var o=document.createElement("option");o.value=i;o.textContent=p.name;w.appendChild(o);});
+  MEALS.forEach(function(p,i){var o=document.createElement("option");o.value=i;o.textContent=p; m.appendChild(o);});
+  w.value=0;m.value=0;
+  buildFoodPick();
+  buildSentence();
+}
+function buildFoodPick(){
+  var g=document.getElementById("foodPick");if(!g)return;
+  g.innerHTML="";
+  FOODS.forEach(function(f){
+    var b=document.createElement("button");
+    b.className="fp";b.textContent=f.emoji+" "+f.word;
+    b.dataset.k=f.key;
+    b.onclick=function(){
+      var k=this.dataset.k,i=curFoods.indexOf(k);
+      if(i>-1){curFoods.splice(i,1);}
+      else{curFoods.push(k);if(curFoods.length>2)curFoods.shift();}
+      renderFoodPick();buildSentence();
+    };
+    g.appendChild(b);
+  });
+  renderFoodPick();
+}
+function renderFoodPick(){
+  var nodes=document.querySelectorAll("#foodPick .fp");
+  for(var i=0;i<nodes.length;i++){
+    if(curFoods.indexOf(FOODS[i].key)>-1)nodes[i].classList.add("sel");
+    else nodes[i].classList.remove("sel");
+  }
+}
+function foodList(){
+  var a=[];
+  curFoods.forEach(function(k){a.push(foodByKey(k).word);});
+  if(a.length===0)a.push("bread");
+  if(a.length===1)return a[0];
+  return a.slice(0,-1).join(", ")+" and "+a[a.length-1];
+}
+function buildSentence(){
+  var w=document.getElementById("whoSel"),m=document.getElementById("mealSel");
+  if(!w||!m)return;
+  curWho=PEOPLE[parseInt(w.value,10)];
+  curMeal=MEALS[parseInt(m.value,10)];
+  var vb=VERBS[0];
+  var vbTxt=curWho.third?vb.s:vb.base;
+  if(curWho.name==="you"){
+    document.getElementById("subQ").textContent="What do you want for "+curMeal+"?";
+    document.getElementById("subA").textContent="I want "+foodList()+" for "+curMeal+".";
+  }else{
+    document.getElementById("subQ").textContent="What does "+curWho.name.toLowerCase()+" want for "+curMeal+"?";
+    document.getElementById("subA").textContent=curWho.pron+" "+vbTxt+" "+foodList()+" for "+curMeal+".";
+  }
+  buildDoesBtns();
+}
+function buildDoesBtns(){
+  var g=document.getElementById("qBtns");if(!g)return;
+  g.innerHTML="";
+  var base=[
+    {label:"does + want (S on DOES)",p:PEOPLE[1]},
+    {label:"do + want (no S)",p:PEOPLE[6]},
+    {label:"do + eat",p:PEOPLE[0]},
+    {label:"does + drink",p:PEOPLE[2]}
+  ];
+  base.forEach(function(b){
+    var btn=document.createElement("button");
+    btn.className="btn "+(["purple","green","blue","orange"][base.indexOf(b)]);
+    btn.textContent="🔁 "+b.label;
+    btn.onclick=function(){doesSentence(b.p);};
+    g.appendChild(btn);
+  });
+}
+function doesSentence(p){
+  var q,a;
+  if(p.name==="you"){q="What do you eat for "+curMeal+"?";a="I eat "+foodList()+" for "+curMeal+".";}
+  else if(p.name==="we"||p.name==="they"){q="What do "+p.name+" want for "+curMeal+"?";a=p.pron+" want "+foodList()+" for "+curMeal+".";}
+  else{q="What does "+p.name.toLowerCase()+" want for "+curMeal+"?";a=p.pron+" wants "+foodList()+" for "+curMeal+".";}
+  document.getElementById("doesQ").textContent=q;
+  document.getElementById("doesA").textContent=a;
+  stopSpeak();
+  speakGB(q,1.2,p.voice,function(){setTimeout(function(){speakGB(a,1.2,p.voice,null,RATE);},420);},RATE);
+}
+function speakSentence(){
+  var q=document.getElementById("subQ").textContent;
+  var a=document.getElementById("subA").textContent;
+  var v=curWho.name==="you"||curWho.pron==="They"||curWho.pron==="We"?VF:(curWho.voice);
+  stopSpeak();
+  speakGB(q,1.2,v,function(){setTimeout(function(){speakGB(a,1.2,v,null,RATE);},420);},RATE);
+}
+function subRandom(){
+  document.getElementById("whoSel").value=Math.floor(Math.random()*PEOPLE.length);
+  document.getElementById("mealSel").value=Math.floor(Math.random()*MEALS.length);
+  curFoods=[FOODS[Math.floor(Math.random()*FOODS.length)].key];
+  if(Math.random()<0.5)curFoods.push(FOODS[Math.floor(Math.random()*FOODS.length)].key);
+  renderFoodPick();buildSentence();
+}
+
+/* ============================================================
+   TAB 8 : DISCOVER THE GRAMMAR + FIX THE MISTAKE
+   ============================================================ */
+var FIX=[
+ {s:"She want bread for breakfast.",good:false,fix:"She wants bread for breakfast."},
+ {s:"What does he wants for lunch?",good:false,fix:"What does he want for lunch?"},
+ {s:"Peter wants steak for dinner.",good:true,fix:"Peter wants steak for dinner."},
+ {s:"I wants soybean milk.",good:false,fix:"I want soybean milk."},
+ {s:"They eat noodles for dinner.",good:true,fix:"They eat noodles for dinner."},
+ {s:"Does Mia want fish?",good:true,fix:"Does Mia want fish?"}
+];
+var fixSel=-1,fixRight=0;
+function buildFix(){
+  var g=document.getElementById("fixGrid");if(!g)return;
+  g.innerHTML="";
+  FIX.forEach(function(f,i){
+    var d=document.createElement("div");
+    d.className="obj";d.id="fx"+i;
+    d.innerHTML="<div style='font-size:clamp(13px,2vw,17px);font-weight:800;color:var(--ink);padding:8px;line-height:1.4;min-height:60px;display:flex;align-items:center;justify-content:center'>"+f.s+"</div>";
+    d.onclick=function(){fixPick(i);};
+    g.appendChild(d);
+  });
+  document.getElementById("fixResult").textContent="…";
+}
+function fixPick(i){
+  fixSel=i;
+  var el=document.getElementById("fx"+i);
+  el.style.borderColor="var(--pink)";
+  sayF(FIX[i].s);
+  showToast("Correct or wrong? Click the buttons →");
+}
+function fixJudge(good){
+  if(fixSel<0){showToast("Click a sentence card first!");return;}
+  var f=FIX[fixSel];
+  var el=document.getElementById("fx"+fixSel);
+  var res=document.getElementById("fixResult");
+  el.style.borderColor="";
+  if(good===f.good){
+    fixRight++;
+    el.classList.add("hit");
+    res.innerHTML="✅ <span style='color:var(--green)'>Correct! "+f.fix+"</span> &nbsp;("+fixRight+"/"+FIX.length+")";
+    sDing();sayF(f.fix);
+    fixSel=-1;
+  }else{
+    res.innerHTML="❌ <span style='color:var(--red)'>Not quite!</span> The correct version is: "+f.fix;
+    sBuzz();sayF(f.fix);
+    fixSel=-1;
+  }
+}
+function buildPrepLines(){
+  var lines=document.querySelectorAll(".pattern-line[data-good]");
+  for(var i=0;i<lines.length;i++){
+    (function(el){
+      el.onclick=function(){
+        var good=el.getAttribute("data-good")==="1";
+        var txt=el.textContent.replace(/\s*✓.*$/,"").replace(/\s*✗.*$/,"").trim();
+        stopSpeak();
+        if(good){sDing();sayF(txt);}
+        else{
+          sBuzz();
+          var fix=(/What does she WANTS/i.test(txt))?"What does she want for breakfast?":txt;
+          speakGB("No! "+txt+". We say: "+fix,1.2,VM,null,RATE);
+        }
+      };
+    })(lines[i]);
+  }
+}
+/* ============================================================
+   TAB 9 : FOOD MARKET + SPIN & SPEAK
+   ============================================================ */
+var mkWho=PEOPLE[2],mkMeal="dinner",mkFood="steak";
+function buildMarket(){
+  var w=document.getElementById("mkWho"),m=document.getElementById("mkMeal");
+  if(w){
+    w.innerHTML="";
+    PEOPLE.forEach(function(p,i){var o=document.createElement("option");o.value=i;o.textContent=p.name;w.appendChild(o);});
+    w.value=2;w.onchange=mkSet;
+  }
+  if(m){
+    m.innerHTML="";
+    MEALS.forEach(function(p,i){var o=document.createElement("option");o.value=i;o.textContent=p;m.appendChild(o);});
+    m.value=2;m.onchange=mkSet;
+  }
+  var g=document.getElementById("mkGrid");if(!g)return;
+  g.innerHTML="";
+  FOODS.forEach(function(f,i){
+    var d=document.createElement("div");
+    d.className="zone";d.id="mk"+i;
+    d.innerHTML="<div class='picbox'><img src='"+f.img+"' alt='"+f.word+"'></div><div class='zlabel'>"+f.emoji+" "+f.word+"</div>";
+    d.onclick=function(){mkPick(i);};
+    g.appendChild(d);
+  });
+  mkSet();
+}
+function mkSet(){
+  var w=document.getElementById("mkWho"),m=document.getElementById("mkMeal");
+  if(w)mkWho=PEOPLE[parseInt(w.value,10)];
+  if(m)mkMeal=MEALS[parseInt(m.value,10)];
+}
+function mkPick(i){
+  mkFood=FOODS[i].word;
+  var q,a;
+  if(mkWho.name==="you"){
+    q="What do you want for "+mkMeal+"?";
+    a="I want "+mkFood+" for "+mkMeal+".";
+  }else if(mkWho.name==="we"||mkWho.name==="they"){
+    q="What do "+mkWho.name+" want for "+mkMeal+"?";
+    a=mkWho.pron+" want "+mkFood+" for "+mkMeal+".";
+  }else{
+    q="What does "+mkWho.name.toLowerCase()+" want for "+mkMeal+"?";
+    a=mkWho.pron+" wants "+mkFood+" for "+mkMeal+".";
+  }
+  document.getElementById("mkQ").textContent=q;
+  document.getElementById("mkA").innerHTML="Class answer: <strong>"+a+"</strong>";
+  document.getElementById("mkResult").textContent="…";
+  for(var k=0;k<FOODS.length;k++)document.getElementById("mk"+k).classList.remove("dim");
+  stopSpeak();
+  speakGB(q,1.2,mkWho.voice,function(){setTimeout(function(){speakGB(a,1.2,mkWho.voice,null,RATE);},420);},RATE);
+  sPop();
+}
+function mkAward(pts){bumpTeam("mkTeams","a",pts);}
+function mkReset(){
+  buildTeams("mkTeams");
+  document.getElementById("mkQ").textContent="Click a food card to send a student to the market!";
+  document.getElementById("mkA").textContent="…";
+  document.getElementById("mkResult").textContent="…";
+  for(var k=0;k<FOODS.length;k++){var z=document.getElementById("mk"+k);if(z)z.classList.remove("dim");}
+}
+var SPWHO=["YOU","SHE","HE","THEY","WE"],SPVERB=["WANT","EAT","DRINK"],SPMEAL=["BREAKFAST","LUNCH","DINNER"];
+var spWho=0,spVerb=0,spMeal=0,spPicked=null;
+function spSpin(which){
+  if(which===0)spWho=Math.floor(Math.random()*SPWHO.length);
+  if(which===1)spVerb=Math.floor(Math.random()*SPVERB.length);
+  if(which===2)spMeal=Math.floor(Math.random()*SPMEAL.length);
+  document.getElementById("spWho").textContent=SPWHO[spWho];
+  document.getElementById("spVerb").textContent=SPVERB[spVerb];
+  document.getElementById("spMeal").textContent=SPMEAL[spMeal];
+  spPicked=null;
+  buildSpQ();
+  sPop();
+}
+function spWhoObj(){
+  if(SPWHO[spWho]==="YOU")return PEOPLE[0];
+  if(SPWHO[spWho]==="SHE")return PEOPLE[1];
+  if(SPWHO[spWho]==="HE")return PEOPLE[2];
+  if(SPWHO[spWho]==="THEY")return PEOPLE[6];
+  return PEOPLE[7];
+}
+function buildSpQ(){
+  var p=spWhoObj();
+  var meal=SPMEAL[spMeal].toLowerCase();
+  var vb=SPVERB[spVerb].toLowerCase();
+  var q;
+  if(p.name==="you")q="What do you "+vb+" for "+meal+"?";
+  else if(p.name==="we"||p.name==="they")q="What do "+p.name+" "+vb+" for "+meal+"?";
+  else q="What does "+p.name.toLowerCase()+" "+vb+" for "+meal+"?";
+  document.getElementById("spQ").textContent=q;
+  document.getElementById("spA").textContent="Pick a food to finish the answer…";
+  var g=document.getElementById("spFoods");if(!g)return;
+  g.innerHTML="";
+  FOODS.forEach(function(f){
+    var b=document.createElement("button");
+    b.className="fp";b.textContent=f.emoji+" "+f.word;
+    b.onclick=function(){
+      var nodes=document.querySelectorAll("#spFoods .fp");
+      for(var i=0;i<nodes.length;i++)nodes[i].classList.remove("sel");
+      this.classList.add("sel");
+      var vtxt=(p.third?vb+"s":vb);
+      var a=(p.name==="you")?"I "+vtxt+" "+f.word+" for "+meal+".":p.pron+" "+vtxt+" "+f.word+" for "+meal+".";
+      document.getElementById("spA").innerHTML="<strong>"+a+"</strong>";
+      stopSpeak();
+      speakGB(q,1.2,p.voice,function(){setTimeout(function(){speakGB(a,1.2,p.voice,null,RATE);},420);},RATE);
+    };
+    g.appendChild(b);
+  });
+}
+function spSpeak(){var q=document.getElementById("spQ").textContent;stopSpeak();sayF(q,0.9);}
+function spReset(){
+  spWho=0;spVerb=0;spMeal=0;
+  document.getElementById("spWho").textContent=SPWHO[0];
+  document.getElementById("spVerb").textContent=SPVERB[0];
+  document.getElementById("spMeal").textContent=SPMEAL[0];
+  buildSpQ();
+}
+
+/* ============================================================
+   TAB 10 : TIC-TAC-TOE
+   ============================================================ */
+var TTT=[
+ {p:"steak",   img:"v-steak.png",   q:"What does M. Big want for dinner?"},
+ {p:"bread",   img:"v-bread.png",   q:"What does Rocky want for breakfast?"},
+ {p:"noodles", img:"v-noodles.png", q:"What do you and I want for dinner?"},
+ {p:"soup",    img:"v-soup.png",    q:"What does Eva want for dinner?"},
+ {p:"rice",    img:"v-rice.png",    q:"What does Kate want for lunch?"},
+ {p:"soymilk", img:"v-soymilk.png", q:"What do They want for dinner?"},
+ {p:"fish",    img:"v-fish.png",    q:"What does Nick want for lunch?"},
+ {p:"bread",   img:"v-bread.png",   q:"What does James want for breakfast?"},
+ {p:"noodles", img:"v-noodles.png", q:"What does May want for lunch?"},
+ {p:"soup",    img:"v-soup.png",    q:"What does Peter want for breakfast?"},
+ {p:"rice",    img:"v-rice.png",    q:"What does Sam want for lunch?"},
+ {p:"steak",   img:"v-steak.png",   q:"What does Mia want for dinner?"}
+];
+var tttMarks={};
+function buildTTT(){
+  var g=document.getElementById("tttBoard");if(!g)return;
+  g.innerHTML="";
+  tttMarks={};
+  TTT.forEach(function(t,i){
+    var d=document.createElement("div");
+    d.className="ttt-cell";d.id="tc"+i;
+    d.innerHTML="<div class='mark'></div><img src='"+t.img+"' alt='"+t.p+"'><div class='tc-q'>"+t.q+"</div>";
+    d.onclick=function(){tttPick(i);};
+    g.appendChild(d);
+  });
+  document.getElementById("tttLog").textContent="Click any square to start!";
+}
+function tttPick(i){
+  var t=TTT[i];
+  document.getElementById("tttLog").innerHTML="🎯 <span style='color:var(--pink)'>“"+t.q+"”</span> — look at the picture and answer!";
+  sayF(t.q,0.9);
+  sPop();
+}
+function tttAward(team){
+  var log=document.getElementById("tttLog");
+  var cells=document.querySelectorAll("#tttBoard .ttt-cell");
+  var empty=null;
+  for(var i=0;i<cells.length;i++)if(!tttMarks[i]){empty=i;break;}
+  if(empty===null){log.innerHTML="🎉 All squares are taken! Start a new game.";return;}
+  tttMarks[empty]=team;
+  var el=document.getElementById("tc"+empty);
+  el.classList.add(team==="star"?"star":"heart");
+  el.querySelector(".mark").textContent=team==="star"?"⭐":"❤️";
+  log.innerHTML=(team==="star"?"⭐ Team ⭐":"❤️ Team ❤️")+" marked square "+(empty+1)+"! First to connect <strong>3</strong> wins!";
+  sDing();
+  var f=FOODS[empty%FOODS.length];
+  sayF((team==="star"?"Team star! ":"Team heart! ")+"They want "+f.word+".");
+}
+function tttReset(){buildTeams("tttTeams");buildTTT();}
+function finishLesson(){
+  buildTeams("tttTeams");
+  document.getElementById("tttLog").innerHTML="🎉 <span style='color:var(--green)'>Fantastic! Give yourselves three big claps — one, two, three!</span>";
+  sWin();launchConfetti();
+  speakGB("Excellent! What did we learn today?",1.2,VF,function(){
+    speakGB("Food! What do you want for breakfast? I want bread and soybean milk for breakfast! What does she want for dinner? She wants noodles and soup for dinner!",1.2,VF,function(){
+      speakGB("Fantastic. Give yourselves three big claps. One, two, three!",1.2,VM,null,RATE);
+    },RATE);
+  },RATE);
+}
+/* ============================================================
+   TAB 11 : QUIZ
+   ============================================================ */
+var TF=[
+ {e:"🥩",s:"We eat steak for breakfast.",a:true,ex:"Yes! We eat steak for breakfast.",v:VF},
+ {e:"👩",s:"She want bread for breakfast.",a:false,ex:"No! She is one person, so we say she WANTS bread.",v:VM},
+ {e:"❓",s:"We say: What does she wants for lunch?",a:false,ex:"No! DOES already has the S. We say: What does she WANT for lunch?",v:VF},
+ {e:"👦",s:"Peter wants soybean milk.",a:true,ex:"Yes! One person by name, so we add the S: Peter WANTS.",v:VM},
+ {e:"🍚",s:"'We' takes an S: we wants rice.",a:false,ex:"No! Only he, she, it take the S. We want rice.",v:VF},
+ {e:"🥛",s:"Soybean milk is two words.",a:true,ex:"Yes! SOY-BEAN MILK — two words.",v:VM}
+];
+var LISTEN=[
+ {w:"steak",e:"🥩",h:"I want ____ for breakfast. (Spelling: S-T-E-A-K)",o:["steak","steack","stake","steaks"],a:0},
+ {w:"soybean milk",e:"🥛",h:"He wants ____ for breakfast. How many words?",o:["soybean milk","soybeanmilk","soya milk","soybean milks"],a:0},
+ {w:"noodles",e:"🍜",h:"What does she want for dinner? She wants ____.",o:["noodles","noodle","noodels","noodles want"],a:0},
+ {w:"fish",e:"🐟",h:"I eat ____ and rice for lunch.",o:["fish","fishes","fsh","fish rice"],a:0},
+ {w:"bread",e:"🍞",h:"The 'ea' in bread is the same as in ____.",o:["bread","steak","breakfast","both"],a:3}
+];
+var SPELL=[
+ {p:"Write the food Mia wants for breakfast:",a:"steak",h:"S-T-E-A-K — ea is /ɛ/",e:"🥩"},
+ {p:"Write the food with the same 'ea' sound:",a:"bread",h:"B-R-E-A-D — ea is /ɛ/",e:"🍞"},
+ {p:"Write the long noodle food:",a:"noodles",h:"N-O-O-D-L-E-S",e:"🍜"},
+ {p:"Write the food you eat with a spoon:",a:"soup",h:"S-O-U-P",e:"🥣"},
+ {p:"Write the food Peter has for dinner:",a:"fish",h:"F-I-S-H",e:"🐟"},
+ {p:"Write the white drink (2 words!):",a:"soybean milk",h:"SOY-BEAN MILK",e:"🥛"}
+];
+var PICQ=[
+ {q:"What does Peter want for breakfast?",a:1,v:VM},
+ {q:"What does M. Big want for dinner?",a:0,v:VF},
+ {q:"What does Kate want for lunch?",a:4,v:VM},
+ {q:"What do they want for dinner?",a:2,v:VF},
+ {q:"What does Nick want for lunch?",a:6,v:VM}
+];
+var FILL=[
+ {q:"What do you want for breakfast?",ok:"I want bread and soybean milk for breakfast.",
+  ans:["I want bread and soybean milk for breakfast.","I wants bread and soybean milk for breakfast.","I want bread at home."],ex:"I / you / we / they take the plain verb: WANT."},
+ {q:"What does she want for breakfast?",ok:"She wants two eggs, bread, and juice.",
+  ans:["She wants two eggs, bread, and juice.","She want two eggs, bread, and juice.","She does wants two eggs."],ex:"She is one person, so the verb takes the S: WANTS."},
+ {q:"What does he want for dinner?",ok:"He wants steak for dinner.",
+  ans:["He wants steak for dinner.","He want steak for dinner.","He wants steak at home."],ex:"He is one person, so the verb takes the S: WANTS."},
+ {q:"What do they want for lunch?",ok:"They want noodles and soup for lunch.",
+  ans:["They want noodles and soup for lunch.","They wants noodles and soup for lunch.","They wants noodles at home."],ex:"They are not he or she, so there is no S: WANT."},
+ {q:"Change the meal: I want bread for ____.",ok:"lunch",
+  ans:["lunch","lunches","the lunch","at home"],ex:"breakfast → lunch → dinner. The verb stays WANT."},
+ {q:"I want milk. I ____ milk.",ok:"drink",
+  ans:["drink","drinks","drank","am drinking"],ex:"'I' takes the plain verb, so: I DRINK milk."}
+];
+var QS=[
+ {t:"tf",t1:"True or False",i:"✅",b:TF.length+" QUESTIONS"},
+ {t:"listen",t1:"Listen & Choose",i:"🎧",b:LISTEN.length+" QUESTIONS"},
+ {t:"spell",t1:"Spelling Challenge",i:"✏️",b:SPELL.length+" QUESTIONS"},
+ {t:"pic",t1:"Picture Quiz",i:"🖼️",b:PICQ.length+" QUESTIONS"},
+ {t:"fill",t1:"Fill in the Blanks",i:"📝",b:FILL.length+" QUESTIONS"}
+];
+var quizScore=0,ansTF=[],ansLs=[],ansSp=[],ansPic=[],ansFi=[];
+function buildQuizAll(){
+  quizScore=0;
+  ansTF=TF.map(function(){return null;});
+  ansLs=LISTEN.map(function(){return null;});
+  ansSp=SPELL.map(function(){return null;});
+  ansPic=PICQ.map(function(){return null;});
+  ansFi=FILL.map(function(){return null;});
+  var h="",keys="abcdefghijklmnopqrstuvwxyz",i,j;
+  for(var s=0;s<QS.length;s++){
+    var q=QS[s];
+    h+="<div class='quiz-section-title'><span style='font-size:28px'>"+q.i+"</span><h3>"+q.t1+"</h3><span class='qs-badge'>"+q.b+"</span></div>";
+    if(q.t==="tf"){
+      for(i=0;i<TF.length;i++){
+        h+="<div class='tf-card' id='tf"+i+"'><div class='tf-emoji'>"+TF[i].e+"</div><div class='tf-stmt'>"+TF[i].s+"</div>"
+          +"<div class='tf-btns'><button class='tf-btn true-btn' onclick=\"answerTF("+i+",true)\">✔️ True</button>"
+          +"<button class='tf-btn false-btn' onclick=\"answerTF("+i+",false)\">❌ False</button></div>"
+          +"<div class='tf-result' id='tfRes"+i+"'></div></div>";
+      }
+    }else if(q.t==="listen"){
+      for(i=0;i<LISTEN.length;i++){
+        h+="<div class='listen-card' id='lc"+i+"'><div class='listen-play'><button onclick=\"playLs("+i+")\">🔊</button></div>"
+          +"<div class='listen-hint'>"+LISTEN[i].h+"</div><div class='listen-opts' id='lo"+i+"'>";
+        for(j=0;j<LISTEN[i].o.length;j++)h+="<div class='listen-opt' onclick=\"answerLs("+i+","+j+")\"><span style='font-size:30px;display:block;margin-bottom:4px'>"+LISTEN[i].e+"</span>"+LISTEN[i].o[j]+"</div>";
+        h+="</div><div class='tf-result' id='lsRes"+i+"'></div></div>";
+      }
+    }else if(q.t==="spell"){
+      for(i=0;i<SPELL.length;i++){
+        h+="<div class='write-card'><div style='text-align:center;font-size:34px'>"+SPELL[i].e+"</div>"
+          +"<div class='write-prompt'>"+SPELL[i].p+"</div><div class='write-hint'>"+SPELL[i].h+"</div>"
+          +"<div class='write-display' id='spd"+i+"'></div><div class='write-keyboard'>";
+        for(j=0;j<keys.length;j++)h+="<button class='write-key' data-sq='"+i+"' data-l='"+keys[j]+"'>"+keys[j]+"</button>";
+        h+="<button class='write-key' data-sq='"+i+"' data-l=' ' style='font-size:clamp(12px,2vw,16px)'>␣</button>"
+          +"<button class='write-key del' data-sq='"+i+"' data-action='del'>⌫</button>"
+          +"<button class='write-key clr' data-sq='"+i+"' data-action='clr'>CLEAR</button></div>"
+          +"<div style='text-align:center;margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap'>"
+          +"<button class='btn blue' onclick=\"hearSp("+i+")\">🔊 Hear</button>"
+          +"<button class='btn green' onclick=\"checkSp("+i+")\">✅ Check</button></div>"
+          +"<div class='write-result' id='spRes"+i+"'></div></div>";
+      }
+    }else if(q.t==="pic"){
+      for(i=0;i<PICQ.length;i++){
+        h+="<div class='listen-card'><div class='write-prompt'>"+PICQ[i].q+"</div><div class='listen-opts' id='pico"+i+"'>";
+        for(j=0;j<FOODS.length;j++)h+="<div class='pic-opt' onclick=\"answerPic("+i+","+j+")\"><img src='"+FOODS[j].img+"' alt='"+FOODS[j].word+"'><div class='po-w'>"+FOODS[j].word+"</div></div>";
+        h+="</div><div class='tf-result' id='picRes"+i+"'></div></div>";
+      }
+    }else{
+      for(i=0;i<FILL.length;i++){
+        h+="<div class='fill-card'><div class='fill-q'>"+FILL[i].q+" <span class='fill-blank' id='fb"+i+"'>______</span>?</div>"
+          +"<div class='fill-a' style='color:#bbb'>choose the correct phrase</div><div class='fill-opts' id='fo"+i+"'>";
+        var sh=FILL[i].ans.slice().sort(function(){return Math.random()-0.5;});
+        for(j=0;j<sh.length;j++)h+="<div class='fill-opt' data-f='"+i+"' data-o='"+sh[j].replace(/'/g,"&#39;")+"'>"+sh[j]+"</div>";
+        h+="</div><div class='fill-result' id='fiRes"+i+"'></div></div>";
+      }
+    }
+  }
+  h+="<div style='text-align:center;margin:20px 0'><button class='btn orange' onclick=\"finishQuiz()\" style='padding:16px 40px;font-size:clamp(16px,2.6vw,20px)'>🏁 Finish Quiz</button></div>";
+  document.getElementById("quizContent").innerHTML=h;
+  document.getElementById("scoreBoard").style.display="none";
+  document.getElementById("quizContent").style.display="block";
+  attachQuizEvents();
+}
+function answerTF(i,ans){
+  if(ansTF[i]!==null)return;
+  ansTF[i]=ans;
+  var t=TF[i],card=document.getElementById("tf"+i),res=document.getElementById("tfRes"+i);
+  var btns=card.querySelectorAll(".tf-btn");
+  for(var k=0;k<btns.length;k++)btns[k].disabled=true;
+  if(ans===t.a){
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+t.ex+"</span>";
+    card.style.borderColor="var(--green)";quizScore+=5;sDing();speakGB(t.ex,1.2,t.v,null,RATE);
+  }else{
+    res.innerHTML="<span style='color:var(--red)'>❌ "+t.ex+"</span>";
+    card.style.borderColor="var(--red)";sBuzz();speakGB(t.ex,1.2,t.v,null,RATE);
+  }
+}
+function playLs(i){stopSpeak();sayF(LISTEN[i].w);}
+function answerLs(i,a){
+  if(ansLs[i]!==null)return;
+  ansLs[i]=a;
+  var l=LISTEN[i],opts=document.querySelectorAll("#lo"+i+" .listen-opt"),res=document.getElementById("lsRes"+i);
+  for(var j=0;j<opts.length;j++){
+    if(j===l.a)opts[j].classList.add("ok");
+    else if(j===a)opts[j].classList.add("no");
+    else opts[j].classList.add("dis");
+  }
+  if(a===l.a){res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+l.w+"</span>";quizScore+=5;sDing();sayF(l.w);}
+  else{res.innerHTML="<span style='color:var(--red)'>❌ It's '"+l.w+"'</span>";sBuzz();sayF(l.w);}
+}
+function hearSp(i){stopSpeak();sayF(SPELL[i].a);}
+function checkSp(i){
+  if(ansSp[i]!==null)return;
+  ansSp[i]=true;
+  var d=document.getElementById("spd"+i),res=document.getElementById("spRes"+i);
+  var val=d.textContent.trim().toLowerCase().replace(/\s+/g," ");
+  if(val===SPELL[i].a){
+    d.className="write-display ok";res.innerHTML="<span style='color:var(--green)'>✅ Correct! '"+SPELL[i].a+"'</span>";
+    quizScore+=5;sDing();sayF(SPELL[i].a);
+  }else{
+    d.className="write-display bad";res.innerHTML="<span style='color:var(--red)'>❌ It's '"+SPELL[i].a+"'</span>";
+    sBuzz();spellOut(SPELL[i].a,250,RATE_SLOW,VF,null);
+  }
+}
+function answerPic(i,a){
+  if(ansPic[i]!==null)return;
+  ansPic[i]=a;
+  var p=PICQ[i],opts=document.querySelectorAll("#pico"+i+" .pic-opt"),res=document.getElementById("picRes"+i);
+  for(var j=0;j<opts.length;j++){
+    if(j===p.a)opts[j].classList.add("ok");
+    else if(j===a)opts[j].classList.add("no");
+    else opts[j].classList.add("dis");
+  }
+  if(a===p.a){
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+FOODS[p.a].word+"</span>";
+    quizScore+=5;sDing();
+    speakGB(FOODS[p.a].word+". "+p.q+" "+FOODS[p.a].word+".",1.2,p.v,null,RATE);
+  }else{
+    res.innerHTML="<span style='color:var(--red)'>❌ That's the "+FOODS[a].word+". The answer is the "+FOODS[p.a].word+"!</span>";
+    sBuzz();
+    speakGB("That's the "+FOODS[a].word+". The answer is the "+FOODS[p.a].word+"!",1.2,p.v,null,RATE);
+  }
+}
+function answerFill(i,el,chosen){
+  if(ansFi[i]!==null)return;
+  ansFi[i]=true;
+  var f=FILL[i],blank=document.getElementById("fb"+i),res=document.getElementById("fiRes"+i);
+  var opts=document.querySelectorAll("#fo"+i+" .fill-opt");
+  var correct=(chosen===f.ok);
+  blank.textContent=chosen;
+  var j;
+  if(correct){
+    blank.className="fill-blank revealed";el.className="fill-opt selected";
+    for(j=0;j<opts.length;j++)if(opts[j]!==el)opts[j].classList.add("dis");
+    res.innerHTML="<span style='color:var(--green)'>✅ Correct! "+f.ex+"</span>";
+    quizScore+=5;sDing();sayF(f.ok);
+  }else{
+    blank.textContent=f.ok;blank.className="fill-blank wrong-reveal";
+    for(j=0;j<opts.length;j++){
+      if(opts[j].textContent===f.ok)opts[j].className="fill-opt selected";
+      else if(opts[j]!==el)opts[j].classList.add("dis");
+    }
+    res.innerHTML="<span style='color:var(--red)'>❌ It's '"+f.ok+"'. "+f.ex+"</span>";
+    sBuzz();sayF(f.ok);
+  }
+}
+function finishQuiz(){
+  var done=0,total=TF.length+LISTEN.length+SPELL.length+PICQ.length+FILL.length;
+  done+=ansTF.filter(function(x){return x!==null;}).length;
+  done+=ansLs.filter(function(x){return x!==null;}).length;
+  done+=ansSp.filter(function(x){return x!==null;}).length;
+  done+=ansPic.filter(function(x){return x!==null;}).length;
+  done+=ansFi.filter(function(x){return x!==null;}).length;
+  if(done<total){showToast("Answer all questions first! ("+done+"/"+total+")");return;}
+  document.getElementById("quizContent").style.display="none";
+  var sb=document.getElementById("scoreBoard");
+  sb.style.display="block";
+  var max=total*5;
+  document.getElementById("finalScore").textContent=quizScore+"/"+max;
+  document.getElementById("finalLabel").textContent="points earned";
+  var pct=quizScore/max,stars="";
+  if(pct===1)stars="⭐⭐⭐";else if(pct>=0.75)stars="⭐⭐";else if(pct>=0.5)stars="⭐";else stars="Keep trying! 💪";
+  document.getElementById("finalStars").textContent=stars;
+  var cTf=ansTF.filter(function(x,i){return x===TF[i].a;}).length;
+  var cLs=ansLs.filter(function(x,i){return x===LISTEN[i].a;}).length;
+  var cSp=ansSp.filter(function(x){return x===true;}).length;
+  var cPic=ansPic.filter(function(x,i){return x===PICQ[i].a;}).length;
+  var cFi=ansFi.filter(function(x){return x===true;}).length;
+  document.getElementById("scoreBreakdown").innerHTML=
+    "<div class='score-item'><div class='si-type'>✅ True/False</div><div class='si-score'>"+cTf+"/"+TF.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>🎧 Listen</div><div class='si-score'>"+cLs+"/"+LISTEN.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>✏️ Spelling</div><div class='si-score'>"+cSp+"/"+SPELL.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>🖼️ Picture</div><div class='si-score'>"+cPic+"/"+PICQ.length+"</div></div>"
+   +"<div class='score-item'><div class='si-type'>📝 Fill Blanks</div><div class='si-score'>"+cFi+"/"+FILL.length+"</div></div>";
+  if(pct===1){launchConfetti();sWin();}
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function resetAllQuiz(){buildQuizAll();window.scrollTo({top:0,behavior:"smooth"});}
+function attachQuizEvents(){
+  document.querySelectorAll(".write-key[data-sq]").forEach(function(btn){
+    btn.onclick=function(){
+      var q=parseInt(this.dataset.sq,10);
+      var d=document.getElementById("spd"+q);
+      if(ansSp[q]!==null)return;
+      if(this.dataset.action==="del")d.textContent=d.textContent.slice(0,-1);
+      else if(this.dataset.action==="clr")d.textContent="";
+      else if(d.textContent.length<18)d.textContent+=this.dataset.l;
+      sPop();
+    };
+  });
+  document.querySelectorAll(".fill-opt[data-f]").forEach(function(el){
+    el.onclick=function(){answerFill(parseInt(this.dataset.f,10),this,this.dataset.o);};
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener("click",function(e){
+  var s=e.target.closest("[data-say]");
+  if(s){
+    var v=s.getAttribute("data-voice")||VF;
+    var p=(v==="boy")?1.05:1.35;
+    var r=s.getAttribute("data-rate");
+    stopSpeak();
+    speakGB(s.getAttribute("data-say"),p,v,null,r?parseFloat(r):RATE);
+    sPop();
+    return;
+  }
+  var sb=e.target.closest(".sec-sound");
+  if(sb){curSec=sb.getAttribute("data-sec");return;}
+  var se=e.target.closest("[data-sec]");
+  if(se){curSec=se.getAttribute("data-sec");}
+});
+document.getElementById("mascot").onclick=function(){
+  speakGB("Hello, friends! I'm Ollie. Today we are talking about breakfast. What do you want for breakfast? I want bread and soybean milk for breakfast!",1.05,VM,null,RATE);
+  showToast("🦉 Hello from Ollie!");
+};
+document.getElementById("sPool").addEventListener("click",function(e){
+  var sp=e.target.closest("span");
+  if(sp&&sp.id.indexOf("sx")===0)sPick(parseInt(sp.id.replace("sx",""),10));
+});
+document.querySelectorAll(".sbtnrow").forEach(function(){});
+var fixBar=document.createElement("div");
+fixBar.className="sbtnrow";
+fixBar.innerHTML="<button class='btn green' onclick=\"fixJudge(true)\">✅ Correct</button><button class='btn red' onclick=\"fixJudge(false)\">❌ Wrong — fix it</button>";
+var fixGrid=document.getElementById("fixGrid");
+if(fixGrid&&fixGrid.parentNode){fixGrid.parentNode.insertBefore(fixBar,document.getElementById("fixResult"));}
+
+var fabDimT=null,fabDimmed=false;
+function fabDim(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity=".3";});fabDimmed=true;}
+function fabBright(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity="1";});}
+function fabResetDim(){fabBright();clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  document.querySelectorAll(".fab").forEach(function(f){
+    if(show){f.style.pointerEvents="auto";f.style.transform="translateY(0)";if(!fabDimmed)f.style.opacity="1";}
+    else{f.style.opacity="0";f.style.pointerEvents="none";f.style.transform="translateY(96px)";fabDimmed=false;clearTimeout(fabDimT);}
+  });
+  if(show&&!fabDimmed)fabResetDim();
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+document.querySelectorAll(".fab").forEach(function(f){
+  f.addEventListener("mouseenter",function(){clearTimeout(fabDimT);fabBright();});
+  f.addEventListener("mouseleave",function(){clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);});
+  f.addEventListener("touchstart",fabResetDim);
+  f.addEventListener("click",fabResetDim);
+});
+var floatEmojis=["🎈","⭐","✨","🍞","🥛","🍳","🥄","🌈","🥣"];
+function createFloaties(){
+  var c=document.getElementById("floaties");
+  for(var i=0;i<12;i++){
+    var s=document.createElement("div");
+    s.className="floaty";s.innerHTML=floatEmojis[i%floatEmojis.length];
+    s.style.left=Math.random()*100+"vw";
+    s.style.fontSize=(Math.random()*14+18)+"px";
+    s.style.animationDuration=(Math.random()*12+14)+"s";
+    s.style.animationDelay=(Math.random()*10)+"s";
+    c.appendChild(s);
+  }
+}
+buildSortS();buildSpell();
+buildTalk();buildDet();buildRole();wnNext();
+buildFoodGrid();buildAct();buildHam();
+buildPatterns();buildSubMachine();buildPrepLines();buildFix();
+buildMarket();spReset();
+buildTTT();buildQuizAll();
+buildTeams("lkTeams");buildTeams("wnTeams");buildTeams("hamTeams");buildTeams("mkTeams");buildTeams("tttTeams");
+document.getElementById("lkNums").innerHTML=lkNumsHtml();
+lkNewRound();
+createFloaties();
+</script>
+</body>
+</html>
