@@ -377,7 +377,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 
 <div class="navbar" id="navBar">
   <button class="ntab on" onclick="showTab(0)">📖 Lesson Plan</button>
-  <button class="ntab" onclick="showTab(1)">🔤 Phonics -s/-es</button>
+  <button class="ntab" onclick="showTab(1)">🔤 Phonics R 🇬🇧</button>
   <button class="ntab" onclick="showTab(2)">👑 Lucky King</button>
   <button class="ntab" onclick="showTab(3)">🎭 Dialogue</button>
   <button class="ntab" onclick="showTab(4)">🎬 Role Play</button>
@@ -387,54 +387,63 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
   <button class="ntab" onclick="showTab(8)">🧠 The S Rule</button>
   <button class="ntab" onclick="showTab(9)">🏪 Food Market</button>
   <button class="ntab" onclick="showTab(10)">🎲 Tic-Tac-Toe</button>
-  <button class="ntab" onclick="showTab(11)">📝 Quiz</button>
+  <button class="ntab" onclick="showTab(11)">📝 Bonus Quiz</button>
 </div>
 
-<!-- ============ TAB 0 : -s/-es NOTE + LESSON PLAN ============ -->
+<!-- ============ TAB 0 : R PHONICS NOTE + LESSON PLAN ============ -->
 <div class="tabpan on" id="tp0" data-sec="plan">
   <div class="snote">
-    <h2>🔤 Teacher's Note — The <span class="sbadge">-s / -es</span> Rule <span class="sbadge">READ ME FIRST</span></h2>
-    <p class="slead">Unit 13 is the first time children must add an <strong>S</strong> to the verb. Almost every spoken sentence here depends on it: <em>want → wants</em>, <em>eat → eats</em>, <em>drink → drinks</em>. Children in Taiwan often drop the S or add it everywhere — this note explains the rule before the lesson starts.</p>
+    <h2>🔤 Teacher's Note — The <span class="sbadge">R Phonics</span> in Unit 13 <span class="sbadge">READ ME FIRST</span></h2>
+    <p class="slead">Unit 13 is full of the letter <strong>R</strong>: <em>breakfast, for, dinner, rice, orange, Peter</em>. British English is <strong>NON-rhotic</strong> — the R is only sounded <strong>before a vowel</strong>. Taiwanese children often say every R (a heavy “American” r) or swap R for L. Read this note in a British accent <strong>before</strong> the lesson starts.</p>
     <div class="sgrid">
       <div class="sitem">
-        <h4><span class="sbig">S</span> Who gets the S?</h4>
-        <p>Only <strong>he, she, it</strong> and one person by name get the extra <strong>s</strong>. Everybody else uses the plain verb.</p>
+        <h4><span class="sbig">R</span> How to make it (British)</h4>
+        <p>Bend your tongue <strong>up and back</strong> so the tip sits just behind your top teeth — but it does <strong>NOT touch</strong>. Lips pull forward a little. Hold it and say <strong>“rrr…”</strong>. Never roll it like a motorbike.</p>
         <div class="schips">
-          <span data-say="I want bread." data-voice="girl">I / You / We / They → want</span>
-          <span data-say="She wants bread." data-voice="girl">He / She / It → wants</span>
+          <span data-say="R. Rrrr." data-rate="0.6" data-voice="girl">rrr…</span>
+          <span data-say="Rice. Red. Rabbit." data-voice="boy">rice · red · rabbit</span>
         </div>
       </div>
       <div class="sitem">
-        <h4>🎯 The full table</h4>
-        <table class="vtable mini">
-          <tr><th>Subject</th><th>want</th><th>eat</th><th>drink</th></tr>
-          <tr><td>I / You / We / They</td><td class="hl">want</td><td class="hl">eat</td><td class="hl">drink</td></tr>
-          <tr><td>He / She / It</td><td class="hl">wants</td><td class="hl">eats</td><td class="hl">drinks</td></tr>
-        </table>
+        <h4>🇬🇧 British = NON-rhotic</h4>
+        <p>The R is only sounded <strong>before a vowel</strong>. Before a consonant, or at the end of a word → <strong>no R sound</strong> in British English.</p>
+        <div class="schips">
+          <span data-say="Breakfast. For breakfast." data-voice="girl">breakfast = “brek-fuhst”</span>
+          <span data-say="For dinner." data-voice="boy">for = “faw”</span>
+        </div>
       </div>
       <div class="sitem ok">
-        <h4>❗ DOES already has the S</h4>
-        <p>In a question we say <strong>does + want</strong> — <strong>not</strong> “does wants”. The S has already moved from the verb to <em>does</em>!</p>
+        <h4>✅ R + a vowel — SAY the R</h4>
+        <p>When a vowel follows, the British R is clear: <strong>rice</strong> (r-ice), <strong>orange</strong> (o-range), <strong>read, red, rabbit, rain</strong>.</p>
         <div class="schips">
-          <span data-say="What does she want for breakfast?" data-voice="girl">What DOES she WANT? ✓</span>
-          <span data-say="What does she wants for breakfast?" data-voice="boy" style="border-color:var(--red);color:var(--red)">What DOES she WANTS? ✗</span>
+          <span data-say="Rice. I want rice for dinner." data-voice="girl">rice ✓ says the R</span>
+          <span data-say="Orange juice. I like orange juice." data-voice="boy">orange ✓ says the R</span>
         </div>
       </div>
       <div class="sitem no">
-        <h4>⚠️ Mistake 1 — no S at all</h4>
-        <p>“She <em>want</em> bread.” <strong>Fix:</strong> point at a girl and hold up an imaginary <strong>S</strong>, then drop it on the end of <em>want</em>.</p>
+        <h4>🔇 In this unit the R is often silent</h4>
+        <p><strong>breakfast · for · dinner · Peter · are</strong> — the R is at the end or before a consonant, so British English says <strong>no R</strong>.</p>
+        <div class="schips">
+          <span data-say="What do you want for breakfast?" data-voice="girl">for breakfast — no R</span>
+          <span data-say="What does she want for dinner?" data-voice="boy">dinner — no R</span>
+        </div>
       </div>
       <div class="sitem no">
-        <h4>⚠️ Mistake 2 — S on everybody</h4>
-        <p>“I <em>wants</em> bread.” <strong>Fix:</strong> only one person is being talked about. Say “I” and the S disappears.</p>
+        <h4>⚠️ Mistake 1 — rhotic “brek-fást”</h4>
+        <p>“brek-fást”, “faw-r”. <strong>Fix:</strong> drop the R before a consonant: <em>breakfast, for, dinner</em>.</p>
       </div>
       <div class="sitem no">
-        <h4>⚠️ Mistake 3 — wants in questions</h4>
-        <p>“What does she <em>wants</em>…?” <strong>Fix:</strong> the S lives on <strong>DOES</strong> now, so the verb goes back to plain <em>want</em>.</p>
+        <h4>⚠️ Mistake 2 — L for R</h4>
+        <p>“lice” for <em>rice</em>, “woose”. <strong>Fix:</strong> /l/ = tongue tip <strong>DOWN</strong> on the teeth ridge. /r/ = tongue tip <strong>UP</strong>, touching nothing.</p>
+      </div>
+      <div class="sitem no">
+        <h4>⚠️ Mistake 3 — rolling the R</h4>
+        <p>“rrrrice”. <strong>Fix:</strong> the British /r/ never touches the roof of the mouth. Say the vowel first, then a small quiet R.</p>
       </div>
     </div>
     <div class="sfoot">
-      <button class="btn orange" data-say="Listen carefully. In Unit 13 the verb changes. I, you, we, they want. He, she, it wants. And in a question, does already has the S, so we say what does she want. Not does wants. Good. Now say it with me." data-voice="girl">🔊 Read this note to me (British)</button>
+      <button class="btn orange" data-say="Listen carefully. In British English the R is only said before a vowel. Rice. Orange. Red. But breakfast, for and dinner have no R sound. Good. Now say it with me. Rice. Breakfast. For breakfast. Dinner." data-voice="girl">🔊 Read this note to me (British ♀)</button>
+      <button class="btn blue" data-say="Good morning, everyone. Let us practise the R sound. Rrrr. Rice, rabbit, orange. And remember, breakfast has no R. Breakfast. For breakfast. Very good." data-voice="boy">🔊 …and with the British man (♂)</button>
       <button class="btn purple" onclick="showTab(1)">🔤 Go to Phonics Practice →</button>
     </div>
   </div>
@@ -458,7 +467,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
   </section>
 
   <section>
-    <div class="shead"><span class="ic">🎯</span><h2>Objectives &amp; Target Language</h2><span class="badge">GOALS</span></div>
+    <div class="shead"><span class="ic">🎯</span><h2>Objectives &amp; Target Language</h2><span class="badge">GOALS</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
     <div class="board-plan" style="margin-bottom:14px">
       <div class="bp-t">What do you want for breakfast? → <span style="color:var(--green)">I want bread and milk for breakfast.</span></div>
       <div class="bp-t">What does she want for breakfast? → <span style="color:var(--green)">She wants two eggs, bread, and juice.</span></div>
@@ -499,47 +508,88 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
       <div><span class="bp-ok">breakfast | lunch | dinner</span></div>
     </div>
   </section>
+
+  <section>
+    <div class="shead"><span class="ic">📖</span><h2>Textbook &amp; Frames at a Glance</h2><span class="badge">TAP TO ZOOM</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Every picture in this lesson is cropped from the Unit 13 folder — use them as section cards, flash cards and pattern frames. Click any picture to enlarge it.</div>
+    <div class="twobox">
+      <div class="framed" onclick="openLb('u13-book1.png')"><img src="u13-book1.png" alt="Magic Joy 5 Unit 13 dialogue, pages 90 and 91: wake up, what time is it, time for breakfast"><div class="fcap">🌅 Dialogue pp. 90–91 (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-book3.png')"><img src="u13-book3.png" alt="Magic Joy 5 Unit 13 pattern table: What do you want for lunch? What do they eat for dinner? What does she drink for breakfast?"><div class="fcap">💬 Pattern table p. 92 (tap to enlarge)</div></div>
+    </div>
+  </section>
 </div>
 
 <!-- ============ TAB 1 : PHONICS -s/-es ============ -->
 <div class="tabpan" id="tp1" data-sec="phonics">
   <section>
-    <div class="shead"><span class="ic">🔤</span><h2>The S Rule — Third Person</h2><span class="badge">PHONICS</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="shead"><span class="ic">🔤</span><h2>The R Sound — British /r/</h2><span class="badge">PHONICS · UK ACCENT</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
     <div class="phon-hero">
-      <div class="phon-big" data-say="S. Ssss." data-rate="0.6" data-voice="girl" title="Click to hear the S sound">S</div>
+      <div class="phon-big" data-say="R. Rrrr. Rrr." data-rate="0.55" data-voice="girl" title="Click to hear the pure British R sound">R</div>
       <div>
-        <div style="font-size:clamp(16px,2.6vw,21px);font-weight:900;color:var(--purple);margin-bottom:8px">Click the big S to hear the sound.</div>
+        <div style="font-size:clamp(16px,2.6vw,21px);font-weight:900;color:var(--purple);margin-bottom:8px">Click the big R to hear the pure British sound.</div>
         <div style="font-size:clamp(13px,2.1vw,16px);font-weight:700;line-height:1.6;color:#555">
-          1️⃣ Just add <strong>“sss”</strong> to the end of the verb.<br>
-          2️⃣ Only <strong>he / she / it</strong> and one name get it.<br>
-          3️⃣ Spelling: <strong>es</strong> after <em>s, sh, ch, x, o</em> → <em>watches, goes</em>.<br>
-          4️⃣ In questions the S jumps to <strong>does</strong>.
+          1️⃣ Tongue <strong>UP and BACK</strong>, tip just behind the top teeth.<br>
+          2️⃣ It does <strong>NOT touch</strong> anything.<br>
+          3️⃣ Lips pull forward slightly, like a small smile.<br>
+          4️⃣ <strong>No rolling</strong> — and the British R only speaks <strong>before a vowel</strong>.
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-          <button class="btn orange" data-say="Want. She wants. Eat. She eats. Drink. She drinks." data-rate="0.72" data-voice="girl">🔊 want / wants</button>
-          <button class="btn blue" data-say="Watch. She watches. Go. She goes. That is es after ch and o." data-rate="0.75" data-voice="boy">🔊 -es after s sh ch x o</button>
+          <button class="btn orange" data-say="R. Rrrr. Now with vowels. Ra. Re. Ri. Ro. Ru. Ar. Er. Or. Ur." data-rate="0.72" data-voice="girl">🔊 R + vowels (British ♀)</button>
+          <button class="btn blue" data-say="Rice. Orange. Red. Rabbit. Now the silent r. Breakfast. For. Dinner. In British English we drop the r before a consonant." data-rate="0.75" data-voice="boy">🔊 R said vs R silent (British ♂)</button>
         </div>
       </div>
     </div>
     <table class="vtable">
-      <tr><th>Subject</th><th>want</th><th>eat</th><th>drink</th><th>question</th></tr>
-      <tr><td>I / You / We / They</td><td class="hl">want</td><td class="hl">eat</td><td class="hl">drink</td><td class="hl">What do you want…?</td></tr>
-      <tr><td>He / She / It</td><td class="hl">wants</td><td class="hl">eats</td><td class="hl">drinks</td><td class="hl">What does she want…?</td></tr>
+      <tr><th>Word</th><th>What follows the R?</th><th>British accent</th></tr>
+      <tr><td class="hl">rice</td><td>a vowel (i)</td><td class="hl">🔊 SAY it — /raɪs/</td></tr>
+      <tr><td class="hl">orange</td><td>a vowel (a)</td><td class="hl">🔊 SAY it — /ˈɒrɪndʒ/</td></tr>
+      <tr><td class="hl">breakfast</td><td>a consonant (k)</td><td class="hl">🔇 NO R — /ˈbrek.fəst/</td></tr>
+      <tr><td class="hl">for · dinner · Peter</td><td>end of the word</td><td class="hl">🔇 NO R — /fɔː/ · /ˈdɪn.ə/</td></tr>
     </table>
-    <div class="tip">🖐️ <strong>Gesture:</strong> hold up an imaginary <strong>S</strong> and move it from <em>wants</em> to <em>does</em>. Say: <em>“Does already has the S power!”</em></div>
+    <div class="tip">🖐️ <strong>Gesture:</strong> hold up an imaginary <strong>R</strong> for <em>rice</em>, then <strong>hide it behind your back</strong> for <em>breakfast</em>. Say: <em>“The British R only speaks before a vowel!”</em></div>
   </section>
 
   <section>
-    <div class="shead"><span class="ic">🕵️</span><h2>S Detective — Where does the S go?</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
-    <div class="tip" style="margin-bottom:14px">💡 Click a sentence to hear it, then click the correct box: <strong>✅ needs S</strong> · <strong>🔵 no S</strong> · <strong>❌ the S is on DOES</strong>. Sort all 12!</div>
-    <div class="sort-pool" id="sPool"></div>
-    <div class="sort-boxes">
-      <div class="sort-box a"><h4>✅ He / She → add the S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">wants · eats · drinks</span></h4><div class="placed" id="boxA"></div></div>
-      <div class="sort-box b"><h4>🔵 I / You / We / They → no S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">want · eat · drink</span></h4><div class="placed" id="boxB"></div></div>
-      <div class="sort-box c"><h4>❌ DOES already has the S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">does + want (not wants)</span></h4><div class="placed" id="boxC"></div></div>
+    <div class="shead"><span class="ic">🍚</span><h2>R Words in This Unit</h2><span class="badge">LISTEN &amp; REPEAT</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Click any word to hear it in a <strong>British accent</strong>. 🔊 = the R is <strong>said</strong> (a vowel follows). 🔇 = the R is <strong>silent</strong> (before a consonant or at the end).</div>
+    <div class="twobox">
+      <div class="framed" onclick="openLb('u13-rice.png')"><img src="u13-rice.png" alt="rice"><div class="fcap">🍚 rice — R + vowel → SAY it (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-dlg1.png')"><img src="u13-dlg1.png" alt="Dialogue line: Come on. Time for breakfast."><div class="fcap">🌅 “…for breakfast” — R + consonant → silent (tap to enlarge)</div></div>
     </div>
-    <div id="sResult" style="text-align:center;font-weight:900;font-size:1.1rem;min-height:26px"></div>
-    <div style="text-align:center;margin-top:12px"><button class="btn orange" onclick="resetSortS()">🔄 Reset</button></div>
+    <div class="sort-pool" style="justify-content:center">
+      <span data-say="Rice. Rice." data-voice="girl" style="border-color:var(--green);color:#2f9e2b">🔊 rice</span>
+      <span data-say="Orange. Orange." data-voice="boy" style="border-color:var(--green);color:#2f9e2b">🔊 orange</span>
+      <span data-say="Read. Read a book." data-voice="girl" style="border-color:var(--green);color:#2f9e2b">🔊 read</span>
+      <span data-say="Red. Red card." data-voice="boy" style="border-color:var(--green);color:#2f9e2b">🔊 red</span>
+      <span data-say="Rabbit. A rabbit." data-voice="girl" style="border-color:var(--green);color:#2f9e2b">🔊 rabbit</span>
+      <span data-say="Rain. Rainy day." data-voice="boy" style="border-color:var(--green);color:#2f9e2b">🔊 rain</span>
+      <span data-say="Breakfast. What do you want for breakfast?" data-voice="girl" style="border-color:#ccc;color:#999">🔇 breakfast</span>
+      <span data-say="For. For breakfast." data-voice="boy" style="border-color:#ccc;color:#999">🔇 for</span>
+      <span data-say="Dinner. What do they eat for dinner?" data-voice="girl" style="border-color:#ccc;color:#999">🔇 dinner</span>
+      <span data-say="Peter. Peter wants bread and milk." data-voice="boy" style="border-color:#ccc;color:#999">🔇 Peter</span>
+      <span data-say="Are you ready for Magic Joy?" data-voice="girl" style="border-color:#ccc;color:#999">🔇 are</span>
+      <span data-say="Where is Jane? Where is Jane?" data-voice="boy" style="border-color:#ccc;color:#999">🔇 where</span>
+    </div>
+    <div class="sbtnrow">
+      <button class="btn green" data-say="Rice, orange, read, red, rabbit, rain. In all of these words, we say the r." data-voice="girl">🔊 Hear all the SAY-R words (British ♀)</button>
+      <button class="btn blue" data-say="Breakfast, for, dinner, Peter, are, where. In British English, these have no r sound." data-voice="boy">🔊 Hear all the silent-R words (British ♂)</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🕵️</span><h2>R Detective — Say it or Silent?</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 A word appears — click it to hear it. Then choose: <strong>🔊 R is SAID</strong> (a vowel follows) or <strong>🔇 R is SILENT</strong> (British — before a consonant or at the end). Get all 12 right!</div>
+    <div class="lk-out">
+      <div class="lk-q" id="rdWord" style="cursor:pointer" onclick="rdSay()">Press “Next word” to start!</div>
+      <div class="lk-a" id="rdHint">Listen in a British accent, then answer →</div>
+    </div>
+    <div class="sbtnrow">
+      <button class="btn purple" onclick="rdNext()">▶ Next word</button>
+      <button class="btn green" onclick="rdAns(true)">🔊 R is SAID</button>
+      <button class="btn blue" onclick="rdAns(false)">🔇 R is SILENT</button>
+      <button class="btn orange" onclick="rdReset()">🔄 Reset</button>
+    </div>
+    <div class="big-ans" id="rdResult">…</div>
   </section>
 
   <section>
@@ -561,7 +611,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
       <div class="story-step" data-say="Good afternoon, everyone! Are you ready for Magic Joy? Today we're going to talk about food! But first, a quick review." data-voice="girl"><div class="step-num">1</div><div class="step-text"><strong>Fast greeting &amp; recall</strong><br>Everybody — question!</div><div class="step-emoji">👋</div></div>
       <div class="story-step" data-say="Does Peter go to the library on Tuesdays? Yes, he does. No, he doesn't. Remember: he and she, the verb takes an s." data-voice="boy"><div class="step-num">2</div><div class="step-text"><strong>Model the pattern</strong><br>Yes, he does. / No, he doesn't.</div><div class="step-emoji">📚</div></div>
     </div>
-    <div class="framed" style="max-width:440px;margin:16px auto" onclick="openLb('v-luckyking.png')"><img src="v-luckyking.png" alt="Scrambled words card from Appendix 13-1: go, library, the, to, Tuesdays"><div class="fcap">🃏 Appendix 13-1 scrambled-words card (tap to enlarge)</div></div>
+    <div class="framed" style="max-width:440px;margin:16px auto" onclick="openLb('u13-luckyking.png')"><img src="u13-luckyking.png" alt="Scrambled words card from Appendix 13-1: go, library, the, to, Tuesdays"><div class="fcap">🃏 Appendix 13-1 scrambled-words card (tap to enlarge)</div></div>
   </section>
 
   <section>
@@ -600,20 +650,24 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
     <div class="shead"><span class="ic">🌅</span><h2>Wake Up! Breakfast Time!</h2><span class="badge">10–13 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Set a clock or draw <strong>🕕 6:00</strong>. Pretend to crow like a rooster! Children love the sleepy Jane part — use a big yawn.</div>
     <div class="twobox">
-      <div class="framed" onclick="openLb('v-breakfast-scene.png')"><img src="v-breakfast-scene.png" alt="Mia wakes Peter and Jane up at 6 o'clock"><div class="fcap">🌅 Mia wakes Peter and Jane — 6:00 (tap to enlarge)</div></div>
-      <div class="framed" onclick="openLb('v-dialogue-poster.png')"><img src="v-dialogue-poster.png" alt="Dialogue poster: what do you want for breakfast?"><div class="fcap">🍽️ Come to the kitchen! (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-bedroom.png')"><img src="u13-bedroom.png" alt="Mia wakes Peter and Jane up at 6 o'clock"><div class="fcap">🌅 Mia wakes Peter and Jane — 6:00 (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-kitchen.png')"><img src="u13-kitchen.png" alt="Dialogue poster: what do you want for breakfast?"><div class="fcap">🍽️ Come to the kitchen! (tap to enlarge)</div></div>
     </div>
     <div class="story-card">
       <div class="story-step" data-say="Cock-a-doodle-doo! Wake up! Wake up!" data-voice="girl"><div class="step-num">🐓</div><div class="step-text"><strong>Rooster!</strong><br>“Wake up! Wake up!”</div><div class="step-emoji">😴</div></div>
-      <div class="story-step" data-say="What time is it?" data-voice="boy"><div class="step-num">?</div><div class="step-text\"><strong>Point at the clock.</strong><br>Class: “It's six.”</div><div class="step-emoji">🕕</div></div>
+      <div class="story-step" data-say="What time is it?" data-voice="boy"><div class="step-num">?</div><div class="step-text"><strong>Point at the clock.</strong><br>Class: “It's six.”</div><div class="step-emoji">🕕</div></div>
       <div class="story-step" data-say="Let's go! No way. I'm sleepy. Come on. It's time for breakfast!" data-voice="girl"><div class="step-num">🥱</div><div class="step-text"><strong>Sleepy Jane</strong><br>Yawn, rub your eyes, pretend to go back to sleep.</div><div class="step-emoji">😴</div></div>
     </div>
-    <img class="t-image" src="v-dialogue-script.png" alt="Dialogue: Wake up. What time is it? It's six. Let's go. No way. I'm sleepy. Come on. It's time for breakfast." onclick="openLb(this.src)" style="margin:16px 0">
+    <div class="twobox">
+      <div class="framed" onclick="openLb('u13-dlg1.png')"><img src="u13-dlg1.png" alt="Dialogue part 1: Wake up. Wake up. What time is it? It's six. Let's go. No way. I'm sleepy. Come on. Time for breakfast."><div class="fcap">💬 Lines 1–5 (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-dlg2.png')"><img src="u13-dlg2.png" alt="Dialogue part 2: Come to the kitchen. What do you want for breakfast? I want bread and milk, please. What does Jane want?"><div class="fcap">💬 Lines 6–9 (tap to enlarge)</div></div>
+    </div>
   </section>
 
   <section>
     <div class="shead"><span class="ic">🔍</span><h2>Breakfast Picture Talk &amp; Detective</h2><span class="badge">13–20 MIN</span><button class="sec-sound" data-sec="dialogue" onclick="toggleSecSound('dialogue',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Point at the food and smell it: <em>“Mmmm… it smells so good!”</em> Then ask the <strong>Dialogue Detective</strong> questions — click a question to reveal the answer.</div>
+    <div class="framed" style="max-width:760px;margin:0 auto 14px" onclick="openLb('u13-spread.png')"><img src="u13-spread.png" alt="Unit 13 dialogue poster: the bedroom at six o'clock and the kitchen breakfast scene"><div class="fcap">🖼️ Dialogue Detective poster — find Jane, Peter and Mia! (tap to enlarge)</div></div>
     <div class="story-card" id="talkSteps"></div>
     <div id="detQs"></div>
   </section>
@@ -625,6 +679,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
     <div class="shead"><span class="ic">🎭</span><h2>Practice Role Play</h2><span class="badge">20–23 MIN</span><button class="sec-sound" data-sec="roleplay" onclick="toggleSecSound('roleplay',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Divide the class into <strong>four groups</strong> — Mia, Peter, Jane, Nick. Use different voices and expressions. Tell students: <strong>“Don't read like robots!”</strong> Then switch roles after one round.</div>
     <div class="story-card" id="roleDlg"></div>
+    <div class="framed" style="max-width:520px;margin:14px auto 0" onclick="openLb('u13-kids.png')"><img src="u13-kids.png" alt="Mia wakes Peter and Jane at six o'clock: Wake up! Wake up!"><div class="fcap">🌅 Act it out — “WAKE UP! WAKE UP!” (tap to enlarge)</div></div>
     <div class="tip" style="margin-top:12px">🎭 Encourage <strong>facial expressions</strong>, <strong>character voices</strong>, <strong>sleepy actions</strong> and <strong>breakfast gestures</strong>.</div>
   </section>
 
@@ -650,8 +705,8 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
     <div class="shead"><span class="ic">🍽️</span><h2>Breakfast Food — Look, Say, Repeat</h2><span class="badge">25–28 MIN · VOCAB</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Show a flashcard, say the word, class repeat <strong>×3</strong>. The manual specifically calls out that the <strong>ea</strong> in <em>steak</em> and <em>bread</em> is pronounced /ɛ/ — model it slowly and carefully. Click a card to hear it, then spell it!</div>
     <div class="twobox">
-      <div class="framed" onclick="openLb('v-poster.png')"><img src="v-poster.png" alt="Magic Joy 5 Unit 13 flashcard poster: steak, bread, noodles, soup, fish, rice, soybean milk"><div class="fcap">📇 Unit 13 flashcard poster (tap to enlarge)</div></div>
-      <div class="framed" onclick="openLb('v-wordbank.png')"><img src="v-wordbank.png" alt="Unit 13 word bank: what do you or they want, eat or drink for breakfast, lunch or dinner"><div class="fcap">🔤 Word bank (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-cards.png')"><img src="u13-cards.png" alt="Magic Joy 5 Unit 13 flashcard poster: steak, bread, noodles, soup, fish, rice, soybean milk"><div class="fcap">📇 Unit 13 flashcard poster (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-book2.png')"><img src="u13-book2.png" alt="Magic Joy 5 Unit 13 textbook page: listen, point, and say — steak, bread, noodles, soup, fish, rice, soybean milk"><div class="fcap">📖 Textbook · Listen, point, and say (tap to enlarge)</div></div>
     </div>
     <div class="vocab-grid" id="foodGrid"></div>
   </section>
@@ -702,8 +757,8 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
     <div class="shead"><span class="ic">💬</span><h2>What Do You Want for Breakfast?</h2><span class="badge">35–38 MIN · PATTERNS</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Write the pattern, hold up food flashcards and build sentences together. Then change the meal: <strong>breakfast → lunch → dinner</strong>, and the verb: <strong>want → eat / drink</strong>.</div>
     <div class="twobox">
-      <div class="framed" onclick="openLb('v-dialogue-poster.png')"><img src="v-dialogue-poster.png" alt="What do you want for breakfast?"><div class="fcap">🍽️ The target pattern (tap to enlarge)</div></div>
-      <div class="framed" onclick="openLb('v-tictactoe.png')"><img src="v-tictactoe.png" alt="Unit 13 patterns poster with food and people"><div class="fcap">🎲 Patterns poster (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-pat1.png')"><img src="u13-pat1.png" alt="What do you want for lunch? I want steak for lunch."><div class="fcap">💬 Pattern 1 (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-frame-you.png')"><img src="u13-frame-you.png" alt="What do you or they want, eat or drink for lunch? I We They want eat drink."><div class="fcap">🔀 Change the word, keep the pattern (tap to enlarge)</div></div>
     </div>
     <div id="patternCards"></div>
   </section>
@@ -738,6 +793,10 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
   <section>
     <div class="shead"><span class="ic">🧠</span><h2>Discover the Grammar</h2><span class="badge">38–41 MIN</span><button class="sec-sound" data-sec="srule" onclick="toggleSecSound('srule',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Write <strong>“I want bread.”</strong> Then point at a girl and write <strong>“She wants bread.”</strong> Ask: <strong>“Same or different?”</strong> Highlight the S. Then show that <strong>DOES</strong> takes the S away from the verb.</div>
+    <div class="twobox">
+      <div class="framed" onclick="openLb('u13-srule.png')"><img src="u13-srule.png" alt="want to wants, drink to drinks"><div class="fcap">🧠 want → wants · drink → drinks (tap to enlarge)</div></div>
+      <div class="framed" onclick="openLb('u13-frame-she.png')"><img src="u13-frame-she.png" alt="What does he or she want, eat, drink for lunch? He and She want, eat, drink with an s."><div class="fcap">🔀 He / She always take the S (tap to enlarge)</div></div>
+    </div>
     <table class="vtable">
       <tr><th>Subject</th><th>VERB</th><th>Example</th></tr>
       <tr><td>I / You / We / They</td><td class="hl">WANT</td><td>I want bread and milk for breakfast.</td></tr>
@@ -749,6 +808,19 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
       <div class="pattern-line" data-good="0" data-mark="1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span>What <strong>DOES</strong> she <strong>WANTS</strong> for breakfast?</span><span class="vchip no" data-mark>✗ wrong</span></div>
       <div class="tip" style="margin-top:10px">🖐️ <strong>Gesture:</strong> hold up an imaginary <strong>S</strong> and move it from <em>wants</em> to <em>does</em>. Say: <em>“Does already has the S power!”</em> Click a line to hear it.</div>
     </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🕵️</span><h2>S Detective — Where does the S go?</h2><span class="badge">GAME</span><button class="sec-sound" data-sec="srule" onclick="toggleSecSound('srule',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Click a sentence to hear it, then click the correct box: <strong>✅ needs S</strong> · <strong>🔵 no S</strong> · <strong>❌ the S is on DOES</strong>. Sort all 12!</div>
+    <div class="sort-pool" id="sPool"></div>
+    <div class="sort-boxes">
+      <div class="sort-box a"><h4>✅ He / She → add the S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">wants · eats · drinks</span></h4><div class="placed" id="boxA"></div></div>
+      <div class="sort-box b"><h4>🔵 I / You / We / They → no S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">want · eat · drink</span></h4><div class="placed" id="boxB"></div></div>
+      <div class="sort-box c"><h4>❌ DOES already has the S<br><span style="font-weight:700;font-size:clamp(11px,1.7vw,13px)">does + want (not wants)</span></h4><div class="placed" id="boxC"></div></div>
+    </div>
+    <div id="sResult" style="text-align:center;font-weight:900;font-size:1.1rem;min-height:26px"></div>
+    <div style="text-align:center;margin-top:12px"><button class="btn orange" onclick="resetSortS()">🔄 Reset</button></div>
   </section>
 
   <section>
@@ -783,6 +855,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
   <section>
     <div class="shead"><span class="ic">🎡</span><h2>Spin &amp; Speak</h2><span class="badge">44–47 MIN · SUBSTITUTION</span><button class="sec-sound" data-sec="market" onclick="toggleSecSound('market',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 The teacher's wheel shows <strong>WHO + VERB + MEAL</strong>. The class must build the <strong>question</strong>, then a chosen student picks food and builds the <strong>answer</strong>. Spin all three boxes!</div>
+    <div class="framed" style="max-width:640px;margin:0 auto 14px" onclick="openLb('u13-table.png')"><img src="u13-table.png" alt="Pattern table: What do you want for lunch? What do they eat for dinner? What does she drink for breakfast?"><div class="fcap">🎡 Swap the word — keep the pattern (tap to enlarge)</div></div>
     <div class="spin-row">
       <div class="spin-box"><div class="sb-lbl">WHO</div><div class="sb-val" id="spWho">YOU</div><button class="btn orange" style="padding:5px 12px;font-size:12px;margin-top:6px" onclick="spSpin(0)">↻</button></div>
       <div class="spin-box b2"><div class="sb-lbl">VERB</div><div class="sb-val" id="spVerb">WANT</div><button class="btn blue" style="padding:5px 12px;font-size:12px;margin-top:6px" onclick="spSpin(1)">↻</button></div>
@@ -803,7 +876,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
     <div class="shead"><span class="ic">🎲</span><h2>Breakfast Tic-Tac-Toe</h2><span class="badge">47–50 MIN · FINAL</span><button class="sec-sound" data-sec="ttt" onclick="toggleSecSound('ttt',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Draw a 3 × 4 grid with different food pictures (manual p. 93). A student picks a square, the teacher asks a question, and the student looks at the picture to answer. Correct → mark the square. <strong>Team ⭐ vs Team ❤️</strong> — first team to connect <strong>3</strong> squares wins!</div>
     <div class="team-grid" id="tttTeams"></div>
-    <div class="framed" style="max-width:660px;margin:0 auto 14px" onclick="openLb('v-tictactoe.png')"><img src="v-tictactoe.png" alt="Unit 13 patterns poster used as the Tic-Tac-Toe board"><div class="fcap">🎲 The manual's board (p. 93) — tap to enlarge</div></div>
+    <div class="framed" style="max-width:660px;margin:0 auto 14px" onclick="openLb('u13-cards.png')"><img src="u13-cards.png" alt="Unit 13 food pictures for the Tic-Tac-Toe board: steak, bread, noodles, soup, fish, rice, soybean milk"><div class="fcap">📇 Put these food pictures on your 3 × 4 board (tap to enlarge)</div></div>
     <div class="ttt" id="tttBoard"></div>
     <div class="ttt-log" id="tttLog">Click any square to start!</div>
     <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
@@ -815,7 +888,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
   <section>
     <div class="shead"><span class="ic">👏</span><h2>Wrap-up</h2><span class="badge">SAY IT TOGETHER</span><button class="sec-sound" data-sec="ttt" onclick="toggleSecSound('ttt',this)"><span class="sec-si">🔊</span></button></div>
     <div class="story-card">
-      <div class="dlg g" data-say="What do you want for breakfast? I want bread and soybean milk for breakfast! What does Mia want for dinner? She wants noodles and soup for dinner! Fantastic. Give yourselves three big claps. One, two, three!" data-voice="girl"><div class="av">🎉</div><div class="bub"><strong>Teacher &amp; Class:</strong> <strong>Rooms!</strong> — sorry, <strong>Food!</strong> What did we learn today?</div><div class="vtag">👩 FEMALE</div></div>
+      <div class="dlg g" data-say="What do you want for breakfast? I want bread and soybean milk for breakfast! What does Mia want for dinner? She wants noodles and soup for dinner! Fantastic. Give yourselves three big claps. One, two, three!" data-voice="girl"><div class="av">🎉</div><div class="bub"><strong>Teacher &amp; Class:</strong> <strong>FOOD!</strong> — what did we learn today?</div><div class="vtag">👩 FEMALE</div></div>
     </div>
     <div style="text-align:center"><button class="btn orange" onclick="finishLesson()">🎉 Finish the lesson!</button></div>
   </section>
@@ -827,7 +900,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
     <span class="big-emoji">📝</span>
     <h1>Unit 13 Quiz</h1>
     <span class="sub">Breakfast Food · What do you want?</span>
-    <div class="desc">Listen, speak, spell and act! 5 sections · earn max points.</div>
+    <div class="desc">Bonus practice after the 50-minute lesson · listen, speak, spell and act!</div>
   </div>
   <section>
     <div class="shead"><span class="ic">🎧</span><h2>Quiz Instructions</h2><span class="badge">LISTEN &amp; CHOOSE</span><button class="sec-sound" data-sec="quiz" onclick="toggleSecSound('quiz',this)"><span class="sec-si">🔊</span></button></div>
@@ -862,7 +935,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <script>
 /* ===== AUDIO + TWO BRITISH VOICES ===== */
 var soundOn=true;
-var RATE=0.9, RATE_SLOW=0.8;
+var RATE=0.88, RATE_SLOW=0.68;
 var secSounds={plan:true,phonics:true,lucky:true,dialogue:true,roleplay:true,vocab:true,hammer:true,patterns:true,srule:true,market:true,ttt:true,quiz:true};
 var curSec="plan";
 var actx=null;
@@ -874,36 +947,58 @@ function sBuzz(){if(!soundOn)return;tone(180,0.18,"sawtooth",0.11);tone(140,0.22
 function sWin(){if(!soundOn)return;tone(523,0.12,"sine",0.14);tone(659,0.12,"sine",0.14,0.1);tone(784,0.12,"sine",0.14,0.2);tone(1047,0.2,"sine",0.16,0.3);}
 var cachedVoices=[];
 if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();};}
+var GH_F=/\b(sonia|libby|maisie|kate|hazel|serena|karen|samantha|susan|fiona|zira|mary|allison|ava|emma|jenny|joanna|salli|kimberly|amy|nicky|hannah|nicole|female)\b/i;
+var GH_M=/\b(ryan|thomas|george|fred|guy|daniel|oliver|arthur|alex|rylan|david|chris|eric|brian|james|mark|ryan|joey|justin|matthew|tyler|male)\b/i;
+function voiceScore(x,gender){
+  var n=(x.name||"").toLowerCase(),lang=(x.lang||"").toLowerCase();
+  if(lang.indexOf("en")!==0)return -999;
+  var s=lang.indexOf("en-gb")===0?40:18;
+  if(/natural|neural|enhanced|premium|online|google|siri|clarity/.test(n))s+=60;
+  if(/desktop|offline|legacy|compact|sapi|zira|david/.test(n))s-=30;
+  var f=GH_F.test(n),m=GH_M.test(n);
+  if(gender==="boy"){ if(f&&!m)s-=90; else if(m&&!f)s+=35; }
+  else{ if(m&&!f)s-=90; else if(f&&!m)s+=35; }
+  return s;
+}
 function pickVoice(gender){
+  if(!cachedVoices.length){try{cachedVoices=speechSynthesis.getVoices();}catch(e){}}
   var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();
   if(!v||!v.length)return null;
-  if(gender==="boy"){
-    return v.find(function(x){return x.lang==="en-GB"&&(x.name.indexOf("Google UK English Male")>-1||x.name.indexOf("Male")>-1||x.name.indexOf("Daniel")>-1||x.name.indexOf("Oliver")>-1||x.name.indexOf("Arthur")>-1);})
-      ||v.find(function(x){return x.lang==="en-GB"&&/male|daniel|oliver|arthur|george|fred/i.test(x.name);})
-      ||v.find(function(x){return x.lang==="en-GB";})
-      ||v.find(function(x){return x.name.indexOf("Male")>-1&&x.lang.indexOf("en")===0;})
-      ||v.find(function(x){return x.lang.indexOf("en")===0;});
+  var best=null,bs=-1e9;
+  for(var i=0;i<v.length;i++){
+    var s=voiceScore(v[i],gender);
+    if(s>bs){bs=s;best=v[i];}
   }
-  return v.find(function(x){return x.lang==="en-GB"&&(x.name.indexOf("Google UK English Female")>-1||x.name.indexOf("Female")>-1||x.name.indexOf("Karen")>-1||x.name.indexOf("Samantha")>-1||x.name.indexOf("Serena")>-1);})
-    ||v.find(function(x){return x.lang==="en-GB"&&!/male/i.test(x.name);})
-    ||v.find(function(x){return x.lang==="en-GB";})
-    ||v.find(function(x){return /female|karen|samantha|serena/i.test(x.name)&&x.lang.indexOf("en")===0;})
-    ||v.find(function(x){return x.lang.indexOf("en")===0;});
+  if(bs<=-999){
+    for(var j=0;j<v.length;j++)if((v[j].lang||"").indexOf("en")===0){return v[j];}
+    return v[0];
+  }
+  return best;
 }
+var keepAlive=null;
 function speakGB(text,pitch,gender,onEnd,rate){
   if(!soundOn||!secSounds[curSec]){if(onEnd)setTimeout(onEnd,120);return;}
   var u=new SpeechSynthesisUtterance(text);
-  u.voice=pickVoice(gender);
-  u.lang="en-GB";
-  u.rate=rate||RATE;
-  u.pitch=pitch;
+  var v=pickVoice(gender);
+  if(v)u.voice=v;
+  u.lang=(v&&v.lang)||"en-GB";
+  u.rate=Math.max(0.5,Math.min(1.0,(typeof rate==="number"&&rate)?rate:RATE));
+  u.pitch=(gender==="boy")?0.97:1.08;
   u.volume=1;
   u.onend=onEnd;
-  try{speechSynthesis.speak(u);}catch(e){if(onEnd)setTimeout(onEnd,120);}
+  try{
+    speechSynthesis.speak(u);
+    if(!keepAlive)keepAlive=setInterval(function(){
+      try{
+        if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.resume();
+        else if(keepAlive){clearInterval(keepAlive);keepAlive=null;}
+      }catch(e){}
+    },8000);
+  }catch(e){if(onEnd)setTimeout(onEnd,120);}
 }
 var VF="girl",VM="boy";
-function sayF(t,rate){speakGB(t,1.35,VF,null,rate);}
-function sayM(t,rate){speakGB(t,1.05,VM,null,rate);}
+function sayF(t,rate){speakGB(t,1.08,VF,null,rate);}
+function sayM(t,rate){speakGB(t,0.97,VM,null,rate);}
 function stopSpeak(){try{speechSynthesis.cancel();}catch(e){}}
 function spellOut(word,gap,rate,gender,cb){
   stopSpeak();
@@ -964,13 +1059,13 @@ document.getElementById("globalSound").onclick=function(){
 
 /* ===== DATA ===== */
 var FOODS=[
- {key:"steak",   word:"steak",          img:"v-steak.png",   emoji:"🥩", act:"Pretend to cut steak.",            say:"I want steak for breakfast.",   hint:"STEAK"},
- {key:"bread",   word:"bread",          img:"v-bread.png",   emoji:"🍞", act:"Pretend to spread butter.",        say:"I want bread for breakfast.",   hint:"BREAD"},
- {key:"noodles", word:"noodles",        img:"v-noodles.png", emoji:"🍜", act:"Pretend to slurp noodles.",         say:"I want noodles for breakfast.", hint:"NOODLES"},
- {key:"soup",    word:"soup",           img:"v-soup.png",    emoji:"🥣", act:"Pretend to drink from a spoon.",   say:"I want soup for breakfast.",    hint:"SOUP"},
- {key:"fish",    word:"fish",           img:"v-fish.png",    emoji:"🐟", act:"Swimming hands.",                   say:"I want fish for breakfast.",    hint:"FISH"},
- {key:"rice",    word:"rice",           img:"v-rice.png",    emoji:"🍚", act:"Pretend to use chopsticks.",       say:"I want rice for breakfast.",    hint:"RICE"},
- {key:"soymilk", word:"soybean milk",   img:"v-soymilk.png", emoji:"🥛", act:"Pretend to drink.",                say:"I want soybean milk for breakfast.", hint:"SOYBEAN MILK"}
+ {key:"steak",   word:"steak",          img:"u13-steak.png",   emoji:"🥩", act:"Pretend to cut steak.",            say:"I want steak for breakfast.",   hint:"STEAK"},
+ {key:"bread",   word:"bread",          img:"u13-bread.png",   emoji:"🍞", act:"Pretend to spread butter.",        say:"I want bread for breakfast.",   hint:"BREAD"},
+ {key:"noodles", word:"noodles",        img:"u13-noodles.png", emoji:"🍜", act:"Pretend to slurp noodles.",         say:"I want noodles for breakfast.", hint:"NOODLES"},
+ {key:"soup",    word:"soup",           img:"u13-soup.png",    emoji:"🥣", act:"Pretend to drink from a spoon.",   say:"I want soup for breakfast.",    hint:"SOUP"},
+ {key:"fish",    word:"fish",           img:"u13-fish.png",    emoji:"🐟", act:"Swimming hands.",                   say:"I want fish for breakfast.",    hint:"FISH"},
+ {key:"rice",    word:"rice",           img:"u13-rice.png",    emoji:"🍚", act:"Pretend to use chopsticks.",       say:"I want rice for breakfast.",    hint:"RICE"},
+ {key:"soymilk", word:"soybean milk",   img:"u13-soymilk.png", emoji:"🥛", act:"Pretend to drink.",                say:"I want soybean milk for breakfast.", hint:"SOYBEAN MILK"}
 ];
 function foodByKey(k){for(var i=0;i<FOODS.length;i++)if(FOODS[i].key===k)return FOODS[i];return FOODS[0];}
 var MEALS=["breakfast","lunch","dinner"];
@@ -1011,7 +1106,7 @@ function bumpTeam(id,t,pts){
 }
 function teamVal(id,t){var el=document.getElementById(id+t.toUpperCase());return el?parseInt(el.textContent||"0",10)||0:0;}
 /* ============================================================
-   TAB 1 : PHONICS -s/-es
+   TAB 8 : S DETECTIVE (moved here from phonics)
    ============================================================ */
 var SDET=[
  {s:"She want bread.",a:"a",ex:"No! She is one person, so we say she WANTS bread."},
@@ -1074,6 +1169,52 @@ function sTo(box){
     sWin();launchConfetti();
   }
 }
+/* ============================================================
+   TAB 1 : PHONICS R (BRITISH ACCENT)
+   ============================================================ */
+var RD=[
+ {w:"rice",said:true,ex:"Yes! R + vowel — we say the R: rice."},
+ {w:"orange",said:true,ex:"Yes! o-range — a vowel follows, so say the R."},
+ {w:"read",said:true,ex:"Yes! r-ead — say the R."},
+ {w:"red",said:true,ex:"Yes! R + e — say the R."},
+ {w:"rabbit",said:true,ex:"Yes! R + a — say the R."},
+ {w:"rain",said:true,ex:"Yes! R + a — say the R."},
+ {w:"breakfast",said:false,ex:"Yes! The R is before a consonant — British English: NO R."},
+ {w:"for",said:false,ex:"Yes! The R is at the end — British English: NO R. It sounds like “faw”."},
+ {w:"dinner",said:false,ex:"Yes! R at the end — silent in British English."},
+ {w:"Peter",said:false,ex:"Yes! Peter ends with a silent R in British English."},
+ {w:"are",said:false,ex:"Yes! “are” — no R sound at the end."},
+ {w:"where",said:false,ex:"Yes! “where” — the R is not sounded at the end."}
+];
+var rdIdx=-1,rdRight=0,rdDone=false;
+function rdNext(){
+  rdIdx=(rdIdx+1)%RD.length;
+  if(rdIdx===0)rdRight=0;
+  rdDone=false;
+  document.getElementById("rdWord").textContent=RD[rdIdx].w;
+  document.getElementById("rdHint").innerHTML="Click the word to hear it, then answer — word "+(rdIdx+1)+" of "+RD.length+" →";
+  document.getElementById("rdResult").textContent="🔊 said or 🔇 silent?";
+  stopSpeak();sayF(RD[rdIdx].w+".");
+}
+function rdSay(){if(rdIdx>=0){stopSpeak();sayF(RD[rdIdx].w+".");}}
+function rdAns(said){
+  if(rdIdx<0){showToast("Press “Next word” first!");return;}
+  if(rdDone)return;
+  rdDone=true;
+  var d=RD[rdIdx],res=document.getElementById("rdResult"),hint=document.getElementById("rdHint");
+  if(said===d.said){
+    rdRight++;
+    hint.innerHTML=d.said?"🔊 R + vowel → the R is SAID":"🔇 R at the end / before a consonant → the R is SILENT in British English";
+    res.innerHTML="✅ <span style='color:var(--green)'>"+d.ex+"</span> &nbsp;("+rdRight+"/"+RD.length+")";
+    sDing();sayF(d.w+". "+d.ex);
+    if(rdRight>=RD.length){res.innerHTML="🎉 All 12 correct — you are an R Detective!";sWin();launchConfetti();}
+  }else{
+    hint.innerHTML=d.said?"🔊 The R IS said — a vowel follows it":"🔇 The R is SILENT in British English";
+    res.innerHTML="❌ <span style='color:var(--red)'>"+(d.said?"The R IS said — before a vowel.":"The R is SILENT in British English.")+"</span> Listen: "+d.w;
+    sBuzz();sayF(d.w+".");
+  }
+}
+function rdReset(){rdIdx=-1;rdRight=0;rdDone=false;document.getElementById("rdWord").textContent="Press “Next word” to start!";document.getElementById("rdHint").textContent="Listen in a British accent, then answer →";document.getElementById("rdResult").textContent="…";}
 var SPELLW=[
  {w:"steak",hint:"ST-E-A-K — the ea is /ɛ/"},
  {w:"bread",hint:"BR-E-A-D — the ea is /ɛ/"},
@@ -1136,14 +1277,14 @@ function checkSpell(i){
    TAB 2 : LUCKY KING
    ============================================================ */
 var LKQ=[
- {who:"Peter",verb:"go",where:"the library",when:"on Tuesdays"},
- {who:"Mia",verb:"go",where:"to school",when:"on Mondays"},
- {who:"Kate",verb:"read",where:"in the library",when:"on Fridays"},
- {who:"Nick",verb:"play",where:"football",when:"on Saturdays"},
- {who:"Jane",verb:"sing",where:"in the music room",when:"on Wednesdays"},
- {who:"Mike",verb:"watch TV",where:"at home",when:"in the evening"},
- {who:"May",verb:"draw",where:"pictures",when:"after school"},
- {who:"Sam",verb:"ride a bike",where:"in the park",when:"on Sundays"}
+ {who:"Peter",aux:"Does",pron:"he",verb:"go",vs:"goes",where:"to the library",when:"on Tuesdays"},
+ {who:"they",aux:"Do",pron:"they",verb:"go",vs:"go",where:"to school",when:"on Mondays"},
+ {who:"Kate",aux:"Does",pron:"she",verb:"read",vs:"reads",where:"in the library",when:"on Fridays"},
+ {who:"you",aux:"Do",pron:"we",verb:"play",vs:"play",where:"football",when:"on Saturdays"},
+ {who:"Jane",aux:"Does",pron:"she",verb:"sing",vs:"sings",where:"in the music room",when:"on Wednesdays"},
+ {who:"Mike",aux:"Does",pron:"he",verb:"watch TV",vs:"watches TV",where:"at home",when:"in the evening"},
+ {who:"Nick and May",aux:"Do",pron:"they",verb:"draw",vs:"draw",where:"pictures",when:"after school"},
+ {who:"Sam",aux:"Does",pron:"he",verb:"ride a bike",vs:"rides a bike",where:"in the park",when:"on Sundays"}
 ];
 var lkCur=null,lkBuilt="",lkAnswered=false,lkPicked="";
 function lkNewRound(){
@@ -1164,7 +1305,7 @@ function lkNewRound(){
     b.onclick=function(){lkTap(b);};
     g.appendChild(b);
   });
-  document.getElementById("lkQ").textContent="Click the words to build: Does "+lkCur.who+" …";
+  document.getElementById("lkQ").textContent="Click the words to build: "+lkCur.aux+" "+lkCur.who+" …";
 }
 function lkTap(b){
   if(b.classList.contains("used"))return;
@@ -1175,36 +1316,41 @@ function lkTap(b){
   if(lkBuilt.length>=wantWords.join(" ").length){
     var ok=lkBuilt===wantWords.join(" ");
     var el=document.getElementById("lkQ");
-    if(ok){el.innerHTML="Does "+lkCur.who+" "+lkCur.verb+" "+lkCur.where+" "+lkCur.when+"?";sDing();}
+    if(ok){el.innerHTML=lkQuestion();sDing();}
     else{el.innerHTML="Try again — press <strong>New scrambled question</strong>.";sBuzz();}
     document.getElementById("lkBtns").style.display="flex";
   }
 }
 function lkQuestion(){
   if(!lkCur)return "";
-  return "Does "+lkCur.who+" "+lkCur.verb+" "+lkCur.where+" "+lkCur.when+"?";
+  return lkCur.aux+" "+lkCur.who+" "+lkCur.verb+" "+lkCur.where+" "+lkCur.when+"?";
 }
-function lkAnswerSing(){return lkCur?lkCur.verb+"s":"";}
-function lkSpeakQuestion(){stopSpeak();sayF(lkQuestion(),0.85);}
+function lkNeedsS(){return lkCur?lkCur.vs!==lkCur.verb:false;}
+function lkAnswerText(){
+  if(!lkCur)return "";
+  var p=lkCur.pron.charAt(0).toUpperCase()+lkCur.pron.slice(1);
+  var aux=lkCur.aux==="Does"?"does":"do";
+  return "Yes, "+lkCur.pron+" "+aux+". "+p+" "+lkCur.vs+" "+lkCur.where+" "+lkCur.when+".";
+}
+function lkSpeakQuestion(){stopSpeak();sayF(lkQuestion(),0.9);}
 function lkSpeakAnswer(){
   if(!lkCur)return;
   stopSpeak();
-  sayF("Yes, he does. He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".");
+  sayF(lkAnswerText(),0.95);
 }
 function lkAnswer(yes){
   if(!lkCur||lkAnswered)return;
   lkAnswered=true;
   var res=document.getElementById("lkResult");
   var a=document.getElementById("lkA");
-  var correct=yes?/s$/.test(lkCur.verb):!/s$/.test(lkCur.verb);
+  var correct=yes===lkNeedsS();
+  a.innerHTML="<strong>"+lkAnswerText()+"</strong>";
   if(correct){
-    a.innerHTML="Yes, he does. <strong>He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".</strong>";
-    res.innerHTML="✅ <span style='color:var(--green)'>Correct! Does it need an S? YES.</span> Now draw a card!";
-    sDing();sayF("Yes, he does. He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".");
+    res.innerHTML="✅ <span style='color:var(--green)'>Correct! In the answer the verb takes the S: "+lkCur.vs+".</span> Now draw a card!";
+    sDing();sayF(lkAnswerText());
   }else{
-    a.innerHTML="He "+lkAnswerSing()+" "+lkCur.where+" "+lkCur.when+".";
-    res.innerHTML="❌ <span style='color:var(--red)'>Look again — the verb needs an S: "+lkAnswerSing()+"</span>";
-    sBuzz();sayF("Look again. He "+lkAnswerSing()+" "+lkCur.where+".");
+    res.innerHTML="❌ <span style='color:var(--red)'>Look again — the answer verb is “"+lkCur.vs+"”.</span>";
+    sBuzz();sayF("Look again. "+lkAnswerText());
   }
   document.getElementById("lkBtns").style.display="none";
 }
@@ -1408,7 +1554,6 @@ function buildHam(){
 function hamNew(){
   hamTarget=Math.floor(Math.random()*FOODS.length);
   document.getElementById("hamResult").textContent="…";
-  document.getElementById("hamBtns")&&0;
   document.getElementById("hamPrompt").innerHTML="🔨 Teacher calls: <span style='color:var(--pink)'>“"+FOODS[hamTarget].hint+"!”</span><br><span style='font-size:clamp(13px,2vw,16px);color:#666'>“Number 4!” — tap the right picture!</span>";
   sayF(FOODS[hamTarget].word.toUpperCase()+"!");
   sPop();
@@ -1420,7 +1565,7 @@ function hamTap(i){
   if(i===hamTarget){
     el.classList.add("tapped");
     res.innerHTML="✅ <span style='color:var(--green)'>Correct! Say it — and spell it for +2!</span>";
-    sDing();sayF(FOODS[i].word+". "+FOODS[i].spell||FOODS[i].word);
+    sDing();sayF(FOODS[i].word+". "+FOODS[i].say);
     hamTarget=-1;
   }else{
     res.innerHTML="❌ <span style='color:var(--red)'>No! Try again.</span>";
@@ -1745,24 +1890,25 @@ function spReset(){
    TAB 10 : TIC-TAC-TOE
    ============================================================ */
 var TTT=[
- {p:"steak",   img:"v-steak.png",   q:"What does M. Big want for dinner?"},
- {p:"bread",   img:"v-bread.png",   q:"What does Rocky want for breakfast?"},
- {p:"noodles", img:"v-noodles.png", q:"What do you and I want for dinner?"},
- {p:"soup",    img:"v-soup.png",    q:"What does Eva want for dinner?"},
- {p:"rice",    img:"v-rice.png",    q:"What does Kate want for lunch?"},
- {p:"soymilk", img:"v-soymilk.png", q:"What do They want for dinner?"},
- {p:"fish",    img:"v-fish.png",    q:"What does Nick want for lunch?"},
- {p:"bread",   img:"v-bread.png",   q:"What does James want for breakfast?"},
- {p:"noodles", img:"v-noodles.png", q:"What does May want for lunch?"},
- {p:"soup",    img:"v-soup.png",    q:"What does Peter want for breakfast?"},
- {p:"rice",    img:"v-rice.png",    q:"What does Sam want for lunch?"},
- {p:"steak",   img:"v-steak.png",   q:"What does Mia want for dinner?"}
+ {p:"steak",   img:"u13-steak.png",   q:"What does Mia want for dinner?"},
+ {p:"bread",   img:"u13-bread.png",   q:"What does Peter want for breakfast?"},
+ {p:"noodles", img:"u13-noodles.png", q:"What does Jane want for lunch?"},
+ {p:"soup",    img:"u13-soup.png",    q:"What do Nick and May want for lunch?"},
+ {p:"rice",    img:"u13-rice.png",    q:"What does Kate want for lunch?"},
+ {p:"soymilk", img:"u13-soymilk.png", q:"What does she want for breakfast?"},
+ {p:"fish",    img:"u13-fish.png",    q:"What does Nick want for lunch?"},
+ {p:"bread",   img:"u13-bread.png",   q:"What do you want for breakfast?"},
+ {p:"noodles", img:"u13-noodles.png", q:"What does Mike want for dinner?"},
+ {p:"soup",    img:"u13-soup.png",    q:"What does Jane want for dinner?"},
+ {p:"rice",    img:"u13-rice.png",    q:"What do they want for dinner?"},
+ {p:"steak",   img:"u13-steak.png",   q:"What does Sam want for dinner?"}
 ];
 var tttMarks={};
+var tttSel=-1;
 function buildTTT(){
   var g=document.getElementById("tttBoard");if(!g)return;
   g.innerHTML="";
-  tttMarks={};
+  tttMarks={};tttSel=-1;
   TTT.forEach(function(t,i){
     var d=document.createElement("div");
     d.className="ttt-cell";d.id="tc"+i;
@@ -1773,25 +1919,47 @@ function buildTTT(){
   document.getElementById("tttLog").textContent="Click any square to start!";
 }
 function tttPick(i){
+  if(tttMarks[i]){showToast("That square is taken — pick another!");return;}
+  tttSel=i;
   var t=TTT[i];
   document.getElementById("tttLog").innerHTML="🎯 <span style='color:var(--pink)'>“"+t.q+"”</span> — look at the picture and answer!";
-  sayF(t.q,0.9);
+  sayF(t.q,0.95);
   sPop();
+}
+function tttWinLine(team){
+  var lines=[],r,c;
+  for(r=0;r<3;r++)for(c=0;c<2;c++)lines.push([r*4+c,r*4+c+1,r*4+c+2]);
+  for(c=0;c<4;c++)lines.push([c,c+4,c+8]);
+  for(c=0;c<2;c++)lines.push([c,c+5,c+10]);
+  for(c=2;c<4;c++)lines.push([c,c+3,c+6]);
+  for(var i=0;i<lines.length;i++){
+    var L=lines[i];
+    if(tttMarks[L[0]]===team&&tttMarks[L[1]]===team&&tttMarks[L[2]]===team)return L;
+  }
+  return null;
 }
 function tttAward(team){
   var log=document.getElementById("tttLog");
-  var cells=document.querySelectorAll("#tttBoard .ttt-cell");
-  var empty=null;
-  for(var i=0;i<cells.length;i++)if(!tttMarks[i]){empty=i;break;}
-  if(empty===null){log.innerHTML="🎉 All squares are taken! Start a new game.";return;}
-  tttMarks[empty]=team;
-  var el=document.getElementById("tc"+empty);
+  var i=tttSel;
+  if(i===null||i===undefined||tttMarks[i]){
+    i=null;
+    for(var k=0;k<TTT.length;k++)if(!tttMarks[k]){i=k;break;}
+  }
+  if(i===null){log.innerHTML="🎉 All squares are taken! Start a new game.";return;}
+  tttMarks[i]=team;
+  tttSel=-1;
+  var el=document.getElementById("tc"+i);
   el.classList.add(team==="star"?"star":"heart");
   el.querySelector(".mark").textContent=team==="star"?"⭐":"❤️";
-  log.innerHTML=(team==="star"?"⭐ Team ⭐":"❤️ Team ❤️")+" marked square "+(empty+1)+"! First to connect <strong>3</strong> wins!";
+  log.innerHTML=(team==="star"?"⭐ Team ⭐":"❤️ Team ❤️")+" marked square "+(i+1)+"! First to connect <strong>3</strong> wins!";
   sDing();
-  var f=FOODS[empty%FOODS.length];
-  sayF((team==="star"?"Team star! ":"Team heart! ")+"They want "+f.word+".");
+  sayF(team==="star"?"Team star! Well done!":"Team heart! Well done!");
+  var win=tttWinLine(team);
+  if(win){
+    log.innerHTML="🏆 <span style='color:var(--green)'>"+(team==="star"?"⭐ Team ⭐":"❤️ Team ❤️")+" connected 3 squares — THE WINNER!</span>";
+    sWin();launchConfetti();
+    for(var j=0;j<win.length;j++)document.getElementById("tc"+win[j]).style.transform="scale(1.06)";
+  }
 }
 function tttReset(){buildTeams("tttTeams");buildTTT();}
 function finishLesson(){
@@ -2059,7 +2227,7 @@ document.addEventListener("click",function(e){
   var s=e.target.closest("[data-say]");
   if(s){
     var v=s.getAttribute("data-voice")||VF;
-    var p=(v==="boy")?1.05:1.35;
+    var p=(v==="boy")?0.97:1.08;
     var r=s.getAttribute("data-rate");
     stopSpeak();
     speakGB(s.getAttribute("data-say"),p,v,null,r?parseFloat(r):RATE);
