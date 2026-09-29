@@ -868,8 +868,8 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <div class="toast" id="toast"></div>
 <div class="mascot" id="mascot" title="Click me!">🏋️</div>
 <div class="fab-wrap">
-  <button class="fab fab-top" id="fabTop" title="Back to top">⬆️</button>
-  <button class="fab fab-home" id="fabHome" title="Lesson plan">🏠</button>
+  <button class="fab fab-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆</button>
+  <a class="fab fab-home" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
 </div>
 <div class="lightbox" id="lightbox"><button class="lb-close" id="lbClose">×</button><img id="lbImg" src="1.png" alt="enlarged"></div>
 <div class="cine" id="cine"><div class="cine-who" id="cineWho"></div><div class="cine-line" id="cineLine"></div><button class="cine-close" onclick="closeCine()">✖ Close</button></div>
@@ -991,14 +991,27 @@ document.getElementById('mascot').addEventListener('click',function(){
   this.style.transform='scale(1.35) rotate(15deg)';
   setTimeout(()=>this.style.transform='',350);
 });
-const fabTop=document.getElementById('fabTop');
-fabTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-document.getElementById('fabHome').addEventListener('click',()=>showTab(0));
-window.addEventListener('scroll',function(){
-  fabTop.style.opacity=window.scrollY>320?'1':'0';
-  fabTop.style.pointerEvents=window.scrollY>320?'auto':'none';
-  fabTop.style.transform=window.scrollY>320?'translateY(0)':'translateY(96px)';
+let fabDimT=null;
+let fabHasBeenDim=false;
+function fabDim(){document.querySelectorAll('.fab').forEach(f=>f.style.opacity='.3');fabHasBeenDim=true;}
+function fabBright(){document.querySelectorAll('.fab').forEach(f=>f.style.opacity='1');}
+function fabResetDim(){fabBright();clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);}
+function fabUpdate(){
+  const show=window.scrollY>160;
+  document.querySelectorAll('.fab').forEach(f=>{
+    if(show){f.style.pointerEvents='auto';f.style.transform='translateY(0)';if(!fabHasBeenDim)f.style.opacity='1';}
+    else{f.style.opacity='0';f.style.pointerEvents='none';f.style.transform='translateY(96px)';fabHasBeenDim=false;clearTimeout(fabDimT);}
+  });
+  if(show&&!fabHasBeenDim)fabResetDim();
+}
+window.addEventListener('scroll',fabUpdate,{passive:true});
+document.querySelectorAll('.fab').forEach(f=>{
+  f.addEventListener('mouseenter',function(){clearTimeout(fabDimT);fabBright();});
+  f.addEventListener('mouseleave',function(){clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);});
+  f.addEventListener('touchstart',function(){fabResetDim();});
+  f.addEventListener('click',function(){fabResetDim();});
 });
+fabUpdate();
 (function(){
   const ems=['⭐','🎵','🐾','💪','🌟','🤸','🏷️','🐛'];
   const box=document.getElementById('floaties');
@@ -1634,7 +1647,6 @@ renderLS();
 renderSpellQ();
 renderFill();
 twNext(true);
-fabTop.style.opacity='0';fabTop.style.pointerEvents='none';fabTop.style.transform='translateY(96px)';
 setTimeout(()=>toast('🏃 Tap any picture or word to hear it — British voices! 🇬🇧'),700);
 
 </script>
