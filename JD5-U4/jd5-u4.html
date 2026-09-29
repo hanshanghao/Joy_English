@@ -93,14 +93,13 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .twobox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
 .imgcap{text-align:center;font-weight:800;color:#888;margin-top:6px;font-size:clamp(12px,1.9vw,15px)}
 /* ===== TEAMS ===== */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0;max-width:640px;margin-left:auto;margin-right:auto}
 .team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
 .team-box .team-icon{font-size:32px;margin-bottom:4px}
 .team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
 .team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
 .team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
 .team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
-.team-box.tc{border-top:6px solid var(--green)}.team-box.tc .team-score{color:var(--green)}
 .team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
 .team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s;font-family:inherit}
 .team-btns button:hover{transform:scale(1.1)}
@@ -789,11 +788,10 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 <!-- ============ TAB 7 : TEAM GAMES ============ -->
 <div class="tabpan" id="tp7" data-sec="games">
   <section>
-    <div class="shead"><span class="ic">🏆</span><h2>Team Score Board</h2><span class="badge">3 TEAMS</span><button class="sec-sound" data-sec="games" onclick="toggleSecSound('games',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="shead"><span class="ic">🏆</span><h2>Team Score Board</h2><span class="badge">2 TEAMS</span><button class="sec-sound" data-sec="games" onclick="toggleSecSound('games',this)"><span class="sec-si">🔊</span></button></div>
     <div class="team-grid">
       <div class="team-box ta"><div class="team-icon">🐬</div><div class="team-name">Team A</div><div class="team-score" id="scoreA">0</div><div class="team-btns"><button class="tsub" onclick="addScore('A',-10)">−10</button><button class="tadd" onclick="addScore('A',10)">+10</button></div></div>
       <div class="team-box tb"><div class="team-icon">🐯</div><div class="team-name">Team B</div><div class="team-score" id="scoreB">0</div><div class="team-btns"><button class="tsub" onclick="addScore('B',-10)">−10</button><button class="tadd" onclick="addScore('B',10)">+10</button></div></div>
-      <div class="team-box tc"><div class="team-icon">🐸</div><div class="team-name">Team C</div><div class="team-score" id="scoreC">0</div><div class="team-btns"><button class="tsub" onclick="addScore('C',-10)">−10</button><button class="tadd" onclick="addScore('C',10)">+10</button></div></div>
     </div>
     <div style="text-align:center;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap">
       <span class="turn-chip" id="turnChip">Turn: Team A 🐬</span>
@@ -944,7 +942,7 @@ const SEC_READS={
   patterns:"Three patterns. I can jump. Let's hop. It can crawl. Make your own sentences with the sentence machine.",
   beforeafter:"Before exercising, I put on my sneakers. After exercising, I wash my face and hands, change my clothes, or take a shower. Eating a lot and lying down are bad ideas.",
   song:"Jump, jump, jump! Jump to the door. Shake, shake, shake! Shake your leg. Hop, hop, hop! Hop to me. Tiptoe, tiptoe to the door. Twist, twist, twist! Twist your body. Crawl, crawl, crawl! Crawl to me.",
-  games:"Team games. Three teams: A, B and C. Open a mystery present, guess my action, and catch the teacher's mistake.",
+  games:"Team games. Two teams: A and B. Open a mystery present, guess my action, and catch the teacher's mistake.",
   quiz:"Final quiz. True or false, listen and choose the picture, spell the R word, and fill in the blank. Good luck!"
 };
 function toggleSecSound(key,btn){
@@ -1283,17 +1281,17 @@ function cmdChain(){
 function cmdStop(){stopCmd();cmdShow('STOP! 🛑','Freeze like a statue! 🗿','boy');}
 function cmdGO(){stopCmd();cmdShow('GO!! 📣','Now do the last action fast!','boy');}
 /* ================= TEAMS ================= */
-const TEAM=[{n:'Team A',i:'🐬'},{n:'Team B',i:'🐯'},{n:'Team C',i:'🐸'}];
+const TEAM=[{n:'Team A',i:'🐬'},{n:'Team B',i:'🐯'}];
 let turn=0;
-function currentTeam(){return['A','B','C'][turn];}
+function currentTeam(){return['A','B'][turn];}
 function addScore(id,d){
   const el=document.getElementById('score'+id);
   el.textContent=Math.max(0,parseInt(el.textContent,10)+d);
   el.style.transform='scale(1.35)';setTimeout(()=>el.style.transform='',260);
-  toast((d>0?'+':'')+d+' points — '+TEAM[['A','B','C'].indexOf(id)].n+'!');
+  toast((d>0?'+':'')+d+' points — '+TEAM[['A','B'].indexOf(id)].n+'!');
 }
-function nextTurn(){turn=(turn+1)%3;document.getElementById('turnChip').textContent='Turn: '+TEAM[turn].n+' '+TEAM[turn].i;}
-function resetScores(){['A','B','C'].forEach(id=>document.getElementById('score'+id).textContent='0');turn=0;document.getElementById('turnChip').textContent='Turn: Team A 🐬';toast('Scores reset!');}
+function nextTurn(){turn=(turn+1)%2;document.getElementById('turnChip').textContent='Turn: '+TEAM[turn].n+' '+TEAM[turn].i;}
+function resetScores(){['A','B'].forEach(id=>document.getElementById('score'+id).textContent='0');turn=0;document.getElementById('turnChip').textContent='Turn: Team A 🐬';toast('Scores reset!');}
 
 /* ================= LISTEN & DRAG ================= */
 let dragSel=null;
