@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD5 Unit 4 - Time to Exercise!</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f;--paper:#fff7ea}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:var(--pink);top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:var(--yellow);bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:var(--blue);top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-30%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0;font-family:inherit}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.18),0 12px 20px rgba(0,0,0,.15)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.1)}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.btn.red{--c1:#ff8a8a;--c2:#e04040}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.topbar .sound-toggle{margin-left:auto;background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
+.topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.topbar .sound-toggle.off{border-color:#ddd;color:#bbb;background:#f2f2f2}
+.sec-sound{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.85);border:2px solid #e0d8f0;border-radius:50px;padding:4px 12px;font-size:clamp(11px,1.6vw,13px);font-weight:700;cursor:pointer;transition:all .2s;color:#555;margin-left:auto}
+.sec-sound:hover{border-color:var(--purple);background:#f5f0ff}
+.sec-sound.off{border-color:#ddd;color:#bbb;background:#f9f9f9}
+.sec-sound.on{border-color:var(--green);background:#ebfff0;color:#2f9e2b;box-shadow:0 2px 8px rgba(76,201,72,.3)}
+.sec-sound .sec-si{font-size:15px}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.navbar .ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s;font-family:inherit}
+.navbar .ntab:hover{border-color:var(--purple);background:#f5f0ff}
+.navbar .ntab.on{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(139,92,240,.35)}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(139,92,240,.15),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15));animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(26px,5.5vw,44px);font-weight:900;color:var(--ink);text-shadow:2px 2px 0 rgba(139,92,240,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.hero .desc{margin-top:10px;font-size:clamp(13px,2vw,16px);color:#666;font-weight:600}
+/* ===== R PHONICS NOTE ===== */
+.rnote{background:linear-gradient(150deg,#fff4fb,#ffe4f3,#f0e6ff);border:4px solid var(--pink);border-radius:24px;padding:20px;margin:0 0 20px;box-shadow:0 10px 26px rgba(240,79,155,.25)}
+.rnote h2{font-size:clamp(19px,3.6vw,28px);font-weight:900;color:var(--pink);margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rnote h2 .rbadge{background:var(--pink);color:#fff;font-size:clamp(11px,1.7vw,13px);padding:4px 12px;border-radius:30px;font-weight:900}
+.rnote .rlead{font-size:clamp(13px,2.1vw,16px);font-weight:700;line-height:1.55;margin-bottom:12px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.ritem{background:rgba(255,255,255,.85);border:3px solid #ffd6ec;border-radius:16px;padding:12px 14px}
+.ritem h4{font-size:clamp(14px,2.2vw,17px);font-weight:900;color:var(--purple);margin-bottom:5px;display:flex;gap:6px;align-items:center}
+.ritem p{font-size:clamp(12px,1.9vw,15px);font-weight:600;line-height:1.5;color:#555}
+.ritem .rbig{font-size:clamp(30px,6vw,46px);font-weight:900;color:var(--pink);line-height:1;margin-right:6px}
+.ritem.ok{border-color:#b6f0b0}.ritem.ok h4{color:#2f9e2b}
+.ritem.no{border-color:#ffc2c2}.ritem.no h4{color:#c0392b}
+.rmouth{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.rmouth span{background:#fff;border:2px solid var(--purple);border-radius:12px;padding:4px 10px;font-size:clamp(12px,1.8vw,15px);font-weight:800;color:var(--purple);cursor:pointer;transition:all .2s}
+.rmouth span:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.rnote .rfoot{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+/* ===== TIMELINE ===== */
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.tl-item{background:#fff;border-radius:18px;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-top:6px solid var(--purple);cursor:pointer;transition:all .25s}
+.tl-item:hover{transform:translateY(-4px);box-shadow:0 9px 20px rgba(0,0,0,.14)}
+.tl-item .tl-min{font-size:clamp(11px,1.7vw,13px);font-weight:900;color:#fff;background:var(--purple);display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:6px}
+.tl-item h4{font-size:clamp(15px,2.4vw,19px);font-weight:900;color:var(--ink);margin-bottom:4px}
+.tl-item p{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#777;line-height:1.45}
+.tl-item.t1{border-top-color:var(--orange)}.tl-item.t1 .tl-min{background:var(--orange)}
+.tl-item.t2{border-top-color:var(--pink)}.tl-item.t2 .tl-min{background:var(--pink)}
+.tl-item.t3{border-top-color:var(--green)}.tl-item.t3 .tl-min{background:var(--green)}
+/* ===== CROPS ===== */
+.crop{position:relative;overflow:hidden;border-radius:16px;width:100%;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,.1);display:block}
+.crop img{position:absolute;max-width:none;height:auto;display:block}
+.cropfit{display:flex;align-items:center;justify-content:center;overflow:hidden;width:100%;background:#fff;border-radius:16px 16px 0 0;box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.cropfit .crop{border-radius:0;box-shadow:none;flex-shrink:0}
+.t-image{width:100%;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;transition:transform .3s;display:block}
+.t-image:hover{transform:scale(1.02)}
+.twobox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.imgcap{text-align:center;font-weight:800;color:#888;margin-top:6px;font-size:clamp(12px,1.9vw,15px)}
+/* ===== TEAMS ===== */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-icon{font-size:32px;margin-bottom:4px}
+.team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
+.team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
+.team-box.tc{border-top:6px solid var(--green)}.team-box.tc .team-score{color:var(--green)}
+.team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s;font-family:inherit}
+.team-btns button:hover{transform:scale(1.1)}
+.team-btns .tadd{background:linear-gradient(135deg,#7ce577,#37a832)}
+.team-btns .tsub{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.turn-chip{display:inline-block;background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff;font-weight:900;padding:5px 16px;border-radius:30px;font-size:clamp(12px,1.9vw,15px)}
+/* ===== CARD GRIDS ===== */
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
+.vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;border:4px solid transparent}
+.vocab-card:hover{transform:translateY(-5px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.vocab-card.said{border-color:var(--green)}
+.vocab-card .vc-body{padding:12px;text-align:center}
+.vocab-card .vc-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.vocab-card .vc-tag{display:inline-block;font-size:clamp(10px,1.5vw,12px);font-weight:900;padding:2px 10px;border-radius:20px;margin-top:5px;background:#e8f4ff;color:#2a7ab8}
+.vocab-card .vc-say{font-size:clamp(12px,1.9vw,15px);font-weight:700;color:var(--green);margin-top:6px;min-height:20px}
+/* ===== STORY STEPS ===== */
+.story-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.story-step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:background .2s}
+.story-step:hover{background:rgba(139,92,240,.06)}
+.story-step .step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.story-step .step-text{font-size:clamp(13px,2vw,16px);font-weight:600;line-height:1.5}
+.story-step .spk{margin-left:auto;font-size:20px;opacity:.5;flex-shrink:0}
+.story-step:hover .spk{opacity:1}
+/* ===== DIALOGUE BUBBLES ===== */
+.dlg{display:flex;align-items:center;gap:10px;padding:10px;border-radius:16px;cursor:pointer;margin-bottom:8px;transition:all .2s}
+.dlg:hover{transform:translateX(4px)}
+.dlg .av{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;flex-shrink:0;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.dlg.g .av{background:linear-gradient(135deg,var(--pink),#e03080)}
+.dlg.b .av{background:linear-gradient(135deg,var(--blue),#2a7ab8)}
+.dlg.p .av{background:linear-gradient(135deg,var(--green),#34a832)}
+.dlg.o .av{background:linear-gradient(135deg,var(--orange),#e06a10)}
+.dlg .bub{padding:10px 16px;border-radius:16px;font-weight:700;font-size:clamp(13px,2.1vw,17px);line-height:1.45;flex:1}
+.dlg.g .bub{background:#f5f0ff;border-left:5px solid var(--pink)}
+.dlg.b .bub{background:#e8f4ff;border-left:5px solid var(--blue)}
+.dlg.p .bub{background:#e8ffe8;border-left:5px solid var(--green)}
+.dlg.o .bub{background:#fff3e8;border-left:5px solid var(--orange)}
+.dlg .vtag{font-size:clamp(10px,1.6vw,12px);font-weight:900;padding:3px 9px;border-radius:20px;background:#fff;border:2px solid #e0d8f0;color:#888;flex-shrink:0}
+.dlg.g .vtag{border-color:var(--pink);color:var(--pink)}
+.dlg.b .vtag{border-color:var(--blue);color:var(--blue)}
+.dlg.p .vtag{border-color:var(--green);color:var(--green)}
+.dlg.o .vtag{border-color:var(--orange);color:var(--orange)}
+/* ===== OBJECT / ACTION CARDS ===== */
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:16px 0}
+.obj{background:#fff;border-radius:18px;padding:14px 10px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .25s;border:4px solid transparent}
+.obj:hover{transform:translateY(-5px) rotate(-2deg);border-color:var(--purple)}
+.obj.used{border-color:var(--green);background:#f2fff2}
+.obj .obj-emoji{font-size:44px;display:block;margin-bottom:6px}
+.obj .obj-name{font-weight:900;font-size:clamp(12px,1.9vw,15px);color:var(--purple)}
+.obj .obj-say{font-size:clamp(11px,1.7vw,13px);font-weight:700;color:#888;margin-top:4px;min-height:18px}
+.obj-say.bad{color:var(--red)}
+.obj-say.good{color:var(--green)}
+.big-reply{text-align:center;font-size:clamp(22px,5vw,42px);font-weight:900;margin:14px 0;min-height:56px;letter-spacing:1px}
+.big-reply.bad{color:var(--red);animation:shake .4s}
+.big-reply.good{color:var(--green);animation:popIn .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes popIn{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1)}}
+/* ===== YES/NO ===== */
+.yn{display:flex;gap:14px;justify-content:center;margin:14px 0;flex-wrap:wrap}
+.yn button{padding:16px 40px;border:none;border-radius:50px;font-size:clamp(17px,3vw,26px);font-weight:900;cursor:pointer;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:all .2s;font-family:inherit}
+.yn button.y{background:linear-gradient(135deg,#7ce577,#37a832)}
+.yn button.n{background:linear-gradient(135deg,#ff8a8a,#e04040)}
+.yn button:hover{transform:translateY(-4px)}
+.big-ans{text-align:center;font-size:clamp(19px,3.4vw,28px);font-weight:900;min-height:36px;margin:10px 0;line-height:1.4}
+/* ===== ZONES ===== */
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.zone{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:4px solid transparent;position:relative}
+.zone:hover{transform:translateY(-4px);border-color:var(--purple)}
+.zone .zlabel{padding:8px;text-align:center;font-weight:900;font-size:clamp(12px,2vw,16px);color:var(--purple);background:#f8f5ff}
+.zone .zhide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:clamp(30px,7vw,52px);background:linear-gradient(135deg,rgba(139,92,240,.94),rgba(240,79,155,.94));color:#fff;opacity:0;pointer-events:none;transition:all .3s;font-weight:900;text-shadow:0 3px 6px rgba(0,0,0,.35);text-align:center;line-height:1.2;padding:8px}
+.zone.revealed .zhide{opacity:1;pointer-events:auto}
+.zone.revealed{border-color:var(--green)}
+/* ===== PATTERNS ===== */
+.pattern-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--purple)}
+.pattern-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:10px}
+.pattern-line{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.7;cursor:pointer;padding:8px 10px;border-radius:12px;transition:background .2s}
+.pattern-line:hover{background:#f8f5ff}
+.pattern-line .q{color:var(--pink)}
+.pattern-line .a{color:var(--green)}
+.pattern-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pattern-examples .pe{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid var(--purple);color:var(--purple);padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.pattern-examples .pe:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.sub-machine{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.sub-machine select{width:100%;padding:12px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(14px,2.2vw,17px);font-weight:800;background:#faf8ff;outline:none;font-family:inherit;color:var(--ink);cursor:pointer}
+.sub-machine select:focus{border-color:var(--purple)}
+.sub-out{text-align:center;background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 14px rgba(0,0,0,.08);border:4px solid var(--green)}
+.sub-out .so-a{font-size:clamp(18px,3.2vw,28px);font-weight:900;color:var(--green);margin-top:6px;line-height:1.4}
+/* ===== PHONICS ===== */
+.phon-hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;background:linear-gradient(135deg,#fff0f8,#f3e9ff);border:4px solid var(--pink);border-radius:22px;padding:20px;margin-bottom:16px}
+.phon-big{font-size:clamp(70px,16vw,130px);font-weight:900;color:var(--pink);line-height:.85;text-shadow:0 6px 0 rgba(240,79,155,.25);animation:bounce 2.2s ease-in-out infinite;cursor:pointer;user-select:none}
+.r-word-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:16px 0}
+.r-word{background:#fff;border-radius:16px;padding:14px 10px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .22s;border:3px solid #f0e0ff}
+.r-word:hover{transform:translateY(-4px) scale(1.03);border-color:var(--pink)}
+.r-word .rw-w{font-size:clamp(15px,2.4vw,20px);font-weight:900;color:var(--purple)}
+.r-word .rw-s{font-size:clamp(11px,1.8vw,14px);font-weight:800;color:var(--pink);letter-spacing:1px;margin-top:3px}
+.sort-boxes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.sort-box{border-radius:18px;padding:14px;min-height:150px;border:4px dashed}
+.sort-box.r{border-color:var(--pink);background:#fff5fb}
+.sort-box.n{border-color:var(--blue);background:#f4faff}
+.sort-box h4{font-size:clamp(14px,2.3vw,18px);font-weight:900;margin-bottom:10px;text-align:center}
+.sort-box.r h4{color:var(--pink)}
+.sort-box.n h4{color:var(--blue)}
+.sort-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+.sort-pool span{background:#fff;border:3px solid #e0d8f0;border-radius:14px;padding:8px 16px;font-size:clamp(13px,2.1vw,17px);font-weight:800;cursor:pointer;transition:all .2s;font-family:inherit}
+.sort-pool span:hover{border-color:var(--purple);transform:translateY(-3px)}
+.sort-pool span.gone{opacity:.2;pointer-events:none}
+.sort-pool span.sel{border-color:var(--pink)!important;background:#ffe4f3;transform:scale(1.08)}
+.sort-box .placed{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:40px}
+.sort-box .placed span{background:#fff;border:3px solid currentColor;border-radius:14px;padding:6px 14px;font-size:clamp(12px,1.9vw,15px);font-weight:800;cursor:pointer}
+.sort-box.r .placed span{color:var(--pink)}
+.sort-box.n .placed span{color:var(--blue)}
+.blend-row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center;margin:10px 0;min-height:40px}
+.blend-row span{background:#fff;border:3px solid var(--purple);border-radius:12px;width:34px;height:40px;display:flex;align-items:center;justify-content:center;font-size:clamp(16px,2.8vw,22px);font-weight:900;color:var(--purple);animation:popIn .2s ease}
+.blend-row .bs{background:transparent;border:none;width:16px}
+.blend-row .done{border-color:var(--green);color:var(--green);background:#e8ffe8}
+/* ===== WRITING ===== */
+.write-card,.fill-card,.listen-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.write-prompt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:6px}
+.write-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:14px;font-weight:600}
+.write-display{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;min-height:48px;padding:10px;background:#f8f5ff;border-radius:14px;border:2px dashed #d0c4f0}
+.write-display.ok{border-color:var(--green);background:#e8ffe8;border-style:solid}
+.write-display.bad{border-color:var(--red);background:#ffe8e8;border-style:solid}
+.write-keyboard{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:12px 0}
+.write-key{width:clamp(30px,6.5vw,38px);height:clamp(34px,7.5vw,42px);border:none;border-radius:10px;font-size:clamp(13px,2.1vw,17px);font-weight:800;cursor:pointer;background:linear-gradient(135deg,#f5f0ff,#ede4ff);color:var(--purple);border:2px solid #d0c4f0;transition:all .15s;box-shadow:0 3px 0 rgba(0,0,0,.08);font-family:inherit}
+.write-key:hover{transform:translateY(-2px);box-shadow:0 5px 0 rgba(0,0,0,.08);background:var(--purple);color:#fff;border-color:var(--purple)}
+.write-key:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.write-key.del{background:linear-gradient(135deg,#ffab6e,#f5822b);color:#fff;border-color:#f5822b;font-size:clamp(15px,2.4vw,19px)}
+.write-key.clr{background:linear-gradient(135deg,#ff8a8a,#e04040);color:#fff;border-color:#e04040;font-size:clamp(11px,1.7vw,13px)}
+.write-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;min-height:24px;margin-top:8px}
+.fill-q{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.6;margin-bottom:4px}
+.fill-a{font-size:clamp(14px,2.2vw,18px);font-weight:700;color:#666;margin-bottom:12px}
+.fill-blank{display:inline-block;min-width:120px;border-bottom:3px dashed var(--purple);padding:2px 8px;color:var(--green);font-weight:900;text-align:center;transition:all .3s}
+.fill-blank.revealed{border-bottom-style:solid;background:#e8ffe8;border-radius:8px}
+.fill-blank.wrong-reveal{border-bottom-color:var(--red);background:#ffe8e8;color:var(--red);border-radius:8px}
+.fill-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fill-opt{padding:10px 18px;border:3px solid #e0d8f0;border-radius:50px;font-size:clamp(13px,2vw,16px);font-weight:700;cursor:pointer;background:#faf8ff;transition:all .2s;font-family:inherit}
+.fill-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.fill-opt.selected{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.fill-opt.wrong{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.fill-opt.dis{pointer-events:none;opacity:.5}
+.fill-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;margin-top:10px;min-height:24px}
+/* ===== QUIZ ===== */
+.quiz-section-title{display:flex;align-items:center;gap:10px;margin:20px 0 14px;padding:10px 16px;background:linear-gradient(135deg,rgba(139,92,240,.12),rgba(240,79,155,.08));border-radius:16px;border-left:5px solid var(--purple)}
+.quiz-section-title h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.quiz-section-title .qs-badge{background:var(--purple);color:#fff;font-size:clamp(11px,1.6vw,13px);font-weight:800;padding:4px 12px;border-radius:20px;margin-left:auto}
+.tf-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0;transition:all .3s}
+.tf-card .tf-emoji{font-size:clamp(44px,9vw,66px);text-align:center;margin-bottom:10px}
+.tf-card .tf-stmt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:14px;line-height:1.4}
+.tf-btns{display:flex;gap:12px;justify-content:center}
+.tf-btn{padding:14px 32px;border:none;border-radius:50px;font-size:clamp(16px,2.6vw,22px);font-weight:900;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.15);font-family:inherit}
+.tf-btn:hover{transform:translateY(-3px)}
+.tf-btn.true-btn{background:linear-gradient(135deg,#7ce577,#37a832)}
+.tf-btn.false-btn{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.tf-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.tf-result{font-size:clamp(13px,2.1vw,17px);font-weight:700;text-align:center;margin-top:12px;min-height:26px;line-height:1.5}
+.listen-play{display:flex;justify-content:center;margin-bottom:14px}
+.listen-play button{width:64px;height:64px;border-radius:50%;border:none;font-size:28px;cursor:pointer;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.15);transition:all .2s}
+.listen-play button:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.15)}
+.listen-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:12px;font-weight:600}
+.listen-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.listen-opt{padding:14px 18px;border:3px solid #e0d8f0;border-radius:14px;cursor:pointer;font-size:clamp(14px,2.2vw,18px);font-weight:700;background:#faf8ff;text-align:center;transition:all .2s;font-family:inherit}
+.listen-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.listen-opt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.listen-opt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.listen-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt{padding:8px;cursor:pointer;border:3px solid #e0d8f0;border-radius:14px;background:#faf8ff;transition:all .2s}
+.pic-opt:hover{border-color:var(--purple);transform:translateY(-3px)}
+.pic-opt.ok{border-color:var(--green);background:#e8ffe8;pointer-events:none}
+.pic-opt.no{border-color:var(--red);background:#ffe8e8;pointer-events:none}
+.pic-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt .po-w{font-size:clamp(11px,1.8vw,14px);font-weight:800;margin-top:6px}
+.score-board{background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:22px;padding:28px 22px;text-align:center;color:#fff;margin:16px 0;box-shadow:0 8px 22px rgba(139,92,240,.3)}
+.score-board h2{font-size:clamp(22px,4vw,32px);font-weight:900;margin-bottom:12px}
+.score-board .score-big{font-size:clamp(40px,10vw,72px);font-weight:900;text-shadow:0 4px 8px rgba(0,0,0,.2);line-height:1}
+.score-board .score-label{font-size:clamp(14px,2.2vw,18px);font-weight:700;opacity:.9;margin-top:4px}
+.score-board .score-stars{font-size:clamp(24px,5vw,40px);margin:10px 0}
+.score-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
+.score-item{background:rgba(255,255,255,.2);border-radius:14px;padding:12px;text-align:center}
+.score-item .si-type{font-size:clamp(11px,1.6vw,13px);font-weight:700;opacity:.85}
+.score-item .si-score{font-size:clamp(20px,4vw,28px);font-weight:900}
+/* ===== MISC ===== */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;pointer-events:none;transition:transform .4s,opacity .4s;opacity:0;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.mascot{position:fixed;bottom:20px;right:20px;z-index:997;font-size:48px;cursor:pointer;transition:transform .3s;line-height:1}
+.mascot:hover{transform:scale(1.15) rotate(-10deg)}
+.fab-wrap{position:fixed;bottom:80px;right:20px;z-index:998;display:flex;flex-direction:column;gap:10px}
+.fab{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .5s,transform .4s,background .2s;opacity:0;pointer-events:none;transform:translateY(96px)}
+.fab.fab-top{background:linear-gradient(135deg,var(--purple),#6c3de0);color:#fff}
+.fab.fab-home{background:linear-gradient(135deg,var(--green),#2f9e2b);color:#fff}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10001;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 0 40px rgba(255,255,255,.2)}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;font-weight:900;transition:transform .2s}
+.lightbox .lb-close:hover{transform:scale(1.2)}
+.confetti-piece{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:10000;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(1080deg);opacity:0}}
+.board-plan{background:#fff;border-radius:18px;padding:18px;box-shadow:0 5px 14px rgba(0,0,0,.08);font-size:clamp(13px,2.1vw,17px);line-height:1.9;font-weight:700}
+.board-plan .bp-t{font-weight:900;color:var(--purple);font-size:1.1em;margin-bottom:4px}
+.bp-star{color:var(--orange);font-weight:900}
+.bp-ok{color:var(--green);font-weight:900}
+.bp-no{color:var(--red);font-weight:900;text-decoration:line-through}
+.cine{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:10000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:20px}
+.cine.show{display:flex}
+.cine .cine-who{font-size:clamp(14px,2.4vw,20px);font-weight:900;color:#ffd447;letter-spacing:2px;margin-bottom:8px}
+.cine .cine-line{font-size:clamp(24px,6vw,52px);font-weight:900;color:#fff;line-height:1.25;text-shadow:0 4px 20px rgba(0,0,0,.6);text-align:center}
+.cine-close{margin-top:20px;padding:12px 30px;border-radius:50px;border:none;background:#fff;font-size:clamp(14px,2.2vw,18px);font-weight:900;cursor:pointer;font-family:inherit}
+.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:10px solid var(--purple);background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.12)}
+.ring .rt{font-size:clamp(34px,8vw,52px);font-weight:900;color:var(--purple);line-height:1}
+.ring .rl{font-size:clamp(10px,1.7vw,12px);font-weight:900;color:#999;letter-spacing:1px}
+.ring.hot{border-color:var(--red);animation:pulseR .6s ease-in-out infinite alternate}
+@keyframes pulseR{from{transform:scale(1)}to{transform:scale(1.05)}}
+.lyric{display:flex;align-items:center;gap:12px;padding:12px;border-radius:16px;margin-bottom:8px;cursor:pointer;transition:all .2s;background:#fff}
+.lyric:hover{transform:translateX(5px);box-shadow:0 5px 14px rgba(0,0,0,.1)}
+.lyric .ly-n{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0}
+.lyric .ly-t{font-size:clamp(14px,2.3vw,19px);font-weight:800;line-height:1.4}
+.lyric .ly-a{margin-left:auto;font-size:24px;flex-shrink:0}
+.lyric.hot{background:#fff7de;border:3px solid var(--yellow)}
+.stage-box{position:relative;background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:4px dashed var(--purple);border-radius:20px;padding:18px;margin:12px 0;text-align:center;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.stage-box .stage-label{font-size:clamp(11px,1.8vw,13px);font-weight:900;color:#999;letter-spacing:2px}
+.stage-box .stage-main{font-size:clamp(26px,5.5vw,44px);font-weight:900;color:var(--purple);line-height:1.2}
+.stage-box .stage-sub{font-size:clamp(13px,2.1vw,16px);font-weight:700;color:#666}
+.stage-box .stage-crop{max-width:340px}
+@media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:70px;right:12px}.vocab-grid{grid-template-columns:repeat(2,1fr)}.mascot{font-size:38px;bottom:10px;right:10px}.twobox{grid-template-columns:1fr}.sub-machine{grid-template-columns:1fr}.phon-hero{grid-template-columns:1fr;text-align:center}.sort-boxes{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div>
+<div class="blob b2"></div>
+<div class="blob b3"></div>
+<div id="floaties"></div>
+
+<div class="topbar">
+  <div class="now-chip">🏃 JD5 · Unit 4 · Time to Exercise!</div>
+  <button class="sound-toggle" id="globalSound" title="Global sound on / off">🔊</button>
+</div>
+
+<div class="navbar" id="navBar">
+  <button class="ntab on" onclick="showTab(0)">📋 Lesson Plan</button>
+  <button class="ntab" onclick="showTab(1)">🔤 Phonics R</button>
+  <button class="ntab" onclick="showTab(2)">💪 Warm-Up</button>
+  <button class="ntab" onclick="showTab(3)">📖 9 Actions</button>
+  <button class="ntab" onclick="showTab(4)">💬 Patterns</button>
+  <button class="ntab" onclick="showTab(5)">⏰ Before / After</button>
+  <button class="ntab" onclick="showTab(6)">🎵 Song</button>
+  <button class="ntab" onclick="showTab(7)">🎯 Team Games</button>
+  <button class="ntab" onclick="showTab(8)">📝 Quiz</button>
+</div>
+
+<!-- ============ TAB 0 : R PHONICS NOTE + LESSON PLAN ============ -->
+<div class="tabpan on" id="tp0" data-sec="plan">
+  <div class="rnote">
+    <h2>🔤 Teacher's Note — The R Phonics in Unit 4 <span class="rbadge">R</span><span class="rbadge">READ ME FIRST</span></h2>
+    <p class="rlead">The star R words of this unit are <strong>roll · run · rabbit · reach · ready</strong>. Children in Taiwan usually need two things: the <strong>British</strong> way to make /r/, and a reminder that British English is <strong>non-rhotic</strong> — the R is only sounded <strong>before a vowel</strong>. Read this note before the lesson.</p>
+    <div class="rgrid">
+      <div class="ritem">
+        <h4><span class="rbig">R</span> How to make it (British)</h4>
+        <p>Bend your tongue <strong>up and back</strong> so the tip sits just behind your top teeth — but it does <strong>NOT touch</strong>. Lips pull forward a little. Hold it and say <strong>“rrr…”</strong>. Never roll it like a motorbike.</p>
+        <div class="rmouth">
+          <span data-say="R. Rrrr." data-rate="0.6" data-voice="girl">rrr…</span>
+          <span data-say="Roll. Roll, roll, roll." data-voice="girl">roll</span>
+          <span data-say="I can roll my body!" data-voice="boy">full sentence</span>
+        </div>
+      </div>
+      <div class="ritem">
+        <h4>🇬🇧 British = NON-rhotic</h4>
+        <p>The R is only sounded <strong>before a vowel</strong>. In <em>roll, run, rabbit, reach, ready</em> the R is always before a vowel, so you <strong>always</strong> say it. But in <em>after</em> and <em>before</em> the R is silent: “ah-fuh”, “bee-foh”.</p>
+        <div class="rmouth">
+          <span data-say="After exercising, I wash my face." data-voice="girl">after = ah-fuh</span>
+          <span data-say="Before exercising, I put on my sneakers." data-voice="boy">before = bee-foh</span>
+        </div>
+      </div>
+      <div class="ritem no">
+        <h4>⚠️ Mistake 1 — L for R</h4>
+        <p>“woll!”, “wun!”, “wabbit!”. <strong>Fix:</strong> /l/ = tongue tip <strong>DOWN</strong> on the teeth ridge. /r/ = tongue tip <strong>UP</strong>, touching nothing.</p>
+      </div>
+      <div class="ritem no">
+        <h4>⚠️ Mistake 2 — Rolling the R</h4>
+        <p>Rolling the tongue like a motorbike. <strong>Fix:</strong> the British /r/ never touches the roof of the mouth. If you can <em>feel</em> a bump, it is too far back.</p>
+      </div>
+      <div class="ritem ok">
+        <h4>✅ Say these R words</h4>
+        <p>roll · run · rabbit · reach · ready · red · race</p>
+        <div class="rmouth">
+          <span data-say="roll" data-voice="girl">roll</span>
+          <span data-say="run" data-voice="boy">run</span>
+          <span data-say="rabbit" data-voice="girl">rabbit</span>
+          <span data-say="reach up high" data-voice="boy">reach</span>
+        </div>
+      </div>
+      <div class="ritem">
+        <h4>🎯 Teach it through the unit</h4>
+        <p>Every time a child says <strong>roll</strong> or <strong>run</strong>, shape the /r/ with them: finger under the chin = tongue goes UP, no touch, lips forward.</p>
+        <div class="rmouth">
+          <span data-say="I can roll." data-voice="girl">I can roll.</span>
+          <span data-say="Let's run!" data-voice="boy">Let's run!</span>
+        </div>
+      </div>
+      <div class="ritem">
+        <h4>🗣️ Chant the R sounds</h4>
+        <p>R-r-r — roll! R-r-r — run! R-r-r — rabbit! Short, loud, proud. Repeat 3 times, faster each round.</p>
+        <div class="rmouth">
+          <span data-say="R, R, R. Roll, run, rabbit!" data-rate="0.8" data-voice="girl">3× chant</span>
+        </div>
+      </div>
+    </div>
+    <div class="rfoot">
+      <button class="btn pink" data-say="Listen carefully. In British English, the r in roll is a small sound. The tongue goes up and back, but it does not touch. Roll, run, rabbit, reach, ready. Now say it with me!" data-voice="girl">🔊 Read this note to me (British ♀)</button>
+      <button class="btn blue" data-say="Remember. After. Before. The r is silent. We say ah-fuh and bee-foh. Good!" data-voice="boy">🔊 Silent R in after / before (British ♂)</button>
+      <button class="btn purple" onclick="showTab(1)">🔤 Go to Phonics Practice →</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <span class="big-emoji">🏃</span>
+    <h1>Joy Discovery 5 · Unit 4</h1>
+    <span class="sub">Time to Exercise! · pp. 22–25</span>
+    <div class="desc">Lesson 1: 9 action words (50 min) → Lesson 2: Before / After + song (50 min)</div>
+  </div>
+
+  <section>
+    <div class="shead"><span class="ic">📋</span><h2>Today's 100-Minute Lesson</h2><span class="badge">2 HOURS</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">💡 Core language: <strong>nine movement words</strong> + <strong>I can… / Let's… / It can…</strong> + <strong>Before / After exercising…</strong>. The golden rule: <strong>hear it → say it → DO it!</strong> Click any block to jump to it!</div>
+    <h3 style="font-weight:900;color:var(--pink);margin:6px 0 4px"> Hour 1 — Time to Exercise!</h3>
+    <div class="tl">
+      <div class="tl-item" onclick="showTab(2)"><span class="tl-min">0–5 min</span><h4>🗣️ Teacher Says</h4><p>Stand up! Jump! Run in place! Drop “Teacher says” and anyone who moves freezes.</p></div>
+      <div class="tl-item t1" onclick="showTab(2)"><span class="tl-min">5–10 min</span><h4>💪 Why Exercise?</h4><p>Is exercise good for us? — Yes! It keeps us healthy and strong. Warm up and stretch first!</p></div>
+      <div class="tl-item t2" onclick="showTab(3)"><span class="tl-min">10–20 min</span><h4>🏃 Action Challenge</h4><p>Teach the 9 movements with TPR. Demonstrate, shout, children copy and say.</p></div>
+      <div class="tl-item t3" onclick="showTab(3)"><span class="tl-min">20–35 min</span><h4>👂 Listen, Do &amp; Say</h4><p>Random calls, chains, and the secret rule: “Don't move until GO!”</p></div>
+      <div class="tl-item" onclick="showTab(4)"><span class="tl-min">35–43 min</span><h4>🐢 Animal Guess</h4><p>What can a turtle do? — It can crawl. Then act it out!</p></div>
+      <div class="tl-item t1" onclick="showTab(7)"><span class="tl-min">43–50 min</span><h4>🎭 Guess My Action</h4><p>One child acts silently — class says the full sentence. Exit challenge!</p></div>
+    </div>
+    <h3 style="font-weight:900;color:var(--blue);margin:14px 0 4px"> Hour 2 — Before or After Exercising?</h3>
+    <div class="tl">
+      <div class="tl-item t3" onclick="showTab(3)"><span class="tl-min">0–5 min</span><h4>⏩ Action Countdown</h4><p>Teacher acts silently — class shouts the word, then 5-4-3-2-1 STOP!</p></div>
+      <div class="tl-item" onclick="showTab(5)"><span class="tl-min">5–20 min</span><h4>⏰ Before vs After</h4><p>Good idea or bad idea? Mime the 6 activities and decide together.</p></div>
+      <div class="tl-item t1" onclick="showTab(5)"><span class="tl-min">20–30 min</span><h4>🏷️ Say it before you stick it!</h4><p>Textbook p.24 — full sentence BEFORE the sticker goes down.</p></div>
+      <div class="tl-item t2" onclick="showTab(7)"><span class="tl-min">30–40 min</span><h4>🎧 Listen &amp; Drag</h4><p>Team competition: listen, discuss, send a number up to drag the picture.</p></div>
+      <div class="tl-item t3" onclick="showTab(6)"><span class="tl-min">40–47 min</span><h4>🎵 Jump, Jump, Jump!</h4><p>Listen → echo → sing and move. Six lines of pure energy.</p></div>
+      <div class="tl-item" onclick="showTab(6)"><span class="tl-min">47–50 min</span><h4>🧊 Freeze! + Final check</h4><p>Music stops — FREEZE! Then rapid-fire: Show me HOP! Before exercising? After?</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎯</span><h2>Objectives &amp; Target Language</h2><span class="badge">GOALS</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="board-plan" style="margin-bottom:14px">
+      <div class="bp-t">I can <span style="color:var(--green)">twist my body</span>. &nbsp;·&nbsp; Let's <span style="color:var(--green)">tiptoe</span>. &nbsp;·&nbsp; It can <span style="color:var(--green)">crawl</span>.</div>
+      <div class="bp-t">Before exercising, I <span style="color:var(--green)">put on my sneakers</span>. &nbsp;·&nbsp; After exercising, I <span style="color:var(--green)">wash my face and hands</span>.</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px">
+      <div class="tip">✅ Do &amp; say 9 actions: tiptoe · jump · roll · crawl · twist your body · hop · shake your leg · stand on one leg · skip</div>
+      <div class="tip">✅ Use <strong>I can…</strong>, <strong>Let's…</strong>, <strong>It can…</strong> with actions</div>
+      <div class="tip">✅ Tell the difference: <strong>jump</strong> (two feet) vs <strong>hop</strong> (one foot)</div>
+      <div class="tip">✅ <strong>Before exercising…</strong> vs <strong>After exercising…</strong></div>
+      <div class="tip">✅ Sing <em>Jump, Jump, Jump!</em> with the actions</div>
+      <div class="tip">✅ Say the R sound: <span class="bp-ok">roll · run · rabbit</span> — and the silent R in <span class="bp-no">after / before</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🗂️</span><h2>Board Plan</h2><span class="badge">WRITE THIS UP</span><button class="sec-sound" data-sec="plan" onclick="toggleSecSound('plan',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="board-plan">
+      <div class="bp-t">JD5 — Unit 4: TIME TO EXERCISE!</div>
+      <div>tiptoe &nbsp;|&nbsp; jump &nbsp;|&nbsp; roll <span class="bp-star">R</span> &nbsp;|&nbsp; crawl</div>
+      <div>twist your body &nbsp;|&nbsp; hop &nbsp;|&nbsp; shake your leg</div>
+      <div>stand on one leg &nbsp;|&nbsp; skip</div>
+      <div style="height:10px"></div>
+      <div class="bp-t">Patterns</div>
+      <div>I can <span class="bp-ok">________</span>. &nbsp; Let's <span class="bp-ok">________</span>. &nbsp; It can <span class="bp-ok">________</span>.</div>
+      <div style="height:10px"></div>
+      <div class="bp-t">BEFORE ⬅️ &nbsp;|&nbsp; ➡️ AFTER</div>
+      <div>Before exercising, I <span class="bp-ok">put on my sneakers</span>.</div>
+      <div>After exercising, I <span class="bp-ok">wash my face and hands</span>.</div>
+      <div><span class="bp-ok">change my clothes ✅</span> &nbsp; <span class="bp-ok">take a shower ✅</span> &nbsp; <span class="bp-no">eat a lot ❌</span></div>
+      <div style="height:10px"></div>
+      <div class="bp-t">Remember</div>
+      <div><span class="bp-ok">jump = two feet ✅</span> &nbsp; <span class="bp-ok">hop = one foot ✅</span></div>
+      <div><span class="bp-ok">R says /r/ before a vowel: roll, run ✅</span></div>
+    </div>
+  </section>
+</div>
+<!-- ============ TAB 1 : PHONICS R ============ -->
+<div class="tabpan" id="tp1" data-sec="phonics">
+  <section>
+    <div class="shead"><span class="ic">🔤</span><h2>The R Sound /r/</h2><span class="badge">BRITISH</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="phon-hero">
+      <div class="phon-big" data-say="R. Rrrr. Roll! Run! Rabbit!" data-rate="0.8" data-voice="girl" title="Click to hear it!">Rr</div>
+      <div>
+        <div class="tip" style="margin-bottom:10px">👄 <strong>How to say British /r/:</strong> tongue bends <strong>up and back</strong> behind the top teeth — it <strong>touches NOTHING</strong>. Lips pull forward a little. Hold it: <strong>“rrr…”</strong>. Never roll it like a motorbike!</div>
+        <div class="rmouth">
+          <span data-say="R. Rrrr. Rrrr!" data-rate="0.8" data-voice="girl">rrr…</span>
+          <span data-say="Roll. I can roll." data-voice="girl">roll</span>
+          <span data-say="Run. Let's run!" data-voice="boy">run</span>
+          <span data-say="Rabbit. The rabbit can jump." data-voice="girl">rabbit</span>
+          <span data-say="Reach up high!" data-voice="boy">reach</span>
+          <span data-say="Ready? Ready!" data-voice="girl">ready</span>
+        </div>
+      </div>
+    </div>
+    <div class="tip">🇬🇧 British English is <strong>non-rhotic</strong>: the R is only sounded <strong>before a vowel</strong>. In <em>roll, run, rabbit, reach, ready, red, race</em> the R always comes before a vowel → <strong>always say it</strong>. But <em>after / before</em> → the R is <strong>silent</strong>: “ah-fuh”, “bee-foh”.</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">⭐</span><h2>Unit R Words</h2><span class="badge">SAY &amp; CLICK</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="r-word-grid">
+      <div class="r-word" data-say="Roll! I can roll my body!" data-voice="girl"><div class="rw-w">roll</div><div class="rw-s">r - o - l - l</div></div>
+      <div class="r-word" data-say="Run! Let's run!" data-voice="boy"><div class="rw-w">run</div><div class="rw-s">r - u - n</div></div>
+      <div class="r-word" data-say="Rabbit! The rabbit can hop." data-voice="girl"><div class="rw-w">rabbit</div><div class="rw-s">r - a - b - b - i - t</div></div>
+      <div class="r-word" data-say="Reach! Reach up high!" data-voice="boy"><div class="rw-w">reach</div><div class="rw-s">r - e - a - c - h</div></div>
+      <div class="r-word" data-say="Ready! Are you ready?" data-voice="girl"><div class="rw-w">ready</div><div class="rw-s">r - e - a - d - y</div></div>
+      <div class="r-word" data-say="Red! It is red." data-voice="boy"><div class="rw-w">red</div><div class="rw-s">r - e - d</div></div>
+      <div class="r-word" data-say="Race! Let's race!" data-voice="girl"><div class="rw-w">race</div><div class="rw-s">r - a - c - e</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🕵️</span><h2>R Detective</h2><span class="badge">SORT IT</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:12px">Click a word in the pool, then click the right box. Does the R <strong>say /r/</strong>, or is it <strong>quiet (silent)</strong>?</div>
+    <div class="sort-pool" id="sortPool"></div>
+    <div class="sort-boxes">
+      <div class="sort-box r" onclick="sortPlace('r')"><h4>📣 R says /r/</h4><div class="placed" id="boxR"></div></div>
+      <div class="sort-box n" onclick="sortPlace('n')"><h4>🤫 Silent R</h4><div class="placed" id="boxN"></div></div>
+    </div>
+    <div class="big-reply" id="sortMsg"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn purple" onclick="sortReset()">↻ Reset</button>
+      <button class="btn orange" onclick="sortCheck()">✅ Check my answers</button>
+      <button class="btn blue" data-say="Roll, run, rabbit, reach, ready. After, before. Listen for the R." data-voice="girl">🔊 Hear all the words</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">✍️</span><h2>Spell the R Word</h2><span class="badge">SAY IT BEFORE YOU SPELL IT!</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="write-card">
+      <div class="write-prompt" id="spellPrompt">Spell the word…</div>
+      <div class="write-hint">Say the word out loud FIRST, then tap the letters.</div>
+      <div class="write-display" id="spellDisplay"></div>
+      <div class="write-keyboard" id="spellKeys"></div>
+      <div class="write-result" id="spellResult"></div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn blue" id="spellHear">🔊 Hear the word</button>
+        <button class="btn orange" onclick="spellClear()">⌫ Clear</button>
+        <button class="btn green" onclick="nextSpell()">Next word ➡️</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🗣️</span><h2>Chant the R Sounds</h2><span class="badge">3× FASTER EACH TIME</span><button class="sec-sound" data-sec="phonics" onclick="toggleSecSound('phonics',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="pattern-card" style="border-left-color:var(--pink)">
+      <div class="pattern-line" data-say="R, R, R. Roll, run, rabbit!" data-rate="0.8" data-voice="girl">R, R, R. <span class="a">Roll, run, rabbit!</span></div>
+      <div class="pattern-line" data-say="I can roll. I can run." data-voice="girl">I can <span class="a">roll</span>. I can <span class="a">run</span>.</div>
+      <div class="pattern-line" data-say="Let's roll! Let's run!" data-voice="boy">Let's <span class="a">roll</span>! Let's <span class="a">run</span>!</div>
+      <div class="pattern-line" data-say="It can roll. It can jump." data-voice="girl">It can <span class="a">roll</span>. It can <span class="a">jump</span>.</div>
+      <div class="pattern-examples">
+        <button class="pe" data-say="Before exercising, I put on my sneakers. Before. The R is quiet." data-voice="boy">🤫 before — quiet R</button>
+        <button class="pe" data-say="After exercising, I wash my face. After. The R is quiet." data-voice="girl">🤫 after — quiet R</button>
+        <button class="pe" data-say="Roll, roll, roll! The R says rrr!" data-rate="0.8" data-voice="girl">📣 roll — loud R!</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 2 : WARM-UP ============ -->
+<div class="tabpan" id="tp2" data-sec="warmup">
+  <section>
+    <div class="shead"><span class="ic">💪</span><h2>Why Do We Exercise?</h2><span class="badge">TALK FIRST</span><button class="sec-sound" data-sec="warmup" onclick="toggleSecSound('warmup',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="twobox">
+      <div><img class="t-image" src="3.png" alt="Is it good to exercise?"><div class="imgcap">Is it good to exercise? 🤔</div></div>
+      <div><img class="t-image" src="4.png" alt="Yes, exercise is important!"><div class="imgcap">Yes! It makes you <strong>stronger</strong> &amp; <strong>healthy</strong> 💪</div></div>
+    </div>
+    <div class="story-card">
+      <div class="story-step" data-say="Is it good to exercise? Yes! Exercise is important." data-voice="girl"><span class="step-num">1</span><span class="step-text"><strong>Teacher:</strong> Is it good to exercise? <span style="color:var(--green)">— Yes!</span></span><span class="spk">🔊</span></div>
+      <div class="story-step" data-say="It makes you stronger and helps keep you healthy." data-voice="girl"><span class="step-num">2</span><span class="step-text">It makes you <strong>stronger</strong> and helps keep you <strong>healthy</strong>.</span><span class="spk">🔊</span></div>
+      <div class="story-step" data-say="Remember! Before we exercise, we must always warm up and stretch our bodies." data-voice="boy"><span class="step-num">3</span><span class="step-text"><strong>Remember!</strong> Before we exercise, we must always <strong>warm up and stretch</strong>.</span><span class="spk">🔊</span></div>
+      <div class="story-step" data-say="If we don't stretch before exercising, we could hurt ourselves." data-voice="boy"><span class="step-num">4</span><span class="step-text">If we don't stretch, we could <span style="color:var(--red)">hurt ourselves!</span> 😖</span><span class="spk">🔊</span></div>
+    </div>
+    <div class="twobox">
+      <div><img class="t-image" src="5.png" alt="Warm up and stretch"><div class="imgcap">Always warm up &amp; stretch first 🧘</div></div>
+      <div><img class="t-image" src="6.png" alt="We could hurt ourselves"><div class="imgcap">No stretching → we could hurt! 🤕</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">📖</span><h2>Remember from Joy Discovery 1?</h2><span class="badge">WARM-UP ACTIONS</span><button class="sec-sound" data-sec="warmup" onclick="toggleSecSound('warmup',this)"><span class="sec-si">🔊</span></button></div>
+    <img class="t-image" src="7.png" alt="Actions from Joy Discovery 1" style="margin-bottom:12px">
+    <div class="tip" style="margin-bottom:6px">Click a card — say it and DO it! 🎬</div>
+    <div class="obj-grid" id="warmGrid"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🗣️</span><h2>Teacher Says</h2><span class="badge">GAME 1</span><button class="sec-sound" data-sec="warmup" onclick="toggleSecSound('warmup',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:12px">Move <strong>only</strong> when the screen says <strong>“Teacher says…”</strong>. If there is NO “Teacher says”, <strong>FREEZE!</strong> — anyone who moves sits down.</div>
+    <div class="stage-box">
+      <span class="stage-label">TEACHER SAYS</span>
+      <div class="stage-main" id="tsText">Press Start! 🎮</div>
+      <div class="stage-sub" id="tsSub">Get ready to move!</div>
+    </div>
+    <div class="big-reply" id="tsReply"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn orange" onclick="teacherSays()">🎲 Next command</button>
+      <button class="btn green" onclick="teacherSays(true)">🔊 Say it aloud too</button>
+    </div>
+  </section>
+</div>
+<!-- ============ TAB 3 : 9 ACTIONS ============ -->
+<div class="tabpan" id="tp3" data-sec="vocab">
+  <section>
+    <div class="shead"><span class="ic">📖</span><h2>The 9 Action Words</h2><span class="badge">HEAR → SAY → DO</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:4px">Click a card to hear it — then everyone <strong>DO</strong> the action! 🎬 Cards turn green when they have been said.</div>
+    <div class="vocab-grid" id="actionCards"></div>
+    <div class="tip">⚠️ Watch out: <span class="bp-ok">jump = two feet 🦶🦶</span> &nbsp;·&nbsp; <span class="bp-ok">hop = one foot 🦶</span></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">👂</span><h2>Listen, Do &amp; Say</h2><span class="badge">GAME 2</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:12px">🤫 <strong>The secret rule:</strong> “<strong>Don't move until GO!</strong>” Children must LISTEN first, then move.</div>
+    <div class="stage-box">
+      <span class="stage-label">LISTEN…</span>
+      <div class="stage-main" id="cmdText">Press a button! 👂</div>
+      <div class="stage-sub" id="cmdSub">Then do the action and say the full sentence.</div>
+    </div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn orange" onclick="cmdRandom()">🎲 One command</button>
+      <button class="btn pink" onclick="cmdChain()">🔗 Action chain ×3</button>
+      <button class="btn red" onclick="cmdStop()">🛑 Stop!</button>
+      <button class="btn green" onclick="cmdGO()">📣 GO!</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🖼️</span><h2>Textbook Slides — Act &amp; Say</h2><span class="badge">pp. 22–23</span><button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
+    <img class="t-image" src="1.png" alt="Textbook p.22 - nine actions" style="margin-bottom:14px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px">
+      <div><img class="t-image" src="11.png" alt="Tiptoe"><div class="imgcap" data-say="Tiptoe! Tiptoe, tiptoe!" data-voice="girl">Tiptoe! 🔊</div></div>
+      <div><img class="t-image" src="12.png" alt="Jump"><div class="imgcap" data-say="Jump! I can jump!" data-voice="boy">Jump! 🔊</div></div>
+      <div><img class="t-image" src="13.png" alt="Crawl and roll"><div class="imgcap" data-say="Crawl, crawl, crawl! Roll, roll, roll!" data-voice="girl">Crawl &amp; Roll! 🔊</div></div>
+      <div><img class="t-image" src="14.png" alt="Twist your body"><div class="imgcap" data-say="Twist, twist, twist! Twist your body!" data-voice="boy">Twist your body! 🔊</div></div>
+      <div><img class="t-image" src="15.png" alt="Hop"><div class="imgcap" data-say="Hop, hop, hop! Hop to me!" data-voice="girl">Hop! 🔊</div></div>
+      <div><img class="t-image" src="16.png" alt="Shake your leg"><div class="imgcap" data-say="Shake, shake, shake! Shake your leg!" data-voice="boy">Shake your leg! 🔊</div></div>
+      <div><img class="t-image" src="17.png" alt="Stand on one leg"><div class="imgcap" data-say="Stand on one leg! I can stand on one leg!" data-voice="girl">Stand on one leg! 🔊</div></div>
+      <div><img class="t-image" src="18.png" alt="Skip"><div class="imgcap" data-say="Skip! I can skip!" data-voice="boy">Skip! 🔊</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 4 : PATTERNS ============ -->
+<div class="tabpan" id="tp4" data-sec="patterns">
+  <section>
+    <div class="shead"><span class="ic">💬</span><h2>Three Magic Patterns</h2><span class="badge">I CAN / LET'S / IT CAN</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="pattern-card">
+      <h3>🟢 I can + action</h3>
+      <div class="pattern-line" data-say="I can jump!" data-voice="girl"><span class="q">What can you do?</span> → <span class="a">I can jump!</span></div>
+      <div class="pattern-examples">
+        <button class="pe" data-say="I can tiptoe." data-voice="girl">I can tiptoe.</button>
+        <button class="pe" data-say="I can roll." data-voice="boy">I can roll.</button>
+        <button class="pe" data-say="I can crawl." data-voice="girl">I can crawl.</button>
+        <button class="pe" data-say="I can twist my body." data-voice="boy">I can twist my body.</button>
+        <button class="pe" data-say="I can hop." data-voice="girl">I can hop.</button>
+        <button class="pe" data-say="I can shake my leg." data-voice="boy">I can shake my leg.</button>
+        <button class="pe" data-say="I can stand on one leg." data-voice="girl">I can stand on one leg.</button>
+        <button class="pe" data-say="I can skip." data-voice="boy">I can skip.</button>
+      </div>
+    </div>
+    <div class="pattern-card" style="border-left-color:var(--orange)">
+      <h3>🟠 Let's + action</h3>
+      <div class="pattern-line" data-say="Let's hop!" data-voice="boy"><span class="q">Shall we play?</span> → <span class="a">Let's hop!</span></div>
+      <div class="pattern-examples">
+        <button class="pe" data-say="Let's tiptoe!" data-voice="girl">Let's tiptoe!</button>
+        <button class="pe" data-say="Let's jump!" data-voice="boy">Let's jump!</button>
+        <button class="pe" data-say="Let's roll!" data-voice="girl">Let's roll!</button>
+        <button class="pe" data-say="Let's crawl!" data-voice="boy">Let's crawl!</button>
+        <button class="pe" data-say="Let's twist!" data-voice="girl">Let's twist!</button>
+        <button class="pe" data-say="Let's skip!" data-voice="boy">Let's skip!</button>
+      </div>
+    </div>
+    <div class="pattern-card" style="border-left-color:var(--blue)">
+      <h3>🔵 It can + action (animals!)</h3>
+      <div class="pattern-line" data-say="What can a turtle do? It can crawl." data-voice="girl"><span class="q">What can a turtle do?</span> → <span class="a">It can crawl!</span></div>
+      <div class="pattern-examples">
+        <button class="pe" data-say="A frog can jump. It can jump!" data-voice="boy">frog → jump</button>
+        <button class="pe" data-say="A pig can roll. It can roll!" data-voice="girl">pig → roll</button>
+        <button class="pe" data-say="A flamingo can stand on one leg!" data-voice="boy">flamingo → stand</button>
+        <button class="pe" data-say="A rabbit can hop. It can hop!" data-voice="girl">rabbit → hop</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧩</span><h2>Sentence Machine</h2><span class="badge">MAKE A SENTENCE</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="sub-machine">
+      <select id="smP" onchange="buildSub()">
+        <option value="I can">I can</option>
+        <option value="Let's">Let's</option>
+        <option value="It can">It can</option>
+      </select>
+      <select id="smW" onchange="buildSub()">
+        <option>tiptoe</option><option>jump</option><option>roll</option><option>crawl</option>
+        <option>twist my body</option><option>hop</option><option>shake my leg</option>
+        <option>stand on one leg</option><option>skip</option><option>run</option>
+      </select>
+    </div>
+    <div class="sub-out">
+      <div style="font-size:clamp(12px,1.9vw,15px);font-weight:900;color:#999;letter-spacing:2px">YOUR SENTENCE</div>
+      <div class="so-a" id="smOut">I can tiptoe.</div>
+      <div style="margin-top:12px"><button class="btn green" id="smSay">🔊 Say it!</button></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🐢</span><h2>Animal Guess — What can it do?</h2><span class="badge">CLICK TO REVEAL</span><button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:6px">Ask together: <strong>“What can a ___ do?”</strong> then click the card for the answer!</div>
+    <div class="obj-grid" id="animalCards"></div>
+  </section>
+</div>
+
+<!-- ============ TAB 5 : BEFORE / AFTER ============ -->
+<div class="tabpan" id="tp5" data-sec="beforeafter">
+  <section>
+    <div class="shead"><span class="ic">⏰</span><h2>Before or After Exercising?</h2><span class="badge">GOOD IDEA / BAD IDEA</span><button class="sec-sound" data-sec="beforeafter" onclick="toggleSecSound('beforeafter',this)"><span class="sec-si">🔊</span></button></div>
+    <img class="t-image" src="2.png" alt="Textbook p.24 - Before or After Exercising" style="margin-bottom:12px">
+    <div class="tip">Textbook p.24 — <strong>Look and stick.</strong> Read the <em>whole sentence</em> before the sticker goes down!</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🏷️</span><h2>Say It Before You Stick It!</h2><span class="badge">CLICK = STICK 🏷️</span><button class="sec-sound" data-sec="beforeafter" onclick="toggleSecSound('beforeafter',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:8px">🟢 = <strong>good idea</strong> ✅ &nbsp;·&nbsp; 🔴 = <strong>bad idea</strong> ❌. Say the full sentence out loud, THEN click the picture to stick it!</div>
+    <h3 style="font-weight:900;color:var(--blue);margin:8px 0 4px">⬅️ Before exercising, I…</h3>
+    <div class="obj-grid" id="beforeCards"></div>
+    <h3 style="font-weight:900;color:var(--pink);margin:14px 0 4px">➡️ After exercising, I…</h3>
+    <div class="obj-grid" id="afterCards"></div>
+    <div class="big-reply" id="stickMsg"></div>
+    <div style="text-align:center"><button class="btn purple" onclick="stickReset()">↻ Stick them all again</button></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎧</span><h2>Listen &amp; Drag</h2><span class="badge">TEAM GAME</span><button class="sec-sound" data-sec="beforeafter" onclick="toggleSecSound('beforeafter',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:10px">1️⃣ Click a picture. 2️⃣ Click the right box (BEFORE or AFTER). Get it right and it flies in! ❌ and you may try again.</div>
+    <div class="sort-pool" id="dragPool"></div>
+    <div class="zone-grid" style="grid-template-columns:1fr 1fr">
+      <div class="zone" onclick="dragPlace('b')" style="border-color:var(--blue)"><div class="zlabel">⬅️ BEFORE exercising</div><div class="placed" id="zoneB" style="padding:10px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center"></div></div>
+      <div class="zone" onclick="dragPlace('a')" style="border-color:var(--pink)"><div class="zlabel">➡️ AFTER exercising</div><div class="placed" id="zoneA" style="padding:10px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center"></div></div>
+    </div>
+    <div class="big-reply" id="dragMsg"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn purple" onclick="dragReset()">↻ Reset</button>
+      <button class="btn orange" onclick="dragCheck()">✅ Check the team</button>
+    </div>
+  </section>
+</div>
+<!-- ============ TAB 6 : SONG ============ -->
+<div class="tabpan" id="tp6" data-sec="song">
+  <section>
+    <div class="shead"><span class="ic">🎵</span><h2>Jump, Jump, Jump!</h2><span class="badge">CHANT &amp; DANCE · pp. 24–25</span><button class="sec-sound" data-sec="song" onclick="toggleSecSound('song',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="twobox">
+      <div>
+        <div class="lyric" onclick="singLine(0)"><span class="ly-n">1</span><span class="ly-t">Jump, jump, jump! Jump to the door!</span><span class="ly-a">🤸</span></div>
+        <div class="lyric" onclick="singLine(1)"><span class="ly-n">2</span><span class="ly-t">Shake, shake, shake! Shake your leg!</span><span class="ly-a">🦵</span></div>
+        <div class="lyric" onclick="singLine(2)"><span class="ly-n">3</span><span class="ly-t">Hop, hop, hop! Hop to me!</span><span class="ly-a">🦶</span></div>
+        <div class="lyric" onclick="singLine(3)"><span class="ly-n">4</span><span class="ly-t">Tiptoe, tiptoe to the door!</span><span class="ly-a">🦶</span></div>
+        <div class="lyric" onclick="singLine(4)"><span class="ly-n">5</span><span class="ly-t">Twist, twist, twist! Twist your body!</span><span class="ly-a">🔄</span></div>
+        <div class="lyric" onclick="singLine(5)"><span class="ly-n">6</span><span class="ly-t">Crawl, crawl, crawl! Crawl to me!</span><span class="ly-a">🐛</span></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+          <button class="btn orange" onclick="songPlay()">▶️ Listen to all 6</button>
+          <button class="btn green" onclick="songNext()">⏭️ Next line</button>
+          <button class="btn red" onclick="stopSong()">⏹️ Stop</button>
+        </div>
+      </div>
+      <div>
+        <div class="imgcap" id="chantPage" style="margin-top:0"></div>
+        <div class="tip" style="margin-top:10px">Do the actions in the pictures while you chant! Each line = one action. 🕺</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧊</span><h2>Freeze Game!</h2><span class="badge">WHEN THE MUSIC STOPS…</span><button class="sec-sound" data-sec="song" onclick="toggleSecSound('song',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:12px">Sing and move — when it says <strong>FREEZE!</strong> everyone must <strong>STOP like a statue</strong> 🗿. Move and you sit down!</div>
+    <div class="ring" id="frzRing"><span class="rt" id="frzTime">▶</span><span class="rl" id="frzLabel">READY?</span></div>
+    <div class="big-reply" id="frzMsg"></div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn green" onclick="freezeStart()">🎵 Start the music</button>
+      <button class="btn red" onclick="freezeStop()">⏹️ End game</button>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TAB 7 : TEAM GAMES ============ -->
+<div class="tabpan" id="tp7" data-sec="games">
+  <section>
+    <div class="shead"><span class="ic">🏆</span><h2>Team Score Board</h2><span class="badge">3 TEAMS</span><button class="sec-sound" data-sec="games" onclick="toggleSecSound('games',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="team-grid">
+      <div class="team-box ta"><div class="team-icon">🐬</div><div class="team-name">Team A</div><div class="team-score" id="scoreA">0</div><div class="team-btns"><button class="tsub" onclick="addScore('A',-10)">−10</button><button class="tadd" onclick="addScore('A',10)">+10</button></div></div>
+      <div class="team-box tb"><div class="team-icon">🐯</div><div class="team-name">Team B</div><div class="team-score" id="scoreB">0</div><div class="team-btns"><button class="tsub" onclick="addScore('B',-10)">−10</button><button class="tadd" onclick="addScore('B',10)">+10</button></div></div>
+      <div class="team-box tc"><div class="team-icon">🐸</div><div class="team-name">Team C</div><div class="team-score" id="scoreC">0</div><div class="team-btns"><button class="tsub" onclick="addScore('C',-10)">−10</button><button class="tadd" onclick="addScore('C',10)">+10</button></div></div>
+    </div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;align-items:center;flex-wrap:wrap">
+      <span class="turn-chip" id="turnChip">Turn: Team A 🐬</span>
+      <button class="btn blue" onclick="nextTurn()">Next turn ➡️</button>
+      <button class="btn purple" onclick="resetScores()">↻ Reset scores</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎁</span><h2>Game 1 — Mystery Card</h2><span class="badge">REVEAL &amp; SAY</span><button class="sec-sound" data-sec="games" onclick="toggleSecSound('games',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:10px">Team A chooses a present 🎁 — click to open. Read the action <strong>out loud</strong> and DO it = +10!</div>
+    <div class="zone-grid" id="mysteryGrid"></div>
+    <div class="big-reply" id="mysteryMsg"></div>
+    <div style="text-align:center"><button class="btn orange" onclick="mysteryNew()">🎁 New presents</button></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎭</span><h2>Game 2 — Guess My Action</h2><span class="badge">NO SOUND!</span><button class="sec-sound" data-sec="games" onclick="toggleSecSound('games',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:10px">One child comes up and acts <strong>silently</strong>. The class must say the <strong>full sentence</strong>: “<strong>It's a ___!</strong>” or “<strong>You can ___!</strong>”</div>
+    <div class="stage-box">
+      <span class="stage-label">ACT THIS…</span>
+      <div class="stage-main" id="gmaText">Press the button! 🎭</div>
+      <div class="stage-sub">Everyone else: guess it in a full sentence!</div>
+    </div>
+    <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn pink" onclick="guessAction()">🎲 New action</button>
+      <button class="btn green" onclick="guessAction(true)">🗣️ Show the sentence</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🤪</span><h2>Game 3 — The Teacher is WRONG!</h2><span class="badge">CATCH THE MISTAKE</span><button class="sec-sound" data-sec="games" onclick="toggleSecSound('games',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:10px">The teacher says a <strong>silly sentence</strong>. Is it <strong>RIGHT ✅</strong> or <strong>WRONG ❌</strong>? The team that shouts first wins 10 points!</div>
+    <div class="stage-box">
+      <span class="stage-label">LISTEN CAREFULLY…</span>
+      <div class="stage-main" id="twText">Press the button! 🤪</div>
+      <div class="stage-sub" id="twSub">Right or wrong?</div>
+    </div>
+    <div class="yn">
+      <button class="y" onclick="teacherWrong(true)">✅ Right!</button>
+      <button class="n" onclick="teacherWrong(false)">❌ Wrong!</button>
+    </div>
+    <div class="big-reply" id="twReply"></div>
+    <div style="text-align:center"><button class="btn orange" onclick="twNext()">🎲 New silly sentence</button></div>
+  </section>
+</div>
+
+<!-- ============ TAB 8 : QUIZ ============ -->
+<div class="tabpan" id="tp8" data-sec="quiz">
+  <section>
+    <div class="shead"><span class="ic">📝</span><h2>Unit 4 Final Quiz</h2><span class="badge">4 PARTS</span><button class="sec-sound" data-sec="quiz" onclick="toggleSecSound('quiz',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip">🎧 Click 🔊 to listen · answers are checked instantly · finish at the end for your stars ⭐!</div>
+  </section>
+
+  <div class="quiz-section-title"><h3>1️⃣ True or False</h3><span class="qs-badge" id="tfProg">0 / 5</span></div>
+  <div id="tfBox"></div>
+
+  <div class="quiz-section-title"><h3>2️⃣ Listen &amp; Choose the Picture</h3><span class="qs-badge" id="lsProg">0 / 4</span></div>
+  <div id="listenBox"></div>
+
+  <div class="quiz-section-title"><h3>3️⃣ Spell the R Word</h3><span class="qs-badge" id="spProg">0 / 4</span></div>
+  <div id="spellBox" class="fill-card"></div>
+
+  <div class="quiz-section-title"><h3>4️⃣ Fill in the Blank</h3><span class="qs-badge" id="flProg">0 / 4</span></div>
+  <div id="fillBox"></div>
+
+  <div style="text-align:center;margin:18px 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button class="btn green" onclick="finishQuiz()">🎉 Finish &amp; See My Score!</button>
+    <button class="btn orange" onclick="resetQuiz()">↻ Play again</button>
+  </div>
+  <div id="scoreBoard"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" title="Click me!">🏋️</div>
+<div class="fab-wrap">
+  <button class="fab fab-top" id="fabTop" title="Back to top">⬆️</button>
+  <button class="fab fab-home" id="fabHome" title="Lesson plan">🏠</button>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" id="lbClose">×</button><img id="lbImg" src="1.png" alt="enlarged"></div>
+<div class="cine" id="cine"><div class="cine-who" id="cineWho"></div><div class="cine-line" id="cineLine"></div><button class="cine-close" onclick="closeCine()">✖ Close</button></div>
+<script>
+/* ================= IMAGE CROPS ================= */
+const IMG={1:[948,556],2:[948,572],3:[730,507],4:[795,600],5:[872,602],6:[763,613],7:[777,512],8:[803,602],9:[821,567],10:[768,527],11:[787,542],12:[808,573],13:[763,528],14:[785,588],15:[747,570],16:[742,576],17:[730,582],18:[850,563]};
+function cropHTML(n,x,y,w,h,style){
+  const iw=IMG[n][0],ih=IMG[n][1];
+  return '<div class="crop" style="aspect-ratio:'+w+'/'+h+';'+(style||'')+'">'+
+    '<img src="'+n+'.png" alt="" style="width:'+(iw/w*100).toFixed(2)+'%;left:'+(-x/w*100).toFixed(2)+'%;top:'+(-y/h*100).toFixed(2)+'%">'+
+  '</div>';
+}
+function cropFit(n,x,y,w,h,maxW){
+  return '<div style="display:flex;justify-content:center;width:100%"><div style="width:100%;max-width:'+(maxW||260)+'px">'+cropHTML(n,x,y,w,h)+'</div></div>';
+}
+
+/* ================= VOICES / SPEECH ================= */
+const RATE=0.9,RATE_SLOW=0.8;
+let VF=null,VM=null,soundOn=true,secOn={};
+function pickVoice(){
+  if(!('speechSynthesis' in window))return;
+  const all=speechSynthesis.getVoices();
+  if(!all.length)return;
+  const gb=all.filter(v=>/en[-_]GB/i.test(v.lang||''));
+  const pool=(gb.length?gb:all.filter(v=>/^en/i.test(v.lang||''))).length?(gb.length?gb:all.filter(v=>/^en/i.test(v.lang||''))):all;
+  const fe=/female|kate|serena|martha|stephanie|victoria|samantha|fiona|moira|tessa|hazel|zira|susan|maria/i;
+  const ma=/male|daniel|arthur|oliver|rishi|alex|fred|david|george|ryan|guy|allan/i;
+  VF=pool.find(v=>fe.test(v.name))||pool[0]||null;
+  VM=pool.find(v=>ma.test(v.name))||pool.find(v=>v!==VF)||VF;
+}
+function speakGB(text,opt){
+  opt=opt||{};
+  if(!('speechSynthesis' in window)){toast('😟 This browser has no speech');return;}
+  if(!soundOn){toast('🔇 Sound is off — tap 🔊 at the top');return;}
+  if(!VF)pickVoice();
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(String(text));
+  const boy=opt.voice==='boy';
+  const v=boy?VM:VF;
+  if(v)u.voice=v;
+  u.lang=(v&&v.lang)||'en-GB';
+  u.pitch=boy?1.05:1.35;
+  u.rate=opt.rate||RATE;
+  speechSynthesis.speak(u);
+}
+function stopSpeak(){if('speechSynthesis' in window)speechSynthesis.cancel();}
+
+/* ================= TOAST / TABS ================= */
+let toastT;
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove('show'),2300);
+}
+const TAB_NAMES=['📋 Lesson Plan','🔤 Phonics R','💪 Warm-Up','📖 9 Actions','💬 Patterns','⏰ Before / After','🎵 Song','🎯 Team Games','📝 Quiz'];
+function showTab(n){
+  stopSpeak();stopSong();stopCmd();freezeHalt();
+  document.querySelectorAll('.tabpan').forEach((p,i)=>p.classList.toggle('on',i===n));
+  document.querySelectorAll('.ntab').forEach((b,i)=>b.classList.toggle('on',i===n));
+  window.scrollTo({top:0,behavior:'smooth'});
+  toast(TAB_NAMES[n]||'');
+}
+
+/* ================= SECTION SOUND ================= */
+const SEC_READS={
+  plan:"Today's lesson: Time to Exercise. Hour one: warm up, the nine action words, listen do and say, animal sentences, and guess my action. Hour two: before and after exercising, say it before you stick it, listen and drag, then the song Jump Jump Jump, Freeze, and a quick check.",
+  phonics:"Phonics: the R sound. In British English, curl the tongue up and back, but do not touch. Roll, run, rabbit, reach, ready. Remember, after and before have a quiet R.",
+  warmup:"Warm up. Is it good to exercise? Yes! It makes you stronger and helps keep you healthy. Always warm up and stretch before we exercise.",
+  vocab:"The nine action words: tiptoe, jump, roll, crawl, twist your body, hop, shake your leg, stand on one leg, and skip. Remember, jump is two feet, hop is one foot.",
+  patterns:"Three patterns. I can jump. Let's hop. It can crawl. Make your own sentences with the sentence machine.",
+  beforeafter:"Before exercising, I put on my sneakers. After exercising, I wash my face and hands, change my clothes, or take a shower. Eating a lot and lying down are bad ideas.",
+  song:"Jump, jump, jump! Jump to the door. Shake, shake, shake! Shake your leg. Hop, hop, hop! Hop to me. Tiptoe, tiptoe to the door. Twist, twist, twist! Twist your body. Crawl, crawl, crawl! Crawl to me.",
+  games:"Team games. Three teams: A, B and C. Open a mystery present, guess my action, and catch the teacher's mistake.",
+  quiz:"Final quiz. True or false, listen and choose the picture, spell the R word, and fill in the blank. Good luck!"
+};
+function toggleSecSound(key,btn){
+  if(!soundOn){toast('🔇 Global sound is off — tap 🔊 at the top first');return;}
+  if(secOn[key]){stopSpeak();secOn[key]=false;toast('🔇 Section sound off');}
+  else{secOn[key]=true;toast('🔊 Reading the section…');speakGB(SEC_READS[key]||'',{voice:'girl'});}
+  document.querySelectorAll('.sec-sound[data-sec="'+key+'"]').forEach(b=>{
+    b.classList.toggle('on',secOn[key]);
+    b.classList.toggle('off',!secOn[key]);
+    const si=b.querySelector('.sec-si');if(si)si.textContent=secOn[key]?'🔊':'🔇';
+  });
+}
+
+/* ================= GLOBAL SOUND TOGGLE ================= */
+document.getElementById('globalSound').addEventListener('click',function(){
+  soundOn=!soundOn;
+  this.textContent=soundOn?'🔊':'🔇';
+  this.classList.toggle('off',!soundOn);
+  if(!soundOn){stopSpeak();stopSong();freezeHalt();toast('🔇 All sound off');}
+  else{toast('🔊 Sound on — British voices ready!');speakGB('Sound on. Are you ready?',{voice:'girl'});}
+});
+
+/* ================= CLICK ROUTER ================= */
+document.addEventListener('click',function(e){
+  const say=e.target.closest('[data-say]');
+  if(say&&!say.hasAttribute('data-noroute')){
+    speakGB(say.getAttribute('data-say'),{voice:say.getAttribute('data-voice'),rate:parseFloat(say.getAttribute('data-rate'))||undefined});
+  }
+  const im=e.target.closest('.t-image');
+  if(im){openLb(im.getAttribute('src'));}
+});
+
+/* ================= LIGHTBOX ================= */
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg');
+function openLb(src){if(!src)return;lbImg.src=src;lb.classList.add('show');}
+function closeLb(){lb.classList.remove('show');}
+document.getElementById('lbClose').addEventListener('click',function(ev){ev.stopPropagation();closeLb();});
+lb.addEventListener('click',function(ev){if(ev.target===lb||ev.target===lbImg)closeLb();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLb();closeCine();}});
+
+/* ================= MASCOT / FAB / FLOATIES ================= */
+const CHEERS=['🌟 Good job!','💪 You can do it!','🏃 Let’s exercise!','⭐ Super!','🎯 Nice try!'];
+document.getElementById('mascot').addEventListener('click',function(){
+  const c=CHEERS[Math.floor(Math.random()*CHEERS.length)];
+  toast(c);speakGB(c.replace(/[🌟💪🏃⭐🎯]\s*/,''),{voice:'girl'});
+  this.style.transform='scale(1.35) rotate(15deg)';
+  setTimeout(()=>this.style.transform='',350);
+});
+const fabTop=document.getElementById('fabTop');
+fabTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('fabHome').addEventListener('click',()=>showTab(0));
+window.addEventListener('scroll',function(){
+  fabTop.style.opacity=window.scrollY>320?'1':'0';
+  fabTop.style.pointerEvents=window.scrollY>320?'auto':'none';
+  fabTop.style.transform=window.scrollY>320?'translateY(0)':'translateY(96px)';
+});
+(function(){
+  const ems=['⭐','🎵','🐾','💪','🌟','🤸','🏷️','🐛'];
+  const box=document.getElementById('floaties');
+  for(let i=0;i<10;i++){
+    const s=document.createElement('span');
+    s.className='floaty';s.textContent=ems[i%ems.length];
+    s.style.left=(Math.random()*96)+'vw';
+    s.style.animationDuration=(14+Math.random()*14)+'s';
+    s.style.animationDelay=(-Math.random()*20)+'s';
+    s.style.fontSize=(18+Math.random()*22)+'px';
+    box.appendChild(s);
+  }
+})();
+
+/* ================= CINE OVERLAY ================= */
+function openCine(who,line){
+  document.getElementById('cineWho').textContent=who||'';
+  document.getElementById('cineLine').textContent=line||'';
+  document.getElementById('cine').classList.add('show');
+}
+function closeCine(){document.getElementById('cine').classList.remove('show');}
+
+/* ================= VOICE BOOT ================= */
+if('speechSynthesis' in window){
+  pickVoice();
+  speechSynthesis.onvoiceschanged=pickVoice;
+  const boot=function(){pickVoice();document.removeEventListener('pointerdown',boot);};
+  document.addEventListener('pointerdown',boot);
+}
+/* ================= DATA ================= */
+const ACTIONS=[
+ {w:'tiptoe',c:[1,55,78,205,265],say:'Tiptoe! I can tiptoe!',short:'I can tiptoe.',tag:'I can tiptoe'},
+ {w:'jump',c:[1,270,80,210,235],say:'Jump! I can jump!',short:'I can jump.',tag:'two feet 🦶🦶'},
+ {w:'roll',c:[1,25,345,200,160],say:'Roll! I can roll!',short:'I can roll.',tag:'R word 🔤'},
+ {w:'crawl',c:[1,205,330,205,150],say:'Crawl! I can crawl!',short:'I can crawl.',tag:'I can crawl'},
+ {w:'twist your body',c:[1,495,65,170,200],say:'Twist your body! I can twist my body!',short:'I can twist my body.',tag:'twist! 🔄'},
+ {w:'hop',c:[1,485,250,170,230],say:'Hop! I can hop!',short:'I can hop.',tag:'one foot 🦶'},
+ {w:'shake your leg',c:[1,615,250,155,245],say:'Shake your leg! I can shake my leg!',short:'I can shake my leg.',tag:'shake it!'},
+ {w:'stand on one leg',c:[1,745,255,200,260],say:'Stand on one leg! I can stand on one leg!',short:'I can stand on one leg.',tag:'balance 🧘'},
+ {w:'skip',c:[1,690,20,255,230],say:'Skip! I can skip!',short:'I can skip.',tag:'I can skip'}
+];
+const WARM=[
+ {n:'Stretch your arms.',c:[8,305,175,215,215]},
+ {n:'Bend down low.',c:[8,85,345,215,245]},
+ {n:'Nod your head.',c:[8,595,340,140,250]},
+ {n:'Clap your hands.',c:[9,40,172,200,268]},
+ {n:'Turn around.',c:[9,240,268,135,275]},
+ {n:'Kick your legs.',c:[9,420,270,155,250]},
+ {n:'Jump up high!',c:[9,595,220,210,285]}
+];
+const ANIMALS=[
+ {n:'turtle',ans:'crawl',q:'What can a turtle do? It can crawl!',c:[1,358,468,80,58]},
+ {n:'frog',ans:'jump',q:'What can a frog do? It can jump!',c:[1,240,200,56,46]},
+ {n:'pig',ans:'roll',q:'What can a pig do? It can roll!',c:[1,163,470,82,55]},
+ {n:'flamingo',ans:'stand on one leg',q:'What can a flamingo do? It can stand on one leg!',c:[1,893,408,55,62]}
+];
+const BA=[
+ {when:'b',ok:true,label:'put on my sneakers',say:'Before exercising, I put on my sneakers. Good idea!',c:[2,290,95,180,150]},
+ {when:'b',bad:true,label:'eat a lot',say:'Before exercising, I eat a lot. Hmm, a bad idea!',c:[2,45,95,240,150]},
+ {when:'a',ok:true,label:'wash my face and hands',say:'After exercising, I wash my face and hands. Good idea!',c:[2,42,372,108,130]},
+ {when:'a',ok:true,label:'change my clothes',say:'After exercising, I change my clothes. Good idea!',c:[2,145,372,122,130]},
+ {when:'a',ok:true,label:'take a shower',say:'After exercising, I take a shower. Good idea!',c:[2,248,372,130,130]},
+ {when:'a',bad:true,label:'lie down',say:'After exercising, I lie down. Hmm, a bad idea!',c:[2,288,258,118,120]}
+];
+const DRAG=[
+ {k:'b',label:'put on my sneakers',c:[2,290,95,180,150],say:'Before exercising, I put on my sneakers.'},
+ {k:'b',label:'eat a lot',c:[2,45,95,240,150],say:'Before exercising, I eat a lot.'},
+ {k:'a',label:'wash my face and hands',c:[2,42,372,108,130],say:'After exercising, I wash my face and hands.'},
+ {k:'a',label:'change my clothes',c:[2,145,372,122,130],say:'After exercising, I change my clothes.'},
+ {k:'a',label:'take a shower',c:[2,248,372,130,130],say:'After exercising, I take a shower.'},
+ {k:'a',label:'lie down',c:[2,288,258,118,120],say:'After exercising, I lie down.'}
+];
+
+/* ================= BUILDERS ================= */
+function buildActionCards(){
+  document.getElementById('actionCards').innerHTML=ACTIONS.map((a,i)=>
+    '<div class="vocab-card" data-say="'+a.say+'" data-voice="'+(i%2?'boy':'girl')+'">'+
+    cropHTML(a.c[0],a.c[1],a.c[2],a.c[3],a.c[4])+
+    '<div class="vc-body"><div class="vc-word">'+a.w+'</div><span class="vc-tag">'+a.tag+'</span>'+
+    '<div class="vc-say">🔊 '+a.short+'</div></div></div>').join('');
+}
+function buildWarm(){
+  document.getElementById('warmGrid').innerHTML=WARM.map((a,i)=>
+    '<div class="obj" data-say="'+a.n+'" data-voice="'+(i%2?'boy':'girl')+'">'+
+    cropHTML(a.c[0],a.c[1],a.c[2],a.c[3],a.c[4])+
+    '<div class="obj-name" style="margin-top:8px">'+a.n+'</div><div class="obj-say good">DO it! 🔊</div></div>').join('');
+}
+function buildAnimals(){
+  document.getElementById('animalCards').innerHTML=ANIMALS.map((a,i)=>
+    '<div class="obj" id="an'+i+'" onclick="animalSay('+i+')">'+
+    cropHTML(a.c[0],a.c[1],a.c[2],a.c[3],a.c[4])+
+    '<div class="obj-name" style="margin-top:8px">'+a.n+'</div><div class="obj-say">❓ What can it do?</div></div>').join('');
+}
+function animalSay(i){
+  const a=ANIMALS[i],el=document.getElementById('an'+i),s=el.querySelector('.obj-say');
+  s.textContent='✅ It can '+a.ans+'!';s.className='obj-say good';el.classList.add('used');
+  speakGB(a.q,{voice:i%2?'boy':'girl'});
+}
+function buildBA(){
+  const mk=(a,idx)=>'<div class="obj" data-say="'+a.say+'" data-voice="'+(idx%2?'boy':'girl')+'" onclick="stickOne(this)">'+
+    cropHTML(a.c[0],a.c[1],a.c[2],a.c[3],a.c[4])+
+    '<div class="obj-name" style="margin-top:8px">'+a.label+'</div>'+
+    '<div class="obj-say '+(a.bad?'bad':'good')+'">'+(a.bad?'❌ bad idea':'✅ good idea')+'</div></div>';
+  document.getElementById('beforeCards').innerHTML=BA.filter(a=>a.when==='b').map(mk).join('');
+  document.getElementById('afterCards').innerHTML=BA.filter(a=>a.when==='a').map(mk).join('');
+}
+function stickOne(el){
+  if(el.classList.contains('used'))return;
+  el.classList.add('used');
+  const n=document.querySelectorAll('#beforeCards .used, #afterCards .used').length;
+  const msg=document.getElementById('stickMsg');
+  msg.className='big-reply good';
+  msg.textContent='🏷️ Stuck '+n+' / 6 — '+(n===6?'ALL DONE! Super job! 🌟':'keep saying the whole sentence!');
+  if(n===6)confetti();
+}
+function stickReset(){
+  document.querySelectorAll('#beforeCards .obj, #afterCards .obj').forEach(o=>o.classList.remove('used'));
+  const msg=document.getElementById('stickMsg');msg.textContent='';msg.className='big-reply';
+}
+function buildSub(){
+  const p=document.getElementById('smP').value,w=document.getElementById('smW').value;
+  const s=p+' '+w+'.';
+  document.getElementById('smOut').textContent=s;
+  const b=document.getElementById('smSay');
+  b.setAttribute('data-say',s);
+  b.setAttribute('data-voice',/^(roll|run|crawl|twist|shake)/.test(w)?'girl':'boy');
+}
+function buildMystery(){mysteryNew();}
+function mysteryNew(){
+  const pool=ACTIONS.slice();
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=pool[i];pool[i]=pool[j];pool[j]=t;}
+  const six=pool.slice(0,6);
+  document.getElementById('mysteryGrid').innerHTML=six.map((a,i)=>
+    '<div class="zone" onclick="mysteryOpen(this,\''+a.w.replace(/'/g,"\\'")+'\',\''+a.say.replace(/'/g,"\\'")+'\')">'+
+    '<div class="zlabel">🎁 Present '+(i+1)+'</div>'+
+    '<div class="zhide">'+a.w+'<br><span style="font-size:.45em;letter-spacing:2px">+10 POINTS!</span></div></div>').join('');
+  const m=document.getElementById('mysteryMsg');m.textContent='';m.className='big-reply';
+}
+function mysteryOpen(el,word,say){
+  if(el.classList.contains('revealed'))return;
+  el.classList.add('revealed');
+  speakGB(say,{voice:'girl'});
+  const m=document.getElementById('mysteryMsg');
+  m.className='big-reply good';m.textContent='🎁 '+word+' — Team, say it! +10!';
+  addScore(currentTeam(),10);
+  openCine('🎁 MYSTERY PRESENT',word);
+}
+function buildChantPage(){
+  document.getElementById('chantPage').innerHTML=cropHTML(2,474,0,474,572)+'<div style="margin-top:6px;font-weight:800;color:#888">Chant and dance! 📖 p.25</div>';
+}
+/* ================= R DETECTIVE (SORT) ================= */
+const SORT_WORDS=[
+ {w:'roll',k:'r'},{w:'run',k:'r'},{w:'rabbit',k:'r'},{w:'ready',k:'r'},{w:'race',k:'r'},
+ {w:'after',k:'n'},{w:'before',k:'n'},{w:'tiger',k:'n'},{w:'water',k:'n'}
+];
+let sortSel=null;
+function sortReset(){
+  sortSel=null;
+  document.getElementById('sortPool').innerHTML=SORT_WORDS.map((s,i)=>'<span onclick="sortPick(this)" data-k="'+s.k+'">'+s.w+'</span>').join('');
+  document.getElementById('boxR').innerHTML='';
+  document.getElementById('boxN').innerHTML='';
+  const m=document.getElementById('sortMsg');m.textContent='';m.className='big-reply';
+}
+function sortPick(el){
+  if(sortSel)sortSel.classList.remove('sel');
+  sortSel=el;el.classList.add('sel');
+  speakGB(el.textContent,{voice:'girl'});
+}
+function sortPlace(box){
+  if(!sortSel){toast('👉 Pick a word from the pool first!');return;}
+  const target=box==='r'?document.getElementById('boxR'):document.getElementById('boxN');
+  target.appendChild(sortSel);
+  sortSel.classList.remove('sel');
+  const good=(sortSel.getAttribute('data-k')===box);
+  sortSel.style.background=good?'#e8ffe8':'#ffe8e8';
+  sortSel.setAttribute('data-ok',good?'1':'0');
+  sortSel.style.outline='';
+  const placed=sortSel;
+  placed.onclick=function(){sortReturn(placed);};
+  sortSel=null;
+}
+function sortReturn(el){
+  el.onclick=function(){sortPick(el);};el.style.background='';el.style.outline='';
+  el.removeAttribute('data-ok');
+  document.getElementById('sortPool').appendChild(el);
+  const m=document.getElementById('sortMsg');m.textContent='';m.className='big-reply';
+}
+function sortCheck(){
+  const all=document.querySelectorAll('.sort-box .placed span');
+  if(!all.length){toast('👉 Put some words in the boxes first!');return;}
+  let ok=0;
+  all.forEach(s=>{if(s.getAttribute('data-ok')==='1')ok++;else s.style.outline='3px solid var(--red)';});
+  const m=document.getElementById('sortMsg');
+  m.className='big-reply '+(ok===all.length?'good':'bad');
+  m.textContent=ok===all.length?'🎉 Perfect! '+ok+' / '+all.length+' — R detective star! ⭐':'✔ '+ok+' / '+all.length+' — the red ones are wrong, try again!';
+  speakGB(ok===all.length?'Perfect! You are an R detective!':'Check the red words. Does the R say rrr, or is it quiet?',{voice:'girl'});
+  if(ok===all.length)confetti();
+}
+
+/* ================= SPELL THE R WORD (KEYBOARD) ================= */
+const SPELL1=['roll','run','rabbit','ready','red','race'];
+let spIdx=0,spTyped='',spSolved=false;
+function renderKeyboard(el){
+  const letters='abcdefghijklmnopqrstuvwxyz'.split('');
+  el.innerHTML=letters.map(c=>'<button class="write-key" data-key="'+c+'">'+c+'</button>').join('')+
+    '<button class="write-key del" data-key="__del">⌫</button>'+
+    '<button class="write-key clr" data-key="__clr">CLEAR</button>';
+}
+document.addEventListener('click',function(e){
+  const k=e.target.closest('.write-key');
+  if(!k)return;
+  const key=k.getAttribute('data-key');
+  if(k.closest('#spellKeys'))spKey(key);
+  else if(k.closest('#spellBox'))quizKey(key);
+  const vc=e.target.closest('.vocab-card');
+  if(vc)vc.classList.add('said');
+});
+function drawSpell(solved){
+  const w=SPELL1[spIdx],d=document.getElementById('spellDisplay'),r=document.getElementById('spellResult');
+  d.innerHTML=w.split('').map((c,i)=>{
+    const typed=spTyped[i];
+    const cls=solved?'':(typed?(typed===c?'':''):'');
+    return '<span style="width:38px;height:44px;border-radius:10px;border:3px solid '+(solved?'var(--green)':'var(--purple)')+';background:'+(solved?'#e8ffe8':(typed?'#fff3fb':'#fff'))+';display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:'+(solved?'var(--green)':'var(--purple)')+'">'+(typed?typed:'_')+'</span>';
+  }).join('');
+  if(solved){d.className='write-display ok';r.textContent='🎉 Correct! '+w;r.style.color='var(--green)';}
+  else if(spTyped.length>=w.length){
+    if(spTyped===w){d.className='write-display ok';r.textContent='🎉 Correct! '+w;r.style.color='var(--green)';spSolved=true;confetti();speakGB(w+'! Well done!',{voice:'girl'});setTimeout(()=>{nextSpell();},1400);}
+    else{d.className='write-display bad';r.textContent='❌ Not yet — say the word again and try!';r.style.color='var(--red)';}
+  }else{d.className='write-display';r.textContent='';}
+}
+function spKey(key){
+  if(spSolved)return;
+  if(key==='__del')spTyped=spTyped.slice(0,-1);
+  else if(key==='__clr')spTyped='';
+  else spTyped+=key;
+  drawSpell(false);
+}
+function nextSpell(){
+  spIdx=(spIdx+1)%SPELL1.length;spTyped='';spSolved=false;
+  const w=SPELL1[spIdx];
+  document.getElementById('spellPrompt').textContent='Spell the R word: '+w;
+  drawSpell(false);
+}
+function spellClear(){spTyped='';spSolved=false;drawSpell(false);}
+document.getElementById('spellHear').addEventListener('click',function(){speakGB(SPELL1[spIdx],{voice:'girl',rate:RATE_SLOW});});
+
+/* ================= TEACHER SAYS ================= */
+const TS_CMDS=['stand up!','jump!','run in place!','sit down!','touch your toes!','clap your hands!','turn around!','freeze!','hop!','shake your leg!','tiptoe!','skip!'];
+function teacherSays(aloud){
+  const has=Math.random()<0.6;
+  const c=TS_CMDS[Math.floor(Math.random()*TS_CMDS.length)];
+  const t=document.getElementById('tsText'),s=document.getElementById('tsSub'),r=document.getElementById('tsReply');
+  if(has){t.textContent='Teacher says: '+c;t.style.color='var(--green)';s.textContent='DO IT! ✅';r.className='big-reply good';r.textContent='✅ Good moving!';if(aloud)speakGB('Teacher says '+c,{voice:'girl'});}
+  else{t.textContent='⚡ '+c;t.style.color='var(--red)';s.textContent='NO “Teacher says” — FREEZE! 🗿';r.className='big-reply bad';r.textContent='❌ FREEZE! Anyone who moved sits down!';if(aloud)speakGB(c,{voice:'boy'});}
+}
+
+/* ================= LISTEN, DO & SAY ================= */
+const CMDS=[
+ "Show me how to tiptoe!","Let's jump!","Show me how to roll!","Let's crawl!",
+ "Twist your body!","Hop, hop, hop!","Shake your leg!","Stand on one leg!",
+ "Skip to the door!","Don't move until GO!","Now GO! Jump, jump, jump!","Run in place! Run, run, run!"
+];
+let cmdTimers=[];
+function stopCmd(){cmdTimers.forEach(t=>clearTimeout(t));cmdTimers=[];}
+function cmdShow(text,sub,voice){
+  document.getElementById('cmdText').textContent=text;
+  document.getElementById('cmdSub').textContent=sub||'Do it and say the sentence!';
+  if(text)speakGB(text,{voice:voice||'girl'});
+}
+function cmdRandom(){stopCmd();cmdShow(CMDS[Math.floor(Math.random()*CMDS.length)]);}
+function cmdChain(){
+  stopCmd();
+  const pool=CMDS.slice(),picked=[];
+  for(let i=0;i<3&&pool.length;i++)picked.push(pool.splice(Math.floor(Math.random()*pool.length),1)[0]);
+  document.getElementById('cmdText').textContent='CHAIN ×3 ready! 🔗';
+  document.getElementById('cmdSub').textContent='Three commands in a row — don\'t lose the chain!';
+  picked.forEach((c,i)=>{cmdTimers.push(setTimeout(()=>cmdShow(c,'Command '+(i+1)+' of 3 — keep going!',i%2?'boy':'girl'),1200+i*2600));});
+  cmdTimers.push(setTimeout(()=>{const t=document.getElementById('cmdText');t.textContent='🎉 Chain finished!';document.getElementById('cmdSub').textContent='Which action was the hardest?';},1200+3*2600));
+}
+function cmdStop(){stopCmd();cmdShow('STOP! 🛑','Freeze like a statue! 🗿','boy');}
+function cmdGO(){stopCmd();cmdShow('GO!! 📣','Now do the last action fast!','boy');}
+/* ================= TEAMS ================= */
+const TEAM=[{n:'Team A',i:'🐬'},{n:'Team B',i:'🐯'},{n:'Team C',i:'🐸'}];
+let turn=0;
+function currentTeam(){return['A','B','C'][turn];}
+function addScore(id,d){
+  const el=document.getElementById('score'+id);
+  el.textContent=Math.max(0,parseInt(el.textContent,10)+d);
+  el.style.transform='scale(1.35)';setTimeout(()=>el.style.transform='',260);
+  toast((d>0?'+':'')+d+' points — '+TEAM[['A','B','C'].indexOf(id)].n+'!');
+}
+function nextTurn(){turn=(turn+1)%3;document.getElementById('turnChip').textContent='Turn: '+TEAM[turn].n+' '+TEAM[turn].i;}
+function resetScores(){['A','B','C'].forEach(id=>document.getElementById('score'+id).textContent='0');turn=0;document.getElementById('turnChip').textContent='Turn: Team A 🐬';toast('Scores reset!');}
+
+/* ================= LISTEN & DRAG ================= */
+let dragSel=null;
+function dragReset(){
+  dragSel=null;
+  document.getElementById('dragPool').innerHTML=DRAG.map(d=>
+    '<span onclick="dragPick(this)" data-k="'+d.k+'" data-say="'+d.say+'" data-voice="girl" style="display:flex;align-items:center;gap:8px">'+
+    cropHTML(d.c[0],d.c[1],d.c[2],d.c[3],d.c[4],'width:64px;flex-shrink:0')+'<b>'+d.label+'</b></span>').join('');
+  document.getElementById('zoneB').innerHTML='';
+  document.getElementById('zoneA').innerHTML='';
+  const m=document.getElementById('dragMsg');m.textContent='';m.className='big-reply';
+}
+function dragPick(el){
+  if(dragSel)dragSel.classList.remove('sel');
+  dragSel=el;el.classList.add('sel');
+}
+function dragPlace(zone){
+  if(!dragSel){toast('👉 Click a picture first!');return;}
+  const ok=dragSel.getAttribute('data-k')===zone;
+  const m=document.getElementById('dragMsg');
+  if(!ok){
+    m.className='big-reply bad';m.textContent='❌ Not that one — BEFORE or AFTER? Listen again!';
+    return;
+  }
+  const el=dragSel;dragSel=null;el.classList.remove('sel');
+  el.style.background='#e8ffe8';el.style.borderColor='var(--green)';el.style.pointerEvents='none';
+  document.getElementById(zone==='b'?'zoneB':'zoneA').appendChild(el);
+  m.className='big-reply good';
+  const total=document.getElementById('dragPool').children.length;
+  const done=document.getElementById('zoneB').children.length+document.getElementById('zoneA').children.length;
+  m.textContent='✅ Correct! '+done+' / '+total;
+  if(done===total){m.textContent='🎉 All 6 sorted! '+TEAM[turn].n+' +10!';addScore(currentTeam(),10);confetti();}
+}
+function dragCheck(){
+  const total=document.getElementById('dragPool').children.length;
+  const done=document.getElementById('zoneB').children.length+document.getElementById('zoneA').children.length;
+  const m=document.getElementById('dragMsg');
+  m.className='big-reply '+(done===total?'good':'bad');
+  m.textContent=done===total?'🎉 '+done+' / '+total+' — perfect! ⭐':'✔ '+done+' / '+total+' sorted — keep going!';
+}
+
+/* ================= GUESS MY ACTION ================= */
+let gmaShown='';
+function guessAction(showSentence){
+  const a=ACTIONS[Math.floor(Math.random()*ACTIONS.length)];
+  gmaShown=a.w;
+  const t=document.getElementById('gmaText');
+  if(showSentence){
+    t.textContent='Say: “'+a.short+'”';
+    speakGB('You can '+a.w+'! '+a.short,{voice:'girl'});
+  }else{
+    t.textContent='🎭 '+a.w;
+    toast('Act it silently — no sound!');
+  }
+}
+
+/* ================= THE TEACHER IS WRONG ================= */
+const TW=[
+ {s:'A rabbit can hop!',ok:true},{s:'A turtle can fly!',ok:false},
+ {s:'Before exercising, I put on my sneakers.',ok:true},{s:'After exercising, I eat a lot. Good idea!',ok:false},
+ {s:'Jump is on one foot.',ok:false},{s:'Hop is on one foot.',ok:true},
+ {s:'I can twist my body.',ok:true},{s:'A fish can crawl!',ok:false},
+ {s:'After exercising, I take a shower.',ok:true},{s:'The R in roll is silent.',ok:false}
+];
+let twIdx=-1;
+function twNext(silent){
+  twIdx=(twIdx+1)%TW.length;
+  document.getElementById('twText').textContent=TW[twIdx].s;
+  document.getElementById('twSub').textContent='Right ✅ or wrong ❌?';
+  const r=document.getElementById('twReply');r.textContent='';r.className='big-reply';
+  if(!silent)speakGB(TW[twIdx].s,{voice:'girl'});
+}
+function teacherWrong(saidRight){
+  if(twIdx<0){twNext();toast('👉 Press “New silly sentence” first!');return;}
+  const cur=TW[twIdx],ok=(saidRight===cur.ok),r=document.getElementById('twReply');
+  if(ok){r.className='big-reply good';r.textContent='🎉 Correct! '+TEAM[turn].n+' +10!';addScore(currentTeam(),10);speakGB('Correct! Well done!',{voice:'boy'});}
+  else{r.className='big-reply bad';r.textContent='❌ Listen again — '+(cur.ok?'it IS right!':'it is WRONG!');speakGB(cur.ok?'It is right!':'It is wrong!',{voice:'boy'});}
+}
+
+/* ================= SONG ================= */
+const LINES=Array.prototype.map.call(document.querySelectorAll('#tp6 .lyric .ly-t'),e=>e.textContent);
+let songTimers=[],songI=-1;
+function highlightLine(i){
+  document.querySelectorAll('#tp6 .lyric').forEach((l,k)=>l.classList.toggle('hot',k===i));
+}
+function singLine(i){
+  songI=i;highlightLine(i);
+  speakGB(LINES[i],{voice:i%2?'boy':'girl'});
+}
+function stopSong(){songTimers.forEach(t=>clearTimeout(t));songTimers=[];}
+function songPlay(){
+  stopSong();stopSpeak();
+  let d=400;
+  LINES.forEach((l,i)=>{
+    songTimers.push(setTimeout(()=>{highlightLine(i);speakGB(l,{voice:i%2?'boy':'girl'});},d));
+    d+=2600;
+  });
+  songTimers.push(setTimeout(()=>{toast('🎵 Song finished — now FREEZE! 🧊');highlightLine(-1);},d));
+}
+function songNext(){stopSpeak();songI=(songI+1)%LINES.length;highlightLine(songI);speakGB(LINES[songI],{voice:songI%2?'boy':'girl'});}
+
+/* ================= FREEZE GAME ================= */
+let frzTimers=[],frzOn=false;
+function freezeStop(){freezeHalt();const msg=document.getElementById('frzMsg');msg.className='big-reply';msg.textContent='Game ended — play again any time!';toast('🧊 Freeze game stopped');}
+function freezeHalt(){
+  frzTimers.forEach(t=>clearTimeout(t));frzTimers=[];frzOn=false;
+  const ring=document.getElementById('frzRing');
+  if(ring){ring.classList.remove('hot');document.getElementById('frzTime').textContent='▶';document.getElementById('frzLabel').textContent='READY?';}
+}
+function freezeStart(){
+  freezeHalt();frzOn=true;stopSpeak();
+  const ring=document.getElementById('frzRing'),tm=document.getElementById('frzTime'),lb=document.getElementById('frzLabel'),msg=document.getElementById('frzMsg');
+  let step=0;
+  const go=()=>{
+    if(!frzOn)return;
+    if(step>=8){
+      ring.classList.remove('hot');tm.textContent='🏆';lb.textContent='WELL DONE';
+      msg.className='big-reply good';msg.textContent='🎉 Freeze game over — nobody fell!';return;
+    }
+    const line=LINES[step%LINES.length];
+    ring.classList.remove('hot');tm.textContent='🎵';lb.textContent='SING!';
+    msg.className='big-reply';msg.textContent=line;
+    speakGB(line,{voice:step%2?'boy':'girl'});
+    frzTimers.push(setTimeout(()=>{
+      if(!frzOn)return;
+      ring.classList.add('hot');tm.textContent='🧊';lb.textContent='FREEZE!';
+      msg.className='big-reply bad';msg.textContent="FREEZE! 🗿 Don't move!";
+      speakGB("Freeze! Don't move!",{voice:'boy'});
+      frzTimers.push(setTimeout(()=>{step++;go();},2300));
+    },2700));
+  };
+  go();
+}
+
+/* ================= CONFETTI ================= */
+function confetti(){
+  const colors=['#8b5cf0','#f04f9b','#ffd447','#4cc948','#4a9ee0','#f5822b'];
+  for(let i=0;i<70;i++){
+    const p=document.createElement('div');
+    p.className='confetti-piece';
+    p.style.left=(Math.random()*100)+'vw';
+    p.style.background=colors[i%6];
+    p.style.width=p.style.height=(8+Math.random()*10)+'px';
+    p.style.animationDuration=(2.4+Math.random()*2.2)+'s';
+    p.style.animationDelay=(Math.random()*.6)+'s';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),5400);
+  }
+}
+/* ================= QUIZ DATA ================= */
+const TF=[
+ {e:'🧘',s:'Before exercising, we should warm up and stretch.',a:true},
+ {e:'🦶',s:'Hop is on two feet.',a:false},
+ {e:'🐢',s:'A turtle can crawl.',a:true},
+ {e:'🍔',s:'After exercising, I eat a lot. Good idea!',a:false},
+ {e:'🔤',s:'In British English, the R in “after” says rrr.',a:false}
+];
+const LS=[
+ {say:'Tiptoe!',opts:[[1,55,78,205,265,'tiptoe'],[1,270,80,210,235,'jump'],[1,690,20,255,230,'skip']]},
+ {say:'Hop!',opts:[[1,485,250,170,230,'hop'],[1,25,345,200,160,'roll'],[1,615,250,155,245,'shake your leg']]},
+ {say:'Twist your body!',opts:[[1,495,65,170,200,'twist'],[1,205,330,205,150,'crawl'],[1,270,80,210,235,'jump']]},
+ {say:'Stand on one leg!',opts:[[1,745,255,200,260,'stand on one leg'],[1,690,20,255,230,'skip'],[1,485,250,170,230,'hop']]}
+];
+const SPQ=['roll','run','rabbit','ready'];
+const FILL=[
+ {q:'Before exercising, I put on my ____.',a:'sneakers',opts:['sneakers','shower','door']},
+ {q:'After exercising, I ____ my face and hands.',a:'wash',opts:['wash','eat','fly']},
+ {q:'I can ____ my body!',a:'twist',opts:['twist','sleep','read']},
+ {q:'A turtle can ____.',a:'crawl',opts:['crawl','sing','drive']}
+];
+const QS={tf:{d:0,o:0,n:TF.length},ls:{d:0,o:0,n:LS.length},sp:{d:0,o:0,n:SPQ.length},fl:{d:0,o:0,n:FILL.length}};
+let tfDone=[],lsDone=[],fillDone=[],fillFirst=[];
+
+function updProg(){
+  document.getElementById('tfProg').textContent=QS.tf.d+' / '+QS.tf.n;
+  document.getElementById('lsProg').textContent=QS.ls.d+' / '+QS.ls.n;
+  document.getElementById('spProg').textContent=QS.sp.d+' / '+QS.sp.n;
+  document.getElementById('flProg').textContent=QS.fl.d+' / '+QS.fl.n;
+}
+
+/* ---- 1. TRUE / FALSE ---- */
+function renderTF(){
+  tfDone=[false,false,false,false,false];
+  QS.tf={d:0,o:0,n:TF.length};
+  document.getElementById('tfBox').innerHTML=TF.map((t,i)=>
+    '<div class="tf-card"><div class="tf-emoji">'+t.e+'</div><div class="tf-stmt">'+t.s+'</div>'+
+    '<div class="tf-btns"><button class="tf-btn true-btn" onclick="answerTF('+i+',true)">✅ True</button>'+
+    '<button class="tf-btn false-btn" onclick="answerTF('+i+',false)">❌ False</button></div>'+
+    '<div class="tf-result" id="tfr'+i+'"></div></div>').join('');
+  updProg();
+}
+function answerTF(i,ans){
+  if(tfDone[i])return;
+  tfDone[i]=true;
+  const ok=(ans===TF[i].a),r=document.getElementById('tfr'+i);
+  QS.tf.d++;if(ok)QS.tf.o++;updProg();
+  r.style.color=ok?'var(--green)':'var(--red)';
+  r.textContent=ok?'🎉 Correct!':('❌ Not quite — it is '+(TF[i].a?'TRUE ✅':'FALSE ❌')+'!');
+  speakGB(ok?'Correct!':('Not quite. '+TF[i].s),{voice:'girl'});
+}
+
+/* ---- 2. LISTEN & CHOOSE ---- */
+function renderLS(){
+  lsDone=[false,false,false,false];
+  QS.ls={d:0,o:0,n:LS.length};
+  document.getElementById('listenBox').innerHTML=LS.map((it,i)=>
+    '<div class="listen-card"><div class="listen-play"><button onclick="speakGB(\''+it.say+'\',{voice:\'girl\'})" title="Listen">🔊</button></div>'+
+    '<div class="listen-hint">Question '+(i+1)+' of '+LS.length+' — listen, then choose the picture.</div>'+
+    '<div class="listen-opts">'+it.opts.map((o,oi)=>
+      '<div class="pic-opt" id="ls'+i+'_'+oi+'" onclick="answerLS('+i+','+oi+')">'+cropHTML(o[0],o[1],o[2],o[3],o[4])+'<div class="po-w">'+o[5]+'</div></div>').join('')+
+    '</div></div>').join('');
+  updProg();
+}
+function answerLS(i,oi){
+  if(lsDone[i])return;
+  lsDone[i]=true;
+  const el=document.getElementById('ls'+i+'_'+oi),ok=(oi===0);
+  el.classList.add(ok?'ok':'no');
+  if(!ok)document.getElementById('ls'+i+'_0').classList.add('ok');
+  for(let k=0;k<3;k++){const o=document.getElementById('ls'+i+'_'+k);if(!o.classList.contains('ok')&&!o.classList.contains('no'))o.classList.add('dis');}
+  QS.ls.d++;if(ok)QS.ls.o++;updProg();
+  speakGB(ok?(LS[i].say+' Yes, you got it!'):(LS[i].say+' Look at the green one.'),{voice:'girl'});
+}
+
+/* ---- 3. SPELL THE R WORD (QUIZ) ---- */
+let qsIdx=0,qsTyped='',qsDoneAll=false;
+function renderSpellQ(){
+  qsIdx=0;qsTyped='';qsDoneAll=false;
+  QS.sp={d:0,o:0,n:SPQ.length};
+  document.getElementById('spellBox').innerHTML=
+    '<div class="write-prompt" id="qsPrompt">Spell the word you hear</div>'+
+    '<div class="write-hint">Say it out loud FIRST, then tap the letters.</div>'+
+    '<div class="write-display" id="qsDisplay"></div>'+
+    '<div class="write-keyboard" id="qsKeys"></div>'+
+    '<div class="write-result" id="qsResult"></div>'+
+    '<div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">'+
+    '<button class="btn blue" onclick="speakGB(SPQ[qsIdx],{voice:\'girl\',rate:RATE_SLOW})">🔊 Hear the word</button>'+
+    '<button class="btn orange" onclick="qsClear()">⌫ Clear</button></div>';
+  renderKeyboard(document.getElementById('qsKeys'));
+  qsDraw();
+}
+function qsClear(){qsTyped='';qsDraw();}
+function quizKey(key){
+  if(qsDoneAll)return;
+  if(key==='__del')qsTyped=qsTyped.slice(0,-1);
+  else if(key==='__clr')qsTyped='';
+  else qsTyped+=key;
+  qsDraw();
+}
+function qsDraw(){
+  const w=SPQ[qsIdx],d=document.getElementById('qsDisplay'),r=document.getElementById('qsResult');
+  document.getElementById('qsPrompt').textContent='Word '+(qsIdx+1)+' of '+SPQ.length+' — spell what you hear';
+  d.innerHTML=w.split('').map((c,i)=>'<span style="width:38px;height:44px;border-radius:10px;border:3px solid var(--purple);background:'+(qsTyped[i]?'#fff3fb':'#fff')+';display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--purple)">'+(qsTyped[i]||'_')+'</span>').join('');
+  if(qsTyped.length<w.length){d.className='write-display';r.textContent='';return;}
+  if(qsTyped===w){
+    d.className='write-display ok';
+    r.textContent='🎉 Correct! '+w;r.style.color='var(--green)';
+    QS.sp.d++;QS.sp.o++;updProg();
+    speakGB(w+'! Correct!',{voice:'girl'});
+    qsDoneAll=true;
+    confetti();
+    setTimeout(()=>{
+      qsIdx++;qsTyped='';
+      if(qsIdx>=SPQ.length){qsIdx=0;qsDoneAll=true;document.getElementById('qsPrompt').textContent='🎉 All R words done!';}
+      else{qsDoneAll=false;qsDraw();speakGB(SPQ[qsIdx],{voice:'girl',rate:RATE_SLOW});}
+    },1500);
+  }else{
+    d.className='write-display bad';
+    r.textContent='❌ Not right — say it slowly and fix it.';r.style.color='var(--red)';
+  }
+}
+
+/* ---- 4. FILL IN THE BLANK ---- */
+function renderFill(){
+  fillDone=[false,false,false,false];fillFirst=[true,true,true,true];
+  QS.fl={d:0,o:0,n:FILL.length};
+  document.getElementById('fillBox').innerHTML=FILL.map((f,i)=>
+    '<div class="fill-card"><div class="fill-q">'+(i+1)+'. '+f.q.replace('____','<span class="fill-blank" id="fb'+i+'">____</span>')+'</div>'+
+    '<div class="fill-opts">'+f.opts.map(o=>'<button class="fill-opt" id="fo'+i+'_'+o+'" onclick="answerFill('+i+',\''+o+'\')">'+o+'</button>').join('')+'</div>'+
+    '<div class="fill-result" id="flr'+i+'"></div></div>').join('');
+  updProg();
+}
+function answerFill(i,val){
+  if(fillDone[i])return;
+  const f=FILL[i],btn=document.getElementById('fo'+i+'_'+val);
+  if(val===f.a){
+    fillDone[i]=true;
+    btn.classList.add('selected');
+    const fb=document.getElementById('fb'+i);fb.textContent=f.a;fb.classList.add('revealed');
+    const r=document.getElementById('flr'+i);r.textContent='🎉 Correct!';r.style.color='var(--green)';
+    document.querySelectorAll('[id^="fo'+i+'_"]').forEach(b=>{if(!b.classList.contains('selected'))b.classList.add('dis');});
+    QS.fl.d++;if(fillFirst[i])QS.fl.o++;updProg();
+    speakGB(f.q.replace('____',f.a),{voice:'girl'});
+  }else{
+    fillFirst[i]=false;
+    btn.classList.add('wrong');
+    const r=document.getElementById('flr'+i);r.textContent='❌ Not that one — try again!';r.style.color='var(--red)';
+  }
+}
+
+/* ---- FINISH / RESET ---- */
+function finishQuiz(){
+  stopSpeak();stopSong();stopCmd();freezeHalt();
+  const total=QS.tf.o+QS.ls.o+QS.sp.o+QS.fl.o;
+  const all=QS.tf.n+QS.ls.n+QS.sp.n+QS.fl.n;
+  const stars=total===all?5:total>=all*0.8?4:total>=all*0.6?3:total>=all*0.4?2:1;
+  const msg=stars>=4?'🌟 Amazing! You know Unit 4!':stars>=3?'👍 Good job! Keep practicing!':'💪 Play the games again, then try the quiz once more!';
+  const item=(lab,s)=>'<div class="score-item"><div class="si-type">'+lab+'</div><div class="si-score">'+s.o+' / '+s.n+'</div></div>';
+  document.getElementById('scoreBoard').innerHTML=
+    '<div class="score-board"><h2>🎉 Your Unit 4 Score</h2>'+
+    '<div class="score-big">'+total+' / '+all+'</div>'+
+    '<div class="score-label">correct answers</div>'+
+    '<div class="score-stars">'+Array(stars+1).join('⭐')+'</div>'+
+    '<div class="score-breakdown">'+item('True / False',QS.tf)+item('Listen &amp; Choose',QS.ls)+item('Spell R words',QS.sp)+item('Fill blanks',QS.fl)+'</div>'+
+    '<div style="margin-top:16px;font-weight:800;font-size:clamp(14px,2.4vw,19px)">'+msg+'</div></div>';
+  document.getElementById('scoreBoard').scrollIntoView({behavior:'smooth',block:'center'});
+  confetti();
+  speakGB(total===all?'Perfect score! Amazing work!':(total>=all*0.6?'Good job! Practice a little more!':'Try again after the games!'),{voice:'girl'});
+}
+function resetQuiz(){
+  renderTF();renderLS();renderSpellQ();renderFill();
+  document.getElementById('scoreBoard').innerHTML='';
+  toast('↻ Quiz reset — good luck!');
+}
+
+/* ================= INIT ================= */
+buildActionCards();
+buildWarm();
+buildAnimals();
+buildBA();
+buildMystery();
+buildChantPage();
+buildSub();
+sortReset();
+renderKeyboard(document.getElementById('spellKeys'));
+spIdx=-1;nextSpell();
+dragReset();
+renderTF();
+renderLS();
+renderSpellQ();
+renderFill();
+twNext(true);
+fabTop.style.opacity='0';fabTop.style.pointerEvents='none';fabTop.style.transform='translateY(96px)';
+setTimeout(()=>toast('🏃 Tap any picture or word to hear it — British voices! 🇬🇧'),700);
+
+</script>
+
+</body>
+</html>
