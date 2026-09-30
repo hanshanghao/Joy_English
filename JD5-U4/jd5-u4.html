@@ -889,31 +889,63 @@ function cropFit(n,x,y,w,h,maxW){
 /* ================= VOICES / SPEECH ================= */
 const RATE=0.9,RATE_SLOW=0.8;
 let VF=null,VM=null,soundOn=true,secOn={};
+const FEM=/\bfemale\b|sonia|libby|hazel|serena|kate|martha|stephanie|fiona|moira|tessa|victoria|samantha|susan|nina/i;
+const MAS=/\bmale\b|ryan|arthur|daniel|thomas|oliver|george|richard|james|alex|fred|guy|david|allan|rishi/i;
+function vScore(v,female){
+  const n=v.name||'',l=v.lang||'';
+  if(!/^en/i.test(l))return -1000;
+  let s=0;
+  if(/natural/i.test(n))s+=300;                       /* Microsoft neural — human-like */
+  if(/google uk english/i.test(n))s+=250;             /* Google UK — smooth & natural */
+  else if(/google/i.test(n))s+=90;
+  if(/enhanced|neural|premium|improved/i.test(n))s+=130;
+  if(/en[-_]GB/i.test(l))s+=150;                      /* true British accent */
+  else if(/en[-_](IE|AU|NZ)/i.test(l))s+=40;
+  if(female){if(FEM.test(n))s+=80;if(MAS.test(n))s-=250;}
+  else{if(MAS.test(n))s+=80;if(FEM.test(n))s-=250;}
+  if(/zira|anna|linda|mary|helena|\bsam\b/i.test(n))s-=80; /* older robotic SAPI voices */
+  return s;
+}
 function pickVoice(){
   if(!('speechSynthesis' in window))return;
   const all=speechSynthesis.getVoices();
   if(!all.length)return;
-  const gb=all.filter(v=>/en[-_]GB/i.test(v.lang||''));
-  const pool=(gb.length?gb:all.filter(v=>/^en/i.test(v.lang||''))).length?(gb.length?gb:all.filter(v=>/^en/i.test(v.lang||''))):all;
-  const fe=/female|kate|serena|martha|stephanie|victoria|samantha|fiona|moira|tessa|hazel|zira|susan|maria/i;
-  const ma=/male|daniel|arthur|oliver|rishi|alex|fred|david|george|ryan|guy|allan/i;
-  VF=pool.find(v=>fe.test(v.name))||pool[0]||null;
-  VM=pool.find(v=>ma.test(v.name))||pool.find(v=>v!==VF)||VF;
+  const en=all.filter(v=>/^en/i.test(v.lang||''));
+  const use=en.length?en:all;
+  const best=f=>{let bv=null,bs=-1e9;use.forEach(v=>{const s=vScore(v,f);if(s>bs){bs=s;bv=v;}});return bs>-900?bv:null;};
+  VF=best(true);
+  VM=best(false);
+  if(VF&&VM&&VF.name===VM.name){                      /* one voice picked for both → find a distinct second */
+    let bv=null,bs=-1e9;
+    use.forEach(v=>{if(v===VF)return;const s=vScore(v,false);if(s>bs){bs=s;bv=v;}});
+    if(bv&&bs>-900)VM=bv;
+  }
+  if(!VF)VF=all[0]||null;
+  if(!VM)VM=VF;
 }
 function speakGB(text,opt){
   opt=opt||{};
   if(!('speechSynthesis' in window)){toast('😟 This browser has no speech');return;}
   if(!soundOn){toast('🔇 Sound is off — tap 🔊 at the top');return;}
-  if(!VF)pickVoice();
+  if(!VF||!VM)pickVoice();
   speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(String(text));
   const boy=opt.voice==='boy';
   const v=boy?VM:VF;
-  if(v)u.voice=v;
-  u.lang=(v&&v.lang)||'en-GB';
-  u.pitch=boy?1.05:1.35;
-  u.rate=opt.rate||RATE;
-  speechSynthesis.speak(u);
+  const rate=opt.rate||RATE;
+  const pitch=boy?0.98:1.12;                          /* soft, human pitch — no chipmunk */
+  /* speak sentence by sentence: each utterance gets its own natural rise & fall */
+  const parts=String(text).match(/[^.!?…]+[.!?…]+["'”’)\]]*\s*|[^.!?…]+$/g)||[String(text)];
+  parts.forEach(p=>{
+    const t=p.trim();
+    if(!t)return;
+    const u=new SpeechSynthesisUtterance(t);
+    if(v)u.voice=v;
+    u.lang=(v&&v.lang)||'en-GB';
+    u.pitch=pitch;
+    u.rate=rate;
+    u.volume=1;
+    speechSynthesis.speak(u);
+  });
 }
 function stopSpeak(){if('speechSynthesis' in window)speechSynthesis.cancel();}
 
