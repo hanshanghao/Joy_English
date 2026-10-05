@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD5 Unit 5 - What Are They Wearing?</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f;--paper:#fff7ea}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:var(--pink);top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:var(--yellow);bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:var(--blue);top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-50%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0;font-family:inherit}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.18),0 12px 20px rgba(0,0,0,.15)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.1)}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.btn.red{--c1:#ff8a8a;--c2:#e04040}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.topbar .sound-toggle{background:var(--paper);border:2px solid var(--purple);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .2s}
+.topbar #voiceBtn{margin-left:auto}
+.topbar #voiceBtn:hover{background:var(--purple);color:#fff}
+.topbar .sound-toggle:hover{background:var(--purple);color:#fff}
+.topbar .sound-toggle.off{border-color:#ddd;color:#bbb;background:#f2f2f2}
+.sec-sound{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.85);border:2px solid #e0d8f0;border-radius:50px;padding:4px 12px;font-size:clamp(11px,1.6vw,13px);font-weight:700;cursor:pointer;transition:all .2s;color:#555;margin-left:auto}
+.sec-sound:hover{border-color:var(--purple);background:#f5f0ff}
+.sec-sound.off{border-color:#ddd;color:#bbb;background:#f9f9f9}
+.sec-sound.on{border-color:var(--green);background:#ebfff0;color:#2f9e2b;box-shadow:0 2px 8px rgba(76,201,72,.3)}
+.sec-sound .sec-si{font-size:15px}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(139,92,240,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.navbar .ntab{flex-shrink:0;padding:9px 13px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(11px,1.5vw,14px);font-weight:800;cursor:pointer;background:#fff;color:var(--ink);transition:all .2s;font-family:inherit}
+.navbar .ntab:hover{border-color:var(--purple);background:#f5f0ff}
+.navbar .ntab.on{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(139,92,240,.35)}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(139,92,240,.15),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(0,0,0,.08)}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.15));animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(26px,5.5vw,44px);font-weight:900;color:var(--ink);text-shadow:2px 2px 0 rgba(139,92,240,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.hero .desc{margin-top:10px;font-size:clamp(13px,2vw,16px);color:#666;font-weight:600}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.tl-item{background:#fff;border-radius:18px;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-top:6px solid var(--purple);cursor:pointer;transition:all .25s}
+.tl-item:hover{transform:translateY(-4px);box-shadow:0 9px 20px rgba(0,0,0,.14)}
+.tl-item .tl-min{font-size:clamp(11px,1.7vw,13px);font-weight:900;color:#fff;background:var(--purple);display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:6px}
+.tl-item h4{font-size:clamp(15px,2.4vw,19px);font-weight:900;color:var(--ink);margin-bottom:4px}
+.tl-item p{font-size:clamp(12px,1.8vw,14px);font-weight:600;color:#777;line-height:1.45}
+.tl-item.t1{border-top-color:var(--orange)}.tl-item.t1 .tl-min{background:var(--orange)}
+.tl-item.t2{border-top-color:var(--pink)}.tl-item.t2 .tl-min{background:var(--pink)}
+.tl-item.t3{border-top-color:var(--green)}.tl-item.t3 .tl-min{background:var(--green)}
+.t-image{width:100%;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;transition:transform .3s;display:block}
+.t-image:hover{transform:scale(1.02)}
+.imgcap{text-align:center;font-weight:800;color:#888;margin-top:6px;font-size:clamp(12px,1.9vw,15px)}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0;max-width:640px;margin-left:auto;margin-right:auto}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-icon{font-size:32px;margin-bottom:4px}
+.team-box .team-name{font-weight:900;font-size:clamp(14px,2.2vw,18px)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0;transition:transform .3s}
+.team-box.ta{border-top:6px solid var(--blue)}.team-box.ta .team-score{color:var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}.team-box.tb .team-score{color:var(--orange)}
+.team-btns{display:flex;gap:8px;justify-content:center;margin-top:8px;flex-wrap:wrap}
+.team-btns button{padding:6px 14px;border:none;border-radius:20px;font-size:clamp(12px,1.6vw,15px);font-weight:800;cursor:pointer;color:#fff;transition:transform .2s;font-family:inherit}
+.team-btns button:hover{transform:scale(1.1)}
+.team-btns .tadd{background:linear-gradient(135deg,#7ce577,#37a832)}
+.team-btns .tsub{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.turn-chip{display:inline-block;background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff;font-weight:900;padding:5px 16px;border-radius:30px;font-size:clamp(12px,1.9vw,15px)}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;margin:16px 0}
+.vocab-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .25s;border:4px solid transparent;text-align:center}
+.vocab-card:hover{transform:translateY(-5px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.vocab-card.said{border-color:var(--green)}
+.vocab-card .vc-body{padding:10px}
+.vocab-card .vc-word{font-size:clamp(15px,2.4vw,20px);font-weight:900;color:var(--purple)}
+.vocab-card .vc-say{font-size:clamp(11px,1.7vw,13px);font-weight:700;color:#888;margin-top:4px}
+.vocab-card .vc-emoji{font-size:56px;line-height:1;padding:16px 0 4px}
+.pic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:14px 0}
+.obj{background:#fff;border-radius:18px;padding:12px 8px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;transition:all .25s;border:4px solid transparent}
+.obj:hover{transform:translateY(-5px);border-color:var(--purple)}
+.obj.used{border-color:var(--green);background:#f2fff2}
+.obj.chosen{border-color:var(--orange);background:#fff6ea}
+.obj.bad{border-color:var(--red);background:#fff0f0;animation:shake .4s}
+.obj img{width:100%;height:104px;object-fit:contain;background:#fff;border-radius:12px}
+.obj .obj-name{font-weight:900;font-size:clamp(12px,1.9vw,15px);color:var(--purple);margin-top:6px}
+.obj .obj-say{font-size:clamp(11px,1.7vw,13px);font-weight:700;color:#888;margin-top:3px;min-height:16px}
+.obj-say.bad{color:var(--red)}
+.obj-say.good{color:var(--green)}
+.big-reply{text-align:center;font-size:clamp(18px,4vw,34px);font-weight:900;margin:14px 0;min-height:44px;letter-spacing:.5px;line-height:1.3}
+.big-reply.bad{color:var(--red);animation:shake .4s}
+.big-reply.good{color:var(--green);animation:popIn .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes popIn{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:1}}
+.pattern-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--purple)}
+.pattern-card h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple);margin-bottom:10px}
+.pattern-line{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.7;cursor:pointer;padding:8px 10px;border-radius:12px;transition:background .2s}
+.pattern-line:hover{background:#f8f5ff}
+.pattern-line .q{color:var(--pink)}
+.pattern-line .a{color:var(--green)}
+.pattern-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.pattern-examples .pe{background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:2px solid var(--purple);color:var(--purple);padding:6px 14px;border-radius:30px;font-size:clamp(12px,1.6vw,14px);font-weight:700;cursor:pointer;transition:all .2s}
+.pattern-examples .pe:hover{background:var(--purple);color:#fff;transform:scale(1.05)}
+.sub-machine{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:14px 0}
+.sub-machine select{width:100%;padding:12px;border:3px solid #e0d8f0;border-radius:14px;font-size:clamp(13px,2vw,16px);font-weight:800;background:#faf8ff;outline:none;font-family:inherit;color:var(--ink);cursor:pointer}
+.sub-machine select:focus{border-color:var(--purple)}
+.sub-out{text-align:center;background:#fff;border-radius:18px;padding:20px;box-shadow:0 5px 14px rgba(0,0,0,.08);border:4px solid var(--green)}
+.sub-out .so-a{font-size:clamp(18px,3.2vw,28px);font-weight:900;color:var(--green);margin-top:6px;line-height:1.4}
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.zone{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:4px solid transparent;position:relative}
+.zone:hover{transform:translateY(-4px);border-color:var(--purple)}
+.zone .zlabel{padding:8px;text-align:center;font-weight:900;font-size:clamp(12px,2vw,16px);color:var(--purple);background:#f8f5ff}
+.zone .zhide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:clamp(24px,5vw,42px);background:linear-gradient(135deg,rgba(139,92,240,.94),rgba(240,79,155,.94));color:#fff;opacity:0;pointer-events:none;transition:all .3s;font-weight:900;text-shadow:0 3px 6px rgba(0,0,0,.35);text-align:center;line-height:1.2;padding:8px}
+.zone.revealed .zhide{opacity:1;pointer-events:auto}
+.zone.revealed{border-color:var(--green)}
+.die-wrap{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap;margin:16px 0}
+.die{width:clamp(90px,20vw,130px);height:clamp(90px,20vw,130px);background:linear-gradient(135deg,#fff,#f0eaff);border:5px solid var(--purple);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:clamp(52px,12vw,84px);font-weight:900;color:var(--purple);box-shadow:0 8px 20px rgba(139,92,240,.3);transition:transform .3s;user-select:none}
+.die.roll{animation:dieRoll .5s ease}
+@keyframes dieRoll{0%{transform:rotate(0) scale(1)}30%{transform:rotate(180deg) scale(1.18)}60%{transform:rotate(340deg) scale(.92)}100%{transform:rotate(360deg) scale(1)}}
+.kid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin:16px 0}
+.kid{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:4px solid transparent;position:relative;text-align:center}
+.kid:hover{transform:translateY(-5px);border-color:var(--pink)}
+.kid.hot{border-color:var(--orange);box-shadow:0 0 0 6px rgba(245,130,43,.25)}
+.kid .knum{position:absolute;top:8px;left:8px;background:linear-gradient(135deg,var(--orange),#e06a10);color:#fff;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;box-shadow:0 3px 8px rgba(0,0,0,.2);z-index:2}
+.kid img{width:100%;height:190px;object-fit:contain;background:#fff;padding:8px}
+.kid .kname{padding:8px;font-weight:800;font-size:clamp(11px,1.7vw,14px);color:#777}
+.occ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:16px 0}
+.occ{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:all .25s;border:4px solid transparent}
+.occ:hover{transform:translateY(-4px);border-color:var(--blue)}
+.occ img{width:100%;display:block}
+.occ .occ-cap{padding:10px;text-align:center;font-weight:900;color:var(--blue);font-size:clamp(13px,2vw,16px);background:#f4faff}
+.story-card{background:#fff;border-radius:18px;padding:20px;margin-bottom:16px;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.story-step{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:14px;margin-bottom:8px;cursor:pointer;transition:background .2s}
+.story-step:hover{background:rgba(139,92,240,.06)}
+.story-step .step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.story-step .step-text{font-size:clamp(13px,2vw,16px);font-weight:600;line-height:1.5}
+.story-step .spk{margin-left:auto;font-size:20px;opacity:.5;flex-shrink:0}
+.story-step:hover .spk{opacity:1}
+.listen-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.listen-play{display:flex;justify-content:center;margin-bottom:14px}
+.listen-play button{width:64px;height:64px;border-radius:50%;border:none;font-size:28px;cursor:pointer;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.15);transition:all .2s}
+.listen-play button:hover{transform:translateY(-3px);box-shadow:0 9px 0 rgba(0,0,0,.15)}
+.listen-hint{font-size:clamp(13px,2vw,16px);color:#888;text-align:center;margin-bottom:12px;font-weight:600}
+.listen-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.pic-opt{padding:8px;cursor:pointer;border:3px solid #e0d8f0;border-radius:14px;background:#faf8ff;transition:all .2s;text-align:center}
+.pic-opt:hover{border-color:var(--purple);transform:translateY(-3px)}
+.pic-opt.ok{border-color:var(--green);background:#e8ffe8;pointer-events:none}
+.pic-opt.no{border-color:var(--red);background:#ffe8e8;pointer-events:none}
+.pic-opt.dis{pointer-events:none;opacity:.5}
+.pic-opt img{width:100%;height:130px;object-fit:contain;background:#fff;border-radius:10px}
+.pic-opt .po-w{font-size:clamp(11px,1.8vw,14px);font-weight:800;margin-top:6px}
+.quiz-section-title{display:flex;align-items:center;gap:10px;margin:20px 0 14px;padding:10px 16px;background:linear-gradient(135deg,rgba(139,92,240,.12),rgba(240,79,155,.08));border-radius:16px;border-left:5px solid var(--purple)}
+.quiz-section-title h3{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--purple)}
+.quiz-section-title .qs-badge{background:var(--purple);color:#fff;font-size:clamp(11px,1.6vw,13px);font-weight:800;padding:4px 12px;border-radius:20px;margin-left:auto}
+.tf-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0;transition:all .3s}
+.tf-card .tf-emoji{font-size:clamp(44px,9vw,66px);text-align:center;margin-bottom:10px}
+.tf-card .tf-stmt{font-size:clamp(15px,2.4vw,20px);font-weight:800;text-align:center;margin-bottom:14px;line-height:1.4}
+.tf-btns{display:flex;gap:12px;justify-content:center}
+.tf-btn{padding:14px 32px;border:none;border-radius:50px;font-size:clamp(16px,2.6vw,22px);font-weight:900;cursor:pointer;transition:all .2s;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.15);font-family:inherit}
+.tf-btn:hover{transform:translateY(-3px)}
+.tf-btn.true-btn{background:linear-gradient(135deg,#7ce577,#37a832)}
+.tf-btn.false-btn{background:linear-gradient(135deg,#ff7eb6,#ef4f98)}
+.tf-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.tf-result{font-size:clamp(13px,2.1vw,17px);font-weight:700;text-align:center;margin-top:12px;min-height:26px;line-height:1.5}
+.fill-card{background:#fff;border-radius:18px;padding:22px;box-shadow:0 5px 14px rgba(0,0,0,.08);margin-bottom:16px;border:3px solid #e0d8f0}
+.fill-q{font-size:clamp(15px,2.4vw,20px);font-weight:800;line-height:1.6;margin-bottom:4px}
+.fill-blank{display:inline-block;min-width:110px;border-bottom:3px dashed var(--purple);padding:2px 8px;color:var(--green);font-weight:900;text-align:center;transition:all .3s}
+.fill-blank.revealed{border-bottom-style:solid;background:#e8ffe8;border-radius:8px}
+.fill-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fill-opt{padding:10px 18px;border:3px solid #e0d8f0;border-radius:50px;font-size:clamp(13px,2vw,16px);font-weight:700;cursor:pointer;background:#faf8ff;transition:all .2s;font-family:inherit}
+.fill-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.fill-opt.selected{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.fill-opt.wrong{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.fill-opt.dis{pointer-events:none;opacity:.5}
+.fill-result{font-size:clamp(13px,2vw,16px);font-weight:800;text-align:center;margin-top:10px;min-height:24px}
+.score-board{background:linear-gradient(135deg,var(--purple),var(--pink));border-radius:22px;padding:28px 22px;text-align:center;color:#fff;margin:16px 0;box-shadow:0 8px 22px rgba(139,92,240,.3)}
+.score-board h2{font-size:clamp(22px,4vw,32px);font-weight:900;margin-bottom:12px}
+.score-board .score-big{font-size:clamp(40px,10vw,72px);font-weight:900;text-shadow:0 4px 8px rgba(0,0,0,.2);line-height:1}
+.score-board .score-label{font-size:clamp(14px,2.2vw,18px);font-weight:700;opacity:.9;margin-top:4px}
+.score-board .score-stars{font-size:clamp(24px,5vw,40px);margin:10px 0}
+.score-breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:16px}
+.score-item{background:rgba(255,255,255,.2);border-radius:14px;padding:12px;text-align:center}
+.score-item .si-type{font-size:clamp(11px,1.6vw,13px);font-weight:700;opacity:.85}
+.score-item .si-score{font-size:clamp(20px,4vw,28px);font-weight:900}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;pointer-events:none;transition:transform .4s,opacity .4s;opacity:0;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.mascot{position:fixed;bottom:18px;right:20px;z-index:997;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:48px;line-height:1;cursor:pointer;transition:transform .3s}
+.mascot:hover{transform:scale(1.15) rotate(-10deg)}
+.fab-wrap{position:fixed;bottom:74px;right:44px;transform:translateX(50%);z-index:998;display:flex;flex-direction:column;align-items:center;gap:8px}
+.fab-wrap .fab{position:relative}
+.fab{width:44px;height:44px;border-radius:50%;border:none;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.2);transition:opacity .5s,transform .4s,background .2s;opacity:0;pointer-events:none;transform:translateY(96px)}
+.fab.fab-show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.fab.fab-top{background:linear-gradient(135deg,var(--purple),#6c3de0);color:#fff}
+.fab.fab-home{background:linear-gradient(135deg,var(--green),#2f9e2b);color:#fff}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10001;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.show{opacity:1;pointer-events:auto}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 0 40px rgba(255,255,255,.2)}
+.lightbox .lb-close{position:absolute;top:16px;right:20px;font-size:40px;color:#fff;cursor:pointer;background:none;border:none;font-weight:900;transition:transform .2s}
+.lightbox .lb-close:hover{transform:scale(1.2)}
+.confetti-piece{position:fixed;top:-20px;width:14px;height:14px;border-radius:3px;z-index:10000;pointer-events:none;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(1080deg);opacity:0}}
+.board-plan{background:#fff;border-radius:18px;padding:18px;box-shadow:0 5px 14px rgba(0,0,0,.08);font-size:clamp(13px,2.1vw,17px);line-height:1.9;font-weight:700}
+.board-plan .bp-t{font-weight:900;color:var(--purple);font-size:1.1em;margin-bottom:4px}
+.bp-star{color:var(--orange);font-weight:900}
+.bp-ok{color:var(--green);font-weight:900}
+.bp-no{color:var(--red);font-weight:900;text-decoration:line-through}
+.cine{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:10000;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;padding:20px}
+.cine.show{display:flex}
+.cine .cine-who{font-size:clamp(14px,2.4vw,20px);font-weight:900;color:#ffd447;letter-spacing:2px;margin-bottom:8px}
+.cine .cine-line{font-size:clamp(24px,6vw,52px);font-weight:900;color:#fff;line-height:1.25;text-shadow:0 4px 20px rgba(0,0,0,.6);text-align:center}
+.cine-close{margin-top:20px;padding:12px 30px;border-radius:50px;border:none;background:#fff;font-size:clamp(14px,2.2vw,18px);font-weight:900;cursor:pointer;font-family:inherit}
+.twobox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.stage-box{position:relative;background:linear-gradient(135deg,#f5f0ff,#ede4ff);border:4px dashed var(--purple);border-radius:20px;padding:18px;margin:12px 0;text-align:center;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.stage-box .stage-label{font-size:clamp(11px,1.8vw,13px);font-weight:900;color:#999;letter-spacing:2px}
+.stage-box .stage-main{font-size:clamp(20px,4vw,34px);font-weight:900;color:var(--purple);line-height:1.25}
+.pick-row{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 12px;justify-content:flex-start}
+.pick-row .obj{min-width:132px;flex-shrink:0}
+.reward-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:16px 0}
+@media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}.hero h1{font-size:1.5rem}.topbar{padding:8px 12px}.fab-wrap{bottom:56px;right:29px}.vocab-grid{grid-template-columns:repeat(2,1fr)}.mascot{font-size:38px;width:38px;height:38px;bottom:10px;right:10px}.twobox{grid-template-columns:1fr}.sub-machine{grid-template-columns:1fr}.kid-grid{grid-template-columns:repeat(2,1fr)}}
+/* ---- lesson flow ---- */
+.jumps{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 12px;margin-bottom:4px;-webkit-overflow-scrolling:touch}
+.jchip{flex:0 0 auto;background:#fff;border:2px solid #e6ddff;border-radius:30px;padding:8px 14px;font-weight:800;font-size:clamp(12px,1.9vw,15px);cursor:pointer;color:var(--purple);font-family:inherit;transition:.15s}
+.jchip:hover{background:var(--purple);color:#fff;transform:translateY(-2px);box-shadow:0 6px 14px rgba(139,92,240,.3)}
+.phead{margin:24px 0 14px;padding:12px 18px;border-radius:16px;background:linear-gradient(135deg,var(--purple),#8b5cf0);color:#fff;font-weight:900;font-size:clamp(14px,2.4vw,19px);display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 6px 16px rgba(139,92,240,.3)}
+.phead.p2{background:linear-gradient(135deg,var(--green),#2f9e2b);box-shadow:0 6px 16px rgba(76,201,72,.3)}
+.ph-t{background:rgba(255,255,255,.25);padding:3px 12px;border-radius:30px;font-size:.75em;letter-spacing:1.5px}
+section{scroll-margin-top:118px}
+.stp{display:block;position:relative;padding:7px 8px 7px 32px;border-radius:10px;cursor:pointer;transition:background .2s;line-height:1.75}
+.stp:before{content:'🔊';position:absolute;left:4px;top:8px;font-size:13px;opacity:.3}
+.stp:hover{background:#f4efff}
+.goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.gcard{background:linear-gradient(150deg,#f8f4ff,#fff);border:2px dashed #d9ccff;border-radius:16px;padding:12px 14px;font-size:clamp(13px,2vw,16px);line-height:1.7}
+.gcard>b{color:var(--purple);font-size:1.05em;display:inline-block;margin-bottom:2px}
+.chiprow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{background:#fff;border:2px solid #e6ddff;border-radius:30px;padding:8px 15px;font-weight:800;font-size:clamp(12px,2vw,15px);cursor:pointer;transition:.15s;color:var(--purple);font-family:inherit}
+.chip:hover{background:var(--purple);color:#fff;transform:translateY(-2px)}
+.imgrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:14px}
+.imgrow .closing{max-width:320px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:768px){section{scroll-margin-top:150px}.stp{padding-left:28px}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div class="floaty" style="left:8%;animation-duration:22s;animation-delay:0s">👕</div>
+<div class="floaty" style="left:25%;animation-duration:28s;animation-delay:4s">👖</div>
+<div class="floaty" style="left:45%;animation-duration:20s;animation-delay:8s">👗</div>
+<div class="floaty" style="left:65%;animation-duration:26s;animation-delay:2s">👟</div>
+<div class="floaty" style="left:82%;animation-duration:24s;animation-delay:6s">🧢</div>
+<div class="floaty" style="left:95%;animation-duration:30s;animation-delay:10s">🧦</div>
+
+<div class="topbar">
+  <div class="now-chip">📖 JD5 · U5</div>
+  <div style="font-weight:900;font-size:clamp(13px,2.2vw,17px)" id="topTitle">Lesson Plan</div>
+  <button class="sound-toggle" id="voiceBtn" onclick="cycleVoice()" title="Change voice">🇬🇧</button>
+  <button class="sound-toggle" id="globalSound" onclick="toggleGlobalSound()" title="Sound on/off">🔊</button>
+</div>
+
+<nav class="navbar" id="navbar">
+  <button class="ntab on" onclick="showTab(0)">📋 Lesson</button>
+  <button class="ntab" onclick="showTab(1)">🎲 Warm-Up</button>
+  <button class="ntab" onclick="showTab(2)">👕 Vocab</button>
+  <button class="ntab" onclick="showTab(3)">💬 Patterns</button>
+  <button class="ntab" onclick="showTab(4)">❓ What's Wrong?</button>
+  <button class="ntab" onclick="showTab(5)">🎧 Listen</button>
+  <button class="ntab" onclick="showTab(6)">🎨 Dress Up</button>
+  <button class="ntab" onclick="showTab(7)">🎯 Team Games</button>
+  <button class="ntab" onclick="showTab(8)">📝 Quiz</button>
+</nav>
+
+<!-- ================= TAB 0 : LESSON FLOW ================= -->
+<div class="tabpan on" data-tab="0">
+  <div class="hero">
+    <span class="big-emoji">👗</span>
+    <h1>Unit 5 · What Are They Wearing?</h1>
+    <div class="sub">JD5 · Joy Discovery 5 · 2 periods · 100 min · pp.56–66</div>
+    <div class="desc">Tap any line to hear it read aloud 🔊 · tap a picture to enlarge 🔍</div>
+  </div>
+
+  <div class="jumps">
+    <button class="jchip" onclick="jumpSec('s-goals')">📌 Goals</button>
+    <button class="jchip" onclick="jumpSec('s-p1')">🎥 Pres. 1</button>
+    <button class="jchip" onclick="jumpSec('s-p2')">🖼️ Pres. 2</button>
+    <button class="jchip" onclick="jumpSec('s-lc')">🎧 Listen &amp; Choose</button>
+    <button class="jchip" onclick="jumpSec('s-ww1')">❓ What's Wrong?</button>
+    <button class="jchip" onclick="jumpSec('s-ww2')">🏷️ Sticker time</button>
+    <button class="jchip" onclick="jumpSec('s-lh')">🎯 Listen &amp; Hit</button>
+    <button class="jchip" onclick="jumpSec('s-du')">🎨 Dress Up</button>
+    <button class="jchip" onclick="jumpSec('s-fs')">✂️ Fashion Stylist</button>
+    <button class="jchip" onclick="jumpSec('s-cb')">📒 Com. Book</button>
+  </div>
+
+  <div class="tl">
+    <div class="tl-item t1" onclick="speak(this.innerText)"><div class="tl-min">⏱ 40 min</div><h4>What Are They Wearing?</h4><p>pp.26–27 · Presentation 1 &amp; 2</p></div>
+    <div class="tl-item t2" onclick="speak(this.innerText)"><div class="tl-min">⏱ 20 min</div><h4>What's Wrong?</h4><p>p.28 · 10 min + 10 min</p></div>
+    <div class="tl-item t3" onclick="speak(this.innerText)"><div class="tl-min">⏱ 35 min</div><h4>Dress Them Up!</h4><p>p.29 · incl. Fashion Stylist 15 min</p></div>
+    <div class="tl-item" onclick="speak(this.innerText)"><div class="tl-min">⏱ 5 min</div><h4>Communication Book</h4><p>Check &amp; sign</p></div>
+  </div>
+
+  <section id="s-goals" data-sec="goals">
+    <div class="shead"><span class="ic">📌</span><h2>Unit Goals &amp; Language</h2><span class="badge">p.56</span>
+      <button class="sec-sound" id="ss-goals" onclick="toggleSecSound('goals')">🔇 Off</button></div>
+    <div class="goals">
+      <div class="gcard"><b>🎯 Subject goal</b><div class="stp" onclick="readStep(this)">Students will learn about various clothing items and be able to identify and name them.</div></div>
+      <div class="gcard"><b>💬 Pattern 1 · What Are They Wearing?</b><div class="stp" onclick="readStep(this)">What is he / she wearing?<br>He's wearing a T-shirt and pants.</div></div>
+      <div class="gcard"><b>🩹 Pattern 2 · What's Wrong?</b><div class="stp" onclick="readStep(this)">What's wrong?<br>He should wear sneakers.</div></div>
+      <div class="gcard"><b>🎨 Pattern 3 · Dress Them Up!</b><div class="stp" onclick="readStep(this)">This is my doll.<br>He is wearing a dress and a cap.</div></div>
+      <div class="gcard"><b>📖 Skills</b><div class="stp" onclick="readStep(this)">Comprehension ✅ · Listening ✅ · Speaking ✅ · Reading ✅</div></div>
+      <div class="gcard"><b>🗣️ Say it!</b><div class="stp" onclick="readStep(this)">Click each word below and repeat after Joy.</div></div>
+    </div>
+    <div class="chiprow">
+      <button class="chip" onclick="speak(this.textContent)">a shirt</button>
+      <button class="chip" onclick="speak(this.textContent)">pants</button>
+      <button class="chip" onclick="speak(this.textContent)">socks</button>
+      <button class="chip" onclick="speak(this.textContent)">sneakers</button>
+      <button class="chip" onclick="speak(this.textContent)">a sweater</button>
+      <button class="chip" onclick="speak(this.textContent)">a jacket</button>
+      <button class="chip" onclick="speak(this.textContent)">jeans</button>
+      <button class="chip" onclick="speak(this.textContent)">shoes</button>
+      <button class="chip" onclick="speak(this.textContent)">a T-shirt</button>
+      <button class="chip" onclick="speak(this.textContent)">shorts</button>
+      <button class="chip" onclick="speak(this.textContent)">sandals</button>
+      <button class="chip" onclick="speak(this.textContent)">a blouse</button>
+      <button class="chip" onclick="speak(this.textContent)">a skirt</button>
+    </div>
+  </section>
+
+  <div class="phead"><span class="ph-t">PERIOD 1</span> What Are They Wearing? · 40 min</div>
+
+  <section id="s-p1" data-sec="p1">
+    <div class="shead"><span class="ic">🎥</span><h2>Presentation 1 · Q&amp;A + Video</h2><span class="badge">10 min · p.57</span>
+      <button class="sec-sound" id="ss-p1" onclick="toggleSecSound('p1')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Steps</div>
+      <div class="stp" onclick="readStep(this)">1. Look out of the window and describe the weather: <b>“It is sunny.”</b> Then ask: <b>“When it's sunny, do you wear a T-shirt?”</b> Show the flashcard. Let 2–3 students say why they do or don't wear T-shirts.</div>
+      <div class="stp" onclick="readStep(this)">2. Say: <b>“We wear different clothes depending on the weather. Let's watch the video and see how Dr. Smarty wears for different types of weather in a fashion show.”</b></div>
+      <div class="stp" onclick="readStep(this)">3. Tap <b>Presentation ▶</b> to play the video. Pause and ask:
+        <br>a) <b>At 0:23</b> — a fashion show is when people wear nice clothes and walk in front of everyone.
+        <br>b) <b>At 1:06</b> — What will you wear when it's hot?</div>
+      <div class="stp" onclick="readStep(this)">4. After the video, ask what students would wear when it is <b>hot, warm, cold</b> or <b>cool</b>.</div>
+    </div>
+    <div class="tip">💡 <b>Notes:</b> If students can't answer, review <i>Tales of Joy 3</i>: It is warm / hot / cold / cool. The p.26 video shows Dr. Smarty modelling all four seasons on the runway. Open books to <b>pp.26–27</b> and point: <b>“You will wear a blouse and sandals.”</b></div>
+    <div class="imgrow">
+      <div><img class="t-image" src="spread1.jpg" alt="pp.26-27 What Are They Wearing" onclick="openLightbox(this.src)"><div class="imgcap">pp.26–27 · Joy Fashion Show</div></div>
+    </div>
+    <div class="btnrow"><button class="btn purple" onclick="showTab(2)">👕 Vocab flashcards</button><button class="btn blue" onclick="showTab(1)">🎲 Roll the die</button></div>
+  </section>
+
+  <section id="s-p2" data-sec="p2">
+    <div class="shead"><span class="ic">🖼️</span><h2>Presentation 2 · Picture Telling + Q&amp;A + Look and Say</h2><span class="badge">22 min · p.58</span>
+      <button class="sec-sound" id="ss-p2" onclick="toggleSecSound('p2')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Steps</div>
+      <div class="stp" onclick="readStep(this)">1. Tap <b>Presentation ▶</b> and pause on the first slide. Tell the class that <b>Justin and Joyce</b> are also at the fashion show — ask students to look for them, then one student circles them with a marker.</div>
+      <div class="stp" onclick="readStep(this)">2. Continue the slides to:
+        <br>a) introduce the clothing items,
+        <br>b) get students to practise saying the target sentence.</div>
+      <div class="stp" onclick="readStep(this)">3. Ask the question on the slide — the class answers with the pattern <b>“She is wearing a red dress.”</b> Divide the class into teams, show the next questions and let each team discuss, then choose a team to answer.</div>
+      <div class="stp" onclick="readStep(this)">4. Students open their books to <b>pp.26–27</b> and read the dialogue sentences aloud.</div>
+    </div>
+    <div class="tip">💡 <b>Note:</b> The presentation slides are interactive — make sure you get the students to share their thoughts.</div>
+    <div class="btnrow"><button class="btn purple" onclick="showTab(2)">👕 Learn the 13 words</button><button class="btn pink" onclick="showTab(3)">💬 Ask &amp; answer</button></div>
+  </section>
+
+  <section id="s-lc" data-sec="lc">
+    <div class="shead"><span class="ic">🎧</span><h2>E-teaching · Listen and Choose</h2><span class="badge">8 min · p.59</span>
+      <button class="sec-sound" id="ss-lc" onclick="toggleSecSound('lc')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Steps</div>
+      <div class="stp" onclick="readStep(this)">1. Tap <b>Activity ⧉</b> and choose Act. <b>“Listen and Choose.”</b></div>
+      <div class="stp" onclick="readStep(this)">2. Do the first question with the class. Ask what each girl is wearing, tap to play the recording, and have the class tell you the correct answer.</div>
+      <div class="stp" onclick="readStep(this)">3. Get a student to come to the front and tap on a picture to show the results.</div>
+      <div class="stp" onclick="readStep(this)">4. Divide the class into three teams and number each student.</div>
+      <div class="stp" onclick="readStep(this)">5. Switch to three-player mode.</div>
+      <div class="stp" onclick="readStep(this)">6. Go to the next questions. Give each team time to talk about what he or she is wearing, then call a number — those students come out and tap their answer.</div>
+      <div class="stp" onclick="readStep(this)">7. Tap ✅ to check the answers.</div>
+    </div>
+    <div class="tip">💡 <b>How to play:</b> Students listen to the recording and look at three pictures, then tap the picture that best matches the recording. <b>Note:</b> Students may forget the English names of clothing items, so a group discussion before calling on a student helps.</div>
+    <div class="btnrow"><button class="btn orange" onclick="showTab(5)">🎧 Play the activity</button></div>
+  </section>
+
+  <div class="phead"><span class="ph-t">PERIOD 1 + 2</span> What's Wrong? · 20 min (10 + 10)</div>
+
+  <section id="s-ww1" data-sec="ww1">
+    <div class="shead"><span class="ic">❓</span><h2>What's Wrong? · Steps 1–5</h2><span class="badge">10 min · p.60–61</span>
+      <button class="sec-sound" id="ss-ww1" onclick="toggleSecSound('ww1')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Goal: students choose appropriate clothing for different occasions · Pattern: “He should wear sneakers.”</div>
+      <div class="stp" onclick="readStep(this)">1. Tap <b>Presentation ▶</b> and pause on the first slide. Roll the <b>digital die</b> and ask the class to say what they are wearing for the number rolled.</div>
+      <div class="stp" onclick="readStep(this)">2. Divide the class into teams and roll the die. Each team discusses the answer, then answers with the pattern <b>“She is wearing a T-shirt and a dress.”</b></div>
+      <div class="stp" onclick="readStep(this)">3. Continue the slides to:
+        <br>a) think and discuss how to dress properly for different occasions,
+        <br>b) guide students to finish the textbook activity — <b>Stick</b>.</div>
+      <div class="stp" onclick="readStep(this)">4. On the <b>Comfort / Respect</b> slide, simplify the language: we wear sandals to the beach because they feel comfortable — but at school it is not polite to wear sandals; we should wear shoes. <i>(Students do not need to say the two words.)</i></div>
+      <div class="stp" onclick="readStep(this)">5. Number the students. Each team discusses first, then call a number — those students stand up, and the first to stand tells the answer. <b>Award a point to that student's team!</b></div>
+    </div>
+    <div class="imgrow">
+      <div><img class="t-image" src="p14.jpg" alt="Roll a die" onclick="openLightbox(this.src)"><div class="imgcap">Roll the die · step 1</div></div>
+      <div><img class="t-image" src="p18.jpg" alt="Comfort and Respect" onclick="openLightbox(this.src)"><div class="imgcap">Comfort &amp; Respect · step 4</div></div>
+      <div><img class="t-image" src="p19.jpg" alt="She will work out later" onclick="openLightbox(this.src)"><div class="imgcap">She will work out later</div></div>
+      <div><img class="t-image" src="p20.jpg" alt="He's going to work" onclick="openLightbox(this.src)"><div class="imgcap">He's going to work</div></div>
+    </div>
+    <div class="btnrow"><button class="btn pink" onclick="showTab(4)">❓ Practise now</button><button class="btn orange" onclick="showTab(1)">🎲 Roll the die</button></div>
+  </section>
+
+  <section id="s-ww2" data-sec="ww2">
+    <div class="shead"><span class="ic">🏷️</span><h2>What's Wrong? · Steps 6–7 · Sticker time</h2><span class="badge">Period 2 · p.61–62</span>
+      <button class="sec-sound" id="ss-ww2" onclick="toggleSecSound('ww2')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Steps</div>
+      <div class="stp" onclick="readStep(this)">6. Continue through the slides. Have the students open their books to <b>p.28</b> and find the required stickers on <b>p.58</b>, then let them finish the textbook exercise.</div>
+      <div class="stp" onclick="readStep(this)">7. Walk around and check the students' books.</div>
+    </div>
+    <div class="imgrow">
+      <div><img class="t-image" src="p21.jpg" alt="Is the person wearing the right clothes" onclick="openLightbox(this.src)"><div class="imgcap">Is the person wearing the right clothes?</div></div>
+      <div><img class="t-image" src="p22.jpg" alt="Turn to page 58" onclick="openLightbox(this.src)"><div class="imgcap">Stickers · p.58 → p.28</div></div>
+      <div><img class="t-image" src="spread2.jpg" alt="pp.28-29" onclick="openLightbox(this.src)"><div class="imgcap">pp.28–29 · the textbook pages</div></div>
+    </div>
+  </section>
+
+  <section id="s-lh" data-sec="lh">
+    <div class="shead"><span class="ic">🎯</span><h2>E-teaching · Listen and Hit</h2><span class="badge">10 min · p.63</span>
+      <button class="sec-sound" id="ss-lh" onclick="toggleSecSound('lh')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Steps</div>
+      <div class="stp" onclick="readStep(this)">1. Tap <b>Activity ⧉</b> and choose Act. <b>“Listen and Hit.”</b></div>
+      <div class="stp" onclick="readStep(this)">2. Show the first question, play the recording and have the class tell you the answer. Tap on the brick to show the results.</div>
+      <div class="stp" onclick="readStep(this)">3. Switch to three-player mode.</div>
+      <div class="stp" onclick="readStep(this)">4. Divide the class into three teams and number each student.</div>
+      <div class="stp" onclick="readStep(this)">5. Play the recordings for the rest of the questions. Let the students discuss in their groups before you call on a student from each team.</div>
+    </div>
+    <div class="tip">💡 <b>How to play:</b> Students look at the picture and listen to the audio, then choose the item that best matches the occasion to wear. <b>Note:</b> this activity is in the second period.</div>
+    <div class="imgrow">
+      <div><img class="t-image" src="p24.jpg" alt="Listen and Hit" onclick="openLightbox(this.src)"><div class="imgcap">Listen and Hit · activity slide</div></div>
+      <div><img class="t-image" src="p15.jpg" alt="When can you wear these" onclick="openLightbox(this.src)"><div class="imgcap">bed / school</div></div>
+      <div><img class="t-image" src="p16.jpg" alt="Swimming pool or wedding" onclick="openLightbox(this.src)"><div class="imgcap">pool / wedding</div></div>
+      <div><img class="t-image" src="p17.jpg" alt="Winter or summer" onclick="openLightbox(this.src)"><div class="imgcap">winter / summer</div></div>
+    </div>
+    <div class="btnrow"><button class="btn orange" onclick="showTab(5)">🎧 Play now</button></div>
+  </section>
+
+  <div class="phead p2"><span class="ph-t">PERIOD 2</span> Dress Them Up! · 35 min + Communication Book · 5 min</div>
+
+  <section id="s-du" data-sec="du">
+    <div class="shead"><span class="ic">🎨</span><h2>Dress Them Up! · Steps 1–5</h2><span class="badge">35 min · p.29 / p.64–65</span>
+      <button class="sec-sound" id="ss-du" onclick="toggleSecSound('du')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Goal: students dress paper dolls using stickers and describe what they are wearing</div>
+      <div class="stp" onclick="readStep(this)">1. Tap <b>Presentation ▶</b> and use the slides to guide students through the “Dress Them Up!” textbook activity — <b>“Oh no, these dolls need something to wear! Let's dress them up.”</b></div>
+      <div class="stp" onclick="readStep(this)">2. Give examples of where stickers go: <b>“Can you put your hat on your foot?”</b> or <b>“Can you wear your dress upside down?”</b></div>
+      <div class="stp" onclick="readStep(this)">3. Continue through the slides. Give students a few minutes to think, choose, peel off the stickers and place them on the boy and the girl — e.g. <b>“The boy will go to school. It is cold and rainy. What should he wear?”</b></div>
+      <div class="stp" onclick="readStep(this)">4. While the students are dressing up the dolls, walk around and check how they are doing.</div>
+      <div class="stp" onclick="readStep(this)">5. Show the page and demonstrate how to introduce the two dolls, then ask students to introduce their dolls to the student next to them: <b>“This is my doll. Her name is Anna. It's hot and sunny. She is wearing a dress and a cap.”</b></div>
+    </div>
+    <div class="tip">💡 <b>Note:</b> If time is not allowed, ask students to share one doll with the student next to them.</div>
+    <div class="imgrow">
+      <div><img class="t-image" src="spread2.jpg" alt="pp.28-29 Dress Them Up" onclick="openLightbox(this.src)"><div class="imgcap">p.29 · Dress Them Up!</div></div>
+    </div>
+    <div class="btnrow"><button class="btn green" onclick="showTab(6)">🎨 Dress your doll</button></div>
+  </section>
+
+  <section id="s-fs" data-sec="fs">
+    <div class="shead"><span class="ic">✂️</span><h2>Class Activity 2 · Fashion Stylist</h2><span class="badge">15 min · p.66</span>
+      <button class="sec-sound" id="ss-fs" onclick="toggleSecSound('fs')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="bp-t">Props: Unit 5 worksheet (find the slide with the Open file icon and print one per student), scissors and glue</div>
+      <div class="stp" onclick="readStep(this)">1. Tap <b>Activity ⧉</b> and choose Act. <b>“Fashion Stylist.”</b></div>
+      <div class="stp" onclick="readStep(this)">2. Follow the instructions on the slides. Give students enough time to think, choose and cut out the clothing items they need and put the items together on Part A.
+        <br><b>1.</b> Who are these clothing items for — a man, a woman, a boy, or a girl?
+        <br><b>2.</b> Where can people wear them to? A party? Dinner? The beach?</div>
+      <div class="stp" onclick="readStep(this)">3. On the last two slides, demonstrate how to introduce your design, then ask students to share their design with the student next to them.</div>
+    </div>
+    <div class="tip">💡 <b>Note:</b> Walk around and check how the students are doing. Assist them if needed.</div>
+    <div class="imgrow">
+      <div><img class="t-image" src="p25.jpg" alt="Let's become fashion stylists" onclick="openLightbox(this.src)"><div class="imgcap">Let's become fashion stylists!</div></div>
+      <div><img class="t-image" src="p26.jpg" alt="Questions to match the clothes" onclick="openLightbox(this.src)"><div class="imgcap">The two guiding questions</div></div>
+    </div>
+    <div class="btnrow"><button class="btn purple" onclick="showTab(7)">✂️ Team styling game</button><button class="btn green" onclick="showTab(6)">🎨 Design an outfit</button></div>
+  </section>
+
+  <section id="s-cb" data-sec="cb">
+    <div class="shead"><span class="ic">📒</span><h2>Communication Book</h2><span class="badge">5 min · p.66</span>
+      <button class="sec-sound" id="ss-cb" onclick="toggleSecSound('cb')">🔇 Off</button></div>
+    <div class="board-plan">
+      <div class="stp" onclick="readStep(this)">Check and sign the Communication Book. This is the same as in the <i>Tales of Joy</i> series, so no further explanation is needed.</div>
+      <div class="stp" onclick="readStep(this)">Students take their work home and tell a parent: <b>“This is my doll. He is wearing a jacket and jeans.”</b></div>
+    </div>
+    <div class="imgrow">
+      <div class="closing"><img class="t-image" src="p27.jpg" alt="Good job! Joy Style" onclick="openLightbox(this.src)"><div class="imgcap">Good job! 🎉</div></div>
+    </div>
+  </section>
+
+  <div class="team-grid">
+    <div class="team-box ta"><div class="team-icon">🐝</div><div class="team-name">Team Bee</div><div class="team-score" id="scoreA">0</div>
+      <div class="team-btns"><button class="tadd" onclick="addScore('A',1)">+1</button><button class="tsub" onclick="addScore('A',-1)">-1</button></div></div>
+    <div class="team-box tb"><div class="team-icon">🐯</div><div class="team-name">Team Tiger</div><div class="team-score" id="scoreB">0</div>
+      <div class="team-btns"><button class="tadd" onclick="addScore('B',1)">+1</button><button class="tsub" onclick="addScore('B',-1)">-1</button></div></div>
+  </div>
+  <div style="text-align:center;margin-top:10px"><span class="turn-chip" id="turnChip">➡️ Team Bee's turn</span> &nbsp; <button class="btn green" onclick="nextTurn()" style="padding:8px 18px;font-size:.9rem">Next turn 🔁</button></div>
+</div>
+
+<!-- ================= TAB 1 : WARM-UP ================= -->
+<div class="tabpan" data-tab="1">
+  <section data-sec="warm1" data-read="1">
+    <div class="shead"><span class="ic">🎲</span><h2>Roll a Die · What is he wearing?</h2><span class="badge">Warm-Up · 5 min</span>
+      <button class="sec-sound" id="ss-warm1" onclick="toggleSecSound('warm1')">🔇 Off</button></div>
+    <div class="tip">👆 Roll the die, then click the picture that matches the number. Read the sentence out loud!</div>
+    <div class="die-wrap">
+      <div class="die" id="die">🎲</div>
+      <button class="btn orange" onclick="rollDie()">Roll! 🎲</button>
+      <div style="font-weight:900;font-size:clamp(14px,2.4vw,20px)" id="dieHint">Click the matching kid →</div>
+    </div>
+    <div class="kid-grid" id="kidGridWarm"></div>
+  </section>
+
+  <section data-sec="warm2" data-read="2">
+    <div class="shead"><span class="ic">🖼️</span><h2>Picture Talk · p.26–27</h2><span class="badge">5 min</span>
+      <button class="sec-sound" id="ss-warm2" onclick="toggleSecSound('warm2')">🔇 Off</button></div>
+    <div class="tip">💬 Ask: <b>Who can you see? What is she wearing?</b> Click any kid to hear the answer.</div>
+    <div class="kid-grid" id="kidGridTalk"></div>
+  </section>
+</div>
+
+<!-- ================= TAB 2 : VOCABULARY ================= -->
+<div class="tabpan" data-tab="2">
+  <section data-sec="vocab1" data-read="1">
+    <div class="shead"><span class="ic">👕</span><h2>Clothes Vocabulary</h2><span class="badge">13 words</span>
+      <button class="sec-sound" id="ss-vocab1" onclick="toggleSecSound('vocab1')">🔇 Off</button></div>
+    <div class="tip">👆 Click a card to hear the word. Then click <b>Hide</b> and let students guess!</div>
+    <div style="margin:10px 0;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn purple" onclick="speakAllVocab()">🔊 Hear all</button>
+      <button class="btn blue" onclick="hideVocab()">🙈 Hide words</button>
+      <button class="btn green" onclick="showVocab()">👀 Show words</button>
+      <button class="btn pink" onclick="quizVocab()">❓ Quick quiz</button>
+    </div>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </section>
+
+  <section data-sec="vocab2" data-read="2">
+    <div class="shead"><span class="ic">🎴</span><h2>Picture Cards · p.26</h2><span class="badge">10 cards</span>
+      <button class="sec-sound" id="ss-vocab2" onclick="toggleSecSound('vocab2')">🔇 Off</button></div>
+    <div class="pic-grid" id="picGrid"></div>
+  </section>
+</div>
+
+<!-- ================= TAB 3 : PATTERNS ================= -->
+<div class="tabpan" data-tab="3">
+  <section data-sec="pat1" data-read="1">
+    <div class="shead"><span class="ic">💬</span><h2>Ask &amp; Answer</h2><span class="badge">Target language</span>
+      <button class="sec-sound" id="ss-pat1" onclick="toggleSecSound('pat1')">🔇 Off</button></div>
+    <div class="pattern-card">
+      <h3>👀 Look at a boy / girl</h3>
+      <div class="pattern-line" onclick="speak('What is he wearing?')"><span class="q">Q:</span> What <b>is he</b> wearing?</div>
+      <div class="pattern-line" onclick="speak('He is wearing a T-shirt and pants.')"><span class="a">A:</span> <b>He is wearing</b> a T-shirt and pants.</div>
+      <div class="pattern-line" onclick="speak('What is she wearing?')"><span class="q">Q:</span> What <b>is she</b> wearing?</div>
+      <div class="pattern-line" onclick="speak('She is wearing a skirt and a blouse.')"><span class="a">A:</span> <b>She is wearing</b> a skirt and a blouse.</div>
+      <div class="pattern-examples" id="patExamples"></div>
+    </div>
+    <div class="pattern-card" style="border-left-color:var(--pink)">
+      <h3>🩹 Something is wrong</h3>
+      <div class="pattern-line" onclick="speak('What\'s wrong?')"><span class="q">Q:</span> <b>What's wrong?</b></div>
+      <div class="pattern-line" onclick="speak('He should wear pants.')"><span class="a">A:</span> <b>He should wear</b> pants. / <b>She should wear</b> a skirt.</div>
+    </div>
+  </section>
+
+  <section data-sec="pat2" data-read="2">
+    <div class="shead"><span class="ic">🛠️</span><h2>Sentence Machine</h2><span class="badge">Make a sentence</span>
+      <button class="sec-sound" id="ss-pat2" onclick="toggleSecSound('pat2')">🔇 Off</button></div>
+    <div class="tip">🛠️ Pick 3 words to build a sentence, then click <b>Speak it!</b></div>
+    <div class="sub-machine">
+      <select id="subWho" onchange="buildSentence()"><option>He</option><option>She</option></select>
+      <select id="subIs" onchange="buildSentence()"><option>is wearing</option></select>
+      <select id="subWear" onchange="buildSentence()"></select>
+    </div>
+    <div class="sub-out">
+      <div style="font-weight:900;color:var(--purple);font-size:clamp(13px,2vw,16px)">Your sentence</div>
+      <div class="so-a" id="subOut">He is wearing a T-shirt and pants.</div>
+      <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn green" onclick="speakOut()">🔊 Speak it!</button>
+        <button class="btn orange" onclick="randomSentence()">🔀 Random</button>
+      </div>
+    </div>
+  </section>
+
+  <section data-sec="pat3" data-read="3">
+    <div class="shead"><span class="ic">🏷️</span><h2>Pattern Labels</h2><span class="badge">click to hear</span>
+      <button class="sec-sound" id="ss-pat3" onclick="toggleSecSound('pat3')">🔇 Off</button></div>
+    <div class="pattern-examples" style="gap:10px" id="bigPatterns"></div>
+  </section>
+</div>
+
+<!-- ================= TAB 4 : WHAT'S WRONG? ================= -->
+<div class="tabpan" data-tab="4">
+  <div class="hero" style="padding:22px 16px 14px">
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">🩹</span>
+    <h1>What's Wrong?</h1>
+    <div class="sub">p.28 · 20 min · Is the person wearing the right clothes?</div>
+  </div>
+
+  <section data-sec="wr1" data-read="1">
+    <div class="shead"><span class="ic">🏋️</span><h2>Work Out · She will work out later</h2><span class="badge">p.31</span>
+      <button class="sec-sound" id="ss-wr1" onclick="toggleSecSound('wr1')">🔇 Off</button></div>
+    <div class="tip">👆 Click <b>2 pieces of clothing</b> she should wear to work out. Then check!</div>
+    <div class="big-reply" id="cwWorkoutReply">&nbsp;</div>
+    <div class="pick-row" id="cwWorkoutRow"></div>
+    <div style="text-align:center;margin-top:8px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn green" onclick="checkOutfit('workout')">✅ Check</button>
+      <button class="btn blue" onclick="resetOutfit('workout')">↺ Reset</button>
+      <button class="btn orange" onclick="speakCwAnswer('workout')">🔊 Answer</button>
+    </div>
+  </section>
+
+  <section data-sec="wr2" data-read="2">
+    <div class="shead"><span class="ic">💼</span><h2>Going to Work · He's going to work</h2><span class="badge">p.32</span>
+      <button class="sec-sound" id="ss-wr2" onclick="toggleSecSound('wr2')">🔇 Off</button></div>
+    <div class="tip">👆 Click <b>2 pieces of clothing</b> he should wear to work. Then check!</div>
+    <div class="big-reply" id="cwWorkReply">&nbsp;</div>
+    <div class="pick-row" id="cwWorkRow"></div>
+    <div style="text-align:center;margin-top:8px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn green" onclick="checkOutfit('work')">✅ Check</button>
+      <button class="btn blue" onclick="resetOutfit('work')">↺ Reset</button>
+      <button class="btn orange" onclick="speakCwAnswer('work')">🔊 Answer</button>
+    </div>
+  </section>
+
+  <section data-sec="wr3" data-read="3">
+    <div class="shead"><span class="ic">🖼️</span><h2>The Picture · p.28</h2><span class="badge">whole class</span>
+      <button class="sec-sound" id="ss-wr3" onclick="toggleSecSound('wr3')">🔇 Off</button></div>
+    <img class="t-image" src="p21.jpg" alt="Is the person wearing the right clothes" onclick="openLightbox(this.src)">
+    <div class="imgcap">p.28 · Is the person wearing the right clothes?</div>
+    <div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn pink" onclick="speakCine('STUDENT','What\'s wrong? 🤔')">❓ What's wrong?</button>
+      <button class="btn green" onclick="speakCine('TEACHER','He should wear pants. ✅')">💡 Answer</button>
+    </div>
+  </section>
+
+  <section data-sec="wr4" data-read="4">
+    <div class="shead"><span class="ic">❓</span><h2>Right or Wrong? · Situation Check</h2><span class="badge">8 pictures</span>
+      <button class="sec-sound" id="ss-wr4" onclick="toggleSecSound('wr4')">🔇 Off</button></div>
+    <div class="tip">👀 Look at each picture. Is it <b>right ✅</b> or <b>wrong ❌</b>? Click your answer.</div>
+    <div class="occ-grid" id="occGrid"></div>
+    <div class="big-reply" id="occReply">&nbsp;</div>
+  </section>
+</div>
+
+<!-- ================= TAB 5 : LISTEN ================= -->
+<div class="tabpan" data-tab="5">
+  <div class="hero" style="padding:22px 16px 14px">
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">🎧</span>
+    <h1>Listen &amp; Choose</h1>
+    <div class="sub">p.59 · 8 min · Listen and Hit · 10 min</div>
+  </div>
+
+  <section data-sec="lst1" data-read="1">
+    <div class="shead"><span class="ic">🖼️</span><h2>Listen and Choose · p.59</h2><span class="badge">4 questions</span>
+      <button class="sec-sound" id="ss-lst1" onclick="toggleSecSound('lst1')">🔇 Off</button></div>
+    <div class="listen-card">
+      <div class="listen-play"><button onclick="playListen()">🔊</button></div>
+      <div class="listen-hint" id="listenHint">Click 🔊, then choose the right picture!</div>
+      <div class="listen-opts" id="listenOpts"></div>
+      <div class="big-reply" id="listenReply">&nbsp;</div>
+      <div style="text-align:center;margin-top:8px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn purple" onclick="nextListen()">Next ▶</button>
+        <button class="btn blue" onclick="resetListen()">↺ Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <section data-sec="lst2" data-read="2">
+    <div class="shead"><span class="ic">✋</span><h2>Listen and Hit · Occasions</h2><span class="badge">p.62 · 10 min</span>
+      <button class="sec-sound" id="ss-lst2" onclick="toggleSecSound('lst2')">🔇 Off</button></div>
+    <div class="listen-card">
+      <div class="listen-play"><button onclick="playHit()">🔊</button></div>
+      <div class="listen-hint" id="hitHint">Hear the sentence, then hit the right picture!</div>
+      <div class="occ-grid" id="hitGrid"></div>
+      <div class="big-reply" id="hitReply">&nbsp;</div>
+      <div style="text-align:center;margin-top:8px"><button class="btn purple" onclick="nextHit()">Next ▶</button></div>
+    </div>
+  </section>
+
+  <section data-sec="lst3" data-read="3">
+    <div class="shead"><span class="ic">🖼️</span><h2>Book Pages</h2><span class="badge">click to enlarge</span>
+      <button class="sec-sound" id="ss-lst3" onclick="toggleSecSound('lst3')">🔇 Off</button></div>
+    <div class="reward-grid">
+      <div><img class="t-image" src="p14.jpg" onclick="openLightbox(this.src)"><div class="imgcap">Roll a die · What is he/she wearing?</div></div>
+      <div><img class="t-image" src="p19.jpg" onclick="openLightbox(this.src)"><div class="imgcap">She will work out later.</div></div>
+      <div><img class="t-image" src="p20.jpg" onclick="openLightbox(this.src)"><div class="imgcap">He's going to work.</div></div>
+      <div><img class="t-image" src="p24.jpg" onclick="openLightbox(this.src)"><div class="imgcap">Listen and Hit</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= TAB 6 : DRESS THEM UP ================= -->
+<div class="tabpan" data-tab="6">
+  <div class="hero" style="padding:22px 16px 14px">
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">🎨</span>
+    <h1>Dress Them Up!</h1>
+    <div class="sub">This is my doll. He/She is wearing … and …</div>
+  </div>
+
+  <section data-sec="du1" data-read="1">
+    <div class="shead"><span class="ic">🪆</span><h2>Doll Designer</h2><span class="badge">35 min · Fashion Stylist</span>
+      <button class="sec-sound" id="ss-du1" onclick="toggleSecSound('du1')">🔇 Off</button></div>
+    <div class="tip">🎨 Pick a doll, then choose <b>top</b> and <b>bottom</b>. Say: <b>He/She is wearing … and …</b> 🗣️</div>
+
+    <div class="stage-box">
+      <div class="stage-label">YOUR DOLL</div>
+      <img id="dollImg" src="kid1.jpg" style="max-width:230px;max-height:230px;border-radius:18px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.12)">
+      <div class="stage-main" id="dollSentence">He is wearing a T-shirt and pants.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:6px">
+        <label style="font-weight:900;font-size:clamp(13px,1.9vw,15px)">Who? 
+          <select id="dollWho" onchange="updateDoll()" style="margin-left:6px;padding:8px 12px;border:3px solid var(--purple);border-radius:14px;font-weight:800;font-family:inherit;font-size:inherit;background:#fff">
+            <option>He</option><option>She</option>
+          </select>
+        </label>
+        <button class="btn pink" onclick="speakDoll()">🔊 Read my sentence</button>
+        <button class="btn orange" onclick="randomDoll()">🔀 Surprise me!</button>
+      </div>
+    </div>
+
+    <div style="font-weight:900;color:var(--purple);margin-top:14px;font-size:clamp(13px,2vw,17px)">1️⃣ Choose the doll</div>
+    <div class="pick-row" id="dollRow"></div>
+
+    <div style="font-weight:900;color:var(--pink);margin-top:6px;font-size:clamp(13px,2vw,17px)">2️⃣ Choose the TOP</div>
+    <div class="pick-row" id="topRow"></div>
+
+    <div style="font-weight:900;color:var(--blue);margin-top:6px;font-size:clamp(13px,2vw,17px)">3️⃣ Choose the BOTTOM</div>
+    <div class="pick-row" id="botRow"></div>
+  </section>
+
+  <section data-sec="du2" data-read="2">
+    <div class="shead"><span class="ic">📸</span><h2>Model Photos · Joy Fashion Show</h2><span class="badge">p.26–27</span>
+      <button class="sec-sound" id="ss-du2" onclick="toggleSecSound('du2')">🔇 Off</button></div>
+    <div class="kid-grid" id="kidGridDress"></div>
+    <div class="big-reply" id="dressReply">&nbsp;</div>
+  </section>
+
+  <section data-sec="du3" data-read="3">
+    <div class="shead"><span class="ic">🖼️</span><h2>Sticker Page · p.58</h2><span class="badge">print out</span>
+      <button class="sec-sound" id="ss-du3" onclick="toggleSecSound('du3')">🔇 Off</button></div>
+    <img class="t-image" src="p22.jpg" alt="Stickers" onclick="openLightbox(this.src)">
+    <div class="imgcap">p.58 · Stickers for What's Wrong?</div>
+  </section>
+</div>
+
+<!-- ================= TAB 7 : TEAM GAMES ================= -->
+<div class="tabpan" data-tab="7">
+  <section data-sec="tg1" data-read="1">
+    <div class="shead"><span class="ic">👕</span><h2>Team Outfit Race</h2><span class="badge">+1 each</span>
+      <button class="sec-sound" id="ss-tg1" onclick="toggleSecSound('tg1')">🔇 Off</button></div>
+    <div class="tip">🐝 Team Bee vs 🐯 Team Tiger. Current turn: <span class="turn-chip" id="turnChip2">Team Bee</span></div>
+    <div class="sub-machine" style="grid-template-columns:1fr 1fr">
+      <div><div style="font-weight:900;margin-bottom:6px">🧍 Boy or Girl?</div>
+        <select id="gWho" onchange="buildGame()"><option>He</option><option>She</option></select></div>
+      <div><div style="font-weight:900;margin-bottom:6px">👗 What should he/she wear?</div>
+        <select id="gWear" onchange="buildGame()"></select></div>
+    </div>
+    <div class="sub-out"><div class="so-a" id="gameOut">He should wear a jacket.</div>
+      <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn orange" onclick="speakGame()">🔊 Say it!</button>
+        <button class="btn purple" onclick="buildGame();speakGame()">🔀 New</button>
+        <button class="btn green" onclick="scoreCurrent()">✅ Correct +1</button>
+      </div></div>
+  </section>
+
+  <section data-sec="tg2" data-read="2">
+    <div class="shead"><span class="ic">🙈</span><h2>Silly Sentences</h2><span class="badge">True or silly?</span>
+      <button class="sec-sound" id="ss-tg2" onclick="toggleSecSound('tg2')">🔇 Off</button></div>
+    <div class="tip">😄 Some sentences are <span class="bp-ok">RIGHT ✅</span> and some are <span class="bp-no">SILLY ❌</span>. Read it, then decide!</div>
+    <div class="tf-card">
+      <div class="tf-emoji" id="twEmoji">🤡</div>
+      <div class="tf-stmt" id="twStmt">She is wearing a jacket and jeans.</div>
+      <div class="tf-btns">
+        <button class="tf-btn true-btn" id="twTrue" onclick="twAnswer(true)">✅ Right</button>
+        <button class="tf-btn false-btn" id="twFalse" onclick="twAnswer(false)">❌ Silly</button>
+      </div>
+      <div class="tf-result" id="twResult"></div>
+      <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextTw()">Next ▶</button></div>
+    </div>
+  </section>
+
+  <section data-sec="tg3" data-read="3">
+    <div class="shead"><span class="ic">💥</span><h2>Quick Fire · Frozen!</h2><span class="badge">no points</span>
+      <button class="sec-sound" id="ss-tg3" onclick="toggleSecSound('tg3')">🔇 Off</button></div>
+    <div class="tip">❄️ Teacher says <b>Freeze!</b> — everyone stops. Teacher points: "What is she wearing?" Student answers in 3 seconds!</div>
+    <div class="stage-box" style="border-color:var(--blue);background:linear-gradient(135deg,#eaf6ff,#d9edff)">
+      <div class="stage-label">FREEZE FRAME</div>
+      <div class="stage-main" id="freezeLine">❄️ Freeze! What is he wearing?</div>
+      <button class="btn blue" onclick="nextFreeze()">🎲 New freeze</button>
+    </div>
+  </section>
+
+  <section data-sec="tg4" data-read="4">
+    <div class="shead"><span class="ic">🏆</span><h2>Score Board</h2>
+      <button class="sec-sound" id="ss-tg4" onclick="toggleSecSound('tg4')">🔇 Off</button></div>
+    <div class="score-board">
+      <h2>Team Scores</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:440px;margin:0 auto">
+        <div><div style="font-size:28px">🐝</div><div class="score-big" id="scoreA2">0</div><div class="score-label">Team Bee</div></div>
+        <div><div style="font-size:28px">🐯</div><div class="score-big" id="scoreB2">0</div><div class="score-label">Team Tiger</div></div>
+      </div>
+      <div class="score-stars" id="scoreStars">⭐</div>
+      <div class="team-btns" style="margin-top:10px">
+        <button class="tadd" onclick="addScore('A',1)">🐝 +1</button><button class="tadd" onclick="addScore('B',1)">🐯 +1</button>
+        <button class="tsub" style="background:linear-gradient(135deg,#ddd,#aaa);color:#333" onclick="resetScores()">↺ Reset</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= TAB 8 : QUIZ ================= -->
+<div class="tabpan" data-tab="8">
+  <div class="hero" style="padding:22px 16px 14px">
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">📝</span>
+    <h1>Unit 5 Quiz</h1>
+    <div class="sub">True or False · Fill in · Silly sentences</div>
+  </div>
+
+  <section data-sec="qz1" data-read="1">
+    <div class="shead"><span class="ic">✅</span><h2>True or False</h2><span class="badge">5 questions</span>
+      <button class="sec-sound" id="ss-qz1" onclick="toggleSecSound('qz1')">🔇 Off</button></div>
+    <div class="quiz-section-title"><h3>Part 1 · True or False</h3><span class="qs-badge" id="tfProgress">0 / 5</span></div>
+    <div class="tf-card">
+      <div class="tf-emoji" id="tfEmoji">👕</div>
+      <div class="tf-stmt" id="tfStmt">He is wearing a T-shirt and pants.</div>
+      <div class="tf-btns">
+        <button class="tf-btn true-btn" onclick="tfAnswer(true)">✅ True</button>
+        <button class="tf-btn false-btn" onclick="tfAnswer(false)">❌ False</button>
+      </div>
+      <div class="tf-result" id="tfResult"></div>
+      <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextTF()">Next ▶</button></div>
+    </div>
+  </section>
+
+  <section data-sec="qz2" data-read="2">
+    <div class="shead"><span class="ic">✏️</span><h2>Fill in the Blank</h2><span class="badge">4 questions</span>
+      <button class="sec-sound" id="ss-qz2" onclick="toggleSecSound('qz2')">🔇 Off</button></div>
+    <div class="quiz-section-title"><h3>Part 2 · Fill in the Blank</h3><span class="qs-badge" id="fillProgress">0 / 4</span></div>
+    <div class="fill-card">
+      <div class="fill-q" id="fillQ"></div>
+      <div class="fill-opts" id="fillOpts"></div>
+      <div class="fill-result" id="fillResult"></div>
+      <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextFill()">Next ▶</button></div>
+    </div>
+  </section>
+
+  <section data-sec="qz3" data-read="3">
+    <div class="shead"><span class="ic">🤡</span><h2>Silly Sentences</h2><span class="badge">8 questions</span>
+      <button class="sec-sound" id="ss-qz3" onclick="toggleSecSound('qz3')">🔇 Off</button></div>
+    <div class="quiz-section-title"><h3>Part 3 · Silly or Right?</h3><span class="qs-badge" id="twProgress">0 / 8</span></div>
+    <div class="tf-card">
+      <div class="tf-emoji" id="tw2Emoji">🤡</div>
+      <div class="tf-stmt" id="tw2Stmt">She is wearing sneakers and a jacket.</div>
+      <div class="tf-btns">
+        <button class="tf-btn true-btn" onclick="tw2Answer(true)">✅ Right</button>
+        <button class="tf-btn false-btn" onclick="tw2Answer(false)">❌ Silly</button>
+      </div>
+      <div class="tf-result" id="tw2Result"></div>
+      <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextTw2()">Next ▶</button></div>
+    </div>
+  </section>
+
+  <section data-sec="qz4" data-read="4">
+    <div class="shead"><span class="ic">🎉</span><h2>Your Score</h2><span class="badge">results</span>
+      <button class="sec-sound" id="ss-qz4" onclick="toggleSecSound('qz4')">🔇 Off</button></div>
+    <div class="score-board">
+      <h2>Great Job! 🌟</h2>
+      <div class="score-big" id="quizTotal">0 / 17</div>
+      <div class="score-label" id="quizMsg">Answer the questions to see your score!</div>
+      <div class="score-stars" id="quizStars"></div>
+      <div class="score-breakdown">
+        <div class="score-item"><div class="si-type">✅ True/False</div><div class="si-score" id="qbTF">0/5</div></div>
+        <div class="score-item"><div class="si-type">✏️ Fill in</div><div class="si-score" id="qbFill">0/4</div></div>
+        <div class="score-item"><div class="si-type">🤡 Silly</div><div class="si-score" id="qbTW">0/8</div></div>
+      </div>
+      <div style="margin-top:16px"><button class="btn green" onclick="resetQuiz()">↺ Take it again</button></div>
+    </div>
+  </section>
+</div>
+
+<!-- overlays -->
+<div class="lightbox" id="lightbox"><button class="lb-close" onclick="closeLightbox()">✕</button><img id="lbImg" src=""></div>
+<div class="cine" id="cine"><div class="cine-who" id="cineWho">STUDENT</div><div class="cine-line" id="cineLine"></div><button class="cine-close" onclick="closeCine()">✕ Close</button></div>
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" onclick="speak('Hello! I am Joy! Let\'s learn Unit 5!')">🐻</div>
+<div class="fab-wrap">
+  <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆️</button>
+  <a class="fab fab-home" id="fabHome" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+</div>
+<script>
+/* ============ state ============ */
+var TAB_NAMES=["Lesson Plan","Warm-Up","Vocabulary","Patterns","What's Wrong?","Listen","Dress Them Up","Team Games","Quiz"];
+var QUIZ={tf:0,tfDone:0,fill:0,fillDone:0,tw:0,twDone:0};
+var TEAM={A:0,B:0},TURN='A';
+var GVOICES=null,GVOICE_I=-1,GVOICE_URI=null,GON=true,SEC_ON={};
+var RATE=0.88,PITCH=1.0;
+
+/* ============ speech ============ */
+function allVoices(){
+  if(!('speechSynthesis' in window))return [];
+  var vs=speechSynthesis.getVoices();
+  return vs?vs.slice():[];
+}
+function vScore(v){
+  var n=(v.name||'')+' '+(v.voiceURI||'');
+  var s=0;
+  if(/en[-_]GB/i.test(v.lang)||/\bUK\b|British|England|London/i.test(n))s+=60;
+  else if(/en[-_]US/i.test(v.lang))s+=25;
+  else if(/^en/i.test(v.lang))s+=15;
+  else s-=100;
+  if(/natural|neural|online/i.test(n))s+=45;
+  if(/sonia|libby|maisie|sonia|ryan/i.test(n))s+=35;
+  if(/google uk english/i.test(n))s+=40;
+  if(/^google/i.test(n))s+=15;
+  if(/zira|sapi|desktop|\bdavid\b|\bmark\b|jenny|aria|\bguy\b|hazel/i.test(n))s-=50;
+  if(/female/i.test(n))s+=8;
+  if(/male/i.test(n))s+=4;
+  return s;
+}
+function voiceList(){
+  var l=allVoices().filter(function(v){return /^en/i.test(v.lang)||/^en/i.test(v.voiceURI||'');});
+  l.sort(function(a,b){return vScore(b)-vScore(a);});
+  return l;
+}
+function currentVoice(){
+  var l=voiceList();
+  if(!l.length)return null;
+  if(GVOICE_URI){
+    for(var i=0;i<l.length;i++){if(l[i].voiceURI===GVOICE_URI){GVOICE_I=i;return l[i];}}
+    GVOICE_URI=null;GVOICE_I=-1;
+  }
+  if(GVOICE_I<0||GVOICE_I>=l.length)GVOICE_I=0;
+  return l[GVOICE_I];
+}
+function renderVoiceBtn(){
+  var b=document.getElementById('voiceBtn');
+  if(!b)return;
+  var v=currentVoice();
+  if(!v){b.textContent='🔇';b.title='No English voice installed';return;}
+  b.textContent=/en[-_]GB/i.test(v.lang)?'\uD83C\uDDEC\uD83C\uDDE7':'\uD83D\uDDE3\uFE0F';
+  b.title='Voice: '+v.name+' (click to change)';
+}
+function cycleVoice(){
+  var l=voiceList();
+  if(!l.length){toast('No English voice found on this device');return;}
+  GVOICE_I=(GVOICE_I+1)%l.length;
+  GVOICE_URI=l[GVOICE_I].voiceURI;
+  renderVoiceBtn();
+  toast('Voice: '+l[GVOICE_I].name);
+  speak('Hello! I am Joy. What is she wearing? She is wearing a skirt and a blouse.');
+}
+function makeUtter(txt){
+  var u=new SpeechSynthesisUtterance(txt);
+  var v=currentVoice();
+  if(v){u.voice=v;u.lang=v.lang||'en-GB';}
+  else u.lang='en-GB';
+  u.rate=RATE;u.pitch=PITCH;u.volume=1;
+  return u;
+}
+function speak(txt){
+  if(!GON)return;
+  try{
+    speechSynthesis.cancel();
+    speechSynthesis.speak(makeUtter(txt));
+  }catch(e){}
+}
+function speakGB(t){speak(t);}
+function toggleGlobalSound(){
+  GON=!GON;
+  var b=document.getElementById('globalSound');
+  b.classList.toggle('off',!GON);
+  b.textContent=GON?'🔊':'🔇';
+  if(!GON&&'speechSynthesis' in window)speechSynthesis.cancel();
+  toast(GON?'Sound ON 🔊':'Sound OFF 🔇');
+}
+function speakLong(steps){
+  if(!GON)return;
+  try{speechSynthesis.cancel();steps.forEach(function(s){
+    speechSynthesis.speak(makeUtter(s));
+  });}catch(e){}
+}
+function toggleSecSound(id){
+  SEC_ON[id]=!SEC_ON[id];
+  var b=document.getElementById('ss-'+id);
+  if(!b)return;
+  b.classList.toggle('on',!!SEC_ON[id]);
+  b.classList.toggle('off',!SEC_ON[id]);
+  b.innerHTML=SEC_ON[id]?'🔊 On':'🔇 Off';
+  if(SEC_ON[id]){
+    var sec=b.closest('section');
+    if(sec){
+      var st=sec.querySelectorAll('.stp');
+      if(st.length){
+        speakLong(Array.prototype.map.call(st,function(e){return (e.innerText||e.textContent).replace(/\s+/g,' ').trim();}));
+        return;
+      }
+      var h2=sec.querySelector('.shead h2');
+      if(h2)speak(h2.textContent);
+    }
+  }else if('speechSynthesis' in window){speechSynthesis.cancel();}
+}
+
+function readStep(el){speak((el.innerText||el.textContent).replace(/\s+/g,' ').trim());}
+function jumpSec(id){var e=document.getElementById(id);if(!e)return;e.scrollIntoView({behavior:'smooth',block:'start'});}
+/* ============ tabs ============ */
+function showTab(n){
+  document.querySelectorAll('.tabpan').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.navbar .ntab').forEach(function(b){b.classList.remove('on');});
+  var pan=document.querySelector('.tabpan[data-tab="'+n+'"]');
+  if(pan)pan.classList.add('on');
+  var tabs=document.querySelectorAll('.navbar .ntab');
+  if(tabs[n])tabs[n].classList.add('on');
+  document.getElementById('topTitle').textContent=TAB_NAMES[n]||'';
+  window.scrollTo({top:0,behavior:'smooth'});
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+}
+function goHome(){showTab(0);}
+
+/* ============ toast / confetti ============ */
+var toastT=null;
+function toast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastT);
+  toastT=setTimeout(function(){t.classList.remove('show');},2200);
+}
+function confetti(n){
+  n=n||60;
+  var cols=['#ff5d5d','#ffd447','#4cc948','#4a9ee0','#f04f9b','#8b5cf0'];
+  for(var i=0;i<n;i++){
+    var d=document.createElement('div');
+    d.className='confetti-piece';
+    d.style.left=(Math.random()*100)+'vw';
+    d.style.background=cols[i%cols.length];
+    d.style.width=(8+Math.random()*10)+'px';
+    d.style.height=(8+Math.random()*10)+'px';
+    d.style.borderRadius=Math.random()>.5?'50%':'3px';
+    d.style.animationDuration=(2+Math.random()*2)+'s';
+    d.style.animationDelay=(Math.random()*.7)+'s';
+    document.body.appendChild(d);
+    setTimeout(function(el){return function(){el.remove();};}(d),5000);
+  }
+}
+
+/* ============ teams ============ */
+function addScore(t,n){
+  TEAM[t]=Math.max(0,(TEAM[t]||0)+n);
+  renderScores();
+  toast((t==='A'?'🐝 Team Bee':'🐯 Team Tiger')+' '+(n>0?'+':'')+n+'! 🎉');
+  if(n>0)confetti(30);
+}
+function resetScores(){TEAM.A=0;TEAM.B=0;renderScores();toast('Scores reset ↺');}
+function renderScores(){
+  var a=document.getElementById('scoreA'),b=document.getElementById('scoreB');
+  var a2=document.getElementById('scoreA2'),b2=document.getElementById('scoreB2');
+  if(a)a.textContent=TEAM.A;if(b)b.textContent=TEAM.B;
+  if(a2)a2.textContent=TEAM.A;if(b2)b2.textContent=TEAM.B;
+  var turn='➡️ '+(TURN==='A'?"Team Bee's turn":"Team Tiger's turn");
+  var c1=document.getElementById('turnChip'),c2=document.getElementById('turnChip2');
+  if(c1)c1.textContent=turn;if(c2)c2.textContent=TURN==='A'?'Team Bee':'Team Tiger';
+  var st=document.getElementById('scoreStars');
+  if(st)st.textContent=TEAM.A+TEAM.B===0?'⭐':'⭐⭐⭐';
+}
+function nextTurn(){TURN=TURN==='A'?'B':'A';renderScores();speak(TURN==='A'?"Team Bee's turn.":"Team Tiger's turn.");}
+function scoreCurrent(){addScore(TURN,1);nextTurn();}
+
+/* ============ lightbox / cine ============ */
+function openLightbox(src){
+  document.getElementById('lbImg').src=src;
+  document.getElementById('lightbox').classList.add('show');
+}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('show');}
+function openCine(who,line){
+  document.getElementById('cineWho').textContent=who;
+  document.getElementById('cineLine').textContent=line;
+  document.getElementById('cine').classList.add('show');
+}
+function closeCine(){document.getElementById('cine').classList.remove('show');}
+function speakCine(who,line){
+  openCine(who,line.replace(/[^A-Za-z0-9' ?!.]/g,''));
+  speak(line.replace(/[^A-Za-z0-9' ?!.]/g,''));
+  if(who==='STUDENT')setTimeout(function(){closeCine();},4000);
+}
+
+/* ============ data ============ */
+var VOCAB=[
+ {w:'a shirt',e:'👔',s:'a shirt'},{w:'pants',e:'👖',s:'pants'},{w:'socks',e:'🧦',s:'socks'},
+ {w:'sneakers',e:'👟',s:'sneakers'},{w:'a sweater',e:'🧶',s:'a sweater'},{w:'a jacket',e:'🧥',s:'a jacket'},
+ {w:'jeans',e:'👖',s:'jeans'},{w:'shoes',e:'👞',s:'shoes'},{w:'a T-shirt',e:'👕',s:'a T-shirt'},
+ {w:'shorts',e:'🩳',s:'shorts'},{w:'sandals',e:'🩴',s:'sandals'},{w:'a blouse',e:'👚',s:'a blouse'},
+ {w:'a skirt',e:'👗',s:'a skirt'}
+];
+var PICS=[
+ {img:'it-tank.jpg',w:'a tank top'},{img:'it-tshirt.jpg',w:'a T-shirt'},{img:'it-blouse.jpg',w:'a blouse'},
+ {img:'it-dress.jpg',w:'a dress'},{img:'it-joggers.jpg',w:'joggers'},{img:'it-yoga.jpg',w:'yoga pants'},
+ {img:'it-sandals.jpg',w:'sandals'},{img:'it-boots.jpg',w:'boots'},{img:'wb-pants.jpg',w:'pants'},
+ {img:'wb-shorts.jpg',w:'shorts'}
+];
+var KIDS=[
+ {n:'Kid 1',img:'kid1.jpg',s:'He is wearing a T-shirt and shorts.'},
+ {n:'Kid 2',img:'kid2.jpg',s:'She is wearing a skirt and a blouse.'},
+ {n:'Kid 3',img:'kid3.jpg',s:'He is wearing a jacket and jeans.'},
+ {n:'Kid 4',img:'kid4.jpg',s:'She is wearing a sweater and pants.'},
+ {n:'Kid 5',img:'kid5.jpg',s:'He is wearing a shirt and shoes.'},
+ {n:'Kid 6',img:'kid6.jpg',s:'She is wearing a dress and sandals.'}
+];
+var DOLLS=[
+ {img:'kid1.jpg'},{img:'kid2.jpg'},{img:'kid3.jpg'},
+ {img:'kid4.jpg'},{img:'kid5.jpg'},{img:'kid6.jpg'}
+];
+var TOPS=[{img:'it-tshirt.jpg',w:'a T-shirt'},{img:'it-blouse.jpg',w:'a blouse'},{img:'it-tank.jpg',w:'a tank top'},
+ {img:'wb-shirt.jpg',w:'a shirt'},{img:'wb-tank.jpg',w:'a tank top'},{img:'it-dress.jpg',w:'a dress'}];
+var BOTS=[{img:'wb-pants.jpg',w:'pants'},{img:'wb-shorts.jpg',w:'shorts'},{img:'it-yoga.jpg',w:'yoga pants'},
+ {img:'it-joggers.jpg',w:'joggers'},{img:'it-sandals.jpg',w:'sandals'},{img:'it-boots.jpg',w:'boots'}];
+var CW_WORKOUT={reply:'cwWorkoutReply',row:'cwWorkoutRow',correct:['it-joggers.jpg','it-tank.jpg'],
+ ans:'She should wear joggers and a tank top.',
+ items:[{img:'it-joggers.jpg',w:'joggers'},{img:'it-tank.jpg',w:'a tank top'},{img:'wb-pants.jpg',w:'pants'},
+  {img:'wb-shirt.jpg',w:'a shirt'},{img:'it-sandals.jpg',w:'sandals'},{img:'it-dress.jpg',w:'a dress'}]};
+var CW_WORK={reply:'cwWorkReply',row:'cwWorkRow',
+ ans:'He should wear pants, a shirt and shoes.',correct:['wb-pants.jpg','wb-shirt.jpg','wb-shoes.jpg'],
+ items:[{img:'wb-pants.jpg',w:'pants'},{img:'wb-shirt.jpg',w:'a shirt'},{img:'it-joggers.jpg',w:'joggers'},
+  {img:'it-tank.jpg',w:'a tank top'},{img:'wb-shoes.jpg',w:'shoes'},{img:'wb-shorts.jpg',w:'shorts'}]};
+var LSQ=[
+ {w:'She is wearing a skirt and a blouse.',ok:'kid2.jpg',opts:[{img:'kid2.jpg',w:'skirt + blouse'},{img:'kid4.jpg',w:'sweater + pants'},{img:'kid6.jpg',w:'dress + sandals'}]},
+ {w:'He is wearing a jacket and jeans.',ok:'kid3.jpg',opts:[{img:'kid1.jpg',w:'T-shirt + shorts'},{img:'kid3.jpg',w:'jacket + jeans'},{img:'kid5.jpg',w:'shirt + shoes'}]},
+ {w:'She is wearing a sweater and pants.',ok:'kid4.jpg',opts:[{img:'kid2.jpg',w:'skirt + blouse'},{img:'kid4.jpg',w:'sweater + pants'},{img:'kid6.jpg',w:'dress + sandals'}]},
+ {w:'He is wearing a T-shirt and shorts.',ok:'kid1.jpg',opts:[{img:'kid1.jpg',w:'T-shirt + shorts'},{img:'kid3.jpg',w:'jacket + jeans'},{img:'kid5.jpg',w:'shirt + shoes'}]}
+];
+var HITQ=[
+ {w:'He is going to sleep in bed.',cap:'🛏️ bed',img:'p15.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
+ {w:'She is going to the pool.',cap:'🏊 pool',img:'p16.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
+ {w:'He is going to school.',cap:'🏫 school',img:'p15.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
+ {w:'She is wearing warm clothes in winter.',cap:'❄️ winter',img:'p17.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']}
+];
+var OCCS=[
+ {img:'p17.jpg',right:true,yes:'❄️ Yes! Warm clothes for winter.'},
+ {img:'p16.jpg',right:true,yes:'🏊 Yes! Swimwear for the pool.'},
+ {img:'p18.jpg',right:true,yes:'🙌 Yes! Respectful clothes.'},
+ {img:'p15.jpg',right:true,yes:'🛏️ Yes! Pyjamas for bed.'},
+ {img:'p21.jpg',right:false,no:"❌ No! What's wrong? He should wear pants."},
+ {img:'p19.jpg',right:false,no:"❌ No! She should wear joggers."},
+ {img:'p20.jpg',right:false,no:"❌ No! He should wear a shirt."},
+ {img:'p23.jpg',right:true,yes:'✅ Yes! Do your best!'}
+];
+var TF=[
+ {e:'👕',s:'He is wearing a T-shirt and pants.',ok:true},
+ {e:'👗',s:'She is wearing a jacket and jeans.',ok:false},
+ {e:'🩹',s:'He should wear sneakers to play sports.',ok:true},
+ {e:'👙',s:'She should wear a swimsuit to bed.',ok:false},
+ {e:'👔',s:'He is wearing a shirt and shoes.',ok:true}
+];
+var FILL=[
+ {q:'She is wearing a ____ and a blouse.',blank:'skirt',opts:['skirt','shirt','shoes']},
+ {q:'He should wear ____ to play sports.',blank:'sneakers',opts:['sneakers','sandals','socks']},
+ {q:'What ____ he wearing?',blank:'is',opts:['is','are','am']},
+ {q:'He is wearing pants and a ____.',blank:'T-shirt',opts:['T-shirt','skirt','boots']}
+];
+var TW=[
+ {e:'🤡',s:'She is wearing a jacket and jeans.',ok:true},
+ {e:'🤡',s:'He is wearing a dress to school.',ok:false},
+ {e:'🤡',s:'She is wearing sneakers and a jacket.',ok:true},
+ {e:'🤡',s:'He is wearing socks on his hands.',ok:false},
+ {e:'🤡',s:'She should wear a skirt.',ok:true},
+ {e:'🤡',s:'He is wearing sandals in the snow.',ok:false},
+ {e:'🤡',s:'He is wearing a T-shirt and shorts.',ok:true},
+ {e:'🤡',s:'She is wearing shoes on her head.',ok:false}
+];
+var FREEZE=['❄️ Freeze! What is he wearing?','❄️ Freeze! What is she wearing?','❄️ Freeze! What\'s wrong?','❄️ Freeze! She is wearing ...'];
+var PATEX=['He is wearing a jacket and jeans.','She is wearing a skirt and a blouse.','He is wearing a T-shirt and shorts.','She is wearing a sweater and pants.','He should wear sneakers.','She should wear a skirt.'];
+</script>
+<script>
+/* ============ vocab ============ */
+function renderVocab(){
+  var h='';VOCAB.forEach(function(v,i){
+    h+='<div class="vocab-card" id="vc'+i+'" onclick="speak(\''+v.s+'\');document.getElementById(\'vc'+i+'\').classList.add(\'said\');setTimeout(function(){document.getElementById(\'vc'+i+'\').classList.remove(\'said\')},900)">'+
+      '<div class="vc-body"><div class="vc-emoji">'+v.e+'</div><div class="vc-word" id="vw'+i+'">'+v.w+'</div>'+
+      '<div class="vc-say">🔊 tap to hear</div></div></div>';
+  });
+  document.getElementById('vocabGrid').innerHTML=h;
+}
+function speakAllVocab(){var arr=VOCAB.map(function(v){return v.s;});speakLong(arr);}
+function hideVocab(){VOCAB.forEach(function(v,i){var el=document.getElementById('vw'+i);if(el)el.textContent='❓';});toast('Words hidden! 🙈');}
+function showVocab(){VOCAB.forEach(function(v,i){var el=document.getElementById('vw'+i);if(el)el.textContent=v.w;});toast('Words shown 👀');}
+function quizVocab(){
+  var v=VOCAB[Math.floor(Math.random()*VOCAB.length)];
+  speak('What is this? '+v.s);
+  openCine('❓ QUICK QUIZ','What is this?');
+  toast('Answer: '+v.w);
+  setTimeout(closeCine,3500);
+}
+function renderPics(){
+  var h='';PICS.forEach(function(p){
+    h+='<div class="obj" onclick="speak(\''+p.w+'\')"><img src="'+p.img+'" alt="'+p.w+'"><div class="obj-name">'+p.w+'</div><div class="obj-say">🔊</div></div>';
+  });
+  document.getElementById('picGrid').innerHTML=h;
+}
+
+/* ============ kids ============ */
+function kidHTML(mode){
+  var h='';
+  KIDS.forEach(function(k,i){
+    var fn=mode==='warm'?'kidWarm('+i+')':(mode==='talk'?'kidTalk('+i+')':'kidDress('+i+')');
+    h+='<div class="kid" id="'+mode+'Kid'+i+'" onclick="'+fn+'"><div class="knum">'+(i+1)+'</div>'+
+      '<img src="'+k.img+'" alt="'+k.n+'"><div class="kname">'+k.n+'</div></div>';
+  });
+  return h;
+}
+function kidWarm(i){
+  var die=document.getElementById('die');
+  var cur=parseInt(die.getAttribute('data-n')||'0',10);
+  if(cur!==i+1){toast('Find the picture with number '+(cur||'?')+'! 🎲');document.getElementById('warmKid'+i).classList.remove('hot');return;}
+  speak(KIDS[i].s);toast(KIDS[i].s);
+  document.getElementById('warmKid'+i).classList.add('hot');
+  confetti(20);addScore(TURN,1);
+}
+function kidTalk(i){speak('What is he or she wearing? '+KIDS[i].s);document.getElementById('talkKid'+i).classList.add('hot');setTimeout(function(){document.getElementById('talkKid'+i).classList.remove('hot')},2500);}
+function kidDress(i){speak(KIDS[i].s);document.getElementById('dressReply').textContent=KIDS[i].s;document.getElementById('dressReply').className='big-reply good';document.getElementById('dressKid'+i).classList.add('hot');setTimeout(function(){document.getElementById('dressKid'+i).classList.remove('hot')},2500);}
+
+/* ============ die ============ */
+function rollDie(){
+  var n=1+Math.floor(Math.random()*6);
+  var d=document.getElementById('die');
+  d.classList.remove('roll');void d.offsetWidth;d.classList.add('roll');
+  setTimeout(function(){d.textContent=['⚀','⚁','⚂','⚃','⚄','⚅'][n-1];d.setAttribute('data-n',n);
+    document.getElementById('dieHint').textContent='Find number '+n+'! 👆';
+    speak('Number '+n);},450);
+  document.querySelectorAll('.kid').forEach(function(k){k.classList.remove('hot')});
+}
+
+/* ============ patterns ============ */
+function renderPatterns(){
+  var h='';PATEX.forEach(function(p){h+='<button class="pe" onclick="speak(\''+p+'\')">'+p+'</button>';});
+  document.getElementById('patExamples').innerHTML=h;
+  document.getElementById('bigPatterns').innerHTML=h;
+  var sel=document.getElementById('subWear');
+  var opts=['a T-shirt and pants','a skirt and a blouse','a jacket and jeans','a sweater and pants','a shirt and shoes','a dress and sandals','shorts and sneakers','a blouse and a skirt'];
+  sel.innerHTML=opts.map(function(o){return '<option>'+o+'</option>';}).join('');
+  buildSentence();
+}
+function buildSentence(){
+  var s=document.getElementById('subWho').value+' '+document.getElementById('subIs').value+' '+document.getElementById('subWear').value+'.';
+  document.getElementById('subOut').textContent=s;
+}
+function speakOut(){var s=document.getElementById('subOut').textContent;speak(s);openCine('🗣️ SAY IT',s);setTimeout(closeCine,3000);}
+function randomSentence(){
+  var a=document.getElementById('subWho'),b=document.getElementById('subWear');
+  a.selectedIndex=Math.floor(Math.random()*a.options.length);
+  b.selectedIndex=Math.floor(Math.random()*b.options.length);
+  buildSentence();speakOut();
+}
+
+/* ============ outfit builder (what's wrong) ============ */
+function buildOutfit(key){
+  var cfg=key==='workout'?CW_WORKOUT:CW_WORK;
+  var h='';
+  cfg.items.forEach(function(it,i){
+    h+='<div class="obj" data-key="'+key+'" data-i="'+i+'" onclick="pickItem(\''+key+'\','+i+')">'+
+      '<img src="'+it.img+'" alt="'+it.w+'"><div class="obj-name">'+it.w+'</div><div class="obj-say"></div></div>';
+  });
+  document.getElementById(cfg.row).innerHTML=h;
+  document.getElementById(cfg.reply).innerHTML='&nbsp;';
+}
+function pickItem(key,i){
+  var cfg=key==='workout'?CW_WORKOUT:CW_WORK;
+  var el=document.querySelector('[data-key="'+key+'"][data-i="'+i+'"]');
+  if(!el)return;
+  if(el.classList.contains('used')){el.classList.remove('used');el.querySelector('.obj-say').textContent='';return;}
+  var n=document.querySelectorAll('[data-key="'+key+'"].used').length;
+  if(n>=2){toast('Only 2 pieces! Click one to remove it. 👆');return;}
+  el.classList.add('used');
+  el.querySelector('.obj-say').textContent='✓';
+  el.querySelector('.obj-say').className='obj-say good';
+  speak(cfg.items[i].w);
+}
+function checkOutfit(key){
+  var cfg=key==='workout'?CW_WORKOUT:CW_WORK;
+  var chosen=[].slice.call(document.querySelectorAll('[data-key="'+key+'"].used')).map(function(el){return cfg.items[+el.dataset.i].img;});
+  var ok=chosen.length===2&&chosen.every(function(c){return cfg.correct.indexOf(c)>-1;});
+  var r=document.getElementById(cfg.reply);
+  if(chosen.length<2){r.textContent='👆 Choose 2 pieces first!';r.className='big-reply';return;}
+  if(ok){r.textContent='✅ '+cfg.ans;r.className='big-reply good';speak(cfg.ans);confetti(40);addScore(TURN,1);}
+  else{r.textContent="❌ Not quite. What's wrong? Try again!";r.className='big-reply bad';
+    document.querySelectorAll('[data-key="'+key+'"].used').forEach(function(el){el.classList.add('bad');setTimeout(function(){el.classList.remove('bad','used');el.querySelector('.obj-say').textContent='';},600);});}
+}
+function resetOutfit(key){buildOutfit(key);document.getElementById(key==='workout'?'cwWorkoutReply':'cwWorkReply').innerHTML='&nbsp;';}
+function speakCwAnswer(key){var cfg=key==='workout'?CW_WORKOUT:CW_WORK;speak(cfg.ans);openCine('💡 ANSWER',cfg.ans);setTimeout(closeCine,3500);}
+
+/* ============ occasions ============ */
+function renderOccs(){
+  var h='';
+  OCCS.forEach(function(o,i){
+    h+='<div class="occ" onclick="occAnswer('+i+')"><img src="'+o.img+'" alt="occasion"><div class="occ-cap">❓ Right or wrong?</div></div>';
+  });
+  document.getElementById('occGrid').innerHTML=h;
+}
+function occAnswer(i){
+  var o=OCCS[i];
+  var r=document.getElementById('occReply');
+  var msg=o.right?o.yes:o.no;
+  r.textContent=msg;r.className='big-reply '+(o.right?'good':'bad');
+  speak(msg.replace(/[^A-Za-z0-9' ?!.,]/g,''));
+  if(o.right)confetti(25);
+}
+
+/* ============ listen & choose ============ */
+var liIdx=0,liLocked=false;
+function renderListen(){
+  var q=LSQ[liIdx%LSQ.length];
+  var h='';
+  q.opts.forEach(function(o){
+    h+='<div class="pic-opt" data-img="'+o.img+'" onclick="listenPick(\''+o.img+'\')"><img src="'+o.img+'" alt=""><div class="po-w">'+o.w+'</div></div>';
+  });
+  document.getElementById('listenOpts').innerHTML=h;
+  document.getElementById('listenReply').innerHTML='&nbsp;';
+  document.getElementById('listenHint').textContent='Question '+(liIdx%LSQ.length+1)+' of '+LSQ.length+' — click 🔊';
+  liLocked=false;
+}
+function playListen(){var q=LSQ[liIdx%LSQ.length];speak(q.w);document.getElementById('listenHint').textContent='🔊 "'+q.w+'"';}
+function listenPick(img){
+  if(liLocked)return;
+  var q=LSQ[liIdx%LSQ.length];
+  var r=document.getElementById('listenReply');
+  document.querySelectorAll('#listenOpts .pic-opt').forEach(function(p){p.classList.add('dis');});
+  if(img===q.ok){
+    liLocked=true;
+    document.querySelector('#listenOpts .pic-opt[data-img="'+img+'"]').classList.add('ok');
+    r.textContent='✅ Correct!';r.className='big-reply good';speak('Correct!');confetti(30);addScore(TURN,1);
+  }else{
+    document.querySelector('#listenOpts .pic-opt[data-img="'+img+'"]').classList.add('no');
+    document.querySelector('#listenOpts .pic-opt[data-img="'+q.ok+'"]').classList.add('ok');
+    r.textContent="❌ Listen again!";r.className='big-reply bad';speak("Listen again.");
+  }
+}
+function nextListen(){liIdx++;renderListen();}
+function resetListen(){liIdx=0;renderListen();}
+
+/* ============ listen & hit ============ */
+var hiIdx=0;
+function renderHit(){
+  var q=HITQ[hiIdx%HITQ.length];
+  var h='';
+  q.opts.forEach(function(im){
+    h+='<div class="occ" data-img="'+im+'" onclick="hitPick(\''+im+'\')"><img src="'+im+'" alt=""><div class="occ-cap">Hit me! ✋</div></div>';
+  });
+  document.getElementById('hitGrid').innerHTML=h;
+  document.getElementById('hitReply').innerHTML='&nbsp;';
+  document.getElementById('hitHint').textContent='Question '+(hiIdx%HITQ.length+1)+' of '+HITQ.length;
+}
+function playHit(){var q=HITQ[hiIdx%HITQ.length];speak(q.w);document.getElementById('hitHint').textContent='🔊 "'+q.w+'"';}
+function hitPick(im){
+  var q=HITQ[hiIdx%HITQ.length];
+  var r=document.getElementById('hitReply');
+  if(im===q.img){r.textContent='✅ '+q.cap;r.className='big-reply good';speak('Correct! '+q.cap);confetti(30);addScore(TURN,1);
+    document.querySelectorAll('#hitGrid .occ').forEach(function(e){e.style.pointerEvents='none';});}
+  else{r.textContent='❌ Try again!';r.className='big-reply bad';speak('Try again.');}
+}
+function nextHit(){hiIdx++;renderHit();}
+
+/* ============ dress up ============ */
+var dDoll=0,dTop=0,dBot=0;
+function renderDress(){
+  var h='';
+  DOLLS.forEach(function(d,i){h+='<div class="obj" id="dollPick'+i+'" onclick="pickDoll('+i+')"><img src="'+d.img+'" alt=""><div class="obj-name">Doll '+(i+1)+'</div></div>';});
+  document.getElementById('dollRow').innerHTML=h;
+  h='';TOPS.forEach(function(t,i){h+='<div class="obj" id="topPick'+i+'" onclick="pickTop('+i+')"><img src="'+t.img+'" alt=""><div class="obj-name">'+t.w+'</div></div>';});
+  document.getElementById('topRow').innerHTML=h;
+  h='';BOTS.forEach(function(b,i){h+='<div class="obj" id="botPick'+i+'" onclick="pickBot('+i+')"><img src="'+b.img+'" alt=""><div class="obj-name">'+b.w+'</div></div>';});
+  document.getElementById('botRow').innerHTML=h;
+  markPicks();updateDoll();
+  document.getElementById('kidGridDress').innerHTML=kidHTML('dress');
+}
+function pickDoll(i){dDoll=i;markPicks();updateDoll();speak(document.getElementById('dollSentence').textContent);}
+function pickTop(i){dTop=i;markPicks();updateDoll();speak(TOPS[i].w);}
+function pickBot(i){dBot=i;markPicks();updateDoll();speak(BOTS[i].w);}
+function markPicks(){
+  DOLLS.forEach(function(d,i){var e=document.getElementById('dollPick'+i);if(e)e.classList.toggle('chosen',i===dDoll);});
+  TOPS.forEach(function(t,i){var e=document.getElementById('topPick'+i);if(e)e.classList.toggle('chosen',i===dTop);});
+  BOTS.forEach(function(b,i){var e=document.getElementById('botPick'+i);if(e)e.classList.toggle('chosen',i===dBot);});
+}
+function updateDoll(){
+  var t=TOPS[dTop],b=BOTS[dBot];
+  var who=document.getElementById('dollWho');
+  var p=who?who.value:'She';
+  document.getElementById('dollImg').src=DOLLS[dDoll].img;
+  document.getElementById('dollSentence').textContent=p+' is wearing '+t.w+' and '+b.w+'.';
+}
+function speakDoll(){var s=document.getElementById('dollSentence').textContent;speak(s);openCine('🗣️ MY DOLL',s);setTimeout(closeCine,3000);}
+function randomDoll(){dDoll=Math.floor(Math.random()*DOLLS.length);dTop=Math.floor(Math.random()*TOPS.length);dBot=Math.floor(Math.random()*BOTS.length);markPicks();updateDoll();speakDoll();confetti(20);}
+
+/* ============ team games ============ */
+function buildGame(){
+  var wear=['a jacket','a T-shirt','a skirt','jeans','shorts','a blouse','sandals','sneakers'];
+  var sel=document.getElementById('gWear');
+  if(!sel.options.length){sel.innerHTML=wear.map(function(w){return '<option>'+w+'</option>';}).join('');sel.selectedIndex=0;}
+  var s=document.getElementById('gWho').value+' should wear '+sel.value+'.';
+  document.getElementById('gameOut').textContent=s;
+}
+function speakGame(){speak(document.getElementById('gameOut').textContent);}
+var twIdx=0;
+function renderTw(){var t=TW[twIdx%TW.length];document.getElementById('twEmoji').textContent=t.e;document.getElementById('twStmt').textContent=t.s;
+  document.getElementById('twTrue').disabled=false;document.getElementById('twFalse').disabled=false;document.getElementById('twResult').textContent='';}
+function twAnswer(val){
+  var t=TW[twIdx%TW.length];var ok=val===t.ok;
+  document.getElementById('twTrue').disabled=true;document.getElementById('twFalse').disabled=true;
+  var r=document.getElementById('twResult');
+  r.innerHTML=ok?'✅ Correct! It is '+(t.ok?'right.':'silly!')+' +1 🎉':(t.ok?'❌ It IS right! 😊':'❌ It is silly! 🤡');
+  if(ok){confetti(25);addScore(TURN,1);speak('Correct!');}else{speak(t.ok?'It is right.':'It is silly.');}
+}
+function nextTw(){twIdx++;renderTw();}
+var frIdx=0;
+function nextFreeze(){frIdx++;var s=FREEZE[frIdx%FREEZE.length];document.getElementById('freezeLine').textContent=s;speak(s);}
+
+/* ============ quiz: true/false ============ */
+var tfIdx=0,tfLocked=false;
+function renderTF(){var t=TF[tfIdx%TF.length];document.getElementById('tfEmoji').textContent=t.e;document.getElementById('tfStmt').textContent=t.s;
+  document.querySelectorAll('[data-sec="qz1"] .tf-btn').forEach(function(b){b.disabled=false;});
+  document.getElementById('tfResult').textContent='';tfLocked=false;
+  document.getElementById('tfProgress').textContent=QUIZ.tfDone+' / '+TF.length;}
+function tfAnswer(val){
+  if(tfLocked)return;tfLocked=true;
+  var t=TF[tfIdx%TF.length];var ok=val===t.ok;
+  document.querySelectorAll('[data-sec="qz1"] .tf-btn').forEach(function(b){b.disabled=true;});
+  var r=document.getElementById('tfResult');
+  r.innerHTML=ok?'✅ Correct! +1':(t.ok?'❌ It is TRUE.':'❌ It is FALSE.');
+  QUIZ.tfDone++;
+  if(ok)QUIZ.tf++;
+  updateQuizBoard();
+}
+function nextTF(){tfIdx++;renderTF();speak(TF[tfIdx%TF.length].s);}
+
+/* ============ quiz: fill ============ */
+var fIdx=0,fLocked=false;
+function renderFill(){
+  var f=FILL[fIdx%FILL.length];
+  document.getElementById('fillQ').innerHTML=f.q.replace('____','<span class="fill-blank" id="fillBlank">____</span>');
+  var h='';f.opts.slice().sort(function(){return Math.random()-.5;}).forEach(function(o){
+    h+='<button class="fill-opt" onclick="fillPick(\''+o+'\',this)">'+o+'</button>';});
+  document.getElementById('fillOpts').innerHTML=h;
+  document.getElementById('fillResult').textContent='';
+  fLocked=false;
+  document.getElementById('fillProgress').textContent=QUIZ.fillDone+' / '+FILL.length;
+}
+function fillPick(o,el){
+  if(fLocked)return;
+  var f=FILL[fIdx%FILL.length];
+  if(o===f.blank){
+    fLocked=true;
+    el.classList.add('selected');
+    var b=document.getElementById('fillBlank');b.textContent=f.blank;b.classList.add('revealed');
+    document.getElementById('fillResult').innerHTML='✅ Correct!';
+    document.getElementById('fillResult').style.color='var(--green)';
+    QUIZ.fillDone++;QUIZ.fill++;
+    document.querySelectorAll('#fillOpts .fill-opt').forEach(function(x){x.classList.add('dis');});
+    speak(f.q.replace('____',f.blank));
+    updateQuizBoard();
+  }else{
+    el.classList.add('wrong');
+    document.getElementById('fillResult').innerHTML='❌ Try again!';
+    document.getElementById('fillResult').style.color='var(--red)';
+    speak('Try again.');
+  }
+}
+function nextFill(){fIdx++;renderFill();}
+
+/* ============ quiz: silly ============ */
+var tw2Idx=0,tw2Locked=false;
+function renderTw2(){var t=TW[tw2Idx%TW.length];
+  document.getElementById('tw2Emoji').textContent=t.e;document.getElementById('tw2Stmt').textContent=t.s;
+  document.querySelectorAll('[data-sec="qz3"] .tf-btn').forEach(function(b){b.disabled=false;});
+  document.getElementById('tw2Result').textContent='';tw2Locked=false;
+  document.getElementById('twProgress').textContent=QUIZ.twDone+' / '+TW.length;}
+function tw2Answer(val){
+  if(tw2Locked)return;tw2Locked=true;
+  var t=TW[tw2Idx%TW.length];var ok=val===t.ok;
+  document.querySelectorAll('[data-sec="qz3"] .tf-btn').forEach(function(b){b.disabled=true;});
+  document.getElementById('tw2Result').innerHTML=ok?'✅ Correct! +1':(t.ok?'❌ It IS right.':'❌ It is silly! 🤡');
+  QUIZ.twDone++;if(ok)QUIZ.tw++;
+  updateQuizBoard();
+}
+function nextTw2(){tw2Idx++;renderTw2();}
+function updateQuizBoard(){
+  var total=QUIZ.tf+QUIZ.fill+QUIZ.tw;
+  document.getElementById('quizTotal').textContent=total+' / '+(TF.length+FILL.length+TW.length);
+  document.getElementById('qbTF').textContent=QUIZ.tf+'/'+TF.length;
+  document.getElementById('qbFill').textContent=QUIZ.fill+'/'+FILL.length;
+  document.getElementById('qbTW').textContent=QUIZ.tw+'/'+TW.length;
+  var done=QUIZ.tfDone+QUIZ.fillDone+QUIZ.twDone;
+  var max=TF.length+FILL.length+TW.length;
+  var pct=total/max;
+  document.getElementById('quizStars').textContent=done===0?'':(pct>=.9?'🌟🌟🌟':(pct>=.6?'🌟🌟':'🌟'));
+  document.getElementById('quizMsg').textContent=done===0?'Answer the questions to see your score!':(pct>=.9?'Outstanding! 🎉':(pct>=.6?'Great job! 👍':'Keep trying! 💪'));
+  if(done===max){confetti(80);speak('Great job!');toast('Quiz complete! 🎉 '+total+' out of '+max);}
+}
+function resetQuiz(){QUIZ={tf:0,tfDone:0,fill:0,fillDone:0,tw:0,twDone:0};tfIdx=0;fIdx=0;tw2Idx=0;renderTF();renderFill();renderTw2();updateQuizBoard();toast('Quiz reset ↺');}
+
+/* ============ scroll / boot ============ */
+window.addEventListener('scroll',function(){
+  var y=window.scrollY;
+  var ft=document.getElementById('fabTop'),fh=document.getElementById('fabHome');
+  ft.classList.toggle('fab-show',y>400);
+  fh.classList.toggle('fab-show',y>1400);
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLightbox();closeCine();}});
+document.addEventListener('click',function(e){
+  if(e.target.classList.contains('lightbox'))closeLightbox();
+});
+if('speechSynthesis' in window){
+  speechSynthesis.onvoiceschanged=function(){GVOICES=null;renderVoiceBtn();};
+  if(speechSynthesis.getVoices().length)renderVoiceBtn();
+}
+document.addEventListener('DOMContentLoaded',function(){
+  renderVocab();renderPics();renderPatterns();
+  document.getElementById('kidGridWarm').innerHTML=kidHTML('warm');
+  document.getElementById('kidGridTalk').innerHTML=kidHTML('talk');
+  document.getElementById('kidGridDress').innerHTML=kidHTML('dress');
+  buildOutfit('workout');buildOutfit('work');
+  renderOccs();renderListen();renderHit();renderDress();
+  buildGame();renderTw();renderTF();renderFill();renderTw2();
+  updateQuizBoard();renderScores();renderVoiceBtn();
+  var d=document.getElementById('die');d.setAttribute('data-n','0');
+  toast('Welcome to JD5 Unit 5! 👗');
+});
+</script>
+</body>
+</html>
