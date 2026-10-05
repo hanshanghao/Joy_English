@@ -1792,6 +1792,27 @@ document.addEventListener("click",function(e){
   var m=document.getElementById("mascot");
   if(m)m.onclick=function(){showToast("🦉 Owlbert says: tap any line to hear it!");sayA("Hello! Tap any line to hear it. Let us talk about the weather!");};
 })();
+/* ---------- FAB: back to top + home ---------- */
+var fabDimT=null,fabDimmed=false;
+function fabDim(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity=".3";});fabDimmed=true;}
+function fabBright(){document.querySelectorAll(".fab").forEach(function(f){f.style.opacity="1";});}
+function fabResetDim(){fabBright();clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);}
+function fabUpdate(){
+  var show=window.scrollY>160;
+  document.querySelectorAll(".fab").forEach(function(f){
+    if(show){f.style.pointerEvents="auto";f.style.transform="translateY(0)";if(!fabDimmed)f.style.opacity="1";}
+    else{f.style.opacity="0";f.style.pointerEvents="none";f.style.transform="translateY(96px)";fabDimmed=false;clearTimeout(fabDimT);}
+  });
+  if(show&&!fabDimmed)fabResetDim();
+}
+window.addEventListener("scroll",fabUpdate,{passive:true});
+document.querySelectorAll(".fab").forEach(function(f){
+  f.addEventListener("mouseenter",function(){clearTimeout(fabDimT);fabBright();});
+  f.addEventListener("mouseleave",function(){clearTimeout(fabDimT);fabDimT=setTimeout(fabDim,3000);});
+  f.addEventListener("touchstart",fabResetDim);
+  f.addEventListener("click",fabResetDim);
+});
+fabUpdate();
 (function(){
   var box=document.getElementById("floaties");
   if(!box)return;
