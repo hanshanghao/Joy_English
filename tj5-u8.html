@@ -345,8 +345,8 @@ section{scroll-margin-top:84px}
 .imgrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0}
 .imgcard{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;transition:transform .2s}
 .imgcard:hover{transform:translateY(-4px)}
-.imgcard img{width:100%;display:block}
-.imgcard .cap{font-size:clamp(11px,1.7vw,13px);font-weight:800;padding:8px 10px;color:#555;text-align:center}
+.imgcard img{width:100%;height:170px;object-fit:cover;display:block}
+.imgcard .cap{font-size:clamp(11px,1.7vw,13px);font-weight:800;padding:8px 10px;color:#555;text-align:center;min-height:34px;display:flex;align-items:center;justify-content:center}
 .chiprow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .chip8{background:#fff;border:3px solid #e4d9ff;border-radius:40px;padding:8px 14px;font-weight:900;cursor:pointer;font-size:clamp(13px,2vw,15px);transition:.18s}
 .chip8:hover{border-color:var(--purple);transform:translateY(-3px)}
@@ -406,7 +406,7 @@ section{scroll-margin-top:84px}
   <button class="ntab" onclick="showTab(4)">🌍 Around the World</button>
   <button class="ntab" onclick="showTab(5)">⚡ Weather Champion</button>
   <button class="ntab" onclick="showTab(6)">📝 Quiz</button>
-  <button class="ntab" onclick="showTab(7)">📚 Book Pages</button>
+  <button class="ntab" onclick="showTab(7)">📚 Picture Cards</button>
 </div>
 
 <div class="tabpan on" id="tp0" data-sec="plan">
@@ -461,8 +461,8 @@ section{scroll-margin-top:84px}
         <div class="story-step" data-say="Today we are going to talk about the weather. Weather!"><div class="step-num">T</div><div class="step-text"><strong>Plant the word:</strong> "Today — the <em>weather</em>! Weather! Everybody say weather!"</div><div class="spk">🔊</div></div>
       </div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-warmup.jpg')"><img src="TJ5-U8/u8-warmup.jpg" alt="Warm-up"><div class="cap">Hour 1 · Warm-up (p.194)</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-1.jpg')"><img src="TJ5-U8/Unit-8-1.jpg" alt="Teacher manual warm-up"><div class="cap">Teacher notes · Warm-up</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/BeachBall.jpg/1280px-BeachBall.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/BeachBall.jpg/1280px-BeachBall.jpg" alt="Beach ball"><div class="cap">Warm-up · hide the ball</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg" alt="Teacher with students"><div class="cap">Warm-up · ask the class</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Boys and girls, look! A magic beanstalk! Let's climb it together!" — dim the lights, start the story.</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s2')">Next: Dialogue →</button><button class="btn purple" onclick="showTab(1)">Open Dialogue tab</button></div>
@@ -482,9 +482,9 @@ section{scroll-margin-top:84px}
         <div class="story-step" data-say="Now open your books to page sixty-two. Listen and repeat."><div class="step-num">5</div><div class="step-text"><strong>p.62:</strong> listen once, whole dialogue — no stopping.</div><div class="spk">🔊</div></div>
       </div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-poster.jpg')"><img src="TJ5-U8/u8-poster.jpg" alt="Dialogue poster"><div class="cap">Dialogue poster</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-2.jpg')"><img src="TJ5-U8/Unit-8-2.jpg" alt="Teacher notes dialogue"><div class="cap">Teacher notes · Dialogue</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-3.jpg')"><img src="TJ5-U8/Unit-8-3.jpg" alt="Acting posters"><div class="cap">Acting &amp; dialogue posters</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sky_Clouds_Sea.jpg/1280px-Sky_Clouds_Sea.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sky_Clouds_Sea.jpg/1280px-Sky_Clouds_Sea.jpg" alt="Sky, sea and clouds"><div class="cap">Dialogue · up in the sky</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg" alt="Classroom"><div class="cap">Dialogue · act it out</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg/1280px-A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg/1280px-A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg" alt="Rainbow after the rain"><div class="cap">Dialogue · look at the sky</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Now you be the characters —Group A, you are Abby…"</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s3')">Next: Role-play →</button><button class="btn orange" onclick="showTab(1)">Open Dialogue tab</button></div>
@@ -509,9 +509,9 @@ section{scroll-margin-top:84px}
         <span class="chip8" onclick="showTab(1)">🎤 Group D · Mom</span>
       </div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene60.jpg')"><img src="TJ5-U8/u8-scene60.jpg" alt="Dialogue page 60"><div class="cap">e-Book p.60 · lines ①②③</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene61.jpg')"><img src="TJ5-U8/u8-scene61.jpg" alt="Dialogue page 61"><div class="cap">e-Book p.61 · line ④</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene62.jpg')"><img src="TJ5-U8/u8-scene62.jpg" alt="Dialogue page 62"><div class="cap">e-Book p.62 · lines ⑤⑥</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg/1280px-Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg/1280px-Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg" alt="Sunny mountain meadow"><div class="cap">Scene 1 · We climb up, up, up</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/White_Cumulus_Clouds_against_Blue_Sky.jpg/1280px-White_Cumulus_Clouds_against_Blue_Sky.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/White_Cumulus_Clouds_against_Blue_Sky.jpg/1280px-White_Cumulus_Clouds_against_Blue_Sky.jpg" alt="White clouds in blue sky"><div class="cap">Scene 2 · What&#39;s at the top?</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Boy_Flies_Kite_%281204845%29.jpeg/1280px-Boy_Flies_Kite_%281204845%29.jpeg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Boy_Flies_Kite_%281204845%29.jpeg/1280px-Boy_Flies_Kite_%281204845%29.jpeg" alt="Flying a kite in the wind"><div class="cap">Scene 3 · How&#39;s the weather?</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Wonderful acting! Now — can you remember what comes <em>next</em>?"</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s4')">Next: What Comes Next? →</button><button class="btn green" onclick="showTab(1)">Play the dialogue game</button></div>
@@ -551,9 +551,9 @@ section{scroll-margin-top:84px}
         <div class="story-step" data-say="Dice game! Roll and say the weather word!"><div class="step-num">4</div><div class="step-text"><strong>Dice game</strong> (p.197): roll → say the word → class checks.</div><div class="spk">🔊</div></div>
       </div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-vocab.jpg')"><img src="TJ5-U8/u8-vocab.jpg" alt="Vocabulary houses"><div class="cap">Vocabulary · Listen, point, say</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-dice.jpg')"><img src="TJ5-U8/u8-dice.jpg" alt="Dice game"><div class="cap">Dice Game (p.197)</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-5.jpg')"><img src="TJ5-U8/Unit-8-5.jpg" alt="Teacher notes vocabulary"><div class="cap">Teacher notes · Vocabulary</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/CSIRO_ScienceImage_11651_Tropical_rain.jpg/1280px-CSIRO_ScienceImage_11651_Tropical_rain.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/CSIRO_ScienceImage_11651_Tropical_rain.jpg/1280px-CSIRO_ScienceImage_11651_Tropical_rain.jpg" alt="Rainy street with umbrellas"><div class="cap">Weather word · rainy</div></div>
+        <div class="imgcard" onclick="openLb('https://upload.wikimedia.org/wikipedia/commons/5/59/Dice%21_%2853251753675%29.jpg')"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Dice%21_%2853251753675%29.jpg" alt="Dice for the dice game"><div class="cap">Dice game · roll and say</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg" alt="Children playing outside"><div class="cap">Vocabulary · say and do</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Fast round now — if I roll a <strong>six</strong>… BOMB!"</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s6')">Next: Weather Bomb →</button><button class="btn orange" onclick="showTab(2)">Open Weather Words tab</button></div>
@@ -589,9 +589,9 @@ section{scroll-margin-top:84px}
         <div class="story-step" data-say="Answer in a full sentence, please."><div class="step-num">4</div><div class="step-text"><strong>Correction:</strong> never accept "windy" alone — full sentence, please!</div><div class="spk">🔊</div></div>
       </div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-patterns.jpg')"><img src="TJ5-U8/u8-patterns.jpg" alt="Pattern window"><div class="cap">Pattern · window model</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-house.jpg')"><img src="TJ5-U8/u8-house.jpg" alt="House window drawing"><div class="cap">Board drawing</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-patbox.jpg')"><img src="TJ5-U8/u8-patbox.jpg" alt="Pattern box"><div class="cap">Contractions box</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg/1280px-Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg/1280px-Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg" alt="Rain on the window"><div class="cap">Pattern · look out the window</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/A_white_board.jpg/1280px-A_white_board.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/A_white_board.jpg/1280px-A_white_board.jpg" alt="Whiteboard"><div class="cap">Draw it on the board</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Chalkboard_in_a_school_in_Afghanistan.jpg/1280px-Chalkboard_in_a_school_in_Afghanistan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Chalkboard_in_a_school_in_Afghanistan.jpg/1280px-Chalkboard_in_a_school_in_Afghanistan.jpg" alt="Blackboard"><div class="cap">Contractions · write it together</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Two teams — Team Sun and Team Cloud — to the wheel!"</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s8')">Next: Weather Wheel →</button><button class="btn purple" onclick="showTab(3)">Open Patterns tab</button></div>
@@ -613,8 +613,8 @@ section{scroll-margin-top:84px}
         <button class="btn blue" onclick="sayF('How is the weather?')">🔊 Question model (British ♀)</button>
         <button class="btn purple" onclick="sayM('It is windy!')">🔊 Answer model (British ♂)</button></div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-wheel.jpg')"><img src="TJ5-U8/u8-wheel.jpg" alt="Spin the wheel"><div class="cap">Spin the Wheel steps (p.198)</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-6.jpg')"><img src="TJ5-U8/Unit-8-6.jpg" alt="Teacher notes patterns"><div class="cap">Teacher notes · Patterns</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Wheel_of_Fortune_Cyclone_Arcade_Game.jpg/1280px-Wheel_of_Fortune_Cyclone_Arcade_Game.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Wheel_of_Fortune_Cyclone_Arcade_Game.jpg/1280px-Wheel_of_Fortune_Cyclone_Arcade_Game.jpg" alt="Colourful spinning wheel"><div class="cap">Spin the wheel</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg" alt="Classroom"><div class="cap">Ask and answer in pairs</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Every country has weather — let's travel!"</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s9')">Next: Around the World →</button></div>
@@ -632,9 +632,9 @@ section{scroll-margin-top:84px}
         <div class="story-step" data-say="How is the weather in Taiwan? It is sunny in Taipei."><div class="step-num">3</div><div class="step-text">Finish with the Taiwan map (p.201): five cities, five weathers.</div><div class="spk">🔊</div></div>
       </div>
       <div class="imgrow">
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-map.jpg')"><img src="TJ5-U8/u8-map.jpg" alt="World map"><div class="cap">Weather around the world</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/u8-maptw.jpg')"><img src="TJ5-U8/u8-maptw.jpg" alt="Taiwan map"><div class="cap">Taiwan · Read and draw</div></div>
-        <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-8.jpg')"><img src="TJ5-U8/Unit-8-8.jpg" alt="Activities"><div class="cap">Teacher notes · Activities</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/World-map-continents-oceans_%281%29.jpg/1280px-World-map-continents-oceans_%281%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/World-map-continents-oceans_%281%29.jpg/1280px-World-map-continents-oceans_%281%29.jpg" alt="World map"><div class="cap">Weather around the world</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Taiwan_location_map.svg/1280px-Taiwan_location_map.svg.png')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Taiwan_location_map.svg/1280px-Taiwan_location_map.svg.png" alt="Map of Taiwan"><div class="cap">Taiwan · Read and draw</div></div>
+        <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg" alt="Teacher with students"><div class="cap">Ask · answer · vote</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Last game — one minute, fastest voice wins!"</div>
       <div class="rowbtns"><button class="btn blue" onclick="jump('s10')">Next: Weather Champion →</button><button class="btn pink" onclick="showTab(4)">Open Around the World tab</button></div>
@@ -678,7 +678,7 @@ CHAMPIONS (10'): ____________</div>
     </div>
     <div class="tip" style="margin-top:14px">🔑 <strong>Teacher's key strategy:</strong> praise the <strong>sentence</strong>, not the word. Every "It is ___" gets a ⭐; one-word answers get a gentle model, not a "no".</div>
     <div class="rowbtns">
-      <button class="btn orange" onclick="showTab(7)">📚 Open book pages</button>
+      <button class="btn orange" onclick="showTab(7)">📚 Open picture cards</button>
       <button class="btn purple" onclick="showTab(6)">📝 Run the quiz</button>
       <button class="btn blue" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ Back to the top</button>
     </div>
@@ -689,7 +689,7 @@ CHAMPIONS (10'): ____________</div>
   <div class="hero">
     <span class="big-emoji">🗣️</span>
     <h1>The Dialogue</h1>
-    <span class="sub">"How's the weather up there?" · e-Book p.60–62</span>
+    <span class="sub">"How's the weather up there?" · the story scene</span>
     <div class="desc">Tap any line to hear it in a British voice. Play the whole scene, choose your group, then play <strong>What Comes Next?</strong></div>
   </div>
 
@@ -697,9 +697,9 @@ CHAMPIONS (10'): ____________</div>
     <div class="shead"><span class="ic">🎬</span><h2>The Story Scene</h2><span class="badge">6 LINES</span>
       <button class="sec-sound" data-sec="dlg" onclick="toggleSecSound('dlg',this)"><span class="sec-si">🔊</span></button></div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene60.jpg')"><img src="TJ5-U8/u8-scene60.jpg" alt="Page 60"><div class="cap">p.60 · ①②③</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene61.jpg')"><img src="TJ5-U8/u8-scene61.jpg" alt="Page 61"><div class="cap">p.61 · ④</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene62.jpg')"><img src="TJ5-U8/u8-scene62.jpg" alt="Page 62"><div class="cap">p.62 · ⑤⑥</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg/1280px-Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg/1280px-Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg" alt="Sunny mountain meadow"><div class="cap">Picture 1 · We climb up, up, up</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/White_Cumulus_Clouds_against_Blue_Sky.jpg/1280px-White_Cumulus_Clouds_against_Blue_Sky.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/White_Cumulus_Clouds_against_Blue_Sky.jpg/1280px-White_Cumulus_Clouds_against_Blue_Sky.jpg" alt="White clouds in blue sky"><div class="cap">Picture 2 · What&#39;s at the top?</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Boy_Flies_Kite_%281204845%29.jpeg/1280px-Boy_Flies_Kite_%281204845%29.jpeg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Boy_Flies_Kite_%281204845%29.jpeg/1280px-Boy_Flies_Kite_%281204845%29.jpeg" alt="Flying a kite in the wind"><div class="cap">Picture 3 · How&#39;s the weather?</div></div>
     </div>
     <div class="tip">💡 Ask <strong>before</strong> you read: "They climb up, up, up… what's at the top?" / "But then — oh no! What do they see?"</div>
   </section>
@@ -855,7 +855,7 @@ CHAMPIONS (10'): ____________</div>
   </section>
 
   <section>
-    <div class="shead"><span class="ic">💣</span><h2>Weather Bomb</h2><span class="badge">DICE GAME · p.197</span>
+    <div class="shead"><span class="ic">💣</span><h2>Weather Bomb</h2><span class="badge">DICE GAME · ROLL &amp; SAY</span>
       <button class="sec-sound" data-sec="vocab" onclick="toggleSecSound('vocab',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">Roll <strong>1–5</strong> → the class says the weather word + sentence. Roll <strong>6</strong> → 💣 <strong>BOMB!</strong> Stand up, turn around, sit down — the last student to sit gets no point.</div>
     <div class="grid2">
@@ -880,9 +880,9 @@ CHAMPIONS (10'): ____________</div>
       </div>
     </div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-dice.jpg')"><img src="TJ5-U8/u8-dice.jpg" alt="Dice game"><div class="cap">Dice Game (p.197)</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-vocab.jpg')"><img src="TJ5-U8/u8-vocab.jpg" alt="Vocabulary"><div class="cap">Vocabulary panel (p.63)</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-5.jpg')"><img src="TJ5-U8/Unit-8-5.jpg" alt="Teacher notes"><div class="cap">Teacher notes · Vocabulary</div></div>
+      <div class="imgcard" onclick="openLb('https://upload.wikimedia.org/wikipedia/commons/5/59/Dice%21_%2853251753675%29.jpg')"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Dice%21_%2853251753675%29.jpg" alt="Dice for the dice game"><div class="cap">Dice game · roll and say</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/CSIRO_ScienceImage_11651_Tropical_rain.jpg/1280px-CSIRO_ScienceImage_11651_Tropical_rain.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/CSIRO_ScienceImage_11651_Tropical_rain.jpg/1280px-CSIRO_ScienceImage_11651_Tropical_rain.jpg" alt="Rainy street with umbrellas"><div class="cap">Weather word · rainy</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg" alt="Children playing outside"><div class="cap">Vocabulary · say and do</div></div>
     </div>
     <div class="rowbtns">
       <button class="btn purple" onclick="showTab(3)">Next: Patterns →</button>
@@ -904,9 +904,9 @@ CHAMPIONS (10'): ____________</div>
       <button class="sec-sound" data-sec="patterns" onclick="toggleSecSound('patterns',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 <strong>Answer in a full sentence, please.</strong> Never accept one word alone — model it again and let them retry.</div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-patterns.jpg')"><img src="TJ5-U8/u8-patterns.jpg" alt="Pattern window"><div class="cap">Window model (p.64)</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-house.jpg')"><img src="TJ5-U8/u8-house.jpg" alt="House drawing"><div class="cap">Draw this on the board</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-patbox.jpg')"><img src="TJ5-U8/u8-patbox.jpg" alt="Pattern box"><div class="cap">Contractions box</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg/1280px-Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg/1280px-Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg" alt="Rain on the window"><div class="cap">Pattern · look out the window</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/A_white_board.jpg/1280px-A_white_board.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/A_white_board.jpg/1280px-A_white_board.jpg" alt="Whiteboard"><div class="cap">Draw this on the board</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Chalkboard_in_a_school_in_Afghanistan.jpg/1280px-Chalkboard_in_a_school_in_Afghanistan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Chalkboard_in_a_school_in_Afghanistan.jpg/1280px-Chalkboard_in_a_school_in_Afghanistan.jpg" alt="Blackboard"><div class="cap">Contractions · write it together</div></div>
     </div>
     <div class="grid2" id="patPairs">
       <div class="mini"><h4>☀️ sunny</h4><div class="rowbtns"><button class="btn blue" style="padding:8px 14px" onclick="sayF('How is the weather?')">Q · teacher</button><button class="btn green" style="padding:8px 14px" onclick="sayM('It is sunny.')">A · class</button></div></div>
@@ -968,8 +968,8 @@ CHAMPIONS (10'): ____________</div>
       <button class="btn orange" onclick="checkWheelWinner()">🏆 Who is winning?</button>
     </div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-wheel.jpg')"><img src="TJ5-U8/u8-wheel.jpg" alt="Spin the wheel"><div class="cap">Spin the Wheel (p.198)</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-6.jpg')"><img src="TJ5-U8/Unit-8-6.jpg" alt="Teacher notes"><div class="cap">Teacher notes · Patterns</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Wheel_of_Fortune_Cyclone_Arcade_Game.jpg/1280px-Wheel_of_Fortune_Cyclone_Arcade_Game.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Wheel_of_Fortune_Cyclone_Arcade_Game.jpg/1280px-Wheel_of_Fortune_Cyclone_Arcade_Game.jpg" alt="Colourful spinning wheel"><div class="cap">Spin the wheel</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg" alt="Classroom"><div class="cap">Ask and answer in pairs</div></div>
     </div>
     <div class="rowbtns">
       <button class="btn purple" onclick="showTab(4)">Next: Around the World →</button>
@@ -991,8 +991,8 @@ CHAMPIONS (10'): ____________</div>
       <button class="sec-sound" data-sec="world" onclick="toggleSecSound('world',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">💡 Each country has a small weather picture. Students <strong>read it</strong>, tap the right word below, and the sentence is read aloud. One student taps, the whole class repeats.</div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-map.jpg')"><img src="TJ5-U8/u8-map.jpg" alt="World map"><div class="cap">How Is the Weather? (p.64)</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-8.jpg')"><img src="TJ5-U8/Unit-8-8.jpg" alt="Teacher notes activities"><div class="cap">Teacher notes · Activities</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/World-map-continents-oceans_%281%29.jpg/1280px-World-map-continents-oceans_%281%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/World-map-continents-oceans_%281%29.jpg/1280px-World-map-continents-oceans_%281%29.jpg" alt="World map"><div class="cap">Weather around the world</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg" alt="Teacher with students"><div class="cap">Ask · answer · vote</div></div>
     </div>
     <div id="worldCards">
       <div class="mini" style="margin-bottom:12px"><h4>🇺🇸 the USA</h4>
@@ -1028,8 +1028,8 @@ CHAMPIONS (10'): ____________</div>
       <button class="sec-sound" data-sec="world" onclick="toggleSecSound('world',this)"><span class="sec-si">🔊</span></button></div>
     <div class="tip" style="margin-bottom:14px">Read each sentence. If it matches the picture, draw <strong>○</strong>. If it does not, draw <strong>✗</strong>. Then build your own sentence below.</div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-maptw.jpg')"><img src="TJ5-U8/u8-maptw.jpg" alt="Taiwan map"><div class="cap">Read and draw · Taiwan</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-9.jpg')"><img src="TJ5-U8/Unit-8-9.jpg" alt="Teacher notes review"><div class="cap">Teacher notes · Review</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Taiwan_location_map.svg/1280px-Taiwan_location_map.svg.png')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Taiwan_location_map.svg/1280px-Taiwan_location_map.svg.png" alt="Map of Taiwan"><div class="cap">Read and draw · Taiwan</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg" alt="Children playing outside"><div class="cap">Review · ask and answer</div></div>
     </div>
     <div class="grid2">
       <div class="mini"><h4>✍️ Make a sentence</h4>
@@ -1163,7 +1163,7 @@ CHAMPIONS (10'): ____________</div>
     <div class="shead"><span class="ic">📚</span><h2>Where to next?</h2></div>
     <div class="rowbtns">
       <button class="btn purple" onclick="showTab(5)">⚡ Weather Champion</button>
-      <button class="btn blue" onclick="showTab(7)">📖 Book pages</button>
+      <button class="btn blue" onclick="showTab(7)">📖 Picture cards</button>
       <button class="btn green" onclick="showTab(0)">Back to the lesson plan</button>
     </div>
   </section>
@@ -1171,42 +1171,49 @@ CHAMPIONS (10'): ____________</div>
 
 <div class="tabpan" id="tp7" data-sec="book">
   <div class="hero">
-    <span class="big-emoji">📚</span>
-    <h1>Book Pages &amp; Resources</h1>
-    <span class="sub">Teacher's guide p.194–203 · e-Book p.60–65</span>
-    <div class="desc">Tap any picture to see it full screen. Everything you need for Unit 8, in lesson order.</div>
+    <span class="big-emoji">🖼️</span>
+    <h1>Picture Cards &amp; Posters</h1>
+    <span class="sub">Tap any picture to see it full screen</span>
+    <div class="desc">Weather cards, lesson pictures and game props for Unit 8 — open one on the projector and the class reads the sentence together.</div>
   </div>
 
   <section>
-    <div class="shead"><span class="ic">📖</span><h2>Teacher's Guide</h2><span class="badge">10 PAGES</span>
+    <div class="shead"><span class="ic">🌈</span><h2>Weather Picture Cards</h2><span class="badge">5 WORDS · TAP TO HEAR</span>
       <button class="sec-sound" data-sec="book" onclick="toggleSecSound('book',this)"><span class="sec-si">🔊</span></button></div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-1.jpg')"><img src="TJ5-U8/Unit-8-1.jpg" alt="p.194 Warm-up"><div class="cap">p.194 · Warm-up (Hour 1)</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-2.jpg')"><img src="TJ5-U8/Unit-8-2.jpg" alt="p.194 Dialogue"><div class="cap">p.194 · Dialogue</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-3.jpg')"><img src="TJ5-U8/Unit-8-3.jpg" alt="p.195 Posters"><div class="cap">p.195 · Acting posters</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-4.jpg')"><img src="TJ5-U8/Unit-8-4.jpg" alt="p.196 Presentation"><div class="cap">p.196 · Present &amp; unscramble</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-5.jpg')"><img src="TJ5-U8/Unit-8-5.jpg" alt="p.197 Vocabulary"><div class="cap">p.197 · Vocabulary + Dice</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-6.jpg')"><img src="TJ5-U8/Unit-8-6.jpg" alt="p.198 Patterns"><div class="cap">p.198 · Patterns + Wheel</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-7.jpg')"><img src="TJ5-U8/Unit-8-7.jpg" alt="Hour 2 Warm-up"><div class="cap">Hour 2 · Warm-up</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-8.jpg')"><img src="TJ5-U8/Unit-8-8.jpg" alt="p.199 Activities"><div class="cap">p.199 · Activities + Matching</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-9.jpg')"><img src="TJ5-U8/Unit-8-9.jpg" alt="p.201 Review"><div class="cap">p.201 · Review vocab &amp; pattern</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/Unit-8-10.jpg')"><img src="TJ5-U8/Unit-8-10.jpg" alt="p.202 Phonics"><div class="cap">p.202 · Phonics</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg/1280px-Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg/1280px-Mt_Oberlin-_Sunny_Day_%2829951599864%29.jpg" alt="Sunny mountain meadow"><div class="cap">☀️ sunny</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/White_Cumulus_Clouds_against_Blue_Sky.jpg/1280px-White_Cumulus_Clouds_against_Blue_Sky.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/White_Cumulus_Clouds_against_Blue_Sky.jpg/1280px-White_Cumulus_Clouds_against_Blue_Sky.jpg" alt="White clouds in blue sky"><div class="cap">☁️ cloudy</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Boy_Flies_Kite_%281204845%29.jpeg/1280px-Boy_Flies_Kite_%281204845%29.jpeg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Boy_Flies_Kite_%281204845%29.jpeg/1280px-Boy_Flies_Kite_%281204845%29.jpeg" alt="Flying a kite in the wind"><div class="cap">🍃 windy</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/CSIRO_ScienceImage_11651_Tropical_rain.jpg/1280px-CSIRO_ScienceImage_11651_Tropical_rain.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/CSIRO_ScienceImage_11651_Tropical_rain.jpg/1280px-CSIRO_ScienceImage_11651_Tropical_rain.jpg" alt="Rainy street with umbrellas"><div class="cap">🌧️ rainy</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Spruce_trees_in_falling_snow_%2852827884596%29.jpg/1280px-Spruce_trees_in_falling_snow_%2852827884596%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Spruce_trees_in_falling_snow_%2852827884596%29.jpg/1280px-Spruce_trees_in_falling_snow_%2852827884596%29.jpg" alt="Snow falling on the trees"><div class="cap">❄️ snowy</div></div>
     </div>
   </section>
 
   <section>
-    <div class="shead"><span class="ic">🖥️</span><h2>e-Book Screens</h2><span class="badge">p.60–65</span></div>
+    <div class="shead"><span class="ic">🖼️</span><h2>Lesson Pictures</h2><span class="badge">WARM-UP · DIALOGUE · VOCAB · PATTERN</span>
+      <button class="sec-sound" data-sec="book" onclick="toggleSecSound('book',this)"><span class="sec-si">🔊</span></button></div>
     <div class="imgrow">
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene60.jpg')"><img src="TJ5-U8/u8-scene60.jpg" alt="e-Book 60"><div class="cap">p.60 · Dialogue ①②③</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene61.jpg')"><img src="TJ5-U8/u8-scene61.jpg" alt="e-Book 61"><div class="cap">p.61 · ④ Don't worry, Mom</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-scene62.jpg')"><img src="TJ5-U8/u8-scene62.jpg" alt="e-Book 62"><div class="cap">p.62 · ⑤⑥ How's the weather?</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-vocab.jpg')"><img src="TJ5-U8/u8-vocab.jpg" alt="Vocabulary"><div class="cap">p.63 · Vocabulary houses</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-patterns.jpg')"><img src="TJ5-U8/u8-patterns.jpg" alt="Pattern"><div class="cap">p.64 · Pattern window</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-map.jpg')"><img src="TJ5-U8/u8-map.jpg" alt="World map"><div class="cap">p.64 · How Is the Weather?</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-maptw.jpg')"><img src="TJ5-U8/u8-maptw.jpg" alt="Taiwan"><div class="cap">p.65 · Read and draw</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-panel.jpg')"><img src="TJ5-U8/u8-panel.jpg" alt="Panels"><div class="cap">Vocabulary + pattern panels</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-matching.jpg')"><img src="TJ5-U8/u8-matching.jpg" alt="Matching game"><div class="cap">Matching game</div></div>
-      <div class="imgcard" onclick="openLb('TJ5-U8/u8-warmup.jpg')"><img src="TJ5-U8/u8-warmup.jpg" alt="Warm-up"><div class="cap">Warm-up · Look and write</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/BeachBall.jpg/1280px-BeachBall.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/BeachBall.jpg/1280px-BeachBall.jpg" alt="Beach ball"><div class="cap">Warm-up · hide the ball</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg/1280px-Children_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg" alt="Children playing outside"><div class="cap">Say it with actions</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Chokai_JHS_2B_classroom_2.jpg/1280px-Chokai_JHS_2B_classroom_2.jpg" alt="Classroom"><div class="cap">Listen, point, say</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg/1280px-A_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg" alt="Teacher with students"><div class="cap">Ask and answer</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sky_Clouds_Sea.jpg/1280px-Sky_Clouds_Sea.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sky_Clouds_Sea.jpg/1280px-Sky_Clouds_Sea.jpg" alt="Sky, sea and clouds"><div class="cap">Dialogue · up in the sky</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg/1280px-A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg/1280px-A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg" alt="Rainbow after the rain"><div class="cap">Dialogue · after the rain</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg/1280px-Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg/1280px-Summer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg" alt="Rain on the window"><div class="cap">Pattern · look out the window</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/A_white_board.jpg/1280px-A_white_board.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/A_white_board.jpg/1280px-A_white_board.jpg" alt="Whiteboard"><div class="cap">Draw it on the board</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Chalkboard_in_a_school_in_Afghanistan.jpg/1280px-Chalkboard_in_a_school_in_Afghanistan.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Chalkboard_in_a_school_in_Afghanistan.jpg/1280px-Chalkboard_in_a_school_in_Afghanistan.jpg" alt="Blackboard"><div class="cap">Write it together</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎲</span><h2>Games &amp; Places</h2><span class="badge">DICE · WHEEL · MAP · CHAMPION</span>
+      <button class="sec-sound" data-sec="book" onclick="toggleSecSound('book',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="imgrow">
+      <div class="imgcard" onclick="openLb('https://upload.wikimedia.org/wikipedia/commons/5/59/Dice%21_%2853251753675%29.jpg')"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/5/59/Dice%21_%2853251753675%29.jpg" alt="Dice"><div class="cap">Weather Bomb · roll the dice</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Wheel_of_Fortune_Cyclone_Arcade_Game.jpg/1280px-Wheel_of_Fortune_Cyclone_Arcade_Game.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Wheel_of_Fortune_Cyclone_Arcade_Game.jpg/1280px-Wheel_of_Fortune_Cyclone_Arcade_Game.jpg" alt="Colourful spinning wheel"><div class="cap">Weather Wheel · spin</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/World-map-continents-oceans_%281%29.jpg/1280px-World-map-continents-oceans_%281%29.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/World-map-continents-oceans_%281%29.jpg/1280px-World-map-continents-oceans_%281%29.jpg" alt="World map"><div class="cap">Weather around the world</div></div>
+      <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Taiwan_location_map.svg/1280px-Taiwan_location_map.svg.png')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Taiwan_location_map.svg/1280px-Taiwan_location_map.svg.png" alt="Map of Taiwan"><div class="cap">Taiwan · read and draw</div></div>
+      <div class="imgcard" onclick="openLb('https://upload.wikimedia.org/wikipedia/commons/b/b0/Blue_Darter_Trophy.jpg')"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Blue_Darter_Trophy.jpg" alt="Trophy"><div class="cap">Weather Champion · everybody wins</div></div>
     </div>
   </section>
 
@@ -1219,13 +1226,39 @@ CHAMPIONS (10'): ____________</div>
       <span class="chip8" onclick="sayF('rainy')">🌧️ rainy</span>
       <span class="chip8" onclick="sayF('snowy')">❄️ snowy</span>
       <span class="chip8" onclick="sayM('How is the weather? It is sunny.')">💬 How is the weather? It is sunny.</span>
-      <span class="chip8" onclick="sayM(&quot;How's the weather up there?&quot;)">💬 How's the weather up there?</span>
+      <span class="chip8" onclick="sayM(&quot;How&#39;s the weather up there?&quot;)">💬 How's the weather up there?</span>
     </div>
     <div class="rowbtns">
       <button class="btn green" onclick="showTab(0)">Back to the lesson plan</button>
       <button class="btn purple" onclick="showTab(6)">📝 Take the quiz</button>
-      <button class="btn blue" onclick="openLb('TJ5-U8/u8-poster.jpg')">🖼️ Dialogue poster</button>
+      <button class="btn blue" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sky_Clouds_Sea.jpg/1280px-Sky_Clouds_Sea.jpg')">🖼️ Dialogue picture</button>
     </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">📷</span><h2>Picture Credits</h2><span class="badge">WIKIMEDIA COMMONS</span></div>
+    <div class="desc">Every photo above comes from <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a>. Tap a title to open its source page, where the author and full licence are shown.</div>
+    <ul class="desc" style="padding-left:20px;line-height:1.7">
+      <li><strong>sunny</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AMt_Oberlin-_Sunny_Day_(29951599864).jpg" target="_blank" rel="noopener">Mt Oberlin- Sunny Day (29951599864).jpg</a> · GlacierNPS · Public domain</li>
+      <li><strong>cloudy</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AWhite_Cumulus_Clouds_against_Blue_Sky.jpg" target="_blank" rel="noopener">White Cumulus Clouds against Blue Sky.jpg</a> · Lance Vanlewen · CC BY-SA 4.0</li>
+      <li><strong>windy</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ABoy_Flies_Kite_(1204845).jpeg" target="_blank" rel="noopener">Boy Flies Kite (1204845).jpeg</a> · Wayne Silver · CC BY 3.0</li>
+      <li><strong>rainy</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ACSIRO_ScienceImage_11651_Tropical_rain.jpg" target="_blank" rel="noopener">CSIRO ScienceImage 11651 Tropical rain.jpg</a> · Liese Coulter, CSIRO · CC BY 3.0</li>
+      <li><strong>snowy</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ASpruce_trees_in_falling_snow_(52827884596).jpg" target="_blank" rel="noopener">Spruce trees in falling snow (52827884596).jpg</a> · USFWSAlaska · Public domain</li>
+      <li><strong>world</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AWorld-map-continents-oceans_(1).jpg" target="_blank" rel="noopener">World-map-continents-oceans (1).jpg</a> · Atharva kurhe · CC0</li>
+      <li><strong>taiwan</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ATaiwan_location_map.svg" target="_blank" rel="noopener">Taiwan location map.svg</a> · NordNordWest · CC BY-SA 3.0</li>
+      <li><strong>dice</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ADice!_(53251753675).jpg" target="_blank" rel="noopener">Dice! (53251753675).jpg</a> · JuliaC2006 from Rochester, UK · CC BY 2.0</li>
+      <li><strong>wheel</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AWheel_of_Fortune_Cyclone_Arcade_Game.jpg" target="_blank" rel="noopener">Wheel of Fortune Cyclone Arcade Game.jpg</a> · Kari · CC BY 2.0</li>
+      <li><strong>class</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AChokai_JHS_2B_classroom_2.jpg" target="_blank" rel="noopener">Chokai JHS 2B classroom 2.jpg</a> · Douglas P Perkins · CC BY 3.0</li>
+      <li><strong>teacher</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AA_Lebanese_teacher_lends_a_hand_to_Syrian_children_in_Zaatari%2C_Jordan.jpg" target="_blank" rel="noopener">A Lebanese teacher lends a hand to Syrian children in Zaatari, Jordan.jpg</a> · DFID · CC BY 2.0</li>
+      <li><strong>window</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ASummer_rain_on_window_pane._-_Flickr_-_Charos_Pix.jpg" target="_blank" rel="noopener">Summer rain on window pane. - Flickr - Charos Pix.jpg</a> · Charos Pix · CC0</li>
+      <li><strong>trophy</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ABlue_Darter_Trophy.jpg" target="_blank" rel="noopener">Blue Darter Trophy.jpg</a> · RoyalxOptimum · CC BY-SA 4.0</li>
+      <li><strong>rainbow</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AA_rainbow_appears_in_the_sky_after_the_rain_shower.jpg" target="_blank" rel="noopener">A rainbow appears in the sky after the rain shower.jpg</a> · Paul-shy · CC BY 4.0</li>
+      <li><strong>ball</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ABeachBall.jpg" target="_blank" rel="noopener">BeachBall.jpg</a> · User Norvy on en.wikipedia · Copyrighted free use</li>
+      <li><strong>board</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AA_white_board.jpg" target="_blank" rel="noopener">A white board.jpg</a> · Umar2z · CC0</li>
+      <li><strong>sky</strong> — <a href="https://commons.wikimedia.org/wiki/File%3ASky_Clouds_Sea.jpg" target="_blank" rel="noopener">Sky Clouds Sea.jpg</a> · Unknown authorUnknown author · CC0</li>
+      <li><strong>kids</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AChildren_play_and_share_snacks_on_a_sunny_day_in_a_green_park%2C_enjoying_time_together_with_laughter_and_joy.jpg" target="_blank" rel="noopener">Children play and share snacks on a sunny day in a green park, enjoying time together with laughter and joy.jpg</a> · Shixart1985 · CC BY 2.0</li>
+      <li><strong>chalk</strong> — <a href="https://commons.wikimedia.org/wiki/File%3AChalkboard_in_a_school_in_Afghanistan.jpg" target="_blank" rel="noopener">Chalkboard in a school in Afghanistan.jpg</a> · Francisco V. Govea II, U.S. Air Force · Public domain</li>
+    </ul>
   </section>
 </div>
 
