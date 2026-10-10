@@ -242,7 +242,7 @@ section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;ma
 .ph-t{background:rgba(255,255,255,.25);padding:3px 12px;border-radius:30px;font-size:.75em;letter-spacing:1.5px}
 section{scroll-margin-top:118px}
 .stp{display:block;position:relative;padding:7px 8px 7px 32px;border-radius:10px;cursor:pointer;transition:background .2s;line-height:1.75}
-.stp:before{content:'🔊';position:absolute;left:4px;top:8px;font-size:13px;opacity:.3}
+.stp:before{content:'';position:absolute;left:2px;top:7px;width:15px;height:15px;background:url('ico-megaphone.jpg') center/contain no-repeat;opacity:.32;border-radius:4px}
 .stp:hover{background:#f4efff}
 .goals{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
 .gcard{background:linear-gradient(150deg,#f8f4ff,#fff);border:2px dashed #d9ccff;border-radius:16px;padding:12px 14px;font-size:clamp(13px,2vw,16px);line-height:1.7}
@@ -254,56 +254,82 @@ section{scroll-margin-top:118px}
 .imgrow .closing{max-width:320px}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 @media(max-width:768px){section{scroll-margin-top:150px}.stp{padding-left:28px}}
+/* ---- photos & emoji-free icons ---- */
+.em{display:inline-block;height:1.1em;width:1.1em;vertical-align:-.16em;border-radius:.22em;object-fit:cover;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.vocab-card .vc-emoji img{width:100%;height:112px;object-fit:cover;border-radius:12px;display:block}
+.tf-card .tf-emoji img{width:clamp(120px,30vw,210px);height:clamp(90px,22vw,150px);object-fit:cover;border-radius:16px}
+.team-icon img{width:40px;height:40px;border-radius:10px;object-fit:cover}
+.mascot img{width:48px;height:48px;border-radius:12px;object-fit:cover}
+.floaty img{width:30px;height:30px;object-fit:cover;border-radius:6px}
+.kcap{font-weight:700;font-size:clamp(10px,1.5vw,12px);color:var(--green);padding:6px 6px 8px;line-height:1.3}
+.hero .big-emoji img{width:clamp(90px,22vw,150px);height:clamp(90px,22vw,150px);object-fit:cover;border-radius:22px;display:inline-block}
+.die{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:6%;padding:15%}
+.die .pip{width:100%;height:100%;background:var(--purple);border-radius:50%;align-self:center;justify-self:center}
+.sit-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 5px 14px rgba(0,0,0,.1);border:4px solid transparent;display:flex;flex-direction:column}
+.sit-card.answered{border-color:#e7e2f5}
+.sit-q{padding:12px 14px;font-weight:800;color:#3a2b66;font-size:clamp(13px,2vw,16px);background:#f4f0ff;line-height:1.4}
+.sit-img{width:100%;display:block;cursor:zoom-in;background:#fff}
+.sit-btns{display:flex;gap:10px;padding:12px}
+.sit-btn{flex:1;border:none;border-radius:12px;padding:12px 8px;font-weight:900;font-size:clamp(13px,2vw,16px);cursor:pointer;transition:transform .15s,filter .15s;color:#fff}
+.sit-btn:hover{filter:brightness(1.06)}
+.sit-btn:active{transform:scale(.97)}
+.sit-btn.right{background:linear-gradient(135deg,#2ec27e,#1a9e63)}
+.sit-btn.wrong{background:linear-gradient(135deg,#f26d6d,#d64545)}
+.sit-feedback{padding:0 14px 14px;font-weight:800;font-size:clamp(12px,1.9vw,15px);display:none;line-height:1.4}
+.sit-feedback.show{display:block}
+.sit-feedback.good{color:#1a9e63}
+.sit-feedback.bad{color:#d64545}
+.sit-card.answered .sit-btns{display:none}
 </style>
 </head>
 <body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
-<div class="floaty" style="left:8%;animation-duration:22s;animation-delay:0s">👕</div>
-<div class="floaty" style="left:25%;animation-duration:28s;animation-delay:4s">👖</div>
-<div class="floaty" style="left:45%;animation-duration:20s;animation-delay:8s">👗</div>
-<div class="floaty" style="left:65%;animation-duration:26s;animation-delay:2s">👟</div>
-<div class="floaty" style="left:82%;animation-duration:24s;animation-delay:6s">🧢</div>
-<div class="floaty" style="left:95%;animation-duration:30s;animation-delay:10s">🧦</div>
+<div class="floaty" style="left:8%;animation-duration:22s;animation-delay:0s"><img class="em" src="it-tshirt.jpg" alt=""></div>
+<div class="floaty" style="left:25%;animation-duration:28s;animation-delay:4s"><img class="em" src="wb-pants.jpg" alt=""></div>
+<div class="floaty" style="left:45%;animation-duration:20s;animation-delay:8s"><img class="em" src="it-dress.jpg" alt=""></div>
+<div class="floaty" style="left:65%;animation-duration:26s;animation-delay:2s"><img class="em" src="sneakers.jpg" alt=""></div>
+<div class="floaty" style="left:82%;animation-duration:24s;animation-delay:6s"><img class="em" src="cap.jpg" alt=""></div>
+<div class="floaty" style="left:95%;animation-duration:30s;animation-delay:10s"><img class="em" src="socks.jpg" alt=""></div>
 
 <div class="topbar">
-  <div class="now-chip">📖 JD5 · U5</div>
+  <div class="now-chip"><img class="em" src="ico-notebook.jpg" alt=""> JD5 · U5</div>
   <div style="font-weight:900;font-size:clamp(13px,2.2vw,17px)" id="topTitle">Lesson Plan</div>
-  <button class="sound-toggle" id="voiceBtn" onclick="cycleVoice()" title="Change voice">🇬🇧</button>
-  <button class="sound-toggle" id="globalSound" onclick="toggleGlobalSound()" title="Sound on/off">🔊</button>
+  <button class="sound-toggle" id="voiceBtn" onclick="cycleVoice()" title="Change voice">EN</button>
+  <button class="sound-toggle" id="globalSound" onclick="toggleGlobalSound()" title="Sound on/off">ON</button>
 </div>
 
 <nav class="navbar" id="navbar">
-  <button class="ntab on" onclick="showTab(0)">📋 Lesson</button>
-  <button class="ntab" onclick="showTab(1)">🎲 Warm-Up</button>
-  <button class="ntab" onclick="showTab(2)">👕 Vocab</button>
-  <button class="ntab" onclick="showTab(3)">💬 Patterns</button>
-  <button class="ntab" onclick="showTab(4)">❓ What's Wrong?</button>
-  <button class="ntab" onclick="showTab(5)">🎧 Listen</button>
-  <button class="ntab" onclick="showTab(6)">🎨 Dress Up</button>
-  <button class="ntab" onclick="showTab(7)">🎯 Team Games</button>
-  <button class="ntab" onclick="showTab(8)">📝 Quiz</button>
+  <button class="ntab on" onclick="showTab(0)"><img class="em" src="ico-clipboard.jpg" alt=""> Lesson</button>
+  <button class="ntab" onclick="showTab(1)"><img class="em" src="dice.jpg" alt=""> Warm-Up</button>
+  <button class="ntab" onclick="showTab(2)"><img class="em" src="it-tshirt.jpg" alt=""> Vocab</button>
+  <button class="ntab" onclick="showTab(3)"><img class="em" src="ico-speech.jpg" alt=""> Patterns</button>
+  <button class="ntab" onclick="showTab(4)"><img class="em" src="ico-question.jpg" alt=""> What's Wrong?</button>
+  <button class="ntab" onclick="showTab(5)"><img class="em" src="ico-headphones.jpg" alt=""> Listen</button>
+  <button class="ntab" onclick="showTab(6)"><img class="em" src="ico-palette.jpg" alt=""> Dress Up</button>
+  <button class="ntab" onclick="showTab(7)"><img class="em" src="ico-target.jpg" alt=""> Team Games</button>
+  <button class="ntab" onclick="showTab(8)"><img class="em" src="ico-pencil.jpg" alt=""> Quiz</button>
 </nav>
 
 <!-- ================= TAB 0 : LESSON FLOW ================= -->
 <div class="tabpan on" data-tab="0">
   <div class="hero">
-    <span class="big-emoji">👗</span>
+    <span class="big-emoji"><img class="em" src="it-dress.jpg" alt=""></span>
     <h1>Unit 5 · What Are They Wearing?</h1>
     <div class="sub">JD5 · Joy Discovery 5 · 2 periods · 100 min · pp.56–66</div>
-    <div class="desc">Tap any line to hear it read aloud 🔊 · tap a picture to enlarge 🔍</div>
+    <div class="desc">Tap any line to hear it read aloud  · tap a picture to enlarge <img class="em" src="search.jpg" alt=""></div>
   </div>
 
   <div class="jumps">
-    <button class="jchip" onclick="jumpSec('s-goals')">📌 Goals</button>
-    <button class="jchip" onclick="jumpSec('s-p1')">🎥 Pres. 1</button>
-    <button class="jchip" onclick="jumpSec('s-p2')">🖼️ Pres. 2</button>
-    <button class="jchip" onclick="jumpSec('s-lc')">🎧 Listen &amp; Choose</button>
-    <button class="jchip" onclick="jumpSec('s-ww1')">❓ What's Wrong?</button>
-    <button class="jchip" onclick="jumpSec('s-ww2')">🏷️ Sticker time</button>
-    <button class="jchip" onclick="jumpSec('s-lh')">🎯 Listen &amp; Hit</button>
-    <button class="jchip" onclick="jumpSec('s-du')">🎨 Dress Up</button>
-    <button class="jchip" onclick="jumpSec('s-fs')">✂️ Fashion Stylist</button>
-    <button class="jchip" onclick="jumpSec('s-cb')">📒 Com. Book</button>
+    <button class="jchip" onclick="jumpSec('s-goals')"><img class="em" src="ico-pin.jpg" alt=""> Goals</button>
+    <button class="jchip" onclick="jumpSec('s-p1')"><img class="em" src="ico-video.jpg" alt=""> Pres. 1</button>
+    <button class="jchip" onclick="jumpSec('s-p2')"><img class="em" src="ico-frame.jpg" alt=""> Pres. 2</button>
+    <button class="jchip" onclick="jumpSec('s-lc')"><img class="em" src="ico-headphones.jpg" alt=""> Listen &amp; Choose</button>
+    <button class="jchip" onclick="jumpSec('s-ww1')"><img class="em" src="ico-question.jpg" alt=""> What's Wrong?</button>
+    <button class="jchip" onclick="jumpSec('s-ww2')"><img class="em" src="ico-tag.jpg" alt=""> Sticker time</button>
+    <button class="jchip" onclick="jumpSec('s-lh')"><img class="em" src="ico-target.jpg" alt=""> Listen &amp; Hit</button>
+    <button class="jchip" onclick="jumpSec('s-du')"><img class="em" src="ico-palette.jpg" alt=""> Dress Up</button>
+    <button class="jchip" onclick="jumpSec('s-fs')"><img class="em" src="ico-scissors.jpg" alt=""> Fashion Stylist</button>
+    <button class="jchip" onclick="jumpSec('s-cb')"><img class="em" src="ico-notebook.jpg" alt=""> Com. Book</button>
   </div>
 
   <div class="tl">
@@ -314,15 +340,15 @@ section{scroll-margin-top:118px}
   </div>
 
   <section id="s-goals" data-sec="goals">
-    <div class="shead"><span class="ic">📌</span><h2>Unit Goals &amp; Language</h2><span class="badge">p.56</span>
-      <button class="sec-sound" id="ss-goals" onclick="toggleSecSound('goals')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-pin.jpg" alt=""></span><h2>Unit Goals &amp; Language</h2><span class="badge">p.56</span>
+      <button class="sec-sound" id="ss-goals" onclick="toggleSecSound('goals')">Off</button></div>
     <div class="goals">
-      <div class="gcard"><b>🎯 Subject goal</b><div class="stp" onclick="readStep(this)">Students will learn about various clothing items and be able to identify and name them.</div></div>
-      <div class="gcard"><b>💬 Pattern 1 · What Are They Wearing?</b><div class="stp" onclick="readStep(this)">What is he / she wearing?<br>He's wearing a T-shirt and pants.</div></div>
-      <div class="gcard"><b>🩹 Pattern 2 · What's Wrong?</b><div class="stp" onclick="readStep(this)">What's wrong?<br>He should wear sneakers.</div></div>
-      <div class="gcard"><b>🎨 Pattern 3 · Dress Them Up!</b><div class="stp" onclick="readStep(this)">This is my doll.<br>He is wearing a dress and a cap.</div></div>
-      <div class="gcard"><b>📖 Skills</b><div class="stp" onclick="readStep(this)">Comprehension ✅ · Listening ✅ · Speaking ✅ · Reading ✅</div></div>
-      <div class="gcard"><b>🗣️ Say it!</b><div class="stp" onclick="readStep(this)">Click each word below and repeat after Joy.</div></div>
+      <div class="gcard"><b><img class="em" src="ico-target.jpg" alt=""> Subject goal</b><div class="stp" onclick="readStep(this)">Students will learn about various clothing items and be able to identify and name them.</div></div>
+      <div class="gcard"><b><img class="em" src="ico-speech.jpg" alt=""> Pattern 1 · What Are They Wearing?</b><div class="stp" onclick="readStep(this)">What is he / she wearing?<br>He's wearing a T-shirt and pants.</div></div>
+      <div class="gcard"><b><img class="em" src="bandage.jpg" alt=""> Pattern 2 · What's Wrong?</b><div class="stp" onclick="readStep(this)">What's wrong?<br>He should wear sneakers.</div></div>
+      <div class="gcard"><b><img class="em" src="ico-palette.jpg" alt=""> Pattern 3 · Dress Them Up!</b><div class="stp" onclick="readStep(this)">This is my doll.<br>He is wearing a dress and a cap.</div></div>
+      <div class="gcard"><b><img class="em" src="ico-notebook.jpg" alt=""> Skills</b><div class="stp" onclick="readStep(this)">Comprehension  · Listening  · Speaking  · Reading </div></div>
+      <div class="gcard"><b><img class="em" src="ico-megaphone.jpg" alt=""> Say it!</b><div class="stp" onclick="readStep(this)">Click each word below and repeat after Joy.</div></div>
     </div>
     <div class="chiprow">
       <button class="chip" onclick="speak(this.textContent)">a shirt</button>
@@ -344,8 +370,8 @@ section{scroll-margin-top:118px}
   <div class="phead"><span class="ph-t">PERIOD 1</span> What Are They Wearing? · 40 min</div>
 
   <section id="s-p1" data-sec="p1">
-    <div class="shead"><span class="ic">🎥</span><h2>Presentation 1 · Q&amp;A + Video</h2><span class="badge">10 min · p.57</span>
-      <button class="sec-sound" id="ss-p1" onclick="toggleSecSound('p1')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-video.jpg" alt=""></span><h2>Presentation 1 · Q&amp;A + Video</h2><span class="badge">10 min · p.57</span>
+      <button class="sec-sound" id="ss-p1" onclick="toggleSecSound('p1')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Steps</div>
       <div class="stp" onclick="readStep(this)">1. Look out of the window and describe the weather: <b>“It is sunny.”</b> Then ask: <b>“When it's sunny, do you wear a T-shirt?”</b> Show the flashcard. Let 2–3 students say why they do or don't wear T-shirts.</div>
@@ -355,16 +381,16 @@ section{scroll-margin-top:118px}
         <br>b) <b>At 1:06</b> — What will you wear when it's hot?</div>
       <div class="stp" onclick="readStep(this)">4. After the video, ask what students would wear when it is <b>hot, warm, cold</b> or <b>cool</b>.</div>
     </div>
-    <div class="tip">💡 <b>Notes:</b> If students can't answer, review <i>Tales of Joy 3</i>: It is warm / hot / cold / cool. The p.26 video shows Dr. Smarty modelling all four seasons on the runway. Open books to <b>pp.26–27</b> and point: <b>“You will wear a blouse and sandals.”</b></div>
+    <div class="tip"><img class="em" src="bulb.jpg" alt=""> <b>Notes:</b> If students can't answer, review <i>Tales of Joy 3</i>: It is warm / hot / cold / cool. The p.26 video shows Dr. Smarty modelling all four seasons on the runway. Open books to <b>pp.26–27</b> and point: <b>“You will wear a blouse and sandals.”</b></div>
     <div class="imgrow">
       <div><img class="t-image" src="spread1.jpg" alt="pp.26-27 What Are They Wearing" onclick="openLightbox(this.src)"><div class="imgcap">pp.26–27 · Joy Fashion Show</div></div>
     </div>
-    <div class="btnrow"><button class="btn purple" onclick="showTab(2)">👕 Vocab flashcards</button><button class="btn blue" onclick="showTab(1)">🎲 Roll the die</button></div>
+    <div class="btnrow"><button class="btn purple" onclick="showTab(2)"><img class="em" src="it-tshirt.jpg" alt=""> Vocab flashcards</button><button class="btn blue" onclick="showTab(1)"><img class="em" src="dice.jpg" alt=""> Roll the die</button></div>
   </section>
 
   <section id="s-p2" data-sec="p2">
-    <div class="shead"><span class="ic">🖼️</span><h2>Presentation 2 · Picture Telling + Q&amp;A + Look and Say</h2><span class="badge">22 min · p.58</span>
-      <button class="sec-sound" id="ss-p2" onclick="toggleSecSound('p2')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>Presentation 2 · Picture Telling + Q&amp;A + Look and Say</h2><span class="badge">22 min · p.58</span>
+      <button class="sec-sound" id="ss-p2" onclick="toggleSecSound('p2')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Steps</div>
       <div class="stp" onclick="readStep(this)">1. Tap <b>Presentation ▶</b> and pause on the first slide. Tell the class that <b>Justin and Joyce</b> are also at the fashion show — ask students to look for them, then one student circles them with a marker.</div>
@@ -374,13 +400,13 @@ section{scroll-margin-top:118px}
       <div class="stp" onclick="readStep(this)">3. Ask the question on the slide — the class answers with the pattern <b>“She is wearing a red dress.”</b> Divide the class into teams, show the next questions and let each team discuss, then choose a team to answer.</div>
       <div class="stp" onclick="readStep(this)">4. Students open their books to <b>pp.26–27</b> and read the dialogue sentences aloud.</div>
     </div>
-    <div class="tip">💡 <b>Note:</b> The presentation slides are interactive — make sure you get the students to share their thoughts.</div>
-    <div class="btnrow"><button class="btn purple" onclick="showTab(2)">👕 Learn the 13 words</button><button class="btn pink" onclick="showTab(3)">💬 Ask &amp; answer</button></div>
+    <div class="tip"><img class="em" src="bulb.jpg" alt=""> <b>Note:</b> The presentation slides are interactive — make sure you get the students to share their thoughts.</div>
+    <div class="btnrow"><button class="btn purple" onclick="showTab(2)"><img class="em" src="it-tshirt.jpg" alt=""> Learn the 13 words</button><button class="btn pink" onclick="showTab(3)"><img class="em" src="ico-speech.jpg" alt=""> Ask &amp; answer</button></div>
   </section>
 
   <section id="s-lc" data-sec="lc">
-    <div class="shead"><span class="ic">🎧</span><h2>E-teaching · Listen and Choose</h2><span class="badge">8 min · p.59</span>
-      <button class="sec-sound" id="ss-lc" onclick="toggleSecSound('lc')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-headphones.jpg" alt=""></span><h2>E-teaching · Listen and Choose</h2><span class="badge">8 min · p.59</span>
+      <button class="sec-sound" id="ss-lc" onclick="toggleSecSound('lc')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Steps</div>
       <div class="stp" onclick="readStep(this)">1. Tap <b>Activity ⧉</b> and choose Act. <b>“Listen and Choose.”</b></div>
@@ -389,17 +415,17 @@ section{scroll-margin-top:118px}
       <div class="stp" onclick="readStep(this)">4. Divide the class into three teams and number each student.</div>
       <div class="stp" onclick="readStep(this)">5. Switch to three-player mode.</div>
       <div class="stp" onclick="readStep(this)">6. Go to the next questions. Give each team time to talk about what he or she is wearing, then call a number — those students come out and tap their answer.</div>
-      <div class="stp" onclick="readStep(this)">7. Tap ✅ to check the answers.</div>
+      <div class="stp" onclick="readStep(this)">7. Tap  to check the answers.</div>
     </div>
-    <div class="tip">💡 <b>How to play:</b> Students listen to the recording and look at three pictures, then tap the picture that best matches the recording. <b>Note:</b> Students may forget the English names of clothing items, so a group discussion before calling on a student helps.</div>
-    <div class="btnrow"><button class="btn orange" onclick="showTab(5)">🎧 Play the activity</button></div>
+    <div class="tip"><img class="em" src="bulb.jpg" alt=""> <b>How to play:</b> Students listen to the recording and look at three pictures, then tap the picture that best matches the recording. <b>Note:</b> Students may forget the English names of clothing items, so a group discussion before calling on a student helps.</div>
+    <div class="btnrow"><button class="btn orange" onclick="showTab(5)"><img class="em" src="ico-headphones.jpg" alt=""> Play the activity</button></div>
   </section>
 
   <div class="phead"><span class="ph-t">PERIOD 1 + 2</span> What's Wrong? · 20 min (10 + 10)</div>
 
   <section id="s-ww1" data-sec="ww1">
-    <div class="shead"><span class="ic">❓</span><h2>What's Wrong? · Steps 1–5</h2><span class="badge">10 min · p.60–61</span>
-      <button class="sec-sound" id="ss-ww1" onclick="toggleSecSound('ww1')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-question.jpg" alt=""></span><h2>What's Wrong? · Steps 1–5</h2><span class="badge">10 min · p.60–61</span>
+      <button class="sec-sound" id="ss-ww1" onclick="toggleSecSound('ww1')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Goal: students choose appropriate clothing for different occasions · Pattern: “He should wear sneakers.”</div>
       <div class="stp" onclick="readStep(this)">1. Tap <b>Presentation ▶</b> and pause on the first slide. Roll the <b>digital die</b> and ask the class to say what they are wearing for the number rolled.</div>
@@ -416,12 +442,12 @@ section{scroll-margin-top:118px}
       <div><img class="t-image" src="p19.jpg" alt="She will work out later" onclick="openLightbox(this.src)"><div class="imgcap">She will work out later</div></div>
       <div><img class="t-image" src="p20.jpg" alt="He's going to work" onclick="openLightbox(this.src)"><div class="imgcap">He's going to work</div></div>
     </div>
-    <div class="btnrow"><button class="btn pink" onclick="showTab(4)">❓ Practise now</button><button class="btn orange" onclick="showTab(1)">🎲 Roll the die</button></div>
+    <div class="btnrow"><button class="btn pink" onclick="showTab(4)"><img class="em" src="ico-question.jpg" alt=""> Practise now</button><button class="btn orange" onclick="showTab(1)"><img class="em" src="dice.jpg" alt=""> Roll the die</button></div>
   </section>
 
   <section id="s-ww2" data-sec="ww2">
-    <div class="shead"><span class="ic">🏷️</span><h2>What's Wrong? · Steps 6–7 · Sticker time</h2><span class="badge">Period 2 · p.61–62</span>
-      <button class="sec-sound" id="ss-ww2" onclick="toggleSecSound('ww2')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-tag.jpg" alt=""></span><h2>What's Wrong? · Steps 6–7 · Sticker time</h2><span class="badge">Period 2 · p.61–62</span>
+      <button class="sec-sound" id="ss-ww2" onclick="toggleSecSound('ww2')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Steps</div>
       <div class="stp" onclick="readStep(this)">6. Continue through the slides. Have the students open their books to <b>p.28</b> and find the required stickers on <b>p.58</b>, then let them finish the textbook exercise.</div>
@@ -435,8 +461,8 @@ section{scroll-margin-top:118px}
   </section>
 
   <section id="s-lh" data-sec="lh">
-    <div class="shead"><span class="ic">🎯</span><h2>E-teaching · Listen and Hit</h2><span class="badge">10 min · p.63</span>
-      <button class="sec-sound" id="ss-lh" onclick="toggleSecSound('lh')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-target.jpg" alt=""></span><h2>E-teaching · Listen and Hit</h2><span class="badge">10 min · p.63</span>
+      <button class="sec-sound" id="ss-lh" onclick="toggleSecSound('lh')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Steps</div>
       <div class="stp" onclick="readStep(this)">1. Tap <b>Activity ⧉</b> and choose Act. <b>“Listen and Hit.”</b></div>
@@ -445,21 +471,21 @@ section{scroll-margin-top:118px}
       <div class="stp" onclick="readStep(this)">4. Divide the class into three teams and number each student.</div>
       <div class="stp" onclick="readStep(this)">5. Play the recordings for the rest of the questions. Let the students discuss in their groups before you call on a student from each team.</div>
     </div>
-    <div class="tip">💡 <b>How to play:</b> Students look at the picture and listen to the audio, then choose the item that best matches the occasion to wear. <b>Note:</b> this activity is in the second period.</div>
+    <div class="tip"><img class="em" src="bulb.jpg" alt=""> <b>How to play:</b> Students look at the picture and listen to the audio, then choose the item that best matches the occasion to wear. <b>Note:</b> this activity is in the second period.</div>
     <div class="imgrow">
       <div><img class="t-image" src="p24.jpg" alt="Listen and Hit" onclick="openLightbox(this.src)"><div class="imgcap">Listen and Hit · activity slide</div></div>
       <div><img class="t-image" src="p15.jpg" alt="When can you wear these" onclick="openLightbox(this.src)"><div class="imgcap">bed / school</div></div>
       <div><img class="t-image" src="p16.jpg" alt="Swimming pool or wedding" onclick="openLightbox(this.src)"><div class="imgcap">pool / wedding</div></div>
       <div><img class="t-image" src="p17.jpg" alt="Winter or summer" onclick="openLightbox(this.src)"><div class="imgcap">winter / summer</div></div>
     </div>
-    <div class="btnrow"><button class="btn orange" onclick="showTab(5)">🎧 Play now</button></div>
+    <div class="btnrow"><button class="btn orange" onclick="showTab(5)"><img class="em" src="ico-headphones.jpg" alt=""> Play now</button></div>
   </section>
 
   <div class="phead p2"><span class="ph-t">PERIOD 2</span> Dress Them Up! · 35 min + Communication Book · 5 min</div>
 
   <section id="s-du" data-sec="du">
-    <div class="shead"><span class="ic">🎨</span><h2>Dress Them Up! · Steps 1–5</h2><span class="badge">35 min · p.29 / p.64–65</span>
-      <button class="sec-sound" id="ss-du" onclick="toggleSecSound('du')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-palette.jpg" alt=""></span><h2>Dress Them Up! · Steps 1–5</h2><span class="badge">35 min · p.29 / p.64–65</span>
+      <button class="sec-sound" id="ss-du" onclick="toggleSecSound('du')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Goal: students dress paper dolls using stickers and describe what they are wearing</div>
       <div class="stp" onclick="readStep(this)">1. Tap <b>Presentation ▶</b> and use the slides to guide students through the “Dress Them Up!” textbook activity — <b>“Oh no, these dolls need something to wear! Let's dress them up.”</b></div>
@@ -468,16 +494,16 @@ section{scroll-margin-top:118px}
       <div class="stp" onclick="readStep(this)">4. While the students are dressing up the dolls, walk around and check how they are doing.</div>
       <div class="stp" onclick="readStep(this)">5. Show the page and demonstrate how to introduce the two dolls, then ask students to introduce their dolls to the student next to them: <b>“This is my doll. Her name is Anna. It's hot and sunny. She is wearing a dress and a cap.”</b></div>
     </div>
-    <div class="tip">💡 <b>Note:</b> If time is not allowed, ask students to share one doll with the student next to them.</div>
+    <div class="tip"><img class="em" src="bulb.jpg" alt=""> <b>Note:</b> If time is not allowed, ask students to share one doll with the student next to them.</div>
     <div class="imgrow">
       <div><img class="t-image" src="spread2.jpg" alt="pp.28-29 Dress Them Up" onclick="openLightbox(this.src)"><div class="imgcap">p.29 · Dress Them Up!</div></div>
     </div>
-    <div class="btnrow"><button class="btn green" onclick="showTab(6)">🎨 Dress your doll</button></div>
+    <div class="btnrow"><button class="btn green" onclick="showTab(6)"><img class="em" src="ico-palette.jpg" alt=""> Dress your doll</button></div>
   </section>
 
   <section id="s-fs" data-sec="fs">
-    <div class="shead"><span class="ic">✂️</span><h2>Class Activity 2 · Fashion Stylist</h2><span class="badge">15 min · p.66</span>
-      <button class="sec-sound" id="ss-fs" onclick="toggleSecSound('fs')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-scissors.jpg" alt=""></span><h2>Class Activity 2 · Fashion Stylist</h2><span class="badge">15 min · p.66</span>
+      <button class="sec-sound" id="ss-fs" onclick="toggleSecSound('fs')">Off</button></div>
     <div class="board-plan">
       <div class="bp-t">Props: Unit 5 worksheet (find the slide with the Open file icon and print one per student), scissors and glue</div>
       <div class="stp" onclick="readStep(this)">1. Tap <b>Activity ⧉</b> and choose Act. <b>“Fashion Stylist.”</b></div>
@@ -486,53 +512,53 @@ section{scroll-margin-top:118px}
         <br><b>2.</b> Where can people wear them to? A party? Dinner? The beach?</div>
       <div class="stp" onclick="readStep(this)">3. On the last two slides, demonstrate how to introduce your design, then ask students to share their design with the student next to them.</div>
     </div>
-    <div class="tip">💡 <b>Note:</b> Walk around and check how the students are doing. Assist them if needed.</div>
+    <div class="tip"><img class="em" src="bulb.jpg" alt=""> <b>Note:</b> Walk around and check how the students are doing. Assist them if needed.</div>
     <div class="imgrow">
       <div><img class="t-image" src="p25.jpg" alt="Let's become fashion stylists" onclick="openLightbox(this.src)"><div class="imgcap">Let's become fashion stylists!</div></div>
       <div><img class="t-image" src="p26.jpg" alt="Questions to match the clothes" onclick="openLightbox(this.src)"><div class="imgcap">The two guiding questions</div></div>
     </div>
-    <div class="btnrow"><button class="btn purple" onclick="showTab(7)">✂️ Team styling game</button><button class="btn green" onclick="showTab(6)">🎨 Design an outfit</button></div>
+    <div class="btnrow"><button class="btn purple" onclick="showTab(7)"><img class="em" src="ico-scissors.jpg" alt=""> Team styling game</button><button class="btn green" onclick="showTab(6)"><img class="em" src="ico-palette.jpg" alt=""> Design an outfit</button></div>
   </section>
 
   <section id="s-cb" data-sec="cb">
-    <div class="shead"><span class="ic">📒</span><h2>Communication Book</h2><span class="badge">5 min · p.66</span>
-      <button class="sec-sound" id="ss-cb" onclick="toggleSecSound('cb')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-notebook.jpg" alt=""></span><h2>Communication Book</h2><span class="badge">5 min · p.66</span>
+      <button class="sec-sound" id="ss-cb" onclick="toggleSecSound('cb')">Off</button></div>
     <div class="board-plan">
       <div class="stp" onclick="readStep(this)">Check and sign the Communication Book. This is the same as in the <i>Tales of Joy</i> series, so no further explanation is needed.</div>
       <div class="stp" onclick="readStep(this)">Students take their work home and tell a parent: <b>“This is my doll. He is wearing a jacket and jeans.”</b></div>
     </div>
     <div class="imgrow">
-      <div class="closing"><img class="t-image" src="p27.jpg" alt="Good job! Joy Style" onclick="openLightbox(this.src)"><div class="imgcap">Good job! 🎉</div></div>
+      <div class="closing"><img class="t-image" src="p27.jpg" alt="Good job! Joy Style" onclick="openLightbox(this.src)"><div class="imgcap">Good job! <img class="em" src="party.jpg" alt=""></div></div>
     </div>
   </section>
 
   <div class="team-grid">
-    <div class="team-box ta"><div class="team-icon">🐝</div><div class="team-name">Team Bee</div><div class="team-score" id="scoreA">0</div>
+    <div class="team-box ta"><div class="team-icon"><img class="em" src="bee.jpg" alt=""></div><div class="team-name">Team Bee</div><div class="team-score" id="scoreA">0</div>
       <div class="team-btns"><button class="tadd" onclick="addScore('A',1)">+1</button><button class="tsub" onclick="addScore('A',-1)">-1</button></div></div>
-    <div class="team-box tb"><div class="team-icon">🐯</div><div class="team-name">Team Tiger</div><div class="team-score" id="scoreB">0</div>
+    <div class="team-box tb"><div class="team-icon"><img class="em" src="tiger.jpg" alt=""></div><div class="team-name">Team Tiger</div><div class="team-score" id="scoreB">0</div>
       <div class="team-btns"><button class="tadd" onclick="addScore('B',1)">+1</button><button class="tsub" onclick="addScore('B',-1)">-1</button></div></div>
   </div>
-  <div style="text-align:center;margin-top:10px"><span class="turn-chip" id="turnChip">➡️ Team Bee's turn</span> &nbsp; <button class="btn green" onclick="nextTurn()" style="padding:8px 18px;font-size:.9rem">Next turn 🔁</button></div>
+  <div style="text-align:center;margin-top:10px"><span class="turn-chip" id="turnChip"> Team Bee's turn</span> &nbsp; <button class="btn green" onclick="nextTurn()" style="padding:8px 18px;font-size:.9rem">Next turn </button></div>
 </div>
 
 <!-- ================= TAB 1 : WARM-UP ================= -->
 <div class="tabpan" data-tab="1">
   <section data-sec="warm1" data-read="1">
-    <div class="shead"><span class="ic">🎲</span><h2>Roll a Die · What is he wearing?</h2><span class="badge">Warm-Up · 5 min</span>
-      <button class="sec-sound" id="ss-warm1" onclick="toggleSecSound('warm1')">🔇 Off</button></div>
-    <div class="tip">👆 Roll the die, then click the picture that matches the number. Read the sentence out loud!</div>
+    <div class="shead"><span class="ic"><img class="em" src="dice.jpg" alt=""></span><h2>Roll a Die · What is he wearing?</h2><span class="badge">Warm-Up · 5 min</span>
+      <button class="sec-sound" id="ss-warm1" onclick="toggleSecSound('warm1')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-point.jpg" alt=""> Roll the die, then click the picture that matches the number. Read the sentence out loud!</div>
     <div class="die-wrap">
-      <div class="die" id="die">🎲</div>
-      <button class="btn orange" onclick="rollDie()">Roll! 🎲</button>
+      <div class="die" id="die"></div>
+      <button class="btn orange" onclick="rollDie()">Roll! <img class="em" src="dice.jpg" alt=""></button>
       <div style="font-weight:900;font-size:clamp(14px,2.4vw,20px)" id="dieHint">Click the matching kid →</div>
     </div>
     <div class="kid-grid" id="kidGridWarm"></div>
   </section>
 
   <section data-sec="warm2" data-read="2">
-    <div class="shead"><span class="ic">🖼️</span><h2>Picture Talk · p.26–27</h2><span class="badge">5 min</span>
-      <button class="sec-sound" id="ss-warm2" onclick="toggleSecSound('warm2')">🔇 Off</button></div>
-    <div class="tip">💬 Ask: <b>Who can you see? What is she wearing?</b> Click any kid to hear the answer.</div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>Picture Talk · p.26–27</h2><span class="badge">5 min</span>
+      <button class="sec-sound" id="ss-warm2" onclick="toggleSecSound('warm2')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-speech.jpg" alt=""> Ask: <b>Who can you see? What is she wearing?</b> Click any kid to hear the answer.</div>
     <div class="kid-grid" id="kidGridTalk"></div>
   </section>
 </div>
@@ -540,21 +566,21 @@ section{scroll-margin-top:118px}
 <!-- ================= TAB 2 : VOCABULARY ================= -->
 <div class="tabpan" data-tab="2">
   <section data-sec="vocab1" data-read="1">
-    <div class="shead"><span class="ic">👕</span><h2>Clothes Vocabulary</h2><span class="badge">13 words</span>
-      <button class="sec-sound" id="ss-vocab1" onclick="toggleSecSound('vocab1')">🔇 Off</button></div>
-    <div class="tip">👆 Click a card to hear the word. Then click <b>Hide</b> and let students guess!</div>
+    <div class="shead"><span class="ic"><img class="em" src="it-tshirt.jpg" alt=""></span><h2>Clothes Vocabulary</h2><span class="badge">13 words</span>
+      <button class="sec-sound" id="ss-vocab1" onclick="toggleSecSound('vocab1')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-point.jpg" alt=""> Click a card to hear the word. Then click <b>Hide</b> and let students guess!</div>
     <div style="margin:10px 0;display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn purple" onclick="speakAllVocab()">🔊 Hear all</button>
-      <button class="btn blue" onclick="hideVocab()">🙈 Hide words</button>
-      <button class="btn green" onclick="showVocab()">👀 Show words</button>
-      <button class="btn pink" onclick="quizVocab()">❓ Quick quiz</button>
+      <button class="btn purple" onclick="speakAllVocab()"> Hear all</button>
+      <button class="btn blue" onclick="hideVocab()"> Hide words</button>
+      <button class="btn green" onclick="showVocab()"><img class="em" src="eyes.jpg" alt=""> Show words</button>
+      <button class="btn pink" onclick="quizVocab()"><img class="em" src="ico-question.jpg" alt=""> Quick quiz</button>
     </div>
     <div class="vocab-grid" id="vocabGrid"></div>
   </section>
 
   <section data-sec="vocab2" data-read="2">
-    <div class="shead"><span class="ic">🎴</span><h2>Picture Cards · p.26</h2><span class="badge">10 cards</span>
-      <button class="sec-sound" id="ss-vocab2" onclick="toggleSecSound('vocab2')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>Picture Cards · p.26</h2><span class="badge">10 cards</span>
+      <button class="sec-sound" id="ss-vocab2" onclick="toggleSecSound('vocab2')">Off</button></div>
     <div class="pic-grid" id="picGrid"></div>
   </section>
 </div>
@@ -562,10 +588,10 @@ section{scroll-margin-top:118px}
 <!-- ================= TAB 3 : PATTERNS ================= -->
 <div class="tabpan" data-tab="3">
   <section data-sec="pat1" data-read="1">
-    <div class="shead"><span class="ic">💬</span><h2>Ask &amp; Answer</h2><span class="badge">Target language</span>
-      <button class="sec-sound" id="ss-pat1" onclick="toggleSecSound('pat1')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-speech.jpg" alt=""></span><h2>Ask &amp; Answer</h2><span class="badge">Target language</span>
+      <button class="sec-sound" id="ss-pat1" onclick="toggleSecSound('pat1')">Off</button></div>
     <div class="pattern-card">
-      <h3>👀 Look at a boy / girl</h3>
+      <h3><img class="em" src="eyes.jpg" alt=""> Look at a boy / girl</h3>
       <div class="pattern-line" onclick="speak('What is he wearing?')"><span class="q">Q:</span> What <b>is he</b> wearing?</div>
       <div class="pattern-line" onclick="speak('He is wearing a T-shirt and pants.')"><span class="a">A:</span> <b>He is wearing</b> a T-shirt and pants.</div>
       <div class="pattern-line" onclick="speak('What is she wearing?')"><span class="q">Q:</span> What <b>is she</b> wearing?</div>
@@ -573,16 +599,16 @@ section{scroll-margin-top:118px}
       <div class="pattern-examples" id="patExamples"></div>
     </div>
     <div class="pattern-card" style="border-left-color:var(--pink)">
-      <h3>🩹 Something is wrong</h3>
+      <h3><img class="em" src="bandage.jpg" alt=""> Something is wrong</h3>
       <div class="pattern-line" onclick="speak('What\'s wrong?')"><span class="q">Q:</span> <b>What's wrong?</b></div>
       <div class="pattern-line" onclick="speak('He should wear pants.')"><span class="a">A:</span> <b>He should wear</b> pants. / <b>She should wear</b> a skirt.</div>
     </div>
   </section>
 
   <section data-sec="pat2" data-read="2">
-    <div class="shead"><span class="ic">🛠️</span><h2>Sentence Machine</h2><span class="badge">Make a sentence</span>
-      <button class="sec-sound" id="ss-pat2" onclick="toggleSecSound('pat2')">🔇 Off</button></div>
-    <div class="tip">🛠️ Pick 3 words to build a sentence, then click <b>Speak it!</b></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-tools.jpg" alt=""></span><h2>Sentence Machine</h2><span class="badge">Make a sentence</span>
+      <button class="sec-sound" id="ss-pat2" onclick="toggleSecSound('pat2')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-tools.jpg" alt=""> Pick 3 words to build a sentence, then click <b>Speak it!</b></div>
     <div class="sub-machine">
       <select id="subWho" onchange="buildSentence()"><option>He</option><option>She</option></select>
       <select id="subIs" onchange="buildSentence()"><option>is wearing</option></select>
@@ -592,15 +618,15 @@ section{scroll-margin-top:118px}
       <div style="font-weight:900;color:var(--purple);font-size:clamp(13px,2vw,16px)">Your sentence</div>
       <div class="so-a" id="subOut">He is wearing a T-shirt and pants.</div>
       <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn green" onclick="speakOut()">🔊 Speak it!</button>
-        <button class="btn orange" onclick="randomSentence()">🔀 Random</button>
+        <button class="btn green" onclick="speakOut()"> Speak it!</button>
+        <button class="btn orange" onclick="randomSentence()"> Random</button>
       </div>
     </div>
   </section>
 
   <section data-sec="pat3" data-read="3">
-    <div class="shead"><span class="ic">🏷️</span><h2>Pattern Labels</h2><span class="badge">click to hear</span>
-      <button class="sec-sound" id="ss-pat3" onclick="toggleSecSound('pat3')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-tag.jpg" alt=""></span><h2>Pattern Labels</h2><span class="badge">click to hear</span>
+      <button class="sec-sound" id="ss-pat3" onclick="toggleSecSound('pat3')">Off</button></div>
     <div class="pattern-examples" style="gap:10px" id="bigPatterns"></div>
   </section>
 </div>
@@ -608,71 +634,70 @@ section{scroll-margin-top:118px}
 <!-- ================= TAB 4 : WHAT'S WRONG? ================= -->
 <div class="tabpan" data-tab="4">
   <div class="hero" style="padding:22px 16px 14px">
-    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">🩹</span>
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)"><img class="em" src="hand-bandage.jpg" alt=""></span>
     <h1>What's Wrong?</h1>
     <div class="sub">p.28 · 20 min · Is the person wearing the right clothes?</div>
   </div>
 
   <section data-sec="wr1" data-read="1">
-    <div class="shead"><span class="ic">🏋️</span><h2>Work Out · She will work out later</h2><span class="badge">p.31</span>
-      <button class="sec-sound" id="ss-wr1" onclick="toggleSecSound('wr1')">🔇 Off</button></div>
-    <div class="tip">👆 Click <b>2 pieces of clothing</b> she should wear to work out. Then check!</div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-workout.jpg" alt=""></span><h2>Work Out · She will work out later</h2><span class="badge">p.31</span>
+      <button class="sec-sound" id="ss-wr1" onclick="toggleSecSound('wr1')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-point.jpg" alt=""> Click <b>2 pieces of clothing</b> she should wear to work out. Then check!</div>
     <div class="big-reply" id="cwWorkoutReply">&nbsp;</div>
     <div class="pick-row" id="cwWorkoutRow"></div>
     <div style="text-align:center;margin-top:8px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <button class="btn green" onclick="checkOutfit('workout')">✅ Check</button>
+      <button class="btn green" onclick="checkOutfit('workout')"> Check</button>
       <button class="btn blue" onclick="resetOutfit('workout')">↺ Reset</button>
-      <button class="btn orange" onclick="speakCwAnswer('workout')">🔊 Answer</button>
+      <button class="btn orange" onclick="speakCwAnswer('workout')"> Answer</button>
     </div>
   </section>
 
   <section data-sec="wr2" data-read="2">
-    <div class="shead"><span class="ic">💼</span><h2>Going to Work · He's going to work</h2><span class="badge">p.32</span>
-      <button class="sec-sound" id="ss-wr2" onclick="toggleSecSound('wr2')">🔇 Off</button></div>
-    <div class="tip">👆 Click <b>2 pieces of clothing</b> he should wear to work. Then check!</div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-briefcase.jpg" alt=""></span><h2>Going to Work · He's going to work</h2><span class="badge">p.32</span>
+      <button class="sec-sound" id="ss-wr2" onclick="toggleSecSound('wr2')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-point.jpg" alt=""> Click <b>2 pieces of clothing</b> he should wear to work. Then check!</div>
     <div class="big-reply" id="cwWorkReply">&nbsp;</div>
     <div class="pick-row" id="cwWorkRow"></div>
     <div style="text-align:center;margin-top:8px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <button class="btn green" onclick="checkOutfit('work')">✅ Check</button>
+      <button class="btn green" onclick="checkOutfit('work')"> Check</button>
       <button class="btn blue" onclick="resetOutfit('work')">↺ Reset</button>
-      <button class="btn orange" onclick="speakCwAnswer('work')">🔊 Answer</button>
+      <button class="btn orange" onclick="speakCwAnswer('work')"> Answer</button>
     </div>
   </section>
 
   <section data-sec="wr3" data-read="3">
-    <div class="shead"><span class="ic">🖼️</span><h2>The Picture · p.28</h2><span class="badge">whole class</span>
-      <button class="sec-sound" id="ss-wr3" onclick="toggleSecSound('wr3')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>The Picture · p.28</h2><span class="badge">whole class</span>
+      <button class="sec-sound" id="ss-wr3" onclick="toggleSecSound('wr3')">Off</button></div>
     <img class="t-image" src="p21.jpg" alt="Is the person wearing the right clothes" onclick="openLightbox(this.src)">
     <div class="imgcap">p.28 · Is the person wearing the right clothes?</div>
     <div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-      <button class="btn pink" onclick="speakCine('STUDENT','What\'s wrong? 🤔')">❓ What's wrong?</button>
-      <button class="btn green" onclick="speakCine('TEACHER','He should wear pants. ✅')">💡 Answer</button>
+      <button class="btn pink" onclick="speakCine('STUDENT','What\'s wrong? ')"><img class="em" src="ico-question.jpg" alt=""> What's wrong?</button>
+      <button class="btn green" onclick="speakCine('TEACHER','He should wear pants. ')"><img class="em" src="bulb.jpg" alt=""> Answer</button>
     </div>
   </section>
 
   <section data-sec="wr4" data-read="4">
-    <div class="shead"><span class="ic">❓</span><h2>Right or Wrong? · Situation Check</h2><span class="badge">8 pictures</span>
-      <button class="sec-sound" id="ss-wr4" onclick="toggleSecSound('wr4')">🔇 Off</button></div>
-    <div class="tip">👀 Look at each picture. Is it <b>right ✅</b> or <b>wrong ❌</b>? Click your answer.</div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-question.jpg" alt=""></span><h2>Right or Wrong? · Situation Check</h2><span class="badge">8 pictures</span>
+      <button class="sec-sound" id="ss-wr4" onclick="toggleSecSound('wr4')">Off</button></div>
+    <div class="tip"><img class="em" src="eyes.jpg" alt=""> Read the question, look at the picture, then choose <b>Right </b> or <b>Wrong </b>.</div>
     <div class="occ-grid" id="occGrid"></div>
-    <div class="big-reply" id="occReply">&nbsp;</div>
   </section>
 </div>
 
 <!-- ================= TAB 5 : LISTEN ================= -->
 <div class="tabpan" data-tab="5">
   <div class="hero" style="padding:22px 16px 14px">
-    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">🎧</span>
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)"><img class="em" src="ico-headphones.jpg" alt=""></span>
     <h1>Listen &amp; Choose</h1>
     <div class="sub">p.59 · 8 min · Listen and Hit · 10 min</div>
   </div>
 
   <section data-sec="lst1" data-read="1">
-    <div class="shead"><span class="ic">🖼️</span><h2>Listen and Choose · p.59</h2><span class="badge">4 questions</span>
-      <button class="sec-sound" id="ss-lst1" onclick="toggleSecSound('lst1')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>Listen and Choose · p.59</h2><span class="badge">4 questions</span>
+      <button class="sec-sound" id="ss-lst1" onclick="toggleSecSound('lst1')">Off</button></div>
     <div class="listen-card">
-      <div class="listen-play"><button onclick="playListen()">🔊</button></div>
-      <div class="listen-hint" id="listenHint">Click 🔊, then choose the right picture!</div>
+      <div class="listen-play"><button onclick="playListen()"></button></div>
+      <div class="listen-hint" id="listenHint">Click , then choose the right picture!</div>
       <div class="listen-opts" id="listenOpts"></div>
       <div class="big-reply" id="listenReply">&nbsp;</div>
       <div style="text-align:center;margin-top:8px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
@@ -683,10 +708,10 @@ section{scroll-margin-top:118px}
   </section>
 
   <section data-sec="lst2" data-read="2">
-    <div class="shead"><span class="ic">✋</span><h2>Listen and Hit · Occasions</h2><span class="badge">p.62 · 10 min</span>
-      <button class="sec-sound" id="ss-lst2" onclick="toggleSecSound('lst2')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="hand.jpg" alt=""></span><h2>Listen and Hit · Occasions</h2><span class="badge">p.62 · 10 min</span>
+      <button class="sec-sound" id="ss-lst2" onclick="toggleSecSound('lst2')">Off</button></div>
     <div class="listen-card">
-      <div class="listen-play"><button onclick="playHit()">🔊</button></div>
+      <div class="listen-play"><button onclick="playHit()"></button></div>
       <div class="listen-hint" id="hitHint">Hear the sentence, then hit the right picture!</div>
       <div class="occ-grid" id="hitGrid"></div>
       <div class="big-reply" id="hitReply">&nbsp;</div>
@@ -695,8 +720,8 @@ section{scroll-margin-top:118px}
   </section>
 
   <section data-sec="lst3" data-read="3">
-    <div class="shead"><span class="ic">🖼️</span><h2>Book Pages</h2><span class="badge">click to enlarge</span>
-      <button class="sec-sound" id="ss-lst3" onclick="toggleSecSound('lst3')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>Book Pages</h2><span class="badge">click to enlarge</span>
+      <button class="sec-sound" id="ss-lst3" onclick="toggleSecSound('lst3')">Off</button></div>
     <div class="reward-grid">
       <div><img class="t-image" src="p14.jpg" onclick="openLightbox(this.src)"><div class="imgcap">Roll a die · What is he/she wearing?</div></div>
       <div><img class="t-image" src="p19.jpg" onclick="openLightbox(this.src)"><div class="imgcap">She will work out later.</div></div>
@@ -709,15 +734,15 @@ section{scroll-margin-top:118px}
 <!-- ================= TAB 6 : DRESS THEM UP ================= -->
 <div class="tabpan" data-tab="6">
   <div class="hero" style="padding:22px 16px 14px">
-    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">🎨</span>
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)"><img class="em" src="ico-palette.jpg" alt=""></span>
     <h1>Dress Them Up!</h1>
     <div class="sub">This is my doll. He/She is wearing … and …</div>
   </div>
 
   <section data-sec="du1" data-read="1">
-    <div class="shead"><span class="ic">🪆</span><h2>Doll Designer</h2><span class="badge">35 min · Fashion Stylist</span>
-      <button class="sec-sound" id="ss-du1" onclick="toggleSecSound('du1')">🔇 Off</button></div>
-    <div class="tip">🎨 Pick a doll, then choose <b>top</b> and <b>bottom</b>. Say: <b>He/She is wearing … and …</b> 🗣️</div>
+    <div class="shead"><span class="ic"><img class="em" src="doll.jpg" alt=""></span><h2>Doll Designer</h2><span class="badge">35 min · Fashion Stylist</span>
+      <button class="sec-sound" id="ss-du1" onclick="toggleSecSound('du1')">Off</button></div>
+    <div class="tip"><img class="em" src="ico-palette.jpg" alt=""> Pick a doll, then choose <b>top</b> and <b>bottom</b>. Say: <b>He/She is wearing … and …</b> <img class="em" src="ico-megaphone.jpg" alt=""></div>
 
     <div class="stage-box">
       <div class="stage-label">YOUR DOLL</div>
@@ -729,31 +754,31 @@ section{scroll-margin-top:118px}
             <option>He</option><option>She</option>
           </select>
         </label>
-        <button class="btn pink" onclick="speakDoll()">🔊 Read my sentence</button>
-        <button class="btn orange" onclick="randomDoll()">🔀 Surprise me!</button>
+        <button class="btn pink" onclick="speakDoll()"> Read my sentence</button>
+        <button class="btn orange" onclick="randomDoll()"> Surprise me!</button>
       </div>
     </div>
 
-    <div style="font-weight:900;color:var(--purple);margin-top:14px;font-size:clamp(13px,2vw,17px)">1️⃣ Choose the doll</div>
+    <div style="font-weight:900;color:var(--purple);margin-top:14px;font-size:clamp(13px,2vw,17px)">1️ Choose the doll</div>
     <div class="pick-row" id="dollRow"></div>
 
-    <div style="font-weight:900;color:var(--pink);margin-top:6px;font-size:clamp(13px,2vw,17px)">2️⃣ Choose the TOP</div>
+    <div style="font-weight:900;color:var(--pink);margin-top:6px;font-size:clamp(13px,2vw,17px)">2️ Choose the TOP</div>
     <div class="pick-row" id="topRow"></div>
 
-    <div style="font-weight:900;color:var(--blue);margin-top:6px;font-size:clamp(13px,2vw,17px)">3️⃣ Choose the BOTTOM</div>
+    <div style="font-weight:900;color:var(--blue);margin-top:6px;font-size:clamp(13px,2vw,17px)">3️ Choose the BOTTOM</div>
     <div class="pick-row" id="botRow"></div>
   </section>
 
   <section data-sec="du2" data-read="2">
-    <div class="shead"><span class="ic">📸</span><h2>Model Photos · Joy Fashion Show</h2><span class="badge">p.26–27</span>
-      <button class="sec-sound" id="ss-du2" onclick="toggleSecSound('du2')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-camera.jpg" alt=""></span><h2>Model Photos · Joy Fashion Show</h2><span class="badge">p.26–27</span>
+      <button class="sec-sound" id="ss-du2" onclick="toggleSecSound('du2')">Off</button></div>
     <div class="kid-grid" id="kidGridDress"></div>
     <div class="big-reply" id="dressReply">&nbsp;</div>
   </section>
 
   <section data-sec="du3" data-read="3">
-    <div class="shead"><span class="ic">🖼️</span><h2>Sticker Page · p.58</h2><span class="badge">print out</span>
-      <button class="sec-sound" id="ss-du3" onclick="toggleSecSound('du3')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="ico-frame.jpg" alt=""></span><h2>Sticker Page · p.58</h2><span class="badge">print out</span>
+      <button class="sec-sound" id="ss-du3" onclick="toggleSecSound('du3')">Off</button></div>
     <img class="t-image" src="p22.jpg" alt="Stickers" onclick="openLightbox(this.src)">
     <div class="imgcap">p.58 · Stickers for What's Wrong?</div>
   </section>
@@ -762,33 +787,33 @@ section{scroll-margin-top:118px}
 <!-- ================= TAB 7 : TEAM GAMES ================= -->
 <div class="tabpan" data-tab="7">
   <section data-sec="tg1" data-read="1">
-    <div class="shead"><span class="ic">👕</span><h2>Team Outfit Race</h2><span class="badge">+1 each</span>
-      <button class="sec-sound" id="ss-tg1" onclick="toggleSecSound('tg1')">🔇 Off</button></div>
-    <div class="tip">🐝 Team Bee vs 🐯 Team Tiger. Current turn: <span class="turn-chip" id="turnChip2">Team Bee</span></div>
+    <div class="shead"><span class="ic"><img class="em" src="it-tshirt.jpg" alt=""></span><h2>Team Outfit Race</h2><span class="badge">+1 each</span>
+      <button class="sec-sound" id="ss-tg1" onclick="toggleSecSound('tg1')">Off</button></div>
+    <div class="tip"><img class="em" src="bee.jpg" alt=""> Team Bee vs <img class="em" src="tiger.jpg" alt=""> Team Tiger. Current turn: <span class="turn-chip" id="turnChip2">Team Bee</span></div>
     <div class="sub-machine" style="grid-template-columns:1fr 1fr">
-      <div><div style="font-weight:900;margin-bottom:6px">🧍 Boy or Girl?</div>
+      <div><div style="font-weight:900;margin-bottom:6px"> Boy or Girl?</div>
         <select id="gWho" onchange="buildGame()"><option>He</option><option>She</option></select></div>
-      <div><div style="font-weight:900;margin-bottom:6px">👗 What should he/she wear?</div>
+      <div><div style="font-weight:900;margin-bottom:6px"><img class="em" src="it-dress.jpg" alt=""> What should he/she wear?</div>
         <select id="gWear" onchange="buildGame()"></select></div>
     </div>
     <div class="sub-out"><div class="so-a" id="gameOut">He should wear a jacket.</div>
       <div style="margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <button class="btn orange" onclick="speakGame()">🔊 Say it!</button>
-        <button class="btn purple" onclick="buildGame();speakGame()">🔀 New</button>
-        <button class="btn green" onclick="scoreCurrent()">✅ Correct +1</button>
+        <button class="btn orange" onclick="speakGame()"> Say it!</button>
+        <button class="btn purple" onclick="buildGame();speakGame()"> New</button>
+        <button class="btn green" onclick="scoreCurrent()"> Correct +1</button>
       </div></div>
   </section>
 
   <section data-sec="tg2" data-read="2">
-    <div class="shead"><span class="ic">🙈</span><h2>Silly Sentences</h2><span class="badge">True or silly?</span>
-      <button class="sec-sound" id="ss-tg2" onclick="toggleSecSound('tg2')">🔇 Off</button></div>
-    <div class="tip">😄 Some sentences are <span class="bp-ok">RIGHT ✅</span> and some are <span class="bp-no">SILLY ❌</span>. Read it, then decide!</div>
+    <div class="shead"><span class="ic"></span><h2>Silly Sentences</h2><span class="badge">True or silly?</span>
+      <button class="sec-sound" id="ss-tg2" onclick="toggleSecSound('tg2')">Off</button></div>
+    <div class="tip"> Some sentences are <span class="bp-ok">RIGHT </span> and some are <span class="bp-no">SILLY </span>. Read it, then decide!</div>
     <div class="tf-card">
-      <div class="tf-emoji" id="twEmoji">🤡</div>
+      <div class="tf-emoji" id="twEmoji"></div>
       <div class="tf-stmt" id="twStmt">She is wearing a jacket and jeans.</div>
       <div class="tf-btns">
-        <button class="tf-btn true-btn" id="twTrue" onclick="twAnswer(true)">✅ Right</button>
-        <button class="tf-btn false-btn" id="twFalse" onclick="twAnswer(false)">❌ Silly</button>
+        <button class="tf-btn true-btn" id="twTrue" onclick="twAnswer(true)"> Right</button>
+        <button class="tf-btn false-btn" id="twFalse" onclick="twAnswer(false)"> Silly</button>
       </div>
       <div class="tf-result" id="twResult"></div>
       <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextTw()">Next ▶</button></div>
@@ -796,28 +821,28 @@ section{scroll-margin-top:118px}
   </section>
 
   <section data-sec="tg3" data-read="3">
-    <div class="shead"><span class="ic">💥</span><h2>Quick Fire · Frozen!</h2><span class="badge">no points</span>
-      <button class="sec-sound" id="ss-tg3" onclick="toggleSecSound('tg3')">🔇 Off</button></div>
-    <div class="tip">❄️ Teacher says <b>Freeze!</b> — everyone stops. Teacher points: "What is she wearing?" Student answers in 3 seconds!</div>
+    <div class="shead"><span class="ic"></span><h2>Quick Fire · Frozen!</h2><span class="badge">no points</span>
+      <button class="sec-sound" id="ss-tg3" onclick="toggleSecSound('tg3')">Off</button></div>
+    <div class="tip"><img class="em" src="snow.jpg" alt=""> Teacher says <b>Freeze!</b> — everyone stops. Teacher points: "What is she wearing?" Student answers in 3 seconds!</div>
     <div class="stage-box" style="border-color:var(--blue);background:linear-gradient(135deg,#eaf6ff,#d9edff)">
       <div class="stage-label">FREEZE FRAME</div>
-      <div class="stage-main" id="freezeLine">❄️ Freeze! What is he wearing?</div>
-      <button class="btn blue" onclick="nextFreeze()">🎲 New freeze</button>
+      <div class="stage-main" id="freezeLine"><img class="em" src="snow.jpg" alt=""> Freeze! What is he wearing?</div>
+      <button class="btn blue" onclick="nextFreeze()"><img class="em" src="dice.jpg" alt=""> New freeze</button>
     </div>
   </section>
 
   <section data-sec="tg4" data-read="4">
-    <div class="shead"><span class="ic">🏆</span><h2>Score Board</h2>
-      <button class="sec-sound" id="ss-tg4" onclick="toggleSecSound('tg4')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="trophy.jpg" alt=""></span><h2>Score Board</h2>
+      <button class="sec-sound" id="ss-tg4" onclick="toggleSecSound('tg4')">Off</button></div>
     <div class="score-board">
       <h2>Team Scores</h2>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:440px;margin:0 auto">
-        <div><div style="font-size:28px">🐝</div><div class="score-big" id="scoreA2">0</div><div class="score-label">Team Bee</div></div>
-        <div><div style="font-size:28px">🐯</div><div class="score-big" id="scoreB2">0</div><div class="score-label">Team Tiger</div></div>
+        <div><div style="font-size:28px"><img class="em" src="bee.jpg" alt=""></div><div class="score-big" id="scoreA2">0</div><div class="score-label">Team Bee</div></div>
+        <div><div style="font-size:28px"><img class="em" src="tiger.jpg" alt=""></div><div class="score-big" id="scoreB2">0</div><div class="score-label">Team Tiger</div></div>
       </div>
-      <div class="score-stars" id="scoreStars">⭐</div>
+      <div class="score-stars" id="scoreStars"></div>
       <div class="team-btns" style="margin-top:10px">
-        <button class="tadd" onclick="addScore('A',1)">🐝 +1</button><button class="tadd" onclick="addScore('B',1)">🐯 +1</button>
+        <button class="tadd" onclick="addScore('A',1)"><img class="em" src="bee.jpg" alt=""> +1</button><button class="tadd" onclick="addScore('B',1)"><img class="em" src="tiger.jpg" alt=""> +1</button>
         <button class="tsub" style="background:linear-gradient(135deg,#ddd,#aaa);color:#333" onclick="resetScores()">↺ Reset</button>
       </div>
     </div>
@@ -827,21 +852,21 @@ section{scroll-margin-top:118px}
 <!-- ================= TAB 8 : QUIZ ================= -->
 <div class="tabpan" data-tab="8">
   <div class="hero" style="padding:22px 16px 14px">
-    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)">📝</span>
+    <span class="big-emoji" style="font-size:clamp(44px,9vw,70px)"><img class="em" src="ico-pencil.jpg" alt=""></span>
     <h1>Unit 5 Quiz</h1>
     <div class="sub">True or False · Fill in · Silly sentences</div>
   </div>
 
   <section data-sec="qz1" data-read="1">
-    <div class="shead"><span class="ic">✅</span><h2>True or False</h2><span class="badge">5 questions</span>
-      <button class="sec-sound" id="ss-qz1" onclick="toggleSecSound('qz1')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"></span><h2>True or False</h2><span class="badge">5 questions</span>
+      <button class="sec-sound" id="ss-qz1" onclick="toggleSecSound('qz1')">Off</button></div>
     <div class="quiz-section-title"><h3>Part 1 · True or False</h3><span class="qs-badge" id="tfProgress">0 / 5</span></div>
     <div class="tf-card">
-      <div class="tf-emoji" id="tfEmoji">👕</div>
+      <div class="tf-emoji" id="tfEmoji"></div>
       <div class="tf-stmt" id="tfStmt">He is wearing a T-shirt and pants.</div>
       <div class="tf-btns">
-        <button class="tf-btn true-btn" onclick="tfAnswer(true)">✅ True</button>
-        <button class="tf-btn false-btn" onclick="tfAnswer(false)">❌ False</button>
+        <button class="tf-btn true-btn" onclick="tfAnswer(true)"> True</button>
+        <button class="tf-btn false-btn" onclick="tfAnswer(false)"> False</button>
       </div>
       <div class="tf-result" id="tfResult"></div>
       <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextTF()">Next ▶</button></div>
@@ -849,8 +874,8 @@ section{scroll-margin-top:118px}
   </section>
 
   <section data-sec="qz2" data-read="2">
-    <div class="shead"><span class="ic">✏️</span><h2>Fill in the Blank</h2><span class="badge">4 questions</span>
-      <button class="sec-sound" id="ss-qz2" onclick="toggleSecSound('qz2')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"></span><h2>Fill in the Blank</h2><span class="badge">4 questions</span>
+      <button class="sec-sound" id="ss-qz2" onclick="toggleSecSound('qz2')">Off</button></div>
     <div class="quiz-section-title"><h3>Part 2 · Fill in the Blank</h3><span class="qs-badge" id="fillProgress">0 / 4</span></div>
     <div class="fill-card">
       <div class="fill-q" id="fillQ"></div>
@@ -861,15 +886,15 @@ section{scroll-margin-top:118px}
   </section>
 
   <section data-sec="qz3" data-read="3">
-    <div class="shead"><span class="ic">🤡</span><h2>Silly Sentences</h2><span class="badge">8 questions</span>
-      <button class="sec-sound" id="ss-qz3" onclick="toggleSecSound('qz3')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"></span><h2>Silly Sentences</h2><span class="badge">8 questions</span>
+      <button class="sec-sound" id="ss-qz3" onclick="toggleSecSound('qz3')">Off</button></div>
     <div class="quiz-section-title"><h3>Part 3 · Silly or Right?</h3><span class="qs-badge" id="twProgress">0 / 8</span></div>
     <div class="tf-card">
-      <div class="tf-emoji" id="tw2Emoji">🤡</div>
+      <div class="tf-emoji" id="tw2Emoji"></div>
       <div class="tf-stmt" id="tw2Stmt">She is wearing sneakers and a jacket.</div>
       <div class="tf-btns">
-        <button class="tf-btn true-btn" onclick="tw2Answer(true)">✅ Right</button>
-        <button class="tf-btn false-btn" onclick="tw2Answer(false)">❌ Silly</button>
+        <button class="tf-btn true-btn" onclick="tw2Answer(true)"> Right</button>
+        <button class="tf-btn false-btn" onclick="tw2Answer(false)"> Silly</button>
       </div>
       <div class="tf-result" id="tw2Result"></div>
       <div style="text-align:center;margin-top:10px"><button class="btn purple" onclick="nextTw2()">Next ▶</button></div>
@@ -877,17 +902,17 @@ section{scroll-margin-top:118px}
   </section>
 
   <section data-sec="qz4" data-read="4">
-    <div class="shead"><span class="ic">🎉</span><h2>Your Score</h2><span class="badge">results</span>
-      <button class="sec-sound" id="ss-qz4" onclick="toggleSecSound('qz4')">🔇 Off</button></div>
+    <div class="shead"><span class="ic"><img class="em" src="party.jpg" alt=""></span><h2>Your Score</h2><span class="badge">results</span>
+      <button class="sec-sound" id="ss-qz4" onclick="toggleSecSound('qz4')">Off</button></div>
     <div class="score-board">
-      <h2>Great Job! 🌟</h2>
+      <h2>Great Job! </h2>
       <div class="score-big" id="quizTotal">0 / 17</div>
       <div class="score-label" id="quizMsg">Answer the questions to see your score!</div>
       <div class="score-stars" id="quizStars"></div>
       <div class="score-breakdown">
-        <div class="score-item"><div class="si-type">✅ True/False</div><div class="si-score" id="qbTF">0/5</div></div>
-        <div class="score-item"><div class="si-type">✏️ Fill in</div><div class="si-score" id="qbFill">0/4</div></div>
-        <div class="score-item"><div class="si-type">🤡 Silly</div><div class="si-score" id="qbTW">0/8</div></div>
+        <div class="score-item"><div class="si-type"> True/False</div><div class="si-score" id="qbTF">0/5</div></div>
+        <div class="score-item"><div class="si-type"> Fill in</div><div class="si-score" id="qbFill">0/4</div></div>
+        <div class="score-item"><div class="si-type"> Silly</div><div class="si-score" id="qbTW">0/8</div></div>
       </div>
       <div style="margin-top:16px"><button class="btn green" onclick="resetQuiz()">↺ Take it again</button></div>
     </div>
@@ -895,13 +920,13 @@ section{scroll-margin-top:118px}
 </div>
 
 <!-- overlays -->
-<div class="lightbox" id="lightbox"><button class="lb-close" onclick="closeLightbox()">✕</button><img id="lbImg" src=""></div>
-<div class="cine" id="cine"><div class="cine-who" id="cineWho">STUDENT</div><div class="cine-line" id="cineLine"></div><button class="cine-close" onclick="closeCine()">✕ Close</button></div>
+<div class="lightbox" id="lightbox"><button class="lb-close" onclick="closeLightbox()">×</button><img id="lbImg" src=""></div>
+<div class="cine" id="cine"><div class="cine-who" id="cineWho">STUDENT</div><div class="cine-line" id="cineLine"></div><button class="cine-close" onclick="closeCine()">× Close</button></div>
 <div class="toast" id="toast"></div>
-<div class="mascot" id="mascot" onclick="speak('Hello! I am Joy! Let\'s learn Unit 5!')">🐻</div>
+<div class="mascot" id="mascot" onclick="speak('Hello! I am Joy! Let\'s learn Unit 5!')"><img class="em" src="bear.jpg" alt=""></div>
 <div class="fab-wrap">
-  <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">⬆️</button>
-  <a class="fab fab-home" id="fabHome" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+  <button class="fab fab-top" id="fabTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">↑</button>
+  <a class="fab fab-home" id="fabHome" href="https://hanshanghao.github.io/Joy_English/" title="Home"><img class="em" src="house.jpg" alt=""></a>
 </div>
 <script>
 /* ============ state ============ */
@@ -952,8 +977,8 @@ function renderVoiceBtn(){
   var b=document.getElementById('voiceBtn');
   if(!b)return;
   var v=currentVoice();
-  if(!v){b.textContent='🔇';b.title='No English voice installed';return;}
-  b.textContent=/en[-_]GB/i.test(v.lang)?'\uD83C\uDDEC\uD83C\uDDE7':'\uD83D\uDDE3\uFE0F';
+  if(!v){b.textContent='X';b.title='No English voice installed';return;}
+  b.textContent=/en[-_]GB/i.test(v.lang)?'GB':'EN';
   b.title='Voice: '+v.name+' (click to change)';
 }
 function cycleVoice(){
@@ -985,9 +1010,9 @@ function toggleGlobalSound(){
   GON=!GON;
   var b=document.getElementById('globalSound');
   b.classList.toggle('off',!GON);
-  b.textContent=GON?'🔊':'🔇';
+  b.textContent=GON?'ON':'OFF';
   if(!GON&&'speechSynthesis' in window)speechSynthesis.cancel();
-  toast(GON?'Sound ON 🔊':'Sound OFF 🔇');
+  toast(GON?'Sound ON':'Sound OFF');
 }
 function speakLong(steps){
   if(!GON)return;
@@ -1001,7 +1026,7 @@ function toggleSecSound(id){
   if(!b)return;
   b.classList.toggle('on',!!SEC_ON[id]);
   b.classList.toggle('off',!SEC_ON[id]);
-  b.innerHTML=SEC_ON[id]?'🔊 On':'🔇 Off';
+  b.innerHTML=SEC_ON[id]?'On':'Off';
   if(SEC_ON[id]){
     var sec=b.closest('section');
     if(sec){
@@ -1062,7 +1087,7 @@ function confetti(n){
 function addScore(t,n){
   TEAM[t]=Math.max(0,(TEAM[t]||0)+n);
   renderScores();
-  toast((t==='A'?'🐝 Team Bee':'🐯 Team Tiger')+' '+(n>0?'+':'')+n+'! 🎉');
+  toast((t==='A'?' Team Bee':' Team Tiger')+' '+(n>0?'+':'')+n+'! ');
   if(n>0)confetti(30);
 }
 function resetScores(){TEAM.A=0;TEAM.B=0;renderScores();toast('Scores reset ↺');}
@@ -1071,11 +1096,11 @@ function renderScores(){
   var a2=document.getElementById('scoreA2'),b2=document.getElementById('scoreB2');
   if(a)a.textContent=TEAM.A;if(b)b.textContent=TEAM.B;
   if(a2)a2.textContent=TEAM.A;if(b2)b2.textContent=TEAM.B;
-  var turn='➡️ '+(TURN==='A'?"Team Bee's turn":"Team Tiger's turn");
+  var turn=' '+(TURN==='A'?"Team Bee's turn":"Team Tiger's turn");
   var c1=document.getElementById('turnChip'),c2=document.getElementById('turnChip2');
   if(c1)c1.textContent=turn;if(c2)c2.textContent=TURN==='A'?'Team Bee':'Team Tiger';
   var st=document.getElementById('scoreStars');
-  if(st)st.textContent=TEAM.A+TEAM.B===0?'⭐':'⭐⭐⭐';
+  if(st)st.textContent=TEAM.A+TEAM.B===0?'':'';
 }
 function nextTurn(){TURN=TURN==='A'?'B':'A';renderScores();speak(TURN==='A'?"Team Bee's turn.":"Team Tiger's turn.");}
 function scoreCurrent(){addScore(TURN,1);nextTurn();}
@@ -1100,11 +1125,11 @@ function speakCine(who,line){
 
 /* ============ data ============ */
 var VOCAB=[
- {w:'a shirt',e:'👔',s:'a shirt'},{w:'pants',e:'👖',s:'pants'},{w:'socks',e:'🧦',s:'socks'},
- {w:'sneakers',e:'👟',s:'sneakers'},{w:'a sweater',e:'🧶',s:'a sweater'},{w:'a jacket',e:'🧥',s:'a jacket'},
- {w:'jeans',e:'👖',s:'jeans'},{w:'shoes',e:'👞',s:'shoes'},{w:'a T-shirt',e:'👕',s:'a T-shirt'},
- {w:'shorts',e:'🩳',s:'shorts'},{w:'sandals',e:'🩴',s:'sandals'},{w:'a blouse',e:'👚',s:'a blouse'},
- {w:'a skirt',e:'👗',s:'a skirt'}
+ {w:'a shirt',p:'wb-shirt.jpg',s:'a shirt'},{w:'pants',p:'wb-pants.jpg',s:'pants'},{w:'socks',p:'socks.jpg',s:'socks'},
+ {w:'sneakers',p:'sneakers.jpg',s:'sneakers'},{w:'a sweater',p:'sweater.jpg',s:'a sweater'},{w:'a jacket',p:'jacket.jpg',s:'a jacket'},
+ {w:'jeans',p:'jeans.jpg',s:'jeans'},{w:'shoes',p:'wb-shoes.jpg',s:'shoes'},{w:'a T-shirt',p:'it-tshirt.jpg',s:'a T-shirt'},
+ {w:'shorts',p:'wb-shorts.jpg',s:'shorts'},{w:'sandals',p:'it-sandals.jpg',s:'sandals'},{w:'a blouse',p:'it-blouse.jpg',s:'a blouse'},
+ {w:'a skirt',p:'skirt.jpg',s:'a skirt'}
 ];
 var PICS=[
  {img:'it-tank.jpg',w:'a tank top'},{img:'it-tshirt.jpg',w:'a T-shirt'},{img:'it-blouse.jpg',w:'a blouse'},
@@ -1143,27 +1168,27 @@ var LSQ=[
  {w:'He is wearing a T-shirt and shorts.',ok:'kid1.jpg',opts:[{img:'kid1.jpg',w:'T-shirt + shorts'},{img:'kid3.jpg',w:'jacket + jeans'},{img:'kid5.jpg',w:'shirt + shoes'}]}
 ];
 var HITQ=[
- {w:'He is going to sleep in bed.',cap:'🛏️ bed',img:'p15.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
- {w:'She is going to the pool.',cap:'🏊 pool',img:'p16.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
- {w:'He is going to school.',cap:'🏫 school',img:'p15.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
- {w:'She is wearing warm clothes in winter.',cap:'❄️ winter',img:'p17.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']}
+ {w:'He is going to sleep in bed.',cap:'bed',img:'p15.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
+ {w:'She is going to the pool.',cap:'pool',img:'p16.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
+ {w:'He is going to school.',cap:'school',img:'p15.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']},
+ {w:'She is wearing warm clothes in winter.',cap:'winter',img:'p17.jpg',opts:['p15.jpg','p16.jpg','p17.jpg','p18.jpg']}
 ];
 var OCCS=[
- {img:'p17.jpg',right:true,yes:'❄️ Yes! Warm clothes for winter.'},
- {img:'p16.jpg',right:true,yes:'🏊 Yes! Swimwear for the pool.'},
- {img:'p18.jpg',right:true,yes:'🙌 Yes! Respectful clothes.'},
- {img:'p15.jpg',right:true,yes:'🛏️ Yes! Pyjamas for bed.'},
- {img:'p21.jpg',right:false,no:"❌ No! What's wrong? He should wear pants."},
- {img:'p19.jpg',right:false,no:"❌ No! She should wear joggers."},
- {img:'p20.jpg',right:false,no:"❌ No! He should wear a shirt."},
- {img:'p23.jpg',right:true,yes:'✅ Yes! Do your best!'}
+ {img:'sit-bed.jpg',q:'He is going to bed. Is he wearing the right clothes?',right:true,yes:'Yes! Pyjamas for bed.'},
+ {img:'sit-pool.jpg',q:'She is going to the pool. Is she wearing the right clothes?',right:true,yes:'Yes! Swimwear for the pool.'},
+ {img:'sit-winter.jpg',q:'It is winter. Is she wearing the right clothes?',right:true,yes:'Yes! Warm clothes for winter.'},
+ {img:'sit-smart.jpg',q:'Look at the picture. Is the person wearing the right clothes?',right:true,yes:'Yes! Respectful clothes.'},
+ {img:'sit-joggers.jpg',q:'Look at the picture. Is she wearing the right clothes?',right:false,no:"No! She should wear joggers."},
+ {img:'sit-shirt.jpg',q:'Look at the picture. Is he wearing the right clothes?',right:false,no:"No! He should wear a shirt."},
+ {img:'sit-pants.jpg',q:'Look at the picture. Is he wearing the right clothes?',right:false,no:"No! What's wrong? He should wear pants."},
+ {img:'sit-best.jpg',q:'Look at the picture. Is the person wearing the right clothes?',right:true,yes:'Yes! Do your best!'}
 ];
 var TF=[
- {e:'👕',s:'He is wearing a T-shirt and pants.',ok:true},
- {e:'👗',s:'She is wearing a jacket and jeans.',ok:false},
- {e:'🩹',s:'He should wear sneakers to play sports.',ok:true},
- {e:'👙',s:'She should wear a swimsuit to bed.',ok:false},
- {e:'👔',s:'He is wearing a shirt and shoes.',ok:true}
+ {p:'it-tshirt.jpg',s:'He is wearing a T-shirt and pants.',ok:true},
+ {p:'it-dress.jpg',s:'She is wearing a jacket and jeans.',ok:false},
+ {p:'bandage.jpg',s:'He should wear sneakers to play sports.',ok:true},
+ {p:'swimsuit.jpg',s:'She should wear a swimsuit to bed.',ok:false},
+ {p:'wb-shirt.jpg',s:'He is wearing a shirt and shoes.',ok:true}
 ];
 var FILL=[
  {q:'She is wearing a ____ and a blouse.',blank:'skirt',opts:['skirt','shirt','shoes']},
@@ -1172,16 +1197,16 @@ var FILL=[
  {q:'He is wearing pants and a ____.',blank:'T-shirt',opts:['T-shirt','skirt','boots']}
 ];
 var TW=[
- {e:'🤡',s:'She is wearing a jacket and jeans.',ok:true},
- {e:'🤡',s:'He is wearing a dress to school.',ok:false},
- {e:'🤡',s:'She is wearing sneakers and a jacket.',ok:true},
- {e:'🤡',s:'He is wearing socks on his hands.',ok:false},
- {e:'🤡',s:'She should wear a skirt.',ok:true},
- {e:'🤡',s:'He is wearing sandals in the snow.',ok:false},
- {e:'🤡',s:'He is wearing a T-shirt and shorts.',ok:true},
- {e:'🤡',s:'She is wearing shoes on her head.',ok:false}
+ {p:'clown.jpg',s:'She is wearing a jacket and jeans.',ok:true},
+ {p:'clown.jpg',s:'He is wearing a dress to school.',ok:false},
+ {p:'clown.jpg',s:'She is wearing sneakers and a jacket.',ok:true},
+ {p:'clown.jpg',s:'He is wearing socks on his hands.',ok:false},
+ {p:'clown.jpg',s:'She should wear a skirt.',ok:true},
+ {p:'clown.jpg',s:'He is wearing sandals in the snow.',ok:false},
+ {p:'clown.jpg',s:'He is wearing a T-shirt and shorts.',ok:true},
+ {p:'clown.jpg',s:'She is wearing shoes on her head.',ok:false}
 ];
-var FREEZE=['❄️ Freeze! What is he wearing?','❄️ Freeze! What is she wearing?','❄️ Freeze! What\'s wrong?','❄️ Freeze! She is wearing ...'];
+var FREEZE=['Freeze! What is he wearing?','Freeze! What is she wearing?','Freeze! What\'s wrong?','Freeze! She is wearing ...'];
 var PATEX=['He is wearing a jacket and jeans.','She is wearing a skirt and a blouse.','He is wearing a T-shirt and shorts.','She is wearing a sweater and pants.','He should wear sneakers.','She should wear a skirt.'];
 </script>
 <script>
@@ -1189,24 +1214,24 @@ var PATEX=['He is wearing a jacket and jeans.','She is wearing a skirt and a blo
 function renderVocab(){
   var h='';VOCAB.forEach(function(v,i){
     h+='<div class="vocab-card" id="vc'+i+'" onclick="speak(\''+v.s+'\');document.getElementById(\'vc'+i+'\').classList.add(\'said\');setTimeout(function(){document.getElementById(\'vc'+i+'\').classList.remove(\'said\')},900)">'+
-      '<div class="vc-body"><div class="vc-emoji">'+v.e+'</div><div class="vc-word" id="vw'+i+'">'+v.w+'</div>'+
-      '<div class="vc-say">🔊 tap to hear</div></div></div>';
+      '<div class="vc-body"><div class="vc-emoji"><img src="'+v.p+'" alt="'+v.w+'" loading="lazy"></div><div class="vc-word" id="vw'+i+'">'+v.w+'</div>'+
+      '<div class="vc-say"> tap to hear</div></div></div>';
   });
   document.getElementById('vocabGrid').innerHTML=h;
 }
 function speakAllVocab(){var arr=VOCAB.map(function(v){return v.s;});speakLong(arr);}
-function hideVocab(){VOCAB.forEach(function(v,i){var el=document.getElementById('vw'+i);if(el)el.textContent='❓';});toast('Words hidden! 🙈');}
-function showVocab(){VOCAB.forEach(function(v,i){var el=document.getElementById('vw'+i);if(el)el.textContent=v.w;});toast('Words shown 👀');}
+function hideVocab(){VOCAB.forEach(function(v,i){var el=document.getElementById('vw'+i);if(el)el.textContent='';});toast('Words hidden! ');}
+function showVocab(){VOCAB.forEach(function(v,i){var el=document.getElementById('vw'+i);if(el)el.textContent=v.w;});toast('Words shown ');}
 function quizVocab(){
   var v=VOCAB[Math.floor(Math.random()*VOCAB.length)];
   speak('What is this? '+v.s);
-  openCine('❓ QUICK QUIZ','What is this?');
+  openCine(' QUICK QUIZ','What is this?');
   toast('Answer: '+v.w);
   setTimeout(closeCine,3500);
 }
 function renderPics(){
   var h='';PICS.forEach(function(p){
-    h+='<div class="obj" onclick="speak(\''+p.w+'\')"><img src="'+p.img+'" alt="'+p.w+'"><div class="obj-name">'+p.w+'</div><div class="obj-say">🔊</div></div>';
+    h+='<div class="obj" onclick="speak(\''+p.w+'\')"><img src="'+p.img+'" alt="'+p.w+'"><div class="obj-name">'+p.w+'</div><div class="obj-say"></div></div>';
   });
   document.getElementById('picGrid').innerHTML=h;
 }
@@ -1216,15 +1241,16 @@ function kidHTML(mode){
   var h='';
   KIDS.forEach(function(k,i){
     var fn=mode==='warm'?'kidWarm('+i+')':(mode==='talk'?'kidTalk('+i+')':'kidDress('+i+')');
+    var cap=(mode==='warm')?'<div class="kcap">'+k.s+'</div>':'';
     h+='<div class="kid" id="'+mode+'Kid'+i+'" onclick="'+fn+'"><div class="knum">'+(i+1)+'</div>'+
-      '<img src="'+k.img+'" alt="'+k.n+'"><div class="kname">'+k.n+'</div></div>';
+      '<img src="'+k.img+'" alt="'+k.n+'"><div class="kname">'+k.n+'</div>'+cap+'</div>';
   });
   return h;
 }
 function kidWarm(i){
   var die=document.getElementById('die');
   var cur=parseInt(die.getAttribute('data-n')||'0',10);
-  if(cur!==i+1){toast('Find the picture with number '+(cur||'?')+'! 🎲');document.getElementById('warmKid'+i).classList.remove('hot');return;}
+  if(cur!==i+1){toast('Find the picture with number '+(cur||'?')+'! ');document.getElementById('warmKid'+i).classList.remove('hot');return;}
   speak(KIDS[i].s);toast(KIDS[i].s);
   document.getElementById('warmKid'+i).classList.add('hot');
   confetti(20);addScore(TURN,1);
@@ -1233,12 +1259,19 @@ function kidTalk(i){speak('What is he or she wearing? '+KIDS[i].s);document.getE
 function kidDress(i){speak(KIDS[i].s);document.getElementById('dressReply').textContent=KIDS[i].s;document.getElementById('dressReply').className='big-reply good';document.getElementById('dressKid'+i).classList.add('hot');setTimeout(function(){document.getElementById('dressKid'+i).classList.remove('hot')},2500);}
 
 /* ============ die ============ */
+function renderDie(n){
+  var pos={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,3,4,6,7,9]};
+  var d=document.getElementById('die');if(!d)return;
+  var cells=[],on=pos[n]||[];
+  for(var i=1;i<=9;i++){cells.push('<div class="pip" style="visibility:'+(on.indexOf(i)>-1?'visible':'hidden')+'"></div>');}
+  d.innerHTML=cells.join('');
+}
 function rollDie(){
   var n=1+Math.floor(Math.random()*6);
   var d=document.getElementById('die');
   d.classList.remove('roll');void d.offsetWidth;d.classList.add('roll');
-  setTimeout(function(){d.textContent=['⚀','⚁','⚂','⚃','⚄','⚅'][n-1];d.setAttribute('data-n',n);
-    document.getElementById('dieHint').textContent='Find number '+n+'! 👆';
+  setTimeout(function(){renderDie(n);d.setAttribute('data-n',n);
+    document.getElementById('dieHint').textContent='Find number '+n+'!';
     speak('Number '+n);},450);
   document.querySelectorAll('.kid').forEach(function(k){k.classList.remove('hot')});
 }
@@ -1257,7 +1290,7 @@ function buildSentence(){
   var s=document.getElementById('subWho').value+' '+document.getElementById('subIs').value+' '+document.getElementById('subWear').value+'.';
   document.getElementById('subOut').textContent=s;
 }
-function speakOut(){var s=document.getElementById('subOut').textContent;speak(s);openCine('🗣️ SAY IT',s);setTimeout(closeCine,3000);}
+function speakOut(){var s=document.getElementById('subOut').textContent;speak(s);openCine(' SAY IT',s);setTimeout(closeCine,3000);}
 function randomSentence(){
   var a=document.getElementById('subWho'),b=document.getElementById('subWear');
   a.selectedIndex=Math.floor(Math.random()*a.options.length);
@@ -1282,9 +1315,9 @@ function pickItem(key,i){
   if(!el)return;
   if(el.classList.contains('used')){el.classList.remove('used');el.querySelector('.obj-say').textContent='';return;}
   var n=document.querySelectorAll('[data-key="'+key+'"].used').length;
-  if(n>=2){toast('Only 2 pieces! Click one to remove it. 👆');return;}
+  if(n>=2){toast('Only 2 pieces! Click one to remove it. ');return;}
   el.classList.add('used');
-  el.querySelector('.obj-say').textContent='✓';
+  el.querySelector('.obj-say').textContent='';
   el.querySelector('.obj-say').className='obj-say good';
   speak(cfg.items[i].w);
 }
@@ -1293,29 +1326,42 @@ function checkOutfit(key){
   var chosen=[].slice.call(document.querySelectorAll('[data-key="'+key+'"].used')).map(function(el){return cfg.items[+el.dataset.i].img;});
   var ok=chosen.length===2&&chosen.every(function(c){return cfg.correct.indexOf(c)>-1;});
   var r=document.getElementById(cfg.reply);
-  if(chosen.length<2){r.textContent='👆 Choose 2 pieces first!';r.className='big-reply';return;}
-  if(ok){r.textContent='✅ '+cfg.ans;r.className='big-reply good';speak(cfg.ans);confetti(40);addScore(TURN,1);}
-  else{r.textContent="❌ Not quite. What's wrong? Try again!";r.className='big-reply bad';
+  if(chosen.length<2){r.textContent=' Choose 2 pieces first!';r.className='big-reply';return;}
+  if(ok){r.textContent=' '+cfg.ans;r.className='big-reply good';speak(cfg.ans);confetti(40);addScore(TURN,1);}
+  else{r.textContent=" Not quite. What's wrong? Try again!";r.className='big-reply bad';
     document.querySelectorAll('[data-key="'+key+'"].used').forEach(function(el){el.classList.add('bad');setTimeout(function(){el.classList.remove('bad','used');el.querySelector('.obj-say').textContent='';},600);});}
 }
 function resetOutfit(key){buildOutfit(key);document.getElementById(key==='workout'?'cwWorkoutReply':'cwWorkReply').innerHTML='&nbsp;';}
-function speakCwAnswer(key){var cfg=key==='workout'?CW_WORKOUT:CW_WORK;speak(cfg.ans);openCine('💡 ANSWER',cfg.ans);setTimeout(closeCine,3500);}
+function speakCwAnswer(key){var cfg=key==='workout'?CW_WORKOUT:CW_WORK;speak(cfg.ans);openCine(' ANSWER',cfg.ans);setTimeout(closeCine,3500);}
 
 /* ============ occasions ============ */
 function renderOccs(){
   var h='';
   OCCS.forEach(function(o,i){
-    h+='<div class="occ" onclick="occAnswer('+i+')"><img src="'+o.img+'" alt="occasion"><div class="occ-cap">❓ Right or wrong?</div></div>';
+    h+='<div class="sit-card" id="sit'+i+'">'+
+       '<div class="sit-q">'+o.q+'</div>'+
+       '<img class="sit-img" src="'+o.img+'" alt="situation" onclick="openLightbox(this.src)">'+
+       '<div class="sit-btns">'+
+         '<button class="sit-btn right" onclick="occAnswer('+i+',true)">Right</button>'+
+         '<button class="sit-btn wrong" onclick="occAnswer('+i+',false)">Wrong</button>'+
+       '</div>'+
+       '<div class="sit-feedback" id="sitFb'+i+'"></div>'+
+       '</div>';
   });
   document.getElementById('occGrid').innerHTML=h;
 }
-function occAnswer(i){
+function occAnswer(i,choice){
   var o=OCCS[i];
-  var r=document.getElementById('occReply');
+  var card=document.getElementById('sit'+i);
+  if(!card||card.classList.contains('answered'))return;
+  var fb=document.getElementById('sitFb'+i);
   var msg=o.right?o.yes:o.no;
-  r.textContent=msg;r.className='big-reply '+(o.right?'good':'bad');
+  var correct=(choice===o.right);
+  card.classList.add('answered');
+  fb.className='sit-feedback show '+(correct?'good':'bad');
+  fb.textContent=(correct?'Correct! ':'Oops! ')+msg;
   speak(msg.replace(/[^A-Za-z0-9' ?!.,]/g,''));
-  if(o.right)confetti(25);
+  if(correct)confetti(25);
 }
 
 /* ============ listen & choose ============ */
@@ -1328,10 +1374,10 @@ function renderListen(){
   });
   document.getElementById('listenOpts').innerHTML=h;
   document.getElementById('listenReply').innerHTML='&nbsp;';
-  document.getElementById('listenHint').textContent='Question '+(liIdx%LSQ.length+1)+' of '+LSQ.length+' — click 🔊';
+  document.getElementById('listenHint').textContent='Question '+(liIdx%LSQ.length+1)+' of '+LSQ.length+' — click ';
   liLocked=false;
 }
-function playListen(){var q=LSQ[liIdx%LSQ.length];speak(q.w);document.getElementById('listenHint').textContent='🔊 "'+q.w+'"';}
+function playListen(){var q=LSQ[liIdx%LSQ.length];speak(q.w);document.getElementById('listenHint').textContent=' "'+q.w+'"';}
 function listenPick(img){
   if(liLocked)return;
   var q=LSQ[liIdx%LSQ.length];
@@ -1340,11 +1386,11 @@ function listenPick(img){
   if(img===q.ok){
     liLocked=true;
     document.querySelector('#listenOpts .pic-opt[data-img="'+img+'"]').classList.add('ok');
-    r.textContent='✅ Correct!';r.className='big-reply good';speak('Correct!');confetti(30);addScore(TURN,1);
+    r.textContent=' Correct!';r.className='big-reply good';speak('Correct!');confetti(30);addScore(TURN,1);
   }else{
     document.querySelector('#listenOpts .pic-opt[data-img="'+img+'"]').classList.add('no');
     document.querySelector('#listenOpts .pic-opt[data-img="'+q.ok+'"]').classList.add('ok');
-    r.textContent="❌ Listen again!";r.className='big-reply bad';speak("Listen again.");
+    r.textContent=" Listen again!";r.className='big-reply bad';speak("Listen again.");
   }
 }
 function nextListen(){liIdx++;renderListen();}
@@ -1356,19 +1402,19 @@ function renderHit(){
   var q=HITQ[hiIdx%HITQ.length];
   var h='';
   q.opts.forEach(function(im){
-    h+='<div class="occ" data-img="'+im+'" onclick="hitPick(\''+im+'\')"><img src="'+im+'" alt=""><div class="occ-cap">Hit me! ✋</div></div>';
+    h+='<div class="occ" data-img="'+im+'" onclick="hitPick(\''+im+'\')"><img src="'+im+'" alt=""><div class="occ-cap">Hit me! </div></div>';
   });
   document.getElementById('hitGrid').innerHTML=h;
   document.getElementById('hitReply').innerHTML='&nbsp;';
   document.getElementById('hitHint').textContent='Question '+(hiIdx%HITQ.length+1)+' of '+HITQ.length;
 }
-function playHit(){var q=HITQ[hiIdx%HITQ.length];speak(q.w);document.getElementById('hitHint').textContent='🔊 "'+q.w+'"';}
+function playHit(){var q=HITQ[hiIdx%HITQ.length];speak(q.w);document.getElementById('hitHint').textContent=' "'+q.w+'"';}
 function hitPick(im){
   var q=HITQ[hiIdx%HITQ.length];
   var r=document.getElementById('hitReply');
-  if(im===q.img){r.textContent='✅ '+q.cap;r.className='big-reply good';speak('Correct! '+q.cap);confetti(30);addScore(TURN,1);
+  if(im===q.img){r.textContent=' '+q.cap;r.className='big-reply good';speak('Correct! '+q.cap);confetti(30);addScore(TURN,1);
     document.querySelectorAll('#hitGrid .occ').forEach(function(e){e.style.pointerEvents='none';});}
-  else{r.textContent='❌ Try again!';r.className='big-reply bad';speak('Try again.');}
+  else{r.textContent=' Try again!';r.className='big-reply bad';speak('Try again.');}
 }
 function nextHit(){hiIdx++;renderHit();}
 
@@ -1400,7 +1446,7 @@ function updateDoll(){
   document.getElementById('dollImg').src=DOLLS[dDoll].img;
   document.getElementById('dollSentence').textContent=p+' is wearing '+t.w+' and '+b.w+'.';
 }
-function speakDoll(){var s=document.getElementById('dollSentence').textContent;speak(s);openCine('🗣️ MY DOLL',s);setTimeout(closeCine,3000);}
+function speakDoll(){var s=document.getElementById('dollSentence').textContent;speak(s);openCine(' MY DOLL',s);setTimeout(closeCine,3000);}
 function randomDoll(){dDoll=Math.floor(Math.random()*DOLLS.length);dTop=Math.floor(Math.random()*TOPS.length);dBot=Math.floor(Math.random()*BOTS.length);markPicks();updateDoll();speakDoll();confetti(20);}
 
 /* ============ team games ============ */
@@ -1413,13 +1459,13 @@ function buildGame(){
 }
 function speakGame(){speak(document.getElementById('gameOut').textContent);}
 var twIdx=0;
-function renderTw(){var t=TW[twIdx%TW.length];document.getElementById('twEmoji').textContent=t.e;document.getElementById('twStmt').textContent=t.s;
+function renderTw(){var t=TW[twIdx%TW.length];document.getElementById('twEmoji').innerHTML='<img src="'+t.p+'" alt="" loading="lazy">';document.getElementById('twStmt').textContent=t.s;
   document.getElementById('twTrue').disabled=false;document.getElementById('twFalse').disabled=false;document.getElementById('twResult').textContent='';}
 function twAnswer(val){
   var t=TW[twIdx%TW.length];var ok=val===t.ok;
   document.getElementById('twTrue').disabled=true;document.getElementById('twFalse').disabled=true;
   var r=document.getElementById('twResult');
-  r.innerHTML=ok?'✅ Correct! It is '+(t.ok?'right.':'silly!')+' +1 🎉':(t.ok?'❌ It IS right! 😊':'❌ It is silly! 🤡');
+  r.innerHTML=ok?' Correct! It is '+(t.ok?'right.':'silly!')+' +1 ':(t.ok?' It IS right! ':' It is silly! ');
   if(ok){confetti(25);addScore(TURN,1);speak('Correct!');}else{speak(t.ok?'It is right.':'It is silly.');}
 }
 function nextTw(){twIdx++;renderTw();}
@@ -1428,7 +1474,7 @@ function nextFreeze(){frIdx++;var s=FREEZE[frIdx%FREEZE.length];document.getElem
 
 /* ============ quiz: true/false ============ */
 var tfIdx=0,tfLocked=false;
-function renderTF(){var t=TF[tfIdx%TF.length];document.getElementById('tfEmoji').textContent=t.e;document.getElementById('tfStmt').textContent=t.s;
+function renderTF(){var t=TF[tfIdx%TF.length];document.getElementById('tfEmoji').innerHTML='<img src="'+t.p+'" alt="" loading="lazy">';document.getElementById('tfStmt').textContent=t.s;
   document.querySelectorAll('[data-sec="qz1"] .tf-btn').forEach(function(b){b.disabled=false;});
   document.getElementById('tfResult').textContent='';tfLocked=false;
   document.getElementById('tfProgress').textContent=QUIZ.tfDone+' / '+TF.length;}
@@ -1437,7 +1483,7 @@ function tfAnswer(val){
   var t=TF[tfIdx%TF.length];var ok=val===t.ok;
   document.querySelectorAll('[data-sec="qz1"] .tf-btn').forEach(function(b){b.disabled=true;});
   var r=document.getElementById('tfResult');
-  r.innerHTML=ok?'✅ Correct! +1':(t.ok?'❌ It is TRUE.':'❌ It is FALSE.');
+  r.innerHTML=ok?' Correct! +1':(t.ok?' It is TRUE.':' It is FALSE.');
   QUIZ.tfDone++;
   if(ok)QUIZ.tf++;
   updateQuizBoard();
@@ -1463,7 +1509,7 @@ function fillPick(o,el){
     fLocked=true;
     el.classList.add('selected');
     var b=document.getElementById('fillBlank');b.textContent=f.blank;b.classList.add('revealed');
-    document.getElementById('fillResult').innerHTML='✅ Correct!';
+    document.getElementById('fillResult').innerHTML=' Correct!';
     document.getElementById('fillResult').style.color='var(--green)';
     QUIZ.fillDone++;QUIZ.fill++;
     document.querySelectorAll('#fillOpts .fill-opt').forEach(function(x){x.classList.add('dis');});
@@ -1471,7 +1517,7 @@ function fillPick(o,el){
     updateQuizBoard();
   }else{
     el.classList.add('wrong');
-    document.getElementById('fillResult').innerHTML='❌ Try again!';
+    document.getElementById('fillResult').innerHTML=' Try again!';
     document.getElementById('fillResult').style.color='var(--red)';
     speak('Try again.');
   }
@@ -1481,7 +1527,7 @@ function nextFill(){fIdx++;renderFill();}
 /* ============ quiz: silly ============ */
 var tw2Idx=0,tw2Locked=false;
 function renderTw2(){var t=TW[tw2Idx%TW.length];
-  document.getElementById('tw2Emoji').textContent=t.e;document.getElementById('tw2Stmt').textContent=t.s;
+  document.getElementById('tw2Emoji').innerHTML='<img src="'+t.p+'" alt="" loading="lazy">';document.getElementById('tw2Stmt').textContent=t.s;
   document.querySelectorAll('[data-sec="qz3"] .tf-btn').forEach(function(b){b.disabled=false;});
   document.getElementById('tw2Result').textContent='';tw2Locked=false;
   document.getElementById('twProgress').textContent=QUIZ.twDone+' / '+TW.length;}
@@ -1489,7 +1535,7 @@ function tw2Answer(val){
   if(tw2Locked)return;tw2Locked=true;
   var t=TW[tw2Idx%TW.length];var ok=val===t.ok;
   document.querySelectorAll('[data-sec="qz3"] .tf-btn').forEach(function(b){b.disabled=true;});
-  document.getElementById('tw2Result').innerHTML=ok?'✅ Correct! +1':(t.ok?'❌ It IS right.':'❌ It is silly! 🤡');
+  document.getElementById('tw2Result').innerHTML=ok?' Correct! +1':(t.ok?' It IS right.':' It is silly! ');
   QUIZ.twDone++;if(ok)QUIZ.tw++;
   updateQuizBoard();
 }
@@ -1503,9 +1549,9 @@ function updateQuizBoard(){
   var done=QUIZ.tfDone+QUIZ.fillDone+QUIZ.twDone;
   var max=TF.length+FILL.length+TW.length;
   var pct=total/max;
-  document.getElementById('quizStars').textContent=done===0?'':(pct>=.9?'🌟🌟🌟':(pct>=.6?'🌟🌟':'🌟'));
-  document.getElementById('quizMsg').textContent=done===0?'Answer the questions to see your score!':(pct>=.9?'Outstanding! 🎉':(pct>=.6?'Great job! 👍':'Keep trying! 💪'));
-  if(done===max){confetti(80);speak('Great job!');toast('Quiz complete! 🎉 '+total+' out of '+max);}
+  document.getElementById('quizStars').textContent=done===0?'':(pct>=.9?'':(pct>=.6?'':''));
+  document.getElementById('quizMsg').textContent=done===0?'Answer the questions to see your score!':(pct>=.9?'Outstanding! ':(pct>=.6?'Great job! ':'Keep trying! '));
+  if(done===max){confetti(80);speak('Great job!');toast('Quiz complete!  '+total+' out of '+max);}
 }
 function resetQuiz(){QUIZ={tf:0,tfDone:0,fill:0,fillDone:0,tw:0,twDone:0};tfIdx=0;fIdx=0;tw2Idx=0;renderTF();renderFill();renderTw2();updateQuizBoard();toast('Quiz reset ↺');}
 
@@ -1533,8 +1579,8 @@ document.addEventListener('DOMContentLoaded',function(){
   renderOccs();renderListen();renderHit();renderDress();
   buildGame();renderTw();renderTF();renderFill();renderTw2();
   updateQuizBoard();renderScores();renderVoiceBtn();
-  var d=document.getElementById('die');d.setAttribute('data-n','0');
-  toast('Welcome to JD5 Unit 5! 👗');
+  var d=document.getElementById('die');d.setAttribute('data-n','0');renderDie(1);
+  toast('Welcome to JD5 Unit 5! ');
 });
 </script>
 </body>
