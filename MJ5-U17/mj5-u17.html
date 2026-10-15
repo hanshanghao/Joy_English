@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Magic Joy 5 · Unit 17 — Chore Champions · Do you usually…?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--teal:#2ec4b6;--ink:#3a2d4f;--paper:#fff7ea;--line:#e0d8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Baloo 2","Nunito","Comic Sans MS","Segoe UI",cursive,sans-serif;
+  background:linear-gradient(160deg,#fff0d9,#ffe9ef,#e2f6ff,#f3ffe4);background-size:300% 300%;
+  animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden;position:relative;font-weight:600}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+img{max-width:100%;display:block}
+button{font-family:inherit}
+::selection{background:#ff7ac6;color:#fff}
+
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:360px;height:360px;background:var(--orange);top:-110px;left:-70px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:300px;height:300px;background:var(--yellow);bottom:-90px;right:-70px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:280px;height:280px;background:var(--blue);top:42%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+.blob.b4{width:230px;height:230px;background:var(--pink);top:8%;right:14%;opacity:.32;animation:drift2 26s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(70px,90px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-80px,-70px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-28%,-32%)}}
+#floaties{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.floaty{position:absolute;font-size:26px;pointer-events:none;opacity:.5;animation:floatUp linear infinite;filter:drop-shadow(0 6px 10px rgba(90,60,170,.18))}
+@keyframes floatUp{0%{transform:translateY(112vh) rotate(-12deg) scale(.7);opacity:0}
+  10%{opacity:.55}50%{transform:translateY(40vh) rotate(10deg) scale(1.05)}
+  90%{opacity:.45}100%{transform:translateY(-14vh) rotate(-8deg) scale(.85);opacity:0}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-14px) rotate(8deg)}}
+@keyframes bob2{0%,100%{transform:translateY(0) rotate(6deg) scale(1)}50%{transform:translateY(-16px) rotate(-8deg) scale(1.06)}}
+@keyframes twinkle{0%,100%{transform:scale(.7) rotate(0);opacity:.5}50%{transform:scale(1.2) rotate(22deg);opacity:1}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.sky{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.sky>span{position:absolute;left:var(--x,10%);top:var(--y,20%);font-size:var(--fs,30px);line-height:1;
+  animation:var(--kf,bob) var(--t,9s) var(--dl,0s) ease-in-out infinite;will-change:transform;opacity:.96;filter:drop-shadow(0 8px 14px rgba(90,60,170,.2))}
+@keyframes flyX{0%{transform:translateX(-20vw) rotate(-8deg)}50%{transform:translateX(50vw) translateY(-18px) rotate(7deg)}100%{transform:translateX(120vw) rotate(-4deg)}}
+@keyframes flyXr{0%{transform:translateX(120vw) scaleX(-1) rotate(-6deg)}50%{transform:translateX(50vw) scaleX(-1) translateY(16px) rotate(5deg)}100%{transform:translateX(-20vw) scaleX(-1) rotate(-5deg)}}
+@keyframes rise{0%{transform:translateY(22vh) rotate(-6deg);opacity:0}10%{opacity:.95}50%{transform:translateY(-42vh) translateX(40px) rotate(8deg)}90%{opacity:.9}100%{transform:translateY(-128vh) translateX(-20px) rotate(-5deg);opacity:0}}
+
+.sticky-wrap{position:sticky;top:0;z-index:60;padding:10px 10px 0}
+.scorebar{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:2px solid #fff;border-radius:22px;padding:9px 12px;box-shadow:0 12px 30px rgba(120,90,190,.2)}
+.brand{font-weight:800;color:#5b3fd0;font-size:clamp(12px,1.9vw,15px);white-space:nowrap;padding-left:4px}
+.sb-teams{display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap}
+.team-card{display:flex;align-items:center;gap:9px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:6px 12px;transition:.3s;position:relative}
+.team-card .nm{font-weight:800;font-size:clamp(11px,1.7vw,14px);cursor:text;outline:none}
+.team-card .pt{font-weight:900;font-size:clamp(18px,3vw,26px);line-height:1;min-width:34px;text-align:center}
+.team-card.ta .pt{color:var(--blue)} .team-card.tb .pt{color:var(--orange)}
+.team-card.active{border-color:var(--yellow);box-shadow:0 0 0 4px rgba(255,212,71,.5);transform:translateY(-2px)}
+.team-card.flash-g{animation:fg .5s} .team-card.flash-b{animation:fb .5s}
+@keyframes fg{0%,100%{background:#fff}50%{background:#dbffd6}}
+@keyframes fb{0%,100%{background:#fff}50%{background:#ffdede}}
+.team-card.bump .pt{animation:bump .5s}
+@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.5) rotate(-8deg)}100%{transform:scale(1)}}
+.turn-box{display:flex;flex-direction:column;align-items:center;gap:4px}
+.turn-btn{background:linear-gradient(140deg,#ffd166,#f5822b);border:0;color:#fff;font-weight:900;border-radius:14px;
+  padding:8px 14px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.16);font-size:clamp(11px,1.7vw,13px)}
+.turn-btn:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.16)}
+.auto-row{display:flex;align-items:center;gap:5px;font-size:10.5px;color:#7a6d99;font-weight:700}
+.pts-sel{border:2px solid var(--line);border-radius:10px;padding:4px 6px;font-weight:800;font-size:12px;background:#fff;color:var(--purple)}
+.sb-tools{display:flex;gap:8px}
+.icon-btn{width:40px;height:40px;border-radius:13px;border:2px solid var(--line);background:#fff;font-size:18px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.icon-btn:hover{background:#f6f0ff;transform:translateY(-2px)}
+.leader{display:flex;gap:6px;align-items:center;font-size:11px;font-weight:800;color:#7a6d99;margin-left:4px}
+
+.navbar{max-width:1180px;margin:8px auto 0;display:flex;gap:8px;overflow-x:auto;padding:6px 2px 10px;scrollbar-width:thin}
+.navbar::-webkit-scrollbar{height:6px}.navbar::-webkit-scrollbar-thumb{background:#d9cdf5;border-radius:6px}
+.ntab{flex-shrink:0;padding:9px 15px;border:2px solid var(--line);border-radius:50px;background:rgba(255,255,255,.85);
+  font-weight:800;font-size:clamp(11px,1.7vw,13.5px);color:#6b5aa8;cursor:pointer;transition:.2s;white-space:nowrap}
+.ntab:hover{transform:translateY(-2px);color:var(--pink)}
+.ntab.on{background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(240,79,155,.35)}
+
+main{position:relative;z-index:1}
+.tabpan{display:none;padding:16px 14px 60px;max-width:1120px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+section{background:rgba(255,255,255,.82);border-radius:26px;padding:22px;margin:18px 0;box-shadow:0 8px 22px rgba(120,90,190,.12);border:1px solid #fff}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:30px;animation:bob 4s ease-in-out infinite}
+.shead h2{font-size:clamp(19px,3.6vw,28px);font-weight:800;color:var(--purple)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(10px,1.7vw,13px);font-weight:800;padding:4px 12px;border-radius:30px}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.55;margin:12px 0}
+.tip b{color:var(--orange)}
+.sbtnrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border:none;border-radius:50px;font-size:clamp(13px,2vw,15.5px);
+  font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1,#b28dff),var(--c2,#8b5cf0));
+  box-shadow:0 5px 0 rgba(0,0,0,.16),0 8px 16px rgba(0,0,0,.1);transition:.14s;position:relative;top:0}
+.btn:hover{top:-2px;box-shadow:0 7px 0 rgba(0,0,0,.16),0 12px 20px rgba(0,0,0,.14)}
+.btn:active{top:3px;box-shadow:0 2px 0 rgba(0,0,0,.16)}
+.btn.green{--c1:#7ce577;--c2:#37a832}.btn.orange{--c1:#ffab6e;--c2:#f5822b}.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}.btn.purple{--c1:#b28dff;--c2:#8b5cf0}.btn.red{--c1:#ff8a8a;--c2:#e04040}
+.btn.dark{--c1:#9aa0b5;--c2:#5b6178}.btn.teal{--c1:#67e8dc;--c2:#19a795}
+.mini-info{display:inline-block;background:#fff;border:2px solid var(--line);border-radius:30px;padding:6px 14px;font-size:clamp(11px,1.7vw,13px);font-weight:800;color:#7a6d99}
+
+.hero{text-align:center;padding:26px 16px 20px;border-radius:26px;margin:0 0 18px;
+  background:linear-gradient(135deg,rgba(245,130,43,.16),rgba(240,79,155,.12),rgba(74,158,224,.1));box-shadow:0 8px 22px rgba(120,90,190,.1)}
+.hero .big-emoji{font-size:clamp(52px,11vw,88px);line-height:1;display:block;margin-bottom:8px;animation:bounce 2.6s ease-in-out infinite}
+.hero h1{font-size:clamp(23px,5vw,42px);font-weight:800;margin-bottom:8px;color:#2b2160}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--orange),var(--pink));color:#fff;padding:7px 22px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:800}
+.hero .desc{margin-top:12px;font-size:clamp(13px,2vw,16px);color:#6b5aa8;font-weight:700}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.framed{background:#fff;border:3px solid #fff;border-radius:20px;padding:10px;box-shadow:0 10px 24px rgba(120,90,190,.16)}
+.framed img{border-radius:14px;cursor:zoom-in}
+.framed figcaption{text-align:center;font-weight:800;color:#7a6d99;font-size:12.5px;margin-top:8px}
+
+.tl{list-style:none;position:relative;padding-left:30px}
+.tl li{position:relative;padding:8px 0 8px 6px;font-weight:700;line-height:1.5}
+.tl li::before{content:"";position:absolute;left:-24px;top:14px;width:12px;height:12px;border-radius:50%;background:linear-gradient(140deg,var(--orange),var(--pink));box-shadow:0 0 0 4px rgba(240,79,155,.15)}
+.tl li::after{content:"";position:absolute;left:-19px;top:26px;bottom:-8px;width:2px;background:repeating-linear-gradient(var(--line),var(--line) 4px,transparent 4px,transparent 8px)}
+.tl li:last-child::after{display:none}
+
+.dlg{display:flex;gap:10px;align-items:flex-start;margin:10px 0}
+.dlg .av{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:24px;flex-shrink:0;background:#fff;border:2px solid var(--line)}
+.dlg .bub{background:#fff;border:2px solid var(--line);border-radius:16px;padding:11px 15px;font-weight:700;line-height:1.5;cursor:pointer;transition:.2s;position:relative}
+.dlg .bub:hover{background:#fff7fb;transform:translateX(3px)}
+.dlg .vtag{font-size:10.5px;font-weight:800;color:#a99ed0;display:block;margin-bottom:3px}
+.dlg.g .av{background:#fff0f7;border-color:#ffcfe6}.dlg.b .av{background:#eef6ff;border-color:#c9e3ff}
+.dlg.p .av{background:#f3fff0;border-color:#cdf0c7}.dlg.o .av{background:#fff6e9;border-color:#ffe0b8}
+.dlg.hl .bub{background:#fffbe8;border-color:var(--yellow);box-shadow:0 0 0 3px rgba(255,212,71,.35)}
+
+.strip{background:#fff;border:2px solid var(--line);border-radius:14px;padding:11px 14px;font-weight:700;cursor:pointer;transition:.2s;margin:7px 0;display:flex;gap:10px;align-items:center}
+.strip:hover{border-color:var(--pink);transform:translateY(-2px);box-shadow:0 8px 18px rgba(240,79,155,.18)}
+.strip .who{font-size:11px;font-weight:800;color:var(--purple);background:#f2ecff;border-radius:20px;padding:3px 10px;flex-shrink:0}
+.strip.used{opacity:.35;pointer-events:none}
+.slotbox{border:3px dashed var(--line);border-radius:16px;min-height:56px;padding:6px 10px;margin:7px 0;transition:.2s;background:rgba(255,255,255,.5)}
+.slotbox .ph{color:#b3a9d8;font-weight:700;padding:12px 6px}
+.slotbox.ok{border-color:var(--green);background:#f0fff0}.slotbox.bad{border-color:var(--red);background:#fff0f0;animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+.vocab-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px 12px;text-align:center;cursor:pointer;transition:.25s;position:relative}
+.vocab-card:hover{transform:translateY(-6px) rotate(-1deg);box-shadow:0 16px 30px rgba(120,90,190,.22);border-color:var(--pink)}
+.vocab-card .em{font-size:52px;line-height:1;margin-bottom:8px;display:block;animation:bob 4s ease-in-out infinite}
+.vocab-card .w{font-weight:800;color:#2b2160;font-size:clamp(14px,2vw,18px)}
+.vocab-card .w3{font-weight:700;color:var(--teal);font-size:12.5px;margin-top:2px}
+.vocab-card .spk{position:absolute;top:8px;right:10px;font-size:15px;opacity:.55}
+
+.pattern-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;box-shadow:0 8px 20px rgba(120,90,190,.1)}
+.pattern-card .pl{font-weight:800;font-size:clamp(15px,2.4vw,20px);color:#2b2160;line-height:1.5}
+.pattern-card .pl .k1{color:var(--blue)}.pattern-card .pl .k2{color:var(--pink)}.pattern-card .pl .k3{color:var(--orange)}.pattern-card .pl .k4{color:var(--teal)}
+.pe{background:#f7f4ff;border-left:6px solid var(--purple);border-radius:12px;padding:10px 14px;margin:8px 0;font-weight:700;cursor:pointer;transition:.2s}
+.pe:hover{background:#efe9ff;transform:translateX(3px)}
+.pe .yes{color:var(--green)}.pe .no{color:var(--red)}
+
+.sub-machine{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.sm-cell{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 10px}
+.sm-cell label{display:block;font-size:11px;font-weight:800;color:#a99ed0;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.sm-cell select{width:100%;border:2px solid var(--line);border-radius:10px;padding:8px;font-weight:800;color:var(--purple);background:#faf7ff;font-size:14px}
+.sub-out{background:linear-gradient(140deg,#f2ecff,#fff);border:3px solid #fff;border-radius:18px;padding:16px;text-align:center;font-weight:800;font-size:clamp(15px,2.6vw,22px);color:#2b2160;min-height:70px;display:flex;align-items:center;justify-content:center;line-height:1.5;box-shadow:0 8px 20px rgba(120,90,190,.12)}
+.sub-out .q{color:var(--blue)}.sub-out .a{color:var(--green)}
+
+.sort-pool,.sort-boxes{display:flex;gap:12px;flex-wrap:wrap}
+.sort-boxes{margin-top:14px}
+.sort-box{flex:1;min-width:150px;border:3px dashed var(--line);border-radius:16px;padding:12px;min-height:120px;text-align:center}
+.sort-box h4{font-size:15px;color:var(--purple);margin-bottom:8px}
+.sort-box.a{background:#eef6ff}.sort-box.b{background:#fff0f7}.sort-box.c{background:#f3fff0}
+.chipword{background:#fff;border:2px solid var(--line);border-radius:30px;padding:9px 16px;font-weight:800;cursor:pointer;transition:.2s}
+.chipword:hover{transform:translateY(-3px);border-color:var(--pink)}
+.chipword.sel{border-color:var(--purple);box-shadow:0 0 0 4px rgba(139,92,240,.2)}
+.chipword.placed{background:#f0fff0;border-color:var(--green)}
+
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.obj{background:#fff;border:2px solid var(--line);border-radius:18px;padding:14px 10px;text-align:center;cursor:pointer;transition:.2s;position:relative}
+.obj:hover{transform:translateY(-5px);box-shadow:0 14px 26px rgba(120,90,190,.2)}
+.obj .em{font-size:44px;display:block}
+.obj .nm{font-weight:800;margin-top:6px;font-size:13.5px;color:#2b2160}
+.obj.tapped{animation:tapok .5s;border-color:var(--green)}
+@keyframes tapok{0%{transform:scale(1)}40%{transform:scale(1.16) rotate(4deg)}100%{transform:scale(1)}}
+.obj.gone{opacity:.18;filter:grayscale(1)}
+.big-reply{text-align:center;font-weight:800;font-size:clamp(16px,2.8vw,24px);color:var(--purple);margin:12px 0;min-height:34px}
+.big-reply.swipe{animation:swipeIn .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes swipeIn{0%{transform:translateX(48px) rotate(2deg);opacity:0}60%{transform:translateX(-6px)}100%{transform:translateX(0);opacity:1}}
+.big-ans{text-align:center;font-weight:800;font-size:clamp(15px,2.6vw,22px);color:var(--green);margin:10px 0;min-height:30px}
+
+.miss-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+.miss-card{background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px 8px;text-align:center;transition:.3s}
+.miss-card .em{font-size:42px;display:block}
+.miss-card.gone{background:#eee8ff;border-style:dashed;color:#b3a9d8}
+.miss-card.gone .em{opacity:.12}
+
+.balloon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px}
+.balloon{aspect-ratio:.85;border-radius:50% 50% 46% 46%;display:grid;place-items:center;cursor:pointer;font-weight:800;color:#fff;font-size:20px;position:relative;
+  box-shadow:inset -8px -10px 20px rgba(0,0,0,.12),0 10px 20px rgba(120,90,190,.18);transition:.25s;border:0}
+.balloon:hover{transform:translateY(-6px) scale(1.04)}
+.balloon::after{content:"";position:absolute;bottom:-12px;width:2px;height:14px;background:#c9bfe8}
+.balloon.pop{transform:scale(1.4);opacity:0;pointer-events:none}
+.bq{text-align:center;font-weight:800;font-size:clamp(15px,2.6vw,22px);color:#2b2160;background:#fffbe8;border:3px dashed var(--yellow);border-radius:16px;padding:16px;margin:12px 0;min-height:40px}
+
+.rc-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px;margin:12px 0}
+.rc-card .prompt{font-weight:800;font-size:clamp(14px,2.2vw,18px);color:#2b2160;margin-bottom:10px;cursor:pointer}
+.rc-card .prompt .spk{color:var(--blue)}
+.rc-opt{display:block;width:100%;text-align:left;background:#faf8ff;border:2px solid var(--line);border-radius:14px;padding:11px 14px;font-weight:700;font-size:clamp(13px,2vw,16px);cursor:pointer;margin:7px 0;transition:.2s;color:#4a3f6a}
+.rc-opt:hover{border-color:var(--purple);transform:translateX(3px)}
+.rc-opt.ok{background:#e6ffe6;border-color:var(--green)}
+.rc-opt.dis{background:#ffecec;border-color:var(--red);opacity:.7}
+
+.mm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px}
+.mm-card{perspective:800px;aspect-ratio:1;cursor:pointer}
+.mm-inner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.mm-card.flip .mm-inner{transform:rotateY(180deg)}
+.mm-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;display:grid;place-items:center;border:2px solid var(--line);text-align:center;padding:6px}
+.mm-back{background:linear-gradient(140deg,var(--purple),var(--blue));color:#fff;font-size:34px}
+.mm-front{background:#fff;transform:rotateY(180deg);font-weight:800;font-size:13px;color:#2b2160}
+.mm-card.done{opacity:.45;pointer-events:none}
+
+.scr-tiles{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:12px 0}
+.scr-slot{min-width:46px;height:52px;border:3px dashed var(--line);border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:24px;color:var(--purple);background:rgba(255,255,255,.6);text-transform:lowercase}
+.scr-chip{min-width:46px;height:52px;border:2px solid var(--line);border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:24px;background:#fff;cursor:pointer;transition:.2s;color:#2b2160}
+.scr-chip:hover{transform:translateY(-4px);border-color:var(--pink)}
+.scr-chip.used{opacity:.25;pointer-events:none}
+
+.keypad{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:520px;margin:12px auto}
+.keypad button{padding:11px 0;border:2px solid var(--line);border-radius:12px;background:#fff;font-weight:800;font-size:15px;cursor:pointer;color:#5b3fd0;transition:.15s}
+.keypad button:hover{background:#f2ecff;transform:translateY(-2px)}
+.spell-out{text-align:center;letter-spacing:.18em;font-weight:800;font-size:clamp(20px,4vw,34px);color:#2b2160;min-height:44px;background:#faf8ff;border:3px dashed var(--line);border-radius:16px;padding:10px;margin:12px 0}
+
+.qz-flag{display:inline-block;background:#fff;border:2px solid var(--line);border-radius:14px;padding:4px 12px;font-weight:800;color:#7a6d99;font-size:12px}
+.listen-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px;margin:12px 0}
+.listen-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:12px}
+.listen-opt{background:#faf8ff;border:2px solid var(--line);border-radius:14px;padding:14px;font-weight:800;cursor:pointer;text-align:center;color:#4a3f6a;transition:.2s}
+.listen-opt:hover{border-color:var(--purple);transform:translateY(-3px)}
+.listen-opt.ok{background:#e6ffe6;border-color:var(--green)}
+.listen-opt.dis{background:#ffecec;border-color:var(--red);opacity:.7}
+.tf-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;text-align:center}
+.tf-card .tf-emoji{font-size:52px}
+.tf-stmt{font-weight:800;font-size:clamp(15px,2.4vw,20px);color:#2b2160;margin:10px 0;cursor:pointer;line-height:1.5}
+.fill-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px;margin:12px 0}
+.fill-card .fill-sent{font-weight:800;font-size:clamp(14px,2.2vw,18px);color:#2b2160;line-height:1.7}
+.fill-blank{display:inline-block;min-width:110px;border-bottom:3px solid var(--purple);text-align:center;color:var(--purple)}
+.fill-opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+
+.score-board{text-align:center;background:#fff;border:3px solid #fff;border-radius:24px;padding:22px;box-shadow:0 14px 34px rgba(120,90,190,.2);margin-top:16px}
+.score-big{font-size:clamp(38px,9vw,72px);font-weight:900;color:var(--orange)}
+.score-stars{font-size:32px;margin:6px 0;letter-spacing:6px}
+
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.tool-card{background:#fff;border:2px solid var(--line);border-radius:20px;padding:18px;text-align:center;box-shadow:0 8px 20px rgba(120,90,190,.1)}
+.tool-card h3{color:var(--purple);font-size:17px;margin-bottom:10px}
+.timer-big{font-size:clamp(38px,9vw,68px);font-weight:900;color:var(--orange);letter-spacing:2px}
+.dice-out{font-size:64px;line-height:1;margin:8px 0;min-height:70px}
+.picker-name{font-size:clamp(22px,5vw,34px);font-weight:900;color:var(--pink);min-height:44px;margin:10px 0}
+.roster-ta{width:100%;min-height:120px;border:2px solid var(--line);border-radius:14px;padding:10px;font-family:inherit;font-weight:700;font-size:14px;resize:vertical}
+
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);background:#2b2160;color:#fff;font-weight:800;padding:13px 24px;border-radius:50px;z-index:200;transition:.4s;box-shadow:0 14px 34px rgba(0,0,0,.3);max-width:90vw;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+.mascot{position:fixed;right:16px;bottom:16px;font-size:52px;cursor:pointer;z-index:120;animation:bob 3.4s ease-in-out infinite;filter:drop-shadow(0 10px 16px rgba(120,90,190,.3))}
+.fab-wrap{position:fixed;left:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:120}
+.fab{width:46px;height:46px;border-radius:50%;border:2px solid #fff;background:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center;box-shadow:0 10px 22px rgba(120,90,190,.28);text-decoration:none;transition:.2s}
+.fab:hover{transform:translateY(-3px) scale(1.06)}
+.lightbox{position:fixed;inset:0;background:rgba(40,25,70,.86);display:none;place-items:center;z-index:300;padding:20px}
+.lightbox.show{display:grid;animation:fadeup .3s}
+.lightbox img{max-width:94vw;max-height:88vh;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lb-close{position:absolute;top:18px;right:22px;font-size:34px;background:none;border:0;color:#fff;cursor:pointer}
+.confetti-piece{position:fixed;top:-40px;font-size:22px;z-index:400;pointer-events:none;animation:confFall linear forwards}
+@keyframes confFall{to{transform:translateY(112vh) rotate(720deg)}}
+
+@media(max-width:820px){.sb-teams{width:100%}.navbar{margin-top:6px}.tl{padding-left:26px}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
+<div class="sky" aria-hidden="true">
+  <span style="--x:2%;--y:12%;--fs:40px;--kf:flyX;--t:52s;--dl:-6s">🧹</span>
+  <span style="--x:2%;--y:66%;--fs:44px;--kf:flyXr;--t:60s;--dl:-22s">🧽</span>
+  <span style="--x:2%;--y:34%;--fs:38px;--kf:flyX;--t:46s;--dl:-12s">📰</span>
+  <span style="--x:2%;--y:82%;--fs:42px;--kf:flyXr;--t:68s;--dl:-30s">🐕</span>
+  <span style="--x:78%;--y:20%;--fs:40px;--kf:rise;--t:16s;--dl:-3s">🌸</span>
+  <span style="--x:60%;--y:70%;--fs:36px;--kf:rise;--t:20s;--dl:-9s">🪣</span>
+  <span style="--x:20%;--y:56%;--fs:34px;--kf:rise;--t:18s;--dl:-6s">🪴</span>
+  <span style="--x:88%;--y:52%;--fs:32px;--kf:rise;--t:22s;--dl:-14s">🧼</span>
+  <span style="--x:12%;--y:24%;--fs:30px;--kf:twinkle;--t:3.4s">✨</span>
+  <span style="--x:70%;--y:14%;--fs:30px;--kf:twinkle;--t:3s;--dl:-1.4s">✨</span>
+  <span style="--x:42%;--y:12%;--fs:34px;--kf:bob;--t:6.5s;--dl:-2s">🧺</span>
+  <span style="--x:50%;--y:86%;--fs:32px;--kf:bob2;--t:5.5s;--dl:-1s">🧴</span>
+</div>
+<div id="floaties" aria-hidden="true"></div>
+
+<div class="sticky-wrap">
+  <div class="scorebar">
+    <div class="brand">🧹 MJ5 · U17 · Chores &amp; Frequency</div>
+    <div class="sb-teams">
+      <div class="team-card ta" id="cardA"><span class="nm" contenteditable="true" id="nameA">Team A</span><span class="pt" id="ptA">0</span></div>
+      <div class="turn-box">
+        <button class="turn-btn" id="turnBtn" onclick="swapTurn()">🎯 Team A's turn</button>
+        <label class="auto-row"><input type="checkbox" id="autoTurn" checked> auto-turn</label>
+      </div>
+      <div class="team-card tb" id="cardB"><span class="nm" contenteditable="true" id="nameB">Team B</span><span class="pt" id="ptB">0</span></div>
+      <select class="pts-sel" id="ptsSel" onchange="PER=+this.value"><option value="1">1 pt</option><option value="2" selected>2 pts</option><option value="3">3 pts</option></select>
+      <span class="leader" id="leaderChip"></span>
+    </div>
+    <div class="sb-tools">
+      <button class="icon-btn" id="globalSound" title="Sound on/off">🔊</button>
+      <button class="icon-btn" onclick="toggleFs()" title="Fullscreen">⛶</button>
+      <button class="icon-btn" onclick="resetScores()" title="Reset scores">♻</button>
+    </div>
+  </div>
+  <div class="navbar" id="navBar">
+    <button class="ntab on" data-i="0">📖 Plan</button>
+    <button class="ntab" data-i="1">🎯 Warm-Up</button>
+    <button class="ntab" data-i="2">🎭 Dialogue</button>
+    <button class="ntab" data-i="3">🎬 Role Play</button>
+    <button class="ntab" data-i="4">🌳 Climb the Tree</button>
+    <button class="ntab" data-i="5">🗣️ Vocabulary</button>
+    <button class="ntab" data-i="6">🎭 Action Fun</button>
+    <button class="ntab" data-i="7">🧩 Patterns</button>
+    <button class="ntab" data-i="8">🔤 The -s Rule</button>
+    <button class="ntab" data-i="9">🔡 Phonics</button>
+    <button class="ntab" data-i="10">⌨️ Spelling</button>
+    <button class="ntab" data-i="11">🔀 Scramble</button>
+    <button class="ntab" data-i="12">👻 Missing?</button>
+    <button class="ntab" data-i="13">🎈 Balloons</button>
+    <button class="ntab" data-i="14">📝 Read &amp; Choose</button>
+    <button class="ntab" data-i="15">🃏 Quiz</button>
+    <button class="ntab" data-i="16">🧰 Tools</button>
+  </div>
+</div>
+
+<main>
+
+<div class="tabpan on" id="tp0">
+  <div class="hero">
+    <span class="big-emoji">🧹🐕📰</span>
+    <h1>Magic Joy 5 · Unit 17</h1>
+    <span class="sub">Do You Usually…? · Chores &amp; Frequency</span>
+    <div class="desc">Warm-up (5) → Dialogue (15) → Vocabulary (15) → Patterns (15) = 50 minutes</div>
+  </div>
+
+  <section>
+    <div class="shead"><span class="ic">📖</span><h2>Lesson Overview</h2><span class="badge">Teacher's Manual</span></div>
+    <div class="grid2">
+      <div class="framed" style="background:linear-gradient(150deg,#fff7de,#fff)"><h3 style="color:var(--orange)">Hour 1 · 50 min</h3>
+        <ul class="tl">
+          <li>Warm-up + Magic Words — 5 min</li>
+          <li>Dialogue — 15 min</li>
+          <li>Vocabulary — 15 min</li>
+          <li>Patterns — 15 min</li>
+        </ul>
+      </div>
+      <div class="framed" style="background:linear-gradient(150deg,#e9f8ff,#fff)"><h3 style="color:var(--blue)">Hour 2 · 50 min</h3>
+        <ul class="tl">
+          <li>Warm-up — 5 min</li>
+          <li>Review Patterns — 10 min</li>
+          <li>Songs — 10 min</li>
+          <li>Phonics (bl · pl · sl) — 15 min</li>
+          <li>Quiz + Contact Book — 10 min</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🎯</span><h2>Teaching Objectives</h2><span class="badge">U17</span></div>
+    <ul class="tl">
+      <li>Understand and read aloud the dialogue about chores.</li>
+      <li>Listen to, recite, and read the dialogue fluently.</li>
+      <li>Learn the vocabulary: <b>sweep the floor · wipe the table · walk the dog · read the newspaper · water the flowers</b>.</li>
+      <li>Ask and answer <b>yes/no questions about frequency</b> with <b>do / don't + usually</b>.</li>
+      <li>Use the frequency adverbs: <b>always · usually · often · sometimes · seldom · never</b>.</li>
+      <li>Preview the third-person <b>-s</b> verb forms: sweeps · wipes · walks · reads · waters.</li>
+    </ul>
+    <div class="tip">🗣️ <b>Magic Words:</b> “To the top!” (超越巅峰!) and “Keep it up!” (继续努力!) — cheer your teams on!</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🔍</span><h2>Difficulties &amp; Reminders</h2><span class="badge">Watch out!</span></div>
+    <ul class="tl">
+      <li>Some students forget the ending <b>-s</b> in “water<b>s</b> the flowers” and the word <b>the</b> in “read <b>the</b> newspaper”.</li>
+      <li>Some students misplace <b>usually</b> in a negative answer: ❌ <i>No, I usually don't.</i> → ✅ <i>No, I don't usually sweep the floor in the morning.</i></li>
+      <li>We say <b>in</b> the morning / <b>in</b> the afternoon / <b>in</b> the evening, but <b>at</b> night. Don't forget!</li>
+      <li>Each student gets only one shot with the sticky ball per round — more English, less throwing!</li>
+    </ul>
+    <div class="grid2">
+      <div class="framed"><h3 style="color:var(--purple)">🧰 Teaching Aids</h3>
+        <p style="font-weight:700;line-height:1.6">Dialogue Poster · flashcards · a broom · a toy dog on a leash · a watering can · a newspaper · a rag · sticky ball · sentence strips (Appendix 17-1).</p>
+      </div>
+      <div class="framed"><h3 style="color:var(--purple)">🏠 Homework</h3>
+        <p style="font-weight:700;line-height:1.6">MJ U17–18 · MP U17–18 · Act(A) U17 · Notebook: Voc + Patt · Memorize U17 · Point &amp; Say · Record · Contact Book continuation slip.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="sbtnrow"><button class="btn orange" data-say="Welcome to unit seventeen! Today we talk about chores and how often we do them. Are you ready? To the top!" data-voice="girl">🔊 Welcome to Unit 17</button></div>
+</div>
+
+<div class="tabpan" id="tp1">
+  <section>
+    <div class="shead"><span class="ic">🎯</span><h2>Warm-Up · Rebuild the Dialogue</h2><span class="badge">5 minutes</span></div>
+    <div class="tip">Split the class into two teams. Each team rearranges the sentence strips to rebuild the Unit 16 dialogue. The faster team wins — show the <b>“Keep it up!”</b> card to the other team.</div>
+    <div class="grid2">
+      <div class="framed"><img src="Dialogue%20Activity.png" alt="Dialogue Activity — Read, Drag and Say"></div>
+      <div class="framed"><img src="Activity%20Suggestion.png" alt="Activity Suggestion"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧩</span><h2>Rebuild &amp; Say</h2><span class="badge">Tap to build</span></div>
+    <p style="font-weight:700;color:#6b5aa8;margin-bottom:10px">Tap a strip to drop it into the next slot. Tap a placed strip to send it back. Then press <b>Check</b>.</p>
+    <div id="warmSlots"></div>
+    <div id="warmPool"></div>
+    <div class="sbtnrow">
+      <button class="btn purple" onclick="warmCheck()">✅ Check</button>
+      <button class="btn blue" data-say="Jane, sweep the floor. Peter, walk the dog.">🔊 Say it (British ♀)</button>
+      <button class="btn dark" onclick="warmReset()">🔄 Shuffle</button>
+    </div>
+    <div class="big-ans" id="warmOut"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp2">
+  <section>
+    <div class="shead"><span class="ic">🎭</span><h2>Dialogue · At Home in the Tree House</h2><span class="badge">15 minutes</span></div>
+    <div class="grid2">
+      <div class="framed" style="grid-column:1/-1"><img src="Dia1.png" alt="Unit 17 Dialogue Poster"><figcaption>Unit 17 Dialogue — tap the picture to zoom · tap a line to hear it</figcaption></div>
+    </div>
+    <div id="dlgList"></div>
+    <div class="sbtnrow">
+      <button class="btn orange" onclick="playAllDialog()">▶️ Play whole dialogue (British voices)</button>
+      <button class="btn dark" onclick="speakStop()">⏹️ Stop</button>
+    </div>
+    <div class="tip">💡 <b>Background story:</b> Back home from Mount Rushmore, Peter and Jane have only just settled when Mother climbs up to the tree house. They tell Mia to hide, then Mother gives them their chores — and kind Mia helps them finish!</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🔍</span><h2>Dialogue Detective</h2><span class="badge">Comprehension</span></div>
+    <p style="font-weight:700;color:#6b5aa8;margin-bottom:10px">Tap a question to hear it, reveal the answer card, then award the team.</p>
+    <div id="detQs"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp3">
+  <section>
+    <div class="shead"><span class="ic">🎬</span><h2>Role Play</h2><span class="badge">Practice</span></div>
+    <div class="tip">Divide the class into three groups. The teacher plays Mother; students play <b>Mia, Peter and Jane</b>. Swap roles until every group has played every role. Walk around, check pronunciation and encourage!</div>
+    <div id="roleList"></div>
+    <div class="sbtnrow">
+      <button class="btn pink" onclick="playRole('girl')">🔊 Read with Female voice</button>
+      <button class="btn blue" onclick="playRole('boy')">🔊 Read with Male voice</button>
+      <button class="btn dark" onclick="speakStop()">⏹️ Stop</button>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp4">
+  <section>
+    <div class="shead"><span class="ic">🌳</span><h2>Climb the Tree</h2><span class="badge">True or False</span></div>
+    <div class="tip">Draw a tree with numbered branches. Two magnets (Team A / Team B) start at the base. Read a statement — the called student stands and says <b>True</b> or <b>False</b>. Correct answers move that team's magnet up a branch. First to the top wins!</div>
+    <div class="tree-wrap" style="display:flex;gap:18px;align-items:flex-end;justify-content:center;margin:18px 0;flex-wrap:wrap">
+      <div class="team-card ta"><span class="nm">Team A magnet</span><span class="pt" id="treeA">0</span></div>
+      <div style="font-size:70px;line-height:1">🌳</div>
+      <div class="team-card tb"><span class="nm">Team B magnet</span><span class="pt" id="treeB">0</span></div>
+    </div>
+    <div class="bq" id="tfStmt">Press “New statement”.</div>
+    <div class="sbtnrow">
+      <button class="btn green" onclick="tfAnswer(true)">✅ True</button>
+      <button class="btn red" onclick="tfAnswer(false)">❌ False</button>
+      <button class="btn purple" onclick="tfNext()">➡️ New statement</button>
+      <button class="btn blue" data-say="Peter usually walks the dog in the morning." data-voice="boy">🔊 Hear statement</button>
+    </div>
+    <div class="big-ans" id="tfOut"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp5">
+  <section>
+    <div class="shead"><span class="ic">🗣️</span><h2>Vocabulary · Chores</h2><span class="badge">15 minutes</span></div>
+    <div class="grid2">
+      <div class="framed"><img src="Vocabulary.png" alt="Unit 17 Vocabulary — Listen, point and say"></div>
+      <div class="framed" style="display:flex;flex-direction:column;justify-content:center">
+        <h3 style="color:var(--purple);margin-bottom:8px">Flashcards + Act It Out</h3>
+        <p style="font-weight:700;line-height:1.6;color:#6b5aa8">Act out each phrase as you say it. Show the picture side and have students act and say the words. Use phonics rules to sound out the spellings as you write them on the board.</p>
+      </div>
+    </div>
+    <div class="vocab-grid grid3" id="vocabGrid" style="margin-top:16px"></div>
+    <div class="sbtnrow">
+      <button class="btn orange" onclick="actRandom()">🎲 Random action</button>
+      <button class="btn green" onclick="actAll()">🔊 Say all (male)</button>
+      <button class="btn pink" onclick="actAllF()">🔊 Say all (female)</button>
+    </div>
+    <p style="text-align:center;font-weight:700;color:#6b5aa8;margin-top:6px">💡 Tip: <b>swipe</b> the word left or right to shuffle the next chore — no repeats!</p>
+    <div class="big-reply" id="actReply"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp6">
+  <section>
+    <div class="shead"><span class="ic">🎭</span><h2>Action Fun · Charades</h2><span class="badge">Pairs</span></div>
+    <div class="tip">Divide the class into pairs. Show a card and have students act it out — the first student to guess and spell the phrase wins a point. Play Paper–Scissors–Stone to decide who acts!</div>
+    <div class="bq" id="charadeClue">🤫 Press “New charade” — act it out, don't say the words!</div>
+    <div class="sbtnrow">
+      <button class="btn purple" onclick="charadeNew()">🎬 New charade</button>
+      <button class="btn blue" onclick="charadeReveal()">👀 Reveal answer</button>
+      <button class="btn green" data-say="Excellent! Well done!" data-voice="girl">🎉 Praise team</button>
+    </div>
+    <div class="big-ans" id="charadeOut"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp7">
+  <section>
+    <div class="shead"><span class="ic">🧩</span><h2>Patterns · Frequency Questions</h2><span class="badge">15 minutes</span></div>
+    <div class="grid2">
+      <div class="framed"><img src="Patterns.png" alt="Unit 17 Patterns — Listen, look and say"></div>
+      <div class="framed"><img src="Activity%20Sample.png" alt="Pattern sample"></div>
+    </div>
+    <div class="pattern-card">
+      <div class="pl"><span class="k1">Do</span> you / they <span class="k2">usually</span> <span class="k3">read the newspaper</span> <span class="k4">at night?</span></div>
+      <div class="pe" data-say="Do you usually read the newspaper at night?" data-voice="girl">❓ Do you usually read the newspaper at night?</div>
+      <div class="pe" data-say="Yes, I usually read the newspaper at night." data-voice="girl"><span class="yes">✅ Yes, I usually read the newspaper at night.</span> / Yes, I do.</div>
+      <div class="pe" data-say="No, I don't usually read the newspaper at night." data-voice="girl"><span class="no">❌ No, I don't usually read the newspaper at night.</span> / No, I don't.</div>
+      <div class="pe" data-say="They usually walk the dog on Sundays." data-voice="boy">🐕 They usually walk the dog on Sundays.</div>
+    </div>
+    <div class="sbtnrow">
+      <button class="btn purple" onclick="openLb('Patterns%20Structure%201.png')">🔎 Structure 1</button>
+      <button class="btn purple" onclick="openLb('Patterns%20Structure%202.png')">🔎 Structure 2</button>
+      <button class="btn purple" onclick="openLb('Patterns%20Sturcture%203.png')">🔎 Structure 3</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">⚙️</span><h2>Substitution Machine</h2><span class="badge">Build &amp; Speak</span></div>
+    <div class="sub-machine">
+      <div class="sm-cell"><label>Subject</label><select id="smWho" onchange="buildSub()"><option>you</option><option>I</option><option>we</option><option>they</option><option>he</option><option>she</option></select></div>
+      <div class="sm-cell"><label>Frequency</label><select id="smAdv" onchange="buildSub()"><option>usually</option><option>always</option><option>often</option><option>sometimes</option><option>seldom</option><option>never</option></select></div>
+      <div class="sm-cell"><label>Chore</label><select id="smVerb" onchange="buildSub()"><option>sweep the floor</option><option>wipe the table</option><option>walk the dog</option><option>read the newspaper</option><option>water the flowers</option></select></div>
+      <div class="sm-cell"><label>Time</label><select id="smTime" onchange="buildSub()"><option>in the morning</option><option>in the afternoon</option><option>in the evening</option><option>at night</option><option>on Sundays</option><option>on weekends</option><option>on Fridays</option></select></div>
+    </div>
+    <div class="sub-out" id="subOut"></div>
+    <div class="sbtnrow">
+      <button class="btn green" onclick="saySub('yes')">🔊 Hear YES answer</button>
+      <button class="btn red" onclick="saySub('no')">🔊 Hear NO answer</button>
+      <button class="btn blue" onclick="saySub('q')">🔊 Hear question</button>
+    </div>
+    <div class="tip">✅ <b>The frequency sandwich:</b> the adverb sits <b>after “usually don't” / before the verb</b> — “No, I <b>don't usually</b> sweep…”. The adverb <b>never changes</b> in the answer.</div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">🧠</span><h2>Frequency Meter</h2><span class="badge">How often?</span></div>
+    <p style="font-weight:700;color:#6b5aa8;margin-bottom:10px">Tap each adverb to hear it. Use the meter to show the meaning to students.</p>
+    <div class="grid3" id="freqGrid"></div>
+  </section>
+
+  <section>
+    <div class="shead"><span class="ic">✨</span><h2>Extra Practice Sentences</h2><span class="badge">Same words · more reps</span></div>
+    <p style="font-weight:700;color:#6b5aa8;margin-bottom:10px">Extra sentences made with this unit's vocabulary and patterns. Tap any line to hear it.</p>
+    <div id="extraList"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp8">
+  <section>
+    <div class="shead"><span class="ic">🔤</span><h2>The -s Rule</h2><span class="badge">he · she</span></div>
+    <div class="tip">With <b>he / she</b>, the verb takes an <b>-s</b>: sweep → sweep<b>s</b>, wipe → wipe<b>s</b>, walk → walk<b>s</b>, read → read<b>s</b>, water → water<b>s</b>. Circle the <b>-s</b> and the word <b>the</b> in red so students notice them!</div>
+    <div class="pattern-card">
+      <div class="pl"><span class="k1">Does</span> <span id="sRuleWho">he</span> <span class="k2">usually</span> <span class="k3" id="sRuleVerb">walk the dog</span> <span class="k4" id="sRuleTime">in the morning?</span></div>
+      <div class="pe" id="sRuleExample" data-say="Does Peter usually walk the dog in the morning? Yes, he usually walks the dog in the morning." data-voice="boy">🐕 Does Peter usually walk the dog in the morning? — Yes, he usually walk<b>s</b> the dog in the morning.</div>
+      <div class="sbtnrow">
+        <button class="btn blue" onclick="sRuleNewExample()">➡️ New example</button>
+        <button class="btn purple" onclick="sRuleHear()">🔊 Hear it</button>
+      </div>
+    </div>
+    <p style="font-weight:700;color:#6b5aa8;margin:12px 0">Tap a verb, then choose the team box.</p>
+    <div class="sort-pool" id="sPool"></div>
+    <div class="sort-boxes">
+      <div class="sort-box a" id="boxA" onclick="sTo('a')"><h4>Base verb (I / you / we / they)</h4></div>
+      <div class="sort-box b" id="boxB" onclick="sTo('b')"><h4>+ s (he / she)</h4></div>
+    </div>
+    <div class="sbtnrow"><button class="btn dark" onclick="buildSRule()">🔄 Reset sort</button></div>
+    <div class="big-ans" id="sOut"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp9">
+  <section>
+    <div class="shead"><span class="ic">🔡</span><h2>Phonics · bl · pl · sl</h2><span class="badge">Unit 16–17</span></div>
+    <div class="tip">This unit continues the <b>bl</b>, <b>pl</b> and <b>sl</b> sounds. Sound out the words with the class, then sort them into the right bucket.</div>
+    <div class="sort-pool" id="phPool"></div>
+    <div class="sort-boxes">
+      <div class="sort-box a" id="phBoxB" onclick="phTo('bl')"><h4>bl</h4></div>
+      <div class="sort-box c" id="phBoxP" onclick="phTo('pl')"><h4>pl</h4></div>
+      <div class="sort-box b" id="phBoxS" onclick="phTo('sl')"><h4>sl</h4></div>
+    </div>
+    <div class="sbtnrow"><button class="btn dark" onclick="buildPhonics()">🔄 Reset</button></div>
+    <div class="big-ans" id="phOut"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp10">
+  <section>
+    <div class="shead"><span class="ic">⌨️</span><h2>Spelling Relay</h2><span class="badge">Teams</span></div>
+    <div class="tip">Turn off the audio. Play a word, or show the emoji, and let the team spell it on the on-screen keyboard. Fastest correct team scores!</div>
+    <div class="bq" id="spellClue">Press “New word”.</div>
+    <div class="spell-out" id="spellOut">_ _ _ _ _</div>
+    <div class="keypad" id="keypad"></div>
+    <div class="sbtnrow">
+      <button class="btn blue" onclick="saySpellWord()">🔊 Hear word</button>
+      <button class="btn green" onclick="checkSpell()">✅ Check</button>
+      <button class="btn dark" onclick="spellBack()">⌫ Back</button>
+      <button class="btn purple" onclick="spellNew()">➡️ New word</button>
+    </div>
+    <div class="big-ans" id="spellMsg"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp11">
+  <section>
+    <div class="shead"><span class="ic">🔀</span><h2>Word Scramble</h2><span class="badge">Spell it</span></div>
+    <p style="font-weight:700;color:#6b5aa8;margin-bottom:6px">Tap the letters in the correct order to spell the word.</p>
+    <div class="bq" id="scrClue">Press “New word”.</div>
+    <div class="scr-tiles" id="scrSlots"></div>
+    <div class="scr-tiles" id="scrPool"></div>
+    <div class="sbtnrow">
+      <button class="btn blue" onclick="scrHear()">🔊 Hear it</button>
+      <button class="btn green" data-say="Spell it!" data-voice="girl">🎯 Go!</button>
+      <button class="btn dark" onclick="scrClear()">🔄 Clear</button>
+      <button class="btn purple" onclick="scrNew()">➡️ New word</button>
+    </div>
+    <div class="big-ans" id="scrMsg"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp12">
+  <section>
+    <div class="shead"><span class="ic">👻</span><h2>What's Missing?</h2><span class="badge">Memory</span></div>
+    <div class="tip">Show the six chore cards, then hide one. Students name the missing chore to earn a point.</div>
+    <div class="miss-grid" id="missGrid"></div>
+    <div class="sbtnrow">
+      <button class="btn purple" onclick="missHide()">🙈 Hide one</button>
+      <button class="btn green" onclick="missReveal()">👀 Show all</button>
+      <button class="btn blue" data-say="Which chore is missing?" data-voice="girl">🔊 Ask: Which is missing?</button>
+    </div>
+    <div class="big-ans" id="missOut"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp13">
+  <section>
+    <div class="shead"><span class="ic">🎈</span><h2>Needle &amp; Balloons</h2><span class="badge">Team game</span></div>
+    <div class="tip">Draw balloons for each team on the board. Call a number — the called student answers the question, then throws the sticky ball at the opposing team's balloon. Pop a balloon to win the round!</div>
+    <div class="balloon-grid" id="balloonGrid"></div>
+    <div class="bq" id="balloonQ">Tap a balloon to pop it and reveal a question.</div>
+    <div class="sbtnrow">
+      <button class="btn green" onclick="balloonScore(true)">✅ Correct answer</button>
+      <button class="btn red" onclick="balloonScore(false)">❌ Try again</button>
+      <button class="btn dark" onclick="balloonReset()">🔄 Refill balloons</button>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp14">
+  <section>
+    <div class="shead"><span class="ic">📝</span><h2>Read &amp; Choose</h2><span class="badge">Workbook U17</span></div>
+    <p style="font-weight:700;color:#6b5aa8;margin-bottom:10px">Read the dialogue, then choose the best sentence. Tap an option to check it. Tap the prompt to hear it.</p>
+    <div id="rcList"></div>
+    <div class="sbtnrow"><button class="btn purple" onclick="buildRC()">🔄 Start over</button></div>
+    <div class="big-ans" id="rcScore"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp15">
+  <section>
+    <div class="shead"><span class="ic">🃏</span><h2>Bonus Quiz</h2><span class="badge">Mix &amp; match</span></div>
+    <div id="quizContent"></div>
+    <div class="sbtnrow">
+      <button class="btn orange" onclick="showQuizScore()">🎉 Show my results</button>
+      <button class="btn dark" onclick="resetQuiz()">🔄 New quiz</button>
+    </div>
+    <div class="score-board" id="scoreBoard" style="display:none"></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp16">
+  <section>
+    <div class="shead"><span class="ic">🧰</span><h2>Teacher Tools</h2><span class="badge">Handy</span></div>
+    <div class="tool-grid">
+      <div class="tool-card">
+        <h3>⏱️ Timer</h3>
+        <div class="timer-big" id="timerBig">01:00</div>
+        <div class="sbtnrow" style="margin:8px 0 0">
+          <button class="btn green" onclick="tmStart(60)">1 min</button>
+          <button class="btn blue" onclick="tmStart(120)">2 min</button>
+          <button class="btn purple" onclick="tmStart(300)">5 min</button>
+          <button class="btn dark" onclick="tmStop()">⏹️</button>
+        </div>
+      </div>
+      <div class="tool-card">
+        <h3>🎲 Dice</h3>
+        <div class="dice-out" id="diceOut">🎲</div>
+        <button class="btn orange" onclick="rollDice()">Roll the dice</button>
+      </div>
+      <div class="tool-card">
+        <h3>🙋 Pick a Student</h3>
+        <div class="picker-name" id="pickName">—</div>
+        <button class="btn pink" onclick="pickStudent()">Pick!</button>
+      </div>
+      <div class="tool-card">
+        <h3>🔊 Voice Check</h3>
+        <p style="font-weight:700;color:#6b5aa8;font-size:13px;margin-bottom:8px">British voice in use:</p>
+        <div class="mini-info" id="voiceInfo">detecting…</div>
+        <div class="sbtnrow" style="margin:10px 0 0">
+          <button class="btn blue" data-say="Hello boys and girls! This is your friendly British teacher." data-voice="girl">Test ♀</button>
+          <button class="btn purple" data-say="Hello boys and girls! This is your friendly British teacher." data-voice="boy">Test ♂</button>
+        </div>
+      </div>
+      <div class="tool-card" style="grid-column:1/-1">
+        <h3>🧑‍🏫 Class List</h3>
+        <textarea class="roster-ta" id="rosterBox" placeholder="One name per line…"></textarea>
+        <div class="sbtnrow" style="margin:10px 0 0"><button class="btn green" onclick="saveRoster()">💾 Save list</button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+<div class="mascot" id="mascot" title="Hello from Buddy the dog!">🐕</div>
+<div class="fab-wrap">
+  <button class="fab" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">⬆</button>
+  <a class="fab" href="https://hanshanghao.github.io/Joy_English/" title="Home">🏠</a>
+</div>
+<div class="lightbox" id="lightbox"><button class="lb-close" id="lbClose">&times;</button><img id="lbImg" src="" alt="Zoomed"></div>
+
+<script>
+var $=function(id){return document.getElementById(id)};
+
+var RATE=0.95,RATE_SLOW=0.72;
+var soundOn=true,actx=null;
+function audio(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx}
+function tone(f,dur,type,vol,delay){var c=audio();if(!c)return;var o=c.createOscillator(),g=c.createGain();o.type=type||"sine";o.frequency.value=f;var t=c.currentTime+(delay||0);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol||.15,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+dur+.05)}
+function sPop(){if(soundOn){tone(500,.1,"square",.08);tone(760,.09,"square",.08,.06)}}
+function sDing(){if(soundOn){tone(660,.12,"triangle",.15);tone(880,.16,"triangle",.15,.1);tone(1320,.24,"triangle",.13,.2)}}
+function sBuzz(){if(soundOn){tone(180,.18,"sawtooth",.1);tone(140,.22,"sawtooth",.1,.16)}}
+function sWin(){if(soundOn){tone(523,.12,"sine",.13);tone(659,.12,"sine",.13,.1);tone(784,.12,"sine",.13,.2);tone(1047,.2,"sine",.15,.3)}}
+
+var cachedVoices=[];
+if("speechSynthesis" in window){cachedVoices=speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=function(){cachedVoices=speechSynthesis.getVoices();updateVoiceInfo();}}
+var GH_F=/\b(sonia|libby|maisie|kate|hazel|serena|samantha|susan|fiona|zira|mary|allison|ava|emma|jenny|joanna|salli|kimberly|amy|nicky|hannah|nicole|martha|female)\b/i;
+var GH_M=/\b(ryan|thomas|george|fred|guy|daniel|oliver|arthur|alex|rylan|david|chris|eric|brian|james|mark|joey|justin|matthew|tyler|male)\b/i;
+function voiceScore(x,gender){
+  var n=(x.name||"").toLowerCase(),lang=(x.lang||"").toLowerCase();
+  if(lang.indexOf("en")!==0)return -999;
+  var s=lang.indexOf("en-gb")===0?70:20;
+  if(/united kingdom|uk english|british|en-gb/.test(n))s+=40;
+  if(/natural|neural|enhanced|premium|online|google|siri|wavenet/.test(n))s+=80;
+  if(/desktop|offline|legacy|compact|sapi|zira|david|espeak/.test(n))s-=60;
+  var f=GH_F.test(n),m=GH_M.test(n);
+  if(gender==="boy"){if(f&&!m)s-=120;else if(m&&!f)s+=45}
+  else{if(m&&!f)s-=120;else if(f&&!m)s+=45}
+  return s;
+}
+function pickVoice(gender){
+  if(!cachedVoices.length){try{cachedVoices=speechSynthesis.getVoices()}catch(e){}}
+  var v=cachedVoices.length?cachedVoices:speechSynthesis.getVoices();
+  if(!v||!v.length)return null;
+  var best=null,bs=-1e9;
+  for(var i=0;i<v.length;i++){var s=voiceScore(v[i],gender);if(s>bs){bs=s;best=v[i]}}
+  if(bs<=-999){for(var j=0;j<v.length;j++)if((v[j].lang||"").indexOf("en")===0)return v[j];return v[0]}
+  return best;
+}
+var keepAlive=null;
+function ttsFix(t){
+  return String(t)
+    .replace(/\bMia\b/g,"Mee-uh")
+    .replace(/\bMia's\b/g,"Mee-uh's");
+}
+function speakGB(text,gender,onEnd,rate){
+  if(!soundOn||!("speechSynthesis" in window)){if(onEnd)setTimeout(onEnd,120);return}
+  var u=new SpeechSynthesisUtterance(ttsFix(text));
+  var v=pickVoice(gender);
+  if(v)u.voice=v;
+  u.lang=(v&&v.lang)||"en-GB";
+  u.rate=Math.max(.5,Math.min(1.05,(typeof rate==="number"&&rate)?rate:RATE));
+  u.pitch=(gender==="boy")?.9:1.06;
+  u.volume=1;u.onend=onEnd;
+  try{
+    speechSynthesis.speak(u);
+    if(!keepAlive)keepAlive=setInterval(function(){try{if(speechSynthesis.speaking||speechSynthesis.pending)speechSynthesis.resume();else{clearInterval(keepAlive);keepAlive=null}}catch(e){}},8000);
+  }catch(e){if(onEnd)setTimeout(onEnd,120)}
+}
+function sayF(t,rate){speakGB(t,"girl",null,rate)}
+function sayM(t,rate){speakGB(t,"boy",null,rate)}
+function speakStop(){try{speechSynthesis.cancel()}catch(e){}}
+function updateVoiceInfo(){
+  var v=pickVoice("girl");
+  var el=$("voiceInfo");
+  if(el)el.textContent=v?(v.name+" ("+(v.lang||"")+")"):"no voice found";
+}
+
+function showToast(msg){var t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove("show")},1800)}
+function confetti(){var em=["🎉","⭐","✨","🎈","🌸","🧹","🐕","💫"];for(var i=0;i<46;i++){var s=document.createElement("span");s.className="confetti-piece";s.textContent=em[i%em.length];s.style.left=(Math.random()*100)+"vw";s.style.animationDuration=(2.4+Math.random()*2)+"s";s.style.animationDelay=(Math.random()*.6)+"s";document.body.appendChild(s);(function(e){setTimeout(function(){e.remove()},5200)})(s)}}
+function attachSwipe(el,cb){if(!el)return;var x=null,y=null;el.style.touchAction="pan-y";el.addEventListener("pointerdown",function(e){x=e.clientX;y=e.clientY});el.addEventListener("pointerup",function(e){if(x===null)return;var dx=e.clientX-x,dy=e.clientY-y;x=null;y=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))cb()});el.addEventListener("pointercancel",function(){x=null;y=null})}
+
+var TURN="a",PER=2,AUTO=true,SC={a:0,b:0};
+function renderScores(){$("ptA").textContent=SC.a;$("ptB").textContent=SC.b;$("cardA").classList.toggle("active",TURN==="a");$("cardB").classList.toggle("active",TURN==="b");$("turnBtn").textContent="🎯 "+(TURN==="a"?($("nameA").textContent||"Team A"):($("nameB").textContent||"Team B"))+"'s turn";$("leaderChip").textContent=SC.a===SC.b?"🤝 tied":(SC.a>SC.b?"🏆 "+(($("nameA").textContent)||"Team A")+" leads":"🏆 "+(($("nameB").textContent)||"Team B")+" leads");try{localStorage.setItem("mj5u17_score",JSON.stringify(SC))}catch(e){}}
+function flash(c,ok){c.classList.add(ok?"flash-g":"flash-b");setTimeout(function(){c.classList.remove("flash-g","flash-b")},520)}
+function award(pts){var c=$("card"+TURN.toUpperCase());SC[TURN]+=pts;c.classList.add("bump");setTimeout(function(){c.classList.remove("bump")},520);flash(c,true);sDing();renderScores()}
+function noPoints(){var c=$("card"+TURN.toUpperCase());flash(c,false);sBuzz()}
+function grade(ok,msg){if(ok){award(PER);showToast("✅ "+(msg||"Correct!")+" +"+PER)}else{noPoints();showToast("❌ "+(msg||"Try again!"))}if(AUTO)setTimeout(swapTurn,700)}
+function swapTurn(){TURN=TURN==="a"?"b":"a";renderScores()}
+function resetScores(){SC={a:0,b:0};renderScores();showToast("Scores reset")}
+function loadScores(){try{var s=JSON.parse(localStorage.getItem("mj5u17_score"));if(s&&typeof s.a==="number"){SC=s}}catch(e){}}
+
+function toggleFs(){try{if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen()}catch(e){}}
+function openLb(src){$("lbImg").src=src;$("lightbox").classList.add("show")}
+function showTab(i){var ps=document.querySelectorAll(".tabpan");ps.forEach(function(p,k){p.classList.toggle("on",k===i)});document.querySelectorAll(".ntab").forEach(function(b){b.classList.toggle("on",+b.dataset.i===i)});window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll(".ntab").forEach(function(b){b.onclick=function(){showTab(+b.dataset.i)}});
+
+document.addEventListener("click",function(e){
+  var t=e.target.closest?e.target.closest("[data-say]"):null;
+  if(!t)return;
+  speakStop();speakGB(t.getAttribute("data-say"),t.getAttribute("data-voice")||"girl",null,RATE);
+});
+document.addEventListener("click",function(e){
+  var img=e.target;
+  if(img.tagName==="IMG"&&img.closest(".framed")){openLb(img.getAttribute("src"))}
+});
+
+var CHORES=[
+  {em:"🧹",w:"sweep the floor",w3:"sweeps the floor",say:"sweep the floor",key:"sweep"},
+  {em:"🧽",w:"wipe the table",w3:"wipes the table",say:"wipe the table",key:"wipe"},
+  {em:"🐕",w:"walk the dog",w3:"walks the dog",say:"walk the dog",key:"walk"},
+  {em:"📰",w:"read the newspaper",w3:"reads the newspaper",say:"read the newspaper",key:"read"},
+  {em:"🌸",w:"water the flowers",w3:"waters the flowers",say:"water the flowers",key:"water"}
+];
+var FREQ=[["always","100%","😃","every single time"],["usually","90%","🙂","almost always"],["often","70%","😊","many times"],["sometimes","50%","😐","now and then"],["seldom","10%","😕","almost never"],["never","0%","🙅","not at any time"]];
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+var DLG=[
+  {who:"Mother",ic:"👩",voice:"girl",text:"Jane, sweep the floor. Peter, walk the dog."},
+  {who:"Jane & Peter",ic:"👧",voice:"boy",text:"Yes, Mother."},
+  {who:"Jane",ic:"👧",voice:"girl",text:"Phew, that was close. Do you usually sweep the floor in the morning?"},
+  {who:"Mia",ic:"👩‍🦰",voice:"girl",text:"Yes, I usually sweep the floor in the morning. Peter usually walks the dog, but he seldom sweeps the floor."},
+  {who:"Mother",ic:"👩",voice:"girl",text:"What do you usually do, Mia?"},
+  {who:"Mia",ic:"👩‍🦰",voice:"girl",text:"I usually read the newspaper and books in the morning. Come, let me help you!"},
+  {who:"Jane",ic:"👧",voice:"girl",text:"Thanks, Mia. Then, we always play in the afternoon."},
+  {who:"Mia",ic:"👩‍🦰",voice:"girl",text:"Yes, and I sometimes water the flowers, too."}
+];
+function buildDialog(){
+  var box=$("dlgList"),cls=["g","b","p","o"];
+  DLG.forEach(function(d,i){
+    var div=document.createElement("div");
+    div.className="dlg "+cls[i%4];
+    div.setAttribute("data-say",d.text);
+    div.setAttribute("data-voice",d.voice);
+    div.innerHTML='<div class="av">'+d.ic+'</div><div class="bub"><span class="vtag">'+d.who+' · '+(d.voice==="boy"?"♂ male":"♀ female")+'</span>'+d.text+'</div>';
+    box.appendChild(div);
+  });
+}
+function playAllDialog(){speakStop();var i=0;function next(){if(i>=DLG.length)return;var d=DLG[i++];speakGB(d.text,d.voice,next,RATE)}next()}
+
+var DET=[
+  {q:"What does Mother tell Jane to do?",a:"Sweep the floor."},
+  {q:"What does Mother tell Peter to do?",a:"Walk the dog."},
+  {q:"Does Mia usually sweep the floor in the morning?",a:"Yes, she does. She usually sweeps the floor in the morning."},
+  {q:"Who usually walks the dog?",a:"Peter usually walks the dog."},
+  {q:"Does Peter sweep the floor?",a:"No, he seldom sweeps the floor."},
+  {q:"What does Mia usually do in the morning?",a:"She usually reads the newspaper and books."},
+  {q:"When does Jane always play?",a:"In the afternoon."},
+  {q:"What does Mia sometimes water?",a:"The flowers."}
+];
+function buildDet(){
+  var box=$("detQs");box.innerHTML="";
+  DET.forEach(function(d,i){
+    var c=document.createElement("div");c.className="pattern-card";
+    c.innerHTML='<div class="pe" data-say="'+d.q.replace(/"/g,"&quot;")+'" data-voice="girl">❓ '+d.q+'</div>'+
+      '<div class="pe" style="display:none;border-color:var(--green)" id="detA'+i+'">✅ '+d.a+'</div>'+
+      '<div class="sbtnrow" style="margin:6px 0 0"><button class="btn green" onclick="detReveal('+i+')">Reveal</button>'+
+      '<button class="btn purple" onclick="grade(true,\'Great comprehension!\')">✅ Team point</button></div>';
+    box.appendChild(c);
+  });
+}
+function detReveal(i){var a=$("detA"+i);a.style.display="block";speakGB(DET[i].a,"girl",null,RATE)}
+
+function buildRole(){
+  var box=$("roleList");box.innerHTML="";
+  DLG.forEach(function(d,i){
+    var div=document.createElement("div");
+    div.className="dlg "+(i%2?"b":"g");
+    div.innerHTML='<div class="av">'+d.ic+'</div><div class="bub"><span class="vtag">'+d.who+'</span>'+d.text+'</div>';
+    box.appendChild(div);
+  });
+}
+function playRole(g){speakStop();var i=0;function next(){if(i>=DLG.length)return;var d=DLG[i++];speakGB(d.text,g,next,RATE)}next()}
+
+var TF=[
+  {s:"Peter usually walks the dog in the morning.",t:true},
+  {s:"Jane usually reads the newspaper in the morning.",t:false},
+  {s:"Mia usually sweeps the floor in the morning.",t:true},
+  {s:"Peter always waters the flowers in the afternoon.",t:false},
+  {s:"Jane always plays in the afternoon.",t:true},
+  {s:"Mia seldom sweeps the floor in the morning.",t:false},
+  {s:"Mia sometimes waters the flowers.",t:true}
+];
+var tfI=-1,tfScoreA=0,tfScoreB=0;
+function tfNext(){tfI=Math.floor(Math.random()*TF.length);$("tfStmt").textContent="🌳 "+TF[tfI].s;$("tfOut").textContent="";speakGB(TF[tfI].s,TF[tfI].t?"girl":"boy",null,RATE)}
+function tfAnswer(ans){
+  if(tfI<0){showToast("Press New statement first");return}
+  var ok=ans===TF[tfI].t;
+  if(ok){sDing();$("tfOut").textContent="✅ Correct! "+(TURN==="a"?$("nameA").textContent:$("nameB").textContent)+" climbs a branch.";if(TURN==="a"){tfScoreA++;$("treeA").textContent=tfScoreA}else{tfScoreB++;$("treeB").textContent=tfScoreB};award(1);
+    if(tfScoreA>=5||tfScoreB>=5){sWin();confetti();showToast("🏆 Team reaches the top of the tree!")}}
+  else{sBuzz();$("tfOut").textContent="❌ Not quite. It is "+(TF[tfI].t?"TRUE":"FALSE")+".";noPoints()}
+  tfI=-1;
+}
+
+function buildVocab(){
+  var g=$("vocabGrid");g.innerHTML="";
+  CHORES.forEach(function(c){
+    var d=document.createElement("div");d.className="vocab-card";
+    d.setAttribute("data-say",c.say);d.setAttribute("data-voice","girl");
+    d.innerHTML='<span class="spk">🔊</span><span class="em">'+c.em+'</span><div class="w">'+c.w+'</div><div class="w3">→ '+c.w3+'</div>';
+    g.appendChild(d);
+  });
+}
+var actBag=[],actLast=null;
+function actRandom(){
+  if(!actBag.length){
+    actBag=shuffle(CHORES);
+    if(actLast&&actBag.length>1&&actBag[0].key===actLast.key){var s=actBag[0];actBag[0]=actBag[1];actBag[1]=s}
+  }
+  var c=actBag.shift();actLast=c;
+  var r=$("actReply");r.textContent=c.em+" "+c.w;
+  r.classList.remove("swipe");void r.offsetWidth;r.classList.add("swipe");
+  speakGB(c.say,"girl",null,RATE);
+}
+function actAll(){speakStop();var i=0;function n(){if(i>=CHORES.length)return;speakGB(CHORES[i].say,"boy",function(){i++;setTimeout(n,220)},RATE)}n();$("actReply").textContent="Listening to all five chores…"}
+function actAllF(){speakStop();var i=0;function n(){if(i>=CHORES.length)return;speakGB(CHORES[i].say,"girl",function(){i++;setTimeout(n,220)},RATE)}n();$("actReply").textContent="Listening to all five chores…"}
+
+var charadeCur=null;
+function charadeNew(){charadeCur=CHORES[Math.floor(Math.random()*CHORES.length)];$("charadeClue").textContent="🤫 Act this out: (secret!)";$("charadeOut").textContent="";showToast("A secret chore was picked!")}
+function charadeReveal(){if(!charadeCur){showToast("Press New charade first");return}$("charadeClue").textContent=charadeCur.em+" "+charadeCur.w;speakGB(charadeCur.say,"girl",null,RATE)}
+
+function conj(subj,verb){if(subj==="he"||subj==="she"){var p=verb.split(" ");return p[0]+"s "+p.slice(1).join(" ")}return verb}
+function subjPron(subj){if(subj==="he")return"he";if(subj==="she")return"she";return subj}
+function buildSub(){
+  var who=$("smWho").value,adv=$("smAdv").value,verb=$("smVerb").value,time=$("smTime").value;
+  var aux=(who==="he"||who==="she")?"Does":"Do";
+  var q=aux+" "+subjPron(who)+" "+adv+" "+verb+" "+time+"?";
+  var v=conj(who,verb);
+  var yes="Yes, "+subjPron(who)+" "+adv+" "+v+" "+time+".";
+  $("subOut").innerHTML='<span class="q">'+q+'</span>';
+  $("subOut").setAttribute("data-q",q);
+  $("subOut").setAttribute("data-yes",yes);
+  var no=who==="he"||who==="she"?"No, "+subjPron(who)+" doesn't "+adv+" "+verb+" "+time+".":"No, "+subjPron(who)+" don't "+adv+" "+verb+" "+time+".";
+  $("subOut").setAttribute("data-no",no);
+}
+function saySub(k){var o=$("subOut");var t=k==="yes"?o.getAttribute("data-yes"):k==="no"?o.getAttribute("data-no"):o.getAttribute("data-q");speakGB(t,k==="yes"?"girl":k==="no"?"girl":"girl",null,RATE);$("subOut").innerHTML='<span class="'+(k==="yes"?"a":k==="no"?"a":"q")+'">'+t+'</span>'}
+
+function buildFreq(){
+  var g=$("freqGrid");g.innerHTML="";
+  FREQ.forEach(function(f){
+    var d=document.createElement("div");d.className="vocab-card";d.setAttribute("data-say",f[0]+", "+f[3]);
+    d.setAttribute("data-voice","girl");
+    d.innerHTML='<span class="em">'+f[2]+'</span><div class="w">'+f[0]+'</div><div class="w3">'+f[1]+' of the time</div>';
+    g.appendChild(d);
+  });
+}
+
+var EXTRA=[
+  {q:"Do you usually sweep the floor in the morning?",a:"Yes, I usually sweep the floor in the morning."},
+  {q:"Do you usually wipe the table in the evening?",a:"No, I don't usually wipe the table in the evening. I usually wipe the table in the afternoon."},
+  {q:"Do they usually walk the dog at night?",a:"No, they don't usually walk the dog at night. They usually walk the dog in the morning."},
+  {q:"Do you usually read the newspaper on Sundays?",a:"Yes, I usually read the newspaper on Sundays."},
+  {q:"Do they usually water the flowers in the afternoon?",a:"Yes, they usually water the flowers in the afternoon."},
+  {q:"Do you often sweep the floor on Mondays?",a:"No, I don't often sweep the floor on Mondays."},
+  {q:"Do they always wipe the table after lunch?",a:"No, they don't always wipe the table after lunch."},
+  {q:"Do you sometimes walk the dog in the park?",a:"Yes, I sometimes walk the dog in the park."},
+  {q:"Do you usually read the newspaper at breakfast?",a:"No, I usually read the newspaper after breakfast."},
+  {q:"Do they usually water the flowers on weekends?",a:"Yes, they usually water the flowers on weekends."},
+  {q:"Does Peter usually walk the dog in the morning?",a:"Yes, he usually walks the dog in the morning."},
+  {q:"Does Jane always sweep the floor in the afternoon?",a:"No, she seldom sweeps the floor in the afternoon. She usually sweeps the floor in the morning."},
+  {q:"Do you usually help at home?",a:"Yes, I always help at home."},
+  {q:"Do you usually water the flowers at night?",a:"No, I never water the flowers at night. I water them in the morning."},
+  {q:"Do they usually play in the afternoon?",a:"Yes, they always play in the afternoon."}
+];
+function buildExtra(){
+  var box=$("extraList");box.innerHTML="";
+  EXTRA.forEach(function(e){
+    var q=document.createElement("div");q.className="pe";q.setAttribute("data-say",e.q);q.setAttribute("data-voice","girl");q.textContent="❓ "+e.q;
+    var a=document.createElement("div");a.className="pe";a.setAttribute("data-say",e.a);a.setAttribute("data-voice","boy");a.textContent="👉 "+e.a;
+    box.appendChild(q);box.appendChild(a);
+  });
+}
+
+var SRULE=[["sweep",0],["wipes",1],["walk",0],["reads",1],["water",0],["sweeps",1],["wipe",0],["walks",1]];
+var SEX=[
+  {name:"Peter",sex:"he",em:"🐕",verb:"walk the dog",time:"in the morning"},
+  {name:"Jane",sex:"she",em:"🧹",verb:"sweep the floor",time:"in the morning"},
+  {name:"Mia",sex:"she",em:"📰",verb:"read the newspaper",time:"in the evening"},
+  {name:"Peter",sex:"he",em:"🌸",verb:"water the flowers",time:"in the afternoon"},
+  {name:"Jane",sex:"she",em:"🧽",verb:"wipe the table",time:"after dinner"},
+  {name:"Mia",sex:"she",em:"🌸",verb:"water the flowers",time:"after school"},
+  {name:"Peter",sex:"he",em:"📰",verb:"read the newspaper",time:"at night"},
+  {name:"Jane",sex:"she",em:"🐕",verb:"walk the dog",time:"before breakfast"}
+];
+var sexBag=[],sexLast=null;
+function sRuleNewExample(){
+  if(!sexBag.length){
+    sexBag=shuffle(SEX);
+    if(sexLast&&sexBag.length>1&&sexBag[0].name===sexLast.name&&sexBag[0].verb===sexLast.verb){var s=sexBag[0];sexBag[0]=sexBag[1];sexBag[1]=s}
+  }
+  var e=sexBag.shift();sexLast=e;
+  var p=e.verb.split(" "),v3=p[0]+"s "+p.slice(1).join(" "),vBold=p[0]+"<b>s</b> "+p.slice(1).join(" ");
+  var q="Does "+e.name+" usually "+e.verb+" "+e.time+"?";
+  var a="Yes, "+e.sex+" usually "+v3+" "+e.time+".";
+  $("sRuleWho").textContent=e.sex;
+  $("sRuleVerb").textContent=e.verb;
+  $("sRuleTime").textContent=e.time+"?";
+  var pe=$("sRuleExample");
+  pe.setAttribute("data-say",q+" "+a);
+  pe.setAttribute("data-voice",e.sex==="he"?"boy":"girl");
+  pe.innerHTML=e.em+" "+q+" — Yes, "+e.sex+" usually "+vBold+" "+e.time+".";
+}
+function sRuleHear(){var pe=$("sRuleExample");speakGB(pe.getAttribute("data-say"),pe.getAttribute("data-voice"),null,RATE)}
+var sSel=null,sPlaced={};
+function buildSRule(){
+  var pool=$("sPool");pool.innerHTML="";$("boxA").innerHTML="<h4>Base verb (I / you / we / they)</h4>";$("boxB").innerHTML="<h4>+ s (he / she)</h4>";sPlaced={};sSel=null;$("sOut").textContent="";
+  sRuleNewExample();
+  shuffle(SRULE).forEach(function(w,i){
+    var c=document.createElement("div");c.className="chipword";c.textContent=w[0];c.dataset.i=i;
+    c.onclick=function(){document.querySelectorAll("#sPool .chipword").forEach(function(x){x.classList.remove("sel")});c.classList.add("sel");sSel={w:w[0],plus:w[1]}};
+    pool.appendChild(c);
+  });
+}
+function sTo(box){
+  if(!sSel){showToast("Tap a verb first");return}
+  var ok=(box==="b"?1:0)===sSel.plus;
+  if(ok){sDing();showToast("✅ Correct!");var el=document.querySelector("#sPool .chipword.sel");if(el)el.remove();var tag=document.createElement("span");tag.className="mini-info";tag.textContent=sSel.w+" "+(sSel.plus?"→ +s":"→ base");tag.style.margin="4px";$(box==="b"?"boxB":"boxA").appendChild(tag);award(PER)}else{sBuzz();showToast(sSel.w+" needs "+(sSel.plus?"an -s (he/she)":"no -s (I/you/we/they)"))}
+  sSel=null;
+}
+
+var PHON=[["blue","bl"],["black","bl"],["blanket","bl"],["blocks","bl"],["blossom","bl"],["play","pl"],["please","pl"],["plate","pl"],["plane","pl"],["plant","pl"],["sleep","sl"],["slow","sl"],["slide","sl"],["slip","sl"],["slime","sl"]];
+var phSel=null;
+function buildPhonics(){
+  var pool=$("phPool");pool.innerHTML="";$("phBoxB").innerHTML="<h4>bl</h4>";$("phBoxP").innerHTML="<h4>pl</h4>";$("phBoxS").innerHTML="<h4>sl</h4>";phSel=null;
+  shuffle(PHON).forEach(function(p){
+    var c=document.createElement("div");c.className="chipword";c.textContent=p[0];
+    c.onclick=function(){document.querySelectorAll("#phPool .chipword").forEach(function(x){x.classList.remove("sel")});c.classList.add("sel");phSel=p};
+    pool.appendChild(c);
+  });
+}
+var PHBOX={bl:"phBoxB",pl:"phBoxP",sl:"phBoxS"};
+function phTo(b){
+  if(!phSel){showToast("Tap a word first");return}
+  if(phSel[1]===b){sDing();showToast("✅ "+phSel[0]+" → "+b);var el=document.querySelector("#phPool .chipword.sel");if(el)el.remove();var tag=document.createElement("span");tag.className="mini-info";tag.textContent=phSel[0];tag.style.margin="4px";$(PHBOX[b]).appendChild(tag);award(1);speakGB(phSel[0],"girl",null,RATE_SLOW)}else{sBuzz();showToast(phSel[0]+" starts with “"+phSel[1]+"”")}
+  phSel=null;
+}
+
+var SPELLW=["sweep","wipe","walk","newspaper","flowers","usually","seldom","always"];
+var spellCur="",spellTyped="";
+function buildKeypad(){
+  var k=$("keypad");k.innerHTML="";
+  "abcdefghijklmnopqrstuvwxyz".split("").forEach(function(ch){
+    var b=document.createElement("button");b.textContent=ch.toUpperCase();b.onclick=function(){spellTyped+=ch;renderSpell();sPop()};k.appendChild(b);
+  });
+}
+function renderSpell(){var o="";for(var i=0;i<spellCur.length;i++){o+=(spellTyped[i]?spellTyped[i].toUpperCase():"_")+" "}$("spellOut").textContent=o.trim()||"_ _ _"}
+function spellNew(){spellCur=SPELLW[Math.floor(Math.random()*SPELLW.length)];spellTyped="";$("spellMsg").textContent="";$("spellClue").textContent="🔤 Spell this word ("+spellCur.length+" letters): "+spellCur.replace(/./g,"_ ");renderSpell()}
+function spellBack(){spellTyped=spellTyped.slice(0,-1);renderSpell()}
+function saySpellWord(){if(spellCur)speakGB(spellCur,"girl",null,RATE_SLOW)}
+function checkSpell(){if(!spellCur){showToast("Press New word");return}if(spellTyped===spellCur){sDing();$("spellMsg").textContent="✅ Correct! "+spellCur;grade(true,"Spelling!");speakGB(spellCur,"girl",null,RATE_SLOW)}else{sBuzz();$("spellMsg").textContent="❌ Not yet — try again"}}
+
+var SCR=["sweep","wipe","walk","read","water","floor","table","flowers","usually","seldom"];
+var scrWord="",scrBuild=[],scrPool=[];
+function scrNew(){scrWord=SCR[Math.floor(Math.random()*SCR.length)];scrBuild=[];scrPool=shuffle(scrWord.split(""));$("scrClue").textContent="🔀 Unscramble: a chore word";$("scrMsg").textContent="";scrRender()}
+function scrRender(){
+  var s=$("scrSlots");s.innerHTML="";for(var i=0;i<scrWord.length;i++){var d=document.createElement("div");d.className="scr-slot";d.textContent=scrBuild[i]||"";s.appendChild(d)}
+  var p=$("scrPool");p.innerHTML="";scrPool.forEach(function(ch,i){var d=document.createElement("div");d.className="scr-chip"+(ch==null?" used":"");d.textContent=ch||"";if(ch!=null)d.onclick=function(){scrBuild.push(ch);scrPool[i]=null;scrRender()};p.appendChild(d)});
+}
+function scrClear(){scrPool=shuffle(scrWord.split(""));scrBuild=[];scrRender()}
+function scrHear(){if(scrWord)speakGB(scrWord,"girl",null,RATE_SLOW)}
+function scrCheckAuto(){if(scrBuild.length===scrWord.length){if(scrBuild.join("")===scrWord){sDing();$("scrMsg").textContent="✅ Yes! "+scrWord;grade(true,"Unscrambled!")}else{sBuzz();$("scrMsg").textContent="❌ Not quite — Clear and try again"}}}
+var _origScrRender=scrRender;
+scrRender=function(){_origScrRender();scrCheckAuto()};
+
+function buildMiss(){
+  var g=$("missGrid");g.innerHTML="";
+  CHORES.concat([{em:"🧺",w:"do the laundry"},{em:"🛏️",w:"make the bed"}]).forEach(function(c){
+    var d=document.createElement("div");d.className="miss-card";d.innerHTML='<span class="em">'+c.em+'</span><div class="nm" style="font-weight:800;margin-top:6px">'+c.w+'</div>';g.appendChild(d);
+  });
+}
+function missHide(){
+  var cards=document.querySelectorAll("#missGrid .miss-card");cards.forEach(function(c){c.classList.remove("gone");delete c.dataset.hidden});
+  var i=Math.floor(Math.random()*cards.length);cards[i].classList.add("gone");cards[i].dataset.hidden=cards[i].querySelector(".nm").textContent;
+  $("missOut").textContent="";
+}
+function missReveal(){document.querySelectorAll("#missGrid .miss-card").forEach(function(c){c.classList.remove("gone")});var h=document.querySelector("#missGrid .miss-card[data-hidden]");if(h){$("missOut").textContent="It was: "+h.dataset.hidden;sDing()}else $("missOut").textContent="Nothing was hidden yet!"}
+
+var balQ=[
+  "Do you usually sweep the floor in the morning?",
+  "Do they usually walk the dog at night?",
+  "Do you often wipe the table after dinner?",
+  "Do they usually read the newspaper in the evening?",
+  "Do you usually water the flowers on weekends?",
+  "Do you always help at home?",
+  "Do they sometimes watch TV after school?",
+  "Do you usually play in the afternoon?",
+  "Do you sometimes water the flowers?",
+  "Do they usually wipe the table on Fridays?",
+  "Does Peter usually walk the dog in the morning?",
+  "Do you never sweep the floor at night?"
+];
+var COL=["#ff7eb6","#8b5cf0","#4a9ee0","#f5822b","#4cc948","#2ec4b6"];
+function buildBalloons(){
+  var g=$("balloonGrid");g.innerHTML="";
+  for(var i=0;i<10;i++){
+    var b=document.createElement("button");b.className="balloon";b.textContent="🎈";b.style.background=COL[i%COL.length];
+    b.onclick=function(btn){return function(){balloonPop(btn)}}(b);
+    g.appendChild(b);
+  }
+}
+function balloonPop(btn){
+  if(btn.classList.contains("pop"))return;
+  btn.classList.add("pop");sPop();
+  var q=balQ[Math.floor(Math.random()*balQ.length)];
+  $("balloonQ").textContent="🎈 "+q;
+  speakGB(q,"girl",null,RATE);
+}
+function balloonScore(ok){if(ok)grade(true,"Balloon answer!");else grade(false,"Try again")}
+function balloonReset(){buildBalloons();$("balloonQ").textContent="Tap a balloon to pop it and reveal a question."}
+
+var RC=[
+  {sp:"Sam",line:"Do you usually read the newspaper in the afternoon?",ans:"Tim:",opts:["I don't usually read the newspaper in the afternoon.","I am reading the newspaper.","I usually read the newspaper in the afternoon."],c:2},
+  {sp:"Ken",line:"___",ans:"Tim: Yes, I usually walk the dog in the morning.",opts:["Do you usually walk the dog in the afternoon?","Does he usually walk the dog in the morning?","Do you usually walk the dog in the morning?"],c:2},
+  {sp:"Tony",line:"___",ans:"Jenny: No, I don't. I never wipe the table on Thursdays.",opts:["Do you always wipe the table on Thursdays?","Do you always wipe the table on Tuesdays?","Do you always wipe the window on Thursdays?"],c:0},
+  {sp:"Alan",line:"Do you often wipe the table?",ans:"Ben:",opts:["I often wipe the table.","No, I do not often wipe the table.","Yes, we often wipe the window."],c:1},
+  {sp:"Bella",line:"Do you often sweep the floor on Mondays?",ans:"Anna: No, ___",opts:["I don't often sweep the floor on Mondays.","I often sweep the floor on Mondays.","I don't often sweep the floor on weekends."],c:0},
+  {sp:"Sam",line:"___",ans:"Tim: No, they don't. They always sweep the floor in the morning.",opts:["Do they always sweep the floor in the morning?","Do you always sweep the floor in the morning?","Do they sometimes sweep the floor in the morning?"],c:0},
+  {sp:"Jane",line:"Do they sometimes go to the movies in the evening?",ans:"Nick:",opts:["No, they don't go to the movies in the evening.","No, they don't go to the movies at night.","No, they don't always go to the movies in the evening."],c:0},
+  {sp:"Tim",line:"___",ans:"Carl: No, they don't often study English in the afternoon.",opts:["When do Ken and Jack study English?","Does Ken often study English in the afternoon?","Do Ken and Jack often study English in the afternoon?"],c:2},
+  {sp:"Debbie",line:"Do they usually water the flowers at night?",ans:"Benson:",opts:["They don't always water the flowers at night.","Yes, they usually water the flowers at night.","Yes, we usually water the flowers at night."],c:1},
+  {sp:"Amy",line:"___",ans:"Jane: No, I never walk the dog at night.",opts:["Do you usually walk to school?","Do you usually walk the dog at night?","Do you usually take a walk at night?"],c:1}
+];
+var rcDone=0;
+function buildRC(){
+  var box=$("rcList");box.innerHTML="";rcDone=0;$("rcScore").textContent="";
+  RC.forEach(function(r,i){
+    var c=document.createElement("div");c.className="rc-card";
+    var head=r.line==="___"?("❓ "+r.sp+": ___"):(r.sp+": "+r.line);
+    var html='<div class="prompt" data-say="'+(r.sp+". "+r.line).replace(/"/g,"&quot;")+'" data-voice="girl"><span class="spk">🔊</span> '+head+'</div>';
+    if(r.ans.indexOf("___")<0)html+='<div class="mini-info">'+r.ans+'</div><div style="height:8px"></div>';
+    r.opts.forEach(function(o,k){html+='<button class="rc-opt" data-i="'+i+'" data-k="'+k+'">'+String.fromCharCode(65+k)+'. '+o+'</button>'});
+    c.innerHTML=html;
+    c.querySelectorAll(".rc-opt").forEach(function(b){b.onclick=function(){rcPick(i,k,this)}});
+    box.appendChild(c);
+  });
+}
+function rcPick(i,k,btn){
+  var card=btn.closest(".rc-card");if(card.dataset.done)return;card.dataset.done="1";
+  var ok=k===RC[i].c;
+  card.querySelectorAll(".rc-opt").forEach(function(b,j){if(j===RC[i].c)b.classList.add("ok");else if(j===k)b.classList.add("dis")});
+  if(ok){rcDone++;grade(true,"Read & Choose!")}else{grade(false,"Look again")}
+  $("rcScore").textContent="Score: "+rcDone+" / "+RC.length;
+  var correct=RC[i].opts[RC[i].c];speakGB(correct,"girl",null,RATE);
+}
+
+var QZ_PIC=[
+  {say:"sweep the floor",ans:"🧹",opts:["🧹","🧽","🐕"]},
+  {say:"wipe the table",ans:"🧽",opts:["🐕","🧽","📰"]},
+  {say:"walk the dog",ans:"🐕",opts:["🌸","🧹","🐕"]},
+  {say:"read the newspaper",ans:"📰",opts:["📰","🌸","🧽"]},
+  {say:"water the flowers",ans:"🌸",opts:["🌸","🐕","🧹"]}
+];
+var QZ_TF=[
+  {s:"Mia usually sweeps the floor in the morning.",t:true},
+  {s:"Peter always sweeps the floor.",t:false},
+  {s:"Jane always plays in the afternoon.",t:true},
+  {s:"Mia never waters the flowers.",t:false}
+];
+var QZ_FILL=[
+  {q:"Do you usually ___ the floor in the morning?",opts:["sweep","sweeps","sweeping"],c:0},
+  {q:"No, I don't ___ wipe the table in the evening.",opts:["sweep","usually","walk"],c:1},
+  {q:"They usually ___ the dog on Sundays.",opts:["walk","walks","walking"],c:0},
+  {q:"He usually ___ the flowers in the afternoon.",opts:["water","waters","watering"],c:1}
+];
+var QZ_LISTEN=[
+  {say:"Do you usually wipe the table in the evening?",opts:["Do you usually wipe the table in the evening?","Do you usually walk the dog in the evening?","Do you usually wipe the window in the morning?"],c:0},
+  {say:"No, they don't usually sweep the floor on Sundays.",opts:["Yes, they usually sweep the floor on Sundays.","No, they don't usually sweep the floor on Sundays.","No, we don't usually sweep the floor on Saturdays."],c:1},
+  {say:"Mia sometimes waters the flowers after school.",opts:["Mia sometimes waters the flowers after school.","Mia always waters the flowers before school.","Mia never waters the flowers after school."],c:0}
+];
+var qzDone=0,qzRight=0,qzBreak={};
+function buildQuiz(){
+  var box=$("quizContent");box.innerHTML="";qzDone=0;qzRight=0;qzBreak={};$("scoreBoard").style.display="none";
+  box.appendChild(qh("A. Listen & choose the picture","🎧"));
+  QZ_PIC.forEach(function(q,i){
+    var d=document.createElement("div");d.className="listen-card";
+    d.innerHTML='<button class="btn blue" onclick="speakGB(\''+q.say+'\',\'girl\',null,RATE)">🔊 '+(q.say.replace(/^\w/,function(m){return m.toUpperCase()}))+'</button>'+
+      '<div class="listen-opts">'+q.opts.map(function(o,k){return '<button class="listen-opt" data-k="'+k+'" style="font-size:34px">'+o+'</button>'}).join("")+'</div>';
+    d.querySelectorAll(".listen-opt").forEach(function(b){b.onclick=function(){qzPic(i,q.opts.indexOf(b.textContent),b)}});
+    box.appendChild(d);
+  });
+  box.appendChild(qh("B. True or False","✅"));
+  QZ_TF.forEach(function(q,i){
+    var d=document.createElement("div");d.className="tf-card";
+    d.innerHTML='<div class="tf-emoji">'+(q.t?"🤔":"🤨")+'</div><div class="tf-stmt" data-say="'+q.s.replace(/"/g,"&quot;")+'" data-voice="girl">'+q.s+'</div>'+
+      '<div class="sbtnrow"><button class="btn green">True</button><button class="btn red">False</button></div>';
+    var btns=d.querySelectorAll(".sbtnrow .btn");btns[0].onclick=function(){qzTF(i,true,d)};btns[1].onclick=function(){qzTF(i,false,d)};
+    box.appendChild(d);
+  });
+  box.appendChild(qh("C. Fill in the blank","✏️"));
+  QZ_FILL.forEach(function(q,i){
+    var d=document.createElement("div");d.className="fill-card";
+    var parts=q.q.split("___");
+    d.innerHTML='<div class="fill-sent">'+parts[0]+'<span class="fill-blank" id="fb'+i+'">?</span>'+parts[1]+'</div>'+
+      '<div class="fill-opts">'+q.opts.map(function(o,k){return '<button class="btn purple" data-k="'+k+'">'+o+'</button>'}).join("")+'</div>';
+    d.querySelectorAll(".fill-opts .btn").forEach(function(b){b.onclick=function(){qzFill(i,q.opts.indexOf(b.textContent),b,d)}});
+    box.appendChild(d);
+  });
+  box.appendChild(qh("D. Listen & choose the sentence","🎧"));
+  QZ_LISTEN.forEach(function(q,i){
+    var d=document.createElement("div");d.className="listen-card";
+    d.innerHTML='<button class="btn blue" onclick="speakGB(\''+q.say.replace(/'/g,"")+'\',\'boy\',null,RATE)">🔊 Play sentence</button>'+
+      '<div class="listen-opts" style="grid-template-columns:1fr">'+q.opts.map(function(o,k){return '<button class="listen-opt" data-k="'+k+'">'+o+'</button>'}).join("")+'</div>';
+    d.querySelectorAll(".listen-opt").forEach(function(b){b.onclick=function(){qzListen(i,q.opts.indexOf(b.textContent),b)}});
+    box.appendChild(d);
+  });
+}
+function qh(t,b){var d=document.createElement("div");d.className="shead";d.innerHTML='<span class="ic">'+b+'</span><h2 style="font-size:20px">'+t+'</h2>';return d}
+function qdone(el,ok,sec){if(el.dataset.done)return false;el.dataset.done="1";qzDone++;if(ok){qzRight++;qzBreak[sec]=(qzBreak[sec]||0)+1}grade(ok);return true}
+function qzPic(i,k,b){var d=b.closest(".listen-card");if(!qdone(d,k===QZ_PIC[i].opts.indexOf(QZ_PIC[i].ans),"pic"))return;b.classList.add(k===QZ_PIC[i].opts.indexOf(QZ_PIC[i].ans)?"ok":"dis")}
+function qzTF(i,val,d){var ok=val===QZ_TF[i].t;if(!qdone(d,ok,"tf"))return;d.querySelectorAll(".tf-card .sbtnrow .btn, .sbtnrow .btn").forEach(function(x){x.disabled=true});
+  var r=document.createElement("div");r.style.fontWeight="800";r.style.marginTop="8px";r.textContent=(QZ_TF[i].t?"TRUE":"FALSE")+" ✅";d.appendChild(r)}
+function qzFill(i,k,b,d){var ok=k===QZ_FILL[i].c;$("fb"+i).textContent=QZ_FILL[i].opts[QZ_FILL[i].c];if(!qdone(d,ok,"fill"))return}
+function qzListen(i,k,b){var d=b.closest(".listen-card");if(!qdone(d,k===QZ_LISTEN[i].c,"listen"))return;b.classList.add(k===QZ_LISTEN[i].c?"ok":"dis")}
+function showQuizScore(){
+  var b=$("scoreBoard");b.style.display="block";
+  var pct=qzDone?Math.round(qzRight/qzDone*100):0;
+  var stars=pct>=90?"⭐⭐⭐":pct>=70?"⭐⭐":pct>=40?"⭐":"💪";
+  var team=(SC.a>SC.b?($("nameA").textContent||"Team A"):SC.b>SC.a?($("nameB").textContent||"Team B"):"It's a tie!");
+  b.innerHTML='<div class="score-big">'+qzRight+' / '+qzDone+'</div><div class="score-stars">'+stars+'</div>'+
+    '<div style="font-weight:800;color:#6b5aa8">Picture: '+(qzBreak.pic||0)+' · True/False: '+(qzBreak.tf||0)+' · Fill: '+(qzBreak.fill||0)+' · Listen: '+(qzBreak.listen||0)+'</div>'+
+    '<div class="mini-info" style="margin-top:10px">🏆 '+team+'</div>';
+  if(pct>=70){sWin();confetti()}
+}
+function resetQuiz(){buildQuiz()}
+
+var roster=["Anna","Ben","Chloe","Daniel","Emma","Fred","Grace","Harry","Isla","Jack","Kate","Liam"];
+function loadRoster(){try{var r=JSON.parse(localStorage.getItem("mj5u17_roster"));if(r&&r.length)roster=r}catch(e){}$("rosterBox").value=roster.join("\n")}
+function saveRoster(){roster=$("rosterBox").value.split("\n").map(function(s){return s.trim()}).filter(Boolean);try{localStorage.setItem("mj5u17_roster",JSON.stringify(roster))}catch(e){}showToast("Saved "+roster.length+" names")}
+function pickStudent(){if(!roster.length){showToast("Add names first");return}var n=roster[Math.floor(Math.random()*roster.length)];$("pickName").textContent=n;sPop();speakGB(n+", it's your turn!","girl",null,RATE)}
+
+var tmInt=null,tmLeft=60;
+function tmRender(){var m=Math.floor(tmLeft/60),s=tmLeft%60;$("timerBig").textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s}
+function tmStart(sec){tmStop();tmLeft=sec;tmRender();tmInt=setInterval(function(){tmLeft--;tmRender();if(tmLeft<=0){tmStop();sAlarm();showToast("⏰ Time's up!")}},1000)}
+function tmStop(){if(tmInt){clearInterval(tmInt);tmInt=null}}
+function sAlarm(){if(soundOn){for(var i=0;i<3;i++){tone(880,.18,"square",.13,i*.35);tone(1174,.18,"square",.13,i*.35+.18)}}}
+function rollDice(){var n=1+Math.floor(Math.random()*6);var f=["⚀","⚁","⚂","⚃","⚄","⚅"];$("diceOut").textContent=f[n-1];sPop();showToast("🎲 "+n)}
+
+function warmFixed(){
+  return [
+    {who:"Mother",text:"Jane, sweep the floor. Peter, walk the dog."},
+    {who:"Jane & Peter",text:"Yes, Mother."},
+    {who:"Jane",text:"Phew, that was close. Do you usually sweep the floor in the morning?"},
+    {who:"Mia",text:"Yes, I usually sweep the floor in the morning. Peter usually walks the dog, but he seldom sweeps the floor."},
+    {who:"Mother",text:"What do you usually do, Mia?"},
+    {who:"Mia",text:"I usually read the newspaper and books in the morning. Come, let me help you!"},
+    {who:"Jane",text:"Thanks, Mia. Then, we always play in the afternoon."},
+    {who:"Mia",text:"Yes, and I sometimes water the flowers, too."}
+  ];
+}
+var warmPlaced=[];
+function warmRender(){
+  var sl=$("warmSlots");sl.innerHTML="";
+  for(var i=0;i<8;i++){
+    var d=document.createElement("div");d.className="slotbox";
+    if(warmPlaced[i]){d.innerHTML='<div class="strip" style="margin:0"><span class="who">'+warmPlaced[i].who+'</span>'+warmPlaced[i].text+'</div>';d.onclick=function(ix){return function(){warmPlaced.splice(ix,1);warmRender()}}(i)}
+    else d.innerHTML='<div class="ph">Slot '+(i+1)+' — tap a strip below</div>';
+    sl.appendChild(d);
+  }
+  var pool=$("warmPool");pool.innerHTML="";
+  var fixed=warmFixed();
+  shuffle(fixed.map(function(f,i){return i})).forEach(function(idx){
+    if(warmPlaced.some(function(p){return p._i===idx}))return;
+    var f=fixed[idx];var c=document.createElement("div");c.className="strip";c.innerHTML='<span class="who">'+f.who+'</span>'+f.text;
+    c.onclick=function(){warmPlaced.push({who:f.who,text:f.text,_i:idx});warmRender()};pool.appendChild(c);
+  });
+}
+function warmCheck(){
+  var fixed=warmFixed();
+  if(warmPlaced.length<8){$("warmOut").textContent="Keep going — "+warmPlaced.length+"/8 placed.";return}
+  var ok=warmPlaced.every(function(p,i){return p._i===i});
+  if(ok){sDing();$("warmOut").textContent="✅ Perfect! The dialogue is complete.";grade(true,"Rebuilt!")}
+  else{sBuzz();$("warmOut").textContent="❌ Almost — some strips are out of order.";noPoints()}
+}
+function warmReset(){warmPlaced=[];$("warmOut").textContent="";warmRender()}
+
+function boot(){
+  $("globalSound").onclick=function(){soundOn=!soundOn;this.textContent=soundOn?"🔊":"🔇";showToast("Sound "+(soundOn?"ON":"OFF"));if(!soundOn)speakStop();$("mascot").textContent=soundOn?"🐕":"🙊"};
+  $("lbClose").onclick=function(){$("lightbox").classList.remove("show")};
+  $("lightbox").onclick=function(e){if(e.target===this)this.classList.remove("show")};
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")$("lightbox").classList.remove("show")});
+  $("mascot").onclick=function(){var m=["Woof! Brush up on your chores! 🧹","To the top! 超越巅峰!","Keep it up! 继续努力!","Don't forget the word 'the' and the -s! 😉","How often do you help at home?"];var t=m[Math.floor(Math.random()*m.length)];showToast(t);speakGB(t,"boy",null,RATE)};
+  $("autoTurn").onchange=function(){AUTO=this.checked};
+  $("nameA").addEventListener("input",renderScores);$("nameB").addEventListener("input",renderScores);
+
+  var fl=$("floaties");var em=["🧹","🧽","📰","🐕","🌸","🪣","🧺","🧼","🛏️","🪴"];
+  for(var i=0;i<12;i++){var s=document.createElement("span");s.className="floaty";s.textContent=em[i%em.length];s.style.left=(Math.random()*95)+"vw";s.style.fontSize=(18+Math.random()*26)+"px";s.style.animationDuration=(14+Math.random()*16)+"s";s.style.animationDelay=(-Math.random()*22)+"s";fl.appendChild(s)}
+
+  buildDialog();buildDet();buildRole();
+  buildVocab();buildFreq();buildExtra();
+  attachSwipe($("actReply"),actRandom);
+  buildSub();buildSRule();buildPhonics();
+  buildKeypad();spellNew();scrNew();
+  buildMiss();buildBalloons();buildRC();buildQuiz();
+  warmRender();
+  loadRoster();tmRender();rollDice();
+  loadScores();renderScores();showTab(0);
+  setTimeout(updateVoiceInfo,600);
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot);else boot();
+</script>
+<script src="https://hanshanghao.github.io/Joy_English/teaching-tools.js" defer></script>
+</body>
+</html>
