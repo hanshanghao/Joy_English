@@ -385,6 +385,70 @@ section{scroll-margin-top:84px}
 .tbl tr:hover{background:#faf7ff}
 .tbl .tm{color:var(--purple);font-weight:900;white-space:nowrap}
 .res-tag{display:inline-block;background:#eaf6ff;border:2px solid #bfe4ff;color:#2b7bbd;border-radius:30px;padding:4px 12px;font-size:clamp(11px,1.7vw,13px);font-weight:900;margin:0 6px 6px 0}
+
+/* ===== TJ5-U8 ADD-ON : SAY THE PREVIOUS SENTENCE ===== */
+.spprev{display:grid;grid-template-columns:minmax(200px,300px) 1fr;gap:16px;margin:14px 0}
+@media(max-width:768px){.spprev{grid-template-columns:1fr}}
+.sp-cover{background:linear-gradient(150deg,#2b2350,#4a3d7a);border-radius:20px;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#fff;text-align:center;padding:18px;position:relative;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,.22)}
+.sp-cover::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 18px,transparent 18px 36px);pointer-events:none}
+.sp-cover .sp-cover-ic{font-size:clamp(48px,12vw,78px);line-height:1;animation:bounce 2.4s ease-in-out infinite;position:relative;z-index:1}
+.sp-cover .sp-cover-t{font-weight:900;font-size:clamp(16px,2.6vw,20px);position:relative;z-index:1}
+.sp-cover .sp-cover-s{font-size:clamp(12px,1.9vw,14px);opacity:.85;position:relative;z-index:1}
+.sp-cover.peeked{background:linear-gradient(150deg,#fff7ea,#ffe9c9);color:var(--ink)}
+.sp-stage{background:#fff;border-radius:20px;padding:18px;box-shadow:0 6px 16px rgba(0,0,0,.1);border-left:7px solid var(--purple)}
+.sp-lab{font-size:clamp(11px,1.7vw,13px);font-weight:900;letter-spacing:1px;color:#999;text-transform:uppercase}
+.sp-cur{margin:8px 0 12px;background:linear-gradient(135deg,#f5f0ff,#ede4ff);border-radius:16px;padding:16px;font-size:clamp(16px,2.8vw,22px);font-weight:900;color:var(--purple);min-height:56px;display:flex;align-items:center;gap:10px}
+.sp-cur .sp-tag{font-size:clamp(10px,1.6vw,12px);font-weight:900;background:var(--purple);color:#fff;border-radius:20px;padding:3px 10px;flex-shrink:0}
+.sp-ask{font-size:clamp(13px,2.1vw,17px);font-weight:700;color:var(--pink);margin-bottom:12px}
+.sp-ans{background:#f8f5ff;border:3px dashed #d0c4f0;border-radius:16px;padding:14px;min-height:56px;font-size:clamp(15px,2.6vw,21px);font-weight:900;color:#b3a9d6;display:flex;align-items:center;gap:10px;transition:all .3s}
+.sp-ans.shown{background:#e8ffe8;border:3px solid var(--green);color:#1a7a2c;animation:popIn .4s}
+.sp-ans .sp-tag2{font-size:clamp(10px,1.6vw,12px);font-weight:900;background:var(--green);color:#fff;border-radius:20px;padding:3px 10px;flex-shrink:0}
+.sp-prog{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.sp-prog span{width:30px;height:30px;border-radius:50%;background:#eee;color:#999;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
+.sp-prog span.on{background:var(--purple);color:#fff}
+.sp-prog span.done{background:var(--green);color:#fff}
+
+/* ===== TJ5-U8 ADD-ON : BEANSTALK CLIMB ===== */
+.bean-arena{position:relative;background:linear-gradient(180deg,#dff3ff,#eafbe0 60%,#d6f0bd);border:4px solid #bfe4ff;border-radius:22px;padding:14px;overflow:hidden;box-shadow:0 8px 22px rgba(0,0,0,.1)}
+.bean-sky{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bk-cloud{position:absolute;font-size:44px;opacity:.9;animation:bkdrift linear infinite}
+.bk-cloud.c1{top:6%;animation-duration:26s;animation-delay:-4s}
+.bk-cloud.c2{top:30%;font-size:34px;animation-duration:34s;animation-delay:-16s}
+.bk-cloud.c3{top:52%;font-size:50px;animation-duration:44s;animation-delay:-24s}
+@keyframes bkdrift{from{left:-15%}to{left:115%}}
+.bean-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:640px){.bean-grid{grid-template-columns:1fr 1fr}}
+.bean-lane{background:rgba(255,255,255,.72);border-radius:18px;padding:10px;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.bl-head{display:flex;align-items:center;gap:8px;justify-content:center;border:3px solid;border-radius:14px;padding:6px 10px;margin-bottom:8px;background:#fff}
+.bl-av{font-size:26px}
+.bl-name{font-weight:900;font-size:clamp(13px,2vw,16px)}
+.bean-stalk{position:relative;height:480px;background:linear-gradient(180deg,#eefbe0,#d9f2c1);border-radius:16px;overflow:hidden;border:3px solid #cbe9ad}
+.bs-line{position:absolute;left:50%;top:0;bottom:0;width:20px;background:linear-gradient(180deg,#63c24a,#3e9a34);border-radius:12px;box-shadow:inset -4px 0 0 rgba(0,0,0,.12),inset 4px 0 0 rgba(255,255,255,.18);transform-origin:bottom center;animation:sway 4.5s ease-in-out infinite alternate;transform:translateX(-50%)}
+@keyframes sway{from{transform:translateX(-50%) rotate(-1.6deg)}to{transform:translateX(-50%) rotate(1.6deg)}}
+.bs-castle{position:absolute;top:2px;left:50%;transform:translateX(-50%);font-size:44px;z-index:2;filter:drop-shadow(0 3px 5px rgba(0,0,0,.2))}
+.bs-flag{position:absolute;top:40px;left:50%;transform:translateX(-50%);font-size:20px;z-index:2;animation:flagWave 1.6s ease-in-out infinite alternate}
+@keyframes flagWave{from{transform:translateX(-50%) rotate(-8deg)}to{transform:translateX(-50%) rotate(8deg)}}
+.bs-treasure{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);font-size:20px;opacity:.7}
+.bean-leaf{position:absolute;width:54px;height:24px;background:linear-gradient(135deg,#8ee06a,#4caf50);border-radius:50% 50% 50% 0;box-shadow:0 3px 6px rgba(0,0,0,.15);transform:rotate(-18deg);animation:leafPulse 2.6s ease-in-out infinite}
+.bean-leaf::after{content:"";position:absolute;top:50%;left:8px;width:36px;height:2px;background:rgba(255,255,255,.5);transform:translateY(-50%)}
+@keyframes leafPulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.18)}}
+.bs-climber{position:absolute;left:50%;transform:translateX(-50%);font-size:34px;z-index:3;transition:bottom .55s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 3px 4px rgba(0,0,0,.25))}
+.bs-climber.hop{animation:beanHop .55s ease}
+@keyframes beanHop{0%{transform:translateX(-50%) scale(1)}40%{transform:translateX(-50%) translateY(-16px) scale(1.18) rotate(-10deg)}100%{transform:translateX(-50%) scale(1)}}
+.bs-climber.win{animation:beanWin 1s ease infinite alternate}
+@keyframes beanWin{from{transform:translateX(-50%) scale(1) rotate(-6deg)}to{transform:translateX(-50%) scale(1.15) rotate(6deg)}}
+.bl-meta{text-align:center;font-weight:800;font-size:clamp(12px,1.9vw,14px);color:#6b8a53;margin:8px 0 4px}
+.bean-ctl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:768px){.bean-ctl{grid-template-columns:1fr}}
+.bean-scores{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.bean-sc{background:#fff;border-radius:14px;padding:8px 14px;text-align:center;box-shadow:0 4px 10px rgba(0,0,0,.1);min-width:80px}
+.bean-sc .bsc-av{font-size:24px}
+.bean-sc .bsc-n{font-weight:900;font-size:clamp(11px,1.7vw,13px)}
+.bean-sc .bsc-v{font-weight:900;font-size:clamp(18px,3.4vw,24px);color:var(--purple)}
+.bs-castle.bean-castle-open{animation:castleOpen 1s ease}
+@keyframes castleOpen{0%,100%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.3);filter:drop-shadow(0 0 18px #ffd447)}}
+.bean-banner{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.4);opacity:0;z-index:5;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-weight:900;font-size:clamp(16px,3vw,24px);padding:14px 26px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.3);text-align:center;pointer-events:none;transition:all .4s}
+.bean-banner.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
 </style>
 </head>
 <body>
@@ -407,6 +471,7 @@ section{scroll-margin-top:84px}
   <button class="ntab" onclick="showTab(5)">⚡ Weather Champion</button>
   <button class="ntab" onclick="showTab(6)">📝 Quiz</button>
   <button class="ntab" onclick="showTab(7)">📚 Picture Cards</button>
+  <button class="ntab" onclick="showTab(8)">🌱 Beanstalk Climb</button>
 </div>
 
 <div class="tabpan on" id="tp0" data-sec="plan">
@@ -487,7 +552,7 @@ section{scroll-margin-top:84px}
         <div class="imgcard" onclick="openLb('https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg/1280px-A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg')"><img loading="lazy" src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg/1280px-A_rainbow_appears_in_the_sky_after_the_rain_shower.jpg" alt="Rainbow after the rain"><div class="cap">Dialogue · look at the sky</div></div>
       </div>
       <div class="tip">🔄 <strong>Transition:</strong> "Now you be the characters —Group A, you are Abby…"</div>
-      <div class="rowbtns"><button class="btn blue" onclick="jump('s3')">Next: Role-play →</button><button class="btn orange" onclick="showTab(1)">Open Dialogue tab</button></div>
+      <div class="rowbtns"><button class="btn blue" onclick="jump('s3')">Next: Role-play →</button><button class="btn orange" onclick="showTab(1)">Open Dialogue tab</button><button class="btn green" onclick="showTab(8)">🌱 Beanstalk Climb</button></div>
     </div>
   </section>
 
@@ -737,6 +802,39 @@ CHAMPIONS (10'): ____________</div>
     <div class="rowbtns">
       <button class="btn orange" onclick="playDlg()">🎬 ACTION! (play all)</button>
       <button class="btn pink" onclick="sayM('Action! Line one, take one.')">🔊 Director's call</button>
+    </div>
+  </section>
+
+  <section id="sayprev">
+    <div class="shead"><span class="ic">🔁</span><h2>Say the Previous Sentence</h2><span class="badge">TEACHER-LED · COVERED PICTURE</span>
+      <button class="sec-sound" data-sec="dlg" onclick="toggleSecSound('dlg',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:12px">🎯 <strong>How to play:</strong> the picture is <strong>covered</strong> — no peeking! Show the line, and the class must say the sentence that comes <strong>before</strong> it. Tap <strong>Reveal the answer</strong> to check, and the British voice reads the correct line aloud.</div>
+    <div class="tip" style="margin-bottom:14px">📝 <strong>Before class:</strong> write the six answers down, in order, so you can reveal them with confidence. <button class="chip8" style="margin-left:8px" onclick="spKey()">🔑 Show / hide answer key</button></div>
+    <div class="spprev">
+      <div class="sp-cover" id="spCover">
+        <div class="sp-cover-ic">🫣</div>
+        <div class="sp-cover-t">Picture covered</div>
+        <div class="sp-cover-s">The class uses memory, not the picture.</div>
+        <button class="btn blue" onclick="spPeek()">👀 Quick peek</button>
+      </div>
+      <div class="sp-stage">
+        <div class="sp-lab">Line on screen now</div>
+        <div class="sp-cur" id="spCur">—</div>
+        <div class="sp-ask">❓ Say the sentence that comes <strong>BEFORE</strong> this one!</div>
+        <div class="sp-ans" id="spAns">…</div>
+        <div class="rowbtns">
+          <button class="btn purple" onclick="spReveal()">🔓 Reveal the answer</button>
+          <button class="btn green" onclick="spNext()">Next line →</button>
+          <button class="btn blue" onclick="spPrev()">← Back</button>
+          <button class="btn pink" onclick="spReset()">🔄 Reset</button>
+        </div>
+        <div class="sp-prog" id="spProg"></div>
+      </div>
+    </div>
+    <div class="mini" id="spKeyBox" style="display:none;margin-top:14px;border-left:6px solid var(--orange)">
+      <h4>🔑 Teacher answer key — write these down before class</h4>
+      <div class="step-text">① NICK — “What's up there?”<br>② JACK — “Let's check it out!”<br>③ MOM — “Be careful.”<br>④ JACK — “Don't worry, Mom.”<br>⑤ ABBY — “How's the weather up there?”<br>⑥ JACK — “It's sunny!”</div>
+      <div class="desc">The “previous sentence” for ② is ①, for ③ is ②, and so on. Line ① has no previous, so the game starts at line ②.</div>
     </div>
   </section>
 
@@ -1262,6 +1360,46 @@ CHAMPIONS (10'): ____________</div>
   </section>
 </div>
 
+<div class="tabpan" id="tp8" data-sec="bean">
+  <div class="hero">
+    <span class="big-emoji">🌱</span>
+    <h1>Beanstalk Climb</h1>
+    <span class="sub">3 players · answer right · climb the magic beanstalk</span>
+    <div class="desc">A fully animated race up the magic beanstalk. Ask a question — the player who answers climbs one leaf. First to the castle 🏰 at the top becomes the Weather Champion!</div>
+  </div>
+
+  <section>
+    <div class="shead"><span class="ic">🌱</span><h2>The Race to the Castle</h2><span class="badge">3 PLAYERS · 8 LEAVES</span>
+      <button class="sec-sound" data-sec="bean" onclick="toggleSecSound('bean',this)"><span class="sec-si">🔊</span></button></div>
+    <div class="tip" style="margin-bottom:14px">🎯 <strong>How to play:</strong> ask the question card. When a player answers correctly, tap <strong>⬆ Climb</strong> on their stalk — they hop up one leaf with a cheer. A wrong answer taps <strong>⬇ Oops</strong> to slide back one leaf. Reach leaf 8 and the castle 🏰 opens!</div>
+    <div class="bean-arena">
+      <div class="bean-sky"><span class="bk-cloud c1">☁️</span><span class="bk-cloud c2">☁️</span><span class="bk-cloud c3">☁️</span></div>
+      <div class="bean-grid" id="beanGrid"></div>
+    </div>
+    <div class="bean-ctl">
+      <div class="mini">
+        <h4>🎤 Question card</h4>
+        <div class="step-text" id="beanQText" style="font-weight:900;font-size:clamp(15px,2.6vw,20px)">Press “Next question” to begin.</div>
+        <div class="desc" id="beanA" style="min-height:22px;color:var(--green);font-weight:800;margin-top:6px"></div>
+        <div class="rowbtns">
+          <button class="btn green" onclick="beanAsk()">➡ Next question</button>
+          <button class="btn blue" onclick="beanReveal()">🔓 Reveal answer</button>
+          <button class="btn purple" onclick="beanAskVoice()">🔊 Hear the question</button>
+        </div>
+      </div>
+      <div class="mini">
+        <h4>🏆 Scoreboard</h4>
+        <div class="bean-scores" id="beanScores"></div>
+        <div class="desc" id="beanFeed">Up to three players — one per stalk. Keep it fair and fast!</div>
+        <div class="rowbtns">
+          <button class="btn orange" onclick="beanWinnerCheck()">🏆 Who is winning?</button>
+          <button class="btn pink" onclick="beanReset()">🔄 New race</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
 
 <div class="toast" id="toast"></div>
 <div class="mascot" id="mascot" title="Hello from Owlbert!">🦉</div>
@@ -1277,7 +1415,7 @@ CHAMPIONS (10'): ____________</div>
 /* ===== AUDIO + TWO BRITISH VOICES ===== */
 var soundOn=true;
 var RATE=0.9, RATE_SLOW=0.8;
-var secSounds={plan:true,dlg:true,vocab:true,patterns:true,world:true,champ:true,quiz:true,book:true};
+var secSounds={plan:true,dlg:true,vocab:true,patterns:true,world:true,champ:true,quiz:true,book:true,bean:true};
 var curSec="plan";
 var actx=null;
 function audio(){if(!actx){try{actx=new(window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==="suspended")actx.resume();return actx;}
@@ -1357,7 +1495,7 @@ function launchConfetti(){
 }
 
 /* ===== TABS ===== */
-var tabSecMap={0:"plan",1:"dlg",2:"vocab",3:"patterns",4:"world",5:"champ",6:"quiz",7:"book"};
+var tabSecMap={0:"plan",1:"dlg",2:"vocab",3:"patterns",4:"world",5:"champ",6:"quiz",7:"book",8:"bean"};
 function showTab(idx){
   curSec=tabSecMap[idx]||"plan";
   var pans=document.querySelectorAll(".tabpan"),tabs=document.querySelectorAll(".navbar .ntab");
@@ -1829,8 +1967,199 @@ renderDQ();
 buildQuiz();
 (function(){
   var h=(location.hash||"").replace("#","");
-  if(/^t[0-7]$/.test(h))showTab(parseInt(h.charAt(1),10));
+  if(/^t[0-8]$/.test(h))showTab(parseInt(h.charAt(1),10));
 })();
+
+/* ===== ADD-ON : SAY THE PREVIOUS SENTENCE ===== */
+var spIdx=1,spShown=false;
+function spRender(){
+  var cur=dlgLines[spIdx];
+  var el=document.getElementById("spCur");
+  if(el)el.innerHTML='<span class="sp-tag">'+cur.sp+'</span>'+cur.t;
+  var a=document.getElementById("spAns");
+  if(a){a.className="sp-ans";a.innerHTML="…";}
+  spShown=false;
+  var p="";
+  for(var i=1;i<dlgLines.length;i++)p+='<span class="'+(i<spIdx?"done":(i===spIdx?"on":""))+'">'+(i+1)+'</span>';
+  var pg=document.getElementById("spProg");
+  if(pg)pg.innerHTML=p;
+}
+function spReveal(){
+  if(spShown)return;
+  var prev=dlgLines[spIdx-1];
+  var a=document.getElementById("spAns");
+  if(a){a.className="sp-ans shown";a.innerHTML='<span class="sp-tag2">'+prev.sp+'</span>'+prev.t;}
+  spShown=true;
+  var pitch=prev.v==="F"?1.35:1.05,gender=prev.v==="F"?"girl":"boy";
+  speakGB(prev.t,pitch,gender);
+  sDing();
+  showToast("✅ "+prev.t);
+}
+function spNext(){if(spIdx<dlgLines.length-1){spIdx++;spRender();sPop();}else showToast("That's the last one! 🎉");}
+function spPrev(){if(spIdx>1){spIdx--;spRender();sPop();}}
+function spReset(){spIdx=1;spRender();showToast("Back to line ② — say the sentence before it!");}
+function spPeek(){
+  var c=document.getElementById("spCover");
+  if(!c)return;
+  c.classList.toggle("peeked");
+  var ic=c.querySelector(".sp-cover-ic"),t=c.querySelector(".sp-cover-t");
+  var on=c.classList.contains("peeked");
+  if(ic)ic.textContent=on?"🖼️":"🫣";
+  if(t)t.textContent=on?"Peeking — teacher only!":"Picture covered";
+  sPop();
+}
+function spKey(){
+  var k=document.getElementById("spKeyBox");
+  if(!k)return;
+  var showNow=(k.style.display==="none"||!k.style.display);
+  k.style.display=showNow?"block":"none";
+  sPop();
+}
+
+/* ===== ADD-ON : BEANSTALK CLIMB (3 players) ===== */
+var BEAN=[{n:"Abby",e:"👧",c:"#f04f9b"},{n:"Nick",e:"👦",c:"#4a9ee0"},{n:"Jack",e:"🧒",c:"#4cc948"}];
+var beanGoal=8,B_STEP=50,B_BASE=30;
+var beanLv=[0,0,0],beanWin=false;
+function beanLeafBottom(L){return B_BASE+L*B_STEP;}
+function beanInit(){
+  var g=document.getElementById("beanGrid");
+  if(!g)return;
+  var h="";
+  for(var i=0;i<3;i++){
+    h+='<div class="bean-lane">'+
+      '<div class="bl-head" style="border-color:'+BEAN[i].c+'"><span class="bl-av">'+BEAN[i].e+'</span><span class="bl-name" style="color:'+BEAN[i].c+'">'+BEAN[i].n+'</span></div>'+
+      '<div class="bean-stalk">'+
+        '<div class="bs-castle" id="bcastle'+i+'">🏰</div><div class="bs-flag">🚩</div>'+
+        '<div class="bs-line"></div>'+
+        '<div class="bs-leaves" id="bleaves'+i+'"></div>'+
+        '<div class="bs-treasure">🌟</div>'+
+        '<div class="bs-climber" id="bclimb'+i+'">'+BEAN[i].e+'</div>'+
+      '</div>'+
+      '<div class="bl-meta">Leaf <span id="blv'+i+'">0</span> / '+beanGoal+'</div>'+
+      '<div class="rowbtns" style="justify-content:center">'+
+        '<button class="btn green" style="padding:8px 16px" onclick="beanClimb('+i+')">⬆ Climb</button>'+
+        '<button class="btn blue" style="padding:8px 16px" onclick="beanSlip('+i+')">⬇ Oops</button>'+
+      '</div>'+
+    '</div>';
+  }
+  g.innerHTML=h;
+  for(var k=0;k<3;k++)beanDrawLeaves(k);
+  beanUpdateClimbers();
+  beanScoresUI();
+}
+function beanDrawLeaves(i){
+  var box=document.getElementById("bleaves"+i);
+  if(!box)return;
+  var h="";
+  for(var L=1;L<=beanGoal;L++){
+    var b=beanLeafBottom(L),side=(L%2===0)?"left:10%":"right:10%";
+    h+='<div class="bean-leaf" style="bottom:'+b+'px;'+side+'"></div>';
+  }
+  box.innerHTML=h;
+}
+function beanUpdateClimbers(){
+  for(var i=0;i<3;i++){
+    var c=document.getElementById("bclimb"+i);
+    if(!c)continue;
+    c.style.bottom=(beanLeafBottom(beanLv[i])-6)+"px";
+  }
+}
+function beanClimb(i){
+  if(beanWin||beanLv[i]>=beanGoal)return;
+  beanLv[i]++;
+  var lv=document.getElementById("blv"+i);if(lv)lv.textContent=beanLv[i];
+  beanUpdateClimbers();
+  var c=document.getElementById("bclimb"+i);
+  if(c){c.classList.remove("hop");void c.offsetWidth;c.classList.add("hop");}
+  sDing();
+  sayA(BEAN[i].n+" climbs up! Leaf "+beanLv[i]+".");
+  beanScoresUI();
+  if(beanLv[i]>=beanGoal)beanWinNow(i);
+}
+function beanSlip(i){
+  if(beanWin||beanLv[i]<=0)return;
+  beanLv[i]--;
+  var lv=document.getElementById("blv"+i);if(lv)lv.textContent=beanLv[i];
+  beanUpdateClimbers();
+  sBuzz();
+  showToast(BEAN[i].n+" slips back to leaf "+beanLv[i]+"!");
+  beanScoresUI();
+}
+function beanScoresUI(){
+  var s=document.getElementById("beanScores");
+  if(!s)return;
+  var h="";
+  for(var i=0;i<3;i++){
+    h+='<div class="bean-sc"><div class="bsc-av">'+BEAN[i].e+'</div><div class="bsc-n">'+BEAN[i].n+'</div><div class="bsc-v">'+beanLv[i]+'</div></div>';
+  }
+  s.innerHTML=h;
+}
+function beanWinNow(i){
+  beanWin=true;
+  var c=document.getElementById("bclimb"+i);
+  if(c)c.classList.add("win");
+  var castle=document.getElementById("bcastle"+i);
+  if(castle)castle.classList.add("bean-castle-open");
+  var arena=document.querySelector(".bean-arena");
+  if(arena){
+    var old=document.getElementById("beanBanner");if(old)old.remove();
+    var banner=document.createElement("div");
+    banner.className="bean-banner";banner.id="beanBanner";
+    banner.innerHTML="🏆 "+BEAN[i].n+" reaches the castle!<br>Weather Champion! 🌟";
+    arena.appendChild(banner);
+    requestAnimationFrame(function(){banner.classList.add("show");});
+  }
+  sWin();launchConfetti();
+  sayA("Hooray! "+BEAN[i].n+" climbs to the top of the beanstalk and reaches the castle! "+BEAN[i].n+" wins!");
+  showToast("🏆 "+BEAN[i].n+" wins the Beanstalk Climb!");
+}
+function beanReset(){
+  beanWin=false;beanLv=[0,0,0];
+  var b=document.getElementById("beanBanner");if(b)b.remove();
+  beanInit();
+  showToast("🌱 New race — everyone at the bottom!");
+}
+function beanWinnerCheck(){
+  var m=Math.max(beanLv[0],beanLv[1],beanLv[2]);
+  if(m===0){showToast("Nobody has climbed yet — answer a question! 🌱");return;}
+  var win=[];
+  for(var i=0;i<3;i++)if(beanLv[i]===m)win.push(BEAN[i].n);
+  showToast("🏆 Leading: "+win.join(" & ")+" · "+m+"/"+beanGoal+" leaves");
+}
+var BEANQ=[
+ {q:"Look out the window — ☀️. Ask and answer.",a:"How is the weather? It is sunny."},
+ {q:"Look out the window — ☁️. Ask and answer.",a:"How is the weather? It is cloudy."},
+ {q:"Look out the window — 🍃. Ask and answer.",a:"How is the weather? It is windy."},
+ {q:"Look out the window — 🌧️. Ask and answer.",a:"How is the weather? It is rainy."},
+ {q:"Look out the window — ❄️. Ask and answer.",a:"How is the weather? It is snowy."},
+ {q:"Spell the weather word: 🍃 (w-i-n-d-y)",a:"W — I — N — D — Y"},
+ {q:"Say the PREVIOUS sentence: “Be careful.”",a:"“Let's check it out!”"},
+ {q:"Say the PREVIOUS sentence: “Don't worry, Mom.”",a:"“Be careful.”"},
+ {q:"Say the PREVIOUS sentence: “How's the weather up there?”",a:"“Don't worry, Mom.”"},
+ {q:"Say the PREVIOUS sentence: “It's sunny!”",a:"“How's the weather up there?”"},
+ {q:"Contractions — say the short form of “How is the weather?”",a:"How's the weather?"},
+ {q:"Contractions — say the short form of “It is windy.”",a:"It's windy."}
+];
+var beanQi=-1;
+function beanAsk(){
+  beanQi=(beanQi+1)%BEANQ.length;
+  var el=document.getElementById("beanQText");if(el)el.textContent=BEANQ[beanQi].q;
+  var a=document.getElementById("beanA");if(a)a.textContent="";
+  sPop();
+}
+function beanReveal(){
+  if(beanQi<0){showToast("Press “Next question” first!");return;}
+  var a=BEANQ[beanQi].a;
+  var el=document.getElementById("beanA");if(el)el.textContent="✅ "+a;
+  sayM(a);sDing();
+}
+function beanAskVoice(){
+  if(beanQi<0){showToast("Press “Next question” first!");return;}
+  sayM(BEANQ[beanQi].q.replace(/[“”]/g,""));
+}
+
+spRender();
+beanInit();
 
 </script>
 </body>
