@@ -18,9 +18,13 @@
 html,body{margin:0;padding:0}
 body{
   font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
-  color:var(--ink); background:linear-gradient(160deg,var(--bg0),var(--bg1));
+  color:var(--ink);
+  background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#eef7ee);
+  background-size:300% 300%;
+  animation:bgmv 20s ease-in-out infinite;
   line-height:1.55; font-size:calc(16px * var(--tx)); overflow-x:hidden;
 }
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 body.bigfont{--tx:1.18}
 body.hidenotes .tnote{display:none}
 h1,h2,h3,h4{line-height:1.2; margin:0 0 .35em}
@@ -28,10 +32,18 @@ a{color:var(--brand); text-decoration:none}
 img{max-width:100%; display:block}
 button{font:inherit; cursor:pointer}
 
-.blob{position:fixed; border-radius:50%; filter:blur(60px); opacity:.35; z-index:0; pointer-events:none}
-.blob.b1{width:420px;height:420px;background:#bfe6c3;top:-120px;left:-120px}
-.blob.b2{width:380px;height:380px;background:#ffe1ad;bottom:-140px;right:-100px}
-.blob.b3{width:320px;height:320px;background:#bfe0f5;top:40%;right:-160px}
+.blob{position:fixed; border-radius:50%; filter:blur(48px); opacity:.5; z-index:0; pointer-events:none}
+.blob.b1{width:420px;height:420px;background:#bfe6c3;top:-120px;left:-120px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:380px;height:380px;background:#ffe1ad;bottom:-140px;right:-100px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:320px;height:320px;background:#bfe0f5;top:40%;right:-160px;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(0,0)}100%{transform:translate(-60px,50px)}}
+
+/* floating farm emojis drifting up the page */
+#floaties{position:fixed; inset:0; pointer-events:none; z-index:0}
+.floaty{position:fixed; z-index:0; font-size:26px; pointer-events:none; opacity:.45; animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
 
 /* ---------- topbar ---------- */
 .topbar{
@@ -224,6 +236,7 @@ footer{text-align:center; color:var(--ink2); font-size:.85em; padding:26px 10px}
 </head>
 <body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div id="floaties"></div>
 
 <!-- ============ TOPBAR ============ -->
 <header class="topbar">
@@ -1551,6 +1564,23 @@ document.querySelectorAll("[data-v]").forEach(function(b){
   });
 });
 document.getElementById("vnext").addEventListener("click",vNew); vNew();
+
+/* =========================================================
+   ANIMATED FARM BACKGROUND — floating emojis
+   ========================================================= */
+(function(){
+  var box=document.getElementById("floaties");
+  if(!box) return;
+  var ems=["🐄","🐐","🐴","🦆","🐔","🐷","🌾","🌻","🥕","☀️","🌱","🐓","🥚","🌿","🍎","🐑"];
+  for(var i=0;i<16;i++){
+    var s=document.createElement("span");
+    s.className="floaty";
+    s.setAttribute("aria-hidden","true");
+    s.textContent=ems[i%ems.length];
+    s.style.cssText="font-size:"+(14+Math.random()*22)+"px;left:"+(Math.random()*96)+"vw;animation:floatUp "+(14+Math.random()*14)+"s linear infinite;animation-delay:-"+(Math.random()*20)+"s;";
+    box.appendChild(s);
+  }
+})();
 
 renderScore();
 </script>
