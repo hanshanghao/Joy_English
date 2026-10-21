@@ -1,0 +1,2879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TJ3-U14 — Unit 14 · A Spider! Ew! | Joy English</title>
+<meta name="description" content="Interactive 50-minute Tales of Joy 3 Unit 14 lesson: A Spider! Ew! Warm-up, Dialogue, Vocabulary (kind · pretty · smart), Patterns (He/She is … and …), About Your Friend, extra practice, 6+ games, presentation mode and Team scoring.">
+<meta name="theme-color" content="#2f8f4e">
+<style>
+
+:root{
+  --bg0:#eef7ee; --bg1:#f7fbf2; --ink:#1c2b23; --ink2:#3f5548;
+  --card:#ffffff; --line:#d6e6d6; --brand:#2f8f4e; --brand2:#61b06a;
+  --accent:#f4a13c; --accent2:#e2762f; --sky:#3aa0d8; --rose:#e35d7c;
+  --good:#2f9e59; --bad:#d9534f; --shadow:0 10px 30px rgba(30,70,40,.12);
+  --r:18px; --r2:26px; --maxw:1120px;
+  --tx:1;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#eef7ee);
+  background-size:300% 300%;
+  animation:bgmv 20s ease-in-out infinite;
+  line-height:1.55; font-size:calc(16px * var(--tx)); overflow-x:hidden;
+}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+html.bigfont, body.bigfont{--tx:1.18}
+body.hidenotes .tnote{display:none}
+
+/* ---------- dark mode ---------- */
+html.dark{
+  --bg0:#101a13; --bg1:#0d1712; --ink:#e9f5ec; --ink2:#b6ccbc;
+  --card:#16211a; --line:#2b3c30; --brand:#5cc06d; --brand2:#7fd08c;
+  --accent:#f4b45c; --accent2:#f0902f; --sky:#5cc0e8; --rose:#f07c98;
+  --good:#5cc07a; --bad:#ef6b67; --shadow:0 10px 30px rgba(0,0,0,.45);
+}
+html.dark body{
+  background:linear-gradient(160deg,#0c1a12,#12130c,#0c1520,#101a13);
+}
+html.dark .blob{opacity:.28}
+html.dark .topbar{background:rgba(18,28,22,.9)}
+html.dark nav.tabs{background:rgba(13,23,18,.92)}
+html.dark .team,.html.dark .tools .tb,html.dark nav.tabs button,html.dark .pill,
+html.dark .slot,html.dark .answer,html.dark .namechip,html.dark .chip{
+  background:#1b2a20; color:var(--ink2);
+}
+html.dark .tools .tb{background:#1b2a20; border-color:var(--line)}
+html.dark .tools .tb.on,html.dark nav.tabs button.active{background:var(--brand); color:#0d1712}
+html.dark .tnote{background:#201d12; border-color:var(--accent)}
+html.dark .tnote h4{color:var(--accent)}
+html.dark .badge{background:#1b2a20}
+html.dark .game,html.dark .cell,html.dark .mcard,html.dark .opt,html.dark .optbtn,
+html.dark .misscard,html.dark .vcard,html.dark .wcard{background:#16211a}
+html.dark .hero{box-shadow:0 10px 30px rgba(0,0,0,.5)}
+h1,h2,h3,h4{line-height:1.2; margin:0 0 .35em}
+a{color:var(--brand); text-decoration:none}
+img{max-width:100%; display:block}
+button{font:inherit; cursor:pointer}
+
+.blob{position:fixed; border-radius:50%; filter:blur(48px); opacity:.5; z-index:0; pointer-events:none}
+.blob.b1{width:420px;height:420px;background:#bfe6c3;top:-120px;left:-120px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:380px;height:380px;background:#ffe1ad;bottom:-140px;right:-100px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:320px;height:320px;background:#bfe0f5;top:40%;right:-160px;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(0,0)}100%{transform:translate(-60px,50px)}}
+
+/* floating spiders & webs drifting up the page */
+#floaties{position:fixed; inset:0; pointer-events:none; z-index:0}
+.floaty{position:fixed; z-index:0; font-size:26px; pointer-events:none; opacity:.45; animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+
+/* ---------- topbar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:60; display:flex; align-items:center; gap:12px;
+  padding:8px 14px; background:rgba(255,255,255,.88); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line); flex-wrap:wrap;
+}
+.brand{display:flex; align-items:center; gap:8px; font-weight:800; color:var(--brand); white-space:nowrap}
+.brand .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--accent))}
+.brand small{font-weight:600; color:var(--ink2)}
+.score{display:flex; align-items:center; gap:6px; margin-left:auto; flex-wrap:wrap}
+.team{display:flex; align-items:center; gap:6px; background:#f3f8f1; border:1px solid var(--line);
+  border-radius:999px; padding:3px 6px 3px 10px; font-weight:700}
+.team .tname{font-size:.85em}
+.team.a .tname{color:#2f8f4e} .team.b .tname{color:#3aa0d8} .team.c .tname{color:#e2762f}
+.team .pts{min-width:2.1em; text-align:center; font-variant-numeric:tabular-nums;
+  background:#fff; border:1px solid var(--line); border-radius:999px; padding:1px 6px}
+.team .m,.team .p{border:none; background:#e6f0e6; border-radius:50%; width:26px;height:26px; font-weight:900; color:var(--ink2)}
+.team .p{background:#dcecdd}
+.tools{display:flex; align-items:center; gap:6px; flex-wrap:wrap}
+.tools .tb{border:1px solid var(--line); background:#fff; border-radius:10px; padding:5px 9px; font-weight:700; font-size:.82em; color:var(--ink2)}
+.tools .tb.on{background:var(--brand); border-color:var(--brand); color:#fff}
+.tools input[type=range]{width:90px; vertical-align:middle}
+#timer{font-variant-numeric:tabular-nums; font-weight:800; color:var(--accent2); min-width:3.4em; text-align:center}
+
+/* ---------- layout ---------- */
+.wrap{position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 16px 80px}
+.hero{margin:18px 0; padding:22px 24px; border-radius:var(--r2);
+  background:linear-gradient(135deg,#2f8f4e,#5cb26a 55%,#f4c26b 130%); color:#fff; box-shadow:var(--shadow)}
+.nowchip{display:inline-block; background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.35);
+  padding:4px 12px; border-radius:999px; font-weight:700; font-size:.85em}
+.hero h1{font-size:clamp(1.5rem,4vw,2.4rem); margin:10px 0 6px}
+.hero p{margin:0; opacity:.95}
+.hero .meta{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+.hero .meta span{background:rgba(255,255,255,.18); border-radius:999px; padding:3px 11px; font-size:.82em}
+
+/* ---------- nav ---------- */
+nav.tabs{position:sticky; top:56px; z-index:55; display:flex; gap:6px; overflow-x:auto;
+  padding:8px 4px; margin:14px 0; background:rgba(247,251,242,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
+nav.tabs button{border:1px solid var(--line); background:#fff; border-radius:999px; padding:7px 14px;
+  font-weight:700; color:var(--ink2); white-space:nowrap; font-size:.86em}
+nav.tabs button.active{background:var(--brand); border-color:var(--brand); color:#fff}
+
+/* ---------- sections ---------- */
+.scene{display:none; animation:fade .35s ease}
+.scene.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--r2);
+  padding:20px 22px; margin:16px 0; box-shadow:var(--shadow)}
+.shead{display:flex; align-items:center; gap:10px; margin:0 0 14px; flex-wrap:wrap}
+.shead .ic{font-size:1.4em}
+.shead h2{font-size:clamp(1.2rem,3vw,1.6rem); margin:0}
+.badge{margin-left:auto; background:#eef6ee; border:1px solid var(--line); color:var(--ink2);
+  border-radius:999px; padding:3px 12px; font-size:.78em; font-weight:700}
+.badge.blue{background:#e9f4fb} .badge.amber{background:#fdf1dd}
+.sub{color:var(--ink2); font-size:.95em}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+.tnote{border-left:4px solid var(--accent); background:#fffaef; border-radius:0 14px 14px 0;
+  padding:12px 16px; margin:12px 0; font-size:.94em}
+.tnote h4{margin:0 0 4px; color:var(--accent2)}
+.tnote ul{margin:6px 0 0 18px; padding:0}
+.tnote li{margin:3px 0}
+
+.btn{display:inline-flex; align-items:center; gap:6px; border:none; border-radius:12px;
+  padding:9px 16px; font-weight:800; background:var(--brand); color:#fff; box-shadow:0 4px 12px rgba(47,143,78,.25)}
+.btn:hover{filter:brightness(1.05)} .btn:active{transform:translateY(1px)}
+.btn.alt{background:var(--sky)} .btn.amber{background:var(--accent2)} .btn.rose{background:var(--rose)}
+.btn.ghost{background:#fff; color:var(--ink2); border:1px solid var(--line); box-shadow:none}
+.btn.sm{padding:6px 12px; font-size:.84em}
+.btn.on{outline:3px solid var(--accent); outline-offset:2px}
+.row{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.pill{display:inline-block; background:#eef6ee; border:1px solid var(--line); border-radius:999px;
+  padding:3px 11px; font-size:.82em; font-weight:700; color:var(--ink2); margin:2px}
+.pill.g{background:#e9f7ec; color:var(--brand)} .pill.r{background:#fdecec; color:var(--bad)}
+span.spk{cursor:pointer; transition:transform .12s}
+span.spk:hover{transform:scale(1.06); color:var(--brand)}
+
+/* ---------- warm-up ---------- */
+.wcard{text-align:center}
+.wpics{font-size:3rem; line-height:1; margin:8px 0}
+.tiles{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:14px 0}
+.tile{min-width:52px;height:52px; padding:0 10px; border-radius:12px; border:1px solid var(--line); background:#fff;
+  font-size:1.05rem; font-weight:900; color:var(--ink); box-shadow:0 3px 8px rgba(0,0,0,.06)}
+.tile.used{opacity:.3; pointer-events:none}
+.answer{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:10px 0; min-height:56px; align-items:center}
+.slot{min-width:52px;height:52px; padding:0 8px; border-radius:12px; border:2px dashed var(--line); background:#fafdf8;
+  font-size:1.05rem; font-weight:900; display:flex; align-items:center; justify-content:center}
+.slot.filled{border-style:solid; border-color:var(--brand2); background:#f1faf1}
+
+/* ---------- dialogue ---------- */
+.kids{position:relative; display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:12px; padding:16px; border-radius:var(--r2);
+  background:linear-gradient(180deg,#cdeafc 0%,#cdeafc 46%,#bfe6a8 46%,#a9dc8f 100%);
+  border:1px solid var(--line); overflow:hidden}
+.kid{background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:16px;
+  padding:10px 8px; text-align:center; cursor:pointer; transition:transform .15s, box-shadow .15s; position:relative}
+.kid:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
+.kid .emoji{font-size:2.6rem; line-height:1}
+.kid .nm{font-weight:800; font-size:.9em; margin-top:4px}
+.kid .bub{position:absolute; left:50%; top:-10px; transform:translate(-50%,-100%);
+  background:#fff; border:1px solid var(--line); border-radius:12px; padding:4px 10px; font-weight:800;
+  font-size:.8em; white-space:nowrap; box-shadow:var(--shadow); opacity:0; transition:.2s; pointer-events:none; z-index:5}
+.kid.show .bub{opacity:1; transform:translate(-50%,-100%) translateY(-4px)}
+
+.dlg{display:flex; flex-direction:column; gap:10px; margin-top:12px}
+.line{display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border-radius:14px;
+  background:#f7fbf4; border:1px solid var(--line)}
+.line .who{font-weight:900; min-width:88px; color:var(--brand)}
+.line .txt{flex:1}
+.line .say{border:none; background:#e6f0e6; border-radius:50%; width:32px;height:32px}
+.line.nini .who{color:var(--rose)} .line.kids .who{color:var(--accent2)}
+
+/* spider hunt */
+.huntwrap{position:relative; border-radius:var(--r2); overflow:hidden; border:1px solid var(--line);
+  height:300px; background:linear-gradient(180deg,#dff1ff 0%,#f2ffe0 60%,#cdf0b0 100%); cursor:crosshair; touch-action:none}
+#huntStage{position:absolute; inset:0; transition:transform .15s ease-out}
+#huntStage.mag-on{transform:scale(1.8)}
+.deco{position:absolute; width:52px; height:52px; object-fit:cover; border-radius:10px;
+  transform:translate(-50%,-50%); user-select:none; pointer-events:none; opacity:.92; border:2px solid #fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.25)}
+#spider{position:absolute; width:44px; height:44px; display:flex; align-items:center; justify-content:center;
+  font-size:30px; transform:translate(-50%,-50%); opacity:0; pointer-events:none; transition:opacity .2s;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}
+#spider.found{opacity:1; animation:wig .5s ease infinite alternate}
+@keyframes wig{from{transform:translate(-50%,-50%) rotate(-12deg)}to{transform:translate(-50%,-50%) rotate(12deg)}}
+.huntbar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:center; margin-top:10px}
+
+/* ---------- vocabulary ---------- */
+.vgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px}
+.vcard{background:#fff; border:1px solid var(--line); border-radius:var(--r); padding:14px; text-align:center;
+  cursor:pointer; transition:transform .15s, box-shadow .15s}
+.vcard:hover{transform:translateY(-3px); box-shadow:var(--shadow)}
+.vcard .emoji{font-size:3rem; line-height:1}
+.vcard .w{font-size:1.25rem; font-weight:900; margin-top:6px}
+.vcard .wp{color:var(--brand); font-weight:800}
+.vcard .hide{display:none}
+.vcard.reveal .hide{display:block}
+.vcard .sound{font-size:.78em; color:var(--ink2)}
+.vcard .new{display:inline-block; background:var(--accent); color:#fff; font-size:.66em; font-weight:900;
+  border-radius:999px; padding:1px 8px; vertical-align:middle; margin-left:4px}
+
+.eggbox{text-align:center}
+.egg{font-size:4.6rem; line-height:1; background:none; border:none; cursor:pointer; transition:transform .2s; padding:6px 10px}
+.egg:hover{transform:scale(1.08) rotate(-4deg)}
+.egg.hatched{animation:pop .45s ease}
+@keyframes pop{0%{transform:scale(1)}55%{transform:scale(1.35) rotate(8deg)}100%{transform:scale(1)}}
+.eggtxt{font-size:1.3rem; font-weight:900; letter-spacing:.14em; min-height:1.4em; color:var(--ink2)}
+.eggtxt .rev{color:var(--brand); letter-spacing:normal}
+.eggs3{display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin:10px 0}
+.eggs3 .e1{display:flex; flex-direction:column; align-items:center; gap:2px; border:1px solid var(--line);
+  background:#fff; border-radius:16px; padding:8px 14px; cursor:pointer}
+.eggs3 .e1:hover{box-shadow:var(--shadow); transform:translateY(-2px)}
+.eggs3 .e1.right{background:#e9f7ec; border-color:var(--brand)}
+.eggs3 .e1.wrong{background:#fdecec; border-color:var(--bad)}
+.wob{animation:wob .4s ease}
+@keyframes wob{0%,100%{transform:translateX(0)}25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+
+/* ---------- patterns ---------- */
+.pbox{background:linear-gradient(135deg,#eef8ee,#e6f2fb); border:1px solid var(--line);
+  border-radius:var(--r2); padding:18px 20px; margin:12px 0; text-align:center}
+.pbox .big{font-size:clamp(1.3rem,3.4vw,2rem); font-weight:900; color:var(--brand)}
+.pbox .big .hi{color:var(--accent2)}
+.pbox .small{color:var(--ink2); margin-top:6px}
+.chip{background:#fff; border:1px solid var(--line); border-radius:12px; padding:8px 14px; font-weight:800; cursor:pointer}
+.chip:hover{border-color:var(--brand2); box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.chip.on{background:var(--brand); border-color:var(--brand); color:#fff}
+.chip.static{cursor:default}
+.subst{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:10px}
+.opt{border:1px solid var(--line); background:#fff; border-radius:12px; padding:9px 16px; font-weight:800}
+.opt.right{background:#e9f7ec; border-color:var(--brand); color:var(--brand)}
+.opt.wrong{background:#fdecec; border-color:var(--bad); color:var(--bad)}
+.opts{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:10px 0}
+.feedback{font-weight:800; min-height:1.5em; margin-top:6px; text-align:center}
+.feedback.good{color:var(--good)} .feedback.bad{color:var(--bad)}
+
+/* ---------- friend card / sentence structure ---------- */
+.namelist{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:10px 0}
+.namechip{background:#fff; border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-weight:800; cursor:pointer}
+.namechip:hover{border-color:var(--brand2)}
+.cardout{font-size:clamp(1.4rem,4vw,2.2rem); font-weight:900; color:var(--brand); text-align:center; min-height:1.4em; margin:8px 0}
+.cardscene{background:linear-gradient(135deg,#fff7e6,#eef8ee); border:1px solid var(--line); border-radius:var(--r2); padding:16px}
+.friendline{font-size:clamp(1.15rem,3vw,1.6rem); font-weight:900; text-align:center; color:var(--ink); min-height:1.5em; margin:8px 0}
+.friendline .hi{color:var(--accent2)}
+.ssrow{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:8px 0}
+.contr{display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin:10px 0}
+.arrowc{font-size:1.4rem; color:var(--accent2)}
+
+/* ---------- games ---------- */
+.game{border:1px solid var(--line); border-radius:var(--r2); padding:16px 18px; margin:14px 0; background:#fff}
+.game > h3{display:flex; align-items:center; gap:8px; font-size:1.08rem}
+.game .num{background:var(--accent); color:#fff; width:28px;height:28px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center; font-size:.9em; flex:0 0 auto}
+.board{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; max-width:440px; margin:12px auto}
+.cell{aspect-ratio:1; border-radius:12px; border:1px solid var(--line); background:#fafdf8;
+  display:flex; align-items:center; justify-content:center; flex-direction:column; font-weight:800; font-size:.9em; padding:4px; text-align:center; cursor:pointer}
+.cell .em{font-size:1.7rem}
+.cell.mark{background:#e9f7ec; border-color:var(--brand2)}
+.mem{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; max-width:460px; margin:12px auto}
+.mcard{aspect-ratio:1; border-radius:12px; border:1px solid var(--line); background:linear-gradient(135deg,#2f8f4e,#5cb26a);
+  color:#fff; font-size:1.5rem; display:flex; align-items:center; justify-content:center; font-weight:900; cursor:pointer}
+.mcard.flip{background:#fff; color:var(--ink)}
+.mcard.done{background:#dff0e0; color:var(--ink); border-color:var(--brand2)}
+.wheelbox{text-align:center}
+.wheel{font-size:4rem; margin:6px 0; transition:transform .1s}
+.face{text-align:center; font-size:4rem; min-height:1.2em}
+.mini{display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin:8px 0}
+.mini button{border:1px solid var(--line); background:#f7fbf4; border-radius:999px; padding:4px 12px; font-weight:800; font-size:.8em; color:var(--ink2)}
+.mini button.on{background:var(--sky); border-color:var(--sky); color:#fff}
+.bigq{font-weight:800; font-size:1.1rem; text-align:center}
+
+/* confetti */
+.spark{position:fixed; z-index:300; pointer-events:none; font-size:20px; animation:sparkfall .9s ease-out forwards}
+@keyframes sparkfall{0%{transform:translate(0,0) scale(.6); opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(1.3); opacity:0}}
+
+/* ---------- reference gallery ---------- */
+.gal{display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px}
+.gal figure{margin:0; background:#fff; border:1px solid var(--line); border-radius:14px; overflow:hidden; cursor:zoom-in}
+.gal img{width:100%; height:150px; object-fit:cover}
+.gal figcaption{padding:6px 10px; font-size:.82em; color:var(--ink2)}
+
+/* ---------- teacher guide ---------- */
+details.guide{border:1px solid var(--line); border-radius:14px; background:#fff; margin:10px 0; padding:4px 14px}
+details.guide summary{cursor:pointer; font-weight:800; padding:10px 0; color:var(--brand)}
+details.guide[open] summary{border-bottom:1px solid var(--line); margin-bottom:8px}
+.timing{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:10px 0}
+.timing div{background:#f7fbf4; border:1px solid var(--line); border-radius:12px; padding:10px}
+.timing b{color:var(--brand)}
+
+/* ---------- lightbox ---------- */
+#lb{position:fixed; inset:0; background:rgba(15,30,20,.85); display:none; align-items:center; justify-content:center; z-index:200; padding:20px}
+#lb.on{display:flex}
+#lb img{max-width:95vw; max-height:88vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lb .close{position:absolute; top:16px; right:20px; background:#fff; border:none; border-radius:50%; width:44px;height:44px; font-size:1.4rem; font-weight:900}
+
+footer{text-align:center; color:var(--ink2); font-size:.85em; padding:26px 10px}
+
+@media(max-width:640px){
+  .brand small{display:none}
+  .score{width:100%; justify-content:center}
+  nav.tabs{top:104px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+/* ---------- imagery / icons (no emoji anywhere) ---------- */
+.ico{width:1.05em; height:1.05em; display:inline-block; vertical-align:-.16em; fill:none;
+  stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.ico.fill{fill:currentColor; stroke:none}
+.shead .ic .ico{width:1.3em; height:1.3em}
+.pic{width:100%; max-width:230px; height:120px; object-fit:cover; border-radius:12px;
+  display:block; margin:6px auto; border:1px solid var(--line); background:#f2f7ef}
+.ph{width:100%; max-width:240px; height:150px; object-fit:cover; border-radius:12px; margin:6px auto;
+  display:block; border:1px solid var(--line); background:#f2f7ef}
+.av{width:72px; height:72px; border-radius:50%; object-fit:cover; display:block; margin:0 auto;
+  border:2px solid var(--brand2); background:#eef6ee}
+.av.boy{border-color:var(--sky)} .av.girl{border-color:var(--rose)}
+.kid .emoji .av{width:68px; height:68px}
+.ai{display:inline-block; font-size:.92em}
+.wpics img{display:inline-block; width:84px; height:84px; object-fit:cover; border-radius:14px; margin:4px; border:1px solid var(--line)}
+.tnote .ti .ico, .sub .ti .ico, p .ti .ico{width:1.05em; height:1.05em; vertical-align:-.16em}
+label.spin{display:inline-flex; align-items:center; gap:4px}
+.duo{display:flex; gap:3px; justify-content:center; align-items:center; flex-wrap:wrap}
+.duo img{width:74px; height:74px; object-fit:cover; border-radius:12px; border:1px solid var(--line)}
+.opt.vi{display:inline-flex; flex-direction:column; align-items:center; gap:3px; padding:6px}
+.opt img{width:118px; height:82px; object-fit:cover; border-radius:10px; border:1px solid var(--line)}
+.wheel img{width:96px; height:96px; object-fit:cover; border-radius:50%; border:3px solid var(--accent);
+  margin:0 auto; background:#fff}
+.face img{width:120px; height:120px; border-radius:16px; object-fit:cover; margin:0 auto;
+  border:2px solid var(--line); background:#f2f7ef}
+.mcard img{width:100%; height:100%; object-fit:cover; border-radius:10px}
+.mcard .mtxt{font-weight:900; font-size:1.05rem}
+.dots{display:flex; gap:4px; justify-content:center; align-items:center; flex-wrap:wrap; margin:6px auto}
+.dots b{width:18px; height:18px; border-radius:50%; display:inline-block}
+.goodico{display:inline-block; vertical-align:-.22em; width:1.15em; height:1.15em; margin-right:4px;
+  fill:none; stroke:currentColor; stroke-width:3; stroke-linecap:round; stroke-linejoin:round}
+.feedback.good .goodico{color:var(--good)} .feedback.bad .goodico{color:var(--bad)}
+.feedback .good{color:var(--good)} .feedback .bad{color:var(--bad)}
+.spark{font-size:0!important; width:11px; height:11px; border-radius:50%}
+#floaties .floaty{font-size:0}
+#floaties svg{display:block; width:100%; height:100%}
+.huntwrap{background-image:url("../tj3-u14-img/huntbg.jpg"); background-size:cover; background-position:center}
+.dlgshots{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0}
+.dlgshots figure{margin:0; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; cursor:zoom-in}
+.dlgshots img{width:100%; height:128px; object-fit:cover}
+.dlgshots figcaption{padding:5px 9px; font-size:.78em; color:var(--ink2)}
+.patpics{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:10px 0}
+.patpics figure{margin:0; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; cursor:zoom-in; max-width:240px}
+.patpics img{width:100%; height:150px; object-fit:contain; background:#fff}
+.patpics figcaption{padding:5px 9px; font-size:.78em; color:var(--ink2)}
+.ti{display:inline-flex; align-items:center; justify-content:center}
+.dim{opacity:.55}
+@media(max-width:640px){.dlgshots{grid-template-columns:1fr}}
+
+/* ---------- expressive “A spider! Ew!” reaction ---------- */
+.ewcard{background:linear-gradient(135deg,#fff2e2,#ffe9ef); border:1px solid var(--line); border-radius:var(--r2);
+  padding:16px 18px; margin:12px 0; text-align:center; position:relative; overflow:hidden}
+.ewcard h3{display:flex; align-items:center; gap:8px; justify-content:center; font-size:1.05rem; margin:0 0 8px}
+.ewstage{display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; margin:6px 0 10px}
+.ewface{width:120px; height:120px; position:relative; flex:0 0 auto; transform-origin:50% 55%}
+.ewface img{width:120px; height:120px; border-radius:50%; object-fit:cover; border:3px solid var(--rose);
+  display:block; background:#fff}
+.ewface .mouth{position:absolute; left:50%; bottom:14%; transform:translateX(-50%); width:46px; height:26px;
+  border-radius:0 0 46px 46px; background:#e35d7c; opacity:0; transition:opacity .15s, height .15s, width .15s;
+  box-shadow:inset 0 4px 8px rgba(0,0,0,.18)}
+.ewface.eww .mouth{opacity:.92; height:34px; width:58px;
+  border-radius:0 0 50% 50% / 0 0 70% 70%; background:#c9415f;
+  box-shadow:inset 0 6px 10px rgba(0,0,0,.28), 0 0 0 2px rgba(227,93,124,.35);
+  transform:translateX(-50%) rotate(-4deg)}
+.ewface .eyes{position:absolute; inset:0; pointer-events:none}
+.ewface .eyes::before,.ewface .eyes::after{content:""; position:absolute; top:34%; width:15px; height:15px;
+  border-radius:50%; background:#243; transform:scaleY(1); transition:transform .15s}
+.ewface .eyes::before{left:28%} .ewface .eyes::after{right:28%}
+.ewface.eww .eyes::before,.ewface.eww .eyes::after{transform:scaleY(.28) scaleX(1.12)}
+/* furrowed brows for disgust */
+.ewface .brow{position:absolute; top:26%; width:20px; height:4px; background:#243; border-radius:3px;
+  opacity:0; transition:opacity .15s, transform .15s}
+.ewface .brow.l{left:22%; transform:translateY(-4px) rotate(12deg)}
+.ewface .brow.r{right:22%; transform:translateY(-4px) rotate(-12deg)}
+.ewface.eww .brow{opacity:.85}
+.ewface.eww .brow.l{transform:translateY(0) rotate(18deg)}
+.ewface.eww .brow.r{transform:translateY(0) rotate(-18deg)}
+/* scrunched nose */
+.ewface .nose{position:absolute; left:50%; top:46%; width:10px; height:8px; margin-left:-5px;
+  border-radius:50%; background:rgba(36,51,51,.22); opacity:0; transition:opacity .15s, transform .15s}
+.ewface.eww .nose{opacity:.9; transform:scale(1.25)}
+.ewface.eww{animation:ewquiver .1s linear 0s 6 both}
+/* startled state during “A spider!” */
+.ewface.surprise{animation:ewpop .5s cubic-bezier(.2,1.5,.4,1) both}
+.ewface.surprise .eyes::before,.ewface.surprise .eyes::after{transform:scale(1.45)}
+.ewface.surprise .brow{opacity:.8}
+.ewface.surprise .brow.l{transform:translateY(-6px) rotate(-8deg)}
+.ewface.surprise .brow.r{transform:translateY(-6px) rotate(8deg)}
+.ewface.surprise .mouth{opacity:.9; width:22px; height:22px; border-radius:50%; background:#c9415f}
+@keyframes ewpop{0%{transform:scale(1)}30%{transform:scale(1.12)}60%{transform:scale(.97)}100%{transform:scale(1)}}
+.ewbubble{flex:1 1 220px; min-width:200px; text-align:center}
+.ewsay{font-size:clamp(1.2rem,3.4vw,1.9rem); font-weight:900; color:var(--ink)}
+.ewsay .sp{color:var(--rose)} .ewsay .ew{color:var(--accent2); letter-spacing:.06em}
+.ewsay .dim{color:var(--ink2); opacity:.45}
+.ewshake{animation:ewshake .55s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes ewshake{
+  0%{transform:translate(0,0) rotate(0)}
+  10%{transform:translate(-4px,1px) rotate(-2deg)}
+  20%{transform:translate(5px,-1px) rotate(2.5deg)}
+  30%{transform:translate(-6px,2px) rotate(-3deg)}
+  40%{transform:translate(6px,-2px) rotate(3deg)}
+  50%{transform:translate(-5px,1px) rotate(-2.5deg)}
+  60%{transform:translate(4px,-1px) rotate(2deg)}
+  70%{transform:translate(-3px,1px) rotate(-1.5deg)}
+  80%{transform:translate(3px,0) rotate(1.5deg)}
+  90%{transform:translate(-2px,0) rotate(-1deg)}
+  100%{transform:translate(0,0) rotate(0)}
+}
+.ewquiver{animation:ewquiver .12s linear infinite}
+@keyframes ewquiver{0%{transform:translate(0,.4px)}50%{transform:translate(.6px,-.4px)}100%{transform:translate(0,.4px)}}
+.ewflip{transform:scaleX(-1)}
+.ewmodes{display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:6px}
+.ewstage .pulse{animation:ewpulse .5s ease}
+@keyframes ewpulse{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+#spider.eww img{filter:drop-shadow(0 0 12px rgba(227,93,124,.9))}
+@media(prefers-reduced-motion:reduce){.ewshake,.ewquiver,.ewface.eww,.ewface.surprise{animation:none!important}}
+
+</style>
+<script>
+(function(){try{
+  var t=localStorage.getItem("tj3u14_theme");
+  if(t==="dark" || (!t && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)){
+    document.documentElement.classList.add("dark");
+  }
+  if(localStorage.getItem("tj3u14_big")==="1") document.documentElement.classList.add("bigfont");
+}catch(e){}})();
+</script>
+</head>
+<body>
+
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div id="floaties"></div>
+
+<!-- ============ TOPBAR ============ -->
+<header class="topbar">
+  <div class="brand"><span class="dot"></span> Joy English <small>繚 TJ3 繚 Unit 14</small></div>
+
+  <div class="score" id="scoreboard">
+    <div class="team a"><span class="tname">Team A</span><span class="pts" id="ptsA">0</span>
+      <button class="m" data-gt="a" data-d="-1" title="minus">??/button>
+      <button class="p" data-gt="a" data-d="1" title="plus">+</button></div>
+    <div class="team b"><span class="tname">Team B</span><span class="pts" id="ptsB">0</span>
+      <button class="m" data-gt="b" data-d="-1" title="minus">??/button>
+      <button class="p" data-gt="b" data-d="1" title="plus">+</button></div>
+    <div class="team c"><span class="tname">Team C</span><span class="pts" id="ptsC">0</span>
+      <button class="m" data-gt="c" data-d="-1" title="minus">??/button>
+      <button class="p" data-gt="c" data-d="1" title="plus">+</button></div>
+    <button class="tools tb" id="reset" title="Reset scores">??/button>
+  </div>
+
+  <div class="tools">
+    <button class="tb" id="snd" title="Sound on/off"><span class="ti" data-ico="spk"></span> Sound</button>
+    <label class="tb spin" title="Speech speed"><span class="ti" data-ico="slow"></span><input type="range" id="rate" min="0.6" max="1.3" step="0.05" value="0.95"><span class="ti" data-ico="fast"></span></label>
+    <select id="voiceSel" class="tb" title="Choose a clearer, friendlier voice" style="max-width:220px"></select>
+    <button class="tb" id="vtest" title="Test the voice"><span class="ti" data-ico="mic"></span> Test voice</button>
+    <button class="tb" id="bigfont" title="Bigger text">A+</button>
+    <button class="tb" id="hidenotes" title="Hide teacher notes"><span class="ti" data-ico="note"></span> Notes</button>
+    <button class="tb" id="tstart" title="Start / pause timer"><span class="ti" data-ico="clock"></span> <span id="timer">0:00</span></button>
+    <button class="tb" id="treset" title="Reset timer">reset</button>
+    <button class="tb" id="prev" title="Previous section"><span class="ti" data-ico="prev"></span></button>
+    <button class="tb" id="next" title="Next section"><span class="ti" data-ico="next"></span></button>
+    <button class="tb" id="pickStudent" title="Pick a random student"><span class="ti" data-ico="user"></span> Pick</button>
+    <button class="tb" id="theme" title="Light / dark mode"><span class="ti" data-ico="moon"></span> Dark</button>
+    <button class="tb" id="full" title="Fullscreen"><span class="ti" data-ico="full"></span></button>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <span class="nowchip"><span class="ti" data-ico="spider"></span> TJ3-U14 繚 Unit 14 繚 A Spider! Ew!</span>
+    <h1>Unit 14 繚 A Spider! Ew!</h1>
+    <p>Four kids find a spider ??<b>Ew!</b> ??but one friend says: ?ey, guys! Be polite. She's kind and pretty.??Learn describing words and build <b>He is ??and ??/b> sentences.</p>
+    <div class="meta">
+      <span><span class="ti" data-ico="clock"></span> 50 minutes</span><span><span class="ti" data-ico="mic"></span> Warm-up 繚 They are / There are</span><span><span class="ti" data-ico="chat"></span> A Spider! Ew!</span>
+      <span><span class="ti" data-ico="book"></span> kind 繚 pretty 繚 smart</span><span><span class="ti" data-ico="grid"></span> <b>She is ??and ??/b></span><span><span class="ti" data-ico="game"></span> 15 games</span>
+    </div>
+  </section>
+
+  <!-- ============ NAV ============ -->
+  <nav class="tabs" id="tabs">
+    <button data-s="0" class="active">1 繚 Warm-up</button>
+    <button data-s="1">2 繚 Dialogue</button>
+    <button data-s="2">3 繚 Vocabulary</button>
+    <button data-s="3">4 繚 Patterns</button>
+    <button data-s="4">5 繚 About Your Friend</button>
+    <button data-s="5">6 繚 Extra Practice</button>
+    <button data-s="6">7 繚 Game Zone</button>
+    <button data-s="7">8 繚 Teacher Guide</button>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 0 ??WARM-UP -->
+  <!-- ============================================================ -->
+  <section class="scene active" id="s0">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="grid"></span></span><h2>Warm-up 繚 Listen, Look and Drag</h2><span class="badge amber">5 min</span></div>
+      <p class="sub">Tap the words in the right order to build the sentence. Then read it aloud!</p>
+
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Teacher instructions</h4>
+        <ul>
+          <li>Play the sentence with <span class="ti" data-ico="spk"></span> first ??students <b>listen and look</b>, then drag (tap) the word tiles into the slots.</li>
+          <li>Review the warm-up structures: <b>They are / There are / Are they ?? / These are</b>.</li>
+          <li>Two teams race: first team to build a correct sentence scores on the scoreboard.</li>
+        </ul>
+      </div>
+
+      <div class="wcard">
+        <div class="wpics" id="wemoji"><img class="ai" alt="" src="tj3-u14-img/friends.jpg"></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn sm" id="wplay"><span class="ti" data-ico="spk"></span> Play the sentence</button>
+          <button class="btn sm alt" data-team="a">Team A spells</button>
+          <button class="btn sm amber" data-team="b">Team B spells</button>
+        </div>
+        <div class="answer" id="wans"></div>
+        <div class="tiles" id="wtiles"></div>
+        <div class="feedback" id="wfb"></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn ghost sm" id="wclear">??Clear</button>
+          <button class="btn ghost sm" id="wskip">Next sentence <span class="ti" data-ico="next"></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">A</span> Which Word? 繚 <i>They are / There are / Are they ??</i></h3>
+      <p class="sub">Read the sentence, tap the word that belongs.</p>
+      <p id="rwQ" class="bigq"></p>
+      <div class="opts" id="rwOpts"></div>
+      <div class="feedback" id="rwFb"></div>
+      <button class="btn sm ghost" id="rwNext">Next <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="target"></span></span><h2>Lesson Objectives</h2><span class="badge">by the end of class</span></div>
+      <div class="grid2">
+        <div>
+          <h4>Speaking &amp; Listening</h4>
+          <ul>
+            <li>Say the reaction from the dialogue: <b>A spider! Ew!</b></li>
+            <li>Be polite and describe a friend: <b>She is kind and pretty.</b></li>
+            <li>Answer <b>How is he / How is she?</b> with two adjectives.</li>
+            <li>Talk about a classmate: <b>Nini is kind and cute.</b></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Vocabulary &amp; Patterns</h4>
+          <ul>
+            <li>New words: <b>kind, pretty, smart</b>.</li>
+            <li>Review: <b>tall, short, cute, good, thin, cool</b>.</li>
+            <li>Pattern: <b>She is / He is + adjective + and + adjective</b>.</li>
+            <li>Warm-up review: <b>They are, There are, Are they ??</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="image"></span></span><h2>Warm-up Pages</h2><span class="badge blue">tap to zoom</span></div>
+      <div class="gal" id="gal0"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 1 ??DIALOGUE -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s1">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="chat"></span></span><h2>A Spider! Ew!</h2><span class="badge">Dialogue 繚 15 min</span></div>
+      <p class="sub">Tap each kid to hear what they say. What do they all shout when they find the spider?</p>
+
+      <div class="kids" id="kids"></div>
+
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Before you read</h4>
+        <ul>
+          <li>Pre-teach: <b>spider, polite, kind, pretty</b> and the reaction <b>Ew!</b>.</li>
+          <li>Play the dialogue once with books closed. Ask: <i>What do they find?</i></li>
+          <li>Point at each speaker as the line plays so students connect voice ??speaker.</li>
+          <li>Stress the manners line: <b>Hey, guys! Be polite. She's kind and pretty.</b></li>
+        </ul>
+      </div>
+
+      <div class="dlg" id="dlg"></div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="btn" id="playAll"><span class="ti" data-ico="play"></span> Play whole dialogue</button>
+        <button class="btn ghost" id="stopAll">??Stop</button>
+        <button class="btn rose" id="classLine"><span class="ti" data-ico="mega"></span> Whole class: ? spider! Ew!??/button>
+      </div>
+
+      <div class="ewcard" id="ewcard">
+        <h3><span class="ti" data-ico="spider"></span> The ? spider! Ew!??reaction ??hear it and act it</h3>
+        <div class="ewstage">
+          <div class="ewface" id="ewface" aria-hidden="true">
+            <img alt="Girl reacting" src="tj3-u14-img/girl1.jpg">
+            <span class="eyes"></span>
+            <span class="brow l"></span>
+            <span class="brow r"></span>
+            <span class="nose"></span>
+            <span class="mouth"></span>
+          </div>
+          <div class="ewbubble">
+            <div class="ewsay" id="ewsay">
+              <span class="sp">A spider!</span>
+              <span class="dim">??/span>
+              <span class="ew">Ewww!</span>
+            </div>
+            <div class="feedback" id="ewFb" style="min-height:1.2em; font-size:.85em; font-weight:700">Press <b>Play Expression</b> to hear it.</div>
+          </div>
+        </div>
+        <div class="ewmodes">
+          <button class="btn sm rose" id="ewPlay"><span class="ti" data-ico="mega"></span> Play Expression</button>
+          <button class="btn sm ghost" id="ewSlow"><span class="ti" data-ico="slow"></span> Slow</button>
+          <button class="btn sm ghost" id="ewNormal"><span class="ti" data-ico="spk"></span> Normal</button>
+          <button class="btn sm amber" id="ewExpr"><span class="ti" data-ico="sparkle"></span> Expressive</button>
+          <button class="btn sm alt" id="ewAudio"><span class="ti" data-ico="play"></span> Use recording</button>
+          <button class="btn sm ghost" id="ewStop">??Stop</button>
+        </div>
+        <div class="tnote" style="text-align:left">
+          <h4><span class="ti" data-ico="teacher"></span> How to use it</h4>
+          <ul>
+            <li><b>Slow</b> = half speed (practise together) 繚 <b>Normal</b> = natural rate 繚 <b>Expressive</b> = extra surprise + disgust.</li>
+            <li>When <b>Ew!</b> plays, the face pulls a disgusted look and shakes ??ask the class to copy it.</li>
+            <li><b>Use recording</b> plays an optional saved audio file (see <code>tj3-u14-audio/ew-expression.mp3</code>) for maximum realism; if the file is missing the page falls back to the browser voice automatically.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="dlgshots">
+        <figure data-img="tj3-u14-img/dlg-1-top.png"><img src="tj3-u14-img/dlg-1-top.png" alt="dialogue page 1, top"><figcaption>Dialogue 繚 p.1 top</figcaption></figure>
+        <figure data-img="tj3-u14-img/dlg-1-bottom.png"><img src="tj3-u14-img/dlg-1-bottom.png" alt="dialogue page 1, bottom"><figcaption>Dialogue 繚 p.1 bottom</figcaption></figure>
+        <figure data-img="tj3-u14-img/dlg-2-top.png"><img src="tj3-u14-img/dlg-2-top.png" alt="dialogue page 2, top"><figcaption>Dialogue 繚 p.2 top</figcaption></figure>
+        <figure data-img="tj3-u14-img/dlg-2-bottom.png"><img src="tj3-u14-img/dlg-2-bottom.png" alt="dialogue page 2, bottom"><figcaption>Dialogue 繚 p.2 bottom</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">A</span> Right and Wrong 繚 listening check</h3>
+      <p class="sub">Listen carefully. Is it in the book? Tap <b>YES</b> or <b>NO</b>.</p>
+      <div class="mini">
+        <button id="rw2Play"><span class="ti" data-ico="spk"></span> Play the line</button>
+        <button id="rw2Rand" class="on"><span class="ti" data-ico="shuffle"></span> Random: ON</button>
+        <button id="rw2Auto"><span class="ti" data-ico="play"></span> Auto: OFF</button>
+      </div>
+      <p id="rw2Text" class="bigq"><span class="ti" data-ico="spk"></span> Listen??/p>
+      <div class="opts" style="justify-content:center">
+        <button class="opt" data-rw2="1"><span class="ti" data-ico="yes"></span> YES!</button>
+        <button class="opt" data-rw2="0"><span class="ti" data-ico="no"></span> NO!</button>
+      </div>
+      <div class="feedback" id="rw2Fb"></div>
+      <button class="btn sm ghost" id="rw2Next">Next line <span class="ti" data-ico="next"></span></button>
+      <div class="row" style="justify-content:center; margin-top:8px">
+        <button class="btn sm" data-team="a">Team A <span class="ti" data-ico="check"></span></button>
+        <button class="btn sm alt" data-team="b">Team B <span class="ti" data-ico="check"></span></button>
+        <button class="btn sm amber" data-team="c">Team C <span class="ti" data-ico="check"></span></button>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">B</span> Spider Hunt! <span class="ti" data-ico="mag"></span></h3>
+      <p class="sub">A spider is hiding in the picture. Move your pointer (or finger) over the picture ??tap where you think the spider is. When the class finds it, everyone shouts together: <b>? spider! Ew!??/b></p>
+      <div class="huntwrap" id="huntWrap">
+        <div id="huntStage">
+          <div id="spider"><img class="ai" alt="spider" src="tj3-u14-img/spider.jpg"></div>
+        </div>
+      </div>
+      <div class="huntbar">
+        <button class="btn sm" id="huntShout"><span class="ti" data-ico="mega"></span> Say it together</button>
+        <button class="btn sm alt" id="huntMag"><span class="ti" data-ico="mag"></span> Magnifier: OFF</button>
+        <button class="btn sm ghost" id="huntNew"><span class="ti" data-ico="map"></span> New hiding place</button>
+      </div>
+      <div class="feedback" id="huntFb">Find the spider ??then reward the team!</div>
+      <div class="row" style="justify-content:center">
+        <button class="btn sm" data-team="a">Team A found it <span class="ti" data-ico="check"></span></button>
+        <button class="btn sm alt" data-team="b">Team B found it <span class="ti" data-ico="check"></span></button>
+        <button class="btn sm amber" data-team="c">Team C found it <span class="ti" data-ico="check"></span></button>
+      </div>
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Spider Hunt 繚 steps from the book</h4>
+        <ul>
+          <li>Divide the class into groups. Go through the slides and give students time to find the spider in each picture.</li>
+          <li>Invite a volunteer to come up and use the <b>Magnifying Glass</b> to zoom (press <span class="ti" data-ico="mag"></span> on this page).</li>
+          <li>If students find it, reward them or their team.</li>
+          <li><b>Reminder:</b> when the spider is spotted, the whole class says, ? spider! Ew!??together.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="image"></span></span><h2>Dialogue &amp; Activity Pages</h2><span class="badge blue">tap to zoom</span></div>
+      <div class="gal" id="gal1"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 2 ??VOCABULARY -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s2">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="book"></span></span><h2>Kind 繚 Pretty 繚 Smart</h2><span class="badge">Vocabulary 繚 10 min</span></div>
+      <p class="sub">Tap a card to hear the word. Tap again to see an example sentence. New words: <b>kind, pretty, smart</b> 繚 Review: <b>tall, short, cute, good, thin, cool</b>.</p>
+      <div class="vgrid" id="vgrid"></div>
+
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Teaching steps</h4>
+        <ul>
+          <li>Say each word twice, students repeat (1-2-3 chorus), then <b>listen and point</b>: ?oint to <i>pretty</i>!??/li>
+          <li>Board display: write the three new words and circle the missing letters ??<b>k_nd, sm_rt, pr_tt_</b>.</li>
+          <li>Ask students for examples: <i>Who is kind? Who is pretty? Who is smart?</i></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">A</span> Read and Hatch <span class="ti" data-ico="egg"></span></h3>
+      <p class="sub">Read the letters under the egg, then tap the egg to hatch it!</p>
+      <div class="eggbox">
+        <button class="egg" id="hEgg"><img class="ai" alt="egg" src="tj3-u14-img/egg.jpg" style="width:1.6em;height:1.6em;border-radius:50%;object-fit:cover"></button>
+        <div class="eggtxt" id="hTxt">k _ n d</div>
+      </div>
+      <div class="feedback" id="hFb"></div>
+      <div class="row" style="justify-content:center">
+        <button class="btn ghost sm" id="hNext">Next word <span class="ti" data-ico="next"></span></button>
+        <button class="btn sm" id="hSay"><span class="ti" data-ico="spk"></span> Say it</button>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">B</span> Listen and Hatch <span class="ti" data-ico="chick"></span></h3>
+      <p class="sub">Listen to the word, then tap the egg that has it.</p>
+      <div class="eggs3" id="lhEggs"></div>
+      <div class="row" style="justify-content:center">
+        <button class="btn sm" id="lhPlay"><span class="ti" data-ico="spk"></span> Play the word</button>
+        <button class="btn ghost sm" id="lhNext">New round <span class="ti" data-ico="next"></span></button>
+      </div>
+      <div class="feedback" id="lhFb"></div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">C</span> Spell the Word</h3>
+      <p class="sub">Which spelling is right? Tap it, then press <b>Appear</b> to check.</p>
+      <p id="spQ" class="bigq" style="font-size:1.5rem; letter-spacing:.15em"></p>
+      <div class="opts" id="spOpts"></div>
+      <div class="feedback" id="spFb"></div>
+      <div class="row" style="justify-content:center">
+        <button class="btn amber sm" id="spAppear"><span class="ti" data-ico="sparkle"></span> Appear</button>
+        <button class="btn ghost sm" id="spNext">Next word <span class="ti" data-ico="next"></span></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="image"></span></span><h2>Vocabulary Pages</h2><span class="badge blue">tap to zoom</span></div>
+      <div class="gal" id="gal2"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 3 ??PATTERNS -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s3">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="grid"></span></span><h2>Pattern 繚 She is / He is ??and ??/h2><span class="badge amber">Patterns 繚 20 min</span></div>
+
+      <div class="pbox">
+        <div class="big">She is <span class="hi">smart</span> and <span class="hi">pretty</span>.</div>
+        <div class="small">He is <b>tall</b> and <b>smart</b>. &nbsp;繚&nbsp; She is <b>kind</b> and <b>pretty</b>.</div>
+        <div class="patpics">
+          <figure data-img="tj3-u14-img/patt-smart-main.png"><img src="tj3-u14-img/patt-smart-main.png" alt="pattern example 繚 smart and pretty"><figcaption>She is smart and pretty.</figcaption></figure>
+          <figure data-img="tj3-u14-img/patt-pretty-main.png"><img src="tj3-u14-img/patt-pretty-main.png" alt="pattern example 繚 kind and pretty"><figcaption>She is kind and pretty.</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="contr">
+        <span class="chip static">She is</span><span class="arrowc">+</span>
+        <span class="chip static">an adjective</span><span class="arrowc">+</span>
+        <span class="chip static">and</span><span class="arrowc">+</span>
+        <span class="chip static">another adjective</span>
+      </div>
+
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Board display &amp; drill</h4>
+        <ul>
+          <li>Write: <b>She is kind and pretty.</b> Underline the two adjectives and the word <b>and</b>.</li>
+          <li>Chain drill: change the adjective each time ??<i>She is cute and smart. He is tall and cool??/i></li>
+          <li>Remember: with <b>he / she</b> we use <b>is</b>, never <i>are</i>.</li>
+        </ul>
+      </div>
+
+      <div class="row" style="justify-content:center">
+        <button class="btn sm" id="subPlay"><span class="ti" data-ico="spk"></span> Hear the pattern</button>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">A</span> Listen and Drag <span class="ti" data-ico="image"></span></h3>
+      <p class="sub">Listen to the sentence, then tap the picture that matches. Press <b>Appear</b> to reveal the sentence and say it out loud.</p>
+      <div class="mini">
+        <button id="ladPlay"><span class="ti" data-ico="spk"></span> Play the sentence</button>
+        <button id="ladRand" class="on"><span class="ti" data-ico="shuffle"></span> Random: ON</button>
+      </div>
+      <div class="opts" id="ladOpts"></div>
+      <div class="feedback" id="ladFb"></div>
+      <div class="pbox" style="margin-top:8px; padding:12px">
+        <div class="big" id="ladSent" style="font-size:1.25rem; visibility:hidden">??/div>
+      </div>
+      <div class="row" style="justify-content:center">
+        <button class="btn amber sm" id="ladAppear"><span class="ti" data-ico="sparkle"></span> Appear</button>
+        <button class="btn ghost sm" id="ladNext">Next <span class="ti" data-ico="next"></span></button>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">B</span> Build the Sentence</h3>
+      <p class="sub">Tap the words in order. Tap a word in the answer to remove it.</p>
+      <div class="answer" id="bsAns" style="min-height:56px"></div>
+      <div class="opts" id="bsWords"></div>
+      <div class="feedback" id="bsFb"></div>
+      <button class="btn sm ghost" id="bsNext">New sentence <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">C</span> Fix the Sentence</h3>
+      <p class="sub">Is the sentence correct? Tap <span class="ti" data-ico="check"></span> or <span class="ti" data-ico="cross"></span>.</p>
+      <p id="fsQ" class="bigq"></p>
+      <div class="opts" style="justify-content:center">
+        <button class="opt" data-fs="1"><span class="ti" data-ico="check"></span> Correct</button>
+        <button class="opt" data-fs="0"><span class="ti" data-ico="cross"></span> Not correct</button>
+      </div>
+      <div class="feedback" id="fsFb"></div>
+      <button class="btn sm ghost" id="fsNext">Next sentence <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">D</span> Pattern Talk 繚 pair speaking</h3>
+      <p class="sub">Take turns. Partner A asks, partner B answers ??tap a bubble to hear it.</p>
+      <div class="opts">
+        <span class="pill g spk" data-say="How is she?" data-g="m">A: How is she?</span>
+        <span class="pill spk" data-say="She is kind and pretty." data-g="f">B: She is kind and pretty.</span>
+        <span class="pill g spk" data-say="How is he?" data-g="f">A: How is he?</span>
+        <span class="pill spk" data-say="He is tall and smart." data-g="m">B: He is tall and smart.</span>
+        <span class="pill g spk" data-say="Is she smart?" data-g="m">A: Is she smart?</span>
+        <span class="pill spk" data-say="Yes, she is. She is pretty and smart." data-g="f">B: Yes, she is. She is pretty and smart.</span>
+      </div>
+      <div class="row" style="justify-content:center; margin-top:8px">
+        <button class="btn sm" data-team="a">Team A <span class="ti" data-ico="check"></span></button>
+        <button class="btn sm alt" data-team="b">Team B <span class="ti" data-ico="check"></span></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="image"></span></span><h2>Patterns &amp; Sentence Structure Pages</h2><span class="badge blue">tap to zoom</span></div>
+      <div class="gal" id="gal3"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 4 ??ABOUT YOUR FRIEND + SENTENCE STRUCTURE -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s4">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="party"></span></span><h2>About Your Friend</h2><span class="badge">Speaking 繚 5 min</span></div>
+      <p class="sub">Pick a name card, then use our words to talk about that friend: <b>?ini is kind and cute.??/b></p>
+
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Steps from the book</h4>
+        <ul>
+          <li>Give each student a card and ask them to write their name on it.</li>
+          <li>Have them put their card into a box.</li>
+          <li>Lead the class to review the words they have learned: <b>tall, cute, kind, short, good, pretty, thin, cool, smart</b>.</li>
+          <li>One by one, have students pick a card, read the name aloud, and use the words to talk about that person.</li>
+        </ul>
+      </div>
+
+      <div class="cardscene">
+        <div class="namelist" id="nameList"></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn" id="pickCard"><span class="ti" data-ico="card"></span> Pick a card</button>
+          <button class="btn ghost sm" id="addName">嚗?Add a classmate</button>
+        </div>
+        <div class="cardout" id="cardOut">?</div>
+        <p class="sub" style="text-align:center; margin:0">Tap two words to describe your friend:</p>
+        <div class="ssrow" id="cardAdj"></div>
+        <div class="friendline" id="friendSent">Pick a word <span class="ti" data-ico="sparkle"></span></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn sm" id="friendSpeak"><span class="ti" data-ico="spk"></span> Say it!</button>
+          <button class="btn ghost sm" id="friendAgain">??New friend</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="build"></span></span><h2>Sentence Structure 繚 Start</h2><span class="badge amber">Build &amp; say</span></div>
+      <p class="sub">Choose <b>He is / She is</b>, then tap two adjectives. Your sentence appears ??press <span class="ti" data-ico="spk"></span> to say it!</p>
+      <div class="row" style="justify-content:center">
+        <button class="chip on" data-ss="She"><span class="ti" data-ico="girl"></span> She is</button>
+        <button class="chip" data-ss="He"><span class="ti" data-ico="boy"></span> He is</button>
+        <button class="chip" id="ssDice"><span class="ti" data-ico="dice"></span> Surprise me</button>
+      </div>
+      <div class="ssrow" id="ssAdj"></div>
+      <div class="pbox" style="margin-top:6px"><div class="big" id="ssOut">She is <span class="hi">kind</span> and <span class="hi">pretty</span>.</div></div>
+      <div class="row" style="justify-content:center">
+        <button class="btn sm" id="ssBuild"><span class="ti" data-ico="spk"></span> Say my sentence</button>
+        <button class="btn ghost sm" id="ssClear">??Clear</button>
+      </div>
+      <div class="tnote">
+        <h4><span class="ti" data-ico="teacher"></span> Sample sentences from the book</h4>
+        <div class="opts">
+          <span class="pill spk" data-say="She is kind and pretty.">She is kind and pretty.</span>
+          <span class="pill spk" data-say="She is cute and smart.">She is cute and smart.</span>
+          <span class="pill spk" data-say="She is thirsty and hungry.">She is thirsty and hungry.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="image"></span></span><h2>About Your Friend Pages</h2><span class="badge blue">tap to zoom</span></div>
+      <div class="gal" id="gal4"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 5 ??EXTRA PRACTICE -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s5">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="star"></span></span><h2>Extra Practice</h2><span class="badge amber">optional 繚 teacher-made</span></div>
+      <p class="sub">These sentences are <b>extra speaking practice written by the teacher</b> (not textbook pages), built from this unit's words and pattern. <b>Tap any sentence to hear it.</b></p>
+
+      <div class="game">
+        <h3><span class="num">1</span> Level 1 繚 Say it 繚 He / She is ??and ??/h3>
+        <div class="opts">
+          <span class="pill spk" data-say="She is cute and kind." data-g="f">She is cute and kind.</span>
+          <span class="pill spk" data-say="He is cool and smart." data-g="m">He is cool and smart.</span>
+          <span class="pill spk" data-say="She is thin and tall." data-g="f">She is thin and tall.</span>
+          <span class="pill spk" data-say="He is good and kind." data-g="m">He is good and kind.</span>
+          <span class="pill spk" data-say="She is short and cute." data-g="f">She is short and cute.</span>
+          <span class="pill spk" data-say="He is smart and cool." data-g="m">He is smart and cool.</span>
+          <span class="pill spk" data-say="She is pretty and kind." data-g="f">She is pretty and kind.</span>
+          <span class="pill spk" data-say="He is tall and good." data-g="m">He is tall and good.</span>
+        </div>
+      </div>
+
+      <div class="game">
+        <h3><span class="num">2</span> Level 2 繚 Add a feeling</h3>
+        <div class="opts">
+          <span class="pill spk" data-say="She is cold and tired." data-g="f">She is cold and tired.</span>
+          <span class="pill spk" data-say="He is hot and thirsty." data-g="m">He is hot and thirsty.</span>
+          <span class="pill spk" data-say="She is sick and tired." data-g="f">She is sick and tired.</span>
+          <span class="pill spk" data-say="He is hungry and tired." data-g="m">He is hungry and tired.</span>
+          <span class="pill spk" data-say="She is hot and thirsty." data-g="f">She is hot and thirsty.</span>
+          <span class="pill spk" data-say="He is cold and sleepy." data-g="m">He is cold and sleepy.</span>
+        </div>
+      </div>
+
+      <div class="game">
+        <h3><span class="num">3</span> Level 3 繚 Ask &amp; answer</h3>
+        <div class="opts">
+          <span class="pill g spk" data-say="How is she?" data-g="m">How is she?</span>
+          <span class="pill spk" data-say="She is kind and pretty." data-g="f">She is kind and pretty.</span>
+          <span class="pill g spk" data-say="How is he?" data-g="f">How is he?</span>
+          <span class="pill spk" data-say="He is tall and smart." data-g="m">He is tall and smart.</span>
+          <span class="pill g spk" data-say="Is she pretty?" data-g="m">Is she pretty?</span>
+          <span class="pill spk" data-say="Yes, she is. She is pretty and smart." data-g="f">Yes, she is. She is pretty and smart.</span>
+          <span class="pill g spk" data-say="Are they kind?" data-g="f">Are they kind?</span>
+          <span class="pill spk" data-say="Yes, they are. They are kind and good." data-g="m">Yes, they are. They are kind and good.</span>
+          <span class="pill g spk" data-say="Is he cold and sick?" data-g="f">Is he cold and sick?</span>
+          <span class="pill spk" data-say="No, he isn't. He is tall and smart." data-g="m">No, he isn't. He is tall and smart.</span>
+        </div>
+      </div>
+
+      <div class="game">
+        <h3><span class="num">4</span> Level 4 繚 About the dialogue</h3>
+        <div class="opts">
+          <span class="pill g spk" data-say="What do they see?" data-g="f">What do they see?</span>
+          <span class="pill spk" data-say="They see a spider!" data-g="m">They see a spider!</span>
+          <span class="pill g spk" data-say="What do they say?" data-g="f">What do they say?</span>
+          <span class="pill spk" data-say="A spider! Ew!" data-g="m">A spider! Ew!</span>
+          <span class="pill g spk" data-say="Should we be rude to the spider?" data-g="f">Should we be rude to the spider?</span>
+          <span class="pill spk" data-say="No! Be polite. She is kind and pretty." data-g="m">No! Be polite. She is kind and pretty.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 6 ??GAME ZONE -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s6">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="game"></span></span><h2>Game Zone 繚 15 games</h2><span class="badge blue">play &amp; score</span></div>
+      <p class="sub">Use the Team A / B / C scoreboard at the top. Every correct answer ??add a point!</p>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">1</span> Adjective Bingo</h3>
+      <p class="sub">Tap <b>Call</b> to hear a word, then tap that cell on your board. Get a line to win!</p>
+      <div class="row" style="justify-content:center"><button class="btn sm" id="g1call"><span class="ti" data-ico="spk"></span> Call</button><button class="btn sm ghost" id="g1reset">New board</button></div>
+      <div class="board" id="g1board"></div>
+      <div class="feedback" id="g1fb"></div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">2</span> Memory Match 繚 word <span class="ti" data-ico="swap"></span> picture</h3>
+      <p class="sub">Flip two cards and match the word with its picture. Fewest flips wins!</p>
+      <div class="mem" id="g2mem"></div>
+      <div class="feedback" id="g2fb"></div>
+      <button class="btn sm ghost" id="g2reset">Shuffle</button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">3</span> Listen and Choose</h3>
+      <p class="sub">Play a word, then tap the word you hear.</p>
+      <button class="btn sm" id="g3play"><span class="ti" data-ico="spk"></span> Play a word</button>
+      <div class="opts" id="g3opts"></div>
+      <div class="feedback" id="g3fb"></div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">4</span> Sentence Race</h3>
+      <p class="sub">Build the sentence from the mixed words.</p>
+      <div class="answer" id="g4ans" style="min-height:56px"></div>
+      <div class="opts" id="g4words"></div>
+      <div class="feedback" id="g4fb"></div>
+      <button class="btn sm ghost" id="g4next">New sentence <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">5</span> Fix the Sentence</h3>
+      <p class="sub"><span class="ti" data-ico="check"></span> correct or <span class="ti" data-ico="cross"></span> not correct?</p>
+      <p id="g5q" class="bigq"></p>
+      <div class="opts" style="justify-content:center">
+        <button class="opt" data-g5="1"><span class="ti" data-ico="check"></span> Correct</button>
+        <button class="opt" data-g5="0"><span class="ti" data-ico="cross"></span> Not correct</button>
+      </div>
+      <div class="feedback" id="g5fb"></div>
+      <button class="btn sm ghost" id="g5next">Next <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">6</span> Find the Right Sentence</h3>
+      <p class="sub">Look at the picture. Which sentence is correct?</p>
+      <div class="face" id="g6face"><img alt="" src="tj3-u14-img/girl1.jpg"></div>
+      <div class="opts" id="g6opts"></div>
+      <div class="feedback" id="g6fb"></div>
+      <button class="btn sm ghost" id="g6next">New picture <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">7</span> Spin the Adjective Wheel</h3>
+      <p class="sub">Spin, then say the word ??and make a sentence with <b>He is / She is ??/b></p>
+      <div class="wheelbox"><div class="wheel" id="g7wheel"><img alt="" src="tj3-u14-img/voc-kind.png"></div><div style="font-size:2rem; font-weight:900" id="g7out">?</div></div>
+      <button class="btn sm" id="g7spin"><span class="ti" data-ico="target"></span> Spin</button>
+      <div class="feedback" id="g7fb"></div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">8</span> He or She? <span class="ti" data-ico="boy"></span> or <span class="ti" data-ico="girl"></span></h3>
+      <p class="sub">Listen to the sentence. Is it about a boy or a girl?</p>
+      <button class="btn sm" id="g8play"><span class="ti" data-ico="spk"></span> Play the sentence</button>
+      <div class="opts" id="g8opts"></div>
+      <div class="feedback" id="g8fb"></div>
+      <button class="btn sm ghost" id="g8next">Next <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">9</span> Mime the Adjective</h3>
+      <p class="sub">A team captain sees the word and mimes it. The team guesses and says the sentence: <b>?e / She is ????/b></p>
+      <div class="pbox" style="margin:8px 0"><div class="big" id="g9word" style="font-size:1.5rem">kind</div></div>
+      <div class="row" style="justify-content:center">
+        <button class="btn sm ghost" id="g9next">New word <span class="ti" data-ico="next"></span></button>
+        <button class="btn sm" data-team="a">Team A guessed <span class="ti" data-ico="check"></span></button>
+        <button class="btn sm alt" data-team="b">Team B guessed <span class="ti" data-ico="check"></span></button>
+      </div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">10</span> Exit Ticket</h3>
+      <p class="sub">One last question before you leave!</p>
+      <p id="g10q" class="bigq"></p>
+      <div class="opts" id="g10opts"></div>
+      <div class="feedback" id="g10fb"></div>
+      <button class="btn sm ghost" id="g10next">New question <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">11</span> Spider Surprise</h3>
+      <p class="sub">Read the clue, then choose the correct character or line.</p>
+      <p id="g11q" class="bigq"></p>
+      <div class="opts" id="g11opts"></div>
+      <div class="feedback" id="g11fb"></div>
+      <button class="btn sm ghost" id="g11next">Next clue <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">12</span> Animal Sound Challenge</h3>
+      <p class="sub">Which animal makes this sound? Listen, then tap the animal.</p>
+      <div class="row" style="justify-content:center"><button class="btn sm" id="g12play"><span class="ti" data-ico="spk"></span> Play the sound</button><button class="btn sm ghost" id="g12next">Next animal <span class="ti" data-ico="next"></span></button></div>
+      <div class="opts" id="g12opts"></div>
+      <div class="feedback" id="g12fb"></div>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">13</span> Adjective Match</h3>
+      <p class="sub">Match the word to its picture and meaning.</p>
+      <div class="answer" id="g13ans" style="min-height:56px"></div>
+      <div class="opts" id="g13words"></div>
+      <div class="opts" id="g13pics"></div>
+      <div class="feedback" id="g13fb"></div>
+      <button class="btn sm ghost" id="g13next">New match <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">14</span> Guess Who?</h3>
+      <p class="sub">Read the kind description, then choose the matching friend.</p>
+      <p id="g14q" class="bigq"></p>
+      <div class="opts" id="g14opts"></div>
+      <div class="feedback" id="g14fb"></div>
+      <button class="btn sm ghost" id="g14next">Next friend <span class="ti" data-ico="next"></span></button>
+    </div>
+
+    <div class="game">
+      <h3><span class="num">15</span> Kind or Unkind?</h3>
+      <p class="sub">Choose the polite, kind response. Being kind is always best!</p>
+      <p id="g15q" class="bigq"></p>
+      <div class="opts" id="g15opts"></div>
+      <div class="feedback" id="g15fb"></div>
+      <button class="btn sm ghost" id="g15next">Next moment <span class="ti" data-ico="next"></span></button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SCENE 7 ??TEACHER GUIDE -->
+  <!-- ============================================================ -->
+  <section class="scene" id="s7">
+    <div class="card">
+      <div class="shead"><span class="ic"><span class="ti" data-ico="clip"></span></span><h2>Teacher Guide 繚 50-minute plan</h2><span class="badge">printable</span></div>
+      <div class="timing">
+        <div><b>5 min</b><br>Warm-up 繚 Listen, Look &amp; Drag</div>
+        <div><b>15 min</b><br>Dialogue 繚 A Spider! Ew!</div>
+        <div><b>10 min</b><br>Vocabulary 繚 kind 繚 pretty 繚 smart</div>
+        <div><b>20 min</b><br>Patterns 繚 She is ??and ??+ games</div>
+      </div>
+
+      <details class="guide" open><summary>1 繚 Warm-up (5 min)</summary>
+        <p>Use <b>Listen, Look and Drag</b>: play a sentence, teams tap the word tiles into order. Then play <b>Which Word?</b> for <b>They are / There are / Are they ??</b> Review the class words: <b>tall, cute, kind, short, good, pretty, thin, cool, smart</b>.</p></details>
+      <details class="guide"><summary>2 繚 Dialogue (15 min)</summary>
+        <p>Pre-teach <b>spider, polite, Ew!</b>. Play the dialogue once with books closed. Then read line by line ??every kid shouts <b>? spider! Ew!??/b> ??until Nini says: <b>?ey, guys! Be polite. She's kind and pretty.??/b> Finish with <b>Right and Wrong</b> and the class <b>Spider Hunt</b> (magnifier plus the whole class shouts the line when the spider is found).</p></details>
+      <details class="guide"><summary>3 繚 Vocabulary (10 min)</summary>
+        <p>New words: <b>kind, pretty, smart</b>. Chorus repeat, listen and point, then <b>Read and Hatch</b>, <b>Listen and Hatch</b> and <b>Spell the Word</b> (k_nd 繚 sm_rt 繚 pr_tt_).</p></details>
+      <details class="guide"><summary>4 繚 Patterns (20 min)</summary>
+        <p>Board display: <b>She is kind and pretty.</b> ??two adjectives joined with <b>and</b>; with <b>he / she</b> we use <b>is</b>. Then: <b>Listen and Drag</b> (drag the matching picture, press <b>Appear</b> to reveal the sentence), <b>Build the Sentence</b>, <b>Fix the Sentence</b> and pair speaking <b>Pattern Talk</b>.</p></details>
+      <details class="guide"><summary>5 繚 About Your Friend (5 min)</summary>
+        <p>Students write their name on a card and drop it in the box. One by one, pick a card, read the name, and describe that friend with two words: <b>?ini is kind and cute.??/b> The on-screen <b>Sentence Structure 繚 Start</b> builder helps the whole class say it together.</p></details>
+      <details class="guide"><summary>6 繚 Game Zone &amp; wrap-up (as time allows)</summary>
+        <p>Play the fifteen Game Zone activities. Use the timer for each round. Award points on the Team A / B / C scoreboard. End with the Exit Ticket.</p></details>
+      <details class="guide"><summary>7 繚 Differentiation</summary>
+        <ul>
+          <li><b>Support:</b> give the first letter of a word; let students copy the frame <b>She is ??and ??/b>.</li>
+          <li><b>Challenge:</b> add feelings and plurals ??<i>They are kind and pretty. He is cold and sick.</i></li>
+          <li><b>Movement:</b> Mime the Adjective, Spider Hunt and About Your Friend get students out of their seats.</li>
+          <li><b>Values:</b> link to the manners line ??<i>Be polite.</i> Kind words, kind faces.</li>
+        </ul></details>
+
+      <div class="tnote">
+        <h4><span class="ti" data-ico="warn"></span> Source note</h4>
+        <p style="margin:0">Every image in the Unit 14 folder is shown in the galleries above (Warm-up 11 繚 Dialogue &amp; activities 19 繚 Vocabulary 23 繚 Patterns &amp; sentence structure 15 繚 About Your Friend 6 = 74 pages). No file called <i>?ctivity Suggestion &amp; Sample.png??/i> exists in this folder ??the activity steps shown on this page were taken from the three instruction images that <i>are</i> present: <b>Spider Hunt Activity Instructions</b>, <b>Patterns Activity1 Instructions</b> and <b>About Your Friend Activity</b>.</p>
+      </div>
+
+      <details class="guide"><summary>Image credits &amp; licenses</summary>
+        <p class="sub">Photos used on this page come from Openverse / Wikimedia Commons (Creative Commons). Book-page pictures (all other <code>tj3-u14-img/??/code> files) are cropped from the Unit&nbsp;14 folder itself. Full list:</p>
+        <ul style="font-size:.82em; line-height:1.5">
+          <li>spider.jpg ???rgiope aurantia - ventral view??by The Cosmonaut 繚 CC BY-SA 2.5 ca 繚 Wikimedia Commons</li>
+          <li>friends.jpg ???intage Portrait Photo ??two little girls with 2 toy pet dogs??by Beverly &amp; Pack 繚 CC BY 繚 Openverse</li>
+          <li>boy1.jpg ???oung Boy Portrait Black &amp; White??by c.mcbrien 繚 CC BY-SA 繚 Openverse</li>
+          <li>boy2.jpg ???hildren??by stephaniemezcurra 繚 CC BY-SA 繚 Openverse</li>
+          <li>girl1.jpg ???ortrait of a Smiling Little Indian Girl??by Nithi clicks 繚 CC BY 繚 Openverse</li>
+          <li>girl2.jpg ???ids??by gemteck1 繚 CC BY 繚 Openverse</li>
+          <li>nini.jpg ???hild??by ||-SAM Nasim-|| 繚 CC BY 繚 Openverse</li>
+          <li>woman.jpg ???mplicit smile??by janoma.cl 繚 CC BY 繚 Openverse</li>
+          <li>man.jpg ???ortraits??by Krists Luhaers 繚 CC BY 繚 Openverse</li>
+          <li>older.jpg ???ay 23 Occupy Wall Street ??Shankbone 37??by david_shankbone 繚 CC BY 繚 Openverse</li>
+          <li>blonde.jpg ???londe hair??by CAITLID 繚 CC BY 繚 Openverse</li>
+          <li>egg.jpg ???ggs??by John Loo 繚 CC BY 繚 Openverse</li>
+          <li>chick.jpg ??? Little Chick In The Garden??by DaPuglet 繚 CC BY-SA 繚 Openverse</li>
+          <li>huntbg.jpg ???lants / patterns / garden / flower??by julia.chapple 繚 CC BY 繚 Openverse</li>
+          <li>tree.jpg ???alm tree, green beach, Vieques??by karlnorling 繚 CC BY 繚 Openverse</li>
+          <li>chair.jpg ???ooden-chair-yellow??by r.nial.bradshaw 繚 CC BY 繚 Openverse</li>
+          <li>teddy.jpg ???eddy bear (Toy museum in Beilngries)??by FHgitarre 繚 CC BY 繚 Openverse</li>
+          <li>books.jpg ???tack of Books??by Sam Howzit 繚 CC BY 繚 Openverse</li>
+          <li>flower.jpg ???unflower flower bud??by oddharmonic 繚 CC BY-SA 繚 Openverse</li>
+          <li>mushroom.jpg ??? red mushroom??by blumblaum 繚 CC BY 繚 Openverse</li>
+          <li>balloon.jpg ???ed Balloon??by rawdonfox 繚 CC BY 繚 Openverse</li>
+          <li>door.jpg ???ooden door??by barit 繚 CC BY-SA 繚 Openverse</li>
+          <li>ladybird.jpg ???lease don't eat me dear Ladybug??by Anderson Mancini 繚 CC BY 繚 Openverse</li>
+          <li>bed.jpg ???azzali: children and teenagers bedrooms??by MAZZALI bespoke italian furniture 繚 CC BY-SA 繚 Openverse</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    Joy English 繚 Tales of Joy 3 繚 Unit 14 繚 A Spider! Ew! ??interactive classroom page.
+    <br>All on-page speech is generated by your browser's built-in voice (it is not an original textbook recording).
+  </footer>
+</div>
+
+<div id="lb"><button class="close" aria-label="Close">??/button><img alt="Zoomed image"></div>
+
+
+
+
+<script>
+/* speech.js — icons, data, Speech engine, SFX, and the expressive "Ew!" engine */
+
+/* =========================================================
+   ICONS — inline SVG strings (no emoji anywhere)
+   ========================================================= */
+var ICO = {
+  spk:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 9h3l4-3v12l-4-3H4z"/><path d="M15 8.5a4.5 4.5 0 0 1 0 7"/><path d="M17.5 6a8 8 0 0 1 0 12"/></svg>',
+  voloff:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 9h3l4-3v12l-4-3H4z"/><path d="M20 9l-5 6M15 9l5 6"/></svg>',
+  play:'<svg class="ico fill" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></svg>',
+  stop:'<svg class="ico fill" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>',
+  prev:'<svg class="ico fill" viewBox="0 0 24 24"><path d="M15 5l-8 7 8 7z"/><rect x="5" y="5" width="2.4" height="14" rx="1"/></svg>',
+  next:'<svg class="ico fill" viewBox="0 0 24 24"><path d="M9 5l8 7-8 7z"/><rect x="16.6" y="5" width="2.4" height="14" rx="1"/></svg>',
+  check:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>',
+  cross:'<svg class="ico" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  mag:'<svg class="ico" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></svg>',
+  shuffle:'<svg class="ico" viewBox="0 0 24 24"><path d="M3 7h4l10 10h4"/><path d="M17 4l3 3-3 3"/><path d="M3 17h4l3-3"/><path d="M17 14l3 3-3 3"/></svg>',
+  clock:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3.5 2"/></svg>',
+  mic:'<svg class="ico" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/></svg>',
+  note:'<svg class="ico" viewBox="0 0 24 24"><path d="M6 4h12v16H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>',
+  full:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>',
+  chat:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+  book:'<svg class="ico" viewBox="0 0 24 24"><path d="M12 6C10 4.5 7 4.5 4 5v14c3-.5 6-.5 8 1 2-1.5 5-1.5 8-1V5c-3-.5-6-.5-8 1z"/><path d="M12 6v14"/></svg>',
+  grid:'<svg class="ico" viewBox="0 0 24 24"><path d="M4.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M16.5 6a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M4.5 18a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0M16.5 18a1.5 1.5 0 1 1 3 0 1.5 1.5 0 1 1-3 0"/><path d="M8 5h8M4 8v8M20 8v8M8 19h8"/></svg>',
+  target:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>',
+  image:'<svg class="ico" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M5 17l4.5-4.5 3 3L16 12l3 3"/></svg>',
+  game:'<svg class="ico" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="11" rx="5"/><path d="M8 10.5v3M6.5 12h3"/><circle cx="16" cy="11" r="1" fill="currentColor"/><circle cx="18" cy="13.5" r="1" fill="currentColor"/></svg>',
+  user:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>',
+  girl:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="9" r="4"/><path d="M8 8a4 5 0 1 1 8 0"/><path d="M12 13v5M9.5 16h5"/></svg>',
+  boy:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 12v6M9 20h6M9 16h6"/></svg>',
+  clip:'<svg class="ico" viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 10h6M9 13h6M9 16h4"/></svg>',
+  star:'<svg class="ico fill" viewBox="0 0 24 24"><path d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8L3.5 9.7l5.9-.9z"/></svg>',
+  warn:'<svg class="ico" viewBox="0 0 24 24"><path d="M12 4l9 16H3z"/><path d="M12 10v4.5M12 17.5h.01"/></svg>',
+  card:'<svg class="ico" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 15l2.5-3 2 2.2L16 10l2 3"/></svg>',
+  dice:'<svg class="ico" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="3"/><circle cx="9.5" cy="9.5" r="1" fill="currentColor"/><circle cx="14.5" cy="14.5" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>',
+  sparkle:'<svg class="ico fill" viewBox="0 0 24 24"><path d="M12 3l1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7z"/><path d="M18.5 15l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>',
+  map:'<svg class="ico" viewBox="0 0 24 24"><path d="M9 4L4 6v14l5-2 6 2 5-2V4l-5 2z"/><path d="M9 4v14M15 6v14"/></svg>',
+  mega:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 10v4l11 5V5z"/><path d="M15 7.5a4 4 0 0 1 0 9"/><path d="M7 14v3.5h3V15"/></svg>',
+  build:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 20V9l5-4 5 4v11"/><path d="M10 20v-5h4v5"/></svg>',
+  spider:'<svg class="ico" viewBox="0 0 24 24" stroke-width="1.7"><ellipse cx="12" cy="14" rx="3" ry="3.6"/><circle cx="12" cy="9.4" r="2.1"/><path d="M9.5 10L5 7M9 11L4 10.5M9.4 13L4 15M10 15.5L6 19M14.5 10L19 7M15 11L20 10.5M14.6 13L20 15M14 15.5L18 19"/></svg>',
+  web:'<svg class="ico" viewBox="0 0 24 24" stroke-width="1.4"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/><path d="M12 6.5a5.5 5.5 0 0 0 0 11M12 6.5a5.5 5.5 0 0 1 0 11M6.5 12a5.5 5.5 0 0 0 11 0"/></svg>',
+  slow:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="13" r="7"/><path d="M12 13V9M9 5h6M12 3v2"/></svg>',
+  fast:'<svg class="ico fill" viewBox="0 0 24 24"><path d="M4 6l7 6-7 6zM12 6l7 6-7 6z"/></svg>',
+  swap:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 8h13M14 5l3 3-3 3M20 16H7M10 13l-3 3 3 3"/></svg>',
+  egg:'<svg class="ico" viewBox="0 0 24 24"><path d="M12 3c4 0 6.5 5 6.5 9.5A6.5 6.5 0 0 1 12 19a6.5 6.5 0 0 1-6.5-6.5C5.5 8 8 3 12 3z"/></svg>',
+  chick:'<svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="12" r="6"/><circle cx="16" cy="9" r="3"/><path d="M18.6 9l2.4 1-2.4 1"/><circle cx="16.4" cy="8" r=".6" fill="currentColor"/><path d="M8 18l-1.5 3M13 18l1.5 3"/></svg>',
+  party:'<svg class="ico" viewBox="0 0 24 24"><path d="M4 20l7-17 6 6z"/><path d="M6 15l3-1M8 11l3-1"/><path d="M17 4v2M20 7h-2M19 12l-1.5-1.5"/></svg>',
+  yes:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8 12.5l2.8 2.8L16.5 9.5"/></svg>',
+  no:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 9l6 6M15 9l-6 6"/></svg>',
+  teacher:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.2"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/><path d="M4 7l3 1.2M20 7l-3 1.2"/></svg>',
+  sun:'<svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8"/></svg>',
+  moon:'<svg class="ico" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a7 7 0 1 0 10.5 10.5z"/></svg>',
+  shuffleW:'<svg class="ico" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 12h8M8 15h5"/></svg>',
+  heart:'<svg class="ico" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.5-7 9-7 9z"/></svg>',
+  paw:'<svg class="ico" viewBox="0 0 24 24"><circle cx="7" cy="9" r="2"/><circle cx="12" cy="7" r="2"/><circle cx="17" cy="9" r="2"/><path d="M8 16c0-2.2 1.8-4 4-4s4 1.8 4 4-1.8 3-4 3-4-.8-4-3z"/></svg>'
+};
+function applyIcons(root){
+  (root||document).querySelectorAll("[data-ico]").forEach(function(sp){
+    var k=sp.getAttribute("data-ico"); if(ICO[k]) sp.innerHTML=ICO[k];
+  });
+}
+
+/* =========================================================
+   DATA
+   ========================================================= */
+var VOCAB = [
+  {w:"kind",  img:"tj3-u14-img/voc-kind.png",  isNew:true,  ex:"Nini is kind.",          p:"k _ n d"},
+  {w:"pretty",img:"tj3-u14-img/voc-pretty.png",isNew:true,  ex:"She is pretty.",         p:"p _ _ t y"},
+  {w:"smart", img:"tj3-u14-img/voc-smart.png", isNew:true,  ex:"He is smart.",           p:"s m _ r t"},
+  {w:"tall",  img:"tj3-u14-img/rev-tall.png",  isNew:false, ex:"He is tall.",            p:"t _ l l"},
+  {w:"short", img:"tj3-u14-img/rev-short.png", isNew:false, ex:"She is short.",          p:"s _ o r t"},
+  {w:"cute",  img:"tj3-u14-img/rev-cute.png",  isNew:false, ex:"The baby is cute.",      p:"c _ t e"},
+  {w:"good",  img:"tj3-u14-img/rev-good.png",  isNew:false, ex:"He is good.",            p:"g _ o d"},
+  {w:"thin",  img:"tj3-u14-img/rev-thin.png",  isNew:false, ex:"She is thin.",           p:"t _ i n"},
+  {w:"cool",  img:"tj3-u14-img/rev-cool.png",  isNew:false, ex:"He is cool.",            p:"c _ o l"}
+];
+var SPELL = [
+  {p:"k _ n d",     o:["kind","kand","kend"],           w:"kind"},
+  {p:"p _ _ t y",   o:["pretty","prety","pritty"],      w:"pretty"},
+  {p:"s m _ r t",   o:["smart","smat","smaart"],        w:"smart"},
+  {p:"c _ t e",     o:["cute","cate","cote"],           w:"cute"},
+  {p:"c _ o l",     o:["cool","coal","coole"],          w:"cool"},
+  {p:"t _ l l",     o:["tall","tel","tyll"],            w:"tall"},
+  {p:"t _ i n",     o:["thin","then","thinn"],          w:"thin"},
+  {p:"g _ o d",     o:["good","goot","gud"],            w:"good"},
+  {p:"s _ o r t",   o:["short","shot","shrot"],         w:"short"}
+];
+
+var WARM = [
+  {t:["They","are","kind","and","pretty"],   pics:["tj3-u14-img/voc-kind.png","tj3-u14-img/voc-pretty.png"]},
+  {t:["Are","they","smart","?"],             pics:["tj3-u14-img/voc-smart.png"]},
+  {t:["There","are","three","spiders"],      pics:["tj3-u14-img/spider.jpg"]},
+  {t:["These","are","my","friends"],         pics:["tj3-u14-img/friends.jpg"]},
+  {t:["They","are","short","and","thin"],    pics:["tj3-u14-img/rev-short.png","tj3-u14-img/rev-thin.png"]},
+  {t:["They","are","cool","and","cute"],     pics:["tj3-u14-img/rev-cool.png","tj3-u14-img/rev-cute.png"]},
+  {t:["There","is","a","spider"],            pics:["tj3-u14-img/spider.jpg"]},
+  {t:["They","are","not","tall"],            pics:["tj3-u14-img/rev-tall.png"]}
+];
+var RW = [
+  {q:"They ___ kind and pretty.",  a:"are",   o:["are","is"],    s:"They are kind and pretty."},
+  {q:"___ they smart?",            a:"Are",   o:["Are","Is"],    s:"Are they smart?"},
+  {q:"There ___ three spiders.",   a:"are",   o:["are","is"],    s:"There are three spiders."},
+  {q:"These ___ my friends.",      a:"are",   o:["are","is"],    s:"These are my friends."},
+  {q:"There ___ a spider!",        a:"is",    o:["is","are"],    s:"There is a spider!"},
+  {q:"They ___ not tall.",         a:"are",   o:["are","is"],    s:"They are not tall."},
+  {q:"___ they kind and good?",    a:"Are",   o:["Are","Is"],    s:"Are they kind and good?"}
+];
+
+var DIALOG = [
+  {who:"Boy 1",     id:"boy1", text:"A spider! Ew!",                              g:"m"},
+  {who:"Girl 1",    id:"girl1",text:"A spider! Ew!",                              g:"f"},
+  {who:"Boy 2",     id:"boy2", text:"A spider! Ew!",                              g:"m"},
+  {who:"Girl 2",    id:"girl2",text:"A spider! Ew!",                              g:"f"},
+  {who:"Boy 1",     id:"boy1", text:"A spider! Ew!",                              g:"m"},
+  {who:"Girl 1",    id:"girl1",text:"A spider! Ew!",                              g:"f"},
+  {who:"Nini",      id:"nini", text:"Hey, guys! Be polite. She's kind and pretty.", g:"f"}
+];
+var KIDS = [
+  {id:"boy1",  av:"tj3-u14-img/boy1.jpg",  nm:"Boy 1",  bub:"A spider! Ew!", g:"m"},
+  {id:"girl1", av:"tj3-u14-img/girl1.jpg", nm:"Girl 1", bub:"A spider! Ew!", g:"f"},
+  {id:"boy2",  av:"tj3-u14-img/boy2.jpg",  nm:"Boy 2",  bub:"A spider! Ew!", g:"m"},
+  {id:"girl2", av:"tj3-u14-img/girl2.jpg", nm:"Girl 2", bub:"A spider! Ew!", g:"f"},
+  {id:"nini",  av:"tj3-u14-img/nini.jpg",  nm:"Nini",  bub:"Be polite!",     g:"f"},
+  {id:"spider",av:"tj3-u14-img/spider.jpg",nm:"Spider", bub:"…kind and pretty!", g:"f"}
+];
+
+/* Pictures for the pattern games & mime (book crops) */
+var PIC = {
+  kind:"tj3-u14-img/voc-kind.png", pretty:"tj3-u14-img/voc-pretty.png", smart:"tj3-u14-img/voc-smart.png",
+  tall:"tj3-u14-img/rev-tall.png", short:"tj3-u14-img/rev-short.png", thin:"tj3-u14-img/rev-thin.png",
+  cute:"tj3-u14-img/rev-cute.png", good:"tj3-u14-img/rev-good.png", cool:"tj3-u14-img/rev-cool.png",
+  hot:"tj3-u14-img/patt-hot-5.png", cold:"tj3-u14-img/patt-cold-10.png", hungry:"tj3-u14-img/patt-hungry-2.png",
+  thirsty:"tj3-u14-img/patt-thirsty-2.png", tired:"tj3-u14-img/patt-tired-7.png", sick:"tj3-u14-img/patt-sick-7.png"
+};
+
+/* Right and Wrong — book items + 2 teacher extras */
+var RWL = [
+  {s:"A spider! Ew!",                          ok:true},
+  {s:"A spy! Duh!",                            ok:false},
+  {s:"A spider! Phew!",                        ok:false},
+  {s:"A spider! Ewe!",                         ok:false},
+  {s:"Two spiders! Ew!",                       ok:false},
+  {s:"A spider! Ew!",                          ok:true},
+  {s:"Hey, guys! Be polite. She's kind and pretty.", ok:true},
+  {s:"Hey, guys! Be rude. She's kind and pretty.",   ok:false}
+];
+
+/* Pattern sentences straight from the book (Listen and Drag) */
+var PATTS = [
+  {s:"She is hungry and thirsty.", p:["hungry","thirsty"], g:"f"},
+  {s:"He is kind and cool.",       p:["kind","cool"],       g:"m"},
+  {s:"She is pretty and smart.",   p:["pretty","smart"],    g:"f"},
+  {s:"She is hot and hungry.",     p:["hot","hungry"],      g:"f"},
+  {s:"She is smart and cool.",     p:["smart","cool"],      g:"f"},
+  {s:"He is tired and sick.",      p:["tired","sick"],      g:"m"},
+  {s:"She is pretty and smart.",   p:["pretty","smart"],    g:"f"},
+  {s:"She is smart and kind.",     p:["smart","kind"],      g:"f"},
+  {s:"He is cold and sick.",       p:["cold","sick"],       g:"m"},
+  {s:"He is tall and smart.",      p:["tall","smart"],      g:"m"}
+];
+PATTS.forEach(function(x){ x.a=x.p.join("|"); });
+
+var FIXP = [
+  {s:"She is kind and pretty.", ok:true},
+  {s:"She is kind or pretty.",  ok:false},
+  {s:"He is tall and smart.",   ok:true},
+  {s:"He am tall.",             ok:false},
+  {s:"She are kind.",           ok:false},
+  {s:"He is and cool.",         ok:false},
+  {s:"He is tired and sick.",   ok:true},
+  {s:"She is smart and kind.",  ok:true}
+];
+var FIXG = [
+  {s:"She is kind and pretty.",   ok:true},
+  {s:"She are kind and pretty.",  ok:false},
+  {s:"They is smart.",            ok:false},
+  {s:"They are kind and good.",   ok:true},
+  {s:"He is pretty and smart.",   ok:true},
+  {s:"She is and pretty.",        ok:false},
+  {s:"There are three spiders.",  ok:true},
+  {s:"There is three spiders.",   ok:false}
+];
+var RACE = [
+  ["She","is","cute","and","kind"],
+  ["He","is","cool","and","smart"],
+  ["They","are","kind","and","pretty"],
+  ["She","is","hungry","and","thirsty"],
+  ["He","is","tall","and","smart"],
+  ["She","is","pretty","and","smart"]
+];
+var FACE = [
+  {av:"tj3-u14-img/girl1.jpg", s:"She is pretty and smart."},
+  {av:"tj3-u14-img/boy1.jpg",  s:"He is tall and cool."},
+  {av:"tj3-u14-img/woman.jpg", s:"She is kind and pretty."},
+  {av:"tj3-u14-img/older.jpg", s:"He is tired and sick."},
+  {av:"tj3-u14-img/man.jpg",   s:"He is cold and sick."},
+  {av:"tj3-u14-img/blonde.jpg",s:"She is hungry and thirsty."}
+];
+var MIME = ["kind","pretty","smart","tall","short","cute","good","thin","cool","hot","cold","tired","sick","hungry","thirsty"];
+var EXIT = [
+  {q:"Which word means a friend who helps you and smiles?", o:["kind","cold","tall"], id:0},
+  {q:"She ___ kind and pretty.",                            o:["is","are","am"],      id:0},
+  {q:"He is tall ___ smart.",                               o:["and","or","is"],      id:0},
+  {q:"Which sentence is correct?",                          o:["She are pretty.","She is pretty and smart.","She pretty is smart."], id:1},
+  {q:"What do the kids say when they see the spider?",      o:["A spider! Ew!","Hello, spider!","Goodbye, spider!"], id:0},
+  {q:"“How is she?” — the answer is…",                       o:["She is kind and pretty.","She are kind.","Yes, they are."], id:0},
+  {q:"Which word is one of today's NEW words?",             o:["pretty","table","window"], id:0}
+];
+var FRIENDS = ["Nini","Tom","Lily","Jack","Mimi","Max"];
+var ADJS = VOCAB.map(function(v){return v.w;}).concat(["hot","cold","hungry","thirsty","tired","sick"]);
+
+/* =========================================================
+   SPEECH ENGINE — friendly British English, male & female
+   ========================================================= */
+var Speech = {
+  muted:false, rate:0.95, pitch:1.05, voices:[], en:[], f:null, m:null, chosen:null, _savedName:"",
+  init:function(){
+    var self=this;
+    try{ self._savedName = localStorage.getItem("tj3u14_voice")||""; }catch(e){}
+    function load(){
+      if(!window.speechSynthesis){ self.voices=[]; return; }
+      self.voices = window.speechSynthesis.getVoices()||[];
+      self.pick(); self.fillSelect();
+    }
+    load();
+    if(window.speechSynthesis){ window.speechSynthesis.onvoiceschanged = load; }
+  },
+  /* higher score = more natural, more British, more human-sounding */
+  score:function(v){
+    var n=(v.name||"").toLowerCase(), s=0;
+    if(/natural|neural|premium|enhanced/.test(n)) s+=100;
+    if(/online/.test(n)) s+=40;
+    if(/en[-_]gb/i.test(v.lang)||/uk english|british/.test(n)) s+=60;
+    if(/google/.test(n)) s+=30;
+    if(/samantha|serena|libby|sonia|aria|jenny|kate|emma|michelle|clara|hazel|amy|fiona/.test(n)) s+=14;
+    if(/daniel|ryan|oliver|george|thomas|fred|guy|mark|david|gordon|rob/.test(n)) s+=14;
+    if(/microsoft|apple/.test(n)) s+=8;
+    if(/compact|espeak|robot|novelty|zarvox|albert|bad news|good news/.test(n)) s-=80;
+    return s;
+  },
+  pick:function(){
+    var v=this.voices.filter(function(x){return /^en/i.test(x.lang);});
+    if(!v.length) v=this.voices.slice();
+    v.sort(function(a,b){ return Speech.score(b)-Speech.score(a); });
+    this.en=v;
+    var femaleRe=/(female|samantha|serena|libby|sonia|aria|jenny|kate|hazel|zira|susan|michelle|emma|amy|clara|fiona)/i;
+    var maleRe=/(male|daniel|ryan|oliver|george|thomas|guy|mark|david|fred|tom|brian|eric|rob)/i;
+    var gb=function(x){ return /en[-_]gb/i.test(x.lang) || /uk english|british/i.test(x.name||""); };
+    this.f = v.find(function(x){return gb(x)&&femaleRe.test(x.name);}) || v.find(function(x){return femaleRe.test(x.name);}) || v[0] || null;
+    this.m = v.find(function(x){return gb(x)&&maleRe.test(x.name);}) || v.find(function(x){return maleRe.test(x.name);}) || v[1] || v[0] || null;
+    this.chosen=null;
+    if(this._savedName){ for(var i=0;i<v.length;i++){ if(v[i].name===this._savedName){ this.chosen=v[i]; break; } } }
+  },
+  fillSelect:function(){
+    var sel=document.getElementById("voiceSel"); if(!sel) return;
+    sel.innerHTML="";
+    var o0=document.createElement("option"); o0.value=""; o0.textContent="Auto · friendly voice"; sel.appendChild(o0);
+    this.en.forEach(function(vx){ var o=document.createElement("option"); o.value=vx.name; o.textContent=vx.name+(vx.lang?" ("+vx.lang+")":""); sel.appendChild(o); });
+    sel.value = this.chosen ? this.chosen.name : "";
+  },
+  voiceFor:function(g){
+    if(this.chosen) return this.chosen;
+    if(g==="m") return this.m||this.f;
+    if(g==="f") return this.f||this.m;
+    return this.f||this.m;
+  },
+  /* respell tricky words so the voice says them right (keeps “Ew!” as a disgusted sound) */
+  sayable:function(text){
+    return String(text==null?"":text)
+      .replace(/\bEw\b/gi,"Ewww")
+      .replace(/\bEwe\b/gi,"Yoo")
+      .replace(/\bEww\b/gi,"Ewww");
+  },
+  speak:function(text,opts){
+    if(this.muted || !("speechSynthesis" in window)) return;
+    opts=opts||{};
+    try{ window.speechSynthesis.cancel(); }catch(e){}
+    var u=new SpeechSynthesisUtterance(this.sayable(text));
+    var v=this.voiceFor(opts.g||"n");
+    if(v){ u.voice=v; u.lang=v.lang||"en-GB"; } else { u.lang="en-GB"; }
+    u.rate=(opts.rate||this.rate);
+    /* tiny pitch variation so the voice sounds human, not robotic */
+    u.pitch=(opts.pitch||this.pitch)+(Math.random()*0.06-0.03);
+    u.volume=1;
+    window.speechSynthesis.speak(u);
+    return u;
+  },
+  stop:function(){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+};
+Speech.init();
+
+/* =========================================================
+   LITTLE SFX + SPARKLES (rewards)
+   ========================================================= */
+var AC=null;
+function audioCtx(){
+  try{
+    if(!AC){ var C=window.AudioContext||window.webkitAudioContext; if(C) AC=new C(); }
+    if(AC && AC.state==="suspended") AC.resume();
+  }catch(e){}
+  return AC;
+}
+function beep(freqs,dur){
+  var ctx=audioCtx(); if(!ctx) return;
+  try{
+    freqs.forEach(function(f,i){
+      var o=ctx.createOscillator(), g=ctx.createGain(), t=ctx.currentTime+i*0.12;
+      o.type="sine"; o.frequency.value=f;
+      g.gain.setValueAtTime(0.0001,t);
+      g.gain.exponentialRampToValueAtTime(0.16,t+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+      o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+dur+0.02);
+    });
+  }catch(e){}
+}
+var Sfx = {
+  ok:function(){ beep([660,880],0.16); },
+  no:function(){ beep([220,180],0.14); }
+};
+/* synth animal calls (no external audio files required; graceful no-op if WebAudio is blocked) */
+function tone(freq, dur, type, when){
+  var ctx=audioCtx(); if(!ctx) return;
+  try{
+    var o=ctx.createOscillator(), g=ctx.createGain(), t=ctx.currentTime+(when||0);
+    o.type=type||"triangle"; o.frequency.setValueAtTime(freq,t);
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.18,t+0.03);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+dur+0.03);
+    return o;
+  }catch(e){ return null; }
+}
+var AnimalSfx = {
+  cow:   function(){ var o=tone(150,0.5,"sawtooth",0); try{o.frequency.exponentialRampToValueAtTime(110,audioCtx().currentTime+0.5);}catch(e){} },
+  duck:  function(){ tone(320,0.12,"square",0); tone(300,0.12,"square",0.16); },
+  goat:  function(){ tone(360,0.4,"triangle",0); try{tone(340,0.4,"triangle",0).frequency.exponentialRampToValueAtTime(300,audioCtx().currentTime+0.6);}catch(e){} },
+  horse: function(){ tone(200,0.18,"sawtooth",0); tone(240,0.18,"sawtooth",0.2); tone(200,0.18,"sawtooth",0.4); },
+  hen:   function(){ tone(500,0.1,"square",0); tone(440,0.1,"square",0.13); tone(500,0.1,"square",0.26); },
+  chicken:function(){ tone(900,0.08,"square",0); tone(1000,0.08,"square",0.11); },
+  play:function(name){ var f=this[name]; if(f){ try{f();}catch(e){} } }
+};
+function sparkles(el){
+  try{
+    var r=(el&&el.getBoundingClientRect)?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};
+    var cols=["#f4a13c","#3aa0d8","#2f9e59","#e35d7c","#ffd43b"];
+    for(var i=0;i<12;i++){
+      var s=document.createElement("span");
+      s.className="spark"; s.setAttribute("aria-hidden","true");
+      s.style.background=cols[i%cols.length];
+      var x=r.left+r.width/2, y=r.top+r.height/2;
+      s.style.left=x+"px"; s.style.top=y+"px";
+      s.style.setProperty("--dx",(Math.random()*220-110)+"px");
+      s.style.setProperty("--dy",(-40-Math.random()*140)+"px");
+      document.body.appendChild(s);
+      (function(sp){ setTimeout(function(){ sp.remove(); },950); })(s);
+    }
+  }catch(e){}
+}
+function good(fb,txt,el,team){
+  txt=String(txt).replace(/^\s*[\u2705\u274C\u2714\u2718]\s*/,"");
+  fb.innerHTML='<span class="good">'+ICO.check.replace('class="ico"','class="goodico"')+' '+txt+'</span>';
+  Sfx.ok(); sparkles(el||fb); if(team) addG(team,1);
+}
+function bad(fb,txt){
+  txt=String(txt).replace(/^\s*[\u2705\u274C\u2714\u2718]\s*/,"");
+  fb.innerHTML='<span class="bad">'+ICO.cross.replace('class="ico"','class="goodico"')+' '+txt+'</span>';
+  Sfx.no();
+}
+
+/* =========================================================
+   EXPRESSIVE “A spider! Ew!” — emotional speech + animation
+   en-GB female voice · surprised “A spider!” · 400 ms pause ·
+   drawn-out disgusted “Ewww!” · optional recorded audio file
+   ========================================================= */
+var EwExp = {
+  mode:"expressive",           // "slow" | "normal" | "expressive"
+  useAudio:false,              // switch to saved recording if it loads
+  audioPath:"tj3-u14-audio/ew-expression.mp3",
+  notice:null,                 // one-shot feedback message for the next play()
+  _audio:null, _audioOK:null, _timers:[], _running:false,
+
+  /* choose the most natural British female voice we can find */
+  britFemale:function(){
+    var list=(window.speechSynthesis && window.speechSynthesis.getVoices) ? (window.speechSynthesis.getVoices()||[]) : [];
+    if(!list.length) return Speech.f||null;
+    var femaleRe=/(female|woman|samantha|serena|libby|sonia|aria|jenny|kate|hazel|zira|susan|michelle|emma|amy|clara|fiona|alice|karen|moira|tessa)/i;
+    var gb=function(v){ return /en[-_]gb/i.test(v.lang||"") || /uk english|british/i.test(v.name||""); };
+    /* 1. British + female named voice */
+    var pick=list.filter(function(v){return gb(v)&&femaleRe.test(v.name||"");})[0];
+    /* 2. any British English voice (prefer the Speech engine's choice) */
+    if(!pick && Speech.chosen && gb(Speech.chosen)) pick=Speech.chosen;
+    if(!pick) pick=list.filter(function(v){return gb(v);})[0];
+    /* 3. any English female */
+    if(!pick) pick=list.filter(function(v){return /^en/i.test(v.lang||"")&&femaleRe.test(v.name||"");})[0];
+    /* 4. whatever Speech picked as female */
+    if(!pick) pick=Speech.f;
+    return pick||null;
+  },
+
+  baseRate:function(){ return this.mode==="slow" ? 0.6 : (this.mode==="expressive" ? 0.92 : 0.95); },
+
+  say:function(text,o){
+    if(this.useAudio && this._audio && !this._audio.paused) return null;
+    if(Speech.muted || !("speechSynthesis" in window)) return null;
+    o=o||{};
+    var u=new SpeechSynthesisUtterance(text);
+    var v=this.britFemale();
+    if(v){ u.voice=v; u.lang=v.lang||"en-GB"; } else { u.lang="en-GB"; }
+    u.rate=o.rate||this.baseRate();
+    u.pitch=o.pitch||1.15;
+    u.volume=(o.volume==null?1:o.volume);
+    try{ window.speechSynthesis.speak(u); }catch(e){}
+    return u;
+  },
+
+  /* try to load a real recorded reaction; silently fall back to TTS if absent */
+  audioUsable:function(){
+    try{
+      if(!(window.Audio && window.HTMLMediaElement)) return false;
+      var probe=document.createElement("audio");
+      if(typeof probe.canPlayType!=="function") return false;
+      /* real browsers answer "maybe"/"probably"; headless/jsdom answers "" */
+      var r=probe.canPlayType("audio/mpeg")||probe.canPlayType("audio/ogg")||probe.canPlayType("audio/wav");
+      return !!r;
+    }catch(e){ return false; }
+  },
+  probeAudio:function(){
+    if(this._audioOK!==null) return;
+    if(!this.audioUsable()){ this._audioOK=false; return; }
+    var a=new Audio();
+    var self=this;
+    a.preload="auto";
+    a.addEventListener("canplaythrough",function(){ self._audioOK=true; self._audio=a; });
+    a.addEventListener("error",function(){ self._audioOK=false; });
+    a.src=this.audioPath;
+    this._audio=a;
+    /* don't block: if the file never loads, _audioOK stays false → TTS is used */
+    setTimeout(function(){ if(self._audioOK===null) self._audioOK=false; },2500);
+  },
+
+  clearTimers:function(){
+    this._timers.forEach(function(t){ clearTimeout(t); });
+    this._timers=[]; this._running=false;
+    var f=document.getElementById("ewface");
+    if(f){ f.classList.remove("eww","surprise","ewshake"); void f.offsetWidth; }
+    var sp=document.getElementById("spider");
+    if(sp){ sp.classList.remove("eww","ewshake","ewquiver"); }
+    var bubble=document.querySelector(".ewbubble");
+    if(bubble){ bubble.classList.remove("ewshake","pulse"); }
+    var say=document.getElementById("ewsay");
+    if(say){ say.innerHTML='<span class="sp">A spider!</span> <span class="dim">…</span> <span class="ew">Ewww!</span>'; }
+    try{ window.speechSynthesis && window.speechSynthesis.cancel(); }catch(e){}
+    if(this._audio){ try{ this._audio.pause(); this._audio.currentTime=0; }catch(e){} }
+  },
+
+  later:function(fn,ms){ var t=setTimeout(fn,ms); this._timers.push(t); return t; },
+
+  /* kind: "surprise" (startled) | "eww" (disgusted) | "off" (neutral) */
+  face:function(kind){
+    var f=document.getElementById("ewface");
+    if(!f) return;
+    f.classList.toggle("surprise",kind==="surprise");
+    f.classList.toggle("eww",kind==="eww");
+    if(kind==="eww" || kind==="surprise"){
+      /* retrigger the shake each time so it reads clearly */
+      f.classList.remove("ewshake"); void f.offsetWidth; f.classList.add("ewshake");
+    }
+  },
+
+  /* highlight which part of the sentence is playing (visual + shake) */
+  spotlight:function(part){
+    var say=document.getElementById("ewsay");
+    if(!say) return;
+    if(part==="s"){ say.innerHTML='<span class="sp">A spider!</span> <span class="dim">…</span> <span class="dim">Ewww!</span>'; }
+    else if(part==="pause"){ say.innerHTML='<span class="dim">A spider!</span> <span class="sp">…</span> <span class="dim">Ewww!</span>'; }
+    else if(part==="e"){ say.innerHTML='<span class="dim">A spider!</span> <span class="dim">…</span> <span class="ew">Ewww!</span>'; }
+  },
+
+  /* full emotional performance */
+  play:function(){
+    this.clearTimers();
+    this.probeAudio();
+    this._running=true;
+    var fb=document.getElementById("ewFb");
+    if(fb) fb.innerHTML=this.notice||"Listen and act it out!";
+
+    /* Audio recording takes priority when available and the file loaded. */
+    if(this.useAudio && this._audioOK && this._audio){
+      try{
+        this._audio.currentTime=0; this._audio.play();
+        this.face("surprise");
+        try{ document.getElementById("spider")&&document.getElementById("spider").classList.add("ewshake"); }catch(e){}
+        this.later(function(){ EwExp.face("eww"); },900);
+        this.later(function(){
+          EwExp._running=false;
+          if(fb) fb.innerHTML="Recorded reaction played.";
+        },3200);
+        return;
+      }catch(e){ /* fall through to TTS */ }
+    }
+
+    var self=this, base=this.baseRate(), expr=(this.mode==="expressive");
+
+    /* --- 1. “A spider!” — sudden startled surprise, raised pitch + pop --- */
+    this.spotlight("s");
+    this.face("surprise");
+    this.say("A spider!",{
+      rate:base*(expr?1.05:1),
+      pitch:expr?1.52:1.42,      /* high = startled */
+      volume:1
+    });
+
+    /* --- 2. ~400 ms pause (the calm-down beat before the disgust) --- */
+    var pause=400;
+    this.later(function(){ self.spotlight("pause"); }, pause-140);
+
+    /* --- 3. “Ewwww!” — a natural drawn-out human grimace:
+       higher pitch than the surprise, a smooth fall, then a soft
+       trembling tail so it sounds genuinely disgusted, not robotic. --- */
+    var start=pause+520;   /* after “A spider!” finishes (~0.9 s) + pause */
+    this.later(function(){
+      if(!self._running) return;
+      self.spotlight("e");
+      self.face("eww");                         /* disgusted face + shake burst */
+      var sp=document.getElementById("spider");
+      if(sp){ sp.classList.remove("ewshake"); void sp.offsetWidth; sp.classList.add("ewshake"); }
+    }, start);
+
+    /* lead syllable: “Ewwww” held, pitched high and gliding down */
+    this.later(function(){
+      if(!self._running) return;
+      self.say("Ewwww",{rate:base*(expr?0.6:0.72), pitch:expr?1.85:1.62, volume:1});
+      self.face("eww");
+    }, start);
+
+    /* trembling tail: quiet, rapid little “w” flutters that fall in pitch,
+       like a real shuddering gasp of disgust */
+    var tail=expr
+      ? [{t:"www",rate:.58,pitch:1.7,vol:.9,at:230},
+         {t:"ww", rate:.55,pitch:1.55,vol:.75,at:430},
+         {t:"w",  rate:.6, pitch:1.4, vol:.5, at:600},
+         {t:"hhh",rate:.7, pitch:1.25,vol:.35,at:740}]
+      : [{t:"www",rate:.7, pitch:1.6, vol:.85,at:240},
+         {t:"w",  rate:.65,pitch:1.45,vol:.5, at:430}];
+    var last=0;
+    tail.forEach(function(c){
+      self.later(function(){
+        if(!self._running) return;
+        self.say(c.t,{rate:c.rate, pitch:c.pitch, volume:c.vol});
+        self.face("eww");
+      }, start+c.at);
+      last=Math.max(last,c.at+260);
+    });
+
+    /* --- 4. tidy up --- */
+    this.later(function(){
+      self._running=false;
+      self.spotlight("e");
+      if(fb) fb.innerHTML="Reaction done — now your turn!";
+    }, start+last+420);
+  },
+
+  stop:function(){ this.clearTimers(); var fb=document.getElementById("ewFb"); if(fb) fb.innerHTML="Stopped."; },
+
+  setMode:function(m){
+    this.mode=m;
+    var namesareal={"slow":"Slow","normal":"Normal","expressive":"Expressive"};
+    ["ewSlow","ewNormal","ewExpr"].forEach(function(id){
+      var b=document.getElementById(id); if(b) b.classList.remove("on");
+    });
+    var map={slow:"ewSlow",normal:"ewNormal",expressive:"ewExpr"};
+    var btn=document.getElementById(map[m]); if(btn) btn.classList.add("on");
+    var fb=document.getElementById("ewFb"); if(fb) fb.innerHTML=namesareal[m]+" mode selected.";
+  }
+};
+
+/* iOS/Android need a user gesture to allow audio + speech; unlock on first tap */
+(function(){
+  function unlock(){
+    try{
+      if(window.speechSynthesis){ var u=new SpeechSynthesisUtterance(" "); u.volume=0; window.speechSynthesis.speak(u); window.speechSynthesis.cancel(); }
+      var ctx=audioCtx(); if(ctx&&ctx.state==="suspended") ctx.resume();
+      EwExp.probeAudio();
+    }catch(e){}
+    document.removeEventListener("touchend",unlock);
+    document.removeEventListener("click",unlock);
+  }
+  document.addEventListener("touchend",unlock,{passive:true});
+  document.addEventListener("click",unlock);
+})();
+
+</script>
+<script>
+/* main.js — scoreboard, toolbar, nav, lightbox/galleries, scene logic, background */
+
+/* =========================================================
+   SCOREBOARD
+   ========================================================= */
+var G={a:0,b:0,c:0};
+var PRAISE=["Great!","Well done!","Perfect!","Excellent!","Fantastic!","Nice one!"];
+function addG(t,d){
+  t=(t||"").toLowerCase(); if(!(t in G)) return;
+  G[t]=Math.max(0,G[t]+(d||0)); renderScore();
+}
+function renderScore(){
+  document.getElementById("ptsA").textContent=G.a;
+  document.getElementById("ptsB").textContent=G.b;
+  document.getElementById("ptsC").textContent=G.c;
+}
+function praise(t){ addG(t,1); Speech.speak(PRAISE[Math.floor(Math.random()*PRAISE.length)],{g:"f",rate:1}); }
+
+document.getElementById("scoreboard").addEventListener("click",function(e){
+  var b=e.target.closest("button[data-gt]"); if(!b) return;
+  addG(b.getAttribute("data-gt"), parseInt(b.getAttribute("data-d"),10));
+});
+document.getElementById("reset").addEventListener("click",function(){ G={a:0,b:0,c:0}; renderScore(); });
+
+/* =========================================================
+   SOUND / TOOLS
+   ========================================================= */
+document.getElementById("snd").addEventListener("click",function(){
+  Speech.muted=!Speech.muted; if(Speech.muted) Speech.stop();
+  this.classList.toggle("on",Speech.muted);
+  this.innerHTML=(Speech.muted?ICO.voloff:ICO.spk)+" "+(Speech.muted? "Muted":"Sound");
+});
+document.getElementById("rate").addEventListener("input",function(){ Speech.rate=parseFloat(this.value); });
+document.getElementById("voiceSel").addEventListener("change",function(){
+  var name=this.value; Speech.chosen=null;
+  if(name){ for(var i=0;i<Speech.en.length;i++){ if(Speech.en[i].name===name){ Speech.chosen=Speech.en[i]; break; } } }
+  try{ localStorage.setItem("tj3u14_voice",name); }catch(e){}
+  Speech.speak("Hi friends! I can't wait to learn with you today!",{g:"f"});
+});
+document.getElementById("vtest").addEventListener("click",function(){
+  Speech.speak("Hello, friends! Let's find the spider together — A spider! Ew!",{g:"f"});
+});
+document.getElementById("bigfont").addEventListener("click",function(){
+  var on=document.documentElement.classList.toggle("bigfont"); this.classList.toggle("on",on);
+  try{ localStorage.setItem("tj3u14_big", on?"1":"0"); }catch(e){}
+});
+document.getElementById("hidenotes").addEventListener("click",function(){
+  document.body.classList.toggle("hidenotes");
+  this.classList.toggle("on",document.body.classList.contains("hidenotes"));
+});
+/* light / dark theme */
+function setTheme(dark){
+  document.documentElement.classList.toggle("dark",dark);
+  var b=document.getElementById("theme");
+  if(b){ b.innerHTML=(dark?ICO.sun:ICO.moon)+" "+(dark?"Light":"Dark"); b.classList.toggle("on",dark); }
+  try{ localStorage.setItem("tj3u14_theme", dark?"dark":"light"); }catch(e){}
+}
+document.getElementById("theme").addEventListener("click",function(){
+  setTheme(!document.documentElement.classList.contains("dark"));
+});
+setTheme(document.documentElement.classList.contains("dark"));
+
+/* random student selector */
+var STUDENTS = ["Amy","Ben","Cindy","David","Ella","Frank","Grace","Henry","Ivy","Jack","Kelly","Leo"];
+var pickLbl=null;
+document.getElementById("pickStudent").addEventListener("click",function(){
+  var n=STUDENTS[Math.floor(Math.random()*STUDENTS.length)];
+  var el=document.getElementById("pickStudent");
+  el.innerHTML=ICO.user+" "+n; el.classList.add("on");
+  Speech.speak(n+", your turn!",{g:"f"});
+  sparkles(el);
+  clearTimeout(pickLbl); pickLbl=setTimeout(function(){ el.classList.remove("on"); el.innerHTML=ICO.user+" Pick"; },2600);
+});
+document.getElementById("full").addEventListener("click",function(){
+  if(!document.fullscreenElement){ if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); }
+  else if(document.exitFullscreen){ document.exitFullscreen(); }
+});
+
+/* timer */
+var tSec=0, tRun=null;
+function fmt(s){ var m=Math.floor(s/60); return m+":"+("0"+(s%60)).slice(-2); }
+document.getElementById("tstart").addEventListener("click",function(){
+  if(tRun){ clearInterval(tRun); tRun=null; }
+  else { tRun=setInterval(function(){ tSec++; document.getElementById("timer").textContent=fmt(tSec); },1000); }
+});
+document.getElementById("treset").addEventListener("click",function(){
+  if(tRun){clearInterval(tRun);tRun=null;} tSec=0; document.getElementById("timer").textContent="0:00";
+});
+
+/* =========================================================
+   NAV / TABS
+   ========================================================= */
+var scenes=document.querySelectorAll(".scene"), tabBtns=document.querySelectorAll("#tabs button");
+function showTab(i){
+  scenes.forEach(function(s,idx){ s.classList.toggle("active",idx===i); });
+  tabBtns.forEach(function(b,idx){ b.classList.toggle("active",idx===i); });
+  try{ window.scrollTo({top:0,behavior:"smooth"}); }catch(e){}
+}
+tabBtns.forEach(function(b){ b.addEventListener("click",function(){ showTab(parseInt(b.getAttribute("data-s"),10)); }); });
+function activeIdx(){ for(var i=0;i<scenes.length;i++){ if(scenes[i].classList.contains("active")) return i; } return 0; }
+document.getElementById("prev").addEventListener("click",function(){ showTab(Math.max(0,activeIdx()-1)); });
+document.getElementById("next").addEventListener("click",function(){ showTab(Math.min(scenes.length-1,activeIdx()+1)); });
+
+/* global team buttons (score award) — skip the warm-up team selector */
+document.querySelectorAll("[data-team]").forEach(function(b){
+  if(b.tagName==="BUTTON" && !b.closest("#s0")){
+    b.addEventListener("click",function(){ praise(b.getAttribute("data-team")); });
+  }
+});
+
+/* speak-on-tap bubbles */
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-say]"); if(!t) return;
+  var txt=t.getAttribute("data-say")||"";
+  if(/^a spider!\s*ew!?$/i.test(txt.trim())){ EwExp.play(); return; }
+  Speech.speak(txt,{g:t.getAttribute("data-g")||"n"});
+});
+
+/* =========================================================
+   LIGHTBOX + GALLERIES (all 74 Unit-14 images)
+   ========================================================= */
+var lb=document.getElementById("lb"), lbImg=lb.querySelector("img");
+lb.addEventListener("click",function(){ lb.classList.remove("on"); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") lb.classList.remove("on"); });
+function bindLightbox(root){
+  root.querySelectorAll("[data-img]").forEach(function(f){
+    if(f.__lb) return; f.__lb=true;
+    f.addEventListener("click",function(){ lbImg.src=f.getAttribute("data-img"); lb.classList.add("on"); });
+  });
+}
+function pad(n){ return n<10?("0"+n):(""+n); }
+function buildGal(id,items){
+  var box=document.getElementById(id); if(!box) return;
+  items.forEach(function(it){
+    var src=/^(assets\/|img\/|https?:)/.test(it[0]) ? it[0] : ("tj3-u14-img/"+it[0]);
+    var f=document.createElement("figure");
+    f.setAttribute("data-img",src);
+    var img=document.createElement("img");
+    img.loading="lazy"; img.alt=it[1]; img.src=src;
+    var cap=document.createElement("figcaption"); cap.textContent=it[1];
+    f.appendChild(img); f.appendChild(cap); box.appendChild(f);
+  });
+  bindLightbox(box);
+}
+var g0=[]; for(var i=1;i<=11;i++) g0.push(["Warmup"+i+".png","Warm-up page "+i]);
+buildGal("gal0",g0);
+
+var g1=[["Dialogue1.png","Dialogue · pp.96–97"],["Dialogue2.png","Dialogue · pp.97–98"]];
+for(var i=1;i<=7;i++) g1.push(["Dialogue Activity 1 ("+i+").png","Right and Wrong · "+i]);
+for(var i=1;i<=9;i++) g1.push(["Dialogue Activity 2 ("+i+").png","Spider Hunt · "+i]);
+g1.push(["Spider Hunt Activity Instructions.png","Spider Hunt · teacher steps"]);
+buildGal("gal1",g1);
+
+var g2=[["Vocabulary.png","Vocabulary · kind · pretty · smart"],
+        ["Vocabulary Activity1.png","Read and Hatch"],
+        ["Vocabulary Activity2.png","Listen and Hatch"]];
+for(var i=1;i<=11;i++) g2.push(["Vocabulary Activity2("+i+").png","Listen and Hatch · "+i]);
+for(var i=3;i<=11;i++) g2.push(["Vocabulary Activity"+i+".png","Word card · "+i]);
+buildGal("gal2",g2);
+
+var g3=[["Patterns.png","Patterns · She is … and …"],
+        ["Patterns Activity1 Instructions.png","Listen and Drag · teacher steps"]];
+for(var i=1;i<=11;i++) g3.push(["Patterns Activity1("+i+").png","Listen and Drag · "+i]);
+g3.push(["Sentence Structure.png","Sentence Structure · Start"]);
+g3.push(["Sentence Structure Samples.png","Sentence Structure · samples"]);
+buildGal("gal3",g3);
+
+buildGal("gal4",[
+  ["About Your Friend.png","About Your Friend · Start"],
+  ["About Your Friend 1.png","Step 1 · name card"],
+  ["About Your Friend 2.png","Step 2 · review the words"],
+  ["About Your Friend 3.png","Step 3 · pick a card"],
+  ["About Your Friend 4.png","Step 4 · talk about your friend"],
+  ["About Your Friend Activity.png","Teacher steps"]
+]);
+
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t;} return a; }
+function pickOne(a){ return a[Math.floor(Math.random()*a.length)]; }
+function maskWord(w){
+  if(w.length<4) return w;
+  var out=w.split("");
+  var idxs=[]; for(var i=1;i<w.length-1;i++) idxs.push(i);
+  idxs=shuffle(idxs);
+  var hide=Math.min(2,idxs.length);
+  for(var k=0;k<hide;k++) out[idxs[k]]="_";
+  return out.join(" ");
+}
+
+/* =========================================================
+   SCENE 0 — WARM-UP: LISTEN, LOOK AND DRAG
+   ========================================================= */
+var wIdx=0, wTeam="a";
+function wNew(){
+  var item=WARM[wIdx%WARM.length]; wIdx++;
+  document.getElementById("wemoji").innerHTML=(item.pics||[]).map(function(p){return '<img class="ai" alt="" src="'+p+'">';}).join("");
+  var words=item.t.slice();
+  document.getElementById("wans").setAttribute("data-correct",words.join("|"));
+  var ans=document.getElementById("wans"); ans.innerHTML="";
+  words.forEach(function(){ var s=document.createElement("div"); s.className="slot"; ans.appendChild(s); });
+  var scr=shuffle(words);
+  if(scr.join("|")===words.join("|")&&words.length>1) scr=shuffle(words);
+  var tEl=document.getElementById("wtiles"); tEl.innerHTML="";
+  scr.forEach(function(w){
+    var b=document.createElement("button"); b.className="tile"; b.textContent=w;
+    b.addEventListener("click",function(){
+      var slots=document.querySelectorAll("#wans .slot");
+      for(var i=0;i<slots.length;i++){
+        if(!slots[i].classList.contains("filled")){ slots[i].textContent=w; slots[i].classList.add("filled"); b.classList.add("used"); break; }
+      }
+      wCheck();
+    });
+    tEl.appendChild(b);
+  });
+  document.getElementById("wfb").textContent="Team "+wTeam.toUpperCase()+" — build the sentence!";
+}
+function wCheck(){
+  var slots=document.querySelectorAll("#wans .slot"), guess="", full=true;
+  for(var i=0;i<slots.length;i++){ guess+=slots[i].textContent; if(i<slots.length-1) guess+="|"; if(!slots[i].classList.contains("filled")) full=false; }
+  if(!full) return;
+  var correct=document.getElementById("wans").getAttribute("data-correct");
+  if(guess===correct){
+    good(document.getElementById("wfb"),""+correct.split("|").join(" ")+" — Team "+wTeam.toUpperCase()+" +1!",document.getElementById("wans"),wTeam);
+    Speech.speak(correct.split("|").join(" "),{g:"f"});
+    setTimeout(wNew,1500);
+  } else {
+    bad(document.getElementById("wfb"),"Not yet — try again!");
+    setTimeout(function(){
+      document.querySelectorAll("#wans .slot").forEach(function(s){ s.textContent=""; s.classList.remove("filled"); });
+      document.querySelectorAll("#wtiles .tile").forEach(function(t){ t.classList.remove("used"); });
+    },900);
+  }
+}
+document.getElementById("wplay").addEventListener("click",function(){
+  var correct=document.getElementById("wans").getAttribute("data-correct")||"";
+  Speech.speak(correct.split("|").join(" "),{g:"f"});
+});
+document.getElementById("wclear").addEventListener("click",function(){
+  document.querySelectorAll("#wans .slot").forEach(function(s){ s.textContent=""; s.classList.remove("filled"); });
+  document.querySelectorAll("#wtiles .tile").forEach(function(t){ t.classList.remove("used"); });
+  document.getElementById("wfb").textContent="Clear! Team "+wTeam.toUpperCase()+" — try again.";
+});
+document.getElementById("wskip").addEventListener("click",wNew);
+document.querySelectorAll("#s0 [data-team]").forEach(function(b){
+  b.addEventListener("click",function(){
+    wTeam=b.getAttribute("data-team");
+    document.querySelectorAll("#s0 [data-team]").forEach(function(x){x.classList.remove("on");});
+    b.classList.add("on");
+    document.getElementById("wfb").textContent="Team "+wTeam.toUpperCase()+" builds next!";
+  });
+});
+wNew();
+
+/* Which word? */
+var rwI=0;
+function rwNew(){
+  var item=RW[rwI%RW.length]; rwI++;
+  document.getElementById("rwQ").textContent=item.q;
+  var opts=document.getElementById("rwOpts"); opts.innerHTML="";
+  shuffle(item.o).forEach(function(c){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=c;
+    b.addEventListener("click",function(){
+      if(c===item.a){
+        good(document.getElementById("rwFb"),""+item.s,document.getElementById("rwQ"));
+        Speech.speak(item.s,{g:"f"});
+        setTimeout(rwNew,1400);
+      } else { bad(document.getElementById("rwFb"),"Try again — say the whole sentence."); }
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("rwFb").textContent="";
+}
+document.getElementById("rwNext").addEventListener("click",rwNew); rwNew();
+
+/* =========================================================
+   SCENE 1 — DIALOGUE
+   ========================================================= */
+var kidsBox=document.getElementById("kids");
+KIDS.forEach(function(k){
+  var d=document.createElement("div"); d.className="kid";
+  var gcls = k.id==="spider" ? "" : (k.g==="m"?"boy":"girl");
+  d.innerHTML='<div class="bub">'+k.bub+'</div><div class="emoji"><img class="av '+gcls+'" alt="'+k.nm+'" src="'+k.av+'"></div><div class="nm">'+k.nm+'</div>';
+  d.addEventListener("click",function(){
+    d.classList.add("show"); setTimeout(function(){d.classList.remove("show");},1500);
+    if(k.id==="spider") Speech.speak("She is kind and pretty.",{g:"f"});
+    else Speech.speak(k.bub,{g:k.g});
+  });
+  kidsBox.appendChild(d);
+});
+
+var dlg=document.getElementById("dlg");
+DIALOG.forEach(function(l){
+  var row=document.createElement("div"); row.className="line "+(l.id==="nini"?"nini":"kids");
+  row.innerHTML='<span class="who">'+l.who+'</span><span class="txt">'+l.text+'</span>'+
+    '<button class="say" title="Play">'+ICO.spk+'</button>';
+  row.querySelector(".say").addEventListener("click",function(){ Speech.speak(l.text,{g:l.g}); });
+  dlg.appendChild(row);
+});
+document.getElementById("playAll").addEventListener("click",function(){
+  if(Speech.muted || !("speechSynthesis" in window)) return;
+  Speech.stop();
+  DIALOG.forEach(function(l){
+    var u=new SpeechSynthesisUtterance(Speech.sayable(l.text));
+    var v=Speech.voiceFor(l.g); if(v){u.voice=v;u.lang=v.lang||"en-GB";} else u.lang="en-GB";
+    u.rate=Speech.rate; u.pitch=1.05+(Math.random()*0.06-0.03);
+    window.speechSynthesis.speak(u);
+  });
+});
+document.getElementById("stopAll").addEventListener("click",function(){ Speech.stop(); });
+document.getElementById("classLine").addEventListener("click",function(){ EwExp.play(); });
+
+/* expressive reaction controls */
+EwExp.setMode("expressive");
+document.getElementById("ewPlay").addEventListener("click",function(){ EwExp.useAudio=false; EwExp.notice=null; EwExp.play(); });
+document.getElementById("ewSlow").addEventListener("click",function(){ EwExp.useAudio=false; EwExp.notice=null; EwExp.setMode("slow"); EwExp.play(); });
+document.getElementById("ewNormal").addEventListener("click",function(){ EwExp.useAudio=false; EwExp.notice=null; EwExp.setMode("normal"); EwExp.play(); });
+document.getElementById("ewExpr").addEventListener("click",function(){ EwExp.useAudio=false; EwExp.notice=null; EwExp.setMode("expressive"); EwExp.play(); });
+document.getElementById("ewStop").addEventListener("click",function(){ EwExp.stop(); });
+document.getElementById("ewAudio").addEventListener("click",function(){
+  EwExp.probeAudio();
+  function commit(){
+    if(EwExp._audioOK){
+      EwExp.useAudio=true;
+      EwExp.notice="Using the recorded reaction.";
+    } else {
+      EwExp.useAudio=false;
+      EwExp.notice="No recording found at <code>tj3-u14-audio/ew-expression.mp3</code> — using the browser voice (still expressive).";
+    }
+    EwExp.play();
+  }
+  if(EwExp._audioOK===null){ setTimeout(commit,600); } else { commit(); }
+});
+
+/* Right and Wrong */
+var rw2I=-1, rw2Rand=true, rw2Auto=false, rw2Order=shuffle(RWL.map(function(_,i){return i;})), rw2Solved=false;
+function rw2Show(){
+  if(rw2Order.length===0) rw2Order=shuffle(RWL.map(function(_,i){return i;}));
+  rw2I=rw2Rand?rw2Order.pop():rw2I%RWL.length;
+  if(!rw2Rand) rw2I=(rw2I+1)%RWL.length;
+  var item=RWL[rw2I];
+  document.getElementById("rw2Text").innerHTML=ICO.spk+' Listen… (line '+((rw2Rand? (RWL.length-rw2Order.length):rw2I+1))+' of '+RWL.length+')';
+  document.getElementById("rw2Fb").textContent="";
+  rw2Solved=false;
+  window.__rw2=item;
+  setTimeout(function(){ Speech.speak(item.s,{g:"m"}); },250);
+}
+document.getElementById("rw2Play").addEventListener("click",function(){
+  if(window.__rw2) Speech.speak(window.__rw2.s,{g:"m"});
+});
+document.getElementById("rw2Rand").addEventListener("click",function(){
+  rw2Rand=!rw2Rand; this.innerHTML=ICO.shuffle+" Random: "+(rw2Rand?"ON":"OFF"); this.classList.toggle("on",rw2Rand);
+  rw2Order=shuffle(RWL.map(function(_,i){return i;}));
+});
+document.getElementById("rw2Auto").addEventListener("click",function(){
+  rw2Auto=!rw2Auto; this.innerHTML=ICO.play+" Auto: "+(rw2Auto?"ON":"OFF"); this.classList.toggle("on",rw2Auto);
+});
+document.querySelectorAll("[data-rw2]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var item=window.__rw2; if(!item) return;
+    var said=b.getAttribute("data-rw2")==="1";
+    if(said===item.ok){
+      good(document.getElementById("rw2Fb"),"Right!",b);
+      if(!rw2Solved){ rw2Solved=true; addG(pickOne(["a","b","c"]),1); }
+      document.getElementById("rw2Text").textContent=item.s;
+      if(rw2Auto) setTimeout(rw2Show,1400);
+    } else {
+      bad(document.getElementById("rw2Fb"),item.ok?"It IS in the book — listen again!":"It is NOT in the book — listen again!");
+      document.getElementById("rw2Text").textContent=item.s;
+    }
+  });
+});
+document.getElementById("rw2Next").addEventListener("click",rw2Show);
+rw2Show();
+
+/* Spider Hunt */
+var deco=["tj3-u14-img/tree.jpg","tj3-u14-img/chair.jpg","tj3-u14-img/teddy.jpg","tj3-u14-img/books.jpg","tj3-u14-img/flower.jpg","tj3-u14-img/mushroom.jpg","tj3-u14-img/balloon.jpg","tj3-u14-img/ladybird.jpg","tj3-u14-img/bed.jpg","tj3-u14-img/door.jpg"];
+var stage=document.getElementById("huntStage"), wrap=document.getElementById("huntWrap"), spider=document.getElementById("spider");
+function buildDeco(){
+  stage.querySelectorAll(".deco").forEach(function(d){ d.remove(); });
+  var n=10;
+  for(var i=0;i<n;i++){
+    var s=document.createElement("img"); s.className="deco"; s.alt=""; s.src=deco[i%deco.length];
+    s.style.left=(8+Math.random()*84)+"%"; s.style.top=(10+Math.random()*80)+"%";
+    stage.appendChild(s);
+  }
+}
+function hideSpider(){
+  spider.classList.remove("found");
+  spider.style.left=(12+Math.random()*76)+"%";
+  spider.style.top=(14+Math.random()*70)+"%";
+  document.getElementById("huntFb").textContent="Find the spider — then reward the team!";
+}
+buildDeco(); hideSpider();
+wrap.addEventListener("click",function(e){
+  var r=spider.getBoundingClientRect();
+  var hit=(e.clientX>=r.left-6&&e.clientX<=r.right+6&&e.clientY>=r.top-6&&e.clientY<=r.bottom+6);
+  if(hit){
+    spider.classList.add("found");
+    good(document.getElementById("huntFb"),"Found it! Whole class: “A spider! Ew!”",spider);
+    Speech.speak("A spider! Ew!",{g:"f",rate:0.9});
+  } else {
+    document.getElementById("huntFb").textContent="Not here… look again!";
+    Sfx.no();
+  }
+});
+document.getElementById("huntShout").addEventListener("click",function(){ EwExp.play(); });
+document.getElementById("huntNew").addEventListener("click",function(){ buildDeco(); hideSpider(); });
+var magOn=false;
+document.getElementById("huntMag").addEventListener("click",function(){
+  magOn=!magOn; stage.classList.toggle("mag-on",magOn);
+  this.innerHTML=ICO.mag+" Magnifier: "+(magOn?"ON":"OFF"); this.classList.toggle("on",magOn);
+  if(!magOn) stage.style.transformOrigin="50% 50%";
+});
+wrap.addEventListener("mousemove",function(e){
+  if(!magOn) return;
+  var r=wrap.getBoundingClientRect();
+  stage.style.transformOrigin=(((e.clientX-r.left)/r.width)*100)+"% "+(((e.clientY-r.top)/r.height)*100)+"%";
+});
+
+/* =========================================================
+   SCENE 2 — VOCABULARY
+   ========================================================= */
+var vgrid=document.getElementById("vgrid");
+VOCAB.forEach(function(v){
+  var d=document.createElement("div"); d.className="vcard";
+  d.innerHTML='<div class="emoji"><img class="pic" alt="'+v.w+'" src="'+v.img+'"></div><div class="w">'+v.w+(v.isNew?'<span class="new">NEW</span>':'')+'</div>'+
+    '<div class="hide"><div class="wp">'+ICO.spk+' '+v.ex+'</div><div class="sound">tap again to hear it</div></div>';
+  d.addEventListener("click",function(){
+    d.classList.add("reveal");
+    Speech.speak(v.ex,{g:Math.random()<0.5?"f":"m"});
+  });
+  vgrid.appendChild(d);
+});
+
+/* Read and Hatch */
+var hCur=null;
+function hNew(){
+  hCur=pickOne(VOCAB);
+  document.getElementById("hEgg").innerHTML='<img class="ai" alt="egg" src="tj3-u14-img/egg.jpg" style="width:1.6em;height:1.6em;border-radius:50%;object-fit:cover">';
+  document.getElementById("hEgg").classList.remove("hatched");
+  document.getElementById("hTxt").textContent=maskWord(hCur.w);
+  document.getElementById("hFb").textContent="Read the letters, then tap the egg!";
+}
+document.getElementById("hEgg").addEventListener("click",function(){
+  if(!hCur) return;
+  this.classList.add("hatched"); this.innerHTML='<img class="ai" alt="chick" src="tj3-u14-img/chick.jpg" style="width:1.6em;height:1.6em;border-radius:50%;object-fit:cover">';
+  document.getElementById("hTxt").innerHTML='<span class="rev">'+hCur.w+'</span>';
+  good(document.getElementById("hFb"),hCur.w.toUpperCase()+"!",document.getElementById("hEgg"));
+  Speech.speak(hCur.w+". "+hCur.ex,{g:"f"});
+  var self=this; setTimeout(function(){ self.innerHTML='<img class="ai" alt="chick" src="tj3-u14-img/chick.jpg" style="width:1.6em;height:1.6em;border-radius:50%;object-fit:cover">'; },600);
+});
+document.getElementById("hSay").addEventListener("click",function(){ if(hCur) Speech.speak(hCur.w,{g:"f"}); });
+document.getElementById("hNext").addEventListener("click",hNew); hNew();
+
+/* Listen and Hatch */
+var lhTarget=null;
+function lhNew(){
+  lhTarget=pickOne(VOCAB);
+  var others=shuffle(VOCAB.filter(function(v){return v.w!==lhTarget.w;})).slice(0,2);
+  var trio=shuffle([lhTarget].concat(others));
+  var box=document.getElementById("lhEggs"); box.innerHTML="";
+  trio.forEach(function(v){
+    var b=document.createElement("button"); b.className="e1";
+    b.innerHTML='<img class="ai" alt="egg" src="tj3-u14-img/egg.jpg" style="width:2.6rem;height:2.6rem;border-radius:50%;object-fit:cover"><span style="font-weight:900; letter-spacing:.1em">'+maskWord(v.w)+'</span>';
+    b.addEventListener("click",function(){
+      if(v.w===lhTarget.w){
+        b.classList.add("right"); b.innerHTML='<img class="ai" alt="chick" src="tj3-u14-img/chick.jpg" style="width:2.6rem;height:2.6rem;border-radius:50%;object-fit:cover"><span style="font-weight:900">'+lhTarget.w+'</span>';
+        good(document.getElementById("lhFb"),lhTarget.w+"!",b);
+        Speech.speak(lhTarget.w+". "+lhTarget.ex,{g:"f"});
+      } else {
+        b.classList.add("wrong","wob"); var self=b;
+        setTimeout(function(){ self.classList.remove("wrong","wob"); },500);
+        bad(document.getElementById("lhFb"),"Listen again!");
+      }
+    });
+    box.appendChild(b);
+  });
+  document.getElementById("lhFb").textContent="";
+  setTimeout(function(){ Speech.speak(lhTarget.w,{g:"f"}); },300);
+}
+document.getElementById("lhPlay").addEventListener("click",function(){ if(lhTarget) Speech.speak(lhTarget.w,{g:"f"}); });
+document.getElementById("lhNext").addEventListener("click",lhNew); lhNew();
+
+/* Spell the Word */
+var spCur=null, spPicked=null;
+function spNew(){
+  spCur=pickOne(SPELL); spPicked=null;
+  document.getElementById("spQ").textContent=spCur.p;
+  var opts=document.getElementById("spOpts"); opts.innerHTML="";
+  shuffle(spCur.o).forEach(function(c){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=c;
+    b.addEventListener("click",function(){
+      spPicked=c;
+      opts.querySelectorAll(".opt").forEach(function(x){ x.classList.remove("right","wrong"); });
+      if(c===spCur.w){ b.classList.add("right"); document.getElementById("spFb").innerHTML='<span class="good">'+ICO.check.replace('class="ico"','class="goodico"')+' Now press '+ICO.sparkle+' Appear!</span>'; Sfx.ok(); }
+      else { b.classList.add("wrong"); bad(document.getElementById("spFb"),"Not quite — look at the letters again."); }
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("spFb").textContent="";
+}
+document.getElementById("spAppear").addEventListener("click",function(){
+  if(!spCur) return;
+  if(spPicked===spCur.w){
+    document.getElementById("spQ").innerHTML='<span style="color:var(--brand)">'+spCur.w+'</span>';
+    good(document.getElementById("spFb"),spCur.w.toUpperCase()+"!",document.getElementById("spQ"));
+    Speech.speak(spCur.w,{g:"f"});
+    setTimeout(spNew,1400);
+  } else {
+    document.getElementById("spQ").innerHTML='<span style="color:var(--brand)">'+spCur.w+'</span>';
+    document.getElementById("spFb").innerHTML='<span class="bad">'+ICO.cross.replace('class="ico"','class="goodico"')+' The right spelling is '+spCur.w+' — say it, then press Next.</span>';
+    Sfx.no();
+  }
+});
+document.getElementById("spNext").addEventListener("click",spNew); spNew();
+
+/* =========================================================
+   SCENE 3 — PATTERNS
+   ========================================================= */
+document.getElementById("subPlay").addEventListener("click",function(){
+  Speech.speak("She is smart and pretty. He is tall and smart. She is kind and pretty.",{g:"f"});
+});
+
+/* Listen and Drag */
+var ladIdx=-1, ladRand=true, ladOrder=shuffle(PATTS.map(function(_,i){return i;})), ladItem=null;
+function ladNew(){
+  if(ladRand){ if(!ladOrder.length) ladOrder=shuffle(PATTS.map(function(_,i){return i;})); ladIdx=ladOrder.pop(); }
+  else { ladIdx=(ladIdx+1)%PATTS.length; }
+  ladItem=PATTS[ladIdx];
+  document.getElementById("ladSent").textContent=ladItem.s;
+  document.getElementById("ladSent").style.visibility="hidden";
+  document.getElementById("ladFb").textContent="";
+  var wrong=shuffle(PATTS.filter(function(p){return p.a!==ladItem.a;})).slice(0,2);
+  var opts=document.getElementById("ladOpts"); opts.innerHTML="";
+  shuffle([ladItem].concat(wrong)).forEach(function(p){
+    var b=document.createElement("button"); b.className="opt"; b.style.fontSize="1.6rem"; b.textContent=p.a;
+    b.addEventListener("click",function(){
+      if(p.a===ladItem.a){
+        good(document.getElementById("ladFb"),"Now press Appear and say it!",b);
+        addG(pickOne(["a","b","c"]),1);
+      } else {
+        bad(document.getElementById("ladFb"),"Listen again — which picture matches?");
+      }
+    });
+    opts.appendChild(b);
+  });
+  setTimeout(function(){ if(ladItem) Speech.speak(ladItem.s,{g:ladItem.g}); },250);
+}
+document.getElementById("ladPlay").addEventListener("click",function(){ if(ladItem) Speech.speak(ladItem.s,{g:ladItem.g}); });
+document.getElementById("ladRand").addEventListener("click",function(){
+  ladRand=!ladRand; this.innerHTML=ICO.shuffle+" Random: "+(ladRand?"ON":"OFF"); this.classList.toggle("on",ladRand);
+  ladOrder=shuffle(PATTS.map(function(_,i){return i;}));
+});
+document.getElementById("ladAppear").addEventListener("click",function(){
+  var sent=document.getElementById("ladSent");
+  sent.style.visibility="visible";
+  if(ladItem){ Speech.speak(ladItem.s,{g:ladItem.g}); sparkles(sent); }
+});
+document.getElementById("ladNext").addEventListener("click",ladNew); ladNew();
+
+/* Build the Sentence */
+function bsNew(){
+  var words=pickOne(RACE);
+  var ans=document.getElementById("bsAns"); ans.innerHTML=""; ans.setAttribute("data-correct",words.join("|"));
+  var box=document.getElementById("bsWords"); box.innerHTML="";
+  shuffle(words).forEach(function(w){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=w;
+    b.addEventListener("click",function(){
+      var s=document.createElement("span"); s.className="chip"; s.textContent=w;
+      s.addEventListener("click",function(){ s.remove(); bsCheck(); });
+      ans.appendChild(s); b.disabled=true; b.style.opacity=.35; bsCheck();
+    });
+    box.appendChild(b);
+  });
+  document.getElementById("bsFb").textContent="";
+}
+function bsCheck(){
+  var ans=document.getElementById("bsAns"), correct=ans.getAttribute("data-correct").split("|");
+  var chips=ans.querySelectorAll(".chip");
+  if(chips.length!==correct.length){ document.getElementById("bsFb").textContent="Keep going…"; return; }
+  var built=[]; chips.forEach(function(c){built.push(c.textContent);});
+  if(built.join("|")===correct.join("|")){
+    good(document.getElementById("bsFb"),""+correct.join(" "),ans);
+    Speech.speak(correct.join(" "),{g:"f"});
+  } else { bad(document.getElementById("bsFb"),"Not quite — tap a word in the answer to remove it."); }
+}
+document.getElementById("bsNext").addEventListener("click",bsNew); bsNew();
+
+/* Fix the Sentence */
+var fsI=0;
+function fsNew(){
+  var item=FIXP[fsI%FIXP.length]; fsI++;
+  var q=document.getElementById("fsQ");
+  q.setAttribute("data-ok",item.ok?"1":"0"); q.textContent=item.s;
+  document.getElementById("fsFb").textContent="";
+}
+document.querySelectorAll("[data-fs]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var q=document.getElementById("fsQ");
+    var ok=q.getAttribute("data-ok")==="1", said=b.getAttribute("data-fs")==="1";
+    if(said===ok){ good(document.getElementById("fsFb"),"Correct!",b); Speech.speak(q.textContent,{g:"f"}); }
+    else { bad(document.getElementById("fsFb"),ok?"It IS correct — read it again.":"It is NOT correct — fix it!"); }
+  });
+});
+document.getElementById("fsNext").addEventListener("click",fsNew); fsNew();
+
+/* =========================================================
+   SCENE 4 — ABOUT YOUR FRIEND + SENTENCE STRUCTURE
+   ========================================================= */
+function renderNames(){
+  var box=document.getElementById("nameList"); box.innerHTML="";
+  FRIENDS.forEach(function(n,i){
+    var b=document.createElement("button"); b.className="namechip"; b.textContent=n;
+    b.title="Tap to remove"; 
+    b.addEventListener("click",function(){
+      FRIENDS.splice(i,1); renderNames();
+    });
+    box.appendChild(b);
+  });
+  if(!FRIENDS.length) FRIENDS.push("Nini");
+}
+renderNames();
+document.getElementById("addName").addEventListener("click",function(){
+  var n=prompt("Classmate's name:"); if(n&&n.trim()){ FRIENDS.push(n.trim()); renderNames(); }
+});
+var friendName=null, friendAdjs=[];
+function renderCardAdj(){
+  var box=document.getElementById("cardAdj"); box.innerHTML="";
+  ADJS.forEach(function(a){
+    var c=document.createElement("button"); c.className="chip"; c.textContent=a;
+    c.addEventListener("click",function(){
+      if(friendAdjs.indexOf(a)>-1) return;
+      friendAdjs.push(a); c.classList.add("on");
+      if(friendAdjs.length>2) friendAdjs.shift();
+      renderCardAdj(); showFriend(false);
+    });
+    box.appendChild(c);
+  });
+}
+function showFriend(speak){
+  var el=document.getElementById("friendSent");
+  if(!friendName){ el.textContent="Pick a card first"; return; }
+  if(!friendAdjs.length){ el.textContent=friendName+" is …"; return; }
+  var parts=friendAdjs.slice(0,2);
+  var txt=friendName+" is "+parts.join(" and ")+".";
+  el.innerHTML=friendName+' is <span class="hi">'+parts.join('</span> and <span class="hi">')+'</span>.';
+  if(speak) Speech.speak(txt,{g:"f"});
+}
+renderCardAdj();
+document.getElementById("pickCard").addEventListener("click",function(){
+  friendName=pickOne(FRIENDS); friendAdjs=[];
+  document.getElementById("cardOut").textContent=friendName;
+  renderCardAdj(); showFriend(false);
+  Speech.speak(friendName+". "+friendName+" is …",{g:"f"});
+  sparkles(document.getElementById("cardOut"));
+});
+document.getElementById("friendSpeak").addEventListener("click",function(){ showFriend(true); });
+document.getElementById("friendAgain").addEventListener("click",function(){
+  document.getElementById("cardOut").textContent="?"; friendName=null; friendAdjs=[];
+  renderCardAdj(); document.getElementById("friendSent").textContent="Pick a word";
+});
+
+/* Sentence Structure builder */
+var ssWho="She", ssPick=[];
+function renderSsAdj(){
+  var box=document.getElementById("ssAdj"); box.innerHTML="";
+  ADJS.forEach(function(a){
+    var c=document.createElement("button"); c.className="chip"+(ssPick.indexOf(a)>-1?" on":""); c.textContent=a;
+    c.addEventListener("click",function(){
+      var k=ssPick.indexOf(a);
+      if(k>-1) ssPick.splice(k,1); else { ssPick.push(a); if(ssPick.length>2) ssPick.shift(); }
+      renderSsAdj(); ssShow();
+    });
+    box.appendChild(c);
+  });
+}
+function ssShow(){
+  var out=document.getElementById("ssOut");
+  if(!ssPick.length){ out.innerHTML=ssWho+' is <span class="hi">…</span> and <span class="hi">…</span>.'; return; }
+  var p=ssPick.slice(0,2);
+  out.innerHTML=ssWho+' is <span class="hi">'+p.join('</span> and <span class="hi">')+'</span>'+(p.length<2?' <span class="hi">and …</span>':'')+'.';
+}
+function ssSpeak(){
+  var p=ssPick.slice(0,2);
+  if(p.length<2){ Speech.speak(ssWho+" is …",{g:ssWho==="He"?"m":"f"}); return; }
+  Speech.speak(ssWho+" is "+p.join(" and ")+".",{g:ssWho==="He"?"m":"f"});
+}
+document.querySelectorAll("[data-ss]").forEach(function(b){
+  b.addEventListener("click",function(){
+    ssWho=b.getAttribute("data-ss");
+    document.querySelectorAll("[data-ss]").forEach(function(x){x.classList.remove("on");});
+    b.classList.add("on"); ssShow();
+  });
+});
+document.getElementById("ssDice").addEventListener("click",function(){
+  ssWho=Math.random()<0.5?"She":"He";
+  ssPick=shuffle(ADJS).slice(0,2);
+  document.querySelectorAll("[data-ss]").forEach(function(x){
+    x.classList.toggle("on",x.getAttribute("data-ss")===ssWho);
+  });
+  renderSsAdj(); ssShow(); ssSpeak();
+  sparkles(document.getElementById("ssOut"));
+});
+document.getElementById("ssBuild").addEventListener("click",ssSpeak);
+document.getElementById("ssClear").addEventListener("click",function(){ ssPick=[]; renderSsAdj(); ssShow(); });
+renderSsAdj(); ssShow();
+
+/* =========================================================
+   ANIMATED BACKGROUND — floating spiders, webs & bugs
+   ========================================================= */
+(function(){
+  var box=document.getElementById("floaties");
+  if(!box) return;
+  var shapes=[ICO.spider,ICO.web,ICO.spider,ICO.web,ICO.sparkle];
+  for(var i=0;i<16;i++){
+    var s=document.createElement("span");
+    s.className="floaty";
+    s.setAttribute("aria-hidden","true");
+    s.innerHTML=shapes[i%shapes.length].replace('class="ico"','class="ico" style="width:100%;height:100%;color:#7a9a86"');
+    s.style.cssText="font-size:0;width:"+(16+Math.random()*22)+"px;height:"+(16+Math.random()*22)+"px;left:"+(Math.random()*96)+"vw;animation:floatUp "+(14+Math.random()*14)+"s linear infinite;animation-delay:-"+(Math.random()*20)+"s;";
+    box.appendChild(s);
+  }
+})();
+
+applyIcons();
+renderScore();
+
+</script>
+<script>
+/* games.js — Game Zone (g1–g10) */
+
+/* =========================================================
+   SCENE 6 — GAME ZONE
+   ========================================================= */
+/* 1 Adjective Bingo */
+function g1New(){
+  var board=document.getElementById("g1board"); board.innerHTML="";
+  var cells=shuffle(VOCAB);
+  cells.forEach(function(v){
+    var c=document.createElement("div"); c.className="cell";
+    c.innerHTML='<img class="cellpic" alt="'+v.w+'" src="'+v.img+'"><span>'+v.w+'</span>';
+    c.addEventListener("click",function(){ c.classList.toggle("mark"); });
+    board.appendChild(c);
+  });
+  document.getElementById("g1fb").textContent="Tap Call to hear a word.";
+}
+document.getElementById("g1call").addEventListener("click",function(){
+  var v=pickOne(VOCAB);
+  Speech.speak(v.w+". "+v.ex,{g:"f"});
+  document.getElementById("g1fb").textContent="Listen… tap that word on your board!";
+});
+document.getElementById("g1reset").addEventListener("click",g1New); g1New();
+
+/* 2 Memory Match */
+function g2New(){
+  var mem=document.getElementById("g2mem"); mem.innerHTML="";
+  var chosen=shuffle(VOCAB).slice(0,6);
+  var cards=[];
+  chosen.forEach(function(v){ cards.push({k:v.w,f:'<img alt="'+v.w+'" src="'+v.img+'">',word:v.w}); cards.push({k:v.w,f:v.w,word:v.w}); });
+  cards=shuffle(cards);
+  var first=null, lock=false;
+  cards.forEach(function(card){
+    var el=document.createElement("div"); el.className="mcard"; el.textContent="?";
+    el.addEventListener("click",function(){
+      if(lock||el.classList.contains("flip")||el.classList.contains("done")) return;
+      el.classList.add("flip");
+      if(/^</.test(card.f)) el.innerHTML=card.f; else el.textContent=card.f;
+      if(card.word) Speech.speak(card.word,{g:"f"});
+      if(!first){ first={card:card,el:el}; }
+      else{
+        if(first.card.k===card.k){ first.el.classList.add("done"); el.classList.add("done"); Sfx.ok(); first=null; }
+        else{ lock=true; var a=first.el,b=el; setTimeout(function(){ a.classList.remove("flip");a.textContent="?";b.classList.remove("flip");b.textContent="?"; first=null;lock=false; },800); }
+      }
+    });
+    mem.appendChild(el);
+  });
+  document.getElementById("g2fb").textContent="Find all 6 pairs!";
+}
+document.getElementById("g2reset").addEventListener("click",g2New); g2New();
+
+/* 3 Listen and Choose */
+var g3w=null;
+function g3New(){
+  g3w=pickOne(VOCAB);
+  var opts=document.getElementById("g3opts"); opts.innerHTML="";
+  shuffle([g3w].concat(shuffle(VOCAB.filter(function(v){return v.w!==g3w.w;})).slice(0,2))).forEach(function(v){
+    var b=document.createElement("button"); b.className="opt";
+    b.innerHTML='<img class="optpic" alt="'+v.w+'" src="'+v.img+'"> '+v.w;
+    b.addEventListener("click",function(){
+      if(v.w===g3w.w){ good(document.getElementById("g3fb"),""+g3w.w+"!",b); Speech.speak(g3w.ex,{g:"f"}); setTimeout(g3New,1400); }
+      else bad(document.getElementById("g3fb"),"Listen again!");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g3fb").textContent="";
+}
+document.getElementById("g3play").addEventListener("click",function(){ if(g3w) Speech.speak(g3w.w,{g:"f"}); });
+g3New();
+
+/* 4 Sentence Race */
+function g4New(){
+  var words=pickOne(RACE);
+  var ans=document.getElementById("g4ans"); ans.innerHTML=""; ans.setAttribute("data-correct",words.join("|"));
+  var box=document.getElementById("g4words"); box.innerHTML="";
+  shuffle(words).forEach(function(w){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=w;
+    b.addEventListener("click",function(){
+      var s=document.createElement("span"); s.className="chip"; s.textContent=w;
+      s.addEventListener("click",function(){ s.remove(); g4Check(); });
+      ans.appendChild(s); b.disabled=true; b.style.opacity=.35; g4Check();
+    });
+    box.appendChild(b);
+  });
+  document.getElementById("g4fb").textContent="";
+}
+function g4Check(){
+  var ans=document.getElementById("g4ans"), correct=ans.getAttribute("data-correct").split("|");
+  var chips=ans.querySelectorAll(".chip");
+  if(chips.length!==correct.length){ document.getElementById("g4fb").textContent="Keep going…"; return; }
+  var built=[]; chips.forEach(function(c){built.push(c.textContent);});
+  if(built.join("|")===correct.join("|")){
+    good(document.getElementById("g4fb"),""+correct.join(" "),ans);
+    Speech.speak(correct.join(" "),{g:"f"});
+  } else bad(document.getElementById("g4fb"),"Tap a word in the answer to remove it, then try again.");
+}
+document.getElementById("g4next").addEventListener("click",g4New); g4New();
+
+/* 5 Fix the Sentence */
+var g5I=0;
+function g5New(){
+  var item=FIXG[g5I%FIXG.length]; g5I++;
+  var q=document.getElementById("g5q");
+  q.setAttribute("data-ok",item.ok?"1":"0"); q.textContent=item.s;
+  document.getElementById("g5fb").textContent="";
+}
+document.querySelectorAll("[data-g5]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var q=document.getElementById("g5q");
+    var ok=q.getAttribute("data-ok")==="1", said=b.getAttribute("data-g5")==="1";
+    if(said===ok){ good(document.getElementById("g5fb"),"Correct!",b); Speech.speak(q.textContent,{g:"f"}); }
+    else bad(document.getElementById("g5fb"),ok?"It IS correct!":"It is NOT correct — who uses “is”? He / She!");
+  });
+});
+document.getElementById("g5next").addEventListener("click",g5New); g5New();
+
+/* 6 Find the Right Sentence */
+var g6f=null;
+function g6New(){
+  g6f=pickOne(FACE);
+  document.getElementById("g6face").innerHTML='<img alt="Who is it?" src="'+g6f.av+'">';
+  var wrongs=shuffle(FACE.filter(function(x){return x.s!==g6f.s;})).slice(0,2);
+  var opts=document.getElementById("g6opts"); opts.innerHTML="";
+  shuffle([g6f].concat(wrongs)).forEach(function(x){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=x.s;
+    b.addEventListener("click",function(){
+      if(x.s===g6f.s){ good(document.getElementById("g6fb"),""+g6f.s,b); Speech.speak(g6f.s,{g:/^He/.test(g6f.s)?"m":"f"}); setTimeout(g6New,1500); }
+      else bad(document.getElementById("g6fb"),"Look at the picture again — he or she?");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g6fb").textContent="";
+}
+document.getElementById("g6next").addEventListener("click",g6New); g6New();
+
+/* 7 Spin the Wheel */
+document.getElementById("g7spin").addEventListener("click",function(){
+  var wheel=document.getElementById("g7wheel"); var spins=18+Math.floor(Math.random()*10);
+  var w=pickOne(ADJS); var n=0;
+  var iv=setInterval(function(){
+    var vv=VOCAB[n%VOCAB.length];
+    wheel.innerHTML='<img alt="'+vv.w+'" src="'+vv.img+'">'; n++;
+    if(n>=spins){
+      clearInterval(iv);
+      var v=VOCAB.filter(function(x){return x.w===w;})[0];
+      var src=(v?v.img:PIC.kind);
+      wheel.innerHTML='<img alt="'+w+'" src="'+src+'">';
+      document.getElementById("g7out").textContent=w;
+      document.getElementById("g7fb").innerHTML='Say the word, then make a sentence: <b>She is '+w+' and …</b>';
+      Speech.speak(w,{g:"f"});
+      sparkles(wheel);
+    }
+  },70);
+});
+
+/* 8 He or She? */
+var g8w=null;
+function g8New(){
+  g8w=pickOne(PATTS);
+  var opts=document.getElementById("g8opts"); opts.innerHTML="";
+  var correct=g8w.s.indexOf("He")===0?"m":"f";
+  [[ICO.boy+" He is","m"],[ICO.girl+" She is","f"]].forEach(function(o){
+    var b=document.createElement("button"); b.className="opt"; b.innerHTML=o[0];
+    b.addEventListener("click",function(){
+      if(o[1]===correct){ good(document.getElementById("g8fb"),g8w.s,b); Speech.speak(g8w.s,{g:correct}); setTimeout(g8New,1600); }
+      else bad(document.getElementById("g8fb"),"Listen again — “He is…” or “She is…”?");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g8fb").textContent="";
+}
+document.getElementById("g8play").addEventListener("click",function(){ if(g8w) Speech.speak(g8w.s,{g:g8w.g}); });
+document.getElementById("g8next").addEventListener("click",g8New); g8New();
+
+/* 9 Mime the Adjective */
+function g9New(){ document.getElementById("g9word").textContent=pickOne(MIME); }
+document.getElementById("g9next").addEventListener("click",g9New); g9New();
+
+/* 10 Exit Ticket */
+var g10I=0;
+function g10New(){
+  var q=EXIT[g10I%EXIT.length]; g10I++;
+  document.getElementById("g10q").textContent=q.q;
+  var opts=document.getElementById("g10opts"); opts.innerHTML="";
+  shuffle(q.o).forEach(function(o){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=o;
+    b.addEventListener("click",function(){
+      if(o===q.o[q.id]){ good(document.getElementById("g10fb"),"Correct! Great job today!",b); Speech.speak("Great job today!",{g:"f",rate:1}); }
+      else bad(document.getElementById("g10fb"),"Try again.");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g10fb").textContent="";
+}
+document.getElementById("g10next").addEventListener("click",g10New); g10New();
+
+/* =========================================================
+   NEW GAMES 11–15 (Master Command: Spider Surprise, Animal Sound,
+   Adjective Match, Guess Who, Kind or Unkind)
+   ========================================================= */
+
+/* 11 Spider Surprise — pick the correct character / dialogue line */
+var SPIDER_Q = [
+  {q:"Who is the kind, smart and pretty spider?", o:["Carol","Wade","Nini"], id:0},
+  {q:"What do the farm animals say when they see Carol?", o:["A spider! Ew!","Good morning!","Let's dance!"], id:0},
+  {q:"What does Wade say to the animals?", o:["Hey, guys! Be polite. She's kind and pretty.","Go away, spider!","I am sleepy."], id:0},
+  {q:"Is it polite to say “Ew!” to a person?", o:["No, it is impolite.","Yes, always.","Only on Monday."], id:0},
+  {q:"How does Carol want to help Wade?", o:["She wants to help him.","She wants to eat him.","She wants his money."], id:0}
+];
+var g11I=0;
+function g11New(){
+  var q=SPIDER_Q[g11I%SPIDER_Q.length]; g11I++;
+  document.getElementById("g11q").textContent=q.q;
+  var opts=document.getElementById("g11opts"); opts.innerHTML="";
+  shuffle(q.o).forEach(function(o){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=o;
+    b.addEventListener("click",function(){
+      if(o===q.o[q.id]){ good(document.getElementById("g11fb"),"Correct! Well done!",b,pickOne(["a","b","c"])); Speech.speak(o,{g:"f"}); }
+      else bad(document.getElementById("g11fb"),"Try again — think about the story.");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g11fb").textContent="";
+}
+document.getElementById("g11next").addEventListener("click",g11New); g11New();
+
+/* 12 Animal Sound Challenge — hear a call, pick the animal */
+var ANIMALS = [
+  {n:"cow",    call:"Moo, moo!",     g:"m"},
+  {n:"duck",   call:"Quack, quack!", g:"f"},
+  {n:"goat",   call:"Baa, baa!",     g:"f"},
+  {n:"horse",  call:"Neigh, neigh!", g:"m"},
+  {n:"hen",    call:"Cluck, cluck!", g:"f"},
+  {n:"chicken",call:"Cheep, cheep!", g:"f"}
+];
+var g12a=null;
+function g12New(){
+  g12a=pickOne(ANIMALS);
+  var opts=document.getElementById("g12opts"); opts.innerHTML="";
+  shuffle([g12a].concat(shuffle(ANIMALS.filter(function(x){return x.n!==g12a.n;})).slice(0,2))).forEach(function(x){
+    var b=document.createElement("button"); b.className="opt"; b.innerHTML=ICO.paw+" "+x.n;
+    b.addEventListener("click",function(){
+      if(x.n===g12a.n){ good(document.getElementById("g12fb"),x.n+" — "+g12a.call,b,pickOne(["a","b","c"])); Speech.speak(g12a.call,{g:g12a.g}); }
+      else bad(document.getElementById("g12fb"),"Listen again — try another animal.");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g12fb").textContent="";
+  setTimeout(function(){ if(g12a){ AnimalSfx.play(g12a.n); Speech.speak(g12a.call,{g:g12a.g}); } },300);
+}
+document.getElementById("g12play").addEventListener("click",function(){ if(g12a){ AnimalSfx.play(g12a.n); Speech.speak(g12a.call,{g:g12a.g}); } });
+document.getElementById("g12next").addEventListener("click",g12New); g12New();
+
+/* 13 Adjective Match — match word to picture */
+function g13New(){
+  var v=pickOne(VOCAB);
+  var ans=document.getElementById("g13ans"); ans.innerHTML='<span class="chip">'+v.w+'</span>'; ans.setAttribute("data-w",v.w);
+  var wrongs=shuffle(VOCAB.filter(function(x){return x.w!==v.w;})).slice(0,2);
+  var pics=document.getElementById("g13pics"); pics.innerHTML="";
+  var words=document.getElementById("g13words"); words.innerHTML="";
+  shuffle([v].concat(wrongs)).forEach(function(x){
+    var pi=document.createElement("button"); pi.className="opt"; pi.innerHTML='<img class="optpic" alt="'+x.w+'" src="'+x.img+'">';
+    pi.addEventListener("click",function(){
+      if(x.w===v.w){ good(document.getElementById("g13fb"),"Match! “"+v.w+"”",pi,pickOne(["a","b","c"])); Speech.speak("It is "+v.w+".",{g:"f"}); }
+      else bad(document.getElementById("g13fb"),"Not quite — look again.");
+    });
+    pics.appendChild(pi);
+  });
+  document.getElementById("g13fb").textContent="";
+}
+document.getElementById("g13next").addEventListener("click",g13New); g13New();
+
+/* 14 Guess Who? — positive description, pick the friend */
+var GUESS = [
+  {q:"She is kind and pretty. Who is it?",  a:"Mary",  o:["Mary","Tom","Jack"]},
+  {q:"He is tall and smart. Who is it?",    a:"Jack",  o:["Lily","Jack","Amy"]},
+  {q:"She is smart and pretty. Who is it?", a:"Jane",  o:["Jane","Ben","Max"]},
+  {q:"He is cool and kind. Who is it?",     a:"Tom",   o:["Mimi","Tom","Ella"]},
+  {q:"She is kind and smart. Who is it?",   a:"Lily",  o:["Lily","Jack","Ben"]}
+];
+function g14New(){
+  var q=pickOne(GUESS);
+  document.getElementById("g14q").textContent=q.q;
+  var opts=document.getElementById("g14opts"); opts.innerHTML="";
+  shuffle(q.o).forEach(function(n){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=n;
+    b.addEventListener("click",function(){
+      if(n===q.a){ good(document.getElementById("g14fb"),"Yes! It is "+q.a+".",b,pickOne(["a","b","c"])); Speech.speak(q.q+" It is "+q.a+".",{g:"f"}); }
+      else bad(document.getElementById("g14fb"),"Have another think — read it again.");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g14fb").textContent="";
+}
+document.getElementById("g14next").addEventListener("click",g14New); g14New();
+
+/* 15 Kind or Unkind? — choose the polite, kind response */
+var KIND = [
+  {q:"A new student has no friend to play with. What do you do?", o:[
+    "Say: “Come and play with us!”","Say: “Go away.”","Laugh at them."], id:0},
+  {q:"You see a small spider in the classroom. What do you say?", o:[
+    "Calmly tell the teacher.","Shout “Ew!” at a friend.","Squash it on the table."], id:0},
+  {q:"Someone drops their pencils. What is kind?", o:[
+    "Help pick them up.","Step on them.","Say “not my job.”"], id:0},
+  {q:"A friend is slow at reading. A kind thing to say is…", o:[
+    "“Take your time — you can do it!”","“You are too slow!”","“Ha ha, you can't read!”"], id:0}
+];
+function g15New(){
+  var q=pickOne(KIND);
+  document.getElementById("g15q").textContent=q.q;
+  var opts=document.getElementById("g15opts"); opts.innerHTML="";
+  shuffle(q.o).forEach(function(o){
+    var b=document.createElement("button"); b.className="opt"; b.textContent=o;
+    b.addEventListener("click",function(){
+      if(o===q.o[q.id]){ good(document.getElementById("g15fb"),"That is kind and polite! Well done.",b,pickOne(["a","b","c"])); Speech.speak("Be kind. Be polite.",{g:"f"}); }
+      else bad(document.getElementById("g15fb"),"That is unkind. Choose the polite choice.");
+    });
+    opts.appendChild(b);
+  });
+  document.getElementById("g15fb").textContent="";
+}
+document.getElementById("g15next").addEventListener("click",g15New); g15New();
+</script>
+</body>
+</html>
