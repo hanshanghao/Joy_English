@@ -1,0 +1,625 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD5 Unit 7 - Wonderful Fruit!</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#8b5cf0;--blue:#4a9ee0;--pink:#f04f9b;--orange:#f5822b;--yellow:#ffd447;--green:#4cc948;--red:#ff5d5d;--ink:#3a2d4f}
+body{font-family:"Comic Sans MS","Baloo 2","Segoe UI",cursive,sans-serif;background:linear-gradient(160deg,#e9ffdb,#fff6d9,#dff3ff,#ffe6c9);background-size:300% 300%;animation:bgmv 18s ease-in-out infinite;color:var(--ink);min-height:100vh;overflow-x:hidden}
+@keyframes bgmv{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.blob{position:fixed;border-radius:50%;filter:blur(48px);opacity:.5;pointer-events:none;z-index:0}
+.blob.b1{width:340px;height:340px;background:#b6f0a3;top:-100px;left:-60px;animation:drift1 16s ease-in-out infinite alternate}
+.blob.b2{width:280px;height:280px;background:#ffeaa7;bottom:-80px;right:-60px;animation:drift2 20s ease-in-out infinite alternate}
+.blob.b3{width:260px;height:260px;background:#ffd3a5;top:40%;left:50%;animation:drift3 22s ease-in-out infinite alternate}
+@keyframes drift1{0%{transform:translate(0,0)}100%{transform:translate(60px,80px)}}
+@keyframes drift2{0%{transform:translate(0,0)}100%{transform:translate(-70px,-60px)}}
+@keyframes drift3{0%{transform:translate(-50%,-50%)}100%{transform:translate(-30%,-30%)}}
+.floaty{position:fixed;z-index:0;font-size:26px;pointer-events:none;opacity:.45;animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.45}90%{opacity:.45}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+section{background:rgba(255,255,255,.78);border-radius:26px;padding:24px 22px;margin:26px 0;box-shadow:0 8px 22px rgba(0,0,0,.12)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.shead .ic{font-size:34px}
+.shead h2{font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--green)}
+.shead .badge{background:var(--orange);color:#fff;font-size:clamp(11px,1.8vw,13px);font-weight:900;padding:4px 12px;border-radius:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border:none;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;color:#fff;background:linear-gradient(140deg,var(--c1),var(--c2));box-shadow:0 5px 0 rgba(0,0,0,.18),0 8px 16px rgba(0,0,0,.12);transition:all .15s;position:relative;top:0;font-family:inherit}
+.btn:hover{top:-2px}
+.btn:active{top:3px}
+.btn.green{--c1:#7ce577;--c2:#37a832}
+.btn.orange{--c1:#ffab6e;--c2:#f5822b}
+.btn.blue{--c1:#6ec6ff;--c2:#3f95d8}
+.btn.pink{--c1:#ff7eb6;--c2:#ef4f98}
+.btn.purple{--c1:#b28dff;--c2:#8b5cf0}
+.tip{background:linear-gradient(150deg,#fff7de,#ffeeb8);border:3px dashed var(--yellow);border-radius:18px;padding:14px 16px;font-weight:700;line-height:1.5}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:999;display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+.now-chip{background:linear-gradient(135deg,var(--green),var(--orange));color:#fff;padding:6px 16px;border-radius:30px;font-size:clamp(11px,1.8vw,14px);font-weight:800;white-space:nowrap}
+.sound-toggle{margin-left:auto;background:#fff;border:2px solid var(--green);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+.navbar{position:sticky;top:54px;z-index:998;display:flex;gap:8px;padding:10px 16px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);overflow-x:auto;border-bottom:2px solid rgba(76,201,72,.1)}
+.navbar::-webkit-scrollbar{display:none}
+.ntab{flex-shrink:0;padding:10px 18px;border:2px solid #e0d8f0;border-radius:50px;font-size:clamp(12px,1.8vw,15px);font-weight:800;cursor:pointer;background:#fff;font-family:inherit}
+.ntab.on{background:linear-gradient(135deg,var(--green),var(--orange));color:#fff;border-color:transparent}
+.tabpan{display:none;padding:68px 16px 26px;max-width:1100px;margin:0 auto}
+.tabpan.on{display:block;animation:fadeup .4s ease}
+@keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:28px 16px 18px;border-radius:26px;margin:0 0 18px;background:linear-gradient(135deg,rgba(76,201,72,.15),rgba(255,212,71,.12),rgba(245,130,43,.1))}
+.hero .big-emoji{font-size:clamp(56px,12vw,90px);line-height:1;display:block;margin-bottom:8px;animation:bounce 2.5s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero h1{font-size:clamp(26px,5.5vw,44px);font-weight:900;text-shadow:2px 2px 0 rgba(76,201,72,.2);margin-bottom:6px}
+.hero .sub{display:inline-block;background:linear-gradient(135deg,var(--green),var(--orange));color:#fff;padding:6px 20px;border-radius:30px;font-size:clamp(12px,2vw,16px);font-weight:700}
+.tl{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.tl-item{background:#fff;border-radius:18px;padding:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-top:6px solid var(--green);cursor:pointer}
+.tl-item .tl-min{font-size:clamp(11px,1.7vw,13px);font-weight:900;color:#fff;background:var(--green);display:inline-block;padding:3px 12px;border-radius:20px;margin-bottom:6px}
+.tl-item h4{font-size:clamp(15px,2.4vw,19px);font-weight:900;margin-bottom:4px}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:16px 0}
+.vocab-card{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.1);cursor:pointer;border:4px solid transparent}
+.vocab-card:hover{border-color:var(--green)}
+.vocab-card .vc-word{font-size:clamp(16px,2.6vw,22px);font-weight:900;color:var(--green)}
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:16px 0}
+.obj{background:#fff;border-radius:18px;padding:14px 10px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08);cursor:pointer;border:4px solid transparent}
+.obj:hover{border-color:var(--green)}
+.obj .obj-name{font-weight:900;color:var(--green)}
+.team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:16px 0;max-width:640px;margin-left:auto;margin-right:auto}
+.team-box{background:#fff;border-radius:18px;padding:16px;text-align:center;box-shadow:0 5px 14px rgba(0,0,0,.08)}
+.team-box .team-score{font-size:clamp(28px,5vw,40px);font-weight:900;margin:6px 0}
+.team-box.ta{border-top:6px solid var(--blue)}
+.team-box.tb{border-top:6px solid var(--orange)}
+.stage-box{background:linear-gradient(135deg,#f5fff0,#fffde4);border:4px dashed var(--green);border-radius:20px;padding:18px;margin:12px 0;text-align:center;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.stage-box .stage-main{font-size:clamp(20px,4vw,32px);font-weight:900;color:var(--green)}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:linear-gradient(135deg,var(--green),var(--orange));color:#fff;padding:12px 24px;border-radius:30px;font-size:clamp(13px,2vw,16px);font-weight:700;z-index:9999;opacity:0;transition:all .4s;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.pat-card{background:#fff;border-radius:18px;padding:18px 20px;margin-bottom:14px;box-shadow:0 5px 14px rgba(0,0,0,.08);border-left:6px solid var(--green);cursor:pointer;transition:transform .2s}
+.pat-card:hover{transform:translateY(-3px)}
+.pat-tag{display:inline-block;background:linear-gradient(135deg,var(--green),var(--orange));color:#fff;font-size:clamp(10px,1.6vw,12px);font-weight:900;padding:3px 12px;border-radius:20px;margin-bottom:8px;letter-spacing:1px}
+.pat-sent{font-size:clamp(18px,3vw,26px);font-weight:900;line-height:1.7;color:var(--ink)}
+.pat-one{font-size:clamp(13px,2vw,16px);font-weight:700;color:#777;margin-top:6px}
+.pat-rule{display:inline-block;font-size:clamp(12px,1.9vw,15px);font-weight:800;color:var(--purple);background:#f5f0ff;border:2px solid #d0c4f0;border-radius:30px;padding:5px 14px;margin-top:8px}
+.und{border-bottom:4px solid var(--green);padding-bottom:1px}
+.pl{color:var(--red);font-weight:900;background:rgba(255,93,93,.12);border-radius:6px;padding:0 3px;margin:0 1px}
+.game-select{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0 18px}
+.game-stage{animation:fadeup .35s ease}
+.ring{width:110px;height:110px;border-radius:50%;margin:10px auto;display:flex;flex-direction:column;align-items:center;justify-content:center;border:8px solid var(--green);background:#fff}
+.ring .rt{font-size:clamp(28px,6vw,40px);font-weight:900;color:var(--green);line-height:1}
+.ring .rl{font-size:clamp(9px,1.5vw,11px);font-weight:900;color:#999;letter-spacing:1px}
+.ring.hot{border-color:var(--red);animation:pulseR .5s ease-in-out infinite alternate}
+@keyframes pulseR{from{transform:scale(1)}to{transform:scale(1.06)}}
+.g1-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+.g1-pool span{background:#fff;border:3px solid #e0d8f0;border-radius:14px;padding:8px 14px;font-size:clamp(13px,2.1vw,16px);font-weight:800;cursor:pointer;transition:all .2s;font-family:inherit;user-select:none}
+.g1-pool span:hover{border-color:var(--green);transform:translateY(-3px)}
+.g1-pool span.gone{opacity:.2;pointer-events:none}
+.g1-pool span.sel{border-color:var(--green);background:#e8ffe8;transform:scale(1.08)}
+.g1-boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}
+.g1-box{border-radius:18px;padding:14px;min-height:120px;border:4px dashed;cursor:pointer;transition:all .25s}
+.g1-box:hover{transform:translateY(-3px)}
+.g1-box#tree{border-color:#8b5cf0;background:#f8f5ff}
+.g1-box#vine{border-color:#4cc948;background:#f2fff2}
+.g1-box#other{border-color:#f5822b;background:#fff8f0}
+.g1-box h4{font-size:clamp(14px,2.3vw,17px);font-weight:900;text-align:center;margin-bottom:8px}
+.g1-box#tree h4{color:#8b5cf0}
+.g1-box#vine h4{color:#4cc948}
+.g1-box#other h4{color:#f5822b}
+.g1-place{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:40px}
+.g1-place span{background:#fff;border:3px solid currentColor;border-radius:12px;padding:5px 12px;font-size:clamp(12px,1.9vw,14px);font-weight:800;cursor:pointer}
+.g1-box#tree .g1-place span{color:#8b5cf0}
+.g1-box#vine .g1-place span{color:#4cc948}
+.g1-box#other .g1-place span{color:#f5822b}
+.g2-opt{padding:10px 22px;border:3px solid #e0d8f0;border-radius:50px;font-size:clamp(14px,2.2vw,17px);font-weight:800;cursor:pointer;background:#faf8ff;font-family:inherit;transition:all .2s}
+.g2-opt:hover{border-color:var(--purple);background:#f5f0ff;transform:translateY(-2px)}
+.g2-opt.ok{border-color:var(--green);background:#e8ffe8;color:#1a7a2c;pointer-events:none}
+.g2-opt.no{border-color:var(--red);background:#ffe8e8;color:#c0392b;pointer-events:none}
+.g2-opt.dis{pointer-events:none;opacity:.5}
+@media(max-width:768px){.team-grid{grid-template-columns:1fr}.navbar .ntab{padding:8px 12px;font-size:.82rem}}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div id="floaties"></div>
+<div class="topbar"><div class="now-chip">JD5 · Unit 7 · Wonderful Fruit!</div><button class="sound-toggle" id="globalSound" title="Sound on/off">🔊</button></div>
+<div class="navbar" id="navBar">
+  <button class="ntab on" onclick="showTab(0)">Lesson Plan</button>
+  <button class="ntab" onclick="showTab(1)">Vocabulary</button>
+  <button class="ntab" onclick="showTab(2)">Patterns</button>
+  <button class="ntab" onclick="showTab(3)">Where Do Fruits Grow?</button>
+  <button class="ntab" onclick="showTab(4)">Inside a Fruit</button>
+  <button class="ntab" onclick="showTab(5)">Fruit Salad</button>
+  <button class="ntab" onclick="showTab(6)">Games</button>
+</div>
+
+<div class="tabpan on" id="tp0">
+  <div class="hero">
+    <span class="big-emoji">🍎🍌🍇</span>
+    <h1>Wonderful Fruit!</h1>
+    <span class="sub">Joy Discovery 5 – Unit 7 (pp. 34–37)</span>
+    <div class="desc">100 minutes • Two 50-minute periods</div>
+  </div>
+  <section>
+    <div class="shead"><span class="ic">📋</span><h2>Lesson Plan</h2><span class="badge">TEACHER</span></div>
+    <div class="tip">Welcome speech: "Hello, everyone! Welcome to our wonderful fruit lesson! Today, we're going to learn about fruits, discover what's inside them, and make a delicious fruit salad. Are you ready? Let's begin!"</div>
+    <h3 style="font-weight:900;color:var(--green);margin:10px 0">Period 1 (50 min)</h3>
+    <div class="tl">
+      <div class="tl-item"><span class="tl-min">0–10 min</span><h4>Warm-Up</h4><p>Greeting, TPR, fruit names</p></div>
+      <div class="tl-item"><span class="tl-min">10–25 min</span><h4>Presentation & Practice</h4><p>Vocab + "Grapes grow on vines."</p></div>
+      <div class="tl-item"><span class="tl-min">25–35 min</span><h4>Textbook Activity</h4><p>Questions & Answers</p></div>
+      <div class="tl-item"><span class="tl-min">35–45 min</span><h4>Drag Activity</h4><p>Trees or Vines? (with accuracy notes)</p></div>
+      <div class="tl-item"><span class="tl-min">45–50 min</span><h4>Wrap-up</h4><p>Review</p></div>
+    </div>
+    <h3 style="font-weight:900;color:var(--orange);margin:10px 0">Period 2 (50 min)</h3>
+    <div class="tl">
+      <div class="tl-item"><span class="tl-min">0–15 min</span><h4>Inside a Fruit</h4><p>Skin, flesh, seeds + sentence</p></div>
+      <div class="tl-item"><span class="tl-min">15–25 min</span><h4>Count & Write</h4><p>How many seeds?</p></div>
+      <div class="tl-item"><span class="tl-min">25–35 min</span><h4>Make a Fruit Salad</h4><p>5 steps + hygiene</p></div>
+      <div class="tl-item"><span class="tl-min">35–45 min</span><h4>Practice/Game</h4><p>Order the steps</p></div>
+      <div class="tl-item"><span class="tl-min">45–50 min</span><h4>Communication Book</h4><p>Check & sign</p></div>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp1">
+  <section>
+    <div class="shead"><span class="ic">🍎</span><h2>Vocabulary Flashcards</h2><span class="badge">BRITISH ENGLISH</span></div>
+    <div class="tip">Tap each card to hear pronunciation. Include slow speed.</div>
+    <div class="vocab-grid">
+      <div class="vocab-card" onclick="say('Coconut')"><div style="font-size:48px">🥥</div><div class="vc-word">Coconut</div><div style="margin-top:6px;font-weight:700">Coconuts grow on palm trees.</div></div>
+      <div class="vocab-card" onclick="say('Banana')"><div style="font-size:48px">🍌</div><div class="vc-word">Banana</div><div style="margin-top:6px;font-weight:700">Bananas grow on banana plants.</div></div>
+      <div class="vocab-card" onclick="say('Guava')"><div style="font-size:48px">🍐</div><div class="vc-word">Guava</div><div style="margin-top:6px;font-weight:700">I like guavas.</div></div>
+      <div class="vocab-card" onclick="say('Cherry')"><div style="font-size:48px">🍒</div><div class="vc-word">Cherry</div><div style="margin-top:6px;font-weight:700">Cherries grow on trees.</div></div>
+      <div class="vocab-card" onclick="say('Grape')"><div style="font-size:48px">🍇</div><div class="vc-word">Grape</div><div style="margin-top:6px;font-weight:700">Grapes grow on vines.</div></div>
+      <div class="vocab-card" onclick="say('Honeydew')"><div style="font-size:48px">🍈</div><div class="vc-word">Honeydew</div><div style="margin-top:6px;font-weight:700">Honeydew grows on vines.</div></div>
+      <div class="vocab-card" onclick="say('Tomato')"><div style="font-size:48px">🍅</div><div class="vc-word">Tomato</div><div style="margin-top:6px;font-weight:700">Tomatoes grow on tomato plants.</div></div>
+      <div class="vocab-card" onclick="say('Watermelon')"><div style="font-size:48px">🍉</div><div class="vc-word">Watermelon</div><div style="margin-top:6px;font-weight:700">Watermelons grow on vines.</div></div>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp2">
+  <section>
+    <div class="shead"><span class="ic">🧩</span><h2>Patterns</h2><span class="badge">SINGULAR &amp; PLURAL</span></div>
+    <div class="tip" style="margin-bottom:14px">Rule: one grape = many grape<b class="pl">s</b>. We add <b class="pl">s</b> or <b class="pl">es</b> to make a plural. The underlined words are the key words in the pattern. Click any sentence to hear it!</div>
+
+    <div class="pat-card" onclick="say('Grapes grow on vines.','female')">
+      <div class="pat-tag">Main pattern</div>
+      <div class="pat-sent"><span class="und">Grape<span class="pl">s</span></span> grow on <span class="und">vine<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">grape</span> grows on one <span class="und">vine</span>.</div>
+      <div class="pat-rule">Grape + <b class="pl">s</b> = Grapes &nbsp;·&nbsp; vine + <b class="pl">s</b> = vines</div>
+    </div>
+
+    <div class="pat-card" onclick="say('Coconuts grow on palm trees.','female')">
+      <div class="pat-sent"><span class="und">Coconut<span class="pl">s</span></span> grow on palm <span class="und">tree<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">coconut</span> grows on one palm <span class="und">tree</span>.</div>
+      <div class="pat-rule">coconut + <b class="pl">s</b> = Coconuts &nbsp;·&nbsp; tree + <b class="pl">s</b> = trees</div>
+    </div>
+
+    <div class="pat-card" onclick="say('Bananas grow on banana plants.','female')">
+      <div class="pat-sent"><span class="und">Banana<span class="pl">s</span></span> grow on banana <span class="und">plant<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">banana</span> grows on one banana <span class="und">plant</span>.</div>
+      <div class="pat-rule">banana + <b class="pl">s</b> = Bananas &nbsp;·&nbsp; plant + <b class="pl">s</b> = plants</div>
+    </div>
+
+    <div class="pat-card" onclick="say('Cherries grow on trees.','female')">
+      <div class="pat-sent"><span class="und">Cherr<span class="pl">ies</span></span> grow on <span class="und">tree<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">cherry</span> grows on one <span class="und">tree</span>.</div>
+      <div class="pat-rule">cherry → cherr + <b class="pl">ies</b> = Cherries (y → i + es)</div>
+    </div>
+
+    <div class="pat-card" onclick="say('Watermelons grow on vines.','female')">
+      <div class="pat-sent"><span class="und">Watermelon<span class="pl">s</span></span> grow on <span class="und">vine<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">watermelon</span> grows on one <span class="und">vine</span>.</div>
+      <div class="pat-rule">watermelon + <b class="pl">s</b> = Watermelons</div>
+    </div>
+
+    <div class="pat-card" onclick="say('Tomatoes grow on tomato plants.','female')">
+      <div class="pat-sent"><span class="und">Tomato<span class="pl">es</span></span> grow on tomato <span class="und">plant<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">tomato</span> grows on one tomato <span class="und">plant</span>.</div>
+      <div class="pat-rule">tomato + <b class="pl">es</b> = Tomatoes (o → + es)</div>
+    </div>
+
+    <div class="pat-card" onclick="say('Honeydews grow on vines.','female')">
+      <div class="pat-sent"><span class="und">Honeydew<span class="pl">s</span></span> grow on <span class="und">vine<span class="pl">s</span></span>.</div>
+      <div class="pat-one">One <span class="und">honeydew</span> grows on one <span class="und">vine</span>.</div>
+      <div class="pat-rule">honeydew + <b class="pl">s</b> = Honeydews</div>
+    </div>
+
+    <div class="pat-card" onclick="say('I like guavas.','female')">
+      <div class="pat-sent">I like <span class="und">guava<span class="pl">s</span></span>.</div>
+      <div class="pat-one">I like one <span class="und">guava</span>, too!</div>
+      <div class="pat-rule">guava + <b class="pl">s</b> = Guavas</div>
+    </div>
+
+    <div class="tip" style="margin-top:14px"><b>Plural rules in this unit:</b> most fruits just add <b class="pl">s</b> (grape → grape<b class="pl">s</b>) · words ending in o add <b class="pl">es</b> (tomato → tomato<b class="pl">es</b>) · words ending in y change to <b class="pl">ies</b> (cherry → cherr<b class="pl">ies</b>).</div>
+    <div style="text-align:center;margin-top:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <button class="btn green" onclick="say('Grapes grow on vines. Cherries grow on trees. Tomatoes grow on tomato plants.','female')">Hear all patterns</button>
+      <button class="btn blue" onclick="say('One grape grows on one vine. Many grapes grow on many vines.','male')">One vs many</button>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp3">
+  <section>
+    <div class="shead"><span class="ic">🌱</span><h2>Where Do Fruits Grow?</h2><span class="badge">SCIENTIFIC + TEXTBOOK</span></div>
+    <div class="tip">Textbook example: "Grapes grow on vines." Also explain scientifically: Bananas grow on large herbaceous plants; tomatoes on tomato plants; watermelons on trailing vines.</div>
+    <div class="obj-grid">
+      <div class="obj"><div style="font-size:42px">🌴</div><div class="obj-name">Palm Trees</div><div style="font-weight:700">Coconut</div></div>
+      <div class="obj"><div style="font-size:42px">🌿</div><div class="obj-name">Banana Plants</div><div style="font-weight:700">Banana</div></div>
+      <div class="obj"><div style="font-size:42px">🍃</div><div class="obj-name">Vines</div><div style="font-weight:700">Grape, Honeydew, Watermelon</div></div>
+      <div class="obj"><div style="font-size:42px">🌱</div><div class="obj-name">Other Plants</div><div style="font-weight:700">Tomato</div></div>
+      <div class="obj"><div style="font-size:42px">🌳</div><div class="obj-name">Trees</div><div style="font-weight:700">Cherry, Guava</div></div>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp4">
+  <section>
+    <div class="shead"><span class="ic">🍎</span><h2>Inside a Fruit</h2><span class="badge">SKIN • FLESH • SEEDS</span></div>
+    <div class="tip">"An apple has skin, flesh and some seeds."</div>
+    <div style="text-align:center;margin:14px 0"><span style="font-size:clamp(80px,16vw,140px)">🍎</span></div>
+    <div class="obj-grid" style="max-width:600px;margin:0 auto">
+      <div class="obj" onclick="say('Skin')"><div class="obj-name">SKIN</div></div>
+      <div class="obj" onclick="say('Flesh')"><div class="obj-name">FLESH</div></div>
+      <div class="obj" onclick="say('Seeds')"><div class="obj-name">SEEDS</div></div>
+    </div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp5">
+  <section>
+    <div class="shead"><span class="ic">🥗</span><h2>Make a Fruit Salad</h2><span class="badge">HYGIENE FIRST</span></div>
+    <div class="tip">Safety: Check allergies, wash hands, wash fruit, adults handle knives/peelers, clean up.</div>
+    <div class="stage-box"><div class="stage-main">1. WASH THE FRUITS.</div><button class="btn blue" style="margin-top:8px" onclick="say('Wash the fruits.','female')">Listen</button></div>
+    <div class="stage-box"><div class="stage-main">2. PEEL THE FRUITS.</div><button class="btn blue" style="margin-top:8px" onclick="say('Peel the fruits.','female')">Listen</button></div>
+    <div class="stage-box"><div class="stage-main">3. CHOP INTO PIECES.</div><button class="btn blue" style="margin-top:8px" onclick="say('Chop into pieces.','female')">Listen</button></div>
+    <div class="stage-box"><div class="stage-main">4. PUT THEM IN A BOWL.</div><button class="btn blue" style="margin-top:8px" onclick="say('Put them in a bowl.','female')">Listen</button></div>
+    <div class="stage-box"><div class="stage-main">5. POUR IN YOGURT AND STIR.</div><button class="btn blue" style="margin-top:8px" onclick="say('Pour in yogurt and stir.','female')">Listen</button></div>
+    <div style="text-align:center;margin-top:12px"><button class="btn green" onclick="say('Well done! Your fruit salad is ready!','female')">Complete</button></div>
+  </section>
+</div>
+
+<div class="tabpan" id="tp6">
+  <section>
+    <div class="shead"><span class="ic">🎮</span><h2>Games</h2><span class="badge">CLASSROOM</span></div>
+    <div class="tip" style="margin-bottom:12px">Pick a game below. Team scores carry across all games. Press a team name to award points after each round.</div>
+    <div class="team-grid" style="margin-bottom:18px">
+      <div class="team-box ta"><div style="font-weight:900">TEAM A</div><div class="team-score" id="sa">0</div><div class="team-btns"><button class="tadd" onclick="add('sa',1)">+1</button><button class="tsub" onclick="add('sa',-1)">-1</button></div></div>
+      <div class="team-box tb"><div style="font-weight:900">TEAM B</div><div class="team-score" id="sb">0</div><div class="team-btns"><button class="tadd" onclick="add('sb',1)">+1</button><button class="tsub" onclick="add('sb',-1)">-1</button></div></div>
+    </div>
+
+    <div class="game-select">
+      <button class="btn green" onclick="loadGame(0)">Who's Faster?</button>
+      <button class="btn orange" onclick="loadGame(1)">Trees or Vines?</button>
+      <button class="btn purple" onclick="loadGame(2)">How Many Seeds?</button>
+    </div>
+
+    <!-- GAME 0: WHO'S FASTER -->
+    <div class="game-stage" id="g0">
+      <div class="stage-box" style="border-color:var(--green)">
+        <div class="stage-label">Question</div>
+        <div id="g0-fruit" style="font-size:clamp(48px,10vw,72px)"></div>
+        <div id="g0-word" style="font-size:clamp(20px,4vw,30px);font-weight:900;color:var(--green)"></div>
+        <div id="g0-q" style="font-size:clamp(15px,2.5vw,20px);font-weight:800"></div>
+        <div id="g0-timer" class="ring"><span class="rt" id="g0-count">5</span><span class="rl">SECONDS</span></div>
+        <div id="g0-fb" style="font-size:clamp(14px,2.2vw,18px);font-weight:800;min-height:28px"></div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px">
+          <button class="btn green" onclick="g0Speak()">Listen</button>
+          <button class="btn blue" onclick="g0Reveal()">Reveal Answer</button>
+          <button class="btn orange" onclick="g0Next()">Next Round</button>
+          <button class="btn purple" onclick="g0StartTimer()">Start Timer</button>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn green" onclick="add('sa',1);g0Fb('Team A scores!')">Team A Wins Round</button>
+          <button class="btn orange" onclick="add('sb',1);g0Fb('Team B wins round!')">Team B Wins Round</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME 1: TREES OR VINES -->
+    <div class="game-stage" id="g1" style="display:none">
+      <div class="tip" style="margin-bottom:10px">Drag each fruit to the correct category. Or tap a fruit, then tap a category box.</div>
+      <div class="g1-pool" id="g1-pool"></div>
+      <div class="g1-boxes">
+        <div class="g1-box" id="g1-tree" onclick="g1Place('tree')"><h4>Trees</h4><div class="g1-place" id="g1-tree-items"></div></div>
+        <div class="g1-box" id="g1-vine" onclick="g1Place('vine')"><h4>Vines</h4><div class="g1-place" id="g1-vine-items"></div></div>
+        <div class="g1-box" id="g1-other" onclick="g1Place('other')"><h4>Other Plants</h4><div class="g1-place" id="g1-other-items"></div></div>
+      </div>
+      <div id="g1-msg" style="text-align:center;font-size:clamp(13px,2vw,16px);font-weight:900;min-height:30px;margin:10px 0;line-height:1.5;padding:8px;background:#fff;border-radius:14px;white-space:normal;word-wrap:break-word"></div>
+      <div style="text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn green" onclick="g1Check()">Check Answers</button>
+        <button class="btn purple" onclick="g1Init()">Retry</button>
+        <button class="btn blue" onclick="say('Apples grow on trees.','male')">Apples grow on trees.</button>
+      </div>
+    </div>
+
+    <!-- GAME 2: HOW MANY SEEDS -->
+    <div class="game-stage" id="g2" style="display:none">
+      <div class="stage-box" style="border-color:var(--purple)">
+        <div class="stage-label">How many seeds are there?</div>
+        <div id="g2-pic" style="font-size:clamp(56px,12vw,80px)"></div>
+        <div id="g2-name" style="font-size:clamp(18px,3vw,26px);font-weight:900;color:var(--purple);margin:4px 0"></div>
+        <div id="g2-dots" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;min-height:40px;margin:8px 0"></div>
+        <div id="g2-fb" style="font-size:clamp(14px,2.2vw,18px);font-weight:800;min-height:28px"></div>
+        <div id="g2-opts" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px"></div>
+        <div style="margin-top:12px"><button class="btn orange" onclick="g2Next()">Next</button></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+function showTab(i){
+  document.querySelectorAll('.tabpan').forEach((t,idx)=>t.classList.toggle('on',idx===i));
+  document.querySelectorAll('.ntab').forEach((b,idx)=>b.classList.toggle('on',idx===i));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function pickVoice(pref){
+  const s=window.speechSynthesis;
+  if(!s) return null;
+  let vs=s.getVoices();
+  let gb=vs.filter(v=>/en-GB/i.test(v.lang)||/british/i.test(v.name));
+  if(gb.length===0) gb=vs.filter(v=>/en/i.test(v.lang));
+  if(gb.length===0) gb=vs;
+  if(pref==='male'){
+    let m=gb.find(v=>/male|daniel|george|oliver|james/i.test(v.name));
+    if(m) return m;
+    return gb[1]||gb[0];
+  }
+  let f=gb.find(v=>/female|hazel|susan|kate|serena|martha/i.test(v.name));
+  if(f) return f;
+  return gb[0];
+}
+function say(t,pref){
+  try{
+    const ss=window.speechSynthesis;
+    if(!ss) return;
+    if(typeof ss.getVoices==='function' && ss.getVoices().length===0){
+      ss.onvoiceschanged=function(){ say(t,pref); ss.onvoiceschanged=null; };
+    }
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang='en-GB';
+    u.rate=0.9;
+    u.pitch=1.0;
+    u.volume=1;
+    const v=pickVoice(pref||'female');
+    if(v) u.voice=v;
+    ss.cancel();
+    ss.speak(u);
+  }catch(e){}
+}
+function add(id,v){
+  const el=document.getElementById(id);
+  let n=parseInt(el.textContent||'0')+v; if(n<0)n=0; el.textContent=n;
+  const toast=document.getElementById('toast');
+  toast.textContent=v>0?'+1 Point!':'-1 Point';
+  toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),800);
+}
+function loadGame(i){
+  document.querySelectorAll('.game-stage').forEach((g,idx)=>g.style.display=idx===i?'block':'none');
+  if(i===0) g0Init();
+  if(i===1) g1Init();
+  if(i===2) g2Init();
+}
+/* GAME 0: WHO'S FASTER */
+const g0fruits=[
+  {emo:'🍌',word:'Banana',q:'Do you like bananas?',a:'Yes, I do!'},
+  {emo:'🍇',word:'Grape',q:'Where do grapes grow?',a:'Grapes grow on vines.'},
+  {emo:'🍉',word:'Watermelon',q:'Where do watermelons grow?',a:'Watermelons grow on vines.'},
+  {emo:'🥥',word:'Coconut',q:'Where do coconuts grow?',a:'Coconuts grow on palm trees.'},
+  {emo:'🍒',word:'Cherry',q:'Where do cherries grow?',a:'Cherries grow on trees.'},
+  {emo:'🍅',word:'Tomato',q:'Is a tomato a fruit or a vegetable?',a:'A tomato is a fruit.'},
+  {emo:'🍈',word:'Honeydew',q:'Where does honeydew grow?',a:'Honeydew grows on vines.'},
+  {emo:'🍐',word:'Guava',q:'Do you like guavas?',a:'Yes, I do!'}
+];
+let g0idx=-1,g0timer=null;
+function g0Init(){ g0idx=-1; g0Next(); }
+function g0Next(){
+  let n; do{n=Math.floor(Math.random()*g0fruits.length);}while(n===g0idx&&g0fruits.length>1);
+  g0idx=n;
+  const f=g0fruits[n];
+  document.getElementById('g0-fruit').textContent=f.emo;
+  document.getElementById('g0-word').textContent=f.word.toUpperCase();
+  document.getElementById('g0-q').textContent=f.q;
+  document.getElementById('g0-fb').textContent='';
+  document.getElementById('g0-count').textContent='5';
+  document.getElementById('g0-timer').classList.remove('hot');
+  say(f.word+'. '+f.q,'female');
+}
+function g0Speak(){ const f=g0fruits[g0idx]; say(f.word+'. '+f.q,'female'); }
+function g0Reveal(){ const f=g0fruits[g0idx]; document.getElementById('g0-fb').textContent=f.a; say(f.a,'male'); }
+function g0Fb(t){ document.getElementById('g0-fb').textContent=t; say(t,'female'); }
+function g0StartTimer(){
+  clearInterval(g0timer);
+  let c=5;
+  document.getElementById('g0-count').textContent=c;
+  document.getElementById('g0-timer').classList.add('hot');
+  g0timer=setInterval(()=>{
+    c--;
+    document.getElementById('g0-count').textContent=c;
+    if(c<=0){
+      clearInterval(g0timer);
+      document.getElementById('g0-timer').classList.remove('hot');
+      say("Time's up!","male");
+    }
+  },1000);
+}
+/* GAME 1: TREES OR VINES */
+const g1fruits=[
+  {w:'Cherry',cat:'tree'},{w:'Guava',cat:'tree'},{w:'Coconut',cat:'tree'},
+  {w:'Grape',cat:'vine'},{w:'Honeydew',cat:'vine'},{w:'Watermelon',cat:'vine'},
+  {w:'Banana',cat:'other'},{w:'Tomato',cat:'other'}
+];
+let g1sel=null;
+function g1Init(){
+  g1sel=null;
+  document.getElementById('g1-msg').textContent='';
+  document.getElementById('g1-tree-items').innerHTML='';
+  document.getElementById('g1-vine-items').innerHTML='';
+  document.getElementById('g1-other-items').innerHTML='';
+  const pool=document.getElementById('g1-pool');
+  pool.innerHTML='';
+  let sh=[...g1fruits].sort(()=>Math.random()-0.5);
+  sh.forEach(f=>{
+    const s=document.createElement('span');
+    s.textContent=f.w;
+    s.draggable=true;
+    s.dataset.cat=f.cat;
+    s.dataset.word=f.w;
+    s.addEventListener('dragstart',ev=>{ev.dataTransfer.setData('text/plain',f.w+'|'+f.cat);});
+    s.addEventListener('click',()=>{
+      document.querySelectorAll('.g1-pool span').forEach(x=>x.classList.remove('sel'));
+      s.classList.add('sel'); g1sel=f;
+    });
+    pool.appendChild(s);
+  });
+  ['tree','vine','other'].forEach(box=>{
+    const el=document.getElementById('g1-'+box);
+    el.ondragover=ev=>ev.preventDefault();
+    el.ondrop=ev=>{
+      ev.preventDefault();
+      const d=ev.dataTransfer.getData('text/plain').split('|');
+      g1Drop(d[0],d[1],box);
+    };
+  });
+}
+function g1Place(box){
+  if(g1sel){ g1Drop(g1sel.w,g1sel.cat,box); g1sel=null; document.querySelectorAll('.g1-pool span').forEach(x=>x.classList.remove('sel')); }
+}
+function g1Drop(word,cat,box){
+  const item=[...document.querySelectorAll('#g1-pool span')].find(s=>s.dataset.word===word);
+  if(!item||item.classList.contains('gone'))return;
+  const span=document.createElement('span');
+  span.textContent=word;
+  span.dataset.cat=cat;
+  span.onclick=()=>{
+    item.classList.remove('gone');
+    span.remove();
+    document.getElementById('g1-msg').textContent='';
+  };
+  document.getElementById('g1-'+box+'-items').appendChild(span);
+  item.classList.add('gone');
+}
+function g1Check(){
+  let ok=0,total=g1fruits.length;
+  document.querySelectorAll('.g1-place span').forEach(s=>{
+    const box=s.parentElement.id.replace('-items','').replace('g1-','');
+    if(s.dataset.cat===box){
+      ok++;
+      s.style.borderColor='#4cc948';
+      s.style.background='#e8ffe8';
+    }else{
+      s.style.borderColor='#ff5d5d';
+      s.style.background='#ffe8e8';
+    }
+  });
+  const placed=document.querySelectorAll('.g1-place span').length;
+  const msg=document.getElementById('g1-msg');
+  if(placed<total){ msg.textContent='Place all fruits first!'; msg.style.color='#c0392b'; return; }
+  if(ok===total){
+    msg.textContent='Perfect! All correct!';
+    msg.style.color='#2f9e2b';
+    say('Perfect! All correct!','female');
+  }else{
+    let wrong=[];
+    document.querySelectorAll('.g1-place span').forEach(s=>{
+      const box=s.parentElement.id.replace('-items','').replace('g1-','');
+      if(s.dataset.cat!==box){
+        const right=s.dataset.cat==='tree'?'Trees':s.dataset.cat==='vine'?'Vines':'Other Plants';
+        wrong.push(s.textContent+' grows on '+right+'.');
+      }
+    });
+    msg.textContent=ok+' of '+total+' correct. Correct answers: '+wrong.join(' ');
+    msg.style.color='#c0392b';
+    say(ok+' of '+total+' correct. '+wrong.join(' '),'male');
+  }
+}
+/* GAME 2: HOW MANY SEEDS */
+const g2items=[
+  {emo:'🍎',name:'Apple',n:5,label:'Many'},
+  {emo:'🥝',name:'Kiwi',n:2,label:'Two'},
+  {emo:'🍊',name:'Orange',n:8,label:'Many'},
+  {emo:'🍐',name:'Pear',n:3,label:'Three'},
+  {emo:'🫐',name:'Blueberry',n:4,label:'Four'},
+  {emo:'🍋',name:'Lemon',n:1,label:'One'},
+  {emo:'🥑',name:'Avocado',n:1,label:'One'},
+  {emo:'🍏',name:'Green apple',n:5,label:'Many'}
+];
+const g2opts=['One','Two','Three','Four','Many'];
+let g2used=[];
+function g2Init(){
+  g2used=[];
+  const stage=document.getElementById('g2-pic').closest('.stage-box');
+  const btn=stage?stage.querySelector('.btn.orange'):null;
+  if(btn) btn.style.display='';
+  g2Next();
+}
+function g2Next(){
+  const remaining=g2items.map((_,i)=>i).filter(i=>g2used.indexOf(i)===-1);
+  if(remaining.length===0){
+    document.getElementById('g2-pic').textContent='';
+    document.getElementById('g2-name').textContent='';
+    document.getElementById('g2-dots').innerHTML='';
+    document.getElementById('g2-opts').innerHTML='';
+    const fb=document.getElementById('g2-fb');
+    fb.textContent='Quiz complete! All fruits answered.';
+    fb.style.color='#2f9e2b';
+    say('Quiz complete! All fruits answered. Well done!','female');
+    return;
+  }
+  const n=remaining[Math.floor(Math.random()*remaining.length)];
+  g2used.push(n);
+  const it=g2items[n];
+  document.getElementById('g2-pic').textContent=it.emo;
+  document.getElementById('g2-name').textContent=it.name;
+  document.getElementById('g2-fb').textContent='';
+  const dots=document.getElementById('g2-dots');
+  dots.innerHTML='';
+  for(let i=0;i<it.n;i++){
+    const d=document.createElement('span');
+    d.textContent='\u25CF';
+    d.style.cssText='font-size:22px;color:var(--ink);opacity:0;animation:fadeup .4s ease forwards;animation-delay:'+(i*0.15)+'s';
+    dots.appendChild(d);
+  }
+  const opts=document.getElementById('g2-opts');
+  opts.innerHTML='';
+  g2opts.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='g2-opt';
+    b.textContent=o;
+    b.onclick=()=>g2Answer(o,it.label);
+    opts.appendChild(b);
+  });
+}
+function g2Answer(pick,correct){
+  document.querySelectorAll('.g2-opt').forEach(b=>{
+    if(b.textContent===correct)b.classList.add('ok');
+    else if(b.textContent===pick)b.classList.add('no');
+    else b.classList.add('dis');
+  });
+  const fb=document.getElementById('g2-fb');
+  const cur=g2items[g2used[g2used.length-1]];
+  const seedWord=(cur&&cur.n===1)?'seed':'seeds';
+  const cnt=(cur&&cur.n===1)?'one':cur?(cur.n<=4?['one','two','three','four'][cur.n-1]:cur.n):'';
+  if(pick===correct){
+    fb.textContent='Correct!';
+    fb.style.color='#2f9e2b';
+    say('Correct! '+(cur&&cur.n===1?'There is one '+seedWord+'.':'There are '+cnt+' '+seedWord+'.'),'female');
+  }else{
+    fb.textContent='The answer is '+correct+'.';
+    fb.style.color='#c0392b';
+    say('The answer is '+correct+'.'+(cur&&cur.n===1?' There is one '+seedWord+'.':' There are '+cnt+' '+seedWord+'.'),'male');
+  }
+  const btn=document.querySelector('#g2-opts').parentElement.querySelector('.btn.orange');
+  if(g2used.length>=g2items.length){ btn.style.display='none'; }
+}
+const floaties=document.getElementById('floaties');
+const fruits=['🍎','🍌','🍇','🍉','🍒','🥥','🍅','🍐','🍈'];
+for(let i=0;i<20;i++){
+  const d=document.createElement('div');
+  d.className='floaty';
+  d.textContent=fruits[i%fruits.length];
+  d.style.left=Math.random()*100+'vw';
+  d.style.animationDuration=(12+Math.random()*10)+'s';
+  d.style.animationDelay=Math.random()*10+'s';
+  floaties.appendChild(d);
+}
+</script>
+</body>
+</html>
