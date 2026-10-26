@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 620" role="img" aria-labelledby="title desc">
+  <title id="title">A curious friend</title>
+  <desc id="desc">A child in a blue hooded cloak points upward with a curious expression.</desc>
+  <defs>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0bd94"/><stop offset="1" stop-color="#d1936a"/></linearGradient>
+    <linearGradient id="cloak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b8bc9"/><stop offset="1" stop-color="#28598f"/></linearGradient>
+    <linearGradient id="tunic" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9d6a4"/><stop offset="1" stop-color="#c7ad72"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#241540" flood-opacity=".3"/></filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <ellipse cx="160" cy="596" rx="100" ry="18" fill="#1c1138" opacity=".3"/>
+    <!-- legs -->
+    <path d="M124 470l-6 100h30l10-100zM196 470l6 100h-30l-10-100z" fill="#5a4b3a"/>
+    <path d="M106 564c-16 2-22 14-14 24 10 12 38 10 52 2l2-24zM214 564c16 2 22 14 14 24-10 12-38 10-52 2l-2-24z" fill="#3c2c1e"/>
+    <!-- tunic -->
+    <path d="M112 280c8-30 24-46 48-46s40 16 48 46l14 202H98z" fill="url(#tunic)"/>
+    <path d="M98 482h132" stroke="#8a6b3e" stroke-width="8"/>
+    <path d="M160 236v246" stroke="#8a6b3e" stroke-width="3" opacity=".4"/>
+    <!-- cloak -->
+    <path d="M112 276c-18 10-34 32-38 68l-14 148h50l10-170z" fill="url(#cloak)"/>
+    <path d="M208 276c18 10 34 32 38 68l14 148h-50l-10-170z" fill="url(#cloak)"/>
+    <path d="M116 252c-8 8-12 20-10 36l18 14 20-36z" fill="url(#cloak)"/>
+    <path d="M204 252c8 8 12 20 10 36l-18 14-20-36z" fill="url(#cloak)"/>
+    <!-- arm pointing up -->
+    <path d="M202 286c28-14 44-42 52-70 4-14-6-26-20-24-10 2-14 12-20 24-10 20-24 38-38 48z" fill="url(#cloak)"/>
+    <path d="M248 206c-10 2-18 12-20 24-2 10 4 18 14 18 8 0 14-8 16-18 2-12-2-26-10-24z" fill="url(#tunic)"/>
+    <g fill="url(#skin)" stroke="#c78d63" stroke-width="3">
+      <circle cx="252" cy="196" r="17"/>
+    </g>
+    <path d="M250 178v-16M262 184l12-10M240 184l-12-10" stroke="#c78d63" stroke-width="4" stroke-linecap="round"/>
+    <!-- other arm -->
+    <path d="M118 286c-24 20-34 48-28 70 4 14 20 16 28 4 8-14 16-30 28-40z" fill="url(#cloak)"/>
+    <circle cx="94" cy="356" r="15" fill="url(#skin)" stroke="#c78d63" stroke-width="3"/>
+    <!-- hood -->
+    <path d="M96 148c0-56 28-88 64-88s64 32 64 88c0 38-24 58-64 58s-64-20-64-58z" fill="url(#cloak)"/>
+    <path d="M104 140c2-42 28-64 56-64s54 24 56 64c-18-18-34-24-56-24s-38 6-56 24z" fill="#3a76ad"/>
+    <!-- face -->
+    <ellipse cx="160" cy="150" rx="48" ry="52" fill="url(#skin)"/>
+    <path d="M112 142c0-32 20-50 48-50s48 20 48 50c-12-12-28-16-48-16s-36 4-48 16z" fill="#5a3823"/>
+    <path d="M120 118c-8-10 0-22 12-24M200 118c8-10 0-22-12-24" fill="none" stroke="#5a3823" stroke-width="5" stroke-linecap="round"/>
+    <path d="M136 142c8-6 16-6 24 0M160 142c8-6 16-6 24 0" stroke="#5a3823" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="148" cy="156" rx="6" ry="7" fill="#2f2118"/>
+    <ellipse cx="172" cy="156" rx="6" ry="7" fill="#2f2118"/>
+    <circle cx="150" cy="153" r="2" fill="#fff"/><circle cx="174" cy="153" r="2" fill="#fff"/>
+    <path d="M160 160c-3 6-2 12 2 15" fill="none" stroke="#c78d63" stroke-width="3" stroke-linecap="round"/>
+    <path d="M151 180c6 5 12 5 18 0" stroke="#7c4a3a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="126" cy="170" r="7" fill="#e8887e" opacity=".45"/>
+    <circle cx="194" cy="170" r="7" fill="#e8887e" opacity=".45"/>
+    <!-- clasp -->
+    <circle cx="160" cy="256" r="10" fill="#ffd25e" stroke="#b8860b" stroke-width="3"/>
+  </g>
+</svg>

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">An excited child</title>
+  <desc id="desc">A smiling child jumps with both arms raised amid bright stars and confetti.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe9a8"/><stop offset=".45" stop-color="#ffc76e"/><stop offset="1" stop-color="#ff9a62"/>
+    </linearGradient>
+    <radialGradient id="burst" cx=".5" cy=".45" r=".6">
+      <stop offset="0" stop-color="#fff8d6" stop-opacity=".95"/><stop offset="1" stop-color="#fff8d6" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6a4d"/><stop offset="1" stop-color="#d93636"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f08a4b"/><stop offset="1" stop-color="#c95f37"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="400" cy="280" r="290" fill="url(#burst)"/>
+  <rect y="470" width="800" height="130" fill="url(#floor)"/>
+  <path d="M0 470h800" stroke="#a84a2c" stroke-width="8"/>
+  <g opacity=".2" fill="#fff">
+    <circle cx="90" cy="90" r="30"/><circle cx="710" cy="120" r="46"/><circle cx="680" cy="400" r="24"/>
+  </g>
+
+  <!-- burst rays -->
+  <g stroke="#fff3bf" stroke-width="14" stroke-linecap="round" opacity=".55">
+    <path d="M400 300L180 120M400 300L620 110M400 300L130 360M400 300L700 350M400 300L250 500M400 300L570 510M400 300L400 60M400 300L80 230M400 300L720 230"/>
+  </g>
+
+  <!-- confetti -->
+  <g>
+    <rect x="140" y="120" width="18" height="28" rx="4" fill="#7c5cff" transform="rotate(-25 149 134)"/>
+    <rect x="660" y="170" width="16" height="26" rx="4" fill="#2fb6c9" transform="rotate(30 668 183)"/>
+    <rect x="180" y="380" width="16" height="26" rx="4" fill="#ff4f91" transform="rotate(18 188 393)"/>
+    <rect x="620" y="430" width="18" height="28" rx="4" fill="#4caf50" transform="rotate(-22 629 444)"/>
+    <circle cx="240" cy="210" r="8" fill="#fff"/>
+    <circle cx="560" cy="120" r="7" fill="#ff4f91"/>
+    <circle cx="590" cy="330" r="8" fill="#7c5cff"/>
+    <circle cx="210" cy="300" r="6" fill="#2fb6c9"/>
+    <path d="M300 120l5 15 15 5-15 5-5 15-5-15-15-5 15-5z" fill="#fff"/>
+    <path d="M520 200l4 12 12 4-12 4-4 12-4-12-12-4 12-4z" fill="#fff8cf"/>
+    <path d="M650 300l5 15 15 5-15 5-5 15-5-15-15-5 15-5z" fill="#fff"/>
+  </g>
+
+  <!-- child -->
+  <g transform="translate(0 -10)">
+    <!-- shadow -->
+    <ellipse cx="400" cy="488" rx="120" ry="22" fill="#8f3d24" opacity=".35"/>
+    <!-- back arm -->
+    <path d="M342 250c-38-30-66-42-84-30-14 10-10 30 12 42 22 12 48 30 66 52" fill="#e8ac83" stroke="#cf8b62" stroke-width="5" stroke-linecap="round"/>
+    <!-- legs -->
+    <path d="M360 406c-14 24-30 48-24 70 5 17 30 16 38-2 8-18 18-42 24-62z" fill="#3d5a9c"/>
+    <path d="M448 406c14 24 30 48 24 70-5 17-30 16-38-2-8-18-18-42-24-62z" fill="#3d5a9c"/>
+    <path d="M327 472c-16 2-24 14-18 25 7 12 32 13 50 4l4-24z" fill="#283c69"/>
+    <path d="M481 472c16 2 24 14 18 25-7 12-32 13-50 4l-4-24z" fill="#283c69"/>
+    <!-- body -->
+    <path d="M334 286c8-42 38-62 72-62 38 0 64 22 68 66l10 128H320z" fill="url(#shirt)"/>
+    <path d="M320 414h164" stroke="#b62b2b" stroke-width="8"/>
+    <path d="M370 232c8 20 49 20 60 0" fill="none" stroke="#f5d2b4" stroke-width="14"/>
+    <!-- front arms raised -->
+    <path d="M346 292c-28-28-48-62-48-86 0-18 22-26 34-12 14 16 30 42 50 60" fill="#f3bb91" stroke="#d9966d" stroke-width="5" stroke-linecap="round"/>
+    <path d="M474 292c28-28 48-62 48-86 0-18-22-26-34-12-14 16-30 42-50 60" fill="#f3bb91" stroke="#d9966d" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#f3bb91" stroke="#d9966d" stroke-width="4">
+      <circle cx="296" cy="194" r="17"/><circle cx="502" cy="194" r="17"/>
+    </g>
+    <g stroke="#d9966d" stroke-width="4" stroke-linecap="round">
+      <path d="M284 184l-12-8M296 178v-14M310 186l10-10M490 186l-10-10M502 178v-14M514 184l12-8"/>
+    </g>
+    <!-- head -->
+    <g>
+      <circle cx="401" cy="182" r="66" fill="#f6c29b"/>
+      <path d="M335 174c-3-44 29-72 67-72 40 0 69 29 66 73-2 16-9 12-13 2-8-20-27-26-53-22-25 4-39 18-54 19-9 1-12-3-13 0z" fill="#4b2e21"/>
+      <path d="M348 182c8-7 17-7 24-1M433 181c8-7 17-7 24-1" stroke="#4b2e21" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="365" cy="196" rx="8" ry="10" fill="#2f2118"/>
+      <ellipse cx="438" cy="196" rx="8" ry="10" fill="#2f2118"/>
+      <circle cx="368" cy="193" r="2.6" fill="#fff"/><circle cx="441" cy="193" r="2.6" fill="#fff"/>
+      <path d="M379 226c14 18 35 18 49 0-2 30-47 31-49 0z" fill="#fff"/>
+      <path d="M384 232c12 7 27 7 39 0" stroke="#b6595b" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M389 230c8 5 14 5 22 0" fill="#ff8a8a"/>
+      <circle cx="343" cy="217" r="11" fill="#f29a8f" opacity=".55"/>
+      <circle cx="462" cy="217" r="11" fill="#f29a8f" opacity=".55"/>
+      <path d="M332 166c-10-14 3-30 17-24M470 166c10-14-3-30-17-24" fill="none" stroke="#4b2e21" stroke-width="6" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- stars around child -->
+  <g fill="#fff8cf">
+    <path d="M262 420l5 15 15 5-15 5-5 15-5-15-15-5 15-5z"/>
+    <path d="M546 404l4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/>
+    <path d="M620 270l4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/>
+  </g>
+  <rect width="800" height="600" fill="#fff4b8" opacity=".04"/>
+</svg>

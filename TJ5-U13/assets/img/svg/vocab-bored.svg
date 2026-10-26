@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">A bored boy at a desk</title>
+  <desc id="desc">A boy slumps at a desk with his chin in his hand while rain falls outside the window.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9e5f4"/><stop offset=".55" stop-color="#b9cbe2"/><stop offset="1" stop-color="#8ea6c8"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#c9d7e8"/><stop offset="1" stop-color="#91a8c4"/>
+    </linearGradient>
+    <linearGradient id="desk" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b97945"/><stop offset="1" stop-color="#7a4523"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6f93c9"/><stop offset="1" stop-color="#43649a"/>
+    </linearGradient>
+    <linearGradient id="window" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5b6f92"/><stop offset="1" stop-color="#2f3f61"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx=".5" cy=".4" r=".6">
+      <stop offset="0" stop-color="#ffe9a3" stop-opacity=".95"/><stop offset="1" stop-color="#ffe9a3" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect y="380" width="800" height="220" fill="#7f95b3"/>
+  <rect x="0" y="0" width="800" height="600" fill="url(#wall)" opacity=".35"/>
+
+  <!-- wainscot and floor -->
+  <rect y="430" width="800" height="170" fill="#6c7f9c"/>
+  <path d="M0 430h800v22H0z" fill="#556885"/>
+  <path d="M0 520h800v80H0z" fill="#5a6c88"/>
+  <g opacity=".22" stroke="#2f405c" stroke-width="2">
+    <path d="M0 508h800M0 548h800M0 588h800"/>
+  </g>
+
+  <!-- window -->
+  <g>
+    <rect x="470" y="62" width="250" height="300" rx="20" fill="#425575"/>
+    <rect x="486" y="78" width="218" height="268" rx="12" fill="url(#window)"/>
+    <path d="M486 190h218M590 78v268" stroke="#8fa3c2" stroke-width="10"/>
+    <circle cx="654" cy="126" r="24" fill="#f5e9c8" opacity=".85"/>
+    <g fill="#c9d8ef" opacity=".85">
+      <path d="M520 120l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+      <path d="M540 152l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+      <path d="M666 230l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/>
+    </g>
+    <g stroke="#a9c2e8" stroke-width="3" stroke-linecap="round" opacity=".8">
+      <path d="M515 240l-10 16M535 260l-8 13M558 228l-11 18M585 268l-8 12M612 240l-10 16M640 274l-8 13M668 240l-9 15"/>
+    </g>
+    <rect x="470" y="62" width="250" height="300" rx="20" fill="none" stroke="#5d7192" stroke-width="14"/>
+    <rect x="458" y="350" width="274" height="20" rx="8" fill="#7e92b1"/>
+  </g>
+
+  <!-- clock -->
+  <g transform="translate(150 130)">
+    <circle r="72" fill="#6b7fa0"/>
+    <circle r="62" fill="#f0ede2"/>
+    <circle r="62" fill="none" stroke="#c8c2ae" stroke-width="3"/>
+    <g stroke="#5e6479" stroke-width="6" stroke-linecap="round">
+      <path d="M0 -50v10M0 50v-10M-50 0h10M50 0h-10"/>
+      <path d="M0 0v-30" stroke="#c8563a"/>
+      <path d="M0 0l24 16" stroke="#44506b"/>
+    </g>
+    <circle r="6" fill="#44506b"/>
+  </g>
+
+  <!-- desk -->
+  <g>
+    <rect x="100" y="402" width="600" height="34" rx="12" fill="url(#desk)"/>
+    <rect x="128" y="436" width="28" height="132" fill="#6e3d1d"/>
+    <rect x="644" y="436" width="28" height="132" fill="#6e3d1d"/>
+    <rect x="128" y="436" width="544" height="16" fill="#8b5228" opacity=".7"/>
+  </g>
+
+  <!-- boy -->
+  <g>
+    <!-- chair back -->
+    <rect x="286" y="330" width="130" height="180" rx="16" fill="#8a5a34"/>
+    <rect x="300" y="344" width="102" height="130" rx="10" fill="#a97041"/>
+    <!-- body -->
+    <path d="M300 430c4-58 36-92 82-92s76 32 82 92z" fill="url(#shirt)"/>
+    <path d="M300 430c4-58 36-92 82-92s76 32 82 92z" fill="none" stroke="#33507e" stroke-width="5"/>
+    <!-- arm propping head -->
+    <path d="M359 348c-8 23-20 49-22 74-2 18 8 26 22 24 12-2 17-12 14-26-4-18-5-38-1-57z" fill="#e8b48f"/>
+    <path d="M356 440c-7 4-8 13 2 16 9 3 19-1 21-8 2-6-4-11-12-11z" fill="#dc9f78"/>
+    <!-- head -->
+    <g>
+      <path d="M348 278c0-38 60-45 74-10 8 21 2 62-12 78-12 14-40 14-52-1-11-14-10-45-10-67z" fill="#f0be99"/>
+      <path d="M342 276c2-39 30-54 58-42 21 9 30 30 24 55-2 8-8 5-12-2-6-11-18-14-31-10-13 4-18 12-25 13-8 1-15-4-14-14z" fill="#6b432b"/>
+      <path d="M360 292c6-4 13-4 19 0" stroke="#6b432b" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M394 292c6-4 13-4 19 0" stroke="#6b432b" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M361 309h14M397 309h14" stroke="#3f3029" stroke-width="4" stroke-linecap="round"/>
+      <path d="M371 306c1 8 1 14-4 19 5 3 11 2 14-1" stroke="#d19570" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M372 344c9-5 20-4 27 2" stroke="#a86152" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <circle cx="356" cy="328" r="8" fill="#e79e8e" opacity=".55"/>
+      <circle cx="416" cy="328" r="8" fill="#e79e8e" opacity=".55"/>
+      <!-- hand under chin -->
+      <path d="M366 354c2 17 19 24 32 16 8-5 7-18-3-24-10-5-22-3-29 8z" fill="#f0be99" stroke="#dc9f78" stroke-width="2"/>
+    </g>
+  </g>
+
+  <!-- table items -->
+  <g>
+    <path d="M170 388h96l-8 16h-84z" fill="#f4efe0"/>
+    <path d="M176 380h84l6 10H170z" fill="#fffaf0"/>
+    <path d="M190 368l30-7 5 17-31 5z" fill="#e8dcc4"/>
+    <path d="M508 391l86 0 6 12-98 0z" fill="#2f4f78"/>
+    <path d="M514 386l74 0 4 6-82 0z" fill="#e8f0fa"/>
+    <rect x="553" y="356" width="6" height="30" rx="3" fill="#d7a15d" transform="rotate(18 556 371)"/>
+  </g>
+
+  <!-- lamp glow -->
+  <ellipse cx="655" cy="330" rx="150" ry="150" fill="url(#lamp)" filter="url(#soft)"/>
+  <g transform="translate(700 282)">
+    <path d="M-34 0h68l-12 46h-44z" fill="#e6c37a"/>
+    <path d="M-40 46h80" stroke="#c79d4f" stroke-width="7" stroke-linecap="round"/>
+    <path d="M0 0v-58" stroke="#8f6b35" stroke-width="5"/>
+    <path d="M-20 -58h40" stroke="#8f6b35" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <!-- bored motion marks -->
+  <g stroke="#5b6f92" stroke-width="4" stroke-linecap="round" opacity=".55">
+    <path d="M455 160c12-8 22-8 34 0M458 178c10-6 18-6 28 0M462 196c8-5 14-5 22 0"/>
+  </g>
+  <rect width="800" height="600" fill="#31425f" opacity=".06"/>
+</svg>

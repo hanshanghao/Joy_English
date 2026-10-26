@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-labelledby="title desc">
+  <title id="title">A golden egg</title>
+  <desc id="desc">A shining golden egg surrounded by magical sparkles.</desc>
+  <defs>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffe58a" stop-opacity=".95"/><stop offset=".6" stop-color="#ffc93c" stop-opacity=".28"/><stop offset="1" stop-color="#ffc93c" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="egg" cx=".38" cy=".3" r=".8">
+      <stop offset="0" stop-color="#fffbe0"/><stop offset=".35" stop-color="#ffe27a"/><stop offset=".75" stop-color="#f0b52e"/><stop offset="1" stop-color="#b8730d"/>
+    </radialGradient>
+  </defs>
+  <circle cx="100" cy="120" r="98" fill="url(#glow)"/>
+  <path d="M100 28c46 0 76 50 76 108 0 60-34 92-76 92s-76-32-76-92c0-58 30-108 76-108z" fill="url(#egg)" stroke="#c58a13" stroke-width="4"/>
+  <path d="M60 120c2-36 18-64 38-76-22 30-30 70-26 112-8-10-12-22-12-36z" fill="#fff8d0" opacity=".75"/>
+  <g fill="#fff4b8">
+    <path d="M34 56l4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/>
+    <path d="M166 78l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+    <path d="M156 176l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/>
+    <circle cx="52" cy="176" r="4"/><circle cx="146" cy="40" r="3"/>
+  </g>
+</svg>

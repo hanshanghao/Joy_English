@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 180" role="img" aria-labelledby="title">
+  <title id="title">A golden feather</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".55" stop-color="#ffc93c"/><stop offset="1" stop-color="#d99a1c"/></linearGradient></defs>
+  <path d="M50 170c-28-30-42-70-28-110C36 32 62 14 84 10c14 38 6 92-14 120-8 12-14 26-20 40z" fill="url(#g)" stroke="#c58a13" stroke-width="4"/>
+  <path d="M50 168C44 126 44 84 58 44" stroke="#b87a12" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <g stroke="#c58a13" stroke-width="3" fill="none" opacity=".6">
+    <path d="M46 120l-22-14M52 100l-26-8M58 80l-24-2M62 60l-20 2M54 140l-24-20M60 58l18-10M52 82l22-6M46 104l24-4M42 128l26-8"/>
+  </g>
+</svg>

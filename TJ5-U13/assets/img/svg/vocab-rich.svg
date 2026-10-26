@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title desc">
+  <title id="title">A rich king with gold coins</title>
+  <desc id="desc">A smiling king in a purple robe holds a bag of gold beside a treasure chest and a castle.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4b2d7a"/><stop offset=".55" stop-color="#6b3f9c"/><stop offset="1" stop-color="#3d2666"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#ffe58a" stop-opacity=".9"/><stop offset="1" stop-color="#ffe58a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="robe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9a5bd6"/><stop offset="1" stop-color="#63309b"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe89a"/><stop offset=".5" stop-color="#ffc93c"/><stop offset="1" stop-color="#d8951a"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8b74b8"/><stop offset="1" stop-color="#553c84"/>
+    </linearGradient>
+    <filter id="softglow"><feGaussianBlur stdDeviation="15"/></filter>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="410" cy="360" rx="360" ry="250" fill="url(#glow)"/>
+
+  <!-- castle -->
+  <g opacity=".5">
+    <path d="M70 360V180l60-48 60 48v180zM610 360V210l55-44 55 44v150z" fill="#2e1c50"/>
+    <path d="M80 360V192h100v168zM620 360V220h90v140z" fill="#3b2665"/>
+    <path d="M70 180l60-48 60 48zM610 210l55-44 55 44z" fill="#241542"/>
+    <g fill="#ffd25e" opacity=".8">
+      <rect x="104" y="220" width="16" height="26" rx="8"/><rect x="142" y="220" width="16" height="26" rx="8"/>
+      <rect x="640" y="250" width="14" height="22" rx="7"/><rect x="676" y="250" width="14" height="22" rx="7"/>
+    </g>
+  </g>
+  <g fill="#2b1a4b" opacity=".5">
+    <path d="M0 440c80-30 180-10 260-22 120-18 220 12 320 0 80-10 150-6 220 12v170H0z"/>
+  </g>
+  <rect y="500" width="800" height="100" fill="#36205c"/>
+  <path d="M0 500h800" stroke="#241342" stroke-width="8"/>
+
+  <!-- sparkles -->
+  <g fill="#ffeaa0">
+    <path d="M128 120l6 18 18 6-18 6-6 18-6-18-18-6 18-6z"/>
+    <path d="M690 150l5 15 15 5-15 5-5 15-5-15-15-5 15-5z"/>
+    <path d="M200 300l4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/>
+    <path d="M720 340l4 12 12 4-12 4-4 12-4-12-12-4 12-4z"/>
+    <circle cx="160" cy="220" r="3"/><circle cx="720" cy="230" r="3"/><circle cx="90" cy="330" r="2.5"/>
+  </g>
+
+  <!-- coins piles -->
+  <g>
+    <ellipse cx="150" cy="500" rx="90" ry="24" fill="#a86d12" opacity=".5"/>
+    <g fill="url(#gold)" stroke="#b87a12" stroke-width="2">
+      <ellipse cx="110" cy="484" rx="22" ry="9"/><ellipse cx="150" cy="490" rx="22" ry="9"/><ellipse cx="188" cy="482" rx="22" ry="9"/>
+      <ellipse cx="128" cy="472" rx="22" ry="9"/><ellipse cx="168" cy="470" rx="22" ry="9"/>
+      <ellipse cx="146" cy="458" rx="22" ry="9"/><ellipse cx="182" cy="458" rx="20" ry="8"/>
+    </g>
+    <g fill="url(#gold)" stroke="#b87a12" stroke-width="2">
+      <ellipse cx="640" cy="492" rx="24" ry="10"/><ellipse cx="682" cy="488" rx="24" ry="10"/><ellipse cx="660" cy="474" rx="24" ry="10"/><ellipse cx="700" cy="470" rx="22" ry="9"/>
+    </g>
+  </g>
+
+  <!-- treasure chest -->
+  <g transform="translate(548 404)">
+    <rect x="0" y="44" width="150" height="76" rx="8" fill="#7a4a22"/>
+    <path d="M0 44c0-30 34-46 75-46s75 16 75 46z" fill="#955c2b"/>
+    <g stroke="#e2b23d" stroke-width="7">
+      <path d="M0 62h150M0 96h150M38 0v120M112 0v120"/>
+    </g>
+    <rect x="65" y="52" width="22" height="30" rx="4" fill="#e2b23d"/>
+    <circle cx="76" cy="64" r="4" fill="#7a4a22"/>
+    <g fill="#ffd25e">
+      <circle cx="30" cy="42" r="6"/><circle cx="56" cy="30" r="5"/><circle cx="96" cy="32" r="6"/><circle cx="124" cy="44" r="5"/>
+    </g>
+  </g>
+
+  <!-- king -->
+  <g transform="translate(0 8)">
+    <ellipse cx="400" cy="540" rx="128" ry="24" fill="#241342" opacity=".55"/>
+    <!-- robe -->
+    <path d="M320 220c18-20 45-32 80-32s62 12 80 32l42 288H278z" fill="url(#robe)"/>
+    <path d="M284 508c18-10 52-18 76-18l-14-158-34 18zM516 508c-18-10-52-18-76-18l14-158 34 18z" fill="#7a45b2"/>
+    <path d="M320 220c18-20 45-32 80-32s62 12 80 32l8 54H312z" fill="#f4f0dd"/>
+    <path d="M312 274h176l6 34H306z" fill="#ffd25e"/>
+    <g fill="#7a45b2">
+      <path d="M340 274h14l6 34h-14zM380 274h14l6 34h-14zM420 274h14l6 34h-14zM460 274h14l6 34h-14z"/>
+    </g>
+    <path d="M330 470h140l12 40H318z" fill="#4a2578"/>
+    <path d="M340 470h120" stroke="#ffd25e" stroke-width="5"/>
+    <!-- arms -->
+    <path d="M320 240c-36 16-55 48-48 76 5 20 28 22 40 6 14-18 30-36 50-44z" fill="#8d5bcb"/>
+    <path d="M480 240c34 14 55 44 48 72-5 20-26 22-40 8 0 0-14-20-34-34z" fill="#8d5bcb"/>
+    <g fill="#e8b48a" stroke="#c78d63" stroke-width="3">
+      <circle cx="292" cy="324" r="21"/>
+      <circle cx="510" cy="322" r="21"/>
+    </g>
+    <!-- money bag in left hand -->
+    <path d="M264 300c-14 6-26 24-24 46 2 24 30 34 48 22 18-12 20-40 8-56-8-10-20-16-32-12z" fill="#c99857" stroke="#9a6b34" stroke-width="3"/>
+    <path d="M266 300c-2-10 4-16 14-16s16 6 14 16" fill="none" stroke="#9a6b34" stroke-width="6"/>
+    <text x="286" y="344" font-family="Georgia,serif" font-size="30" font-weight="bold" fill="#7a4a22" text-anchor="middle">$</text>
+    <!-- neck and head -->
+    <path d="M372 178h58v42h-58z" fill="#e0a879"/>
+    <circle cx="401" cy="140" r="58" fill="#edbb8e"/>
+    <path d="M344 142c-3-42 23-68 59-68 38 0 64 28 60 70-2 11-7 10-11 1-8-20-24-26-45-23-22 3-38 16-54 18-7 1-9 4-9 2z" fill="#4a3427"/>
+    <path d="M352 118c-8-8-4-22 7-27M450 118c8-8 4-22-7-27" fill="none" stroke="#4a3427" stroke-width="6" stroke-linecap="round"/>
+    <path d="M372 138c7-6 15-6 22 0M408 138c7-6 15-6 22 0" stroke="#4a3427" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="382" cy="148" rx="6" ry="7" fill="#33241a"/>
+    <ellipse cx="419" cy="148" rx="6" ry="7" fill="#33241a"/>
+    <circle cx="384" cy="145" r="2" fill="#fff"/><circle cx="421" cy="145" r="2" fill="#fff"/>
+    <path d="M373 168c9 8 20 8 29 0" stroke="#b5735f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M360 160c6 12 6 22-2 28M443 160c-6 12-6 22 2 28" stroke="#c78d63" stroke-width="2" fill="none" opacity=".5"/>
+    <circle cx="358" cy="164" r="9" fill="#e79e8e" opacity=".45"/>
+    <circle cx="444" cy="164" r="9" fill="#e79e8e" opacity=".45"/>
+    <!-- crown -->
+    <g transform="translate(401 66)">
+      <path d="M-60 16l12-48 30 28 18-50 18 50 30-28 12 48z" fill="url(#gold)" stroke="#c58a13" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M-58 16h116v18h-116z" fill="#f4c33f" stroke="#c58a13" stroke-width="4"/>
+      <circle cx="0" cy="-12" r="6" fill="#e8486b"/><circle cx="-36" cy="4" r="5" fill="#4fb2d8"/><circle cx="36" cy="4" r="5" fill="#4fb2d8"/>
+    </g>
+    <!-- medallion -->
+    <path d="M380 300c0-18 14-30 30-30s30 12 30 30-14 30-30 30-30-12-30-30z" fill="#ffd25e" stroke="#c58a13" stroke-width="4"/>
+    <path d="M410 284l6 12 13 2-9 9 2 13-12-6-12 6 2-13-9-9 13-2z" fill="#7a45b2"/>
+  </g>
+
+  <!-- glow particles -->
+  <g fill="#fff3b0" opacity=".75">
+    <circle cx="250" cy="180" r="4"/><circle cx="540" cy="140" r="3"/><circle cx="620" cy="260" r="4"/><circle cx="180" cy="380" r="3"/><circle cx="700" cy="420" r="3"/>
+  </g>
+  <rect width="800" height="600" fill="#2b1a4b" opacity=".06"/>
+</svg>

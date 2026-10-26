@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 110" role="img" aria-labelledby="title">
+  <title id="title">A gold crown</title>
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3b0"/><stop offset=".5" stop-color="#ffc93c"/><stop offset="1" stop-color="#c88a16"/></linearGradient></defs>
+  <path d="M16 46l14-34 22 24 18-36 18 36 22-24 14 34z" fill="url(#g)" stroke="#b87a12" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M16 46h108v18H16z" fill="url(#g)" stroke="#b87a12" stroke-width="5"/>
+  <circle cx="70" cy="26" r="6" fill="#e8486b"/><circle cx="38" cy="40" r="5" fill="#4fb2d8"/><circle cx="102" cy="40" r="5" fill="#4fb2d8"/>
+  <circle cx="70" cy="74" r="5" fill="#e8486b"/>
+</svg>
